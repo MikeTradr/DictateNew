@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="7706" systemVersion="14D131" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ei9-cN-Wbe">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="7701"/>
+    </dependencies>
+    <scenes>
+        <!--Main-->
+        <scene sceneID="aou-V4-d1y">
+            <objects>
+                <controller identifier="Main" id="AgC-eL-Hgc" customClass="MainIC" customModule="Dictate_WatchKit_Extension">
+                    <items>
+                        <button width="40" height="68" alignment="center" backgroundImage="dicApp-2-no-back-180" id="O2a-qB-bgG">
+                            <connections>
+                                <action selector="buttonMic" destination="AgC-eL-Hgc" id="z3v-MG-ylF"/>
+                            </connections>
+                        </button>
+                        <label width="136" alignment="center" text="Tap Mic to dictate or force touch" textAlignment="center" numberOfLines="10" id="Wh0-Sx-ekC">
+                            <color key="textColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                        </label>
+                        <group alignment="center" verticalAlignment="bottom" id="zPJ-tz-Iw3">
+                            <items>
+                                <button width="40" height="40" alignment="left" backgroundImage="check_box40px-grey50%" id="voa-7n-w13">
+                                    <connections>
+                                        <action selector="buttonReminders" destination="AgC-eL-Hgc" id="fk9-69-9Eb"/>
+                                    </connections>
+                                </button>
+                                <button width="10" alignment="left" enabled="NO" id="drI-Ny-pCP"/>
+                                <button width="40" height="40" alignment="right" backgroundImage="Today40px-50%" id="Kqo-x8-f9R">
+                                    <connections>
+                                        <action selector="buttonToday" destination="AgC-eL-Hgc" id="Ead-nG-8vd"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
+                        <group width="1" alignment="left" hidden="YES" layout="vertical" id="0HL-J3-Tja">
+                            <items>
+                                <label width="1" alignment="left" text="type" id="dZr-r8-usa">
+                                    <color key="textColor" red="1" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="font" type="system" pointSize="16"/>
+                                </label>
+                                <label alignment="left" text="day" id="Rd4-17-QaH">
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                    <fontDescription key="font" type="system" pointSize="16"/>
+                                </label>
+                                <label alignment="left" text="start" id="EJB-4B-o93">
+                                    <color key="textColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                </label>
+                                <label alignment="left" text="end" id="YGV-OF-sni">
+                                    <color key="textColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                </label>
+                                <label alignment="left" text="phone" id="PMI-eH-MjR">
+                                    <fontDescription key="font" type="system" pointSize="16"/>
+                                </label>
+                                <label alignment="left" text="calendar" id="Cqu-yl-ZGP">
+                                    <color key="textColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="font" type="system" pointSize="16"/>
+                                </label>
+                            </items>
+                        </group>
+                        <group width="1" alignment="left" hidden="YES" id="L45-SR-M1E">
+                            <items>
+                                <button width="0.33329999999999999" alignment="center" verticalAlignment="center" title="edit" id="Pp3-cw-89M">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                    <connections>
+                                        <action selector="buttonEdit" destination="AgC-eL-Hgc" id="zla-sP-3Nd"/>
+                                    </connections>
+                                </button>
+                                <button width="0.33329999999999999" alignment="left" verticalAlignment="center" title="cxl" id="LqW-ZT-10I">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                    <connections>
+                                        <action selector="buttonCancel" destination="AgC-eL-Hgc" id="Bot-sx-3CD"/>
+                                    </connections>
+                                </button>
+                                <button width="0.33329999999999999" alignment="center" verticalAlignment="center" title="+" id="Kv9-FC-BDH">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="font" type="boldSystem" pointSize="24"/>
+                                    <connections>
+                                        <action selector="buttonCreate" destination="AgC-eL-Hgc" id="9MT-8G-Td1"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
+                    </items>
+                    <menu key="menu" id="9VF-Gx-jXs">
+                        <items>
+                            <menuItem title="Dictate" image="Mic-Menu-v6" id="Qyn-2e-IMb">
+                                <connections>
+                                    <action selector="menuDictate" destination="AgC-eL-Hgc" id="eNF-Cn-aqO"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Preferences" image="cog2-48px" id="ObU-zt-q66">
+                                <connections>
+                                    <action selector="menuPreferences" destination="AgC-eL-Hgc" id="RLe-YB-4Oz"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                    <connections>
+                        <outlet property="groupButtons" destination="L45-SR-M1E" id="Znx-BF-AlL"/>
+                        <outlet property="groupNavigation" destination="zPJ-tz-Iw3" id="6Xp-QK-N6H"/>
+                        <outlet property="groupResults" destination="0HL-J3-Tja" id="eE4-hO-HJr"/>
+                        <outlet property="myLabel" destination="Wh0-Sx-ekC" id="grP-Ta-USV"/>
+                        <outlet property="resultCalendar" destination="Cqu-yl-ZGP" id="XdI-O1-I6n"/>
+                        <outlet property="resultDay" destination="Rd4-17-QaH" id="dKe-sq-jBJ"/>
+                        <outlet property="resultEnd" destination="YGV-OF-sni" id="ey5-gh-6E4"/>
+                        <outlet property="resultPhone" destination="PMI-eH-MjR" id="X1n-Hr-4F0"/>
+                        <outlet property="resultStart" destination="EJB-4B-o93" id="bqq-Qb-J7p"/>
+                        <outlet property="resultType" destination="dZr-r8-usa" id="qXC-jt-KzR"/>
+                        <segue destination="Iem-D3-4JW" kind="relationship" relationship="nextPage" id="Vga-yg-6e5"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="202" y="337.5"/>
+        </scene>
+        <!--TodayEvents-->
+        <scene sceneID="sS8-Mf-H5Q">
+            <objects>
+                <controller identifier="TodayEvents" id="Iem-D3-4JW" customClass="TodayIC" customModule="Dictate_WatchKit_Extension">
+                    <items>
+                        <group alignment="center" verticalAlignment="bottom" id="vG5-qB-MSl">
+                            <items>
+                                <button width="40" height="40" alignment="left" backgroundImage="check_box40px-grey50%" id="odN-Fp-JgR">
+                                    <connections>
+                                        <action selector="buttonReminders" destination="Iem-D3-4JW" id="arD-OV-5lk"/>
+                                    </connections>
+                                </button>
+                                <button width="10" alignment="left" enabled="NO" id="Hdc-gQ-ojn"/>
+                                <button width="27" height="40" alignment="center" backgroundImage="dicApp-2-nb-40px" id="NXn-HE-V7o">
+                                    <connections>
+                                        <action selector="buttonMainIC" destination="Iem-D3-4JW" id="i5s-D7-gUY"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
+                    </items>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="407" y="334"/>
+        </scene>
+        <!--Preferences-->
+        <scene sceneID="ggb-XE-VMe">
+            <objects>
+                <controller identifier="Preferences" id="gYc-zu-iHZ" customClass="PreferencesIC" customModule="Dictate_WatchKit_Extension">
+                    <items>
+                        <group alignment="center" verticalAlignment="bottom" id="1c1-qi-y2S">
+                            <items>
+                                <button width="40" height="40" alignment="left" backgroundImage="check_box40px-grey50%" id="xVg-mX-Us5">
+                                    <connections>
+                                        <action selector="buttonReminders" destination="AgC-eL-Hgc" id="8OL-QS-bN1"/>
+                                    </connections>
+                                </button>
+                                <button width="10" alignment="left" enabled="NO" id="vz3-6q-yX7"/>
+                                <button width="27" height="40" alignment="center" backgroundImage="dicApp-2-nb-40px" id="ns4-Fk-KhA"/>
+                                <button width="10" alignment="center" enabled="NO" id="MuW-qV-8PD"/>
+                                <button width="40" height="40" alignment="right" backgroundImage="Today40px-50%" id="jrs-HL-obg">
+                                    <connections>
+                                        <action selector="buttonToday" destination="AgC-eL-Hgc" id="EpZ-ba-OVJ"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
+                    </items>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="202" y="94"/>
+        </scene>
+        <!--Reminders-->
+        <scene sceneID="peT-G5-wcJ">
+            <objects>
+                <controller identifier="Reminders" id="ei9-cN-Wbe" customClass="RemindersIC" customModule="Dictate_WatchKit_Extension">
+                    <items>
+                        <group alignment="center" verticalAlignment="bottom" id="0b7-3H-Sfe">
+                            <items>
+                                <button width="40" height="40" alignment="left" backgroundImage="Today40px-50%" id="cfO-lh-HXy">
+                                    <connections>
+                                        <action selector="buttonToday" destination="ei9-cN-Wbe" id="n23-C4-8KX"/>
+                                    </connections>
+                                </button>
+                                <button width="10" alignment="left" enabled="NO" id="9Fe-kV-x7C"/>
+                                <button width="27" height="40" alignment="center" backgroundImage="dicApp-2-nb-40px" id="FgP-jg-Rkw">
+                                    <color key="titleColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <connections>
+                                        <action selector="buttonMain" destination="ei9-cN-Wbe" id="q10-IO-Gm7"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
+                    </items>
+                    <connections>
+                        <segue destination="AgC-eL-Hgc" kind="relationship" relationship="nextPage" id="Sgd-o5-lSy"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="-54" y="334"/>
+        </scene>
+        <!--Glance Interface Controller-->
+        <scene sceneID="BOz-TT-tkC">
+            <objects>
+                <glanceController spacing="0.0" id="0uZ-2p-rRc" customClass="GlanceController" customModule="Dictate_WatchKit_App" customModuleProvider="target">
+                    <items>
+                        <group alignment="left" id="t8f-Gd-c4y"/>
+                        <group alignment="left" id="uCw-4Q-Ouw"/>
+                    </items>
+                    <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="14"/>
+                </glanceController>
+            </objects>
+            <point key="canvasLocation" x="235" y="672"/>
+        </scene>
+        <!--Static Notification Interface Controller-->
+        <scene sceneID="AEw-b0-oYE">
+            <objects>
+                <notificationController id="YCC-NB-fut">
+                    <items>
+                        <label alignment="left" text="Alert Label" id="XkS-y5-khE"/>
+                    </items>
+                    <notificationCategory key="notificationCategory" identifier="myCategory" id="JfB-70-Muf"/>
+                    <connections>
+                        <outlet property="notificationAlertLabel" destination="XkS-y5-khE" id="49B-RR-99y"/>
+                        <segue destination="gdX-wl-uQE" kind="relationship" relationship="dynamicNotificationInterface" id="fKh-qV-3T2"/>
+                    </connections>
+                </notificationController>
+            </objects>
+            <point key="canvasLocation" x="235" y="1001"/>
+        </scene>
+        <!--Notification Controller-->
+        <scene sceneID="KIl-fV-djm">
+            <objects>
+                <controller id="gdX-wl-uQE" customClass="NotificationController" customModule="Dictate_WatchKit_App" customModuleProvider="target"/>
+            </objects>
+            <point key="canvasLocation" x="553" y="1001"/>
+        </scene>
+    </scenes>
+    <color key="tintColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+</document>

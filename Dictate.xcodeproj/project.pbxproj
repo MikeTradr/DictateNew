@@ -32,38 +32,12 @@
 		D323505F1B697B0200939F03 /* DictateCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D323505D1B697B0200939F03 /* DictateCode.swift */; };
 		D32350621B69828900939F03 /* ReminderCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32350611B69828900939F03 /* ReminderCode.swift */; };
 		D32350631B69828900939F03 /* ReminderCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32350611B69828900939F03 /* ReminderCode.swift */; };
-		D33CACFE1B74283800F59260 /* Beep2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D33CACFD1B74283800F59260 /* Beep2.mp3 */; };
-		D33CACFF1B74283800F59260 /* Beep2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D33CACFD1B74283800F59260 /* Beep2.mp3 */; };
 		D33CAD041B74773500F59260 /* button-14.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D33CAD031B74773500F59260 /* button-14.mp3 */; };
 		D33CAD051B74773500F59260 /* button-14.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D33CAD031B74773500F59260 /* button-14.mp3 */; };
 		D33CAD071B747EBE00F59260 /* se_tap.m4a in Resources */ = {isa = PBXBuildFile; fileRef = D33CAD061B747EBE00F59260 /* se_tap.m4a */; };
 		D33CAD081B747EBE00F59260 /* se_tap.m4a in Resources */ = {isa = PBXBuildFile; fileRef = D33CAD061B747EBE00F59260 /* se_tap.m4a */; };
-		D33CAD0C1B74DC1700F59260 /* 122-whoosh03.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D33CAD0B1B74DC1700F59260 /* 122-whoosh03.mp3 */; };
-		D33CAD0D1B74DC1700F59260 /* 122-whoosh03.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D33CAD0B1B74DC1700F59260 /* 122-whoosh03.mp3 */; };
-		D33CAD0F1B74DC3500F59260 /* 289-SimpleBeep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D33CAD0E1B74DC3500F59260 /* 289-SimpleBeep.mp3 */; };
-		D33CAD101B74DC3500F59260 /* 289-SimpleBeep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D33CAD0E1B74DC3500F59260 /* 289-SimpleBeep.mp3 */; };
-		D33CAD121B74DC3D00F59260 /* 217-buttonclick03.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D33CAD111B74DC3D00F59260 /* 217-buttonclick03.mp3 */; };
-		D33CAD131B74DC3D00F59260 /* 217-buttonclick03.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D33CAD111B74DC3D00F59260 /* 217-buttonclick03.mp3 */; };
-		D33CAD151B74DC4C00F59260 /* button-43.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D33CAD141B74DC4C00F59260 /* button-43.mp3 */; };
-		D33CAD161B74DC4C00F59260 /* button-43.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D33CAD141B74DC4C00F59260 /* button-43.mp3 */; };
-		D33CAD181B74DC8C00F59260 /* button-14.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D33CAD171B74DC8C00F59260 /* button-14.mp3 */; };
-		D33CAD191B74DC8C00F59260 /* button-14.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D33CAD171B74DC8C00F59260 /* button-14.mp3 */; };
-		D33CAD1B1B74DCB900F59260 /* beep-08b.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D33CAD1A1B74DCB900F59260 /* beep-08b.mp3 */; };
-		D33CAD1C1B74DCB900F59260 /* beep-08b.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D33CAD1A1B74DCB900F59260 /* beep-08b.mp3 */; };
-		D33CAD1E1B74DCD400F59260 /* 124-DeleteWhoosh.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D33CAD1D1B74DCD400F59260 /* 124-DeleteWhoosh.mp3 */; };
-		D33CAD1F1B74DCD400F59260 /* 124-DeleteWhoosh.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D33CAD1D1B74DCD400F59260 /* 124-DeleteWhoosh.mp3 */; };
-		D33CAD211B74DDA600F59260 /* se_tap.m4a in Resources */ = {isa = PBXBuildFile; fileRef = D33CAD201B74DDA600F59260 /* se_tap.m4a */; };
-		D33CAD221B74DDA600F59260 /* se_tap.m4a in Resources */ = {isa = PBXBuildFile; fileRef = D33CAD201B74DDA600F59260 /* se_tap.m4a */; };
-		D33CAD241B74F4A200F59260 /* 218-buttonclick54.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D33CAD231B74F4A200F59260 /* 218-buttonclick54.mp3 */; };
-		D33CAD251B74F4A200F59260 /* 218-buttonclick54.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D33CAD231B74F4A200F59260 /* 218-buttonclick54.mp3 */; };
-		D33CAD271B74F4C200F59260 /* 262-buttonclick57.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D33CAD261B74F4C200F59260 /* 262-buttonclick57.mp3 */; };
-		D33CAD281B74F4C200F59260 /* 262-buttonclick57.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D33CAD261B74F4C200F59260 /* 262-buttonclick57.mp3 */; };
-		D33CAD2A1B74F4CC00F59260 /* 212-buttonclick52.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D33CAD291B74F4CC00F59260 /* 212-buttonclick52.mp3 */; };
-		D33CAD2B1B74F4CC00F59260 /* 212-buttonclick52.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D33CAD291B74F4CC00F59260 /* 212-buttonclick52.mp3 */; };
 		D3A0F9FC1B69F0BB00F1FEDA /* EventCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A0F9FB1B69F0BB00F1FEDA /* EventCode.swift */; };
 		D3A0F9FD1B69F0BB00F1FEDA /* EventCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A0F9FB1B69F0BB00F1FEDA /* EventCode.swift */; };
-		D3A0F9FF1B69F63000F1FEDA /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A0F9FE1B69F63000F1FEDA /* General.swift */; };
-		D3A0FA001B69F63000F1FEDA /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A0F9FE1B69F63000F1FEDA /* General.swift */; };
 		D3E810851B70F4BC004AE5A9 /* TodayIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E810831B70F4BC004AE5A9 /* TodayIC.swift */; };
 		D3E810881B70FEA0004AE5A9 /* PreferencesIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E810871B70FEA0004AE5A9 /* PreferencesIC.swift */; };
 		D3E8108A1B710690004AE5A9 /* RemindersIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E810891B710690004AE5A9 /* RemindersIC.swift */; };
@@ -97,6 +71,38 @@
 		EC0B48941B6FEAC400C0AD82 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC0B48921B6FEAC400C0AD82 /* Parse.framework */; };
 		EC0B48951B6FEBA600C0AD82 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC0B48911B6FEAC400C0AD82 /* Bolts.framework */; };
 		EC0B48961B6FEBA600C0AD82 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC0B48921B6FEAC400C0AD82 /* Parse.framework */; };
+		ECB861E01B77DBB700503C50 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB861DC1B77DBB700503C50 /* Constants.swift */; };
+		ECB861E11B77DBB700503C50 /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB861DD1B77DBB700503C50 /* General.swift */; };
+		ECB861E21B77DBB700503C50 /* SwiftColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB861DE1B77DBB700503C50 /* SwiftColors.swift */; };
+		ECB861E31B77DBB700503C50 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB861DF1B77DBB700503C50 /* Utility.swift */; };
+		ECB861F21B77DCB000503C50 /* 122-whoosh03.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ECB861E61B77DCB000503C50 /* 122-whoosh03.mp3 */; };
+		ECB861F31B77DCB000503C50 /* 124-DeleteWhoosh.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ECB861E71B77DCB000503C50 /* 124-DeleteWhoosh.mp3 */; };
+		ECB861F41B77DCB000503C50 /* 212-buttonclick52.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ECB861E81B77DCB000503C50 /* 212-buttonclick52.mp3 */; };
+		ECB861F51B77DCB000503C50 /* 217-buttonclick03.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ECB861E91B77DCB000503C50 /* 217-buttonclick03.mp3 */; };
+		ECB861F61B77DCB000503C50 /* 218-buttonclick54.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ECB861EA1B77DCB000503C50 /* 218-buttonclick54.mp3 */; };
+		ECB861F71B77DCB000503C50 /* 262-buttonclick57.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ECB861EB1B77DCB000503C50 /* 262-buttonclick57.mp3 */; };
+		ECB861F81B77DCB000503C50 /* 289-SimpleBeep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ECB861EC1B77DCB000503C50 /* 289-SimpleBeep.mp3 */; };
+		ECB861F91B77DCB000503C50 /* beep-08b.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ECB861ED1B77DCB000503C50 /* beep-08b.mp3 */; };
+		ECB861FA1B77DCB000503C50 /* Beep2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ECB861EE1B77DCB000503C50 /* Beep2.mp3 */; };
+		ECB861FB1B77DCB000503C50 /* button-14.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ECB861EF1B77DCB000503C50 /* button-14.mp3 */; };
+		ECB861FC1B77DCB000503C50 /* button-43.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ECB861F01B77DCB000503C50 /* button-43.mp3 */; };
+		ECB861FD1B77DCB000503C50 /* se_tap.m4a in Resources */ = {isa = PBXBuildFile; fileRef = ECB861F11B77DCB000503C50 /* se_tap.m4a */; };
+		ECB861FE1B77DCDC00503C50 /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB861DD1B77DBB700503C50 /* General.swift */; };
+		ECB862021B77DD4100503C50 /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB862011B77DD4100503C50 /* TodayViewController.m */; };
+		ECB8622B1B77DEBD00503C50 /* CALEventManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB862041B77DEBD00503C50 /* CALEventManager.m */; };
+		ECB8622C1B77DEBD00503C50 /* JTCalendarManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB862091B77DEBD00503C50 /* JTCalendarManager.m */; };
+		ECB8622D1B77DEBD00503C50 /* JTCalendarSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB8620B1B77DEBD00503C50 /* JTCalendarSettings.m */; };
+		ECB8622E1B77DEBD00503C50 /* JTDateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB8620D1B77DEBD00503C50 /* JTDateHelper.m */; };
+		ECB8622F1B77DEBD00503C50 /* JTCalendarDelegateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB862101B77DEBD00503C50 /* JTCalendarDelegateManager.m */; };
+		ECB862301B77DEBD00503C50 /* JTCalendarScrollManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB862121B77DEBD00503C50 /* JTCalendarScrollManager.m */; };
+		ECB862311B77DEBD00503C50 /* JTCalendarDayView.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB8621C1B77DEBD00503C50 /* JTCalendarDayView.m */; };
+		ECB862321B77DEBD00503C50 /* JTCalendarMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB8621E1B77DEBD00503C50 /* JTCalendarMenuView.m */; };
+		ECB862331B77DEBD00503C50 /* JTCalendarPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB862201B77DEBD00503C50 /* JTCalendarPageView.m */; };
+		ECB862341B77DEBD00503C50 /* JTCalendarWeekDayView.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB862221B77DEBD00503C50 /* JTCalendarWeekDayView.m */; };
+		ECB862351B77DEBD00503C50 /* JTCalendarWeekView.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB862241B77DEBD00503C50 /* JTCalendarWeekView.m */; };
+		ECB862361B77DEBD00503C50 /* JTHorizontalCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB862261B77DEBD00503C50 /* JTHorizontalCalendarView.m */; };
+		ECB862371B77DEBD00503C50 /* JTVerticalCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB862281B77DEBD00503C50 /* JTVerticalCalendarView.m */; };
+		ECB862381B77DEBD00503C50 /* NSDate+CALAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB8622A1B77DEBD00503C50 /* NSDate+CALAddition.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -157,22 +163,9 @@
 		D3188A8A1B6E9C1100323DC0 /* vcTodayTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = vcTodayTable.swift; sourceTree = "<group>"; };
 		D323505D1B697B0200939F03 /* DictateCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictateCode.swift; sourceTree = "<group>"; };
 		D32350611B69828900939F03 /* ReminderCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderCode.swift; sourceTree = "<group>"; };
-		D33CACFD1B74283800F59260 /* Beep2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Beep2.mp3; sourceTree = "<group>"; };
 		D33CAD031B74773500F59260 /* button-14.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "button-14.mp3"; sourceTree = "<group>"; };
 		D33CAD061B747EBE00F59260 /* se_tap.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = se_tap.m4a; sourceTree = "<group>"; };
-		D33CAD0B1B74DC1700F59260 /* 122-whoosh03.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "122-whoosh03.mp3"; sourceTree = "<group>"; };
-		D33CAD0E1B74DC3500F59260 /* 289-SimpleBeep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "289-SimpleBeep.mp3"; sourceTree = "<group>"; };
-		D33CAD111B74DC3D00F59260 /* 217-buttonclick03.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "217-buttonclick03.mp3"; sourceTree = "<group>"; };
-		D33CAD141B74DC4C00F59260 /* button-43.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "button-43.mp3"; sourceTree = "<group>"; };
-		D33CAD171B74DC8C00F59260 /* button-14.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "button-14.mp3"; sourceTree = "<group>"; };
-		D33CAD1A1B74DCB900F59260 /* beep-08b.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "beep-08b.mp3"; sourceTree = "<group>"; };
-		D33CAD1D1B74DCD400F59260 /* 124-DeleteWhoosh.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "124-DeleteWhoosh.mp3"; sourceTree = "<group>"; };
-		D33CAD201B74DDA600F59260 /* se_tap.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = se_tap.m4a; sourceTree = "<group>"; };
-		D33CAD231B74F4A200F59260 /* 218-buttonclick54.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "218-buttonclick54.mp3"; sourceTree = "<group>"; };
-		D33CAD261B74F4C200F59260 /* 262-buttonclick57.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "262-buttonclick57.mp3"; sourceTree = "<group>"; };
-		D33CAD291B74F4CC00F59260 /* 212-buttonclick52.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "212-buttonclick52.mp3"; sourceTree = "<group>"; };
 		D3A0F9FB1B69F0BB00F1FEDA /* EventCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCode.swift; sourceTree = "<group>"; };
-		D3A0F9FE1B69F63000F1FEDA /* General.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = General.swift; sourceTree = "<group>"; };
 		D3B07A231B731C8800B9C2A9 /* Dictate.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Dictate.entitlements; sourceTree = "<group>"; };
 		D3B07A241B731D2A00B9C2A9 /* Dictate WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Dictate WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 		D3E810831B70F4BC004AE5A9 /* TodayIC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayIC.swift; sourceTree = "<group>"; };
@@ -210,6 +203,61 @@
 		EC0B488F1B6FEA2B00C0AD82 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		EC0B48911B6FEAC400C0AD82 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		EC0B48921B6FEAC400C0AD82 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		ECB861DC1B77DBB700503C50 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = Utils/Constants.swift; sourceTree = "<group>"; };
+		ECB861DD1B77DBB700503C50 /* General.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = General.swift; path = Utils/General.swift; sourceTree = "<group>"; };
+		ECB861DE1B77DBB700503C50 /* SwiftColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftColors.swift; path = Utils/SwiftColors.swift; sourceTree = "<group>"; };
+		ECB861DF1B77DBB700503C50 /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utility.swift; path = Utils/Utility.swift; sourceTree = "<group>"; };
+		ECB861E61B77DCB000503C50 /* 122-whoosh03.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "122-whoosh03.mp3"; sourceTree = "<group>"; };
+		ECB861E71B77DCB000503C50 /* 124-DeleteWhoosh.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "124-DeleteWhoosh.mp3"; sourceTree = "<group>"; };
+		ECB861E81B77DCB000503C50 /* 212-buttonclick52.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "212-buttonclick52.mp3"; sourceTree = "<group>"; };
+		ECB861E91B77DCB000503C50 /* 217-buttonclick03.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "217-buttonclick03.mp3"; sourceTree = "<group>"; };
+		ECB861EA1B77DCB000503C50 /* 218-buttonclick54.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "218-buttonclick54.mp3"; sourceTree = "<group>"; };
+		ECB861EB1B77DCB000503C50 /* 262-buttonclick57.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "262-buttonclick57.mp3"; sourceTree = "<group>"; };
+		ECB861EC1B77DCB000503C50 /* 289-SimpleBeep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "289-SimpleBeep.mp3"; sourceTree = "<group>"; };
+		ECB861ED1B77DCB000503C50 /* beep-08b.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "beep-08b.mp3"; sourceTree = "<group>"; };
+		ECB861EE1B77DCB000503C50 /* Beep2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Beep2.mp3; sourceTree = "<group>"; };
+		ECB861EF1B77DCB000503C50 /* button-14.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "button-14.mp3"; sourceTree = "<group>"; };
+		ECB861F01B77DCB000503C50 /* button-43.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "button-43.mp3"; sourceTree = "<group>"; };
+		ECB861F11B77DCB000503C50 /* se_tap.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = se_tap.m4a; sourceTree = "<group>"; };
+		ECB861FF1B77DD4000503C50 /* Dictate-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Dictate-Bridging-Header.h"; sourceTree = "<group>"; };
+		ECB862001B77DD4100503C50 /* TodayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TodayViewController.h; sourceTree = "<group>"; };
+		ECB862011B77DD4100503C50 /* TodayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodayViewController.m; sourceTree = "<group>"; };
+		ECB862031B77DEBD00503C50 /* CALEventManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CALEventManager.h; path = Externals/CALEventManager.h; sourceTree = "<group>"; };
+		ECB862041B77DEBD00503C50 /* CALEventManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CALEventManager.m; path = Externals/CALEventManager.m; sourceTree = "<group>"; };
+		ECB862061B77DEBD00503C50 /* JTCalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTCalendar.h; sourceTree = "<group>"; };
+		ECB862071B77DEBD00503C50 /* JTCalendarDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTCalendarDelegate.h; sourceTree = "<group>"; };
+		ECB862081B77DEBD00503C50 /* JTCalendarManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTCalendarManager.h; sourceTree = "<group>"; };
+		ECB862091B77DEBD00503C50 /* JTCalendarManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JTCalendarManager.m; sourceTree = "<group>"; };
+		ECB8620A1B77DEBD00503C50 /* JTCalendarSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTCalendarSettings.h; sourceTree = "<group>"; };
+		ECB8620B1B77DEBD00503C50 /* JTCalendarSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JTCalendarSettings.m; sourceTree = "<group>"; };
+		ECB8620C1B77DEBD00503C50 /* JTDateHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTDateHelper.h; sourceTree = "<group>"; };
+		ECB8620D1B77DEBD00503C50 /* JTDateHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JTDateHelper.m; sourceTree = "<group>"; };
+		ECB8620F1B77DEBD00503C50 /* JTCalendarDelegateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTCalendarDelegateManager.h; sourceTree = "<group>"; };
+		ECB862101B77DEBD00503C50 /* JTCalendarDelegateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JTCalendarDelegateManager.m; sourceTree = "<group>"; };
+		ECB862111B77DEBD00503C50 /* JTCalendarScrollManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTCalendarScrollManager.h; sourceTree = "<group>"; };
+		ECB862121B77DEBD00503C50 /* JTCalendarScrollManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JTCalendarScrollManager.m; sourceTree = "<group>"; };
+		ECB862141B77DEBD00503C50 /* JTCalendarDay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTCalendarDay.h; sourceTree = "<group>"; };
+		ECB862151B77DEBD00503C50 /* JTCalendarPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTCalendarPage.h; sourceTree = "<group>"; };
+		ECB862161B77DEBD00503C50 /* JTCalendarWeek.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTCalendarWeek.h; sourceTree = "<group>"; };
+		ECB862171B77DEBD00503C50 /* JTCalendarWeekDay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTCalendarWeekDay.h; sourceTree = "<group>"; };
+		ECB862181B77DEBD00503C50 /* JTContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTContent.h; sourceTree = "<group>"; };
+		ECB862191B77DEBD00503C50 /* JTMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTMenu.h; sourceTree = "<group>"; };
+		ECB8621B1B77DEBD00503C50 /* JTCalendarDayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTCalendarDayView.h; sourceTree = "<group>"; };
+		ECB8621C1B77DEBD00503C50 /* JTCalendarDayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JTCalendarDayView.m; sourceTree = "<group>"; };
+		ECB8621D1B77DEBD00503C50 /* JTCalendarMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTCalendarMenuView.h; sourceTree = "<group>"; };
+		ECB8621E1B77DEBD00503C50 /* JTCalendarMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JTCalendarMenuView.m; sourceTree = "<group>"; };
+		ECB8621F1B77DEBD00503C50 /* JTCalendarPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTCalendarPageView.h; sourceTree = "<group>"; };
+		ECB862201B77DEBD00503C50 /* JTCalendarPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JTCalendarPageView.m; sourceTree = "<group>"; };
+		ECB862211B77DEBD00503C50 /* JTCalendarWeekDayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTCalendarWeekDayView.h; sourceTree = "<group>"; };
+		ECB862221B77DEBD00503C50 /* JTCalendarWeekDayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JTCalendarWeekDayView.m; sourceTree = "<group>"; };
+		ECB862231B77DEBD00503C50 /* JTCalendarWeekView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTCalendarWeekView.h; sourceTree = "<group>"; };
+		ECB862241B77DEBD00503C50 /* JTCalendarWeekView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JTCalendarWeekView.m; sourceTree = "<group>"; };
+		ECB862251B77DEBD00503C50 /* JTHorizontalCalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTHorizontalCalendarView.h; sourceTree = "<group>"; };
+		ECB862261B77DEBD00503C50 /* JTHorizontalCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JTHorizontalCalendarView.m; sourceTree = "<group>"; };
+		ECB862271B77DEBD00503C50 /* JTVerticalCalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTVerticalCalendarView.h; sourceTree = "<group>"; };
+		ECB862281B77DEBD00503C50 /* JTVerticalCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JTVerticalCalendarView.m; sourceTree = "<group>"; };
+		ECB862291B77DEBD00503C50 /* NSDate+CALAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+CALAddition.h"; path = "Externals/NSDate+CALAddition.h"; sourceTree = "<group>"; };
+		ECB8622A1B77DEBD00503C50 /* NSDate+CALAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+CALAddition.m"; path = "Externals/NSDate+CALAddition.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -258,10 +306,10 @@
 			isa = PBXGroup;
 			children = (
 				D3F8ACEA1B696FB00070C097 /* AppDelegate.swift */,
+				D323505B1B69783F00939F03 /* External */,
 				D32350581B69782600939F03 /* Models */,
 				D32350591B69782D00939F03 /* Views */,
 				D323505A1B69783400939F03 /* Controllers */,
-				D323505B1B69783F00939F03 /* External */,
 				D323505C1B69784500939F03 /* Utils */,
 			);
 			name = Classes;
@@ -304,6 +352,9 @@
 				D3188A861B6E9BF900323DC0 /* vcTest1.swift */,
 				D3188A881B6E9C0800323DC0 /* ToDoTableViewController.swift */,
 				D3188A8A1B6E9C1100323DC0 /* vcTodayTable.swift */,
+				ECB862001B77DD4100503C50 /* TodayViewController.h */,
+				ECB862011B77DD4100503C50 /* TodayViewController.m */,
+				ECB861FF1B77DD4000503C50 /* Dictate-Bridging-Header.h */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -311,6 +362,11 @@
 		D323505B1B69783F00939F03 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				ECB862051B77DEBD00503C50 /* JTCalendar */,
+				ECB862031B77DEBD00503C50 /* CALEventManager.h */,
+				ECB862041B77DEBD00503C50 /* CALEventManager.m */,
+				ECB862291B77DEBD00503C50 /* NSDate+CALAddition.h */,
+				ECB8622A1B77DEBD00503C50 /* NSDate+CALAddition.m */,
 			);
 			name = External;
 			sourceTree = "<group>";
@@ -318,19 +374,10 @@
 		D323505C1B69784500939F03 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				D33CAD0B1B74DC1700F59260 /* 122-whoosh03.mp3 */,
-				D33CAD1D1B74DCD400F59260 /* 124-DeleteWhoosh.mp3 */,
-				D33CAD291B74F4CC00F59260 /* 212-buttonclick52.mp3 */,
-				D33CAD111B74DC3D00F59260 /* 217-buttonclick03.mp3 */,
-				D33CAD231B74F4A200F59260 /* 218-buttonclick54.mp3 */,
-				D33CAD261B74F4C200F59260 /* 262-buttonclick57.mp3 */,
-				D33CAD0E1B74DC3500F59260 /* 289-SimpleBeep.mp3 */,
-				D33CAD1A1B74DCB900F59260 /* beep-08b.mp3 */,
-				D33CACFD1B74283800F59260 /* Beep2.mp3 */,
-				D33CAD171B74DC8C00F59260 /* button-14.mp3 */,
-				D33CAD141B74DC4C00F59260 /* button-43.mp3 */,
-				D33CAD201B74DDA600F59260 /* se_tap.m4a */,
-				D3A0F9FE1B69F63000F1FEDA /* General.swift */,
+				ECB861DC1B77DBB700503C50 /* Constants.swift */,
+				ECB861DD1B77DBB700503C50 /* General.swift */,
+				ECB861DE1B77DBB700503C50 /* SwiftColors.swift */,
+				ECB861DF1B77DBB700503C50 /* Utility.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -413,6 +460,7 @@
 				D3F8ACF31B696FB00070C097 /* LaunchScreen.xib */,
 				D3188A661B6E994E00323DC0 /* Main.storyboard */,
 				D3F8ACF11B696FB00070C097 /* Images.xcassets */,
+				ECB861E41B77DBFF00503C50 /* Resources */,
 				D32350601B697B9D00939F03 /* Frameworks */,
 				D3F8ACE81B696FB00070C097 /* Supporting Files */,
 			);
@@ -483,6 +531,99 @@
 				D3F8AD231B696FCD0070C097 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		ECB861E41B77DBFF00503C50 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				ECB861E51B77DCB000503C50 /* Sounds */,
+			);
+			name = Resources;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		ECB861E51B77DCB000503C50 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				ECB861E61B77DCB000503C50 /* 122-whoosh03.mp3 */,
+				ECB861E71B77DCB000503C50 /* 124-DeleteWhoosh.mp3 */,
+				ECB861E81B77DCB000503C50 /* 212-buttonclick52.mp3 */,
+				ECB861E91B77DCB000503C50 /* 217-buttonclick03.mp3 */,
+				ECB861EA1B77DCB000503C50 /* 218-buttonclick54.mp3 */,
+				ECB861EB1B77DCB000503C50 /* 262-buttonclick57.mp3 */,
+				ECB861EC1B77DCB000503C50 /* 289-SimpleBeep.mp3 */,
+				ECB861ED1B77DCB000503C50 /* beep-08b.mp3 */,
+				ECB861EE1B77DCB000503C50 /* Beep2.mp3 */,
+				ECB861EF1B77DCB000503C50 /* button-14.mp3 */,
+				ECB861F01B77DCB000503C50 /* button-43.mp3 */,
+				ECB861F11B77DCB000503C50 /* se_tap.m4a */,
+			);
+			name = Sounds;
+			path = Dictate/Resources/Sounds;
+			sourceTree = "<group>";
+		};
+		ECB862051B77DEBD00503C50 /* JTCalendar */ = {
+			isa = PBXGroup;
+			children = (
+				ECB862061B77DEBD00503C50 /* JTCalendar.h */,
+				ECB862071B77DEBD00503C50 /* JTCalendarDelegate.h */,
+				ECB862081B77DEBD00503C50 /* JTCalendarManager.h */,
+				ECB862091B77DEBD00503C50 /* JTCalendarManager.m */,
+				ECB8620A1B77DEBD00503C50 /* JTCalendarSettings.h */,
+				ECB8620B1B77DEBD00503C50 /* JTCalendarSettings.m */,
+				ECB8620C1B77DEBD00503C50 /* JTDateHelper.h */,
+				ECB8620D1B77DEBD00503C50 /* JTDateHelper.m */,
+				ECB8620E1B77DEBD00503C50 /* Managers */,
+				ECB862131B77DEBD00503C50 /* Protocols */,
+				ECB8621A1B77DEBD00503C50 /* Views */,
+			);
+			name = JTCalendar;
+			path = Externals/JTCalendar;
+			sourceTree = "<group>";
+		};
+		ECB8620E1B77DEBD00503C50 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				ECB8620F1B77DEBD00503C50 /* JTCalendarDelegateManager.h */,
+				ECB862101B77DEBD00503C50 /* JTCalendarDelegateManager.m */,
+				ECB862111B77DEBD00503C50 /* JTCalendarScrollManager.h */,
+				ECB862121B77DEBD00503C50 /* JTCalendarScrollManager.m */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		ECB862131B77DEBD00503C50 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				ECB862141B77DEBD00503C50 /* JTCalendarDay.h */,
+				ECB862151B77DEBD00503C50 /* JTCalendarPage.h */,
+				ECB862161B77DEBD00503C50 /* JTCalendarWeek.h */,
+				ECB862171B77DEBD00503C50 /* JTCalendarWeekDay.h */,
+				ECB862181B77DEBD00503C50 /* JTContent.h */,
+				ECB862191B77DEBD00503C50 /* JTMenu.h */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		ECB8621A1B77DEBD00503C50 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				ECB8621B1B77DEBD00503C50 /* JTCalendarDayView.h */,
+				ECB8621C1B77DEBD00503C50 /* JTCalendarDayView.m */,
+				ECB8621D1B77DEBD00503C50 /* JTCalendarMenuView.h */,
+				ECB8621E1B77DEBD00503C50 /* JTCalendarMenuView.m */,
+				ECB8621F1B77DEBD00503C50 /* JTCalendarPageView.h */,
+				ECB862201B77DEBD00503C50 /* JTCalendarPageView.m */,
+				ECB862211B77DEBD00503C50 /* JTCalendarWeekDayView.h */,
+				ECB862221B77DEBD00503C50 /* JTCalendarWeekDayView.m */,
+				ECB862231B77DEBD00503C50 /* JTCalendarWeekView.h */,
+				ECB862241B77DEBD00503C50 /* JTCalendarWeekView.m */,
+				ECB862251B77DEBD00503C50 /* JTHorizontalCalendarView.h */,
+				ECB862261B77DEBD00503C50 /* JTHorizontalCalendarView.m */,
+				ECB862271B77DEBD00503C50 /* JTVerticalCalendarView.h */,
+				ECB862281B77DEBD00503C50 /* JTVerticalCalendarView.m */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -626,24 +767,24 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECB861F81B77DCB000503C50 /* 289-SimpleBeep.mp3 in Resources */,
+				ECB861FB1B77DCB000503C50 /* button-14.mp3 in Resources */,
 				D3188A671B6E994E00323DC0 /* Main.storyboard in Resources */,
+				ECB861F31B77DCB000503C50 /* 124-DeleteWhoosh.mp3 in Resources */,
+				ECB861F41B77DCB000503C50 /* 212-buttonclick52.mp3 in Resources */,
+				ECB861F51B77DCB000503C50 /* 217-buttonclick03.mp3 in Resources */,
+				ECB861FA1B77DCB000503C50 /* Beep2.mp3 in Resources */,
+				ECB861FC1B77DCB000503C50 /* button-43.mp3 in Resources */,
+				ECB861F91B77DCB000503C50 /* beep-08b.mp3 in Resources */,
+				ECB861F71B77DCB000503C50 /* 262-buttonclick57.mp3 in Resources */,
 				D33CAD041B74773500F59260 /* button-14.mp3 in Resources */,
-				D33CAD0F1B74DC3500F59260 /* 289-SimpleBeep.mp3 in Resources */,
-				D33CAD2A1B74F4CC00F59260 /* 212-buttonclick52.mp3 in Resources */,
 				D33CAD071B747EBE00F59260 /* se_tap.m4a in Resources */,
-				D33CACFE1B74283800F59260 /* Beep2.mp3 in Resources */,
-				D33CAD1E1B74DCD400F59260 /* 124-DeleteWhoosh.mp3 in Resources */,
-				D33CAD211B74DDA600F59260 /* se_tap.m4a in Resources */,
-				D33CAD1B1B74DCB900F59260 /* beep-08b.mp3 in Resources */,
-				D33CAD241B74F4A200F59260 /* 218-buttonclick54.mp3 in Resources */,
-				D33CAD181B74DC8C00F59260 /* button-14.mp3 in Resources */,
-				D33CAD121B74DC3D00F59260 /* 217-buttonclick03.mp3 in Resources */,
+				ECB861F61B77DCB000503C50 /* 218-buttonclick54.mp3 in Resources */,
+				ECB861F21B77DCB000503C50 /* 122-whoosh03.mp3 in Resources */,
 				D3188A7B1B6E9B4B00323DC0 /* ToDoTableViewCell.xib in Resources */,
-				D33CAD151B74DC4C00F59260 /* button-43.mp3 in Resources */,
+				ECB861FD1B77DCB000503C50 /* se_tap.m4a in Resources */,
 				D3F8ACF51B696FB00070C097 /* LaunchScreen.xib in Resources */,
 				D3188A751B6E9B1500323DC0 /* CustomTableViewCell.xib in Resources */,
-				D33CAD0C1B74DC1700F59260 /* 122-whoosh03.mp3 in Resources */,
-				D33CAD271B74F4C200F59260 /* 262-buttonclick57.mp3 in Resources */,
 				D3F8ACF21B696FB00070C097 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -659,22 +800,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D33CAD131B74DC3D00F59260 /* 217-buttonclick03.mp3 in Resources */,
-				D33CAD0D1B74DC1700F59260 /* 122-whoosh03.mp3 in Resources */,
-				D33CAD101B74DC3500F59260 /* 289-SimpleBeep.mp3 in Resources */,
-				D33CAD191B74DC8C00F59260 /* button-14.mp3 in Resources */,
 				D3F8AD1A1B696FCD0070C097 /* Images.xcassets in Resources */,
-				D33CAD1C1B74DCB900F59260 /* beep-08b.mp3 in Resources */,
-				D33CACFF1B74283800F59260 /* Beep2.mp3 in Resources */,
-				D33CAD281B74F4C200F59260 /* 262-buttonclick57.mp3 in Resources */,
-				D33CAD1F1B74DCD400F59260 /* 124-DeleteWhoosh.mp3 in Resources */,
-				D33CAD161B74DC4C00F59260 /* button-43.mp3 in Resources */,
 				D33CAD081B747EBE00F59260 /* se_tap.m4a in Resources */,
 				D33CAD051B74773500F59260 /* button-14.mp3 in Resources */,
 				D3F8AD1E1B696FCD0070C097 /* Dictate WatchKit App.app in Resources */,
-				D33CAD251B74F4A200F59260 /* 218-buttonclick54.mp3 in Resources */,
-				D33CAD2B1B74F4CC00F59260 /* 212-buttonclick52.mp3 in Resources */,
-				D33CAD221B74DDA600F59260 /* se_tap.m4a in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -694,22 +823,40 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECB862021B77DD4100503C50 /* TodayViewController.m in Sources */,
+				ECB8622E1B77DEBD00503C50 /* JTDateHelper.m in Sources */,
+				ECB8622D1B77DEBD00503C50 /* JTCalendarSettings.m in Sources */,
 				D3188A871B6E9BF900323DC0 /* vcTest1.swift in Sources */,
 				D3188A7F1B6E9B7F00323DC0 /* LoginViewController.swift in Sources */,
+				ECB862371B77DEBD00503C50 /* JTVerticalCalendarView.m in Sources */,
 				D3188A791B6E9B4200323DC0 /* ToDoTableCell.swift in Sources */,
+				ECB862301B77DEBD00503C50 /* JTCalendarScrollManager.m in Sources */,
+				ECB861E21B77DBB700503C50 /* SwiftColors.swift in Sources */,
+				ECB862331B77DEBD00503C50 /* JTCalendarPageView.m in Sources */,
+				ECB862341B77DEBD00503C50 /* JTCalendarWeekDayView.m in Sources */,
+				ECB8622C1B77DEBD00503C50 /* JTCalendarManager.m in Sources */,
 				D3188A6C1B6E9ADB00323DC0 /* MailComposer.swift in Sources */,
 				D3188A691B6E9AA700323DC0 /* MailComposer3.swift in Sources */,
 				D3188A6F1B6E9AE400323DC0 /* MessageCode.swift in Sources */,
-				D3A0F9FF1B69F63000F1FEDA /* General.swift in Sources */,
+				ECB862361B77DEBD00503C50 /* JTHorizontalCalendarView.m in Sources */,
 				D3188A851B6E9BED00323DC0 /* PrefsTempVC.swift in Sources */,
 				D3188A891B6E9C0800323DC0 /* ToDoTableViewController.swift in Sources */,
+				ECB862311B77DEBD00503C50 /* JTCalendarDayView.m in Sources */,
 				D3F8ACED1B696FB00070C097 /* ViewController.swift in Sources */,
+				ECB8622B1B77DEBD00503C50 /* CALEventManager.m in Sources */,
 				D3188A811B6E9B9900323DC0 /* tabBarController.swift in Sources */,
+				ECB862351B77DEBD00503C50 /* JTCalendarWeekView.m in Sources */,
 				D3F8ACEB1B696FB00070C097 /* AppDelegate.swift in Sources */,
 				D32350621B69828900939F03 /* ReminderCode.swift in Sources */,
+				ECB862381B77DEBD00503C50 /* NSDate+CALAddition.m in Sources */,
+				ECB8622F1B77DEBD00503C50 /* JTCalendarDelegateManager.m in Sources */,
+				ECB861E11B77DBB700503C50 /* General.swift in Sources */,
 				D3188A771B6E9B2600323DC0 /* TableCell.swift in Sources */,
+				ECB862321B77DEBD00503C50 /* JTCalendarMenuView.m in Sources */,
 				D3188A7D1B6E9B7700323DC0 /* ViewControllerDictate.swift in Sources */,
+				ECB861E31B77DBB700503C50 /* Utility.swift in Sources */,
 				D3188A8B1B6E9C1100323DC0 /* vcTodayTable.swift in Sources */,
+				ECB861E01B77DBB700503C50 /* Constants.swift in Sources */,
 				D323505E1B697B0200939F03 /* DictateCode.swift in Sources */,
 				D3A0F9FC1B69F0BB00F1FEDA /* EventCode.swift in Sources */,
 				D3188A831B6E9BD500323DC0 /* PrefsTableVC.swift in Sources */,
@@ -739,9 +886,9 @@
 				D3E810881B70FEA0004AE5A9 /* PreferencesIC.swift in Sources */,
 				D3188A6A1B6E9AA700323DC0 /* MailComposer3.swift in Sources */,
 				D32350631B69828900939F03 /* ReminderCode.swift in Sources */,
-				D3A0FA001B69F63000F1FEDA /* General.swift in Sources */,
 				D3E810851B70F4BC004AE5A9 /* TodayIC.swift in Sources */,
 				D3F8AD181B696FCD0070C097 /* GlanceController.swift in Sources */,
+				ECB861FE1B77DCDC00503C50 /* General.swift in Sources */,
 				D3188A731B6E9AEF00323DC0 /* MessageComposer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -873,6 +1020,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -889,6 +1037,8 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Dictate/Dictate-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -896,6 +1046,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -911,6 +1062,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Dictate/Dictate-Bridging-Header.h";
 			};
 			name = Release;
 		};

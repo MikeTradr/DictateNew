@@ -18,6 +18,13 @@ class TableCell: UITableViewCell {
     @IBOutlet weak var labelVertical: UILabel!
     
     
+    @IBOutlet weak var startTimeLabel: UILabel!
+    @IBOutlet weak var endTimeLabel: UILabel!
+    
+    @IBOutlet weak var eventTitleLabel: UILabel!
+    
+    @IBOutlet weak var calendarNameLabel: UILabel!
+    @IBOutlet weak var verticalBarView: UIView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

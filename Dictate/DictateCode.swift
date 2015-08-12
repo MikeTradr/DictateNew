@@ -183,8 +183,7 @@ class DictateCode: NSObject {
                 
                 let subStringReminder = (word as NSString).containsString("reminder") || (word as NSString).containsString("remind")  // see "reminder" ore "remind" then process
                 
-                
-                if(subStringReminder ){
+                if(subStringReminder && (wordArr[i] == wordArr[0])){ //added last so only here if matches is first word in string!
                     
                     // why did I have this in ??? removed 072315 wordArrTrimmed = wordArrRaw
                     
@@ -242,7 +241,7 @@ class DictateCode: NSObject {
                 
                 //wordArrTrimmed = wordArrRaw
                 
-                if(subStringText ){
+                if(subStringText && (wordArr[i] == wordArr[0])){    //added last so only here if matches is first word in string!
                     wordArrTrimmed = wordArrTrimmed.filter() { $0 != wordArr[i] }   // remove "text" word
                     wordArrTrimmed = wordArrTrimmed.filter() { $0 != "Text" }   // remove "text" word
                     
@@ -331,7 +330,9 @@ class DictateCode: NSObject {
                 
                 //wordArrTrimmed = wordArrRaw
                 
-                if(subStringCall && (actionType != "Reminder") ){
+                println("p334 we here? wordArr[0], wordArr[i] : \(wordArr[0]), \(wordArr[i])")
+                
+                if(subStringCall && (actionType != "Reminder") && (wordArr[i] == wordArr[0]) ){ //added last so only here if matches is first word in string!
                     wordArrTrimmed = wordArrTrimmed.filter() { $0 != wordArr[i] }   // remove [i] word
                     wordArrTrimmed = wordArrTrimmed.filter() { $0 != "Call" }   // remove "Call" word
                     
@@ -417,7 +418,7 @@ class DictateCode: NSObject {
                 
                 let subStringMail = (word as NSString).containsString("mail")  || (word as NSString).containsString("email")   // see "mail" or "email" then process
                 
-                if(subStringMail ){
+                if(subStringMail && (wordArr[i] == wordArr[0])){    //added last so only here if matches is first word in string!
                     wordArrTrimmed = wordArrTrimmed.filter() { $0 != wordArr[i] }   // remove "mail" word
                     wordArrTrimmed = wordArrTrimmed.filter() { $0 != "Mail" }   // remove "mail" word
                     

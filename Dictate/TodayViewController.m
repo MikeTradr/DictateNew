@@ -246,6 +246,8 @@
     
     EKEvent *event = _events[indexPath.row];
     cell.eventTitleLabel.text = [event title];
+    cell.calendarNameLabel.textColor = [UIColor colorWithCGColor: event.calendar.CGColor];    //added by Mike 080915
+
     cell.calendarNameLabel.text = event.calendar.title;
     cell.verticalBarView.backgroundColor = [UIColor colorWithCGColor: event.calendar.CGColor];
     

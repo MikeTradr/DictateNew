@@ -189,7 +189,7 @@ class vcTodayTable: UITableViewController, UITableViewDelegate, UITableViewDataS
         var nib = UINib(nibName: "CustomTableViewCell", bundle: nil)
         tableViewToday.registerNib(nib, forCellReuseIdentifier: "customCell")
         
-        //Set the badger number to display
+        //Set the bader number to display
         // TODO add this to the app start up, does not show when app loads.
         numberOfNewItems = events.count
         if (self.numberOfNewItems == 0) {
@@ -295,6 +295,7 @@ class vcTodayTable: UITableViewController, UITableViewDelegate, UITableViewDataS
     // Pass the selected object to the new view controller.
         
         var alertSound3: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("se_tap", ofType: "m4a")!)!
+        
         //General.playSound(alertSound3!)
         
         playSound(alertSound3)

@@ -1263,12 +1263,20 @@
                                             <constraint firstAttribute="height" constant="1" id="u7T-xu-IJP"/>
                                         </constraints>
                                     </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HRf-vl-KwO">
+                                        <rect key="frame" x="141" y="45" width="38" height="18"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="centerY" secondItem="yO8-KK-VCy" secondAttribute="centerY" id="CEq-fs-OSI"/>
+                                    <constraint firstAttribute="centerX" secondItem="HRf-vl-KwO" secondAttribute="centerX" id="CXK-O8-CA6"/>
                                     <constraint firstAttribute="centerX" secondItem="yO8-KK-VCy" secondAttribute="centerX" id="G6G-Ll-w8G"/>
                                     <constraint firstAttribute="bottom" secondItem="FWo-eo-Smi" secondAttribute="bottom" id="MBC-xM-TEU"/>
+                                    <constraint firstItem="FWo-eo-Smi" firstAttribute="top" secondItem="HRf-vl-KwO" secondAttribute="bottom" id="PfS-MH-lVH"/>
                                     <constraint firstAttribute="trailing" secondItem="FWo-eo-Smi" secondAttribute="trailing" id="RTi-q1-jhs"/>
                                     <constraint firstAttribute="height" constant="64" id="WbI-7f-kfD"/>
                                     <constraint firstItem="FWo-eo-Smi" firstAttribute="leading" secondItem="vhf-cr-eei" secondAttribute="leading" id="k2j-UQ-qKm"/>
@@ -1288,8 +1296,8 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Tg3-ea-7YT" id="lpM-su-soZ">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zLi-nW-V9B">
-                                                    <rect key="frame" x="0.0" y="2" width="600" height="56"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zLi-nW-V9B">
+                                                    <rect key="frame" x="0.0" y="2" width="320" height="56"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sh7-aC-z99">
                                                             <rect key="frame" x="10" y="10" width="57.5" height="0.0"/>
@@ -1313,8 +1321,8 @@
                                                                 <constraint firstAttribute="width" constant="2" id="PvC-x8-Wif"/>
                                                             </constraints>
                                                         </view>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" misplaced="YES" text="New Appointment" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6TS-2L-qK1">
-                                                            <rect key="frame" x="95" y="9" width="505" height="18"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="New Appointment" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6TS-2L-qK1">
+                                                            <rect key="frame" x="95" y="9" width="225" height="18"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                             <color key="textColor" white="1" alpha="0.84999999999999998" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
@@ -1386,6 +1394,7 @@
                         <outlet property="calendarMenuView" destination="vhf-cr-eei" id="GNi-Ly-Eeh"/>
                         <outlet property="pushButton" destination="yO8-KK-VCy" id="OQQ-0q-xkW"/>
                         <outlet property="tableView" destination="Edt-3H-0z9" id="l43-GR-XYw"/>
+                        <outlet property="todayDateLabel" destination="HRf-vl-KwO" id="YmU-L0-Ty0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hze-L6-1q5" userLabel="First Responder" sceneMemberID="firstResponder"/>

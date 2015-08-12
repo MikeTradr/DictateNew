@@ -18,6 +18,7 @@
     NSDate *_startDate;
     NSDate *_endDate;
     NSDate *_dateSelected;
+    NSDateFormatter *_dateFormatter;
 }
 
 @end
@@ -39,7 +40,8 @@
 {
     [super viewDidLoad];
     
-    
+    _dateFormatter = [NSDateFormatter new];
+    _dateFormatter.dateFormat = @"cccc MMMM dd, yyyy";
     _calendarManager = [JTCalendarManager new];
     _calendarManager.delegate = self;
     self.tableView.tableFooterView = [UIView new];
@@ -59,6 +61,7 @@
     _todayDate = [NSDate date];
     [_calendarManager setDate:_todayDate];
     _dateSelected = _todayDate;
+    _todayDateLabel.text = [_dateFormatter stringFromDate:_todayDate];
     [self fetchEvents];
     [_calendarManager reload];
 }
@@ -113,6 +116,7 @@
         dayView.circleView.backgroundColor = [[UIColor alloc]initWithHexString:@"#FF2D55"];
         dayView.dotView.backgroundColor = [UIColor whiteColor];
         dayView.textLabel.textColor = [UIColor whiteColor];
+        dayView.textLabel.font = [UIFont systemFontOfSize:17];
     }
     // Selected date
     else if(_dateSelected && [_calendarManager.dateHelper date:_dateSelected isTheSameDayThan:dayView.date]){
@@ -120,18 +124,21 @@
         dayView.circleView.backgroundColor = [[UIColor alloc]initWithHexString:@"#1AD6FD"];//#55EFCB
         dayView.dotView.backgroundColor = [UIColor whiteColor];
         dayView.textLabel.textColor = [UIColor whiteColor];
+        dayView.textLabel.font = [UIFont systemFontOfSize:17];
     }
     // Other month
     else if(![_calendarManager.dateHelper date:_calendarContentView.date isTheSameMonthThan:dayView.date]){
         dayView.circleView.hidden = YES;
         dayView.dotView.backgroundColor = [[UIColor alloc]initWithHexString:@"#FF5B37"];
         dayView.textLabel.textColor = [UIColor lightGrayColor];
+        dayView.textLabel.font = [UIFont systemFontOfSize:17];
     }
     // Another day of the current month
     else{
         dayView.circleView.hidden = YES;
         dayView.dotView.backgroundColor = [[UIColor alloc]initWithHexString:@"#FF5B37"];
         dayView.textLabel.textColor = [UIColor whiteColor];
+        dayView.textLabel.font = [UIFont systemFontOfSize:17];
     }
     
     if([self haveEventForDay:dayView.date]){
@@ -145,6 +152,7 @@
 - (void)calendar:(JTCalendarManager *)calendar didTouchDayView:(JTCalendarDayView *)dayView
 {
     _dateSelected = dayView.date;
+    self.todayDateLabel.text = [_dateFormatter stringFromDate:dayView.date];
     _events = [self eventsForTheDay:dayView.date];
     [self.tableView reloadData];
     
@@ -254,6 +262,7 @@
         cell.endTimeLabel.text = eventEndDTString;
     }else{
         cell.startTimeLabel.text = @"all-day";
+        cell.endTimeLabel.text = @"";
     }
     return cell;
 }

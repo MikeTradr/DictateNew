@@ -47,8 +47,8 @@
         [dayViews addObject:label];
         
         label.textAlignment = NSTextAlignmentCenter;
-        label.textColor = [UIColor colorWithRed:152./256. green:147./256. blue:157./256. alpha:1.];
-        label.font = [UIFont systemFontOfSize:11];
+        label.textColor = [UIColor whiteColor];//[UIColor colorWithRed:152./256. green:147./256. blue:157./256. alpha:1.];
+        label.font = [UIFont systemFontOfSize:12];
     }
     
     _dayViews = dayViews;

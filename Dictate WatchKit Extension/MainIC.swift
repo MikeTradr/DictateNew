@@ -549,14 +549,16 @@ class MainIC: WKInterfaceController {
         PFUser.enableAutomaticUser()
         
         // Enable data sharing in app extensions.
-         Parse.enableDataSharingWithApplicationGroupIdentifier("group.com.parse.Dictate", containingApplication: "com.parse.Dictate")
+         Parse.enableDataSharingWithApplicationGroupIdentifier("group.com.thatsoft.dictateApp", containingApplication: "com.thatsoft.dictateApp")
         
      //   Parse.enableDataSharingWithApplicationGroupIdentifier(“group.com.parse.Dictate”, containingApplication: “com.parse.Dictate”)
+        
+        Parse.enableLocalDatastore()
         
         // Initialize Parse.
         Parse.setApplicationId("1wwwPAQ0Of2Fp6flotUw4YzN64HFDmy3ijAlQZKE",
             clientKey: "EHeeek4uXhJQi0vXPBba945A4h0LQ4QddEGW8gSs")
-*/
+
         
         self.myLabel.setTextColor(UIColor.yellowColor())
         self.myLabel.setText("Tap Mic to dictate or force touch")

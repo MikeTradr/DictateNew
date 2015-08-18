@@ -26,7 +26,7 @@ class General: NSObject {
     }
     
     func cleardata() {
-        println("#### pl576 we here cleardata")
+        println("General 29 we here cleardata")
         
         var mainType = ""
         var day = ""

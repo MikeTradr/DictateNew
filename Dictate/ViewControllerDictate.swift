@@ -259,7 +259,7 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
 //---- my General functions ----------------------------------------
     
     func cleardata() {
-        println("#### pl576 we here cleardata: \(date)")
+        println("ViewController 262 we here cleardata: \(date)")
         
         date = ""
         phone = ""
@@ -438,6 +438,8 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
         
         println("p419 DictateScene, actionType: \(actionType)")
         
+// ____ actionType Text ____________________________________
+        
         if (actionType == "Text") {
             println("p397 in Text Switch")
 
@@ -447,7 +449,7 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
             rawDataObject["actionType"] = actionType
             rawDataObject["rawString"] = outputNote
             rawDataObject["output"] = output
-            rawDataObject["userName"] = PFUser.currentUser()?.username
+           // rawDataObject["userName"] = PFUser.currentUser()?.username
             rawDataObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
                 println("p433 vcDictate rawDataObject has been saved.")
             }

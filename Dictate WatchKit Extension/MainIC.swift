@@ -235,7 +235,7 @@ class MainIC: WKInterfaceController {
 //---- my General functions ----------------------------------------
     
     func cleardata() {
-        println("#### pl576 we here cleardata: \(date)")
+        println("MainIC 236 we here cleardata: \(date)")
         
         date = ""
         phone = ""
@@ -471,6 +471,9 @@ class MainIC: WKInterfaceController {
         
         
         cleardata()
+        
+        println("462 we here?")
+
         
         General().delay(3.0) {
             // do stuff

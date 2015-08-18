@@ -179,7 +179,9 @@ class PrefsTempVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
         
         //TODO Mike add Parse databse logout code.
         
-    //    PFUser.logOut()
+        println("p163 Prefs, Logout Func")
+        
+        PFUser.logOut()
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewControllerWithIdentifier("Login") as! UIViewController
@@ -190,9 +192,34 @@ class PrefsTempVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
            // self.loginSetup()
             
         }
+
     
+/*
+
+//TODO fix and add to view controllder to login and SignUP???
+
+    func loginSetup() {
+        
+        if (PFUser.currentUser() == nil) {
+            
+            var logInViewController = LoginViewController()
+            
+            logInViewController.delegate = self
+            
+            var signUpViewController = PFSignUpViewController()
+            
+            signUpViewController.delegate = self
+            
+            logInViewController.signUpController = signUpViewController
+            
+            self.presentViewController(logInViewController, animated: true, completion: nil)
+            
+            
+        }
+        
+    }
     
-    
+*/
 
     /*
     // MARK: - Navigation

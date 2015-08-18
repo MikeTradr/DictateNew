@@ -10,7 +10,7 @@ import UIKit
 import Parse
 
 class LoginViewController: UIViewController {
-    
+
     var window: UIWindow?
     
     var signupActive = true
@@ -41,14 +41,53 @@ class LoginViewController: UIViewController {
         
     }
     
-
+//TODO Temp force login for testing... and Parse Mike username problems lol...
+    
     @IBAction func buttonForceGo(sender: AnyObject) {
         
         println("p47 We here buttonForceGo?")
         
-        self.performSegueWithIdentifier("login", sender: self)
+        var errorMessage = "Please try again later"
+        
+        //TODO I atempted to make a user namve for forced login so Parse still works!
+        
+        PFUser.logInWithUsernameInBackground("force", password: "force", block: { (user, error) -> Void in
+            
+            println("119 We here logged in?")
+            
+            self.activityIndicator.stopAnimating()
+            UIApplication.sharedApplication().endIgnoringInteractionEvents()
+            
+            if user != nil {
+                // lpgged In!
+                
+                self.performSegueWithIdentifier("login", sender: self)
+                
+            } else {
+                
+                if let errorString = error!.userInfo?["error"] as? String {
+                    
+                    errorMessage = errorString
+                    
+                }
+                
+                println("140 We here failed signup?")
+                //println("140 username.text: \(username.text)")
+                //println("140 password.text: \(password.text)")
+                //println("140 self.email.text: \(email.text)")
+                
+                self.displayAlert("Failed SignUp", message: errorMessage)
+                
+                
+            }
+            
+        })
 
-        //self.tabBarController?.selectedIndex = 2
+        
+    
+        
+        
+        self.performSegueWithIdentifier("login", sender: self)
         
     }
     
@@ -80,11 +119,15 @@ class LoginViewController: UIViewController {
                 var user = PFUser()
                 user.username = username.text
                 user.password = password.text
-                //user.email = email.text
+                user.email = email.text
+        //TODO so we can see password so store password in our own field on parse, userpassword
+                //user.userpassword = password.text
                 
                 
                 user.signUpInBackgroundWithBlock({ (success, error) -> Void in
                     
+                    println("88 We here user.signUpInBackgroundWithBlock")
+
                     self.activityIndicator.stopAnimating()
                     UIApplication.sharedApplication().endIgnoringInteractionEvents()
                     
@@ -111,9 +154,13 @@ class LoginViewController: UIViewController {
                 
             } else {
                 
+                println("136 username.text: \(username.text)")
+                println("136 password.text: \(password.text)")
+                println("136 self.email.text: \(email.text)")
+                
                 PFUser.logInWithUsernameInBackground(username.text, password: password.text, block: { (user, error) -> Void in
                     
-                    println("p98 We here logged in?")
+                    println("119 We here logged in?")
                     
                     self.activityIndicator.stopAnimating()
                     UIApplication.sharedApplication().endIgnoringInteractionEvents()
@@ -130,6 +177,11 @@ class LoginViewController: UIViewController {
                             errorMessage = errorString
                             
                         }
+                        
+                        println("140 We here failed signup?")
+                        //println("140 username.text: \(username.text)")
+                        //println("140 password.text: \(password.text)")
+                        //println("140 self.email.text: \(email.text)")
                         
                         self.displayAlert("Failed SignUp", message: errorMessage)
                         
@@ -186,8 +238,19 @@ class LoginViewController: UIViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
+        
+        println("190 We in LoginViewController viewDidAppear")
+        
+        PFUser.logOut()
+        
+        println("194 PFUser.currentUser(): \(PFUser.currentUser())")
+
+        
+        
+        
         if PFUser.currentUser() != nil {
-            self.performSegueWithIdentifier("login", sender: self)
+            // TODO commented out below for testing username problem 081715 MJD
+          //  self.performSegueWithIdentifier("login", sender: self)
         }  
     }
 

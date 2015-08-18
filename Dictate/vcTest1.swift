@@ -395,15 +395,24 @@ class vcTest1: UIViewController {
         
     //TODO get this from login Screen, hard coded for now...
         
-        println("p349 PFUser.currentUser(): \(PFUser.currentUser())")
+        println("p374 PFUser.currentUser(): \(PFUser.currentUser())")
         
     //TODO fix PFuser when is nil can be nil???
 
         if PFUser.currentUser() == nil {
             rawDataObject["userName"] = "Mike Coded"
         } else {
-            rawDataObject["userName"] = PFUser.currentUser()?.username
+           // rawDataObject["userName"] = "Mike Hard Coded"
+            
+            println("p383 PFUser.currentUser().username: \(PFUser.currentUser()!.username)")
+
+            
+        // todo bombs below here.
+            rawDataObject["userName"] = PFUser.currentUser()!.username
         }
+        
+        println("p384 we here? ")
+
         //rawDataObject["userName"] = "Mike Coded"
         
     // TODO used to have this alone:  rawDataObject["userName"] = PFUser.currentUser()?.username

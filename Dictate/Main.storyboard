@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="JhY-cq-KWn">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="JhY-cq-KWn">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -386,7 +386,7 @@
         <scene sceneID="IXE-dy-qQl">
             <objects>
                 <tableViewController storyboardIdentifier="ToDoList" title="ToDoList" id="dXF-g5-diV" customClass="ToDoTableViewController" customModule="Dictate" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="KN6-hI-mTG">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="KN6-hI-mTG">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -396,23 +396,17 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="u1E-qD-F64" id="2Ds-yh-tXo">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qvk-LU-pbE">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qvk-LU-pbE">
                                             <rect key="frame" x="0.0" y="2" width="414" height="56"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OHd-bi-opa">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OHd-bi-opa">
                                                     <rect key="frame" x="77" y="0.0" width="2" height="56"/>
                                                     <color key="backgroundColor" red="0.5" green="0.9428710938" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="2" id="GW1-NK-4hQ"/>
                                                     </constraints>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" misplaced="YES" text="New Appointment" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jrm-xJ-tya">
-                                                    <rect key="frame" x="95" y="10" width="319" height="36"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                                    <color key="textColor" white="1" alpha="0.84999999999999998" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QLl-Mq-LvN">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QLl-Mq-LvN">
                                                     <rect key="frame" x="95" y="46" width="0.0" height="0.0"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.85882352939999995" green="0.86666666670000003" blue="0.87058823529999996" alpha="0.34999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
@@ -438,21 +432,36 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dqH-hp-xYr">
+                                                    <rect key="frame" x="95" y="38" width="311" height="0.0"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="New Appointment" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bm2-g0-zBS">
+                                                    <rect key="frame" x="95" y="3" width="311" height="27"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" red="0.16862745100000001" green="0.16862745100000001" blue="0.16862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
-                                                <constraint firstItem="QLl-Mq-LvN" firstAttribute="top" secondItem="Jrm-xJ-tya" secondAttribute="bottom" id="CJ5-3X-5Wv"/>
-                                                <constraint firstAttribute="bottom" secondItem="Jrm-xJ-tya" secondAttribute="bottom" constant="10" id="GO9-Aj-gAx"/>
-                                                <constraint firstAttribute="trailing" secondItem="Jrm-xJ-tya" secondAttribute="trailing" id="NyQ-QR-lFW"/>
+                                                <constraint firstItem="Bm2-g0-zBS" firstAttribute="leading" secondItem="OHd-bi-opa" secondAttribute="trailing" constant="16" id="0P3-56-YEe"/>
+                                                <constraint firstItem="dqH-hp-xYr" firstAttribute="top" secondItem="Qvk-LU-pbE" secondAttribute="top" constant="38" id="5VW-sk-18t"/>
+                                                <constraint firstAttribute="trailing" secondItem="Bm2-g0-zBS" secondAttribute="trailing" constant="8" id="FdJ-ci-EPZ"/>
+                                                <constraint firstItem="dqH-hp-xYr" firstAttribute="top" secondItem="Bm2-g0-zBS" secondAttribute="bottom" constant="8" id="JYP-z4-RSi"/>
+                                                <constraint firstItem="Bm2-g0-zBS" firstAttribute="top" secondItem="Qvk-LU-pbE" secondAttribute="top" constant="3" id="OOV-ZZ-uNo"/>
+                                                <constraint firstItem="dqH-hp-xYr" firstAttribute="width" secondItem="Bm2-g0-zBS" secondAttribute="width" id="OaN-nf-3cp"/>
                                                 <constraint firstItem="CNa-jd-5oq" firstAttribute="leading" secondItem="Qvk-LU-pbE" secondAttribute="leading" constant="19" id="QN1-6P-cne"/>
-                                                <constraint firstItem="Jrm-xJ-tya" firstAttribute="leading" secondItem="OHd-bi-opa" secondAttribute="trailing" constant="16" id="SY9-TX-XzU"/>
+                                                <constraint firstItem="dqH-hp-xYr" firstAttribute="leading" secondItem="Bm2-g0-zBS" secondAttribute="leading" id="RMp-Qg-EHO"/>
                                                 <constraint firstItem="OHd-bi-opa" firstAttribute="top" secondItem="Qvk-LU-pbE" secondAttribute="top" id="Sny-qI-7e0"/>
+                                                <constraint firstItem="dqH-hp-xYr" firstAttribute="leading" secondItem="QLl-Mq-LvN" secondAttribute="leading" id="TvU-xQ-8zD"/>
                                                 <constraint firstAttribute="centerY" secondItem="CNa-jd-5oq" secondAttribute="centerY" id="YXB-9o-6pb"/>
                                                 <constraint firstAttribute="bottom" secondItem="OHd-bi-opa" secondAttribute="bottom" id="bpF-xn-tNc"/>
-                                                <constraint firstItem="Jrm-xJ-tya" firstAttribute="top" secondItem="Qvk-LU-pbE" secondAttribute="top" constant="10" id="hqX-KK-ThQ"/>
+                                                <constraint firstItem="QLl-Mq-LvN" firstAttribute="top" secondItem="dqH-hp-xYr" secondAttribute="bottom" constant="8" symbolic="YES" id="jff-fF-DiI"/>
                                                 <constraint firstItem="OHd-bi-opa" firstAttribute="leading" secondItem="CNa-jd-5oq" secondAttribute="trailing" constant="31" id="pJ2-Xq-2lJ"/>
                                                 <constraint firstItem="CNa-jd-5oq" firstAttribute="width" secondItem="CNa-jd-5oq" secondAttribute="height" multiplier="1:1" id="q7R-2N-amg"/>
-                                                <constraint firstItem="Jrm-xJ-tya" firstAttribute="leading" secondItem="QLl-Mq-LvN" secondAttribute="leading" id="wSo-s4-gAM"/>
                                             </constraints>
                                         </view>
                                     </subviews>
@@ -464,6 +473,12 @@
                                         <constraint firstAttribute="trailing" secondItem="Qvk-LU-pbE" secondAttribute="trailing" id="tx9-DI-3IX"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="calendarName" destination="dqH-hp-xYr" id="5QM-rm-E6A"/>
+                                    <outlet property="checkBox" destination="CNa-jd-5oq" id="bgw-El-6e2"/>
+                                    <outlet property="titleLabel" destination="Bm2-g0-zBS" id="Lev-pL-pL1"/>
+                                    <outlet property="verticalBarView" destination="OHd-bi-opa" id="QCf-Df-fmg"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -1292,8 +1307,8 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Tg3-ea-7YT" id="lpM-su-soZ">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zLi-nW-V9B">
-                                                    <rect key="frame" x="0.0" y="2" width="600" height="56"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zLi-nW-V9B">
+                                                    <rect key="frame" x="0.0" y="2" width="320" height="56"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sh7-aC-z99">
                                                             <rect key="frame" x="10" y="10" width="72" height="0.0"/>
@@ -1310,21 +1325,21 @@
                                                             <color key="textColor" red="0.50196081399917603" green="0.50196081399917603" blue="0.50196081399917603" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ICb-Wa-EgM">
-                                                            <rect key="frame" x="77" y="0.0" width="2" height="56"/>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ICb-Wa-EgM">
+                                                            <rect key="frame" x="90" y="0.0" width="4" height="56"/>
                                                             <color key="backgroundColor" red="0.5" green="0.9428710938" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="4" id="PvC-x8-Wif"/>
                                                             </constraints>
                                                         </view>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" misplaced="YES" text="New Appointment" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6TS-2L-qK1">
-                                                            <rect key="frame" x="95" y="9" width="505" height="18"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="New Appointment" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6TS-2L-qK1">
+                                                            <rect key="frame" x="102" y="2" width="218" height="26.5"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Unl-7f-EZu">
-                                                            <rect key="frame" x="95" y="27" width="0.0" height="0.0"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Unl-7f-EZu">
+                                                            <rect key="frame" x="102" y="32" width="0.0" height="0.0"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>

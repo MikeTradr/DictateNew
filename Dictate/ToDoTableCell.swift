@@ -10,8 +10,11 @@ import UIKit
 
 class ToDoTableCell: UITableViewCell {
     
-    @IBOutlet weak var labelTitle: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var calendarName: UILabel!
     
+    @IBOutlet weak var verticalBarView: UIView!
+    @IBOutlet weak var checkBox: CheckBox!
     
     override func awakeFromNib() {
         super.awakeFromNib()

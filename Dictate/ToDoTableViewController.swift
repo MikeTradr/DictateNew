@@ -16,7 +16,7 @@ class ToDoTableViewController: UITableViewController, UITableViewDelegate, UITab
     var startDate:NSDate!
     var endDate:NSDate!
     var today:NSDate!
-    var reminders:NSArray   = []
+    var reminders:[EKReminder] = []
     var eventStore : EKEventStore = EKEventStore()
     lazy var dateFormatter:NSDateFormatter = {
         let _dateFormatter = NSDateFormatter()
@@ -27,51 +27,22 @@ class ToDoTableViewController: UITableViewController, UITableViewDelegate, UITab
     @IBOutlet var ToDoTableView: UITableView!
     
     
-    
-    func fetchReminders() {
-        
-        getAccessToEventStoreForType(EKEntityTypeReminder, completion: { (granted) -> Void in
-            
-            if granted{
-                println("granted: \(granted)")
-                
-                var reminder:EKEvent = EKEvent(eventStore: self.eventStore)
-                // This lists every reminder
-                let calendars = self.eventStore.calendarsForEntityType(EKEntityTypeReminder)
-                var predicate = self.eventStore.predicateForIncompleteRemindersWithDueDateStarting(nil, ending: nil, calendars: calendars)
-                self.eventStore.fetchRemindersMatchingPredicate(predicate) { reminders in
-                    self.reminders = reminders
-                }
-            }
-        })
-    }
-    
-    func getAccessToEventStoreForType(type:EKEntityType, completion:(granted:Bool)->Void){
-        let status = EKEventStore.authorizationStatusForEntityType(type)
-        if status != EKAuthorizationStatus.Authorized{
-            self.eventStore.requestAccessToEntityType(EKEntityTypeReminder, completion: {
-                granted, error in
-                if (granted) && (error == nil) {
-                    completion(granted: true)
-                }else{
-                    completion(granted: false)
-                }
-            })
-            
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         var viewController = self
         setStartDateAndEndDate()
-        fetchReminders()
-        
+      
         
         println("p175: reminders: \(self.reminders)")
         println("p176: reminders.count: \(self.reminders.count)")
         
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        EventManager.sharedInstance.fetchReminders({ (reminders) -> Void in
+            self.reminders = reminders
+        })
     }
     
     func setStartDateAndEndDate()
@@ -100,23 +71,16 @@ class ToDoTableViewController: UITableViewController, UITableViewDelegate, UITab
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete method implementation.
-        // Return the number of rows in the section.
-        return 10;//reminders.count
+        return reminders.count
     }
     
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        //        let object: AnyObject = reminders[indexPath.row]
-        
-        //        println("p222: object: \(object)")
-        
-        
         var cell:ToDoTableCell = tableView.dequeueReusableCellWithIdentifier("ReminderCell") as! ToDoTableCell
-        
-        //        cell.labelTitle.text = String(object as! NSString)
-        //cell.labelTitle.text = "Test Reminder Title"
+        cell.selectionStyle = .None
+        let reminder = reminders[indexPath.row]
+        cell.titleLabel.text = reminder.title
         
         
         

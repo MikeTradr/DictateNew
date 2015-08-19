@@ -42,6 +42,7 @@ class ToDoTableViewController: UITableViewController, UITableViewDelegate, UITab
     override func viewWillAppear(animated: Bool) {
         EventManager.sharedInstance.fetchReminders({ (reminders) -> Void in
             self.reminders = reminders
+            self.tableView.reloadData()
         })
     }
     

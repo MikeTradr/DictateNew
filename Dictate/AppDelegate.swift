@@ -20,6 +20,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
+        // [Optional] Track statistics around application opens.
+        PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
+        
         Parse.enableLocalDatastore()
         
         // ****************************************************************************
@@ -35,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // PFFacebookUtils.initializeFacebook()
         // ****************************************************************************
 
-/*
+
         PFUser.enableAutomaticUser()
         
         let defaultACL = PFACL();
@@ -45,16 +48,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         PFACL.setDefaultACL(defaultACL, withAccessForCurrentUser:true)
         
+        // Enable data sharing in main app.
+        //Parse.enableDataSharingWithApplicationGroupIdentifier(“group.com.parse.Dictate”)
         
-        
-        
-        
-        // Initialize Parse.
-        Parse.setApplicationId("1wwwPAQ0Of2Fp6flotUw4YzN64HFDmy3ijAlQZKE",
-            clientKey: "EHeeek4uXhJQi0vXPBba945A4h0LQ4QddEGW8gSs")
-        
-        // [Optional] Track statistics around application opens.
-        PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
         
         // Register for Push Notitications
         if application.applicationState != UIApplicationState.Background {
@@ -93,9 +89,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         // Enable data sharing in main app.
-        //Parse.enableDataSharingWithApplicationGroupIdentifier(“group.com.parse.Dictate”)
-        
-         Parse.enableDataSharingWithApplicationGroupIdentifier("group.com.parse.Dictate", containingApplication: "com.parse.Dictate")
+       // Parse.enableDataSharingWithApplicationGroupIdentifier(<#groupIdentifier: String#>)
+        Parse.enableDataSharingWithApplicationGroupIdentifier("group.com.thatsoft.dictateApp")
+    
         
         // Setup Parse
         //Parse.setApplicationId(“<ParseAppId>”, clientKey: “<ClientKey>”)
@@ -104,7 +100,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             clientKey: "EHeeek4uXhJQi0vXPBba945A4h0LQ4QddEGW8gSs")
         
         
-*/
         
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         

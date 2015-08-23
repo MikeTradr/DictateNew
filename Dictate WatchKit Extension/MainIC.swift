@@ -104,7 +104,7 @@ class MainIC: WKInterfaceController {
     
     @IBOutlet weak var groupNavigation: WKInterfaceGroup!
     
-    
+    @IBOutlet weak var buttonMicrophone: WKInterfaceButton! // added to set microphone to hidden
     
     //@IBOutlet weak var groupButtons: WKInterfaceGroup!
    // @IBOutlet weak var groupResults: WKInterfaceGroup!
@@ -204,6 +204,8 @@ class MainIC: WKInterfaceController {
                 self.groupButtons.setHidden(false)
                 self.groupResults.setHidden(false)
                 self.groupNavigation.setHidden(true)
+                
+                self.buttonMicrophone.setHidden(true)
 
                 
                 
@@ -392,6 +394,8 @@ class MainIC: WKInterfaceController {
         
         self.myLabel.setTextColor(UIColor.greenColor())
         
+        self.buttonMicrophone.setHidden(true)  //display mircophone
+        
         let labelText = "Event created on your \(calendarName.capitalizedString) calendar!"
         
         let font:UIFont? = UIFont(name: "Arial", size: 22.0)
@@ -425,7 +429,7 @@ class MainIC: WKInterfaceController {
             fullDTEnd = ""
         }
  
- /*
+ 
         let rawDataObject = PFObject(className: "UserData")
         rawDataObject["rawString"] = strRaw
         rawDataObject["output"] = output
@@ -434,12 +438,21 @@ class MainIC: WKInterfaceController {
         rawDataObject["actionType"] = actionType
         rawDataObject["calendarName"] = calendarName
         
+//TODO get these two fields from code!
+        rawDataObject["device"] = "Watch"               //TODO hardcoded get device from code?
+        rawDataObject["userPhoneNumber"] = "watch phone number"               //TODO hardcoded get device from code?
+
+        
+        
         //TODO get this from login Screen, hard coded for now...
         
         println("p349 PFUser.currentUser(): \(PFUser.currentUser())")
         
-        //rawDataObject["userName"] = "Mike Coded"
-        rawDataObject["userName"] = PFUser.currentUser()?.username
+        if PFUser.currentUser() == nil {
+            rawDataObject["userName"] = "Mike Watch H.Coded"
+        } else {
+            rawDataObject["userName"] = PFUser.currentUser()?.username
+        }
         
         
         var query = PFQuery(className:"UserData")
@@ -456,7 +469,7 @@ class MainIC: WKInterfaceController {
             println("p362 vcTest1 rawDataObject has been saved.")
         }
         
-*/        
+        
         cleardata()
         
         General().delay(3.0) {
@@ -478,6 +491,9 @@ class MainIC: WKInterfaceController {
         
         actionType = ""
         defaults.setObject(actionType, forKey: "actionType")
+        
+        self.buttonMicrophone.setHidden(false)  //display mircophone
+
         
         
     }
@@ -515,6 +531,16 @@ class MainIC: WKInterfaceController {
         // Configure interface objects here.
         
         println("p471 in MainIC")
+        
+        // Enable data sharing in app extensions.
+        Parse.enableDataSharingWithApplicationGroupIdentifier("group.com.thatsoft.dictateApp",
+            containingApplication: "com.thatsoft.dictateApp")
+        // Setup Parse
+        Parse.setApplicationId("1wwwPAQ0Of2Fp6flotUw4YzN64HFDmy3ijAlQZKE",
+            clientKey: "EHeeek4uXhJQi0vXPBba945A4h0LQ4QddEGW8gSs")
+
+        
+        
   /*
         Parse.enableLocalDatastore()
         PFUser.enableAutomaticUser()

@@ -105,6 +105,7 @@
                         </items>
                     </menu>
                     <connections>
+                        <outlet property="buttonMicrophone" destination="O2a-qB-bgG" id="HE1-X2-2cA"/>
                         <outlet property="groupButtons" destination="L45-SR-M1E" id="Znx-BF-AlL"/>
                         <outlet property="groupNavigation" destination="zPJ-tz-Iw3" id="6Xp-QK-N6H"/>
                         <outlet property="groupResults" destination="0HL-J3-Tja" id="eE4-hO-HJr"/>

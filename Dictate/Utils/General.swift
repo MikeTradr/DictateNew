@@ -11,11 +11,11 @@ import AVFoundation
 
 class General: NSObject {
     
-    var sound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("Beep2", ofType: "mp3")!)
+  // var sound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("Beep2", ofType: "mp3")!)
     
     // make sure to add this sound to your project
-    var alertSound3 = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("Beep2", ofType: "mp3")!)
-    var audioPlayer = AVAudioPlayer()
+  //  var alertSound3 = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("Beep2", ofType: "mp3")!)
+  //  var audioPlayer = AVAudioPlayer()
     
     //---- my General functions ----------------------------------------
     
@@ -69,14 +69,14 @@ class General: NSObject {
     }
     
 
-    
+/*
     func playSound(sound: NSURL) {
         var error:NSError?
         audioPlayer = AVAudioPlayer(contentsOfURL: sound, error: &error)
         audioPlayer.prepareToPlay()
         audioPlayer.play()
     }
-    
+*/
     //---- end my Gerneral functions -------------------------------------
     
 }

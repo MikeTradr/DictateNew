@@ -104,12 +104,29 @@ class vcTest1: UIViewController {
         audioPlayer.play()
     }
     
+    func handleSwipes(sender:UISwipeGestureRecognizer) {
+        if (sender.direction == .Left) {
+            self.tabBarController?.selectedIndex = 2
+        }
+        if (sender.direction == .Right) {
+            self.tabBarController?.selectedIndex = 0
+        }
+    }
+    
 
 //#### End my functions #################################
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Added left adn Right Swipe gestures. TODO Can add this to the General.swift Class? and call it?
+        var leftSwipe = UISwipeGestureRecognizer(target: self, action: Selector("handleSwipes:"))
+        var rightSwipe = UISwipeGestureRecognizer(target: self, action: Selector("handleSwipes:"))
+        leftSwipe.direction = .Left
+        rightSwipe.direction = .Right
+        view.addGestureRecognizer(leftSwipe)
+        view.addGestureRecognizer(rightSwipe)
 
         // moved all to viewWillAppear...
     }
@@ -368,6 +385,10 @@ class vcTest1: UIViewController {
         rawDataObject["fullDTEnd"] = fullDTEnd
         rawDataObject["actionType"] = actionType
         rawDataObject["calendarName"] = calendarName
+        
+//TODO get these two fields from code!
+        rawDataObject["device"] = "iPhone"               //TODO hardcoded get device from code?
+        rawDataObject["userPhoneNumber"] = "608-242-7700"               //TODO hardcoded get device from code?
         
     //TODO get this from login Screen, hard coded for now...
         

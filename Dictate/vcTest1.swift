@@ -200,7 +200,7 @@ class vcTest1: UIViewController {
         resultTitle.text = output
         // TODO Anil next line bombs not sure why! I did like others simple label lol
         
-        //resultDur.text = "test"    // BOMBS HHY????
+        //resultDur.text = "test"    // BOMBS WHY????
         
         println("p137 actionType: \(actionType)")
         println("p138 resultType.text: \(resultType.text)")
@@ -242,6 +242,9 @@ class vcTest1: UIViewController {
         
         switch (actionType){
         case "Reminder":
+            //println("p245 actionType: \(actionType)")
+            //println("p246 resultType.text: \(resultType.text)")
+            
             resultType.backgroundColor = UIColor.yellowColor()
             buttonCreateOutlet.setTitle("Create Reminder", forState: UIControlState.Normal)
             buttonCreateOutlet.backgroundColor = UIColor.yellowColor()

@@ -99,24 +99,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Parse.setApplicationId("1wwwPAQ0Of2Fp6flotUw4YzN64HFDmy3ijAlQZKE",
             clientKey: "EHeeek4uXhJQi0vXPBba945A4h0LQ4QddEGW8gSs")
         
-        
-        
-        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
-        
-        //UITabBar.appearance().barTintColor = UIColor.blackColor()
-        //UITabBar.appearance().tintColor = UIColor.whiteColor()
-        
-        //TODO set to start at tab index 2
-        
-        //self.window.rootViewController
-        
-        //tabBarController?.selectedIndex = 0
-        
-        //works  let tabBar: UITabBarController = self.window?.rootViewController as! UITabBarController
-        
-        /// works tabBar.selectedIndex = 2
-        
-        if let tabBarController = self.window!.rootViewController as? UITabBarController {
+        //worked: https://coderwall.com/p/dyqrfa/customize-navigation-bar-appearance-with-swift
+        UIApplication.sharedApplication().statusBarStyle = .LightContent    //set StatusBar to white color all over app.
+
+        if let tabBarController = self.window!.rootViewController as? UITabBarController {   //set to start at tab index 2
             tabBarController.selectedIndex = 2
         }
         

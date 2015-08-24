@@ -296,22 +296,37 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
     
     }
     
+    func handleSwipes(sender:UISwipeGestureRecognizer) {
+        if (sender.direction == .Left) {
+            self.tabBarController?.selectedIndex = 3
+        }
+        if (sender.direction == .Right) {
+            var alertSound3: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("122-whoosh03", ofType: "mp3")!)!
+            //General.playSound(alertSound3!)
+            playSound(alertSound3)
+            self.tabBarController?.selectedIndex = 1
+        }
+    }
+    
     
     
 //---- end my Gerneral functions -------------------------------------
     
-//---- Override functions ----------------------------------------
-    
- //   override func preferredStatusBarStyle() -> UIStatusBarStyle {
- //       return UIStatusBarStyle.LightContent
-  //  }
+//---- Override functions --------------------------------------------
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
         println("p310 we here? viewDidLoad viewController")
-
+        
+        //Added left adn Right Swipe gestures. TODO Can add this to the General.swift Class? and call it?
+        var leftSwipe = UISwipeGestureRecognizer(target: self, action: Selector("handleSwipes:"))
+        var rightSwipe = UISwipeGestureRecognizer(target: self, action: Selector("handleSwipes:"))
+        leftSwipe.direction = .Left
+        rightSwipe.direction = .Right
+        view.addGestureRecognizer(leftSwipe)
+        view.addGestureRecognizer(rightSwipe)
         
         let testObject = PFObject(className: "TestObject")
         testObject["foo"] = "does send?"
@@ -320,9 +335,6 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
         }
         
         //...
-        
-        
-        UIApplication.sharedApplication().statusBarStyle = .LightContent
         
         self.tabBarController?.selectedIndex = 2
                 
@@ -368,12 +380,10 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
         self.determineStatus()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "determineStatus", name: UIApplicationWillEnterForegroundNotification, object: nil)
         
-        
         var alertSound218 = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("218-buttonclick54", ofType: "mp3")!)
         //  General.playSound(alertSound3!)
         
         playSound(alertSound218!)
-        
         
     }
     
@@ -399,14 +409,12 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
         
         var alertSound1 = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("se_tap", ofType: "m4a")!)
         //  General.playSound(alertSound3!)
-        
         playSound(alertSound1!)
 
         //cleardata()
         
         let strRaw = enteredText.text
         println("827 strRaw: \(strRaw)")
-          
         
         resultMessage.text = strRaw
         
@@ -415,18 +423,8 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
         } else {
             str = enteredText2.text
         }
-  
-/*   Moved to vcTest1 viewcontroller to sedn from there.
-        let rawDataObject = PFObject(className: "UserData")
-        rawDataObject["rawString"] = str
-        rawDataObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
-            println("p402 rawDataObject has been saved.")
-        }
-        
-*/
         
         println("### 684 str: \(str)")
-
         
         // CALL main parsing of string...  Only call this here once! Check TODO Mike...
         

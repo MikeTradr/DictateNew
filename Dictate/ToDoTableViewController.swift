@@ -5,12 +5,17 @@
 //  Created by Mike Derr on 6/22/15.
 //  Copyright (c) 2015 ThatSoft.com. All rights reserved.
 //
+// did Anil do this code?
+
 
 import UIKit
 import EventKit
 import EventKitUI
+import AVFoundation
 
 class ToDoTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    var audioPlayer = AVAudioPlayer()
     
     var numberOfNewItems:Int    = 0
     var startDate:NSDate!
@@ -32,18 +37,51 @@ class ToDoTableViewController: UITableViewController, UITableViewDelegate, UITab
         
         var viewController = self
         setStartDateAndEndDate()
+        
+        //Added left adn Right Swipe gestures. TODO Can add this to the General.swift Class? and call it?
+        var leftSwipe = UISwipeGestureRecognizer(target: self, action: Selector("handleSwipes:"))
+        var rightSwipe = UISwipeGestureRecognizer(target: self, action: Selector("handleSwipes:"))
+        leftSwipe.direction = .Left
+        rightSwipe.direction = .Right
+        view.addGestureRecognizer(leftSwipe)
+        view.addGestureRecognizer(rightSwipe)
       
         
-        println("p175: reminders: \(self.reminders)")
-        println("p176: reminders.count: \(self.reminders.count)")
-        
     }
+    
+
     
     override func viewWillAppear(animated: Bool) {
         EventManager.sharedInstance.fetchReminders({ (reminders) -> Void in
             self.reminders = reminders
             self.tableView.reloadData()
+            
+            println("p49 self.reminders: \(self.reminders)")
+            println("p50 self.reminders.count: \(self.reminders.count)")
+            
+            var tabArray = self.tabBarController?.tabBar.items as NSArray!  //added by Mike 082315 here and viewDidLoad appear?
+            var tabItem = tabArray.objectAtIndex(3) as! UITabBarItem              // set 4th tab item
+            tabItem.badgeValue = String(self.reminders.count)
+            
+      //does this badge code work?
+            
+            self.tabBarItem.badgeValue = String(self.reminders.count)
+
+            //Set the badge number to display              // added 082215 by Mike
+            // TODO add this to the app start up, does not show when app loads.
+            self.numberOfNewItems = reminders.count
+            if (self.numberOfNewItems == 0) {
+                self.tabBarItem.badgeValue = nil;
+            } else {
+                println("p60 we here? self.numberOfNewItems: \(self.numberOfNewItems)")
+                self.tabBarItem.badgeValue = String(self.reminders.count)
+            }
+            
         })
+        
+        var alertSound3: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("button-14", ofType: "mp3")!)!
+        //General.playSound(alertSound3!)
+        playSound(alertSound3)
     }
     
     func setStartDateAndEndDate()
@@ -56,6 +94,22 @@ class ToDoTableViewController: UITableViewController, UITableViewDelegate, UITab
     
     func createReminderDictionary(){
         
+    }
+    
+    func playSound(sound: NSURL){       //Added by Mike 082215
+        var error:NSError?
+        audioPlayer = AVAudioPlayer(contentsOfURL: sound, error: &error)
+        audioPlayer.prepareToPlay()
+        audioPlayer.play()
+    }
+    
+    func handleSwipes(sender:UISwipeGestureRecognizer) {
+        if (sender.direction == .Left) {
+            self.tabBarController?.selectedIndex = 4
+        }
+        if (sender.direction == .Right) {
+            self.tabBarController?.selectedIndex = 2
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -117,14 +171,14 @@ class ToDoTableViewController: UITableViewController, UITableViewDelegate, UITab
         return 70
     }
     
-    /*
+    
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+  //  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    }
-    */
+
+    
     
 }

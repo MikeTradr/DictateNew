@@ -15,8 +15,8 @@ import AVFoundation
 class PrefsTempVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     
     let userDefaultDuration:Double = 0.0
+  
     var audioPlayer = AVAudioPlayer()
-    
     
     @IBOutlet weak var prefsDefaultCalendar: UITextField!
     
@@ -28,7 +28,6 @@ class PrefsTempVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
     
     
 // TODO  get calendars from users, and make into array hard coded at prsent 7-17-15
-    
     let pickerData = ["User Default Calendar","Mike","Work","Steph","Bands","Birthdays","Reacurring","Dictate Events"]
     
     func playSound(sound: NSURL){
@@ -54,11 +53,32 @@ class PrefsTempVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
         self.presentViewController(vc, animated: true, completion: nil)
     }
     
+    func handleSwipes(sender:UISwipeGestureRecognizer) {
+        if (sender.direction == .Left) {
+            self.tabBarController?.selectedIndex = 1
+        }
+        if (sender.direction == .Right) {
+            var alertSound3: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("122-whoosh03", ofType: "mp3")!)!
+            //General.playSound(alertSound3!)
+            playSound(alertSound3)
+            
+            self.tabBarController?.selectedIndex = 4
+        }
+    }
+    
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        //Added left adn Right Swipe gestures. TODO Can add this to the General.swift Class? and call it?
+        var leftSwipe = UISwipeGestureRecognizer(target: self, action: Selector("handleSwipes:"))
+        var rightSwipe = UISwipeGestureRecognizer(target: self, action: Selector("handleSwipes:"))
+        leftSwipe.direction = .Left
+        rightSwipe.direction = .Right
+        view.addGestureRecognizer(leftSwipe)
+        view.addGestureRecognizer(rightSwipe)
 
         
         pickerCalendars.delegate = self
@@ -95,9 +115,8 @@ class PrefsTempVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
     }
     
     override func viewWillAppear(animated: Bool) {
-        var alertSound3: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("se_tap", ofType: "m4a")!)!
+        var alertSound3: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("262-buttonclick57", ofType: "mp3")!)!
         //General.playSound(alertSound3!)
-        
         playSound(alertSound3)
     }
 

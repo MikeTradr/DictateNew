@@ -544,7 +544,7 @@ class MainIC: WKInterfaceController {
 
         
         
-  /*
+
         Parse.enableLocalDatastore()
         PFUser.enableAutomaticUser()
         

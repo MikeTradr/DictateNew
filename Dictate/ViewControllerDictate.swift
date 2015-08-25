@@ -449,7 +449,12 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
             rawDataObject["actionType"] = actionType
             rawDataObject["rawString"] = outputNote
             rawDataObject["output"] = output
-           // rawDataObject["userName"] = PFUser.currentUser()?.username
+            rawDataObject["userName"] = PFUser.currentUser()?.username
+            
+            //TODO get these two fields from code!
+            rawDataObject["device"] = "iPhone"               //TODO hardcoded get device from code?
+            rawDataObject["userPhoneNumber"] = "608-242-7700"               //TODO hardcoded get device from code?
+            
             rawDataObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
                 println("p433 vcDictate rawDataObject has been saved.")
             }
@@ -508,6 +513,11 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
              rawDataObject["actionType"] = actionType
             rawDataObject["rawString"] = outputNote
             rawDataObject["userName"] = PFUser.currentUser()?.username
+            
+            //TODO get these two fields from code!
+            rawDataObject["device"] = "iPhone"               //TODO hardcoded get device from code?
+            rawDataObject["userPhoneNumber"] = "608-242-7700"               //TODO hardcoded get device from code?
+            
             rawDataObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
                 println("p490 vcDictate rawDataObject has been saved.")
             }
@@ -542,6 +552,11 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
             rawDataObject["rawString"] = outputNote
             rawDataObject["output"] = output
             rawDataObject["userName"] = PFUser.currentUser()?.username
+            
+            //TODO get these two fields from code!
+            rawDataObject["device"] = "iPhone"               //TODO hardcoded get device from code?
+            rawDataObject["userPhoneNumber"] = "608-242-7700"               //TODO hardcoded get device from code?
+            
             rawDataObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
                 println("p523 vcDictate rawDataObject has been saved.")
             }

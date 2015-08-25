@@ -28,7 +28,7 @@ class PrefsTempVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
     
     
 // TODO  get calendars from users, and make into array hard coded at prsent 7-17-15
-    let pickerData = ["User Default Calendar","Mike","Work","Steph","Bands","Birthdays","Reacurring","Dictate Events"]
+    let pickerData = ["User Default Calendar", "Mike", "Work", "Steph", "Bands", "Birthdays", "Reacurring" ,"Dictate Events"]
     
     func playSound(sound: NSURL){
         var error:NSError?
@@ -125,11 +125,17 @@ class PrefsTempVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func buttonGoToNewSettingsScene(sender: AnyObject) {
+        
+        let storyboard = UIStoryboard(name: "Settings", bundle: nil)
+        let vc = storyboard.instantiateViewControllerWithIdentifier("someViewController") as! UIViewController
+        self.presentViewController(vc, animated: true, completion: nil)
+        
+    }
+  
     
     @IBAction func buttonUpdatePrefs(sender: AnyObject) {
-        
-        
-        
+  
         
         let defaults = NSUserDefaults.standardUserDefaults()
        // defaults.setObject(prefsDefaultCalendar.text, forKey: "prefsDefaultCalendarName")

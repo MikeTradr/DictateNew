@@ -32,6 +32,9 @@
 		D323505F1B697B0200939F03 /* DictateCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D323505D1B697B0200939F03 /* DictateCode.swift */; };
 		D32350621B69828900939F03 /* ReminderCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32350611B69828900939F03 /* ReminderCode.swift */; };
 		D32350631B69828900939F03 /* ReminderCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32350611B69828900939F03 /* ReminderCode.swift */; };
+		D33C13BB1B8C1EC900470F8F /* ToDoMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33C13BA1B8C1EC900470F8F /* ToDoMenuViewController.swift */; };
+		D33C13BD1B8C3CCB00470F8F /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33C13BC1B8C3CCB00470F8F /* SettingsTableViewController.swift */; };
+		D33C13BF1B8C47E800470F8F /* SettingsCalendarTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33C13BE1B8C47E800470F8F /* SettingsCalendarTableViewController.swift */; };
 		D33CAD041B74773500F59260 /* button-14.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D33CAD031B74773500F59260 /* button-14.mp3 */; };
 		D33CAD051B74773500F59260 /* button-14.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D33CAD031B74773500F59260 /* button-14.mp3 */; };
 		D33CAD071B747EBE00F59260 /* se_tap.m4a in Resources */ = {isa = PBXBuildFile; fileRef = D33CAD061B747EBE00F59260 /* se_tap.m4a */; };
@@ -169,6 +172,9 @@
 		D3188A8A1B6E9C1100323DC0 /* vcTodayTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = vcTodayTable.swift; sourceTree = "<group>"; };
 		D323505D1B697B0200939F03 /* DictateCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictateCode.swift; sourceTree = "<group>"; };
 		D32350611B69828900939F03 /* ReminderCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderCode.swift; sourceTree = "<group>"; };
+		D33C13BA1B8C1EC900470F8F /* ToDoMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ToDoMenuViewController.swift; path = ../ToDoMenuViewController.swift; sourceTree = "<group>"; };
+		D33C13BC1B8C3CCB00470F8F /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		D33C13BE1B8C47E800470F8F /* SettingsCalendarTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsCalendarTableViewController.swift; path = Views/SettingsCalendarTableViewController.swift; sourceTree = "<group>"; };
 		D33CAD031B74773500F59260 /* button-14.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "button-14.mp3"; sourceTree = "<group>"; };
 		D33CAD061B747EBE00F59260 /* se_tap.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = se_tap.m4a; sourceTree = "<group>"; };
 		D38C9C551B821DA3009CFC7C /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
@@ -359,6 +365,7 @@
 		D323505A1B69783400939F03 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				D33C13C01B8C480500470F8F /* Settings */,
 				D3188A7C1B6E9B7700323DC0 /* ViewControllerDictate.swift */,
 				D3188A7E1B6E9B7F00323DC0 /* LoginViewController.swift */,
 				D3F8ACEC1B696FB00070C097 /* ViewController.swift */,
@@ -366,11 +373,12 @@
 				D3188A821B6E9BD500323DC0 /* PrefsTableVC.swift */,
 				D3188A841B6E9BED00323DC0 /* PrefsTempVC.swift */,
 				D3188A861B6E9BF900323DC0 /* vcTest1.swift */,
+				D33C13BA1B8C1EC900470F8F /* ToDoMenuViewController.swift */,
 				D3188A881B6E9C0800323DC0 /* ToDoTableViewController.swift */,
 				D3188A8A1B6E9C1100323DC0 /* vcTodayTable.swift */,
 				ECB862001B77DD4100503C50 /* TodayViewController.h */,
-				ECB862011B77DD4100503C50 /* TodayViewController.m */,
 				ECB861FF1B77DD4000503C50 /* Dictate-Bridging-Header.h */,
+				ECB862011B77DD4100503C50 /* TodayViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -416,6 +424,15 @@
 				EC0B487D1B6FE9B800C0AD82 /* libsqlite3.0.dylib */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D33C13C01B8C480500470F8F /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				D33C13BC1B8C3CCB00470F8F /* SettingsTableViewController.swift */,
+				D33C13BE1B8C47E800470F8F /* SettingsCalendarTableViewController.swift */,
+			);
+			name = Settings;
 			sourceTree = "<group>";
 		};
 		D33CAD091B747F0900F59260 /* Resources */ = {
@@ -883,6 +900,7 @@
 				ECB862341B77DEBD00503C50 /* JTCalendarWeekDayView.m in Sources */,
 				ECB8622C1B77DEBD00503C50 /* JTCalendarManager.m in Sources */,
 				D3188A6C1B6E9ADB00323DC0 /* MailComposer.swift in Sources */,
+				D33C13BF1B8C47E800470F8F /* SettingsCalendarTableViewController.swift in Sources */,
 				D3188A691B6E9AA700323DC0 /* MailComposer3.swift in Sources */,
 				D3188A6F1B6E9AE400323DC0 /* MessageCode.swift in Sources */,
 				ECB862361B77DEBD00503C50 /* JTHorizontalCalendarView.m in Sources */,
@@ -892,6 +910,7 @@
 				D3F8ACED1B696FB00070C097 /* ViewController.swift in Sources */,
 				ECB8622B1B77DEBD00503C50 /* CALEventManager.m in Sources */,
 				D3188A811B6E9B9900323DC0 /* tabBarController.swift in Sources */,
+				D33C13BB1B8C1EC900470F8F /* ToDoMenuViewController.swift in Sources */,
 				ECB862351B77DEBD00503C50 /* JTCalendarWeekView.m in Sources */,
 				ECF8185F1B83B7E10087ECAD /* CheckBox.swift in Sources */,
 				D3F8ACEB1B696FB00070C097 /* AppDelegate.swift in Sources */,
@@ -902,6 +921,7 @@
 				D3188A771B6E9B2600323DC0 /* TableCell.swift in Sources */,
 				ECB862321B77DEBD00503C50 /* JTCalendarMenuView.m in Sources */,
 				D3188A7D1B6E9B7700323DC0 /* ViewControllerDictate.swift in Sources */,
+				D33C13BD1B8C3CCB00470F8F /* SettingsTableViewController.swift in Sources */,
 				ECF818631B84FAB70087ECAD /* EventManager.swift in Sources */,
 				ECB861E31B77DBB700503C50 /* Utility.swift in Sources */,
 				D3188A8B1B6E9C1100323DC0 /* vcTodayTable.swift in Sources */,

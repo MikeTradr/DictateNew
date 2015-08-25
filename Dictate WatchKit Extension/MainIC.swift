@@ -11,6 +11,8 @@ import Foundation
 import EventKit
 import Parse
 import AVFoundation
+//import MessageUI
+
 
 var results = []
 
@@ -278,9 +280,7 @@ class MainIC: WKInterfaceController {
     func playSoundNew(sound: NSURL) {
         let filePath = NSBundle.mainBundle().pathForResource("se_tap", ofType: "m4a")!
         let fileUrl = NSURL.fileURLWithPath(filePath)
-     //   let asset = WKAudioFileAsset(URL: fileUrl)
-   //     let playerItem = WKAudioFilePlayerItem(asset: asset)
-    //    player = WKAudioFilePlayer(playerItem: playerItem)
+
     }
     
 //---- End my General functions ----------------------------------------
@@ -325,6 +325,8 @@ class MainIC: WKInterfaceController {
     
     @IBAction func buttonCreate() {
         
+        self.buttonMicrophone.setHidden(true)  //hide mircophone
+        
         println("p277 eventStart: \(startDT)")
         println("p278 calendarName: \(calendarName)")
         
@@ -362,7 +364,6 @@ class MainIC: WKInterfaceController {
             // TODO MIKE  remove this parsing again! pass with NSUser Data in method
             //   let (startDT, endDT, output, outputNote, day, calendarName, actionType) = DictateCode().parse(str)
             
-            
             //DictateCode().insertEvent(eventStore, startDT: startDT, endDT: endDT, output: output, outputNote: outputNote, calendarName: calendarName )
             
             EventCode().createEvent()
@@ -394,7 +395,7 @@ class MainIC: WKInterfaceController {
         
         self.myLabel.setTextColor(UIColor.greenColor())
         
-        self.buttonMicrophone.setHidden(true)  //display mircophone
+        self.buttonMicrophone.setHidden(true)  //hide mircophone
         
         let labelText = "Event created on your \(calendarName.capitalizedString) calendar!"
         
@@ -495,7 +496,7 @@ class MainIC: WKInterfaceController {
         actionType = ""
         defaults.setObject(actionType, forKey: "actionType")
         
-        self.buttonMicrophone.setHidden(false)  //display mircophone
+        //self.buttonMicrophone.setHidden(false)  //display mircophone
 
         
         
@@ -521,6 +522,7 @@ class MainIC: WKInterfaceController {
 
     
     @IBAction func buttonCancel() {
+        self.buttonMicrophone.setHidden(false)  //display mircophone
         self.myLabel.setText("Tap Mic to dictate or force touch")
         cleardata()
         
@@ -547,23 +549,19 @@ class MainIC: WKInterfaceController {
 
         Parse.enableLocalDatastore()
         PFUser.enableAutomaticUser()
-        
+/*
         // Enable data sharing in app extensions.
-         Parse.enableDataSharingWithApplicationGroupIdentifier("group.com.thatsoft.dictateApp", containingApplication: "com.thatsoft.dictateApp")
-        
-     //   Parse.enableDataSharingWithApplicationGroupIdentifier(“group.com.parse.Dictate”, containingApplication: “com.parse.Dictate”)
+        Parse.enableDataSharingWithApplicationGroupIdentifier("group.com.thatsoft.dictateApp", containingApplication: "com.thatsoft.dictateApp")
         
         Parse.enableLocalDatastore()
         
         // Initialize Parse.
         Parse.setApplicationId("1wwwPAQ0Of2Fp6flotUw4YzN64HFDmy3ijAlQZKE",
             clientKey: "EHeeek4uXhJQi0vXPBba945A4h0LQ4QddEGW8gSs")
-
-        
+*/
         self.myLabel.setTextColor(UIColor.yellowColor())
         self.myLabel.setText("Tap Mic to dictate or force touch")
 
-        
     }
     
     override func willActivate() {
@@ -585,7 +583,5 @@ class MainIC: WKInterfaceController {
     }
     
     //---- End Override functions ----------------------------------------
-    
-    
     
 }   // end InterfaceController

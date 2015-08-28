@@ -39,6 +39,8 @@
 		D33CAD051B74773500F59260 /* button-14.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D33CAD031B74773500F59260 /* button-14.mp3 */; };
 		D33CAD071B747EBE00F59260 /* se_tap.m4a in Resources */ = {isa = PBXBuildFile; fileRef = D33CAD061B747EBE00F59260 /* se_tap.m4a */; };
 		D33CAD081B747EBE00F59260 /* se_tap.m4a in Resources */ = {isa = PBXBuildFile; fileRef = D33CAD061B747EBE00F59260 /* se_tap.m4a */; };
+		D3795E7A1B8DF927009D3DB5 /* SettingsEventTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3795E791B8DF927009D3DB5 /* SettingsEventTableViewController.swift */; };
+		D3795E7B1B8F654F009D3DB5 /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF818621B84FAB70087ECAD /* EventManager.swift */; };
 		D38C9C571B821DA3009CFC7C /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D38C9C551B821DA3009CFC7C /* Fabric.framework */; };
 		D38C9C581B821DA3009CFC7C /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D38C9C551B821DA3009CFC7C /* Fabric.framework */; };
 		D38C9C591B821DA3009CFC7C /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D38C9C561B821DA3009CFC7C /* Crashlytics.framework */; };
@@ -177,6 +179,7 @@
 		D33C13BE1B8C47E800470F8F /* SettingsCalendarTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsCalendarTableViewController.swift; path = Views/SettingsCalendarTableViewController.swift; sourceTree = "<group>"; };
 		D33CAD031B74773500F59260 /* button-14.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "button-14.mp3"; sourceTree = "<group>"; };
 		D33CAD061B747EBE00F59260 /* se_tap.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = se_tap.m4a; sourceTree = "<group>"; };
+		D3795E791B8DF927009D3DB5 /* SettingsEventTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsEventTableViewController.swift; path = Views/SettingsEventTableViewController.swift; sourceTree = "<group>"; };
 		D38C9C551B821DA3009CFC7C /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		D38C9C561B821DA3009CFC7C /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		D3A0F9FB1B69F0BB00F1FEDA /* EventCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCode.swift; sourceTree = "<group>"; };
@@ -431,6 +434,7 @@
 			children = (
 				D33C13BC1B8C3CCB00470F8F /* SettingsTableViewController.swift */,
 				D33C13BE1B8C47E800470F8F /* SettingsCalendarTableViewController.swift */,
+				D3795E791B8DF927009D3DB5 /* SettingsEventTableViewController.swift */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -921,6 +925,7 @@
 				D3188A771B6E9B2600323DC0 /* TableCell.swift in Sources */,
 				ECB862321B77DEBD00503C50 /* JTCalendarMenuView.m in Sources */,
 				D3188A7D1B6E9B7700323DC0 /* ViewControllerDictate.swift in Sources */,
+				D3795E7A1B8DF927009D3DB5 /* SettingsEventTableViewController.swift in Sources */,
 				D33C13BD1B8C3CCB00470F8F /* SettingsTableViewController.swift in Sources */,
 				ECF818631B84FAB70087ECAD /* EventManager.swift in Sources */,
 				ECB861E31B77DBB700503C50 /* Utility.swift in Sources */,
@@ -945,6 +950,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3795E7B1B8F654F009D3DB5 /* EventManager.swift in Sources */,
 				D3F8AD161B696FCD0070C097 /* NotificationController.swift in Sources */,
 				D3E8108A1B710690004AE5A9 /* RemindersIC.swift in Sources */,
 				D3188A6D1B6E9ADB00323DC0 /* MailComposer.swift in Sources */,

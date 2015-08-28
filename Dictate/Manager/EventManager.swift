@@ -57,4 +57,21 @@ class EventManager: NSObject {
             completion(granted: true)
         }
     }
+    
+    func creatNewReminderList(name:String, items:[String]){
+        let calender = EKCalendar(forEntityType: EKEntityTypeReminder , eventStore: self.eventStore)
+        calender.title = name
+        var error:NSError?
+        calender.source = eventStore.defaultCalendarForNewReminders().source
+        self.eventStore.saveCalendar(calender, commit: true, error: &error)
+        println("Error: \(error)")
+        
+        for item in items{
+            let reminder = EKReminder(eventStore: self.eventStore)
+            reminder.title = item
+            reminder.calendar = calender
+            self.eventStore.saveReminder(reminder, commit: true, error: &error)
+        }
+    }
+    
 }

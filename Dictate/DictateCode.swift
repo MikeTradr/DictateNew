@@ -8,7 +8,6 @@
 
 import UIKit
 import EventKit
-//import Parse
 
 /*
 func delay(delay:Double, closure:()->()) {
@@ -78,10 +77,24 @@ class DictateCode: NSObject {
     
     //#### my functions #################################
     
+    func stripListWords(wordArr:[String]) -> ([String]) {
+        
+        for (i, element) in enumerate(wordArr) {
+            
+            word = wordArr[i] //as! String
+        }
+        
+        return wordArr
+    }
+
+
+    
     func parse (str: String) -> (NSDate, NSDate, String, String, String, String, String) {
         //returning startDT, endDT, output, outputNote, day, calendarName, eventDuration, actionType
         
         let defaults = NSUserDefaults.standardUserDefaults()
+        
+        var wordArr:[String]        = []
         
         actionType = ""     // set to blank so can process...
         mainType = ""
@@ -118,11 +131,68 @@ class DictateCode: NSObject {
             
             //TODO ADD if we see LIST then parse on comma maybe...
             
+            let charset = NSCharacterSet(charactersInString: ",")
+
+// ____ IF for comma in string ____________________________________
+           
+            if str.lowercaseString.rangeOfCharacterFromSet(charset, options: nil, range: nil) != nil {
+                println("p122 Comma's in String yes")
+                
+                wordArr = str.componentsSeparatedByString(",")      //** use for COMMA seperated list, or phrases
+                
+                actionType = "Phrase List"         // set type for proper processing
+                
+                let notes = wordArr              //origonal string
+                mainType = "Phrase List"
+                
+                // New list today go to the store,
+                
+                var firstString:String = wordArr[0]
+                
+               // let subStringNew = (firstString as NSString).containsString("new list") // see "new" then process
+                
+               // if(subStringNew){
+                //    firstString = firstString.stringByReplacingOccurrencesOfString("new list", withString: "", options: .allZeros, range: nil)
+               // }
+                
+                firstString = firstString.stringByReplacingOccurrencesOfString("new", withString: "", options: .allZeros, range: nil)
+                
+                firstString = firstString.stringByReplacingOccurrencesOfString("list", withString: "", options: .allZeros, range: nil)
+                
+                println("p100 wordArr: \(wordArr)")
+                println("p150 firstString: \(firstString)")
+                
+                var reminderTitle = firstString
+                
+            //    if #available(iOS 9.0, *) {
+            //        reminderTitle.localizedCapitalizedString
+            //   }
+                
+                reminderTitle = reminderTitle.capitalizedString
+                println("p172 reminderTitle: \(reminderTitle)")
+
+                wordArrTrimmed = wordArr.filter() { $0 != wordArr[0] }   // remove first array item
+                println("p165 wordArrTrimmed: \(wordArrTrimmed)")
+             
+                defaults.setObject(actionType, forKey: "actionType")    //sets actionType for processing
+                defaults.setObject(mainType, forKey: "mainType")
+                defaults.setObject(reminderTitle, forKey: "title")      //sets reminderTitle
+                defaults.setObject(reminderTitle, forKey: "calendarName")   //sets title to calendarName for ParseDB
+                
+                defaults.setObject(wordArrTrimmed, forKey: "wordArrTrimmed")            //sets reminderItems
+
+                return (startDT, endDT, output, outputNote, day, calendarName, actionType)
+                
+// ____ end IF comma in string ____________________________________
+                
+            } else {
+                
+                wordArr = str.componentsSeparatedByString(" ")      //** use for SPACE seperated list, or phrases
+            
+
             //let wordArr = str.componentsSeparatedByString(",")      //** use for COMMA seperated list, or phrases
-            let wordArr = str.componentsSeparatedByString(" ")      //** use for SPACE seperated list, or phrases
             
             wordArrTrimmed = wordArr
-            
             
             let wordArrRaw = strRaw.componentsSeparatedByString(" ")    //Raw Array for nicer output
             println("p100 wordArr: \(wordArr)")
@@ -167,7 +237,7 @@ class DictateCode: NSObject {
             println("194: 1 week and 0 hours from now: \(calendar.dateByAddingComponents(components, toDate: date2, options: nil))")
             
             
-            // ____ For Loop to loop through every word in the Sting now an array ____________________________________
+// ____ For Loop to loop through every word in the Sting now an array _________________
             
             for (i, element) in enumerate(wordArr) {
                 
@@ -177,6 +247,134 @@ class DictateCode: NSObject {
                 println("vvvvvvvv current WORD vvvvvvvv: \(word)")
                 
                 println("p132 wordArrTrimmed: \(wordArrTrimmed)")
+                
+                
+// ____ "new" word ____________________________________
+                
+                let subStringNewList = (word as NSString).containsString("new") // see "new" ore "remind" then process
+                
+                if(subStringNewList && (wordArr[i] == wordArr[0])){ //added last so only here if matches is first word in string!
+                    
+                    if (i < arrayLength-1) {
+                        nextWord = wordArr[i+1]
+                    } else {
+                        nextWord = ""
+                    }
+                    
+                    if (i < arrayLength-2) {
+                        nextWord2 = wordArr[i+2]
+                    } else {
+                        nextWord2 = ""
+                    }
+
+                    
+                    if ( (nextWord != "") && nextWord == "list" ) {
+                        
+                            wordArrTrimmed = wordArrTrimmed.filter() { $0 != wordArr[i+1] }   // remove "list" nextword
+                        
+                            wordArrTrimmed = wordArrTrimmed.filter() { $0 != wordArr[i] }   // remove "new" word
+                        
+                            wordArrTrimmed = wordArrTrimmed.filter() { $0 != wordArr[i+2] }   // remove nextWord2 the list name.
+            
+                            println("p200 nextWord: \(nextWord)")
+                        
+                            println("p202 wordArrTrimmed: \(wordArrTrimmed)")
+
+                            actionType = "New List"         // set type for proper processing
+                        
+                            let notes = strRaw              //origonal string
+                            mainType = "New List"           // type to display
+                            
+                            var joiner = " "
+                            output = joiner.join(wordArrTrimmed)
+                            
+                            let title = output
+                            println("p213 title: \(title)")
+                        
+                            println("p203: actionType \(actionType)")
+                            println("p204: mainType \(mainType)")
+                            
+                            defaults.setObject(actionType, forKey: "actionType")        //sets actionType for processing
+                            defaults.setObject(mainType, forKey: "mainType")            //sets mainType
+                        
+                            nextWord2.capitalizedString
+                            nextWord2.replaceRange(nextWord2.startIndex...nextWord2.startIndex, with: String(nextWord2[nextWord2.startIndex]).capitalizedString)
+                        
+                            let reminderTitle = nextWord2
+                        
+                            defaults.setObject(reminderTitle, forKey: "title")            //sets reminderTitle
+                        
+                            defaults.setObject(reminderTitle, forKey: "calendarName")            //sets title to calendarName for ParseDB
+
+                        
+                            defaults.setObject(wordArrTrimmed, forKey: "wordArrTrimmed")            //sets reminderItems
+
+            
+                           // EventManager.sharedInstance.creatNewReminderList(nextWord2, items: wordArrTrimmed)
+                        
+                           // EventManager.sharedInstance.creatNewReminderList(nextWord, items: ["Butter","Milk","Cheese"])
+                        
+                    }
+  
+                }
+
+// ____ "list" first word ____________________________________
+                
+                let subStringList = (word as NSString).containsString("list") // see "raw"  then process
+                
+                if(subStringList && (wordArr[i] == wordArr[0])){ //added last so only here if matches is first word in string!
+                    
+                    if (i < arrayLength-1) {
+                        nextWord = wordArr[i+1]
+                    } else {
+                        nextWord = ""
+                    }
+                    
+                    if ( nextWord != "" ) {
+                     
+                        wordArrTrimmed = wordArrTrimmed.filter() { $0 != wordArr[i] }   // remove "lis" word
+                        
+                        println("p200 nextWord: \(nextWord)")
+                        
+                        println("p202 wordArrTrimmed: \(wordArrTrimmed)")
+                        
+                        actionType = "List"         // set type for proper processing
+                        
+                        let notes = strRaw              //origonal string
+                        mainType = "List"           // type to display
+                        
+                        var joiner = " "
+                        output = joiner.join(wordArrTrimmed)
+                        
+                        let title = output
+                        println("p213 title: \(title)")
+                        
+                        println("p203: actionType \(actionType)")
+                        println("p204: mainType \(mainType)")
+                        
+                        defaults.setObject(actionType, forKey: "actionType")        //sets actionType for processing
+                        defaults.setObject(mainType, forKey: "mainType")            //sets mainType
+                        
+                        let reminderTitle = "Untitled"
+                        
+                        defaults.setObject(reminderTitle, forKey: "title")            //sets reminderTitle
+                        
+                        defaults.setObject(reminderTitle, forKey: "calendarName")            //sets title to calendarName for ParseDB
+                        
+                        
+                        defaults.setObject(wordArrTrimmed, forKey: "wordArrTrimmed")            //sets reminderTitle
+                        
+                        
+                        // EventManager.sharedInstance.creatNewReminderList(nextWord2, items: wordArrTrimmed)
+                        
+                        // EventManager.sharedInstance.creatNewReminderList(nextWord, items: ["Butter","Milk","Cheese"])
+                        
+                    }
+                    
+                }
+                
+                
+                
                 
 // ____ "reminder" or "remind" word ____________________________________
                 
@@ -1747,23 +1945,32 @@ class DictateCode: NSObject {
             // Not for extension saveToDatabase()    // save data to database call function
             
             return (startDT, endDT, output, outputNote, day, calendarName, actionType)
+           
+            }  // end else space deliminated string
             
+   
             
-        } else {                                                                    // if str != ""
+       // }   // end else
+        
+        
+        
+        }       //end func str != 0
+        
+        if (str == "") {                                                       // if str != ""
             var messageOut:String = "Nothing to Translate, try again"
             //cleardata()
+            
             if (startDT != NSDate(dateString:"2014-12-12") ) {
                 return (startDT, endDT, output, outputNote, day, calendarName, actionType)
             } else {
                 return (NSDate(dateString:"2014-12-12"), NSDate(dateString:"2014-12-12"), output, outputNote, day, calendarName, actionType)
+                
             }
-            
-        }   // end else
+        }
         
+        return (NSDate(dateString:"2014-12-12"), NSDate(dateString:"2014-12-12"), output, outputNote, day, calendarName, actionType)
         
-        
-    }       //end func str != 0
-    // end func parse
+    } // end func parse
     
     
     

@@ -537,6 +537,9 @@ class MainIC: WKInterfaceController {
         
         println("p471 in MainIC")
         
+        Parse.enableLocalDatastore()
+        PFUser.enableAutomaticUser()
+        
         // Enable data sharing in app extensions.
         Parse.enableDataSharingWithApplicationGroupIdentifier("group.com.thatsoft.dictateApp",
             containingApplication: "com.thatsoft.dictateApp")
@@ -544,11 +547,7 @@ class MainIC: WKInterfaceController {
         Parse.setApplicationId("1wwwPAQ0Of2Fp6flotUw4YzN64HFDmy3ijAlQZKE",
             clientKey: "EHeeek4uXhJQi0vXPBba945A4h0LQ4QddEGW8gSs")
 
-        
-        
 
-        Parse.enableLocalDatastore()
-        PFUser.enableAutomaticUser()
 /*
         // Enable data sharing in app extensions.
         Parse.enableDataSharingWithApplicationGroupIdentifier("group.com.thatsoft.dictateApp", containingApplication: "com.thatsoft.dictateApp")

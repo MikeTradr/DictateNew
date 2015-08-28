@@ -179,6 +179,8 @@ class ReminderCode: NSObject {
         
         reminder.calendar = calendarDatabase.defaultCalendarForNewReminders()
         
+        //reminder.calendar = calendarDatabase.defaultCalendarForNewReminders()
+        
         var error: NSError?
         
         if error != nil{

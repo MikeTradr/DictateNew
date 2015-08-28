@@ -163,6 +163,11 @@ class vcTest1: UIViewController {
         
         let actionType:String  = defaults.stringForKey("actionType")!
         
+        var reminderTitle   = defaults.stringForKey("title")
+        
+        var wordArrTrimmed  = defaults.objectForKey("wordArrTrimmed") as! [String] //array of the items
+
+        
         println("p111Main day: \(day)")
         println("p111Main phone: \(phone)")
         println("p111Main startDT: \(startDT)")
@@ -177,6 +182,9 @@ class vcTest1: UIViewController {
         
         println("p111Main mainType: \(mainType)")
         println("p111Main actionType: \(actionType)")
+        
+        println("p111Main reminderTitle: \(reminderTitle)")
+        println("p111Main wordArrTrimmed: \(wordArrTrimmed)")
         
         println("p119Main Representation: \(NSUserDefaults.standardUserDefaults().dictionaryRepresentation())")
         
@@ -236,9 +244,9 @@ class vcTest1: UIViewController {
         let newSwiftColor = UIColor(red: 255, green: 165, blue: 0)
         let lightPink = UIColor(red: 255, green: 204, blue: 255)
         let swiftColor = UIColor(red: 255, green: 165, blue: 0)
-        
-        
-        
+        let moccasin = UIColor(red: 255, green: 228, blue: 181)     //light biege color, for Word List
+        let apricot = UIColor(red: 251, green: 206, blue: 177)     //light biege color, for Phrase List
+
         
         switch (actionType){
         case "Reminder":
@@ -255,22 +263,45 @@ class vcTest1: UIViewController {
             resultEndDate.text = ""
             
             break;
+            
         case "Event":
             resultType.backgroundColor = swiftColor
             buttonCreateOutlet.setTitle("Create Event", forState: UIControlState.Normal)
             buttonCreateOutlet.backgroundColor = swiftColor
             break;
             
-        case "List":        resultType.backgroundColor = UIColor.redColor(); break;
-        case "CommaList":   resultType.backgroundColor = UIColor.cyanColor(); break;
-            /*
-            case "Text":
-            resultType.backgroundColor = UIColor.cyanColor()
-            buttonCreateOutlet.setTitle("Send Text", forState: UIControlState.Normal)
-            buttonCreateOutlet.backgroundColor = UIColor.cyanColor()
+        case "New List", "List":
+            
+            var reminderTitle:String = defaults.stringForKey("title")!
+
+            resultType.backgroundColor = moccasin
+            buttonCreateOutlet.backgroundColor = moccasin
+            buttonCreateOutlet.setTitle("Create New List", forState: UIControlState.Normal)
+            resultCalendar.text = "New List: \(reminderTitle)"
+            resultEndDate.text = ""
+            resultStartDate.text = ""
+            resultDay.text = ""
+
+            break;
+            
+            
+        case "Phrase List":
+            var reminderTitle:String = defaults.stringForKey("title")!
+            
+            resultType.backgroundColor = apricot
+            buttonCreateOutlet.backgroundColor = apricot
+            buttonCreateOutlet.setTitle("Create Phrase List", forState: UIControlState.Normal)
+            resultCalendar.text = ""
+            resultTitle.text = reminderTitle
+
+            let stringOutput = ", ".join(wordArrTrimmed)
+            
+            resultDay.text = stringOutput
+            resultEndDate.text = ""
+            resultStartDate.text = ""
+           
             
             break;
-            */
         default:
             resultType.backgroundColor = swiftColor
             buttonCreateOutlet.setTitle("Create Event", forState: UIControlState.Normal)
@@ -342,12 +373,31 @@ class vcTest1: UIViewController {
             resultMessage.text = "Event created on your \(calendarName.capitalizedString) calendar!"
             break;
             
-        case "List":
-            println("p150 in list Switch")
+        case "New List", "List" :
+            println("p353 in list Switch")
+            
+            var calendarName    = defaults.stringForKey("calendarName") //Sets Reminder Title
+            var wordArrTrimmed  = defaults.objectForKey("wordArrTrimmed") as! [String] //array of the items
+
+            EventManager.sharedInstance.creatNewReminderList(calendarName!, items: wordArrTrimmed)
+            
+            resultMessage.text = "Your List \(calendarName!) has been created"
+            
             break;
-        case "CommaList":
-            println("p151 in commaList Switch")
+            
+        case "Phrase List":
+            println("p378 in phraseList Switch")
+            
+            var calendarName    = defaults.stringForKey("calendarName") //Sets Reminder Title
+            var wordArrTrimmed  = defaults.objectForKey("wordArrTrimmed") as! [String] //array of the items
+            
+            EventManager.sharedInstance.creatNewReminderList(calendarName!, items: wordArrTrimmed)
+            
+            resultMessage.text = "Your List \(calendarName!) has been created"
+
+            
             break;
+            
         case "Note":
             println("p152 in note Switch")
             break;
@@ -441,8 +491,11 @@ class vcTest1: UIViewController {
         resultDay.text = ""
         resultTime.text = timeString
         resultPhone.text = phone
-        resultStartDate.text = fullDT
-        resultEndDate.text = fullDTEnd
+        
+        resultStartDate.text = ""
+        resultEndDate.text = ""
+        //resultStartDate.text = fullDT
+        //resultEndDate.text = fullDTEnd
         resultTitle.text = ""
         // error below TODO
        // resultDuration.text = ""
@@ -463,7 +516,7 @@ class vcTest1: UIViewController {
         
        
         
-        General().delay(3.0) {
+        General().delay(2.0) {
             // do stuff
             self.resultMessage.text = ""
             self.resultError.text = ""

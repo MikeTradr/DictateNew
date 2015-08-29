@@ -17,7 +17,7 @@ class vcTest1: UIViewController {
     
     var audioPlayer = AVAudioPlayer()
     
-
+    var output = ""
 
     
     // Create a MessageComposer
@@ -45,6 +45,18 @@ class vcTest1: UIViewController {
 
     @IBOutlet weak var resultMessage: UITextView!
     @IBOutlet weak var resultError: UITextView!
+    
+    //Labels:
+    @IBOutlet weak var labelDay: UILabel!
+    @IBOutlet weak var labelTime: UILabel!
+    @IBOutlet weak var labelPhone: UILabel!
+    @IBOutlet weak var labelStartDate: UILabel!
+    @IBOutlet weak var labelEndDate: UILabel!
+    @IBOutlet weak var labelTitle: UILabel!
+    @IBOutlet weak var labelCal: UILabel!
+    @IBOutlet weak var labelAlert: UILabel!
+    @IBOutlet weak var labelRepeat: UILabel!
+    
     
     //@IBOutlet weak var resultRaw: UITextView!
     
@@ -259,9 +271,26 @@ class vcTest1: UIViewController {
             if ( resultStartDate.text == "12-12-2014 12:00 AM" ) {        // added 072315 no need to show if no date used
                 resultStartDate.text = ""
             }
-            resultCalendar.text = ""
+            resultCalendar.text = reminderTitle
             resultEndDate.text = ""
             
+            labelCal.text   = "List"    // default Cal.
+            labelTitle.text = "Items"   // default Title.
+            
+            labelDay.hidden = true
+            labelTime.hidden = true
+            labelPhone.hidden = true
+            labelStartDate.hidden = true
+            labelEndDate.hidden = true
+            labelRepeat.hidden = true
+            
+            resultDay.hidden = true
+            resultTime.hidden = true
+            resultPhone.hidden = true
+            resultStartDate.hidden = true
+            resultEndDate.hidden = true
+            resultRepeat.hidden = true
+     
             break;
             
         case "Event":
@@ -277,10 +306,31 @@ class vcTest1: UIViewController {
             resultType.backgroundColor = moccasin
             buttonCreateOutlet.backgroundColor = moccasin
             buttonCreateOutlet.setTitle("Create New List", forState: UIControlState.Normal)
-            resultCalendar.text = "New List: \(reminderTitle)"
+            resultCalendar.text = ""
+            resultTitle.text = reminderTitle
             resultEndDate.text = ""
             resultStartDate.text = ""
-            resultDay.text = ""
+            let stringOutput = ", ".join(wordArrTrimmed)
+            resultDay.text = stringOutput
+            
+            labelDay.text = "Items"
+            
+            labelCal.text   = "List"    // default Cal.
+            labelTitle.text = "Items"   // default Title.
+            
+            //labelDay.hidden = true
+            labelTime.hidden = true
+            labelPhone.hidden = true
+            labelStartDate.hidden = true
+            labelEndDate.hidden = true
+            labelRepeat.hidden = true
+            
+            resultDay.hidden = true
+            resultTime.hidden = true
+            resultPhone.hidden = true
+            resultStartDate.hidden = true
+            resultEndDate.hidden = true
+            resultRepeat.hidden = true
 
             break;
             
@@ -299,9 +349,28 @@ class vcTest1: UIViewController {
             resultDay.text = stringOutput
             resultEndDate.text = ""
             resultStartDate.text = ""
-           
             
+            labelDay.text = "Items"
+            
+            labelCal.text   = "List"    // default Cal.
+            labelTitle.text = "Items"   // default Title.
+            
+            //labelDay.hidden = true
+            labelTime.hidden = true
+            labelPhone.hidden = true
+            labelStartDate.hidden = true
+            labelEndDate.hidden = true
+            labelRepeat.hidden = true
+            
+            resultDay.hidden = true
+            resultTime.hidden = true
+            resultPhone.hidden = true
+            resultStartDate.hidden = true
+            resultEndDate.hidden = true
+            resultRepeat.hidden = true
+           
             break;
+            
         default:
             resultType.backgroundColor = swiftColor
             buttonCreateOutlet.setTitle("Create Event", forState: UIControlState.Normal)
@@ -354,19 +423,23 @@ class vcTest1: UIViewController {
             //let notes:String = outputNote
             
             //ReminderCode().createReminder(title, notes: notes, startDT: startDT)
+        // WORKS try Amnil's code   
             ReminderCode().createReminder()
+            
+            calendarName = "Today"
+
+            output      = defaults.stringForKey("output")!
+            var outputArray:[String] = Array(arrayLiteral: output)
+            
+            println("p366 output: \(outputArray)")
+
+            EventManager.sharedInstance.addReminder(calendarName, items: outputArray)
 
             resultMessage.text = "Reminder created on your \(calendarName.capitalizedString) list"
             break;
             
         case "Event":
             println("p255 in Event Switch")
-            
-// TODO MIKE  remove this parsing again! pass with NSUser Data in method
-         //   let (startDT, endDT, output, outputNote, day, calendarName, actionType) = DictateCode().parse(str)
-            
- 
-            //DictateCode().insertEvent(eventStore, startDT: startDT, endDT: endDT, output: output, outputNote: outputNote, calendarName: calendarName )
             
             EventCode().createEvent()
 
@@ -379,7 +452,7 @@ class vcTest1: UIViewController {
             var calendarName    = defaults.stringForKey("calendarName") //Sets Reminder Title
             var wordArrTrimmed  = defaults.objectForKey("wordArrTrimmed") as! [String] //array of the items
 
-            EventManager.sharedInstance.creatNewReminderList(calendarName!, items: wordArrTrimmed)
+            EventManager.sharedInstance.createNewReminderList(calendarName!, items: wordArrTrimmed)
             
             resultMessage.text = "Your List \(calendarName!) has been created"
             
@@ -391,11 +464,10 @@ class vcTest1: UIViewController {
             var calendarName    = defaults.stringForKey("calendarName") //Sets Reminder Title
             var wordArrTrimmed  = defaults.objectForKey("wordArrTrimmed") as! [String] //array of the items
             
-            EventManager.sharedInstance.creatNewReminderList(calendarName!, items: wordArrTrimmed)
+            EventManager.sharedInstance.createNewReminderList(calendarName!, items: wordArrTrimmed)
             
             resultMessage.text = "Your List \(calendarName!) has been created"
-
-            
+  
             break;
             
         case "Note":
@@ -414,7 +486,7 @@ class vcTest1: UIViewController {
         }
         
         var strRaw      = defaults.stringForKey("strRaw")
-        output      = defaults.stringForKey("output")!
+        output          = defaults.stringForKey("output")!
         calendarName    = defaults.stringForKey("calendarName")!
 
         
@@ -440,6 +512,9 @@ class vcTest1: UIViewController {
         rawDataObject["calendarName"] = calendarName
         
 //TODO get these two fields from code!
+        //TODO see here:
+        println("p478 Device and Phone munber in here: \(NSUserDefaults.standardUserDefaults().dictionaryRepresentation())")
+        
         rawDataObject["device"] = "iPhone"               //TODO hardcoded get device from code?
         rawDataObject["userPhoneNumber"] = "608-242-7700"               //TODO hardcoded get device from code?
         
@@ -486,22 +561,7 @@ class vcTest1: UIViewController {
         
 
         General().cleardata()
-        resultType.text = ""
-     //   resultRaw.text = ""
-        resultDay.text = ""
-        resultTime.text = timeString
-        resultPhone.text = phone
-        
-        resultStartDate.text = ""
-        resultEndDate.text = ""
-        //resultStartDate.text = fullDT
-        //resultEndDate.text = fullDTEnd
-        resultTitle.text = ""
-        // error below TODO
-       // resultDuration.text = ""
-        resultCalendar.text = ""
-        resultAlert.text = ""
-        resultRepeat.text = ""
+      
         
          defaults.setObject(eventDuration, forKey: "eventDuration")
 
@@ -525,6 +585,7 @@ class vcTest1: UIViewController {
             self.tabBarController?.selectedIndex = 2
             
         }
+      
     }
 
     
@@ -560,6 +621,45 @@ class vcTest1: UIViewController {
         
         self.tabBarController?.selectedIndex = 2
   
+    }
+    
+    override func viewWillDisappear(animated:Bool) {
+        super.viewWillDisappear(animated)
+        
+        resultType.text = ""
+        //   resultRaw.text = ""
+        resultDay.text = ""
+        resultTime.text = timeString
+        resultPhone.text = phone
+        
+        resultStartDate.text = ""
+        resultEndDate.text = ""
+        //resultStartDate.text = fullDT
+        //resultEndDate.text = fullDTEnd
+        resultTitle.text = ""
+        // error below TODO
+        // resultDuration.text = ""
+        resultCalendar.text = ""
+        resultAlert.text = ""
+        resultRepeat.text = ""
+        
+        labelCal.text   = "Cal."    // default Cal.
+        labelTitle.text = "Title"   // default Title.
+        
+        labelDay.hidden = false
+        labelTime.hidden = false
+        labelPhone.hidden = false
+        labelStartDate.hidden = false
+        labelEndDate.hidden = false
+        labelRepeat.hidden = false
+        
+        resultDay.hidden = false
+        resultTime.hidden = false
+        resultPhone.hidden = false
+        resultStartDate.hidden = false
+        resultEndDate.hidden = false
+        resultRepeat.hidden = false
+        
     }
 
 

@@ -177,8 +177,12 @@ class ReminderCode: NSObject {
         
         reminder.addAlarm(alarm)
         
-        reminder.calendar = calendarDatabase.defaultCalendarForNewReminders()
+        reminder.calendar = calendarDatabase.defaultCalendarForNewReminders()   // WORKS to Default
         
+        //reminder.calendar = calendarDatabase.calendarWithIdentifier("Today")
+        
+        println("p192 reminder.calendar: \(reminder.calendar)")
+
         //reminder.calendar = calendarDatabase.defaultCalendarForNewReminders()
         
         var error: NSError?
@@ -187,6 +191,9 @@ class ReminderCode: NSObject {
             println("errors: \(error?.localizedDescription)")
         }
         
+        println("p192 reminder: \(reminder)")
+        println("p192 reminder.calendar: \(reminder.calendar)")
+
         calendarDatabase.saveReminder(reminder, commit: true, error: &error)
     }
     

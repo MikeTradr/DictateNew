@@ -58,7 +58,7 @@ class EventManager: NSObject {
         }
     }
     
-    func creatNewReminderList(name:String, items:[String]){
+    func createNewReminderList(name:String, items:[String]){    //forgor e in create -added Mike 082915
         let calender = EKCalendar(forEntityType: EKEntityTypeReminder , eventStore: self.eventStore)
         calender.title = name
         var error:NSError?
@@ -73,5 +73,35 @@ class EventManager: NSObject {
             self.eventStore.saveReminder(reminder, commit: true, error: &error)
         }
     }
+    
+//Add item to Reminder List - Mike 082915
+    func addReminder(name:String, items:[String]){
+        let calender = EKCalendar(forEntityType: EKEntityTypeReminder , eventStore: self.eventStore)
+        calender.title = name
+        var error:NSError?
+        calender.source = eventStore.defaultCalendarForNewReminders().source
+     //   self.eventStore.saveCalendar(calender, commit: true, error: &error)
+        println("p84 Error: \(error)")
+        
+        println("p84 calender.title: \(calender.title)")
+
+        
+        for item in items{
+            let reminder = EKReminder(eventStore: self.eventStore)
+            reminder.title = item
+            println("p84 reminder.title: \(reminder.title)")
+            println("p84 calendar: \(calender)")
+
+            reminder.calendar = calender
+            println("p84 reminder.calendar: \(reminder.calendar)")
+            println("p84 reminder: \(reminder)")
+            
+            self.eventStore.saveReminder(reminder, commit: true, error: &error)
+            println("p97 Error: \(error)")
+
+        }
+    }
+    
+    
     
 }

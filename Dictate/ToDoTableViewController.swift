@@ -126,6 +126,33 @@ class ToDoTableViewController: UITableViewController, UITableViewDelegate, UITab
         }
     }
     
+    
+// TODO trying to add a popover menu for the reminders lists...
+//http://stackoverflow.com/questions/24635744/how-to-present-popover-properly-in-ios-8
+    
+    // another tutorial on popover.
+    //http://gracefullycoded.com/display-a-popover-in-swift/
+    
+/*
+    func addCategory() {
+        
+        var popoverContent = self.storyboard?.instantiateViewControllerWithIdentifier("NewCategory") as! UIViewController
+        var nav = UINavigationController(rootViewController: popoverContent)
+        nav.modalPresentationStyle = UIModalPresentationStyle.Popover
+        var popover = nav.popoverPresentationController
+        popoverContent.preferredContentSize = CGSizeMake(500,600)
+        popover.delegate = self
+        popover.sourceView = self.view
+        popover.sourceRect = CGRectMake(100,100,0,0)
+        
+        self.presentViewController(nav, animated: true, completion: nil)
+        
+    }
+*/
+    
+    
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

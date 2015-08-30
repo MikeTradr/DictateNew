@@ -100,6 +100,7 @@ class DictateCode: NSObject {
         mainType = ""
         calendarName = ""   // set to blank so can process...
         
+        
         //eventDuration = 10  // TODO get from defaults screen
         //eventDuration = 0  // TODO get from defaults screen
         
@@ -109,8 +110,10 @@ class DictateCode: NSObject {
         defaults.setObject(actionType, forKey: "actionType")        //sets actionType for processing
         defaults.setObject(mainType, forKey: "mainType")            //sets mainType
         defaults.setObject(eventDuration, forKey: "eventDuration")
+        defaults.setObject(wordArrTrimmed, forKey: "wordArrTrimmed")
+
         
-        println("p84 eventDuration from NSDefaults: \(eventDuration)")              // see what NSDefaults has!
+        println("p116 eventDuration from NSDefaults: \(eventDuration)")              // see what NSDefaults has!
         println("p87 calendarName: \(calendarName)")              // see what NSDefaults has!
         
         
@@ -420,6 +423,9 @@ class DictateCode: NSObject {
                     defaults.setObject(eventAlert, forKey: "eventAlert")
                     defaults.setObject(actionType, forKey: "actionType")        //sets actionType for processing
                     defaults.setObject(mainType, forKey: "mainType")            //sets mainType
+                    
+                    defaults.setObject(output, forKey: "output")            //sets output
+
                     
                     println("p190: calendarName \(calendarName)")
                     
@@ -1975,7 +1981,7 @@ class DictateCode: NSObject {
     
     
     
-    //-----------------------------------------------
+//-----------------------------------------------
     
     /*
     func saveToDatabase() {

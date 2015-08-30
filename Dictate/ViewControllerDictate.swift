@@ -77,7 +77,7 @@ let str27:String = "new list cheese milk carrots lettace eggs"
 
 let str28:String = "new todo call mom, meeting at 10 AM, play tennis, pick up kids"
 
-let str29:String = "Reminder call daughter"
+let str29:String = "Reminder Wash the car"
 
 
 

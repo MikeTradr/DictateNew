@@ -41,6 +41,17 @@ class LoginViewController: UIViewController {
         
     }
     
+    
+    @IBAction func buttonTestPrefsScene(sender: AnyObject) {
+        
+        
+        let storyboard = UIStoryboard(name: "oldPrefs", bundle: nil)
+        let vc = storyboard.instantiateViewControllerWithIdentifier("someViewController") as! UIViewController
+        self.presentViewController(vc, animated: true, completion: nil)
+        
+        
+    }
+    
 //TODO Temp force login for testing... and Parse Mike username problems lol...
     
     @IBAction func buttonForceGo(sender: AnyObject) {

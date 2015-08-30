@@ -24,11 +24,27 @@ class PrefsTempVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
     
     @IBOutlet weak var myLabel: UILabel!
     
+    @IBOutlet weak var labelDefaultReminder: UILabel!
+    
+    
     @IBOutlet weak var pickerCalendars: UIPickerView!
+    
+    @IBOutlet weak var pickerReminders: UIPickerView!
+    
     
     
 // TODO  get calendars from users, and make into array hard coded at prsent 7-17-15
-    let pickerData = ["User Default Calendar", "Mike", "Work", "Steph", "Bands", "Birthdays", "Reacurring" ,"Dictate Events"]
+    //let pickerData = ["User Default Calendar", "Mike", "Work", "Steph", "Bands", "Birthdays", "Reacurring" ,"Dictate Events"]
+    
+    let defaults = NSUserDefaults.standardUserDefaults()
+    
+    //TODO why did not work?: defaults.objectForKey("wordArrTrimmed") as! [String] //array of the items
+    //var pickerCalendarArray = defaults.objectForKey("wordArrTrimmed") as! [String] //array of the items
+    var pickerCalendarArray = NSUserDefaults.standardUserDefaults().objectForKey("calendarArray") as! [String] //array of the items
+    
+    var pickerReminderArray = NSUserDefaults.standardUserDefaults().objectForKey("reminderArray") as! [String] //array of the items
+    
+
     
     func playSound(sound: NSURL){
         var error:NSError?
@@ -83,13 +99,18 @@ class PrefsTempVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
         
         pickerCalendars.delegate = self
         pickerCalendars.dataSource = self
-
+        
+        pickerReminders.delegate = self
+        pickerReminders.dataSource = self
+        
         self.prefsDefaultCalendar.delegate = self
         self.prefsDefaultDuration.delegate = self
         
         let defaults = NSUserDefaults.standardUserDefaults()
 
         self.prefsDefaultCalendar.text = defaults.stringForKey("prefsDefaultCalendarName")
+        
+        
         
         
         println("p27 prefsDefaultCalendar.text: \(prefsDefaultCalendar.text)")
@@ -244,22 +265,22 @@ class PrefsTempVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
         return 1
     }
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pickerData.count
+        return pickerCalendarArray.count
     }
     
     //MARK: Delegates
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
-        return pickerData[row]
+        return pickerCalendarArray[row]
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        myLabel.text = pickerData[row]
+        myLabel.text = pickerCalendarArray[row]
     }
     
  // TODO Set a better non serif font! system font!!!!
     
     func pickerView(pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
-        let titleData = pickerData[row]
+        let titleData = pickerCalendarArray[row]
         var myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "Geneva", size: 15.0)!,NSForegroundColorAttributeName:UIColor.blueColor()])
         return myTitle
     }
@@ -273,12 +294,12 @@ class PrefsTempVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
             pickerLabel = UILabel()
             
             //color  and center the label's background
-            let hue = CGFloat(row)/CGFloat(pickerData.count)
+            let hue = CGFloat(row)/CGFloat(pickerCalendarArray.count)
             pickerLabel.backgroundColor = UIColor(hue: hue, saturation: 1.0, brightness:1.0, alpha: 1.0)
             pickerLabel.textAlignment = .Center
             
         }
-        let titleData = pickerData[row]
+        let titleData = pickerCalendarArray[row]
         let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "Georgia", size: 26.0)!,NSForegroundColorAttributeName:UIColor.blackColor()])
         pickerLabel!.attributedText = myTitle
         
@@ -297,7 +318,66 @@ class PrefsTempVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
         return 300
     }
     
+//---------- Reminder Picker ----------------------------------------------
     
+    func numberOfComponentsInPickerView2(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    func pickerView2(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerReminderArray.count
+    }
+    
+    //MARK: Delegates
+    func pickerView2(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
+        return pickerReminderArray[row]
+    }
+    
+    func pickerView2(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        labelDefaultReminder.text = pickerReminderArray[row]
+    }
+    
+    // TODO Set a better non serif font! system font!!!!
+    
+    func pickerView2(pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+        let titleData = pickerReminderArray[row]
+        var myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "Geneva", size: 15.0)!,NSForegroundColorAttributeName:UIColor.blueColor()])
+        return myTitle
+    }
+    
+    
+    // TODO set background color to match color of users Calendars please!!!!!
+    
+    func pickerView2(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView!) -> UIView {
+        var pickerLabel = view as! UILabel!
+        if view == nil {  //if no label there yet
+            pickerLabel = UILabel()
+            
+            //color  and center the label's background
+            let hue = CGFloat(row)/CGFloat(pickerCalendarArray.count)
+            pickerLabel.backgroundColor = UIColor(hue: hue, saturation: 1.0, brightness:1.0, alpha: 1.0)
+            pickerLabel.textAlignment = .Center
+            
+        }
+        let titleData = pickerReminderArray[row]
+        let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "Georgia", size: 26.0)!,NSForegroundColorAttributeName:UIColor.blackColor()])
+        pickerLabel!.attributedText = myTitle
+        
+        return pickerLabel
+        
+    }
+    
+    // TODO check sizes for smaller phones! and font size etc... make look great!
+    
+    //size the components of the UIPickerView
+    func pickerView2(pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+        return 36.0
+    }
+    
+    func pickerView2(pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
+        return 300
+    }
+
+//---------- End Reminder Picker ----------------------------------------------
     
     
     

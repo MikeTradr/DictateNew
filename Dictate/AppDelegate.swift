@@ -132,6 +132,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             tabBarController.selectedIndex = 2
         }
         
+        //make Reminder's List Array
+        EventManager.sharedInstance.createReminderArray()
+        
+        //make Calendar's List Array
+        EventManager.sharedInstance.createCalendarArray()
+
+        
+        
+        
+        
+        
+        
+        
+        
         return true
         
     }

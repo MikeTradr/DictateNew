@@ -179,7 +179,7 @@ class ReminderCode: NSObject {
         
         reminder.calendar = calendarDatabase.defaultCalendarForNewReminders()   // WORKS to Default
         
-        //reminder.calendar = calendarDatabase.calendarWithIdentifier("Today")
+        reminder.calendar = calendarDatabase.calendarWithIdentifier("0x1702ae400")
         
         println("p192 reminder.calendar: \(reminder.calendar)")
 

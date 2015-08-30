@@ -8,6 +8,11 @@
 
 import UIKit
 import EventKit
+//import MessageUI
+
+// TODO Anil wanted to add: UIViewController
+// for this error in line 81              self.presentViewController(alert, animated: true, completion: nil)
+
 
 class EventManager: NSObject {
     class var sharedInstance : EventManager {
@@ -32,6 +37,9 @@ class EventManager: NSObject {
                 
               
                 let calendars = self.eventStore.calendarsForEntityType(EKEntityTypeReminder)
+                
+                println("p36 calendars: \(calendars)")
+  
                 var predicate = self.eventStore.predicateForIncompleteRemindersWithDueDateStarting(nil, ending: nil, calendars: calendars)
                 self.eventStore.fetchRemindersMatchingPredicate(predicate) { reminders in
                     completion(reminders as! [EKReminder]!)
@@ -61,10 +69,23 @@ class EventManager: NSObject {
     func createNewReminderList(name:String, items:[String]){    //forgor e in create -added Mike 082915
         let calender = EKCalendar(forEntityType: EKEntityTypeReminder , eventStore: self.eventStore)
         calender.title = name
-        var error:NSError?
+        var error:NSError? = nil                                // = nil added by Mike 082915
         calender.source = eventStore.defaultCalendarForNewReminders().source
-        self.eventStore.saveCalendar(calender, commit: true, error: &error)
+        let calendarWasSaved = self.eventStore.saveCalendar(calender, commit: true, error: &error)
         println("Error: \(error)")
+        
+        // Handle situation if the calendar could not be saved
+        if calendarWasSaved == false {
+            let alert = UIAlertController(title: "Calendar could not save", message: error?.localizedDescription, preferredStyle: .Alert)
+            let OKAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            alert.addAction(OKAction)
+            
+    //        self.presentViewController(alert, animated: true, completion: nil)
+        } else {
+            
+    //todo Anil erro line below here
+       //     NSUserDefaults.standardUserDefaults().setObject(newCalendar.calendarIdentifier, forKey: "EventTrackerPrimaryCalendar")
+        }
         
         for item in items{
             let reminder = EKReminder(eventStore: self.eventStore)
@@ -84,6 +105,26 @@ class EventManager: NSObject {
         println("p84 Error: \(error)")
         
         println("p84 calender.title: \(calender.title)")
+        
+        let calendars = self.eventStore.calendarsForEntityType(EKEntityTypeReminder)
+        
+        var reminderArray:[String] = []
+        
+        for calendar in calendars {
+            var calendarTitle:String! = calendar.title
+            
+           // var calendarTitle = calendar.title
+
+            println("p95 calendarTitle: \(calendarTitle)")
+            
+            reminderArray.append(calendarTitle)
+            
+            println("p95 reminderArray: \(reminderArray)")
+       
+            
+        }
+        
+        println("p94 calendars: \(calendars)")
 
         
         for item in items{
@@ -98,10 +139,87 @@ class EventManager: NSObject {
             
             self.eventStore.saveReminder(reminder, commit: true, error: &error)
             println("p97 Error: \(error)")
+            
+            
 
         }
     }
     
+    func createReminderArray() {        //called from AppDelegate on startup
+        let calender = EKCalendar(forEntityType: EKEntityTypeReminder , eventStore: self.eventStore)
+     
+        var error:NSError?
+        calender.source = eventStore.defaultCalendarForNewReminders().source
+        println("p135 Error: \(error)")
+        
+        let calendars = self.eventStore.calendarsForEntityType(EKEntityTypeReminder)
+        
+        var reminderArray:[String] = []
+        
+        for calendar in calendars {
+            var reminderTitle:String! = calendar.title
+            println("p144 reminderTitle: \(reminderTitle)")
+            
+            reminderArray.append(reminderTitle)
+        }
+        println("p148 reminderArray: \(reminderArray)")
+        println("p148 reminderArray.count: \(reminderArray.count)")
+        
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setObject(reminderArray, forKey: "reminderArray")            //sets reminderArray
+
+    }   //func CreateReminderArray   
     
+    func createCalendarArray() {        //called from AppDelegate on startup
+        let calender = EKCalendar(forEntityType: EKEntityTypeEvent , eventStore: self.eventStore)
+        
+        // from https://www.andrewcbancroft.com/2015/06/17/creating-calendars-with-event-kit-and-swift/
+        
+        // Use Event Store to create a new calendar instance
+        // Configure its title
+        let newCalendar = EKCalendar(forEntityType: EKEntityTypeEvent, eventStore: eventStore)
+        newCalendar.title = "Some New Calendar Title"
+        
+        // Access list of available sources from the Event Store
+        let sourcesInEventStore = eventStore.sources() as! [EKSource]
+        println("p167 sourcesInEventStore: \(sourcesInEventStore)")
+        
+  //TODO Anil use only Local calendarsmaybe in out CalendarListArray I made???
+        
+   //     p167 sourcesInEventStore: [EKSource <0x1700cf880> {UUID = 855E381A-DEF0-4F78-846E-7B7EC1EE990D; type = Local; title = Default; externalID = (null)}, EKSource <0x1700cf5e0> {UUID = BA48C2E6-DA4E-40BA-BCE8-D20FA3F957AF; type = Other; title = Other; externalID = (null)}, EKSource <0x1700cf570> {UUID = 0B17DA80-1504-4142-AAE4-51CB6DC52327; type = CalDAV; title = iCloud; externalID = 0B17DA80-1504-4142-AAE4-51CB6DC52327}, EKSource <0x1700cf730> {UUID = 17673175-ACD9-4C7E-BE76-AE60BF850880; type = Subcribed; title = Subscribed Calendars; externalID = Subscribed Calendars}, EKSource <0x1700d0840> {UUID = 2F54B94E-CDED-491C-A812-760833A10C7A; type = CalDAV; title = Mike Main; externalID = 2F54B94E-CDED-491C-A812-760833A10C7A}, EKSource <0x1700d08b0> {UUID = CC9633E4-021B-4E85-8EE0-082AFFB5A232; type = CalDAV; title = MikeTradr; externalID = CC9633E4-021B-4E85-8EE0-082AFFB5A232}]
+
+        
+        // Filter the available sources and select the "Local" source to assign to the new calendar's
+        // source property
+        
+    //TODO Anil can we filter for local calndars only. I get in Arry Mike Derr twice!
+        newCalendar.source = sourcesInEventStore.filter{
+            (source: EKSource) -> Bool in
+            source.sourceType.value == EKSourceTypeLocal.value
+            }.first
+        
+        
+        
+        var error:NSError?
+        calender.source = eventStore.defaultCalendarForNewEvents.source
+        println("p181 Error: \(error)")
+        
+        let calendars = self.eventStore.calendarsForEntityType(EKEntityTypeEvent)
+        
+        var calendarArray:[String] = []
+        
+        for calendar in calendars {
+            var calendarTitle:String! = calendar.title
+            println("p189 calendarTitle: \(calendarTitle)")
+            
+            calendarArray.append(calendarTitle)
+        }
+        println("p193 calendarArray: \(calendarArray)")
+        println("p193 calendarArray.count: \(calendarArray.count)")
+        
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setObject(calendarArray, forKey: "calendarArray")            //sets calendarArray
+        
+    }   //func CreateCalendarArray
     
 }

@@ -10,6 +10,19 @@ import UIKit
 import EventKit
 
 class EventCode: NSObject {
+    class var sharedInstance : EventManager {
+        struct Static {
+            static var onceToken : dispatch_once_t = 0
+            static var instance : EventManager? = nil
+        }
+        dispatch_once(&Static.onceToken) {
+            Static.instance = EventManager()
+        }
+        return Static.instance!
+    }
+    
+    let eventStore = EKEventStore()
+
     
     func createEvent() {
         
@@ -329,5 +342,31 @@ class EventCode: NSObject {
         }
         
     }
+    
+    func createCalendarArray() {        //called from AppDelegate on startup
+        let calender = EKCalendar(forEntityType: EKEntityTypeEvent , eventStore: self.eventStore)
+        
+        var error:NSError?
+        calender.source = eventStore.defaultCalendarForNewEvents.source
+        println("p351 Error: \(error)")
+        
+        let calendars = self.eventStore.calendarsForEntityType(EKEntityTypeEvent)
+        
+        var calendarArray:[String] = []
+        
+        for calendar in calendars {
+            var calendarTitle:String! = calendar.title
+            println("p359 calendarTitle: \(calendarTitle)")
+            
+            calendarArray.append(calendarTitle)
+        }
+        println("p363 calendarArray: \(calendarArray)")
+        println("p363 calendarArray.count: \(calendarArray.count)")
+        
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setObject(calendarArray, forKey: "calendarArray")            //sets calendarArray
+        
+    }   //func CreateCalendarArray
+    
     
 }

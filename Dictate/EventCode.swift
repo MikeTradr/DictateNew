@@ -68,7 +68,7 @@ class EventCode: NSObject {
         
         println("p114 calandarName: \(calendarName)")       //TODO WHY is "" ????
         
-        if (calendarName == "") {                           // calendarName not set in parse so pill it from prefDefault
+        if (calendarName == "") {                       // calendarName not set in parse so pill it from prefDefault
             calendarName = defaults.stringForKey("prefsDefaultCalendarName")
         }
         
@@ -92,7 +92,7 @@ class EventCode: NSObject {
             as! [EKCalendar]
         
         var userCalendarsArr = [String]()
-        
+ /*
         for calendar in calendars as [EKCalendar] {                         //make array of uses calendars
             // loops through all calendars users has :) make into array
             println("p820 Calendar = \(calendar.title)")
@@ -102,11 +102,11 @@ class EventCode: NSObject {
             
             
             let defaults = NSUserDefaults.standardUserDefaults()
-            defaults.setObject(userCalendarsArr, forKey: "userCalendarsArr")
-            
+            defaults.setObject(userCalendarsArr, forKey: "userCalendarsArr"
+        
         }
         
-        
+ */
         
         
         var event:EKEvent = EKEvent(eventStore: eventStore)
@@ -342,7 +342,8 @@ class EventCode: NSObject {
         }
         
     }
-    
+ 
+/*
     func createCalendarArray() {        //called from AppDelegate on startup
         let calender = EKCalendar(forEntityType: EKEntityTypeEvent , eventStore: self.eventStore)
         
@@ -367,6 +368,6 @@ class EventCode: NSObject {
         defaults.setObject(calendarArray, forKey: "calendarArray")            //sets calendarArray
         
     }   //func CreateCalendarArray
-    
+*/
     
 }

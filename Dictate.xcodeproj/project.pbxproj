@@ -47,6 +47,8 @@
 		D38C9C5A1B821DA3009CFC7C /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D38C9C561B821DA3009CFC7C /* Crashlytics.framework */; };
 		D3A0F9FC1B69F0BB00F1FEDA /* EventCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A0F9FB1B69F0BB00F1FEDA /* EventCode.swift */; };
 		D3A0F9FD1B69F0BB00F1FEDA /* EventCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A0F9FB1B69F0BB00F1FEDA /* EventCode.swift */; };
+		D3B703801B935AC200FA1DF0 /* SettingsReminderTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B7037F1B935AC200FA1DF0 /* SettingsReminderTableViewController.swift */; };
+		D3B703821B94E90800FA1DF0 /* ReminderListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B703811B94E90800FA1DF0 /* ReminderListTableViewController.swift */; };
 		D3E810851B70F4BC004AE5A9 /* TodayIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E810831B70F4BC004AE5A9 /* TodayIC.swift */; };
 		D3E810881B70FEA0004AE5A9 /* PreferencesIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E810871B70FEA0004AE5A9 /* PreferencesIC.swift */; };
 		D3E8108A1B710690004AE5A9 /* RemindersIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E810891B710690004AE5A9 /* RemindersIC.swift */; };
@@ -185,6 +187,8 @@
 		D3A0F9FB1B69F0BB00F1FEDA /* EventCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCode.swift; sourceTree = "<group>"; };
 		D3B07A231B731C8800B9C2A9 /* Dictate.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Dictate.entitlements; sourceTree = "<group>"; };
 		D3B07A241B731D2A00B9C2A9 /* Dictate WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Dictate WatchKit Extension.entitlements"; sourceTree = "<group>"; };
+		D3B7037F1B935AC200FA1DF0 /* SettingsReminderTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsReminderTableViewController.swift; path = Views/SettingsReminderTableViewController.swift; sourceTree = "<group>"; };
+		D3B703811B94E90800FA1DF0 /* ReminderListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReminderListTableViewController.swift; path = Views/ReminderListTableViewController.swift; sourceTree = "<group>"; };
 		D3E810831B70F4BC004AE5A9 /* TodayIC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayIC.swift; sourceTree = "<group>"; };
 		D3E810871B70FEA0004AE5A9 /* PreferencesIC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesIC.swift; sourceTree = "<group>"; };
 		D3E810891B710690004AE5A9 /* RemindersIC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemindersIC.swift; sourceTree = "<group>"; };
@@ -375,6 +379,7 @@
 				D3188A801B6E9B9900323DC0 /* tabBarController.swift */,
 				D3188A821B6E9BD500323DC0 /* PrefsTableVC.swift */,
 				D3188A841B6E9BED00323DC0 /* PrefsTempVC.swift */,
+				D3B703811B94E90800FA1DF0 /* ReminderListTableViewController.swift */,
 				D3188A861B6E9BF900323DC0 /* vcTest1.swift */,
 				D33C13BA1B8C1EC900470F8F /* ToDoMenuViewController.swift */,
 				D3188A881B6E9C0800323DC0 /* ToDoTableViewController.swift */,
@@ -435,6 +440,7 @@
 				D33C13BC1B8C3CCB00470F8F /* SettingsTableViewController.swift */,
 				D33C13BE1B8C47E800470F8F /* SettingsCalendarTableViewController.swift */,
 				D3795E791B8DF927009D3DB5 /* SettingsEventTableViewController.swift */,
+				D3B7037F1B935AC200FA1DF0 /* SettingsReminderTableViewController.swift */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -894,8 +900,10 @@
 				ECB8622E1B77DEBD00503C50 /* JTDateHelper.m in Sources */,
 				ECB8622D1B77DEBD00503C50 /* JTCalendarSettings.m in Sources */,
 				ECF818601B83B7E10087ECAD /* CheckBoxLayer.swift in Sources */,
+				D3B703801B935AC200FA1DF0 /* SettingsReminderTableViewController.swift in Sources */,
 				D3188A871B6E9BF900323DC0 /* vcTest1.swift in Sources */,
 				D3188A7F1B6E9B7F00323DC0 /* LoginViewController.swift in Sources */,
+				D3B703821B94E90800FA1DF0 /* ReminderListTableViewController.swift in Sources */,
 				ECB862371B77DEBD00503C50 /* JTVerticalCalendarView.m in Sources */,
 				D3188A791B6E9B4200323DC0 /* ToDoTableCell.swift in Sources */,
 				ECB862301B77DEBD00503C50 /* JTCalendarScrollManager.m in Sources */,

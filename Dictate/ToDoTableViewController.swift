@@ -13,7 +13,7 @@ import EventKit
 import EventKitUI
 import AVFoundation
 
-class ToDoTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource { //UIPickerViewDataSource {
+class ToDoTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource {
     
     var audioPlayer = AVAudioPlayer()
     
@@ -31,10 +31,23 @@ class ToDoTableViewController: UITableViewController, UITableViewDelegate, UITab
     
     @IBOutlet var ToDoTableView: UITableView!
     
-    @IBOutlet weak var pickerLists: UIPickerView!
+    @IBOutlet weak var buttonReminderListSelector: UIButton!
+    @IBOutlet weak var labelNumberListItems: UILabel!
     
-    // TODO  get calendars from users, and make into array hard coded at prsent 7-17-15
-    let pickerData = ["Reminders", "522", "Anil List", "Steph", "All", "Bands", "Birthdays", "Reacurring", "x1"]
+    
+// TODO Anil get calendars from users, Add to array: All, Default, Last, +Array and make into array hard coded at prsent 7-17-15
+ 
+    @IBAction func buttonReminderListSelector(sender: AnyObject) {
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewControllerWithIdentifier("ShowReminders") as! UIViewController
+        self.presentViewController(vc, animated: true, completion: nil)
+        
+
+        
+    }
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,10 +63,6 @@ class ToDoTableViewController: UITableViewController, UITableViewDelegate, UITab
         view.addGestureRecognizer(leftSwipe)
         view.addGestureRecognizer(rightSwipe)
         
-        //TODO hard coded to row 3, set to the default user Calendar item!
-        self.pickerLists.selectRow(4, inComponent: 0, animated: true)
-      
-        
     }
     
 
@@ -62,9 +71,7 @@ class ToDoTableViewController: UITableViewController, UITableViewDelegate, UITab
         EventManager.sharedInstance.fetchReminders({ (reminders) -> Void in
             self.reminders = reminders
             self.tableView.reloadData()
-    
-            
-            
+   
             println("p49 self.reminders: \(self.reminders)")
             println("p50 self.reminders.count: \(self.reminders.count)")
             
@@ -90,8 +97,6 @@ class ToDoTableViewController: UITableViewController, UITableViewDelegate, UITab
             self.tabBarItem.badgeValue = String(self.reminders.count)
         }
         
-        pickerLists.delegate = self
-    //    pickerLists.dataSource = self
         
         var alertSound3: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("button-14", ofType: "mp3")!)!
         //General.playSound(alertSound3!)
@@ -223,67 +228,6 @@ class ToDoTableViewController: UITableViewController, UITableViewDelegate, UITab
     
     //MARK: - Delegates and datasources
     //MARK: Data Sources
-    
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pickerData.count
-    }
-    
-    //MARK: Delegates
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
-        return pickerData[row]
-    }
-    
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-       // myLabel.text = pickerData[row]
-    }
-    
-    // TODO Set a better non serif font! system font!!!!
-    
-    func pickerView(pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
-        let titleData = pickerData[row]
-        var myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "Geneva", size: 12.0)!,NSForegroundColorAttributeName:UIColor.blueColor()])
-        return myTitle
-    }
-    
-    
-    // TODO set background color to match color of users Calendars please!!!!!
-    
-    func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView!) -> UIView {
-        var pickerLabel = view as! UILabel!
-        if view == nil {  //if no label there yet
-            pickerLabel = UILabel()
-            
-            //color  and center the label's background
-            let hue = CGFloat(row)/CGFloat(pickerData.count)
-            pickerLabel.backgroundColor = UIColor(hue: hue, saturation: 1.0, brightness:1.0, alpha: 1.0)
-            pickerLabel.textAlignment = .Center
-            
-        }
-        let titleData = pickerData[row]
-        let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "Helvetica", size: 15.0)!,NSForegroundColorAttributeName:UIColor.blackColor()])
-        pickerLabel!.attributedText = myTitle
-        
-        return pickerLabel
-        
-    }
-    
-    // TODO check sizes for smaller phones! and font size etc... make look great!
-    
-    //size the components of the UIPickerView
-    func pickerView(pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
-        return 17.0
-    }
-    
-    func pickerView(pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
-        return 100
-    }
-    
-    func pickerView(pickerView: UIPickerView, heightForComponet component: Int) -> CGFloat {
-        return 54
-    }
     
     
 }

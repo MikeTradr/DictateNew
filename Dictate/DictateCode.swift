@@ -41,6 +41,9 @@ class DictateCode: NSObject {
     var errorMsg:String         = ""
     var calendarToUse:String    = ""
     var calendarName:String     = ""
+    var listName:String         = ""
+    var listToUse:String        = ""
+
     
     //var startDate:String        = ""
     
@@ -65,7 +68,7 @@ class DictateCode: NSObject {
     let defaults = NSUserDefaults.standardUserDefaults()
    
 // new for new start...
-    var eventDuration:Double     = 10
+    var eventDuration:Double     = 10   //TODO get this from settings
     var now = ""
     var word = ""
     var timeString = ""
@@ -99,6 +102,7 @@ class DictateCode: NSObject {
         actionType = ""     // set to blank so can process...
         mainType = ""
         calendarName = ""   // set to blank so can process...
+        listName = ""
         
         
         //eventDuration = 10  // TODO get from defaults screen
@@ -290,6 +294,8 @@ class DictateCode: NSObject {
                             
                             var joiner = " "
                             output = joiner.join(wordArrTrimmed)
+                        
+                            listName = "New List"
                             
                             let title = output
                             println("p213 title: \(title)")
@@ -303,11 +309,11 @@ class DictateCode: NSObject {
                             nextWord2.capitalizedString
                             nextWord2.replaceRange(nextWord2.startIndex...nextWord2.startIndex, with: String(nextWord2[nextWord2.startIndex]).capitalizedString)
                         
-                            let reminderTitle = nextWord2
+                            let reminderList = nextWord2
                         
-                            defaults.setObject(reminderTitle, forKey: "title")            //sets reminderTitle
-                        
-                            defaults.setObject(reminderTitle, forKey: "calendarName")            //sets title to calendarName for ParseDB
+                            defaults.setObject(reminderList, forKey: "reminderList")            //sets reminderList
+                    
+                            defaults.setObject(reminderList, forKey: "calendarName")            //sets title to calendarName for ParseDB
 
                         
                             defaults.setObject(wordArrTrimmed, forKey: "wordArrTrimmed")            //sets reminderItems
@@ -317,15 +323,16 @@ class DictateCode: NSObject {
                         
                            // EventManager.sharedInstance.creatNewReminderList(nextWord, items: ["Butter","Milk","Cheese"])
                         
+                        break
                     }
   
                 }
 
 // ____ "list" first word ____________________________________
                 
-                let subStringList = (word as NSString).containsString("list") // see "raw"  then process
+                let subStringListFirstWord = (word as NSString).containsString("list") // see "raw"  then process
                 
-                if(subStringList && (wordArr[i] == wordArr[0])){ //added last so only here if matches is first word in string!
+                if(subStringListFirstWord && (wordArr[i] == wordArr[0])){ //added last so only here if matches is first word in string!
                     
                     if (i < arrayLength-1) {
                         nextWord = wordArr[i+1]
@@ -335,7 +342,7 @@ class DictateCode: NSObject {
                     
                     if ( nextWord != "" ) {
                      
-                        wordArrTrimmed = wordArrTrimmed.filter() { $0 != wordArr[i] }   // remove "lis" word
+                        wordArrTrimmed = wordArrTrimmed.filter() { $0 != wordArr[i] }   // remove "list" word
                         
                         println("p200 nextWord: \(nextWord)")
                         
@@ -358,20 +365,20 @@ class DictateCode: NSObject {
                         defaults.setObject(actionType, forKey: "actionType")        //sets actionType for processing
                         defaults.setObject(mainType, forKey: "mainType")            //sets mainType
                         
-                        let reminderTitle = "Untitled"
+                        let reminderList = "Untitled List"
                         
-                        defaults.setObject(reminderTitle, forKey: "title")            //sets reminderTitle
+                       // defaults.setObject(reminderTitle, forKey: "title")            //sets reminderTitle
+                        defaults.setObject(reminderList, forKey: "reminderList")            //sets reminderList
                         
-                        defaults.setObject(reminderTitle, forKey: "calendarName")            //sets title to calendarName for ParseDB
-                        
+                        defaults.setObject(reminderList, forKey: "calendarName")            //sets title to calendarName for ParseDB
                         
                         defaults.setObject(wordArrTrimmed, forKey: "wordArrTrimmed")            //sets reminderTitle
-                        
                         
                         // EventManager.sharedInstance.creatNewReminderList(nextWord2, items: wordArrTrimmed)
                         
                         // EventManager.sharedInstance.creatNewReminderList(nextWord, items: ["Butter","Milk","Cheese"])
                         
+                        break
                     }
                     
                 }
@@ -473,6 +480,7 @@ class DictateCode: NSObject {
                             
                             println("p209 nextWord: \(nextWord)")
                             
+                    // TODO Anil get this from Settings users created favorite names, phone, and email
                             
                             switch (nextWord) {
                             case "mike":                toPhone  = "608-242-7700"; break
@@ -525,6 +533,8 @@ class DictateCode: NSObject {
                     
                     //TODO Handle Reminder or Calendar Event more efficiently????
                     
+                    break       //added 083115 my Mike to break out of the loop
+                    
                 }
                 
 // ____ "call", "phone", "ring" or "buzz" word ____________________________________
@@ -564,7 +574,8 @@ class DictateCode: NSObject {
                             
                             println("p209 nextWord: \(nextWord)")
                             
-                            
+                // TODO Anil get this from Settings users created favorite names, phone, and email
+            
                             switch (nextWord) {
                             case "mike":                toPhone  = "608-242-7700"; break
                             case "stephanie", "steph":  toPhone  = "608-692-6132"; break
@@ -616,6 +627,9 @@ class DictateCode: NSObject {
                     
                     //TODO Handle Reminder or Calendar Event more efficiently????
                     
+                    break       //added 083115 my Mike to break out of the loop
+
+                    
                 }
                 
 // ____ "mail" or "email" word ____________________________________
@@ -649,6 +663,8 @@ class DictateCode: NSObject {
                             
                             println("p209 nextWord: \(nextWord)")
                             
+                // TODO Anil get this from Settings users created favorite names, phone, and email
+
                             switch (nextWord) {
                             case "mike":                toPhone  = "mike@derr.ws"; break
                             case "stephanie", "steph":  toPhone  = "steph@derr.ws"; break
@@ -698,6 +714,7 @@ class DictateCode: NSObject {
                     
                     //TODO Handle Reminder or Calendar Event more efficiently????
                     
+                    break       //added 083115 my Mike to break out of the loop
                 }
                 
                 
@@ -735,7 +752,8 @@ class DictateCode: NSObject {
                             var toPhone:String = ""
                             
                             println("p522 nextWord: \(nextWord)")
-                            
+                        
+                    // TODO Anil, can't invote progrmatically??? get this from Settings users created favorite names, phone, and email
                             
                             switch (nextWord) {
                             case "mike":                toPhone  = "mike@derr.ws"; break
@@ -940,7 +958,7 @@ class DictateCode: NSObject {
                 }
                 
                 
-                // ____ ":" is a time word ____________________________________
+// ____ ":" is a time word ____________________________________
                 
                 let subStringTimeColon = (word as NSString).containsString(":")     // see : then process time at word
                 println("#### p182 subStringTimeColen: \(subStringTimeColon)")
@@ -976,7 +994,7 @@ class DictateCode: NSObject {
                     time = "No Time Found"
                 }
                 
-                // ____ "o'clock" ____________________________________
+// ____ "o'clock" ____________________________________
                 
                 let subStringOclock = (word as NSString).containsString("o'clock") // see o'clock then process time at word
                 println(subStringOclock)
@@ -1002,7 +1020,7 @@ class DictateCode: NSObject {
                     time = "No Time Found"
                 }
                 
-                // ____ Time as 3-4 digits ____________________________________
+// ____ Time as 3-4 digits ____________________________________
                 
                 // Handle if time word as number only like 1045 or 330
                 var numOfCharacters = count(word)
@@ -1050,7 +1068,7 @@ class DictateCode: NSObject {
                     time = "No Time Found"
                 }
                 
-                // ____ "day" word ____________________________________
+    // ____ "day" word ____________________________________
                 
                 let subStringDay = (word as NSString).containsString("day")     // note: could be today also!
                 if(subStringDay){
@@ -1144,7 +1162,7 @@ class DictateCode: NSObject {
                     day = "Today"
                 }
                 
-                // ____ Months Words ____________________________________
+    // ____ Months Words ____________________________________
                 
                 if (i < arrayLength-1) {
                     nextWord = wordArr[i+1]
@@ -1223,7 +1241,7 @@ class DictateCode: NSObject {
                 
                 println("#### 345: startDate: \(startDate)")
                 
-                // ____ Phone as numbers 7-10 digits ____________________________________
+        // ____ Phone as numbers 7-10 digits ____________________________________
                 
                 // process Phone number
                 let subStringPhone = (word as NSString).containsString("-")
@@ -1242,8 +1260,7 @@ class DictateCode: NSObject {
                 }
                 
                 
-                
-                // ____ Phone as numbers 7-10 digits ____________________________________
+        // ____ Phone as numbers 7-10 digits ____________________________________
                 
                 // Handle if number word as number only like 60823427700  make it phone
                 numOfCharacters = count(word)
@@ -1284,11 +1301,10 @@ class DictateCode: NSObject {
                     
                 }
                 
-                
-                
+        
                 var currentWord: AnyObject = wordArr[i]             //TODO why I do this?  word is the same current word at [i]
                 
-                // ____ "calendar" word ____________________________________
+        // ____ "calendar" word ____________________________________
                 
                 let subStringCalendar = (word as NSString).containsString("calendar") // see calendar then process
                 if (subStringCalendar) {
@@ -1296,7 +1312,11 @@ class DictateCode: NSObject {
                     println("p944: calendarName \(calendarName)")
                     
                     // TODO pull this from EKEvntkit get users lsit of calendar's
-                    var arrayCalendars = ["work", "mike", "mom", "music", "steph"]
+                    
+                    
+                    //var arrayCalendars = ["work", "mike", "mom", "music", "steph"]
+                    
+                    var arrayCalendars = NSUserDefaults.standardUserDefaults().objectForKey("calendarArray") as! [String] //array of the items
                     
                     if (i < arrayLength-1) {
                         nextWord = wordArr[i+1]
@@ -1341,10 +1361,114 @@ class DictateCode: NSObject {
                 //let defaults = NSUserDefaults.standardUserDefaults()
                 //set above in IF statement. defaults.setObject(calendarName, forKey: "calendar")
                 
+        // ____ "list" word ____________________________________
+                
+                let subStringList = (word as NSString).containsString("list") // see calendar then process
+                if (subStringList) {
+                    println("p1357 list found at item: \(i)")
+                    println("p1358 listName: \(listName)")
+                    
+                    var reminderArray = NSUserDefaults.standardUserDefaults().objectForKey("reminderArray") as! [String] //array of the items
+                    
+                    println("p1389 reminderArray: \(reminderArray)")
+
+                    
+                    if (i < arrayLength-1) {
+                        nextWord = wordArr[i+1]
+                    } else {
+                        nextWord = ""
+                    }
+                    println("p1378 nextWord: \(nextWord)")
+                 
+                    if (nextWord != "") {                         //  check to see if there is word after "list"
+                        
+                        nextWord = nextWord.capitalizedString
+                        for list in reminderArray {
+                            
+                            //var list = list.capitalizedString
+                            println("p1388 nextWord: \(nextWord)")
+                            println("p1388 list: \(list)")
+                            
+                            if nextWord == list {
+                                listName = nextWord
+                                wordArrTrimmed = wordArrTrimmed.filter() { $0 != wordArr[i+1] }
+                                break
+                            }
+                        }
+
+                        /*
+                            if contains(reminderArray, wordArr[i+1]) {
+                                listName = wordArr[i+1]
+                                wordArrTrimmed = wordArrTrimmed.filter() { $0 != wordArr[i+1] }
+                            }   else if contains(reminderArray, wordArr[i-1]) {
+                                listName = wordArr[i-1]
+                                wordArrTrimmed = wordArrTrimmed.filter() { $0 != wordArr[i-1] }
+                            }
+                         */
+                        
+                       
+                        
+                        
+                    } else {
+                        errorMsg = "No List Found"
+                    }
+                    println("p1412 listName: \(listName)")
+                    
+                    listName = ""
+              /*
+                    for ((i+1), nextW) in enumerate(wordArr) {
+                        listName = listName + "\(nextW) "
+                        println("p1417 listName: \(listName)")
+                        
+                    }
+*/
+
+               //     for nextW in wordArr {
+               //         listName = listName + "\(nextW) "
+                //        println("p1417 listName: \(listName)")
+                        
+               //     }
+
+                    
+                    wordArrTrimmed = wordArrTrimmed.filter() { $0 != wordArr[i] }
+                    if (listName == ""){
+                        mainType = "New OneItem List"
+                        actionType = "New OneItem List"             //sets actionType for processing
+                        
+                        listName = "New List"
+                        
+                        defaults.setObject(actionType, forKey: "actionType")    //sets actionType
+                        defaults.setObject(listName, forKey: "reminderList")    //sets reminderList
+                        defaults.setObject(listName, forKey: "calendarName")    //sets List to calendarName for ParseDB
+                        defaults.setObject(wordArrTrimmed, forKey: "wordArrTrimmed")    //sets List to calendarName for ParseDB
+
+                        
+                        //TODO trim array from List to end and save rest as output for th new List
+                        
+                    }
+                    
+                    println("p1394 listName: \(listName)")
+                    //let defaults = NSUserDefaults.standardUserDefaults()
+                    defaults.setObject(listName, forKey: "listName")
+                }
+                
+                //TODO Pull from prefs
                 
                 
                 
-                // ____ "duration" word ____________________________________
+                
+                // no word "calendar" found in string so set to thi canelndar for now.
+                // TODO take from prefs users default calendar
+                println("p1406 listName: \(listName)")
+                
+                println("p1439 wordArrTrimmed: \(wordArrTrimmed)")
+                
+                //let defaults = NSUserDefaults.standardUserDefaults()
+                //set above in IF statement. defaults.setObject(calendarName, forKey: "calendar")
+         
+                
+                
+        // ____ "duration" word ____________________________________
                 
                 let subStringDuration = (word as NSString).containsString("duration") || (word as NSString).containsString("length")   // see duration or lenght then process
                 
@@ -1479,7 +1603,7 @@ class DictateCode: NSObject {
                 println("p692 wordArrTrimmed: \(wordArrTrimmed)")
                 
                 
-                // ____ "Alarm"/"Alert" word ____________________________________
+        // ____ "Alarm"/"Alert" word ____________________________________
                 //TODO add Alert code...
                 
                 let subStringAlert = (word as NSString).containsString("alert") || (word as NSString).containsString("alarm")   // see duration or lenght then process
@@ -1651,11 +1775,9 @@ class DictateCode: NSObject {
                 } else {
                     errorMsg = "No Alert Found"
                 }
+        
                 
-                
-                
-                
-                // ____ "Repeat" word ____________________________________
+        // ____ "Repeat" word ____________________________________
                 
                 
                 let subStringRepeat = (word as NSString).containsString("repeat") || (word as NSString).containsString("reoccurring")   // see duration or lenght then process
@@ -1717,13 +1839,10 @@ class DictateCode: NSObject {
                 } else {
                     errorMsg = "No Repeat Found"
                 }
+     
                 
                 
-                
-                
-                
-                
-                //---- Switch Rotine for Type's ----
+        //---- Switch Rotine for Type's ----
                 
                 switch wordArr[i] as String {
                     
@@ -1913,6 +2032,8 @@ class DictateCode: NSObject {
                 println("p1561 actionType: \(actionType)")
                 mainType = "Event"
             }
+                
+            //Save vales to NSUserDefaults...
             
             println("p1566 actionType: \(actionType)")
             
@@ -2234,7 +2355,7 @@ class DictateCode: NSObject {
     
     
     //TODO MIKE make a class of this is cleaner...
-    
+/*
     func insertEvent(store: EKEventStore, startDT:NSDate, endDT:NSDate, output:String, outputNote:String, calendarName:String) {
         
         println("##### pl570 WE HERE func insertEvent *** startDT: \(startDT)")
@@ -2466,7 +2587,7 @@ class DictateCode: NSObject {
         }
         
     } // func insertEvent
-    
+*/
     
     //#### end my functions #################################
     

@@ -18,8 +18,8 @@ class vcTest1: UIViewController {
     var audioPlayer = AVAudioPlayer()
     
     var output = ""
+    var reminderTitle = ""
 
-    
     // Create a MessageComposer
     let messageComposer = MessageComposer()
 
@@ -57,6 +57,10 @@ class vcTest1: UIViewController {
     @IBOutlet weak var labelAlert: UILabel!
     @IBOutlet weak var labelRepeat: UILabel!
     
+    @IBOutlet weak var resultMultiLine1: UITextView!
+
+    
+    
     
     //@IBOutlet weak var resultRaw: UITextView!
     
@@ -71,6 +75,11 @@ class vcTest1: UIViewController {
     let mainType:String     = NSUserDefaults.standardUserDefaults().stringForKey("mainType") ?? "Event"
     var actionType:String   = NSUserDefaults.standardUserDefaults().stringForKey("actionType") ?? "Event"
     
+// TODO Anil why can't have ! instead of the ?? got unwrapped nil error as it wa nil initially
+    //var listName:String   = NSUserDefaults.standardUserDefaults().stringForKey("listName") ?? "Today"  //listName is Reminder Lsit naem to save reminder to
+    
+  
+
     
 //#### my functions #################################
 
@@ -178,6 +187,13 @@ class vcTest1: UIViewController {
         var reminderTitle   = defaults.stringForKey("title")
         
         var wordArrTrimmed  = defaults.objectForKey("wordArrTrimmed") as! [String] //array of the items
+        
+        var reminderArray = defaults.objectForKey("reminderArray") as! [String] //array of the items
+        
+        var listName:String   = defaults.stringForKey("listName")!
+
+        
+        
 
         
         println("p111Main day: \(day)")
@@ -197,6 +213,10 @@ class vcTest1: UIViewController {
         
         println("p111Main reminderTitle: \(reminderTitle)")
         println("p111Main wordArrTrimmed: \(wordArrTrimmed)")
+        println("p111Main listName: \(listName)")
+        println("p111Main reminderArray: \(reminderArray)")
+
+
         
         println("p119Main Representation: \(NSUserDefaults.standardUserDefaults().dictionaryRepresentation())")
         
@@ -271,6 +291,8 @@ class vcTest1: UIViewController {
             if ( resultStartDate.text == "12-12-2014 12:00 AM" ) {        // added 072315 no need to show if no date used
                 resultStartDate.text = ""
             }
+            
+            reminderTitle = listName
             resultCalendar.text = reminderTitle
             resultEndDate.text = ""
             
@@ -301,7 +323,9 @@ class vcTest1: UIViewController {
             
         case "New List", "List":
             
-            var reminderTitle:String = defaults.stringForKey("title")!
+            //var reminderTitle:String = defaults.stringForKey("title")!
+            var reminderTitle:String    = defaults.stringForKey("reminderList")! //Sets Reminder Title
+
 
             resultType.backgroundColor = moccasin
             buttonCreateOutlet.backgroundColor = moccasin
@@ -325,7 +349,7 @@ class vcTest1: UIViewController {
             labelEndDate.hidden = true
             labelRepeat.hidden = true
             
-            resultDay.hidden = true
+            //resultDay.hidden = true
             resultTime.hidden = true
             resultPhone.hidden = true
             resultStartDate.hidden = true
@@ -333,6 +357,44 @@ class vcTest1: UIViewController {
             resultRepeat.hidden = true
 
             break;
+            
+        case "New OneItem List":
+            
+            //var reminderTitle:String = defaults.stringForKey("title")!
+            var reminderTitle:String    = defaults.stringForKey("reminderList")! //Sets Reminder Title
+            
+            
+            resultType.backgroundColor = moccasin
+            buttonCreateOutlet.backgroundColor = moccasin
+            buttonCreateOutlet.setTitle("Create New List", forState: UIControlState.Normal)
+            resultCalendar.text = ""
+            resultTitle.text = reminderTitle
+            resultEndDate.text = ""
+            resultStartDate.text = ""
+            let stringOutput = ", ".join(wordArrTrimmed)
+            resultDay.text = stringOutput
+            
+            labelDay.text = "Items"
+            
+            labelCal.text   = "List"    // default Cal.
+            labelTitle.text = "Items"   // default Title.
+            
+            //labelDay.hidden = true
+            labelTime.hidden = true
+            labelPhone.hidden = true
+            labelStartDate.hidden = true
+            labelEndDate.hidden = true
+            labelRepeat.hidden = true
+            
+            //resultDay.hidden = true
+            resultTime.hidden = true
+            resultPhone.hidden = true
+            resultStartDate.hidden = true
+            resultEndDate.hidden = true
+            resultRepeat.hidden = true
+            
+            break
+            
             
             
         case "Phrase List":
@@ -347,13 +409,33 @@ class vcTest1: UIViewController {
             let stringOutput = ", ".join(wordArrTrimmed)
             
             resultDay.text = stringOutput
+            resultDay.sizeToFit()
+            self.view.addSubview(resultDay)
+            
+            resultMultiLine1.text = stringOutput
+            
+            let contentSize = resultMultiLine1.sizeThatFits(resultMultiLine1.bounds.size)
+            
+            var frame = resultMultiLine1.frame
+            
+            println("p364 contentSize.height:  \(contentSize.height)")
+
+            
+            frame.size.height = contentSize.height
+            resultMultiLine1.frame = frame
+            
+            println("p364 resultMultilne1.frame:  \(resultMultiLine1.frame)")
+
+
+            
+            
             resultEndDate.text = ""
             resultStartDate.text = ""
             
             labelDay.text = "Items"
             
-            labelCal.text   = "List"    // default Cal.
-            labelTitle.text = "Items"   // default Title.
+            labelCal.text   = ""    // default Cal.
+            labelTitle.text = "List"   // default Title.
             
             //labelDay.hidden = true
             labelTime.hidden = true
@@ -361,13 +443,17 @@ class vcTest1: UIViewController {
             labelStartDate.hidden = true
             labelEndDate.hidden = true
             labelRepeat.hidden = true
-            
-            resultDay.hidden = true
+            labelCal.hidden = true
+            labelAlert.hidden = true
+      
+            //resultDay.hidden = true
             resultTime.hidden = true
             resultPhone.hidden = true
             resultStartDate.hidden = true
             resultEndDate.hidden = true
             resultRepeat.hidden = true
+            resultCalendar.hidden = true
+            resultAlert.hidden = true
            
             break;
             
@@ -380,9 +466,7 @@ class vcTest1: UIViewController {
         }
      
     }
-    
-    
-    
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -424,14 +508,48 @@ class vcTest1: UIViewController {
             
             //ReminderCode().createReminder(title, notes: notes, startDT: startDT)
         // WORKS try Amnil's code   
-            ReminderCode().createReminder()
+         //   ReminderCode().createReminder()
             
-            calendarName = "Today"
+            println("p431 reminderTitle: \(reminderTitle)")
+            
+            var calendarName = ""
+            
+            var reminderArray       = defaults.objectForKey("reminderArray") as! [String] //array of the items
+            var listName:String     = defaults.stringForKey("listName")!
+            
+            println("p480 reminderArray: \(reminderArray)")
+            println("p480 listName: \(listName)")
+            
+            for list in reminderArray {
+                
+                var list = list.capitalizedString
+                println("p486 list: \(list)")
+                if listName == list {
+                    calendarName = listName
+                    break
+                } else {
+            // TODO call routine to make new reminder with this name
+                    calendarName = "New List"
+                }
+            }
+
+        /*
+            if contains(reminderArray, listName) {
+                calendarName = listName
+            } else {
+        // TODO call routine to make new reminder with this name
+                calendarName = "New List"
+            }
+*/
+            println("p478 calendarName: \(calendarName)")
+
+            resultCalendar.text = calendarName
 
             output      = defaults.stringForKey("output")!
             var outputArray:[String] = Array(arrayLiteral: output)
             
-            println("p366 output: \(outputArray)")
+            println("p511 calendarName: \(calendarName)")
+            println("p511 outputArray: \(outputArray)")
 
             EventManager.sharedInstance.addReminder(calendarName, items: outputArray)
 
@@ -447,9 +565,9 @@ class vcTest1: UIViewController {
             break;
             
         case "New List", "List" :
-            println("p353 in list Switch")
+            println("p530 in list Switch")
             
-            var calendarName    = defaults.stringForKey("calendarName") //Sets Reminder Title
+            var calendarName    = defaults.stringForKey("reminderList") //Sets Reminder Title
             var wordArrTrimmed  = defaults.objectForKey("wordArrTrimmed") as! [String] //array of the items
 
             EventManager.sharedInstance.createNewReminderList(calendarName!, items: wordArrTrimmed)
@@ -457,6 +575,21 @@ class vcTest1: UIViewController {
             resultMessage.text = "Your List \(calendarName!) has been created"
             
             break;
+            
+            
+        case  "New OneItem List" :
+            println("p543 in New OneItem List Switch")
+            
+            var calendarName    = defaults.stringForKey("reminderList") //Sets Reminder Title
+
+            output      = defaults.stringForKey("output")!
+            var outputArray:[String] = Array(arrayLiteral: output)
+            
+            EventManager.sharedInstance.createNewReminderList(calendarName!, items: outputArray)
+            
+            resultMessage.text = "Your New List \(calendarName!) has been created"
+            
+            break
             
         case "Phrase List":
             println("p378 in phraseList Switch")

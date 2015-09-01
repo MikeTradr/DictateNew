@@ -95,8 +95,56 @@ class EventManager: NSObject {
         }
     }
     
-//Add item to Reminder List - Mike 082915
     func addReminder(name:String, items:[String]){
+        println("p90 in addReminder name: \(name)")
+    
+        var destCalendar:EKCalendar?
+        let calendars = self.eventStore.calendarsForEntityType(EKEntityTypeReminder)
+        
+        var reminderArray:[String] = []
+        
+        for calendar in calendars {
+            var calendarTitle:String! = calendar.title
+            
+            // var calendarTitle = calendar.title
+            
+            println("p110 calendarTitle: \(calendarTitle)")
+            
+            if calendar.title == name{
+                destCalendar = calendar as? EKCalendar
+                break
+            }
+            
+            
+        }
+        
+        //println("p94 calendars: \(calendars)")
+        
+        println("p123 destCalendar: \(destCalendar)")
+        
+        if destCalendar != nil{
+            for item in items{
+                let reminder = EKReminder(eventStore: self.eventStore)
+                reminder.title = item
+                println("p126 reminder.title: \(reminder.title)")
+                println("p126 calendar: \(destCalendar)")
+                
+                reminder.calendar = destCalendar
+                println("p130 reminder.calendar: \(reminder.calendar)")
+                println("p130 reminder: \(reminder)")
+                
+                var error:NSError?
+                self.eventStore.saveReminder(reminder, commit: true, error: &error)
+                println("p97 Error: \(error)")
+                
+            }   //for item...
+        }   // if dest...
+    }
+    
+    
+    
+//Add item to Reminder List - Mike 082915
+    func addReminderMike(name:String, items:[String]){
         let calender = EKCalendar(forEntityType: EKEntityTypeReminder , eventStore: self.eventStore)
         calender.title = name
         var error:NSError?

@@ -73,13 +73,17 @@ let str25:String = "Message wife I will be home at 1:15 am"
 
 let str26:String = "Email my wife I am buying us a new truck and will need you to put $2000 into our bank account by 5 PM today. Thank you so much. I love you Tony"
 
-let str27:String = "new list cheese milk carrots lettace eggs"
+let str27:String = "new list groceries cheese milk carrots lettace eggs"
 
 let str28:String = "new todo call mom, meeting at 10 AM, play tennis, pick up kids"
 
 let str29:String = "Reminder Wash the car"
 
+let str30:String = "Reminder go to the bank list to do downtown"
 
+let str31:String = "todo today, call mom, meeting at 10 AM, play tennis, pick up kids"
+
+let str32:String = "list shower work workout dinner sleep"
 
 
 
@@ -87,7 +91,7 @@ let str29:String = "Reminder Wash the car"
 
 
 // ---- chagne strigngs here for testing ---
-var str:String = str29
+var str:String = str32
 
 //var strRaw:String = str
 
@@ -368,9 +372,11 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
 
 
 //#### for testing comment out besides for simulator in xCode
+        
+        println("p375 str: \(str)")
 
-        //enteredText.text = str        // comment out besides for simulator in xCode
-        //resultMessage.text = str
+        enteredText2.text = str        // comment out besides for simulator in xCode
+        resultMessage.text = str
        
 
     }

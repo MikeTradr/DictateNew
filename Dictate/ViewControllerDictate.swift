@@ -91,7 +91,7 @@ let str32:String = "list shower work workout dinner sleep"
 
 
 // ---- chagne strigngs here for testing ---
-var str:String = str32
+var str:String = str30
 
 //var strRaw:String = str
 

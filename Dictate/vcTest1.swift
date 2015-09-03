@@ -531,12 +531,20 @@ class vcTest1: UIViewController {
                 //var list = list.capitalizedString
                 println("p524 reminderList: \(reminderList)")
                 println("p525 list________: \(list)")
+                
+                var lengthList = count(list)
+                var lengthReminderList = count(reminderList)
+                println("p537 lengthList________: \(lengthList)")
+                println("p537 lengthReminderList: \(lengthReminderList)")
+
+
+                
             //ANIL WE ARE NOT DROPPIG IN HERE!!!! 090315
             // list = "test"  and "test" is in reminderList  see console.
-                if reminderList == list {
+                if (reminderList == list) {
                     println("p528 we in condition reminderList: \(reminderList)")
                     calendarName = reminderList
-                    
+                    break
                 } else {
             // TODO call routine to make new reminder with this name
                     //calendarName = "New List"

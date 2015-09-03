@@ -27,6 +27,8 @@ class EventManager: NSObject {
     }
     
     let eventStore = EKEventStore()
+    let defaults = NSUserDefaults.standardUserDefaults()
+
     
     func fetchReminders(completion:([EKReminder])->Void) {
         
@@ -102,8 +104,38 @@ class EventManager: NSObject {
         var destCalendar:EKCalendar?
         let calendars = self.eventStore.calendarsForEntityType(EKEntityTypeReminder)
         
-        var reminderArray:[String] = []
+        //var reminderArray:[String] = []
         
+        var reminderArray       = defaults.objectForKey("reminderArray") as! [String] //array of the items
+        let reminderArrayLowerCased = reminderArray.map { return $0.lowercaseString}    //lowercase ever word in array -from Anil 083115 thank you Bro :)
+        
+        for list in reminderArrayLowerCased {
+            //var calendarTitle:String! = calendar.title
+            
+            // var calendarTitle = calendar.title
+            
+          //  println("p110 calendar.title: \(calendar.title)")
+            println("p112 _________name: \(name)")
+            
+            if (name == list) {
+                //println("p528 we in condition reminderList: \(reminderList)")
+                
+                destCalendar = name as? EKCalendar
+
+                
+                calendarName = reminderList
+                break
+            }
+            
+            if calendar.title == name {
+                destCalendar = calendar as? EKCalendar
+                break
+            }
+        }
+        
+        
+
+
         for calendar in calendars {
             //var calendarTitle:String! = calendar.title
             
@@ -116,10 +148,23 @@ class EventManager: NSObject {
                 destCalendar = calendar as? EKCalendar
                 break
             }
-            
-            
         }
         
+   /*
+        for calendar in calendars {
+            //var calendarTitle:String! = calendar.title
+            
+            // var calendarTitle = calendar.title
+            
+            println("p110 calendar.title: \(calendar.title)")
+            println("p112 _________name: \(name)")
+            
+            if calendar.title == name {
+                destCalendar = calendar as? EKCalendar
+                break
+            }
+        }
+  */
         //println("p94 calendars: \(calendars)")
         
         println("p123 destCalendar: \(destCalendar)")
@@ -226,7 +271,9 @@ class EventManager: NSObject {
         
         for calendar in calendars {
             var reminderTitle:String! = calendar.title
-            println("p144 reminderTitle: \(reminderTitle)")
+            println("p229 reminderTitle: \(reminderTitle)")
+            var length = count(reminderTitle)
+            println("p231 length: \(length)")
             
             reminderArray.append(reminderTitle)
         }

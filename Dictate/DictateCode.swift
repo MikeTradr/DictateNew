@@ -1411,9 +1411,11 @@ class DictateCode: NSObject {
                     listName = ""
                     for word in wordArr[startIndex..<wordArr.count] {   // make list title from words after List to end
                         println("p1428: \(word)")
-                        listName = listName + "\(word) "
+                        listName = listName + " \(word)"
                         println("p1430: \(listName)")
                     }
+                    
+                    listName = dropFirst(listName) //remove first space I added above in loop.
                     
                     wordArrTrimmed = wordArrTrimmed.filter() { $0 != wordArr[i] }
                     

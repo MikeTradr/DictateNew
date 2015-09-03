@@ -85,9 +85,9 @@ let str31:String = "todo today, call mom, meeting at 10 AM, play tennis, pick up
 
 let str32:String = "list shower work workout dinner sleep"
 
-let str33:String = "Reminder go to the bank list to do tomorrow"    // test to see if new list "to do downtown" is created
+let str33:String = "Reminder go to the store list to do tomorrow"    // test to see if new list "to do downtown" is created
 
-let str34:String = "Reminder go to the bank list test"    // test to see if new list "to do downtown" is created
+let str34:String = "Reminder go to the gym list test"    // test to see if new list "to do downtown" is created
 
 
 
@@ -95,7 +95,7 @@ let str34:String = "Reminder go to the bank list test"    // test to see if new 
 
 
 // ---- chagne strigngs here for testing ---
-var str:String = str30
+var str:String = str33
 
 //var strRaw:String = str
 

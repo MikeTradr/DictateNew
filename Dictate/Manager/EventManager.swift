@@ -95,6 +95,7 @@ class EventManager: NSObject {
         }
     }
     
+// ____ addReminder func ____________________________________
     func addReminder(name:String, items:[String]){
         println("p90 in addReminder name: \(name)")
     
@@ -104,13 +105,14 @@ class EventManager: NSObject {
         var reminderArray:[String] = []
         
         for calendar in calendars {
-            var calendarTitle:String! = calendar.title
+            //var calendarTitle:String! = calendar.title
             
             // var calendarTitle = calendar.title
             
-            println("p110 calendarTitle: \(calendarTitle)")
+            println("p110 calendar.title: \(calendar.title)")
+            println("p112 _________name: \(name)")
             
-            if calendar.title == name{
+            if calendar.title == name {
                 destCalendar = calendar as? EKCalendar
                 break
             }
@@ -138,7 +140,25 @@ class EventManager: NSObject {
                 println("p97 Error: \(error)")
                 
             }   //for item...
-        }   // if dest...
+        } else {
+            
+            println("p145 we here??? destCalendar: \(destCalendar)")
+
+            let reminder = EKReminder(eventStore: self.eventStore)
+
+            let calender = EKCalendar(forEntityType: EKEntityTypeReminder , eventStore: self.eventStore)
+            calender.title = name
+            calender.source = eventStore.defaultCalendarForNewReminders().source
+            
+            var tempString = ""
+            let reminderTitle = tempString.join(items)  //convert [String] to String for reminder content
+            reminder.title = reminderTitle
+
+            var error:NSError? = nil                                // = nil added by Mike 082915
+            reminder.calendar = eventStore.defaultCalendarForNewReminders()
+            self.eventStore.saveReminder(reminder, commit: true, error: &error)
+
+        }// if dest...
     }
     
     

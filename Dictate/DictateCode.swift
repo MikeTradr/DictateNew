@@ -418,31 +418,24 @@ class DictateCode: NSObject {
                     let eventAlert = "none set yet"
                     
                     startDT = NSDate(dateString:"2014-12-12")
+                    listName = "default"                            //save reminder to default Reminder List
+                    
+                    println("p424 actionType: \(actionType)")
+                    println("p424: mainType: \(mainType)")
+                    println("p424: startDT: \(startDT)")
+                    println("p424: eventAlert: \(eventAlert)")
+                    println("p424: calendarName: \(calendarName)")
+                    println("p424: output: \(output)")
+                    println("p424: listName: \(listName)")
+                    
                     defaults.setObject(startDT, forKey: "startDT")
-                    
-                    
-                    println("p203: actionType \(actionType)")
-                    println("p204: mainType \(mainType)")
-                    
-                    // let defaults = NSUserDefaults.standardUserDefaults()
-                    
-                    defaults.setObject(calendarName, forKey: "calendarName")    //does this work or above
+                    defaults.setObject(calendarName, forKey: "calendarName")    //sets calendarName
                     defaults.setObject(eventAlert, forKey: "eventAlert")
                     defaults.setObject(actionType, forKey: "actionType")        //sets actionType for processing
                     defaults.setObject(mainType, forKey: "mainType")            //sets mainType
-                    
-                    defaults.setObject(output, forKey: "output")            //sets output
-
-                    
-                    println("p190: calendarName \(calendarName)")
-                    
-                    
-                    //ReminderCode().createReminder(title, notes: notes)
-                    //TODO above line, this done in  Reminder button but change that, add code,  to the process button
-                    
-                    
-                    //TODO Handle Reminder or Calendar Event more efficiently????
-                    
+                    defaults.setObject(output, forKey: "output")                //sets output
+                    defaults.setObject(listName, forKey: "reminderList")        //sets reminderList
+        
                 }
                 
 // ____ "text", "message", "im" word ____________________________________
@@ -701,18 +694,10 @@ class DictateCode: NSObject {
                     actionType = "Mail"         // set type for proper processing
                     let eventAlert = "none set yet"
                     
-                    let defaults = NSUserDefaults.standardUserDefaults()
-                    
                     defaults.setObject(eventAlert, forKey: "eventAlert")
                     defaults.setObject(actionType, forKey: "actionType")        //sets actionType
                     defaults.setObject(mainType, forKey: "mainType")            //sets actionType
                     
-                    
-                    //ReminderCode().createReminder(title, notes: notes)
-                    //TODO above line, this done in  Reminder button but change that, add code,  to the process button
-                    
-                    
-                    //TODO Handle Reminder or Calendar Event more efficiently????
                     
                     break       //added 083115 my Mike to break out of the loop
                 }
@@ -1371,8 +1356,9 @@ class DictateCode: NSObject {
                     var reminderArray = NSUserDefaults.standardUserDefaults().objectForKey("reminderArray") as! [String] //array of the items
                     
                     println("p1389 reminderArray: \(reminderArray)")
-
                     
+                    let reminderArrayLowerCased = reminderArray.map { return $0.lowercaseString}    //lowercase ever word in array -from Anil 083115 thank you Bro :)
+
                     if (i < arrayLength-1) {
                         nextWord = wordArr[i+1]
                     } else {
@@ -1382,8 +1368,7 @@ class DictateCode: NSObject {
                  
                     if (nextWord != "") {                         //  check to see if there is word after "list"
                         
-                        nextWord = nextWord.capitalizedString
-                        for list in reminderArray {
+                        for list in reminderArrayLowerCased {
                             
                             //var list = list.capitalizedString
                             println("p1388 nextWord: \(nextWord)")
@@ -1414,7 +1399,7 @@ class DictateCode: NSObject {
                     }
                     println("p1412 listName: \(listName)")
                     
-                    listName = ""
+                    //listName = ""
               /*
                     for ((i+1), nextW) in enumerate(wordArr) {
                         listName = listName + "\(nextW) "
@@ -1422,15 +1407,25 @@ class DictateCode: NSObject {
                         
                     }
 */
-
-               //     for nextW in wordArr {
-               //         listName = listName + "\(nextW) "
-                //        println("p1417 listName: \(listName)")
-                        
-               //     }
-
+                    let startIndex = i+1
+                    listName = ""
+                    for word in wordArr[startIndex..<wordArr.count] {   // make list title from words after List to end
+                        println("p1428: \(word)")
+                        listName = listName + "\(word) "
+                        println("p1430: \(listName)")
+                    }
                     
                     wordArrTrimmed = wordArrTrimmed.filter() { $0 != wordArr[i] }
+                    
+                    println("p1435 wordArrTrimmed: \(wordArrTrimmed)")
+
+                    let end = i-1
+                    let slice = wordArrTrimmed[0..<end]
+                    
+                    println("p1440 slice: \(slice)")
+                    
+                    wordArrTrimmed = Array(slice)
+                    
                     if (listName == ""){
                         mainType = "New OneItem List"
                         actionType = "New OneItem List"             //sets actionType for processing
@@ -1449,7 +1444,10 @@ class DictateCode: NSObject {
                     
                     println("p1394 listName: \(listName)")
                     //let defaults = NSUserDefaults.standardUserDefaults()
-                    defaults.setObject(listName, forKey: "listName")
+                    //defaults.setObject(listName, forKey: "listName")
+                    
+                    defaults.setObject(listName, forKey: "reminderList")    //sets actionType
+
                 }
                 
                 //TODO Pull from prefs

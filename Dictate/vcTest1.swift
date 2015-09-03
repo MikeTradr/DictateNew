@@ -190,7 +190,7 @@ class vcTest1: UIViewController {
         
         var reminderArray = defaults.objectForKey("reminderArray") as! [String] //array of the items
         
-        var listName:String   = defaults.stringForKey("listName")!
+        var reminderList:String   = defaults.stringForKey("reminderList")!
 
         
         
@@ -213,7 +213,7 @@ class vcTest1: UIViewController {
         
         println("p111Main reminderTitle: \(reminderTitle)")
         println("p111Main wordArrTrimmed: \(wordArrTrimmed)")
-        println("p111Main listName: \(listName)")
+        println("p111Main reminderList: \(reminderList)")
         println("p111Main reminderArray: \(reminderArray)")
 
 
@@ -292,7 +292,7 @@ class vcTest1: UIViewController {
                 resultStartDate.text = ""
             }
             
-            reminderTitle = listName
+            reminderTitle = reminderList
             resultCalendar.text = reminderTitle
             resultEndDate.text = ""
             
@@ -499,63 +499,79 @@ class vcTest1: UIViewController {
         //actionType = "Reminder"
         
         switch (actionType){
+            
+            
+// ____ Reminder Case buttonCreate____________________________________
         case "Reminder":
             println("p242 in Reminder Switch")
-            //createReminder()                      // worked with nothing in func call??? why?
             
             let title:String = output
             //let notes:String = outputNote
             
-            //ReminderCode().createReminder(title, notes: notes, startDT: startDT)
-        // WORKS try Amnil's code   
-         //   ReminderCode().createReminder()
-            
-            println("p431 reminderTitle: \(reminderTitle)")
+        // WORKS try Amnil's code
+          //  ReminderCode().createReminder()
             
             var calendarName = ""
-            
+    
             var reminderArray       = defaults.objectForKey("reminderArray") as! [String] //array of the items
-            var listName:String     = defaults.stringForKey("listName")!
+            var reminderList:String     = defaults.stringForKey("reminderList")!
             
-            println("p480 reminderArray: \(reminderArray)")
-            println("p480 listName: \(listName)")
+            println("p518 reminderArray: \(reminderArray)")
+            println("p519 reminderList: \(reminderList)")
             
-            for list in reminderArray {
+            //let array = ["Anil","MIKE"]
+            let reminderArrayLowerCased = reminderArray.map { return $0.lowercaseString}    //lowercase ever word in array -from Anil 083115 thank you Bro :)
+           // print(lowercaseArray)
+            
+            println("p525 lowercaseArray: \(reminderArrayLowerCased)")
+
+            
+            for list in reminderArrayLowerCased {
                 
-                var list = list.capitalizedString
-                println("p486 list: \(list)")
-                if listName == list {
-                    calendarName = listName
-                    break
+                //var list = list.capitalizedString
+                println("p524 reminderList: \(reminderList)")
+                println("p525 list________: \(list)")
+            //ANIL WE ARE NOT DROPPIG IN HERE!!!! 090315
+            // list = "test"  and "test" is in reminderList  see console.
+                if reminderList == list {
+                    println("p528 we in condition reminderList: \(reminderList)")
+                    calendarName = reminderList
+                    
                 } else {
             // TODO call routine to make new reminder with this name
-                    calendarName = "New List"
+                    //calendarName = "New List"
+        
                 }
             }
-
-        /*
-            if contains(reminderArray, listName) {
-                calendarName = listName
+    /*
+            if contains(reminderArrayLowerCased, reminderList) {
+                println("p543 we in contains reminderList: \(reminderList)")
+                calendarName = reminderList
+            
             } else {
+                
         // TODO call routine to make new reminder with this name
-                calendarName = "New List"
+                //calendarName = "New List"
             }
+            
 */
+            
             println("p478 calendarName: \(calendarName)")
 
             resultCalendar.text = calendarName
 
             output      = defaults.stringForKey("output")!
-            var outputArray:[String] = Array(arrayLiteral: output)
+            var outputArray:[String] = Array(arrayLiteral: output)  //make output into Array for func call below
             
-            println("p511 calendarName: \(calendarName)")
-            println("p511 outputArray: \(outputArray)")
+            println("p550 calendarName: \(calendarName)")
+            println("p551 outputArray: \(outputArray)")
 
             EventManager.sharedInstance.addReminder(calendarName, items: outputArray)
 
             resultMessage.text = "Reminder created on your \(calendarName.capitalizedString) list"
             break;
             
+// ____ Event Case ____________________________________
         case "Event":
             println("p255 in Event Switch")
             

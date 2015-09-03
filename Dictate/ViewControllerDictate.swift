@@ -77,13 +77,17 @@ let str27:String = "new list groceries cheese milk carrots lettace eggs"
 
 let str28:String = "new todo call mom, meeting at 10 AM, play tennis, pick up kids"
 
-let str29:String = "Reminder Wash the car"
+let str29:String = "Reminder Wash the car tonight"
 
-let str30:String = "Reminder go to the bank list to do downtown"
+let str30:String = "Reminder go to the bank list today"    // test to see if added to list "today"
 
 let str31:String = "todo today, call mom, meeting at 10 AM, play tennis, pick up kids"
 
 let str32:String = "list shower work workout dinner sleep"
+
+let str33:String = "Reminder go to the bank list to do tomorrow"    // test to see if new list "to do downtown" is created
+
+let str34:String = "Reminder go to the bank list test"    // test to see if new list "to do downtown" is created
 
 
 

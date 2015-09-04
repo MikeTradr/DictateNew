@@ -146,7 +146,7 @@ class EventManager: NSObject {
             
             if calendar.title == name {
                 destCalendar = calendar as? EKCalendar
-                break
+                break;
             }
         }
         

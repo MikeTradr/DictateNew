@@ -99,7 +99,7 @@ let str35:String = "Reminder go to the store list new list title"    // test to 
 
 
 // ---- chagne strigngs here for testing ---
-var str:String = str34
+var str:String = str29
 
 //var strRaw:String = str
 

@@ -519,6 +519,22 @@ class vcTest1: UIViewController {
             println("p518 reminderArray: \(reminderArray)")
             println("p519 reminderList: \(reminderList)")
             
+            if reminderList == "default" {
+                calendarName = reminderList
+
+                output      = defaults.stringForKey("output")!
+                var outputArray:[String] = Array(arrayLiteral: output)  //make output into Array for func call below
+                
+                println("p550 calendarName: \(calendarName)")
+                println("p551 outputArray: \(outputArray)")
+                
+                EventManager.sharedInstance.addReminder(calendarName, items: outputArray)
+                
+                
+            }
+            
+            
+            
             for list in reminderArray {
                 
                 //var list = list.capitalizedString

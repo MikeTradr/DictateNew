@@ -105,10 +105,10 @@ class EventManager: NSObject {
         let calendars = self.eventStore.calendarsForEntityType(EKEntityTypeReminder)
         
         //var reminderArray:[String] = []
-        
+/*
         var reminderArray       = defaults.objectForKey("reminderArray") as! [String] //array of the items
         let reminderArrayLowerCased = reminderArray.map { return $0.lowercaseString}    //lowercase ever word in array -from Anil 083115 thank you Bro :)
-        
+
         for list in reminderArrayLowerCased {
             //var calendarTitle:String! = calendar.title
             
@@ -116,7 +116,7 @@ class EventManager: NSObject {
             
           //  println("p110 calendar.title: \(calendar.title)")
             println("p112 _________name: \(name)")
-            
+
             if (name == list) {
                 //println("p528 we in condition reminderList: \(reminderList)")
                 
@@ -133,7 +133,7 @@ class EventManager: NSObject {
             }
         }
         
-        
+*/
 
 
         for calendar in calendars {

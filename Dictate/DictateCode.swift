@@ -1366,48 +1366,8 @@ class DictateCode: NSObject {
                     }
                     println("p1378 nextWord: \(nextWord)")
                  
-                    if (nextWord != "") {                         //  check to see if there is word after "list"
-                        
-                        for list in reminderArrayLowerCased {
-                            
-                            //var list = list.capitalizedString
-                            println("p1388 nextWord: \(nextWord)")
-                            println("p1388 list: \(list)")
-                            
-                            if nextWord == list {
-                                listName = nextWord
-                                wordArrTrimmed = wordArrTrimmed.filter() { $0 != wordArr[i+1] }
-                                break
-                            }
-                        }
 
-                        /*
-                            if contains(reminderArray, wordArr[i+1]) {
-                                listName = wordArr[i+1]
-                                wordArrTrimmed = wordArrTrimmed.filter() { $0 != wordArr[i+1] }
-                            }   else if contains(reminderArray, wordArr[i-1]) {
-                                listName = wordArr[i-1]
-                                wordArrTrimmed = wordArrTrimmed.filter() { $0 != wordArr[i-1] }
-                            }
-                         */
-                        
-                       
-                        
-                        
-                    } else {
-                        errorMsg = "No List Found"
-                    }
-                    println("p1412 listName: \(listName)")
-                    
-                    //listName = ""
-              /*
-                    for ((i+1), nextW) in enumerate(wordArr) {
-                        listName = listName + "\(nextW) "
-                        println("p1417 listName: \(listName)")
-                        
-                    }
-*/
-                    let startIndex = i+1
+                    let startIndex = i+1    //start at word after "list"
                     listName = ""
                     for word in wordArr[startIndex..<wordArr.count] {   // make list title from words after List to end
                         println("p1428: \(word)")
@@ -1415,7 +1375,11 @@ class DictateCode: NSObject {
                         println("p1430: \(listName)")
                     }
                     
-                    listName = dropFirst(listName) //remove first space I added above in loop.
+                    if listName != "" {
+                        listName = dropFirst(listName) //remove first space I added above in loop.
+                
+                        listName = listName.capitalizedString   //capitalzie first letter of each word for Calendar match
+                    }
                     
                     wordArrTrimmed = wordArrTrimmed.filter() { $0 != wordArr[i] }
                     
@@ -1431,23 +1395,15 @@ class DictateCode: NSObject {
                     if (listName == ""){
                         mainType = "New OneItem List"
                         actionType = "New OneItem List"             //sets actionType for processing
-                        
                         listName = "New List"
                         
                         defaults.setObject(actionType, forKey: "actionType")    //sets actionType
                         defaults.setObject(listName, forKey: "reminderList")    //sets reminderList
                         defaults.setObject(listName, forKey: "calendarName")    //sets List to calendarName for ParseDB
                         defaults.setObject(wordArrTrimmed, forKey: "wordArrTrimmed")    //sets List to calendarName for ParseDB
-
-                        
-                        //TODO trim array from List to end and save rest as output for th new List
-                        
                     }
                     
                     println("p1394 listName: \(listName)")
-                    //let defaults = NSUserDefaults.standardUserDefaults()
-                    //defaults.setObject(listName, forKey: "listName")
-                    
                     defaults.setObject(listName, forKey: "reminderList")    //sets actionType
 
                 }

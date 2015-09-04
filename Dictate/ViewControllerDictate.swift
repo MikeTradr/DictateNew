@@ -87,15 +87,19 @@ let str32:String = "list shower work workout dinner sleep"
 
 let str33:String = "Reminder go to the store list to do tomorrow"    // test to see if new list "to do downtown" is created
 
-let str34:String = "Reminder go to the gym list test"    // test to see if new list "to do downtown" is created
+let str34:String = "Reminder go play tennis list test"    // test to see if new list "to do downtown" is created
 
+let str35a:String = "Reminder go to the store list new unmatched title"    // test to see if new list "to do downtown" is created
+
+
+let str35:String = "Reminder go to the store list new list title"    // test to see if new list "to do downtown" is created
 
 
 
 
 
 // ---- chagne strigngs here for testing ---
-var str:String = str33
+var str:String = str34
 
 //var strRaw:String = str
 

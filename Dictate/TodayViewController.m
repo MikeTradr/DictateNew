@@ -62,7 +62,10 @@
     [_calendarManager setDate:_todayDate];
     _dateSelected = _todayDate;
     _todayDateLabel.text = [_dateFormatter stringFromDate:_todayDate];
-    [self fetchEvents];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        [self fetchEvents];
+
+    });
     [_calendarManager reload];
 }
 -(void)fetchEvents{

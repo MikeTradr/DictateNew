@@ -28,36 +28,30 @@
 +(instancetype)sharedEventManager
 {
     static CALEventManager *sharedManger = nil;
- 
+    
     static dispatch_once_t onceToken;
-
+    
     dispatch_once(&onceToken, ^{
         sharedManger = [[CALEventManager alloc]init];
         
     });
+    [sharedManger getPermissionWithcompletion:^(BOOL granted, NSError *error) {
+        
+    }];
+    
     return sharedManger;
 }
 
--(BOOL)getAccessPermissionToEventStore
+-(void)getPermissionWithcompletion:(EKEventStoreRequestAccessCompletionHandler)completion
 {
-    // From iOS6+ need user permission
-    __block BOOL accessGranted;
-    
     if ([EKEventStore authorizationStatusForEntityType:EKEntityTypeEvent] == EKAuthorizationStatusAuthorized)
     {
-        accessGranted = YES;
+        completion(YES,nil);
     }
     else
     {
-        dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-        [_eventStore requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError *error)
-        {
-            accessGranted = granted;
-            dispatch_semaphore_signal(semaphore);
-        }];
-        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+        [_eventStore requestAccessToEntityType:EKEntityTypeEvent completion:completion];
     }
-    return accessGranted;
 }
 -(NSArray *)eventsForTheDate:(NSDate *)date
 {
@@ -65,26 +59,21 @@
     
     NSDate *startDate = [date beginningOfDay];
     NSDate *endDate = [startDate dateByAddingTimeInterval:60*60*24]; // 24 hours
-
-    if ([self getAccessPermissionToEventStore])
-    {
-        NSPredicate *predicate = [_eventStore predicateForEventsWithStartDate:startDate endDate:endDate calendars:nil];
-        events = [_eventStore eventsMatchingPredicate:predicate];
-    }
+    
+    NSPredicate *predicate = [_eventStore predicateForEventsWithStartDate:startDate endDate:endDate calendars:nil];
+    events = [_eventStore eventsMatchingPredicate:predicate];
+    
     return events;
 }
 -(NSArray *)eventsFromDate:(NSDate *)fromDate toDate:(NSDate *)toDate{
-   
+    
     NSArray *events = nil;
     
     NSDate *startDate = [fromDate beginningOfDay];
     NSDate *endDate = [toDate endOfDay];
     
-    if ([self getAccessPermissionToEventStore])
-    {
-        NSPredicate *predicate = [_eventStore predicateForEventsWithStartDate:startDate endDate:endDate calendars:nil];
-        events = [_eventStore eventsMatchingPredicate:predicate];
-    }
+    NSPredicate *predicate = [_eventStore predicateForEventsWithStartDate:startDate endDate:endDate calendars:nil];
+    events = [_eventStore eventsMatchingPredicate:predicate];
     return events;
 }
 

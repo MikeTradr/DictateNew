@@ -182,12 +182,9 @@ class ToDoTableViewController: UITableViewController, UITableViewDelegate, UITab
         cell.selectionStyle = .None
         let reminder = reminders[indexPath.row]
         cell.titleLabel.text = reminder.title
-        
-        
-        
-        // let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as! UITableViewCell
-        
-        // Configure the cell...
+        cell.calendarName.text = reminder.calendar.title
+        cell.calendarName.textColor = UIColor(CGColor: reminder.calendar.CGColor)
+        cell.verticalBarView.backgroundColor = UIColor(CGColor: reminder.calendar.CGColor)
         
         return cell
     }
@@ -217,17 +214,16 @@ class ToDoTableViewController: UITableViewController, UITableViewDelegate, UITab
         return 70
     }
     
+    @IBAction func checkBoxTapped(sender: CheckBox) {
+        let indexPath = indexPathForView(sender)!
     
-    // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-  //  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    }
 
-    
-    //MARK: - Delegates and datasources
-    //MARK: Data Sources
-    
-    
+    func indexPathForView(view: UIView) -> NSIndexPath? {
+        let viewOrigin = view.bounds.origin
+        
+        let viewLocation = tableView.convertPoint(viewOrigin, fromView: view)
+        
+        return tableView.indexPathForRowAtPoint(viewLocation)
+    }    
 }

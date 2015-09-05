@@ -116,6 +116,8 @@
 		ECF8185F1B83B7E10087ECAD /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF8185D1B83B7E10087ECAD /* CheckBox.swift */; };
 		ECF818601B83B7E10087ECAD /* CheckBoxLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF8185E1B83B7E10087ECAD /* CheckBoxLayer.swift */; };
 		ECF818631B84FAB70087ECAD /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF818621B84FAB70087ECAD /* EventManager.swift */; };
+		ECF818661B8519F80087ECAD /* BFPaperCheckbox.m in Sources */ = {isa = PBXBuildFile; fileRef = ECF818651B8519F80087ECAD /* BFPaperCheckbox.m */; };
+		ECF818691B851B830087ECAD /* UIColor+BFPaperColors.m in Sources */ = {isa = PBXBuildFile; fileRef = ECF818681B851B830087ECAD /* UIColor+BFPaperColors.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -281,6 +283,10 @@
 		ECF8185D1B83B7E10087ECAD /* CheckBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CheckBox.swift; path = Views/CheckBox.swift; sourceTree = "<group>"; };
 		ECF8185E1B83B7E10087ECAD /* CheckBoxLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CheckBoxLayer.swift; path = Views/CheckBoxLayer.swift; sourceTree = "<group>"; };
 		ECF818621B84FAB70087ECAD /* EventManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EventManager.swift; path = Manager/EventManager.swift; sourceTree = "<group>"; };
+		ECF818641B8519F80087ECAD /* BFPaperCheckbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFPaperCheckbox.h; sourceTree = "<group>"; };
+		ECF818651B8519F80087ECAD /* BFPaperCheckbox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFPaperCheckbox.m; sourceTree = "<group>"; };
+		ECF818671B851B830087ECAD /* UIColor+BFPaperColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+BFPaperColors.h"; sourceTree = "<group>"; };
+		ECF818681B851B830087ECAD /* UIColor+BFPaperColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+BFPaperColors.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -399,6 +405,10 @@
 				ECB862041B77DEBD00503C50 /* CALEventManager.m */,
 				ECB862291B77DEBD00503C50 /* NSDate+CALAddition.h */,
 				ECB8622A1B77DEBD00503C50 /* NSDate+CALAddition.m */,
+				ECF818641B8519F80087ECAD /* BFPaperCheckbox.h */,
+				ECF818651B8519F80087ECAD /* BFPaperCheckbox.m */,
+				ECF818671B851B830087ECAD /* UIColor+BFPaperColors.h */,
+				ECF818681B851B830087ECAD /* UIColor+BFPaperColors.m */,
 			);
 			name = External;
 			sourceTree = "<group>";
@@ -932,7 +942,9 @@
 				ECB861E11B77DBB700503C50 /* General.swift in Sources */,
 				D3188A771B6E9B2600323DC0 /* TableCell.swift in Sources */,
 				ECB862321B77DEBD00503C50 /* JTCalendarMenuView.m in Sources */,
+				ECF818691B851B830087ECAD /* UIColor+BFPaperColors.m in Sources */,
 				D3188A7D1B6E9B7700323DC0 /* ViewControllerDictate.swift in Sources */,
+				ECF818661B8519F80087ECAD /* BFPaperCheckbox.m in Sources */,
 				D3795E7A1B8DF927009D3DB5 /* SettingsEventTableViewController.swift in Sources */,
 				D33C13BD1B8C3CCB00470F8F /* SettingsTableViewController.swift in Sources */,
 				ECF818631B84FAB70087ECAD /* EventManager.swift in Sources */,

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="JhY-cq-KWn">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="JhY-cq-KWn">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -698,25 +697,37 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qvk-LU-pbE">
                                             <rect key="frame" x="0.0" y="2" width="414" height="56"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OHd-bi-opa">
+                                                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OHd-bi-opa">
                                                     <rect key="frame" x="66" y="0.0" width="4" height="56"/>
                                                     <color key="backgroundColor" red="0.5" green="0.9428710938" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="4" id="GW1-NK-4hQ"/>
                                                     </constraints>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QLl-Mq-LvN">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QLl-Mq-LvN">
                                                     <rect key="frame" x="78" y="46" width="0.0" height="0.0"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.85882352939999995" green="0.86666666670000003" blue="0.87058823529999996" alpha="0.34999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CNa-jd-5oq" customClass="CheckBox" customModule="Dictate" customModuleProvider="target">
-                                                    <rect key="frame" x="19" y="14" width="27" height="27"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dqH-hp-xYr">
+                                                    <rect key="frame" x="95" y="38" width="311" height="0.0"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" misplaced="YES" text="New Appointment" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bm2-g0-zBS">
+                                                    <rect key="frame" x="95" y="3" width="311" height="27"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CNa-jd-5oq" customClass="BFPaperCheckbox">
+                                                    <rect key="frame" x="8" y="3" width="50" height="50"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="27" id="7Sa-vt-Dch"/>
-                                                        <constraint firstAttribute="width" secondItem="CNa-jd-5oq" secondAttribute="height" multiplier="1:1" id="ENU-9K-Q6R"/>
+                                                        <constraint firstAttribute="width" constant="50" id="biP-G7-Lrt"/>
+                                                        <constraint firstAttribute="height" constant="50" id="frm-yB-Hf1"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="insetFactor">
@@ -730,37 +741,27 @@
                                                             <real key="value" value="0.34000000000000002"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="checkBoxTapped:" destination="dXF-g5-diV" eventType="valueChanged" id="AmR-Ip-VnZ"/>
+                                                    </connections>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dqH-hp-xYr">
-                                                    <rect key="frame" x="78" y="38" width="328" height="0.0"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="New Appointment" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bm2-g0-zBS">
-                                                    <rect key="frame" x="78" y="0.0" width="328" height="38"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="0.68000000000000005" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstItem="Bm2-g0-zBS" firstAttribute="leading" secondItem="OHd-bi-opa" secondAttribute="trailing" constant="8" id="0P3-56-YEe"/>
                                                 <constraint firstItem="dqH-hp-xYr" firstAttribute="top" secondItem="Qvk-LU-pbE" secondAttribute="top" constant="38" id="5VW-sk-18t"/>
                                                 <constraint firstAttribute="trailing" secondItem="Bm2-g0-zBS" secondAttribute="trailing" constant="8" id="FdJ-ci-EPZ"/>
-                                                <constraint firstItem="dqH-hp-xYr" firstAttribute="top" secondItem="Bm2-g0-zBS" secondAttribute="bottom" id="JYP-z4-RSi"/>
-                                                <constraint firstItem="Bm2-g0-zBS" firstAttribute="top" secondItem="Qvk-LU-pbE" secondAttribute="top" id="OOV-ZZ-uNo"/>
+                                                <constraint firstItem="dqH-hp-xYr" firstAttribute="top" secondItem="Bm2-g0-zBS" secondAttribute="bottom" constant="8" id="JYP-z4-RSi"/>
+                                                <constraint firstItem="CNa-jd-5oq" firstAttribute="leading" secondItem="Qvk-LU-pbE" secondAttribute="leading" constant="8" id="Ndx-pY-iWk"/>
+                                                <constraint firstItem="Bm2-g0-zBS" firstAttribute="top" secondItem="Qvk-LU-pbE" secondAttribute="top" constant="3" id="OOV-ZZ-uNo"/>
                                                 <constraint firstItem="dqH-hp-xYr" firstAttribute="width" secondItem="Bm2-g0-zBS" secondAttribute="width" id="OaN-nf-3cp"/>
-                                                <constraint firstItem="CNa-jd-5oq" firstAttribute="leading" secondItem="Qvk-LU-pbE" secondAttribute="leading" constant="19" id="QN1-6P-cne"/>
                                                 <constraint firstItem="dqH-hp-xYr" firstAttribute="leading" secondItem="Bm2-g0-zBS" secondAttribute="leading" id="RMp-Qg-EHO"/>
                                                 <constraint firstItem="OHd-bi-opa" firstAttribute="top" secondItem="Qvk-LU-pbE" secondAttribute="top" id="Sny-qI-7e0"/>
                                                 <constraint firstItem="dqH-hp-xYr" firstAttribute="leading" secondItem="QLl-Mq-LvN" secondAttribute="leading" id="TvU-xQ-8zD"/>
-                                                <constraint firstAttribute="centerY" secondItem="CNa-jd-5oq" secondAttribute="centerY" id="YXB-9o-6pb"/>
                                                 <constraint firstAttribute="bottom" secondItem="OHd-bi-opa" secondAttribute="bottom" id="bpF-xn-tNc"/>
+                                                <constraint firstAttribute="centerY" secondItem="CNa-jd-5oq" secondAttribute="centerY" id="gOL-GM-xy9"/>
                                                 <constraint firstItem="QLl-Mq-LvN" firstAttribute="top" secondItem="dqH-hp-xYr" secondAttribute="bottom" constant="8" symbolic="YES" id="jff-fF-DiI"/>
-                                                <constraint firstItem="OHd-bi-opa" firstAttribute="leading" secondItem="CNa-jd-5oq" secondAttribute="trailing" constant="20" id="pJ2-Xq-2lJ"/>
-                                                <constraint firstItem="CNa-jd-5oq" firstAttribute="width" secondItem="CNa-jd-5oq" secondAttribute="height" multiplier="1:1" id="q7R-2N-amg"/>
+                                                <constraint firstItem="OHd-bi-opa" firstAttribute="leading" secondItem="CNa-jd-5oq" secondAttribute="trailing" constant="19" id="wVB-EC-PKU"/>
                                             </constraints>
                                         </view>
                                     </subviews>
@@ -785,7 +786,7 @@
                             <outlet property="delegate" destination="dXF-g5-diV" id="SqO-0K-rwU"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="SLN-9H-I4j"/>
+                    <navigationItem key="navigationItem" title="TODO" id="SLN-9H-I4j"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
                         <outlet property="ToDoTableView" destination="KN6-hI-mTG" id="tEz-gQ-b58"/>
@@ -1538,16 +1539,20 @@
             </objects>
             <point key="canvasLocation" x="1551" y="-254"/>
         </scene>
-        <!--Reminders-->
+        <!--ToDo-->
         <scene sceneID="MUq-g7-wCE">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="9Yi-dM-vPR" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Reminders" image="check_box40px" id="VoF-B4-V6d"/>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9Yi-dM-vPR" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="ToDo" image="check_box40px" id="VoF-B4-V6d"/>
                     <toolbarItems/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="qKr-lB-ny4">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.16862745100000001" green="0.16862745100000001" blue="0.16862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>

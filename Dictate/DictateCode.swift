@@ -418,7 +418,9 @@ class DictateCode: NSObject {
                     let eventAlert = "none set yet"
                     
                     startDT = NSDate(dateString:"2014-12-12")
-                    listName = "default"                            //save reminder to default Reminder List
+                    
+                    //TODO Mike Anil get from settings user set default reminder list!
+                    listName = "Default"                            //save reminder to default Reminder List
                     
                     println("p424 actionType: \(actionType)")
                     println("p424: mainType: \(mainType)")
@@ -526,7 +528,7 @@ class DictateCode: NSObject {
                     
                     //TODO Handle Reminder or Calendar Event more efficiently????
                     
-                    break       //added 083115 my Mike to break out of the loop
+                    break;       //added 083115 my Mike to break out of the loop
                     
                 }
                 
@@ -570,11 +572,11 @@ class DictateCode: NSObject {
                 // TODO Anil get this from Settings users created favorite names, phone, and email
             
                             switch (nextWord) {
-                            case "mike":                toPhone  = "608-242-7700"; break
-                            case "stephanie", "steph":  toPhone  = "608-692-6132"; break
-                            case "john", "jonathan":    toPhone  = "608-220-8543"; break
-                            case "mom":                 toPhone  = "608-693-8347"; break
-                            case "andrew":              toPhone  = "262-412-8745"; break
+                            case "mike":                toPhone  = "608-242-7700"; break;
+                            case "stephanie", "steph":  toPhone  = "608-692-6132"; break;
+                            case "john", "jonathan":    toPhone  = "608-220-8543"; break;
+                            case "mom":                 toPhone  = "608-693-8347"; break;
+                            case "andrew":              toPhone  = "262-412-8745"; break;
                                 
                             default:
                                 toPhone = ""
@@ -620,7 +622,7 @@ class DictateCode: NSObject {
                     
                     //TODO Handle Reminder or Calendar Event more efficiently????
                     
-                    break       //added 083115 my Mike to break out of the loop
+                    break;      //added 083115 my Mike to break out of the loop
 
                     
                 }
@@ -659,11 +661,11 @@ class DictateCode: NSObject {
                 // TODO Anil get this from Settings users created favorite names, phone, and email
 
                             switch (nextWord) {
-                            case "mike":                toPhone  = "mike@derr.ws"; break
-                            case "stephanie", "steph":  toPhone  = "steph@derr.ws"; break
-                            case "john", "jonathan":    toPhone  = "jonathanmwild@gmail.com"; break
-                            case "mom":                 toPhone  = "germangirl1988@gmail.com"; break
-                            case "andrew":              toPhone  = "aw@rouse.biz"; break
+                            case "mike":                toPhone  = "mike@derr.ws"; break;
+                            case "stephanie", "steph":  toPhone  = "steph@derr.ws"; break;
+                            case "john", "jonathan":    toPhone  = "jonathanmwild@gmail.com"; break;
+                            case "mom":                 toPhone  = "germangirl1988@gmail.com"; break;
+                            case "andrew":              toPhone  = "aw@rouse.biz"; break;
                                 
                             default:
                                 toPhone = ""
@@ -699,7 +701,7 @@ class DictateCode: NSObject {
                     defaults.setObject(mainType, forKey: "mainType")            //sets actionType
                     
                     
-                    break       //added 083115 my Mike to break out of the loop
+                    break;       //added 083115 my Mike to break out of the loop
                 }
                 
                 
@@ -741,11 +743,11 @@ class DictateCode: NSObject {
                     // TODO Anil, can't invote progrmatically??? get this from Settings users created favorite names, phone, and email
                             
                             switch (nextWord) {
-                            case "mike":                toPhone  = "mike@derr.ws"; break
-                            case "stephanie", "steph":  toPhone  = "steph@derr.ws"; break
-                            case "john", "jonathan":    toPhone  = "jonathanmwild@gmail.com"; break
-                            case "mom":                 toPhone  = "germangirl1988@gmail.com"; break
-                            case "andrew":              toPhone  = "aw@rouse.biz"; break
+                            case "mike":                toPhone  = "mike@derr.ws"; break;
+                            case "stephanie", "steph":  toPhone  = "steph@derr.ws"; break;
+                            case "john", "jonathan":    toPhone  = "jonathanmwild@gmail.com"; break;
+                            case "mom":                 toPhone  = "germangirl1988@gmail.com"; break;
+                            case "andrew":              toPhone  = "aw@rouse.biz"; break;
                                 
                             default:
                                 toPhone = ""
@@ -1385,7 +1387,11 @@ class DictateCode: NSObject {
                     
                     println("p1435 wordArrTrimmed: \(wordArrTrimmed)")
 
-                    let end = i-1
+                    let end = (i-1)
+                    println("p1390 i: \(i)")
+                    println("p1390 end: \(end)")
+
+                    
                     let slice = wordArrTrimmed[0..<end]
                     
                     println("p1440 slice: \(slice)")
@@ -1405,6 +1411,8 @@ class DictateCode: NSObject {
                     
                     println("p1394 listName: \(listName)")
                     defaults.setObject(listName, forKey: "reminderList")    //sets actionType
+                    
+                    break;
 
                 }
                 
@@ -1765,7 +1773,7 @@ class DictateCode: NSObject {
                         nextWord2 = ""
                     }
                     
-                    let frequencyArray = ["daily", "weekly", "yearly"]
+                    let frequencyArray = ["daily", "weekly", "yearly", "monthly"]   // added trying monthly 090415 Mike
                     
                     if (nextWord != "") && ( contains(frequencyArray,nextWord) ) {    // check if word is in array
                         
@@ -1781,6 +1789,7 @@ class DictateCode: NSObject {
                         case "daily": returnValue   = 1;   break;
                         case "weekly": returnValue  = 2;   break;
                         case "yearly": returnValue  = 3;   break;
+                        case "monthly": returnValue  = 4;   break;
                             
                         default:   println("p923 no repeat word matched")
                         break;
@@ -1789,7 +1798,7 @@ class DictateCode: NSObject {
                         var repeatInterval:Int = 1        //TODO for now 1 mean every week etc...
                         
                         println("p931 returnValue: \(returnValue)")
-                        eventRepeatInterval = returnValue   // 1 = daily, 2 = weekly, 3 = yearly
+                        eventRepeatInterval = returnValue   // 1 = daily, 2 = weekly, 3 = yearly, 4 = monthly
                     }
                     
                 } else {
@@ -1817,14 +1826,14 @@ class DictateCode: NSObject {
                     mainType = "todo"
                     wordArrTrimmed = wordArrTrimmed.filter() { $0 != wordArr[i] }
                     break;
-                    
+         /*
                 case "list", "list,":
                     println("found list")
                     mainType = "List"
                     output = mainType+": "+(wordArr[i] as String)
                     wordArrTrimmed = wordArrTrimmed.filter() { $0 != wordArr[i] }
                     break;
-                    
+         */
                 case "contact":
                     println("found contact")
                     mainType = "contact"
@@ -1890,18 +1899,20 @@ class DictateCode: NSObject {
                     
                 }   // end Switch
                 
-                println("p979 wordArrTrimmed: \(wordArrTrimmed)")
+                println("p1900 wordArrTrimmed: \(wordArrTrimmed)")
                 
             }  // end for loop
             
             // #### end for loop for words in array ############################################################
             
-            println("p1473: calendarName \(calendarName)")
+            println("p1906: calendarName \(calendarName)")
             
             //TODO maybe this not needed now? 7/15/15 Mike check
             
             if (calendarName == "") {
                 // took out test 7/4/15 8 am set calandar name elsewhere took out to see Reminder set in reminder code above
+                
+                //TODO get freom prefs eventually TODO MIKE  TODO Anil
                 
                 calendarName    = defaults.stringForKey("prefsDefaultCalendarName") ?? "Work"
                 // calendarName = "dictate events"
@@ -2019,7 +2030,7 @@ class DictateCode: NSObject {
             
             println("p1291 eventRepeat: \(eventRepeat)")
             
-            defaults.setObject(eventRepeat, forKey: "eventRepeat")
+            defaults.setObject(eventRepeat, forKey: "eventRepeat")  //sets repeat interval for Events
             
             println("p1401 calendarName: \(calendarName)")
             
@@ -2060,33 +2071,6 @@ class DictateCode: NSObject {
     
 //-----------------------------------------------
     
-    /*
-    func saveToDatabase() {
-    
-    println("p1720 strRaw: \(strRaw)")
-    println("p1720 output: \(output)")
-    println("p1720 outputNote: \(outputNote)")
-    println("p1720 strRaw: \(startDT)")
-    println("p1720 strRaw: \(endDT)")
-    println("p1720 calendarName: \(calendarName)")
-    println("p1720 actionType: \(actionType)")
-    
-    let rawDataObject = PFObject(className: "UserData")
-    rawDataObject["rawString"] = strRaw
-    rawDataObject["output"] = output
-    rawDataObject["actionType"] = actionType
-    
-    
-    
-    
-    rawDataObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
-    println("p402 rawDataObject has been saved.")
-    }
-    
-    
-    
-    }
-    */
     
     
     func calcDays(eventDay:Int, priorWord:String, priorWord2:String) -> String {         // gets 1-7 for day of week Sun-Sat as event day
@@ -2114,12 +2098,12 @@ class DictateCode: NSObject {
             let differenceDays = todayDay - eventDay
             
             switch differenceDays {
-            case 1: daysToAdd = 6;  break
-            case 2: daysToAdd = 5;  break
-            case 3: daysToAdd = 4;  break
-            case 4: daysToAdd = 3;  break
-            case 5: daysToAdd = 2;  break
-            case 6: daysToAdd = 1;  break
+            case 1: daysToAdd = 6;  break;
+            case 2: daysToAdd = 5;  break;
+            case 3: daysToAdd = 4;  break;
+            case 4: daysToAdd = 3;  break;
+            case 5: daysToAdd = 2;  break;
+            case 6: daysToAdd = 1;  break;
             default:
                 println("691 differenceDays is something else")
             }               // end switch
@@ -2308,243 +2292,7 @@ class DictateCode: NSObject {
             return (string as NSString).substringWithRange(range)
         }
     }
-    
-    
-    //TODO MIKE make a class of this is cleaner...
-/*
-    func insertEvent(store: EKEventStore, startDT:NSDate, endDT:NSDate, output:String, outputNote:String, calendarName:String) {
-        
-        println("##### pl570 WE HERE func insertEvent *** startDT: \(startDT)")
-        
-        println("628 *** startDT: \(startDT)")
-        println("629 endDT: \(endDT)")
-        println("######## p804 calendarName: \(calendarName)")
-        
-        if (calendarName == "") {
-            var calendarName = "dictate events"
-        }
-        
-        
-        // 1
-        let calendars = store.calendarsForEntityType(EKEntityTypeEvent)
-            as! [EKCalendar]
-        
-        var userCalendarsArr = [String]()
-        
-        for calendar in calendars as [EKCalendar] {                         //make array of uses calendars
-            // loops through all calendars users has :) make into array
-            println("p820 Calendar = \(calendar.title)")
-            
-            userCalendarsArr.append(calendar.title.lowercaseString)
-            println("p823 userCalendarArr = \(userCalendarsArr)")
-            
-            
-            let defaults = NSUserDefaults.standardUserDefaults()
-            defaults.setObject(userCalendarsArr, forKey: "userCalendarsArr")
-            
-        }
-        
-        for calendar in calendars {
-            // 2
-            
-            //calendar.calendar = eventStore.defaultCalendarForNewReminders()
-            
-            //   if calendarName != "" {
-            
-            if calendar.title.lowercaseString == calendarName {
-                
-                println("p839 WE HERE?: \(calendarName)")
-                
-                // 3
-                //let startDate = NSDate()
-                println("p638 *** startDT: \(startDT)")
-                println("p639 endDT: \(endDT)")
-                println("p833 Calendar = \(calendarName)")
-                
-                
-                // Duration, set End Date Time
-                let endDate = startDT.dateByAddingTimeInterval(eventDuration * 60)
-                
-                
-                // 4
-                // Create Event
-                
-                var event = EKEvent(eventStore: store)
-                event.calendar = calendar
-                
-                
-                // Create Alarm aka Alert...
-                //let alertMinutes:Double = 10
-                
-                println("p1172 userAlertMinutes = \(userAlertMinutes)")
-                println("p1173 self.eventAlert = \(self.eventAlert)")
-                
-                let defaults = NSUserDefaults.standardUserDefaults()
-                let eventAlert = defaults.objectForKey("eventAlert") as! Double
-                println("p1185 eventAlert = \(eventAlert)")
-                
-                if (eventAlert != 0.0){
-                    let alertOffset:Double = -( eventAlert * 60 )            //60 minutes * 60 seconds = 1 hour
-                    let alert = EKAlarm(relativeOffset: alertOffset)        // at user Offset
-                    event.addAlarm(alert)
-                }
-                
-                let alertNow = EKAlarm(relativeOffset: 0.0)             // at time of event
-                event.addAlarm(alertNow)
-                
-                
-                // Create Reccurring Event...
-                
-                // TODO MIKE Clean this code? add more features... end date! make class to use in Reminders also
-                
-                /* Add the rule */
-                // let rule = EKRecurrenceRule(recurrenceWithFrequency: EKRecurrenceFrequencyDaily, interval: 1, end: EKRecurrenceEnd.recurrenceEndWithEndDate(NSDate.distantFuture() as! NSDate) as! EKRecurrenceEnd)
-                
-                //   event.addRecurrenceRule(rule)
-                
-                let eventRepeat:Int = defaults.objectForKey("eventRepeat") as! Int
-                
-                println("p1456 eventRepeat = \(eventRepeat)")
-                
-                let everySunday = EKRecurrenceDayOfWeek(1)
-                let january = 1
-                
-                var returnValue: String = ""
-                
-                // TODO Fix why this below errors????
-                let endRecurrence: EKRecurrenceEnd = EKRecurrenceEnd.recurrenceEndWithOccurrenceCount(5) as! EKRecurrenceEnd
-                //let endRecurrence: Int = 5
-                
-                let oneYear:NSTimeInterval = 365 * 24 * 60 * 60
-                let fiveDays:NSTimeInterval = 5 * 24 * 60 * 60
-                
-                let oneYearFromNow = startDT.dateByAddingTimeInterval(oneYear)
-                let fiveDaysFromNow = startDT.dateByAddingTimeInterval(fiveDays)
-                
-                let recurringEnd = EKRecurrenceEnd.recurrenceEndWithEndDate(oneYearFromNow) as! EKRecurrenceEnd
-                
-                let recurringFive = EKRecurrenceEnd.recurrenceEndWithEndDate(fiveDaysFromNow) as! EKRecurrenceEnd
-                
-                
-                
-                switch (eventRepeat){  // 1 = daily, 2 = weekly, 3 = yearly   I made this to pass then change later in event method
-                case 1:
-                    let recur = EKRecurrenceRule(
-                        recurrenceWithFrequency:EKRecurrenceFrequencyDaily,
-                        interval:1,
-                        //daysOfTheWeek:[everySunday],
-                        daysOfTheWeek:nil,
-                        daysOfTheMonth:nil,
-                        //monthsOfTheYear:[january],
-                        monthsOfTheYear:nil,
-                        weeksOfTheYear:nil,
-                        daysOfTheYear:nil,
-                        setPositions: nil,
-                        //end: endRecurrence) // errors  TODO
-                        end: endRecurrence)
-                    
-                    event.addRecurrenceRule(recur)
-                    
-                    break;
-                    
-                    
-                    
-                case 2:
-                    println("p1491  in case 2? eventRepeat = \(eventRepeat)")
-                    
-                    let recur = EKRecurrenceRule(
-                        recurrenceWithFrequency:EKRecurrenceFrequencyWeekly,
-                        interval:1,
-                        end: recurringEnd)
-                    
-                    event.addRecurrenceRule(recur)
-                    
-                    break;
-                case 3:
-                    let recur = EKRecurrenceRule(
-                        recurrenceWithFrequency:EKRecurrenceFrequencyYearly,
-                        interval:1,
-                        //daysOfTheWeek:[everySunday],
-                        daysOfTheWeek:nil,
-                        daysOfTheMonth:nil,
-                        //monthsOfTheYear:[january],
-                        monthsOfTheYear:nil,
-                        weeksOfTheYear:nil,
-                        daysOfTheYear:nil,
-                        setPositions: nil,
-                        end:nil)
-                    
-                    event.addRecurrenceRule(recur)
-                    
-                    break;
-                default:   println("p1511 no eventRepeat word matched")
-                break;
-                }
-                
-                
-                /*
-                
-                let recur = EKRecurrenceRule(
-                
-                
-                
-                //recurrenceWithFrequency:EKRecurrenceFrequencyDaily,       // every daily
-                recurrenceWithFrequency:returnValue,        // every week
-                //recurrenceWithFrequency:EKRecurrenceFrequencyYearly,      // every year
-                
-                interval:1,                     // no,  2 = every *two* years
-                //daysOfTheWeek:[everySunday],
-                daysOfTheWeek:nil,
-                
-                daysOfTheMonth:nil,
-                //monthsOfTheYear:[january],
-                monthsOfTheYear:nil,
-                weeksOfTheYear:nil,
-                daysOfTheYear:nil,
-                setPositions: nil,
-                end:nil)
-                
-                */
-                
-                //event.addRecurrenceRule(recur)       //TODO commented to turn off this until fully coded
-                
-                
-                //event.calendar = calendarName
-                
-                
-                
-                
-                println("p862 output: \(output)")
-                println("p863 startDT: \(startDT)")
-                println("p864 endDT: \(endDT)")
-                println("p865 from func endDate: \(endDate)")
-                
-                event.title = output
-                event.startDate = startDT
-                event.endDate = endDate
-                event.notes = outputNote
-                
-                
-                // TODO ADD eventDuration field to screen
-                
-                var error: NSError?
-                let result = store.saveEvent(event, span: EKSpanThisEvent, error: &error)
-                
-                if result == false {
-                    if let theError = error {
-                        println("An error occured \(theError)")
-                    }
-                }   // if result
-                
-            }
-            
-            
-            
-        }
-        
-    } // func insertEvent
-*/
-    
+   
     //#### end my functions #################################
     
 }   // class dictate code

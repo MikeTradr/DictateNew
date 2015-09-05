@@ -45,6 +45,10 @@
 		D38C9C581B821DA3009CFC7C /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D38C9C551B821DA3009CFC7C /* Fabric.framework */; };
 		D38C9C591B821DA3009CFC7C /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D38C9C561B821DA3009CFC7C /* Crashlytics.framework */; };
 		D38C9C5A1B821DA3009CFC7C /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D38C9C561B821DA3009CFC7C /* Crashlytics.framework */; };
+		D392FAD41B9B1BA800678B18 /* SettingsFriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D392FAD31B9B1BA800678B18 /* SettingsFriendsTableViewController.swift */; };
+		D392FAD61B9B1C7E00678B18 /* SettingsInstructionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D392FAD51B9B1C7E00678B18 /* SettingsInstructionsTableViewController.swift */; };
+		D392FAD81B9B1D3600678B18 /* SettingsKeywordsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D392FAD71B9B1D3600678B18 /* SettingsKeywordsTableViewController.swift */; };
+		D392FADA1B9B1DFD00678B18 /* SettingsGeneralTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D392FAD91B9B1DFD00678B18 /* SettingsGeneralTableViewController.swift */; };
 		D3A0F9FC1B69F0BB00F1FEDA /* EventCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A0F9FB1B69F0BB00F1FEDA /* EventCode.swift */; };
 		D3A0F9FD1B69F0BB00F1FEDA /* EventCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A0F9FB1B69F0BB00F1FEDA /* EventCode.swift */; };
 		D3B703801B935AC200FA1DF0 /* SettingsReminderTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B7037F1B935AC200FA1DF0 /* SettingsReminderTableViewController.swift */; };
@@ -188,6 +192,10 @@
 		D3795E791B8DF927009D3DB5 /* SettingsEventTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsEventTableViewController.swift; path = Views/SettingsEventTableViewController.swift; sourceTree = "<group>"; };
 		D38C9C551B821DA3009CFC7C /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		D38C9C561B821DA3009CFC7C /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		D392FAD31B9B1BA800678B18 /* SettingsFriendsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsFriendsTableViewController.swift; path = Views/SettingsFriendsTableViewController.swift; sourceTree = "<group>"; };
+		D392FAD51B9B1C7E00678B18 /* SettingsInstructionsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsInstructionsTableViewController.swift; path = Views/SettingsInstructionsTableViewController.swift; sourceTree = "<group>"; };
+		D392FAD71B9B1D3600678B18 /* SettingsKeywordsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsKeywordsTableViewController.swift; path = Views/SettingsKeywordsTableViewController.swift; sourceTree = "<group>"; };
+		D392FAD91B9B1DFD00678B18 /* SettingsGeneralTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsGeneralTableViewController.swift; path = Views/SettingsGeneralTableViewController.swift; sourceTree = "<group>"; };
 		D3A0F9FB1B69F0BB00F1FEDA /* EventCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCode.swift; sourceTree = "<group>"; };
 		D3B07A231B731C8800B9C2A9 /* Dictate.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Dictate.entitlements; sourceTree = "<group>"; };
 		D3B07A241B731D2A00B9C2A9 /* Dictate WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Dictate WatchKit Extension.entitlements"; sourceTree = "<group>"; };
@@ -459,6 +467,10 @@
 				D33C13BE1B8C47E800470F8F /* SettingsCalendarTableViewController.swift */,
 				D3795E791B8DF927009D3DB5 /* SettingsEventTableViewController.swift */,
 				D3B7037F1B935AC200FA1DF0 /* SettingsReminderTableViewController.swift */,
+				D392FAD31B9B1BA800678B18 /* SettingsFriendsTableViewController.swift */,
+				D392FAD51B9B1C7E00678B18 /* SettingsInstructionsTableViewController.swift */,
+				D392FAD71B9B1D3600678B18 /* SettingsKeywordsTableViewController.swift */,
+				D392FAD91B9B1DFD00678B18 /* SettingsGeneralTableViewController.swift */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -916,11 +928,14 @@
 			files = (
 				ECB862021B77DD4100503C50 /* TodayViewController.m in Sources */,
 				ECF240461B9AFBF3002BFBAE /* ReminderEditorViewController.m in Sources */,
+				D392FAD61B9B1C7E00678B18 /* SettingsInstructionsTableViewController.swift in Sources */,
 				ECB8622E1B77DEBD00503C50 /* JTDateHelper.m in Sources */,
 				ECB8622D1B77DEBD00503C50 /* JTCalendarSettings.m in Sources */,
 				ECF818601B83B7E10087ECAD /* CheckBoxLayer.swift in Sources */,
 				D3B703801B935AC200FA1DF0 /* SettingsReminderTableViewController.swift in Sources */,
+				D392FAD81B9B1D3600678B18 /* SettingsKeywordsTableViewController.swift in Sources */,
 				D3188A871B6E9BF900323DC0 /* vcTest1.swift in Sources */,
+				D392FAD41B9B1BA800678B18 /* SettingsFriendsTableViewController.swift in Sources */,
 				D3188A7F1B6E9B7F00323DC0 /* LoginViewController.swift in Sources */,
 				D3B703821B94E90800FA1DF0 /* ReminderListTableViewController.swift in Sources */,
 				ECB862371B77DEBD00503C50 /* JTVerticalCalendarView.m in Sources */,
@@ -948,6 +963,7 @@
 				D32350621B69828900939F03 /* ReminderCode.swift in Sources */,
 				ECB862381B77DEBD00503C50 /* NSDate+CALAddition.m in Sources */,
 				ECB8622F1B77DEBD00503C50 /* JTCalendarDelegateManager.m in Sources */,
+				D392FADA1B9B1DFD00678B18 /* SettingsGeneralTableViewController.swift in Sources */,
 				ECB861E11B77DBB700503C50 /* General.swift in Sources */,
 				D3188A771B6E9B2600323DC0 /* TableCell.swift in Sources */,
 				ECF240481B9C947E002BFBAE /* DateTableViewCell.swift in Sources */,

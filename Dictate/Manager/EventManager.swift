@@ -124,12 +124,12 @@ class EventManager: NSObject {
 
                 
                 calendarName = reminderList
-                break
+                break;
             }
             
             if calendar.title == name {
                 destCalendar = calendar as? EKCalendar
-                break
+                break;
             }
         }
         
@@ -150,22 +150,6 @@ class EventManager: NSObject {
             }
         }
         
-   /*
-        for calendar in calendars {
-            //var calendarTitle:String! = calendar.title
-            
-            // var calendarTitle = calendar.title
-            
-            println("p110 calendar.title: \(calendar.title)")
-            println("p112 _________name: \(name)")
-            
-            if calendar.title == name {
-                destCalendar = calendar as? EKCalendar
-                break
-            }
-        }
-  */
-        //println("p94 calendars: \(calendars)")
         
         println("p123 destCalendar: \(destCalendar)")
         
@@ -271,9 +255,9 @@ class EventManager: NSObject {
         
         for calendar in calendars {
             var reminderTitle:String! = calendar.title
-            println("p229 reminderTitle: \(reminderTitle)")
+            //println("p229 reminderTitle: \(reminderTitle)")
             var length = count(reminderTitle)
-            println("p231 length: \(length)")
+            //println("p231 length: \(length)")
             
             reminderArray.append(reminderTitle)
         }

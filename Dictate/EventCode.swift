@@ -224,11 +224,11 @@ class EventCode: NSObject {
                 
                 
                 
-                switch (eventRepeat){  // 1 = daily, 2 = weekly, 3 = yearly   I made this to pass then change later in event method
+                switch (eventRepeat){  // 1 = daily, 2 = weekly, 3 = yearly, 4 = monthly   I made this to pass then change later in event method
                 case 1:
                     let recur = EKRecurrenceRule(
                         recurrenceWithFrequency:EKRecurrenceFrequencyDaily,
-                        interval:1,
+                        interval:3,                     // test 3 days
                         //daysOfTheWeek:[everySunday],
                         daysOfTheWeek:nil,
                         daysOfTheMonth:nil,
@@ -257,6 +257,7 @@ class EventCode: NSObject {
                     event.addRecurrenceRule(recur)
                     
                     break;
+                    
                 case 3:
                     let recur = EKRecurrenceRule(
                         recurrenceWithFrequency:EKRecurrenceFrequencyYearly,
@@ -274,43 +275,31 @@ class EventCode: NSObject {
                     event.addRecurrenceRule(recur)
                     
                     break;
+                    
+                case 4:
+                    let recur = EKRecurrenceRule(
+                        recurrenceWithFrequency:EKRecurrenceFrequencyMonthly,
+                        interval:1,
+                        //daysOfTheWeek:[everySunday],
+                        daysOfTheWeek:nil,
+                        daysOfTheMonth:nil,
+                        //monthsOfTheYear:[january],
+                        monthsOfTheYear:nil,
+                        weeksOfTheYear:nil,
+                        daysOfTheYear:nil,
+                        setPositions: nil,
+                        end:nil)
+                    
+                    event.addRecurrenceRule(recur)
+                    
+                    break;
+                    
                 default:   println("p1511 no eventRepeat word matched")
                 break;
                 }
                 
-                
-                /*
-                
-                let recur = EKRecurrenceRule(
-                
-                
-                
-                //recurrenceWithFrequency:EKRecurrenceFrequencyDaily,       // every daily
-                recurrenceWithFrequency:returnValue,        // every week
-                //recurrenceWithFrequency:EKRecurrenceFrequencyYearly,      // every year
-                
-                interval:1,                     // no,  2 = every *two* years
-                //daysOfTheWeek:[everySunday],
-                daysOfTheWeek:nil,
-                
-                daysOfTheMonth:nil,
-                //monthsOfTheYear:[january],
-                monthsOfTheYear:nil,
-                weeksOfTheYear:nil,
-                daysOfTheYear:nil,
-                setPositions: nil,
-                end:nil)
-                
-                */
-                
-                //event.addRecurrenceRule(recur)       //TODO commented to turn off this until fully coded
-                
-                
-                //event.calendar = calendarName
-                
-                
-                
-                
+
+ 
                 println("p862 output: \(output)")
                 println("p863 startDT: \(startDT)")
                 println("p864 endDT: \(endDT)")
@@ -342,32 +331,5 @@ class EventCode: NSObject {
         }
         
     }
- 
-/*
-    func createCalendarArray() {        //called from AppDelegate on startup
-        let calender = EKCalendar(forEntityType: EKEntityTypeEvent , eventStore: self.eventStore)
-        
-        var error:NSError?
-        calender.source = eventStore.defaultCalendarForNewEvents.source
-        println("p351 Error: \(error)")
-        
-        let calendars = self.eventStore.calendarsForEntityType(EKEntityTypeEvent)
-        
-        var calendarArray:[String] = []
-        
-        for calendar in calendars {
-            var calendarTitle:String! = calendar.title
-            println("p359 calendarTitle: \(calendarTitle)")
-            
-            calendarArray.append(calendarTitle)
-        }
-        println("p363 calendarArray: \(calendarArray)")
-        println("p363 calendarArray.count: \(calendarArray.count)")
-        
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setObject(calendarArray, forKey: "calendarArray")            //sets calendarArray
-        
-    }   //func CreateCalendarArray
-*/
     
 }

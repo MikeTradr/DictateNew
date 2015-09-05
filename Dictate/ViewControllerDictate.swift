@@ -81,9 +81,8 @@ let str29:String = "Reminder Wash the car tonight"
 
 let str30:String = "Reminder go to the bank list today"    // test to see if added to list "today"
 
-let str31:String = "todo today, call mom, meeting at 10 AM, play tennis, pick up kids"
-
-let str32:String = "list shower work workout dinner sleep"
+let str31:String = "todo today, call mom, meeting at 10 AM, play tennis, pick up kids" // comma deliminaed list, first phrase or word before comma is title
+let str32:String = "list shower work workout dinner sleep"  //raw list one word speed list, ""untitled list"
 
 let str33:String = "Reminder go to the store list to do tomorrow"    // test to see if new list "to do downtown" is created
 
@@ -91,15 +90,17 @@ let str34:String = "Reminder go play tennis list test"    // test to see if new 
 
 let str35a:String = "Reminder go to the store list new unmatched title"    // test to see if new list "to do downtown" is created
 
-
 let str35:String = "Reminder go to the store list new list title"    // test to see if new list "to do downtown" is created
 
+let str36:String = "Reminder Mike Call Mom Today repeat monthly for 3 days" //TODO MAKE THIS WORK MIKE
+
+let str37:String = "Appointment today 3:00 pm repeat monthly calendar Mike Call Mom"
 
 
 
 
-// ---- chagne strigngs here for testing ---
-var str:String = str29
+// ---- change strings here for testing, shows on the dictated field---
+var str:String = str37
 
 //var strRaw:String = str
 

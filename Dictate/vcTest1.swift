@@ -335,26 +335,63 @@ class vcTest1: UIViewController {
             resultEndDate.text = ""
             resultStartDate.text = ""
             let stringOutput = ", ".join(wordArrTrimmed)
-            resultDay.text = stringOutput
             
-            labelDay.text = "Items"
+        // ____ Data Used _____________________________________
+            labelDay.text       = "Title"   // default Day
+            labelTime.text      = "Items"   // default Time
+
+            resultDay.text      = reminderTitle
+            resultTime.text     = stringOutput
+            resultMultiLine1.text = stringOutput
             
-            labelCal.text   = "List"    // default Cal.
-            labelTitle.text = "Items"   // default Title.
+            labelPhone.text = ""
+            resultStartDate.text = ""
+            labelEndDate.text = ""
+            labelTitle.text = ""
+            labelCal.text = ""
+            labelAlert.text = ""
+            labelRepeat.text = ""
+
+        // ____ Labels _____________________________________
+            if labelDay.text == "" { labelDay.hidden = true } else { labelDay.hidden = false }
+            if labelTime.text == "" { labelTime.hidden = true } else { labelTime.hidden = false }
+            if labelTitle.text == "" { labelTitle.hidden = true } else { labelTitle.hidden = false }
+            if labelPhone.text == "" { labelPhone.hidden = true } else { labelPhone.hidden = false }
+            if resultStartDate.text == "" {
+                labelStartDate.hidden = true
+                resultStartDate.hidden  = true
+            } else {
+                labelStartDate.hidden = false
+                resultStartDate.hidden  = false
+            }
+            if labelEndDate.text == "" { labelEndDate.hidden = true } else { labelEndDate.hidden = false }
+            if labelAlert.text == "" { labelAlert.hidden = true } else { labelAlert.hidden = false }
+            if labelRepeat.text == "" { labelRepeat.hidden = true } else { labelRepeat.hidden = false }
+       /*
+            labelCal.hidden         = true
+            labelTitle.hidden       = true
+            labelPhone.hidden       = true
+            labelStartDate.hidden   = true
+            labelEndDate.hidden     = true
+            labelRepeat.hidden      = true
+            labelAlert.hidden       = true
+*/
             
-            //labelDay.hidden = true
-            labelTime.hidden = true
-            labelPhone.hidden = true
-            labelStartDate.hidden = true
-            labelEndDate.hidden = true
-            labelRepeat.hidden = true
+        // ____ Results _____________________________________
+            //resultDay.hidden      = true
+            //resultTime.hidden     = true
+            resultCalendar.hidden   = true
+            resultTitle.hidden      = true
+            resultPhone.hidden      = true
+           // resultStartDate.hidden  = true
+            resultEndDate.hidden    = true
+            resultRepeat.hidden     = true
+            resultAlert.hidden      = true
             
-            //resultDay.hidden = true
-            resultTime.hidden = true
-            resultPhone.hidden = true
-            resultStartDate.hidden = true
-            resultEndDate.hidden = true
-            resultRepeat.hidden = true
+            if alert != 0.0 {
+                labelAlert.hidden   = false
+                resultAlert.hidden  = false
+            }
 
             break;
             
@@ -511,7 +548,7 @@ class vcTest1: UIViewController {
             let title:String = output
             
             var calendarName = ""
-            var reminderCreatedFlag = true
+            var reminderCreatedFlag = false
     
             var reminderArray       = defaults.objectForKey("reminderArray") as! [String] //array of the items
             var reminderList:String     = defaults.stringForKey("reminderList")!
@@ -530,9 +567,7 @@ class vcTest1: UIViewController {
                 
                 EventManager.sharedInstance.addReminder(calendarName, items: outputArray)
                 
-                
             }
-            
             
             
             for list in reminderArray {
@@ -543,9 +578,8 @@ class vcTest1: UIViewController {
                 
                 var lengthList = count(list)
                 var lengthReminderList = count(reminderList)
-                println("p537 lengthList________: \(lengthList)")
-                println("p537 lengthReminderList: \(lengthReminderList)")
-
+                //println("p537 lengthList________: \(lengthList)")
+                //println("p537 lengthReminderList: \(lengthReminderList)")
 
                 if (reminderList == list) {
                     println("p528 we in condition reminderList: \(reminderList)")

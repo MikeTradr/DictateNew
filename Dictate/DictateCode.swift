@@ -24,6 +24,7 @@ class DictateCode: NSObject {
     
     var startDT:NSDate          = NSDate(dateString:"2014-12-12")
     var endDT:NSDate            = NSDate(dateString:"2014-12-12")
+    var reminderAlarm:NSDate    = NSDate(dateString:"2014-12-12")
     
     var outputNote:String       = ""
     var output:String           = ""
@@ -880,7 +881,7 @@ class DictateCode: NSObject {
                 let subStringPM = (word as NSString).containsString("pm")   // see PM then process time at word[i-1]
                 
                 if(subStringPM && (count(word) == 2)){
-                    println("217: pm time found at item \(i)")
+                    println("p217: pm time found at item \(i)")
                     // time = "\(wordArr[i-1]) \(wordArr[i])"
                     let timeNumber = wordArr[i-1]
                     
@@ -1385,12 +1386,16 @@ class DictateCode: NSObject {
                     
                     wordArrTrimmed = wordArrTrimmed.filter() { $0 != wordArr[i] }
                     
-                    println("p1435 wordArrTrimmed: \(wordArrTrimmed)")
-
-                    let end = (i-1)
+                    println("p138 wordArrTrimmed: \(wordArrTrimmed)")
+                    println("p1388 wordArrTrimmed.count: \(wordArrTrimmed.count)")
+                    
+                    var end = (i-1)
                     println("p1390 i: \(i)")
                     println("p1390 end: \(end)")
-
+                    
+                    if end >= wordArrTrimmed.count {
+                        end = wordArrTrimmed.count
+                    }
                     
                     let slice = wordArrTrimmed[0..<end]
                     
@@ -1994,11 +1999,25 @@ class DictateCode: NSObject {
             println("p1554 outputNote: \(outputNote)")
             println("p1556 actionType: \(actionType)")
             
-            if (actionType == "") {
+            if (actionType == "") {     // if no actionType we assume it is Event for calendar event.
                 actionType = "Event"
                 println("p1561 actionType: \(actionType)")
                 mainType = "Event"
             }
+                
+        // _____add alarm if time deteced, and type is Reminder
+                
+            if (actionType == "Reminder" ) && (startDT != NSDate(dateString:"2014-12-12")) {
+                reminderAlarm = startDT
+                println("p2013 reminderAlarm: \(reminderAlarm)")
+                defaults.setObject(reminderAlarm, forKey: "reminderAlarm")  // set for Reminder Alarm
+            } else {
+                reminderAlarm = NSDate(dateString:"2014-12-12") // basically a blank date
+                println("p2018 reminderAlarm: \(reminderAlarm)")
+                defaults.setObject(reminderAlarm, forKey: "reminderAlarm")  // set for Reminder Alarm
+                }
+                
+                
                 
             //Save vales to NSUserDefaults...
             
@@ -2024,6 +2043,10 @@ class DictateCode: NSObject {
             defaults.setObject(eventDuration, forKey: "eventDuration")
             
             defaults.setObject(eventAlert, forKey: "eventAlert")
+                
+
+                
+                
             
             // TODO  not used yet we see!
             let eventRepeat = eventRepeatInterval

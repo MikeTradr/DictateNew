@@ -191,9 +191,8 @@ class vcTest1: UIViewController {
         var reminderArray = defaults.objectForKey("reminderArray") as! [String] //array of the items
         
         var reminderList:String   = defaults.stringForKey("reminderList")!
+        var reminderAlarm   = defaults.objectForKey("reminderAlarm")! as! NSDate
 
-        
-        
 
         
         println("p111Main day: \(day)")
@@ -215,10 +214,10 @@ class vcTest1: UIViewController {
         println("p111Main wordArrTrimmed: \(wordArrTrimmed)")
         println("p111Main reminderList: \(reminderList)")
         println("p111Main reminderArray: \(reminderArray)")
-
+        println("p111Main reminderAlarm: \(reminderAlarm)")
 
         
-        println("p119Main Representation: \(NSUserDefaults.standardUserDefaults().dictionaryRepresentation())")
+        println("p112Main Representation: \(NSUserDefaults.standardUserDefaults().dictionaryRepresentation())")
         
         // println("p121Main keys.array: \(NSUserDefaults.standardUserDefaults().dictionaryRepresentation().keys.array)")
         
@@ -297,7 +296,7 @@ class vcTest1: UIViewController {
             resultEndDate.text = ""
             
             labelCal.text   = "List"    // default Cal.
-            labelTitle.text = "Items"   // default Title.
+            labelTitle.text = "Items"   // default Title
             
             labelDay.hidden = true
             labelTime.hidden = true
@@ -305,6 +304,7 @@ class vcTest1: UIViewController {
             labelStartDate.hidden = true
             labelEndDate.hidden = true
             labelRepeat.hidden = true
+            labelAlert.hidden = true
             
             resultDay.hidden = true
             resultTime.hidden = true
@@ -312,6 +312,16 @@ class vcTest1: UIViewController {
             resultStartDate.hidden = true
             resultEndDate.hidden = true
             resultRepeat.hidden = true
+            resultAlert.hidden = true
+            
+            println("p317 fullDT: \(fullDT)")
+            
+            if fullDT != "12-12-2014 12:00 AM" {        // means a blank date
+                labelAlert.hidden = false
+                resultAlert.hidden = false
+                labelAlert.text = "Alarm"               // default Alert
+                resultAlert.text = fullDT
+            }
      
             break;
             
@@ -565,7 +575,7 @@ class vcTest1: UIViewController {
                 println("p550 calendarName: \(calendarName)")
                 println("p551 outputArray: \(outputArray)")
                 
-                EventManager.sharedInstance.addReminder(calendarName, items: outputArray)
+                ReminderManager.sharedInstance.addReminder(calendarName, items: outputArray)
                 
             }
             
@@ -595,7 +605,7 @@ class vcTest1: UIViewController {
                     println("p550 calendarName: \(calendarName)")
                     println("p551 outputArray: \(outputArray)")
                     
-                    EventManager.sharedInstance.addReminder(calendarName, items: outputArray)
+                    ReminderManager.sharedInstance.addReminder(calendarName, items: outputArray)
                     
                     resultMessage.text = "Reminder created on your \(calendarName.capitalizedString) list"
                     reminderCreatedFlag = true
@@ -612,7 +622,7 @@ class vcTest1: UIViewController {
                 output      = defaults.stringForKey("output")!
                 var outputArray:[String] = Array(arrayLiteral: output)
                 
-                EventManager.sharedInstance.createNewReminderList(calendarName, items: outputArray)
+                ReminderManager.sharedInstance.createNewReminderList(calendarName, items: outputArray)
                 resultMessage.text = "Reminder created on your New \(calendarName.capitalizedString) list"
             }
 
@@ -633,7 +643,7 @@ class vcTest1: UIViewController {
             var calendarName    = defaults.stringForKey("reminderList") //Sets Reminder Title
             var wordArrTrimmed  = defaults.objectForKey("wordArrTrimmed") as! [String] //array of the items
 
-            EventManager.sharedInstance.createNewReminderList(calendarName!, items: wordArrTrimmed)
+            ReminderManager.sharedInstance.createNewReminderList(calendarName!, items: wordArrTrimmed)
             
             resultMessage.text = "Your List \(calendarName!) has been created"
             
@@ -648,7 +658,7 @@ class vcTest1: UIViewController {
             output      = defaults.stringForKey("output")!
             var outputArray:[String] = Array(arrayLiteral: output)
             
-            EventManager.sharedInstance.createNewReminderList(calendarName!, items: outputArray)
+            ReminderManager.sharedInstance.createNewReminderList(calendarName!, items: outputArray)
             
             resultMessage.text = "Your New List \(calendarName!) has been created"
             
@@ -660,7 +670,7 @@ class vcTest1: UIViewController {
             var calendarName    = defaults.stringForKey("calendarName") //Sets Reminder Title
             var wordArrTrimmed  = defaults.objectForKey("wordArrTrimmed") as! [String] //array of the items
             
-            EventManager.sharedInstance.createNewReminderList(calendarName!, items: wordArrTrimmed)
+            ReminderManager.sharedInstance.createNewReminderList(calendarName!, items: wordArrTrimmed)
             
             resultMessage.text = "Your List \(calendarName!) has been created"
   

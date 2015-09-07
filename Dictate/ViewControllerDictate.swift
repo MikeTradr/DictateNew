@@ -96,11 +96,16 @@ let str36:String = "Reminder Mike Call Mom Today repeat monthly for 3 days" //TO
 
 let str37:String = "Appointment today 3:00 pm repeat monthly calendar Mike Call Mom"
 
+let str38:String = "Reminder mow the grass today 1 pm list today"  // bombs
+
+
+
+
 
 
 
 // ---- change strings here for testing, shows on the dictated field---
-var str:String = str37
+var str:String = str33
 
 //var strRaw:String = str
 

@@ -133,10 +133,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         //make Reminder's List Array
-        EventManager.sharedInstance.createReminderArray()
+        ReminderManager.sharedInstance.createReminderArray()
         
         //make Calendar's List Array
-        EventManager.sharedInstance.createCalendarArray()
+        ReminderManager.sharedInstance.createCalendarArray()
 
         
         

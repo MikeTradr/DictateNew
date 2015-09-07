@@ -10,13 +10,13 @@ import UIKit
 import EventKit
 
 class EventCode: NSObject {
-    class var sharedInstance : EventManager {
+    class var sharedInstance : ReminderManager {
         struct Static {
             static var onceToken : dispatch_once_t = 0
-            static var instance : EventManager? = nil
+            static var instance : ReminderManager? = nil
         }
         dispatch_once(&Static.onceToken) {
-            Static.instance = EventManager()
+            Static.instance = ReminderManager()
         }
         return Static.instance!
     }

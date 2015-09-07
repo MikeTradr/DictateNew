@@ -1,5 +1,6 @@
 //
 //  EventMnager.swift
+// Rmaned ReminderManager 090515 by Mike
 //  Dictate
 //
 //  Created by Anil Varghese on 19/08/15.
@@ -14,17 +15,18 @@ import EventKit
 // for this error in line 81              self.presentViewController(alert, animated: true, completion: nil)
 
 
-class EventManager: NSObject {
-    class var sharedInstance : EventManager {
+class ReminderManager: NSObject {
+    class var sharedInstance : ReminderManager {
         struct Static {
             static var onceToken : dispatch_once_t = 0
-            static var instance : EventManager? = nil
+            static var instance : ReminderManager? = nil
         }
         dispatch_once(&Static.onceToken) {
-            Static.instance = EventManager()
+            Static.instance = ReminderManager()
         }
         return Static.instance!
     }
+    
     
     let eventStore = EKEventStore()
     let defaults = NSUserDefaults.standardUserDefaults()
@@ -100,6 +102,23 @@ class EventManager: NSObject {
 // ____ addReminder func ____________________________________
     func addReminder(name:String, items:[String]){
         println("p90 in addReminder name: \(name)")
+        
+        let defaults = NSUserDefaults.standardUserDefaults()
+        
+        let mainType    = defaults.stringForKey("mainType")
+        let actionType  = defaults.stringForKey("actionType")
+        
+        let day         = defaults.stringForKey("day")
+        let phone       = defaults.stringForKey("phone")
+        
+        let startDT     = defaults.objectForKey("startDT")! as! NSDate
+        let endDT       = defaults.objectForKey("endDT")! as! NSDate
+        let output      = defaults.stringForKey("output")
+        let outputNote  = defaults.stringForKey("outputNote")
+        let duration    = defaults.stringForKey("eventDuration")
+        let calendarName    = defaults.stringForKey("calendarName")
+        let alert       = defaults.objectForKey("eventAlert") as! Double
+        let repeat      = defaults.stringForKey("eventRepeat")
     
         var destCalendar:EKCalendar?
         let calendars = self.eventStore.calendarsForEntityType(EKEntityTypeReminder)
@@ -150,12 +169,34 @@ class EventManager: NSObject {
             }
         }
         
+        let reminder = EKReminder(eventStore: self.eventStore)
+        
+        //____ add Reminder Alarm ____________________
+        var alarm = EKAlarm()
+        
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss +0000 "
+        
+        let noDate = dateFormatter.dateFromString("2014-12-12 00:00:00 +0000")  //need this to match set no date from DictateCode
+        
+        println("p167 Reminder: noDate: \(noDate)")
+        
+        if (startDT != noDate) {        // if Date != no date string, set alarm for Reminder
+            alarm = EKAlarm(absoluteDate: startDT)
+        }
+        
+        reminder.addAlarm(alarm)
+        
+        //____ end add Reminder Alarm ____________________
+
+
+        
         
         println("p123 destCalendar: \(destCalendar)")
         
         if destCalendar != nil{
             for item in items{
-                let reminder = EKReminder(eventStore: self.eventStore)
+               // let reminder = EKReminder(eventStore: self.eventStore)
                 reminder.title = item
                 println("p126 reminder.title: \(reminder.title)")
                 println("p126 calendar: \(destCalendar)")
@@ -164,12 +205,13 @@ class EventManager: NSObject {
                 println("p130 reminder.calendar: \(reminder.calendar)")
                 println("p130 reminder: \(reminder)")
                 
+               
                 var error:NSError?
                 self.eventStore.saveReminder(reminder, commit: true, error: &error)
                 println("p97 Error: \(error)")
                 
             }   //for item...
-        } else {
+        } else {    //Save tp default calendar as no name matched.
             
             println("p145 we here??? destCalendar: \(destCalendar)")
 
@@ -187,7 +229,7 @@ class EventManager: NSObject {
             reminder.calendar = eventStore.defaultCalendarForNewReminders()
             self.eventStore.saveReminder(reminder, commit: true, error: &error)
 
-        }// if dest...
+        }   // if dest...
     }
     
     

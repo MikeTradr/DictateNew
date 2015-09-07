@@ -157,6 +157,8 @@ class ReminderCode: NSObject {
         
         reminder.title = reminderTitle
         
+        //____ add Reminder Alarm ____________________
+
         println("p161 Reminder: startDT: \(startDT)")
         
         var alarm = EKAlarm()
@@ -168,14 +170,14 @@ class ReminderCode: NSObject {
         
         println("p167 Reminder: noDate: \(noDate)")
         
-        if (startDT != noDate) {        // if Date != no date string, set alarme for Reminder
+        if (startDT != noDate) {        // if Date != no date string, set alarm for Reminder
             alarm = EKAlarm(absoluteDate: startDT)
         }
         
-        //let date = startDT
-        //alarm = EKAlarm(absoluteDate: startDT)
-        
         reminder.addAlarm(alarm)
+        
+        //____ end add Reminder Alarm ____________________
+
         
         reminder.calendar = calendarDatabase.defaultCalendarForNewReminders()   // WORKS to Default
         

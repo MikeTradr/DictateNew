@@ -1752,6 +1752,32 @@
             </objects>
             <point key="canvasLocation" x="1721" y="600"/>
         </scene>
+        <!--Calendar Selection View Controller-->
+        <scene sceneID="Pgw-ak-cQZ">
+            <objects>
+                <tableViewController storyboardIdentifier="CalendarSelectionViewController" id="i4q-i2-lYB" customClass="CalendarSelectionViewController" customModule="Dictate" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="TTF-op-biL">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="b0U-Hm-5LQ">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="b0U-Hm-5LQ" id="iJH-sl-Xbx">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="i4q-i2-lYB" id="enK-pH-B6u"/>
+                            <outlet property="delegate" destination="i4q-i2-lYB" id="wok-SP-eI9"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lzC-S5-pqB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2286" y="844"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="muo-Ya-V8L">
             <objects>

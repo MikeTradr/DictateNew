@@ -412,6 +412,13 @@ NSUInteger DeviceSystemMajorVersion()
         [self displayInlineDatePickerForRowAtIndexPath:indexPath];
         
     }
+    else if (indexPath.section == 2){
+        // Calendar list
+        CalendarSelectionViewController *selectionController = [self.storyboard instantiateViewControllerWithIdentifier:@"CalendarSelectionViewController"];
+        NSArray *calendars = [ReminderManager.sharedInstance.eventStore calendarsForEntityType:EKEntityTypeReminder];
+        selectionController.calendarList = calendars;
+        [self.navigationController pushViewController:selectionController animated:true];
+    }
     else
     {
         [tableView deselectRowAtIndexPath:indexPath animated:YES];

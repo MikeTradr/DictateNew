@@ -119,7 +119,6 @@
 		ECB862381B77DEBD00503C50 /* NSDate+CALAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB8622A1B77DEBD00503C50 /* NSDate+CALAddition.m */; };
 		ECF240461B9AFBF3002BFBAE /* ReminderEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECF240451B9AFBF3002BFBAE /* ReminderEditorViewController.m */; };
 		ECF240481B9C947E002BFBAE /* DateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF240471B9C947E002BFBAE /* DateTableViewCell.swift */; };
-		ECF2404B1B9DFF10002BFBAE /* RTCheckListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECF2404A1B9DFF10002BFBAE /* RTCheckListViewController.m */; };
 		ECF2404D1B9DFF7F002BFBAE /* CalendarSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF2404C1B9DFF7F002BFBAE /* CalendarSelectionViewController.swift */; };
 		ECF8185F1B83B7E10087ECAD /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF8185D1B83B7E10087ECAD /* CheckBox.swift */; };
 		ECF818601B83B7E10087ECAD /* CheckBoxLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF8185E1B83B7E10087ECAD /* CheckBoxLayer.swift */; };
@@ -295,8 +294,6 @@
 		ECF240441B9AFBF3002BFBAE /* ReminderEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReminderEditorViewController.h; sourceTree = "<group>"; };
 		ECF240451B9AFBF3002BFBAE /* ReminderEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReminderEditorViewController.m; sourceTree = "<group>"; };
 		ECF240471B9C947E002BFBAE /* DateTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DateTableViewCell.swift; path = Views/DateTableViewCell.swift; sourceTree = "<group>"; };
-		ECF240491B9DFF10002BFBAE /* RTCheckListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCheckListViewController.h; sourceTree = "<group>"; };
-		ECF2404A1B9DFF10002BFBAE /* RTCheckListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTCheckListViewController.m; sourceTree = "<group>"; };
 		ECF2404C1B9DFF7F002BFBAE /* CalendarSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarSelectionViewController.swift; sourceTree = "<group>"; };
 		ECF8185D1B83B7E10087ECAD /* CheckBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CheckBox.swift; path = Views/CheckBox.swift; sourceTree = "<group>"; };
 		ECF8185E1B83B7E10087ECAD /* CheckBoxLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CheckBoxLayer.swift; path = Views/CheckBoxLayer.swift; sourceTree = "<group>"; };
@@ -413,8 +410,6 @@
 				ECF240441B9AFBF3002BFBAE /* ReminderEditorViewController.h */,
 				ECF240451B9AFBF3002BFBAE /* ReminderEditorViewController.m */,
 				ECF2404C1B9DFF7F002BFBAE /* CalendarSelectionViewController.swift */,
-				ECF240491B9DFF10002BFBAE /* RTCheckListViewController.h */,
-				ECF2404A1B9DFF10002BFBAE /* RTCheckListViewController.m */,
 				ECB861FF1B77DD4000503C50 /* Dictate-Bridging-Header.h */,
 			);
 			name = Controllers;
@@ -972,7 +967,6 @@
 				D32350621B69828900939F03 /* ReminderCode.swift in Sources */,
 				ECB862381B77DEBD00503C50 /* NSDate+CALAddition.m in Sources */,
 				ECB8622F1B77DEBD00503C50 /* JTCalendarDelegateManager.m in Sources */,
-				ECF2404B1B9DFF10002BFBAE /* RTCheckListViewController.m in Sources */,
 				D392FADA1B9B1DFD00678B18 /* SettingsGeneralTableViewController.swift in Sources */,
 				ECB861E11B77DBB700503C50 /* General.swift in Sources */,
 				D3188A771B6E9B2600323DC0 /* TableCell.swift in Sources */,

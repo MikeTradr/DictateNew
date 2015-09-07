@@ -35,15 +35,15 @@ class ToDoTableViewController: UITableViewController, UITableViewDelegate, UITab
     @IBOutlet weak var labelNumberListItems: UILabel!
     
     
-// TODO Anil get calendars from users, Add to array: All, Default, Last, +Array and make into array hard coded at prsent 7-17-15
- 
+    // TODO Anil get calendars from users, Add to array: All, Default, Last, +Array and make into array hard coded at prsent 7-17-15
+    
     @IBAction func buttonReminderListSelector(sender: AnyObject) {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewControllerWithIdentifier("ShowReminders") as! UIViewController
         self.presentViewController(vc, animated: true, completion: nil)
         
-
+        
         
     }
     
@@ -65,13 +65,13 @@ class ToDoTableViewController: UITableViewController, UITableViewDelegate, UITab
         
     }
     
-
+    
     
     override func viewWillAppear(animated: Bool) {
         EventManager.sharedInstance.fetchReminders({ (reminders) -> Void in
             self.reminders = reminders
             self.tableView.reloadData()
-   
+            
             println("p49 self.reminders: \(self.reminders)")
             println("p50 self.reminders.count: \(self.reminders.count)")
             
@@ -132,28 +132,28 @@ class ToDoTableViewController: UITableViewController, UITableViewDelegate, UITab
     }
     
     
-// TODO trying to add a popover menu for the reminders lists...
-//http://stackoverflow.com/questions/24635744/how-to-present-popover-properly-in-ios-8
+    // TODO trying to add a popover menu for the reminders lists...
+    //http://stackoverflow.com/questions/24635744/how-to-present-popover-properly-in-ios-8
     
     // another tutorial on popover.
     //http://gracefullycoded.com/display-a-popover-in-swift/
     
-/*
+    /*
     func addCategory() {
-        
-        var popoverContent = self.storyboard?.instantiateViewControllerWithIdentifier("NewCategory") as! UIViewController
-        var nav = UINavigationController(rootViewController: popoverContent)
-        nav.modalPresentationStyle = UIModalPresentationStyle.Popover
-        var popover = nav.popoverPresentationController
-        popoverContent.preferredContentSize = CGSizeMake(500,600)
-        popover.delegate = self
-        popover.sourceView = self.view
-        popover.sourceRect = CGRectMake(100,100,0,0)
-        
-        self.presentViewController(nav, animated: true, completion: nil)
-        
+    
+    var popoverContent = self.storyboard?.instantiateViewControllerWithIdentifier("NewCategory") as! UIViewController
+    var nav = UINavigationController(rootViewController: popoverContent)
+    nav.modalPresentationStyle = UIModalPresentationStyle.Popover
+    var popover = nav.popoverPresentationController
+    popoverContent.preferredContentSize = CGSizeMake(500,600)
+    popover.delegate = self
+    popover.sourceView = self.view
+    popover.sourceRect = CGRectMake(100,100,0,0)
+    
+    self.presentViewController(nav, animated: true, completion: nil)
+    
     }
-*/
+    */
     
     
     
@@ -190,7 +190,6 @@ class ToDoTableViewController: UITableViewController, UITableViewDelegate, UITab
     }
     
     
-    
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         // Return NO if you do not want the specified item to be editable.
@@ -216,14 +215,26 @@ class ToDoTableViewController: UITableViewController, UITableViewDelegate, UITab
     
     @IBAction func checkBoxTapped(sender: CheckBox) {
         let indexPath = indexPathForView(sender)!
-    
+        
     }
-
+    
     func indexPathForView(view: UIView) -> NSIndexPath? {
         let viewOrigin = view.bounds.origin
         
         let viewLocation = tableView.convertPoint(viewOrigin, fromView: view)
         
         return tableView.indexPathForRowAtPoint(viewLocation)
-    }    
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "ReminderEditSegue"{
+            let indexPath = self.tableView.indexPathForSelectedRow()!
+            let selectedReminder =  reminders[indexPath.row];
+            let navController = segue.destinationViewController as! UINavigationController
+            let destController = navController.topViewController as! ReminderEditorViewController
+            destController.reminder = selectedReminder
+            
+        }
+    }
 }

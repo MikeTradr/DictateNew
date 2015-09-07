@@ -6,3 +6,4 @@
 #import "JTCalendar.h"
 #import "BFPaperCheckbox.h"
 #import "UIColor+BFPaperColors.h"
+#import "ReminderEditorViewController.h"

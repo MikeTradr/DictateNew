@@ -79,6 +79,8 @@ class CheckBoxLayer: CALayer {
         
         // Set the tint color of the outer box.
         CGContextSetStrokeColorWithColor(context, tintColor)
+       // CGContextSetStrokeColorWithColor(context, tintColor)
+
         
         // Draw the outer box.
         CGContextStrokeRect(context, checkBoxRect)

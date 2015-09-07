@@ -481,6 +481,8 @@ class MainIC: WKInterfaceController {
             self.myLabel.setTextColor(UIColor.yellowColor())
             self.myLabel.setText("Tap Mic to dictate or force touch")
             self.groupNavigation.setHidden(false)
+            self.buttonMicrophone.setHidden(false)  //hide mircophone
+
 
         }
         
@@ -560,6 +562,8 @@ class MainIC: WKInterfaceController {
 */
         self.myLabel.setTextColor(UIColor.yellowColor())
         self.myLabel.setText("Tap Mic to dictate or force touch")
+        self.buttonMicrophone.setHidden(false)  //hide mircophone
+
 
     }
     
@@ -568,6 +572,8 @@ class MainIC: WKInterfaceController {
         
         self.myLabel.setTextColor(UIColor.yellowColor())
         self.myLabel.setText("Tap Mic to dictate or force touch")
+        self.buttonMicrophone.setHidden(false)  //hide mircophone
+
         
         super.willActivate()
         

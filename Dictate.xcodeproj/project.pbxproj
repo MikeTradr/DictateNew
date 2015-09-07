@@ -1163,7 +1163,7 @@
 					"$(SDKROOT)/usr/lib/system",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c43031e2-04cc-4502-a05a-fabeb557bd3a";
+				PROVISIONING_PROFILE = "911c4914-c198-4ce5-abd2-6ccb80bac8fa";
 				SWIFT_OBJC_BRIDGING_HEADER = "Dictate/Dictate-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -1190,7 +1190,7 @@
 					"$(SDKROOT)/usr/lib/system",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c43031e2-04cc-4502-a05a-fabeb557bd3a";
+				PROVISIONING_PROFILE = "911c4914-c198-4ce5-abd2-6ccb80bac8fa";
 				SWIFT_OBJC_BRIDGING_HEADER = "Dictate/Dictate-Bridging-Header.h";
 			};
 			name = Release;
@@ -1244,7 +1244,7 @@
 				INFOPLIST_FILE = "Dictate WatchKit App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e1cc13e3-8d0a-4007-84e7-d674290353eb";
+				PROVISIONING_PROFILE = "f210f918-7cb7-4a4f-9728-2f4a8f5e57c0";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
 				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
@@ -1261,7 +1261,7 @@
 				INFOPLIST_FILE = "Dictate WatchKit App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e1cc13e3-8d0a-4007-84e7-d674290353eb";
+				PROVISIONING_PROFILE = "f210f918-7cb7-4a4f-9728-2f4a8f5e57c0";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
 				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
@@ -1290,7 +1290,7 @@
 					"$(PROJECT_DIR)/Dictate",
 				);
 				PRODUCT_NAME = "${TARGET_NAME}";
-				PROVISIONING_PROFILE = "ef52e9b5-6476-4684-b6d7-9f65eb1219e5";
+				PROVISIONING_PROFILE = "0ea38b2d-3376-49b2-b200-82d3e3d0b597";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -1313,7 +1313,7 @@
 					"$(PROJECT_DIR)/Dictate",
 				);
 				PRODUCT_NAME = "${TARGET_NAME}";
-				PROVISIONING_PROFILE = "ef52e9b5-6476-4684-b6d7-9f65eb1219e5";
+				PROVISIONING_PROFILE = "0ea38b2d-3376-49b2-b200-82d3e3d0b597";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;

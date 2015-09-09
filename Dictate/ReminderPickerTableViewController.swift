@@ -66,7 +66,7 @@ class ReminderPickerTableViewController: UITableViewController {
         if let defaultReminderList = selectedReminder {
         
             
-            selectedReminderIndex = find(reminderList.title, defaultReminderList)!
+//            selectedReminderIndex = find(reminderList.title, defaultReminderList)!
         }
     }
 
@@ -101,6 +101,12 @@ class ReminderPickerTableViewController: UITableViewController {
       //  cell.calendarName.text = reminder.calendar.title
         cell.textLabel?.textColor = UIColor(CGColor: reminder.CGColor)
         
+        //Anil added
+        if reminder.calendarIdentifier == self.selectedReminder{
+            cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+        }else{
+            cell.accessoryType = UITableViewCellAccessoryType.None
+        }
         //TODO why can't I color vertical bar?
        // cell.verticalBarView.backgroundColor = UIColor(CGColor: reminder.calendar.CGColor)
         
@@ -113,14 +119,7 @@ class ReminderPickerTableViewController: UITableViewController {
      //   cell.textLabel?.text = reminders[indexPath.row]
       //  cell.textLabel?.textColor =  UIColor(CGColor: calendar.CGColor)
 
-        
-        if indexPath.row == selectedReminderIndex {
-            cell.accessoryType = .Checkmark
-        } else {
-            cell.accessoryType = .None
-        }
-
-
+        //Anil removed
         return cell
     }
     
@@ -186,7 +185,8 @@ class ReminderPickerTableViewController: UITableViewController {
         println("p192 selectedReminder: \(selectedReminder)")
         println("p193 selectedReminder.title: \(selectedReminder.title)")
 
-        defaults.setObject(selectedReminder.title, forKey: "defaultReminderList")            //sets title to calendarName for ParseDB
+        //Anil added
+        defaults.setObject(selectedReminder.calendarIdentifier, forKey: "defaultReminderList")            //sets title to calendarName for ParseDB
 
         
         
@@ -216,7 +216,7 @@ class ReminderPickerTableViewController: UITableViewController {
         }
         
         if segue.identifier == "PickReminder" {
-            if let reminderPickerTableViewController = segue.destinationViewController as? ReminderPickerTableViewController.selectedReminder = defaultReminderList
+//            if let reminderPickerTableViewController = segue.destinationViewController as? ReminderPickerTableViewController.selectedReminder = defaultReminderList
         }
     }
 

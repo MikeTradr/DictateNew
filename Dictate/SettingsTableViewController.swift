@@ -61,6 +61,19 @@ class SettingsTableViewController: UITableViewController{
         if segue.identifier == "SaveReminderDetail" {
             
         }
+        
+        //Anil added
+        if segue.identifier == "PickReminder"{
+            //usually we the value in the next controller from here
+            // in our case its not really required, since we are setting it in user defaults, will be globaly available
+            //As a better approach iam doing here to show you
+            
+            let selectedCalendarIdentifier = NSUserDefaults.standardUserDefaults().objectForKey("defaultReminderList") as? String
+            
+//            .setObject(selectedReminder.calendarIdentifier, forKey: "defaultReminderList")
+            let reminderPickerController = segue.destinationViewController as! ReminderPickerTableViewController
+            reminderPickerController.selectedReminder = selectedCalendarIdentifier
+        }
     }
     
     
@@ -73,11 +86,11 @@ class SettingsTableViewController: UITableViewController{
     }
     
     @IBAction func selectedReminderList(segue: UIStoryboardSegue) {
-        if let reminderPickerTabelViewController = segue.sourceViewController as? ReminderPickerTabelViewController,
-            selectedReminder = ReminderPickerTabelViewController.selectedReminder {
-                labelReminderDefault.text = selectedReminder
-                defaultReminderList = selectedReminder
-        }
+//        if let reminderPickerTabelViewController = segue.sourceViewController as? ReminderPickerTabelViewController,
+//            selectedReminder = ReminderPickerTabelViewController.selectedReminder {
+//                labelReminderDefault.text = selectedReminder
+//                defaultReminderList = selectedReminder
+//        }
         
     }
     

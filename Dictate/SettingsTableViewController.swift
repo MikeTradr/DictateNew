@@ -11,7 +11,11 @@ import AVFoundation
 
 class SettingsTableViewController: UITableViewController{
     
+    var defaultReminderList:String = "Default"
+    
     var audioPlayer = AVAudioPlayer()
+    
+    @IBOutlet weak var labelReminderDefault: UILabel!
     
     func playSound(sound: NSURL){
         var error:NSError?
@@ -38,6 +42,8 @@ class SettingsTableViewController: UITableViewController{
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        labelReminderDefault.text = defaultReminderList
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -51,12 +57,27 @@ class SettingsTableViewController: UITableViewController{
         // Dispose of any resources that can be recreated.
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "SaveReminderDetail" {
+            
+        }
+    }
+    
     
     @IBAction func buttonGoToPrefs(sender: AnyObject) {
             
             let storyboard = UIStoryboard(name: "Preferences", bundle: nil)
             let vc = storyboard.instantiateViewControllerWithIdentifier("someViewController") as! UIViewController
             self.presentViewController(vc, animated: true, completion: nil)
+        
+    }
+    
+    @IBAction func selectedReminderList(segue: UIStoryboardSegue) {
+        if let reminderPickerTabelViewController = segue.sourceViewController as? ReminderPickerTabelViewController,
+            selectedReminder = ReminderPickerTabelViewController.selectedReminder {
+                labelReminderDefault.text = selectedReminder
+                defaultReminderList = selectedReminder
+        }
         
     }
     

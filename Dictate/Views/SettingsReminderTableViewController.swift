@@ -9,9 +9,14 @@
 import UIKit
 
 class SettingsReminderTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    //TODO check is user has thsi reminder list made or not????
+    var defaultReminderList = "Default"     //does user have this lsi tmade already? check???
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false

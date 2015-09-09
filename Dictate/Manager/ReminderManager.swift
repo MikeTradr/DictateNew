@@ -1,6 +1,6 @@
 //
 //  EventMnager.swift
-// Rmaned ReminderManager 090515 by Mike
+//  Renamed ReminderManager 090515 by Mike
 //  Dictate
 //
 //  Created by Anil Varghese on 19/08/15.
@@ -284,7 +284,101 @@ class ReminderManager: NSObject {
         }
     }
     
+    
+    func getCalendars(type:EKEntityType) -> [EKCalendar]{
+        return self.eventStore.calendarsForEntityType(type) as! [EKCalendar]
+    }
+    
+    //let reminderList = ReminderManager.sharedInstance.getCalendars(EKEntityTypeReminder)
+   // let calendarList = ReminderManager.sharedInstance.getCalendars(EKEntityTypeEvent)
+    
+    
+    
+    
+        //http://www.appcoda.com/ios-event-kit-programming-tutorial/
+        
+        
+        
+        func getLocalEventCalendars() -> [AnyObject] {
+            var allCalendars: [AnyObject] = self.eventStore.calendarsForEntityType(EKEntityTypeEvent)
+            println("p296 allCalendars: \(allCalendars)")
+            
+            var localCalendars: [AnyObject] = NSMutableArray() as [AnyObject]
+            
+ /*
+            for var i = 0; i < allCalendars.count; i++ {
+                var currentCalendar: EKCalendar = allCalendars.objectAtIndex(i)
+                
+                if currentCalendar.type == EKCalendarTypeLocal {
+                    localCalendars.addObject(currentCalendar)
+                }
+
+*/
+        //TODO thise crash app:
+            let defaults = NSUserDefaults.standardUserDefaults()
+        //    defaults.setObject(allCalendars, forKey: "calendarArray")            //sets calendarArray
+            
+            return localCalendars
+
+       }
+    
+     /*
+        -(NSArray *)getLocalEventCalendars{
+            NSArray *allCalendars = [self.eventStore calendarsForEntityType:EKEntityTypeEvent];
+            NSMutableArray *localCalendars = [[NSMutableArray alloc] init];
+            
+            for (int i=0; i<allCalendars.count; i++) {
+                EKCalendar *currentCalendar = [allCalendars objectAtIndex:i];
+                if (currentCalendar.type == EKCalendarTypeLocal) {
+                    [localCalendars addObject:currentCalendar];
+                }
+            }
+            
+            return (NSArray *)localCalendars;
+        }
+        Let’s discuss it a bit. At first, you notice that we get an array with all calendars of any type using the calendarsForEntityType: method of the event store object and by specifying the EKEntityTypeEvent as the kind of the calendars we want to get. Note that this array contains calendars of all types, so we must get only the local ones. For that reason, we initialize a mutable array, and using a loop we check the type of each returned calendar. Every local calendar found in the first array is stored to the mutable one, which is returned at the end. Inside the loop, each calendar (the current calendar) is stored to a EKCalendar object temporarily. As you understand, the EKCalendar class represents a calendar in the Event Kit framework.
+        
+*/
+        
+    func createReminderArray() -> [AnyObject]  {        //called from AppDelegate on startup
+        
+        
+        var allReminders: Array<EKCalendar>= self.eventStore.calendarsForEntityType(EKEntityTypeReminder) as!  Array<EKCalendar>
+        
+        var calendarList = Array<EKCalendar>()
+
+        
+     //   var allReminders: [AnyObject] = self.eventStore.calendarsForEntityType(EKEntityTypeReminder)
+        println("p337 allReminders: \(allReminders)")
+        
+        var localReminders: [AnyObject] = NSMutableArray() as [AnyObject]
+        
+    /*
+        for var i = 0; i < allReminders.count; i++ {
+        var currentCalendar: EKCalendar = allReminders.objectAtIndex(i)
+        
+        if currentCalendar.type == EKCalendarTypeLocal {
+        localCalendars.addObject(currentCalendar)
+        }
+        
+        */
+        
+        let defaults = NSUserDefaults.standardUserDefaults()
+     //   defaults.setObject(allReminders, forKey: "reminderArray")            //sets reminderArray
+        
+        return allReminders
+        
+    }
+
+    
+    
+    
+  /*
     func createReminderArray() {        //called from AppDelegate on startup
+        
+        
+        
+        
         let calender = EKCalendar(forEntityType: EKEntityTypeReminder , eventStore: self.eventStore)
      
         var error:NSError?
@@ -294,6 +388,10 @@ class ReminderManager: NSObject {
         let calendars = self.eventStore.calendarsForEntityType(EKEntityTypeReminder)
         
         var reminderArray:[String] = []
+        
+        var remindersAnil:NSArray = [ReminderManager.sharedInstance.eventStore, EKEntityTypeReminder];
+        println("p299 remindersAnil: \(remindersAnil)")
+
         
         for calendar in calendars {
             var reminderTitle:String! = calendar.title
@@ -362,5 +460,7 @@ class ReminderManager: NSObject {
         defaults.setObject(calendarArray, forKey: "calendarArray")            //sets calendarArray
         
     }   //func CreateCalendarArray
+   
+*/
     
 }

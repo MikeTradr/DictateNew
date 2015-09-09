@@ -1304,7 +1304,9 @@ class DictateCode: NSObject {
                     
                     //var arrayCalendars = ["work", "mike", "mom", "music", "steph"]
                     
-                    var arrayCalendars = NSUserDefaults.standardUserDefaults().objectForKey("calendarArray") as! [String] //array of the items
+                    var calendarArray = NSUserDefaults.standardUserDefaults().objectForKey("calendarArray") as! [String] //array of the items
+                    
+                    println("p1325 calendarArray: \(calendarArray)")
                     
                     if (i < arrayLength-1) {
                         nextWord = wordArr[i+1]
@@ -1312,15 +1314,23 @@ class DictateCode: NSObject {
                         nextWord = ""
                     }
                     
+                    println("p1318 nextWord: \(nextWord)")
+                    
+                     let calendarArrayLowerCased = calendarArray.map { return $0.lowercaseString}    //lowercase ever word in array -from Anil 083115 thank you Bro :)
+
                     if (nextWord != "") {                           //  check to see if there is word after "calendar"
                         
-                        if contains(arrayCalendars, wordArr[i+1]) {
-                            calendarToUse = wordArr[i+1]
+                        if contains(calendarArrayLowerCased, nextWord) {
+                            println("p1321 we here? calendarArrayLowerCased: \(calendarArrayLowerCased)")
+                            calendarToUse = nextWord
                             wordArrTrimmed = wordArrTrimmed.filter() { $0 != wordArr[i+1] }
-                        }   else if contains(arrayCalendars, wordArr[i-1]) {
+                        }   else if contains(calendarArrayLowerCased, wordArr[i-1]) {
                             calendarToUse = wordArr[i-1]
                             wordArrTrimmed = wordArrTrimmed.filter() { $0 != wordArr[i-1] }
                         }
+                        
+                        println("p1325 calendarToUse: \(calendarToUse)")
+
                         
                     } else {
                         errorMsg = "No Calendar Found"
@@ -1330,7 +1340,7 @@ class DictateCode: NSObject {
                         calendarName = calendarToUse
                     }
                     
-                    println("p973: calendarName \(calendarName)")
+                    println("p1340 calendarName: \(calendarName)")
                     //let defaults = NSUserDefaults.standardUserDefaults()
                     defaults.setObject(calendarName, forKey: "calendar")
                 }
@@ -1444,8 +1454,8 @@ class DictateCode: NSObject {
                 if (subStringDuration) {
                     println("p523: duration found at item \(i)")
                     
-                    
-                    
+                    wordArrTrimmed = wordArrTrimmed.filter() { $0 != wordArr[i] }   //remove "duration" word
+  
                     //TODO is there a better way to check words? text if word in array???
                     
                     if (i < arrayLength-1) {        // check to see is there is something after word "duration"
@@ -1561,7 +1571,7 @@ class DictateCode: NSObject {
                             println("p547 userDuration \(userDuration)")
                             
                             eventDuration = Double(userDuration)
-                            wordArrTrimmed = wordArrTrimmed.filter() { $0 != wordArr[i] }
+                            wordArrTrimmed = wordArrTrimmed.filter() { $0 != wordArr[i+1] }
                         }   // end (durationNumberString != [])
                     }   //end nextWord != ""
                     

@@ -53,6 +53,7 @@
 		D3A0F9FD1B69F0BB00F1FEDA /* EventCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A0F9FB1B69F0BB00F1FEDA /* EventCode.swift */; };
 		D3B703801B935AC200FA1DF0 /* SettingsReminderTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B7037F1B935AC200FA1DF0 /* SettingsReminderTableViewController.swift */; };
 		D3B703821B94E90800FA1DF0 /* ReminderListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B703811B94E90800FA1DF0 /* ReminderListTableViewController.swift */; };
+		D3BD1BDE1B9F3CF10052A312 /* ReminderPickerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BD1BDD1B9F3CF10052A312 /* ReminderPickerTableViewController.swift */; };
 		D3E810851B70F4BC004AE5A9 /* TodayIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E810831B70F4BC004AE5A9 /* TodayIC.swift */; };
 		D3E810881B70FEA0004AE5A9 /* PreferencesIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E810871B70FEA0004AE5A9 /* PreferencesIC.swift */; };
 		D3E8108A1B710690004AE5A9 /* RemindersIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E810891B710690004AE5A9 /* RemindersIC.swift */; };
@@ -202,6 +203,7 @@
 		D3B07A241B731D2A00B9C2A9 /* Dictate WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Dictate WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 		D3B7037F1B935AC200FA1DF0 /* SettingsReminderTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsReminderTableViewController.swift; path = Views/SettingsReminderTableViewController.swift; sourceTree = "<group>"; };
 		D3B703811B94E90800FA1DF0 /* ReminderListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReminderListTableViewController.swift; path = Views/ReminderListTableViewController.swift; sourceTree = "<group>"; };
+		D3BD1BDD1B9F3CF10052A312 /* ReminderPickerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderPickerTableViewController.swift; sourceTree = "<group>"; };
 		D3E810831B70F4BC004AE5A9 /* TodayIC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayIC.swift; sourceTree = "<group>"; };
 		D3E810871B70FEA0004AE5A9 /* PreferencesIC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesIC.swift; sourceTree = "<group>"; };
 		D3E810891B710690004AE5A9 /* RemindersIC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemindersIC.swift; sourceTree = "<group>"; };
@@ -469,6 +471,7 @@
 				D33C13BE1B8C47E800470F8F /* SettingsCalendarTableViewController.swift */,
 				D3795E791B8DF927009D3DB5 /* SettingsEventTableViewController.swift */,
 				D3B7037F1B935AC200FA1DF0 /* SettingsReminderTableViewController.swift */,
+				D3BD1BDD1B9F3CF10052A312 /* ReminderPickerTableViewController.swift */,
 				D392FAD31B9B1BA800678B18 /* SettingsFriendsTableViewController.swift */,
 				D392FAD51B9B1C7E00678B18 /* SettingsInstructionsTableViewController.swift */,
 				D392FAD71B9B1D3600678B18 /* SettingsKeywordsTableViewController.swift */,
@@ -931,6 +934,7 @@
 			files = (
 				ECB862021B77DD4100503C50 /* TodayViewController.m in Sources */,
 				ECF240461B9AFBF3002BFBAE /* ReminderEditorViewController.m in Sources */,
+				D3BD1BDE1B9F3CF10052A312 /* ReminderPickerTableViewController.swift in Sources */,
 				D392FAD61B9B1C7E00678B18 /* SettingsInstructionsTableViewController.swift in Sources */,
 				ECB8622E1B77DEBD00503C50 /* JTDateHelper.m in Sources */,
 				ECB8622D1B77DEBD00503C50 /* JTCalendarSettings.m in Sources */,

@@ -38,12 +38,26 @@ class SettingsTableViewController: UITableViewController{
         var alertSound3: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("262-buttonclick57", ofType: "mp3")!)!
         //General.playSound(alertSound3!)
         playSound(alertSound3)
+        
+        
+        let selectedReminderIdentifier = NSUserDefaults.standardUserDefaults().objectForKey("defaultReminderList") as? String
+        println("p44 selectedReminderIdentifier: \(selectedReminderIdentifier)")
+        
+        let reminder = ReminderManager.sharedInstance.eventStore.calendarWithIdentifier("selectedReminderIdentifier")
+        
+        println("p46 reminder: \(reminder)")
+        
+        // labelReminderDefault.text = reminder.title
+        
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        labelReminderDefault.text = defaultReminderList
+        let selectedReminderIdentifier = NSUserDefaults.standardUserDefaults().objectForKey("defaultReminderList") as? String
+        
+        labelReminderDefault.text = selectedReminderIdentifier
+        
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false

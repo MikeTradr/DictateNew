@@ -132,6 +132,7 @@
 		ECF240461B9AFBF3002BFBAE /* ReminderEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECF240451B9AFBF3002BFBAE /* ReminderEditorViewController.m */; };
 		ECF240481B9C947E002BFBAE /* DateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF240471B9C947E002BFBAE /* DateTableViewCell.swift */; };
 		ECF2404D1B9DFF7F002BFBAE /* CalendarSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF2404C1B9DFF7F002BFBAE /* CalendarSelectionViewController.swift */; };
+		ECF2404F1BA13786002BFBAE /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF2404E1BA13786002BFBAE /* DataManager.swift */; };
 		ECF8185F1B83B7E10087ECAD /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF8185D1B83B7E10087ECAD /* CheckBox.swift */; };
 		ECF818601B83B7E10087ECAD /* CheckBoxLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF8185E1B83B7E10087ECAD /* CheckBoxLayer.swift */; };
 		ECF818631B84FAB70087ECAD /* ReminderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF818621B84FAB70087ECAD /* ReminderManager.swift */; };
@@ -318,6 +319,7 @@
 		ECF240451B9AFBF3002BFBAE /* ReminderEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReminderEditorViewController.m; sourceTree = "<group>"; };
 		ECF240471B9C947E002BFBAE /* DateTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DateTableViewCell.swift; path = Views/DateTableViewCell.swift; sourceTree = "<group>"; };
 		ECF2404C1B9DFF7F002BFBAE /* CalendarSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarSelectionViewController.swift; sourceTree = "<group>"; };
+		ECF2404E1BA13786002BFBAE /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataManager.swift; path = Manager/DataManager.swift; sourceTree = "<group>"; };
 		ECF8185D1B83B7E10087ECAD /* CheckBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CheckBox.swift; path = Views/CheckBox.swift; sourceTree = "<group>"; };
 		ECF8185E1B83B7E10087ECAD /* CheckBoxLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CheckBoxLayer.swift; path = Views/CheckBoxLayer.swift; sourceTree = "<group>"; };
 		ECF818621B84FAB70087ECAD /* ReminderManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReminderManager.swift; path = Manager/ReminderManager.swift; sourceTree = "<group>"; };
@@ -757,6 +759,7 @@
 				D3A0F9FB1B69F0BB00F1FEDA /* EventCode.swift */,
 				ECF818621B84FAB70087ECAD /* ReminderManager.swift */,
 				D3D98AF31BA54D5B00BA1901 /* FavoritesManager.swift */,
+				ECF2404E1BA13786002BFBAE /* DataManager.swift */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -1009,6 +1012,7 @@
 				D3188A851B6E9BED00323DC0 /* PrefsTempVC.swift in Sources */,
 				D3188A891B6E9C0800323DC0 /* ToDoTableViewController.swift in Sources */,
 				ECB862311B77DEBD00503C50 /* JTCalendarDayView.m in Sources */,
+				ECF2404F1BA13786002BFBAE /* DataManager.swift in Sources */,
 				D3F8ACED1B696FB00070C097 /* ViewController.swift in Sources */,
 				ECB8622B1B77DEBD00503C50 /* CALEventManager.m in Sources */,
 				D3188A811B6E9B9900323DC0 /* tabBarController.swift in Sources */,
@@ -1225,7 +1229,7 @@
 					"$(SDKROOT)/usr/lib/system",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "911c4914-c198-4ce5-abd2-6ccb80bac8fa";
+				PROVISIONING_PROFILE = "c43031e2-04cc-4502-a05a-fabeb557bd3a";
 				SWIFT_OBJC_BRIDGING_HEADER = "Dictate/Dictate-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -1252,7 +1256,7 @@
 					"$(SDKROOT)/usr/lib/system",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "911c4914-c198-4ce5-abd2-6ccb80bac8fa";
+				PROVISIONING_PROFILE = "c43031e2-04cc-4502-a05a-fabeb557bd3a";
 				SWIFT_OBJC_BRIDGING_HEADER = "Dictate/Dictate-Bridging-Header.h";
 			};
 			name = Release;
@@ -1306,7 +1310,7 @@
 				INFOPLIST_FILE = "Dictate WatchKit App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f210f918-7cb7-4a4f-9728-2f4a8f5e57c0";
+				PROVISIONING_PROFILE = "e1cc13e3-8d0a-4007-84e7-d674290353eb";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
 				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
@@ -1323,7 +1327,7 @@
 				INFOPLIST_FILE = "Dictate WatchKit App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f210f918-7cb7-4a4f-9728-2f4a8f5e57c0";
+				PROVISIONING_PROFILE = "e1cc13e3-8d0a-4007-84e7-d674290353eb";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
 				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
@@ -1352,7 +1356,7 @@
 					"$(PROJECT_DIR)/Dictate",
 				);
 				PRODUCT_NAME = "${TARGET_NAME}";
-				PROVISIONING_PROFILE = "0ea38b2d-3376-49b2-b200-82d3e3d0b597";
+				PROVISIONING_PROFILE = "ef52e9b5-6476-4684-b6d7-9f65eb1219e5";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -1375,7 +1379,7 @@
 					"$(PROJECT_DIR)/Dictate",
 				);
 				PRODUCT_NAME = "${TARGET_NAME}";
-				PROVISIONING_PROFILE = "0ea38b2d-3376-49b2-b200-82d3e3d0b597";
+				PROVISIONING_PROFILE = "ef52e9b5-6476-4684-b6d7-9f65eb1219e5";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;

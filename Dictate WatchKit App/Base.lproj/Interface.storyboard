@@ -129,13 +129,13 @@
                     <items>
                         <group alignment="center" verticalAlignment="bottom" id="vG5-qB-MSl">
                             <items>
-                                <button width="40" height="40" alignment="left" backgroundImage="check_box40px-grey50%" id="odN-Fp-JgR">
+                                <button width="40" height="40" alignment="right" backgroundImage="check_box40px-grey50%" id="odN-Fp-JgR">
                                     <connections>
                                         <action selector="buttonReminders" destination="Iem-D3-4JW" id="arD-OV-5lk"/>
                                     </connections>
                                 </button>
-                                <button width="10" alignment="left" enabled="NO" id="Hdc-gQ-ojn"/>
-                                <button width="27" height="40" alignment="center" backgroundImage="dicApp-2-nb-40px" id="NXn-HE-V7o">
+                                <button width="10" alignment="center" enabled="NO" id="Hdc-gQ-ojn"/>
+                                <button width="27" height="40" alignment="left" backgroundImage="dicApp-2-nb-40px" id="NXn-HE-V7o">
                                     <connections>
                                         <action selector="buttonMainIC" destination="Iem-D3-4JW" id="i5s-D7-gUY"/>
                                     </connections>

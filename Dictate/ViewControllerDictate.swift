@@ -92,7 +92,7 @@ let str35a:String = "Reminder go to the store list new unmatched title"    // te
 
 let str35:String = "Reminder go to the store list new list title"    // test to see if new list "to do downtown" is created
 
-let str36:String = "Reminder Mike Call Mom Today repeat monthly for 3 days" //TODO MAKE THIS WORK MIKE
+let str36:String = "Reminder Mike Call Mom Today repeat daily for 3 days" //TODO MAKE THIS WORK MIKE
 
 let str37:String = "Appointment today 3:00 pm repeat monthly calendar Mike Call Mom"
 
@@ -107,7 +107,7 @@ let str39:String = "4:55 test to calendar calendar Mike duration 90 minutes aler
 
 
 // ---- change strings here for testing, shows on the dictated field---
-var str:String = str39
+var str:String = ""
 
 //var strRaw:String = str
 

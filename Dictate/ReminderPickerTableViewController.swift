@@ -35,14 +35,20 @@ class ReminderPickerTableViewController: UITableViewController {
     
     let defaults = NSUserDefaults.standardUserDefaults()
     
-    @IBOutlet weak var verticalBarView: UIView!
-    
     
    // var reminderArray = defaults.objectForKey("reminderArray") as! [String] //array of the items
     
    // var reminderArray: Array<EKCalendar> = NSUserDefaults.standardUserDefaults().objectForKey("reminderArray") //array of the items
 
     // var reminderArray: Array<EKCalendar> = ReminderManager.createReminderArray
+    
+   override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+    
+        let view = cell.viewWithTag(1)
+        let reminder = reminderList[indexPath.row]
+        view!.backgroundColor = UIColor(CGColor: reminder.CGColor)
+    
+    }
 
     override func viewWillAppear(animated: Bool) {
       let reminderList = ReminderManager.sharedInstance.getCalendars(EKEntityTypeReminder)
@@ -100,6 +106,7 @@ class ReminderPickerTableViewController: UITableViewController {
         cell.textLabel?.text = reminder.title
       //  cell.calendarName.text = reminder.calendar.title
         cell.textLabel?.textColor = UIColor(CGColor: reminder.CGColor)
+      //  cell.verticalBarView.backgroundColor = UIColor(CGColor: reminder.CGColor)
         
         //Anil added
         if reminder.calendarIdentifier == self.selectedReminder{

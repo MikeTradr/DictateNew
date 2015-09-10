@@ -408,10 +408,18 @@ class ReminderManager: NSObject {
         defaults.setObject(reminderArray, forKey: "reminderArray")            //sets reminderArray
 
     }   //func CreateReminderArray   
-    
+*/
     func createCalendarArray() {        //called from AppDelegate on startup
-        let calender = EKCalendar(forEntityType: EKEntityTypeEvent , eventStore: self.eventStore)
+        println("p413 we here?")
         
+        var allCalendars: Array<EKCalendar>= self.eventStore.calendarsForEntityType(EKEntityTypeEvent) as!  Array<EKCalendar>
+        
+        println("p416 allCalendars: \(allCalendars)")
+        
+        let calender = EKCalendar(forEntityType: EKEntityTypeEvent , eventStore: self.eventStore)
+        println("p418 calender: \(calender)")
+
+   
         // from https://www.andrewcbancroft.com/2015/06/17/creating-calendars-with-event-kit-and-swift/
         
         // Use Event Store to create a new calendar instance
@@ -432,6 +440,8 @@ class ReminderManager: NSObject {
         // source property
         
     //TODO Anil can we filter for local calndars only. I get in Arry Mike Derr twice!
+       //TODO Anil help we need to file ter calendars of type = calDAV
+        
         newCalendar.source = sourcesInEventStore.filter{
             (source: EKSource) -> Bool in
             source.sourceType.value == EKSourceTypeLocal.value
@@ -457,10 +467,10 @@ class ReminderManager: NSObject {
         println("p193 calendarArray.count: \(calendarArray.count)")
         
         let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setObject(calendarArray, forKey: "calendarArray")            //sets calendarArray
-        
+      //  defaults.setObject(calendarArray, forKey: "calendarArray")            //sets calendarArray
+ 
     }   //func CreateCalendarArray
    
-*/
+
     
 }

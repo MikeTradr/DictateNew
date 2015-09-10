@@ -9,5 +9,15 @@
 import UIKit
 
 class DataManager: NSObject {
-   
+    class var sharedInstance : DataManager {
+        struct Static {
+            static var onceToken : dispatch_once_t = 0
+            static var instance : DataManager? = nil
+        }
+        dispatch_once(&Static.onceToken) {
+            Static.instance = DataManager()
+        }
+        return Static.instance!
+    }
+
 }

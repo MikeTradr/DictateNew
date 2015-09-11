@@ -2054,8 +2054,7 @@ class DictateCode: NSObject {
             
             defaults.setObject(eventAlert, forKey: "eventAlert")
                 
-
-                
+            defaults.synchronize() // from Rob course
                 
             
             // TODO  not used yet we see!

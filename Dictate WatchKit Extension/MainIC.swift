@@ -115,6 +115,9 @@ class MainIC: WKInterfaceController {
     
     let defaults = NSUserDefaults.standardUserDefaults()
     
+    //let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp") // from course
+
+    
     
     
     
@@ -301,7 +304,10 @@ class MainIC: WKInterfaceController {
         println("p257 force touch tapped, Preferneces Item")
         //TODO add segue to prefs screen on watch???
         
-          pushControllerWithName("Preferences", context: "Dictate")
+        pushControllerWithName("ReminderPicker", context: "Dictate")
+        
+        //pushControllerWithName("Preferences", context: "Dictate")
+
     }
     
     
@@ -563,12 +569,24 @@ class MainIC: WKInterfaceController {
         self.myLabel.setTextColor(UIColor.yellowColor())
         self.myLabel.setText("Tap Mic to dictate or force touch")
         self.buttonMicrophone.setHidden(false)  //hide mircophone
+    
+        //  TODO Crashes
+      //  let reminderList = ReminderManager.sharedInstance.getCalendars(EKEntityTypeReminder)
+        
+     //   println("w572: reminderList: \(reminderList)")
+        
+       // if defaults.objectForKey("actionType") != nil {
+        //    println(defaults.objectForKey("actionType"))   //from rob course
+       // }
+        
+
 
 
     }
     
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
+        println("p589 in MainIC willActivate")
         
         self.myLabel.setTextColor(UIColor.yellowColor())
         self.myLabel.setText("Tap Mic to dictate or force touch")

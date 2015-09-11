@@ -363,8 +363,16 @@ class ReminderManager: NSObject {
         
         */
         
-        let defaults = NSUserDefaults.standardUserDefaults()
-     //   defaults.setObject(allReminders, forKey: "reminderArray")            //sets reminderArray
+        //let defaults = NSUserDefaults.standardUserDefaults()
+        
+        let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp") // from course
+
+        let allRemindersHardcoded = ["Reminder list1", "Today", "Tomorrow", "Groceries", "ToCode"]
+        defaults?.setObject(allRemindersHardcoded, forKey: "allRemindersHardcoded")            //sets allRemindersHardcoded
+        
+        var testArrayData = defaults?.objectForKey("allRemindersHardcoded") as! [String] //array of the items
+        
+        println("p372 testArrayData: \(testArrayData)")
         
         return allReminders
         
@@ -467,6 +475,7 @@ class ReminderManager: NSObject {
         println("p193 calendarArray.count: \(calendarArray.count)")
         
         let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.synchronize()
       //  defaults.setObject(calendarArray, forKey: "calendarArray")            //sets calendarArray
  
     }   //func CreateCalendarArray

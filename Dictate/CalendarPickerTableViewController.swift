@@ -1,17 +1,17 @@
 //
-//  ReminderPickerTableViewController.swift
+//  CalendarPickerTableViewController.swift
 //  Dictate
 //
-//  Created by Mike Derr on 9/8/15.
+//  Created by Mike Derr on 9/10/15.
 //  Copyright (c) 2015 ThatSoft.com. All rights reserved.
 //
 
 import UIKit
 import EventKit
 
-class ReminderPickerTableViewController: UITableViewController {
+class CalendarPickerTableViewController: UITableViewController {
     
-    let reminderList = ReminderManager.sharedInstance.getCalendars(EKEntityTypeReminder)
+    let calendarList = ReminderManager.sharedInstance.getCalendars(EKEntityTypeEvent)
     
     var numberOfNewItems:Int    = 0
     var startDate:NSDate!
@@ -30,8 +30,8 @@ class ReminderPickerTableViewController: UITableViewController {
     
  //   var games:[String]!
     
-    var selectedReminder:String? = nil
-    var selectedReminderIndex:Int? = nil
+    var selectedCalendar:String? = nil
+    var selectedCalendarIndex:Int? = nil
     
     let defaults = NSUserDefaults.standardUserDefaults()
     
@@ -42,7 +42,7 @@ class ReminderPickerTableViewController: UITableViewController {
 
     // var reminderArray: Array<EKCalendar> = ReminderManager.createReminderArray
 
-    
+/*
    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
     
         let view = cell.viewWithTag(1)
@@ -51,12 +51,12 @@ class ReminderPickerTableViewController: UITableViewController {
     
     
     }
-
+*/
     override func viewWillAppear(animated: Bool) {
-      let reminderList = ReminderManager.sharedInstance.getCalendars(EKEntityTypeReminder)
+        let calendarList = ReminderManager.sharedInstance.getCalendars(EKEntityTypeEvent)
 
-            println("p49 reminderList: \(reminderList)")
-            println("p50 reminderList.count: \(reminderList.count)")
+            println("p58 calendarList: \(calendarList)")
+            println("p59 calendarList.count: \(calendarList.count)")
             
         }
         
@@ -71,7 +71,7 @@ class ReminderPickerTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
          self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
-        if let defaultReminderList = selectedReminder {
+        if let defaultCalendarList = selectedCalendar {
         
             
 //            selectedReminderIndex = find(reminderList.title, defaultReminderList)!
@@ -94,7 +94,7 @@ class ReminderPickerTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return reminderList.count
+        return calendarList.count
     }
 
     
@@ -106,21 +106,22 @@ class ReminderPickerTableViewController: UITableViewController {
         
         // var cell = tableView.dequeueReusableCellWithIdentifier("ReminderCell") as! SettingsReminderListTableViewCell
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("ReminderCell", forIndexPath: indexPath) as! SettingsReminderListTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("CalendarCell", forIndexPath: indexPath) as! SettingsCalendarListTableViewCell
         
         cell.selectionStyle = .None
     
-        let reminder = reminderList[indexPath.row]
+        let calendar = calendarList[indexPath.row]
         
-        cell.labelTitle.text = reminder.title
+        cell.labelTitle.text = calendar.title
         //TODO Anil help how can we count # items in each Reminder list?
-        cell.labelNumberItems.text = "\(reminderList.count) items"
+        cell.labelNumberItems.text = "\(calendarList.count) items"
       
-        cell.labelTitle.textColor = UIColor(CGColor: reminder.CGColor)
-        cell.labelNumberItems.textColor = UIColor(CGColor: reminder.CGColor)
+        cell.labelTitle.textColor = UIColor(CGColor: calendar.CGColor)
+        cell.labelNumberItems.textColor = UIColor(CGColor: calendar.CGColor)
+        cell.verticalBarView.backgroundColor = UIColor(CGColor: calendar.CGColor)
         
-        //Anil added
-        if reminder.calendarIdentifier == self.selectedReminder{
+        //Anil added, Mike changed
+        if calendar.calendarIdentifier == self.selectedCalendar{
             cell.accessoryType = UITableViewCellAccessoryType.Checkmark
         }else{
             cell.accessoryType = UITableViewCellAccessoryType.None
@@ -190,19 +191,19 @@ class ReminderPickerTableViewController: UITableViewController {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
         //other row is selected  - need to deselect it
-        if let index = selectedReminderIndex {
+        if let index = selectedCalendarIndex {
             let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: index, inSection: 0))
             cell?.accessoryType = .None
         }
         
-        selectedReminderIndex = indexPath.row
-        let selectedReminder = reminderList[indexPath.row]
+        selectedCalendarIndex = indexPath.row
+        let selectedCalendar = calendarList[indexPath.row]
 
-        println("p192 selectedReminder: \(selectedReminder)")
-        println("p193 selectedReminder.title: \(selectedReminder.title)")
+        println("p192 selectedCalendar: \(selectedCalendar)")
+        println("p193 selectedCalendar.title: \(selectedCalendar.title)")
 
         //Anil added
-        defaults.setObject(selectedReminder.calendarIdentifier, forKey: "defaultReminderList")            //sets title to calendarName for ParseDB
+        defaults.setObject(selectedCalendar.calendarIdentifier, forKey: "selectedCalendar")            //sets title to calendarName for ParseDB
 
         
         
@@ -220,18 +221,18 @@ class ReminderPickerTableViewController: UITableViewController {
         }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "SaveSelectedReminder" {
+        if segue.identifier == "SaveSelectedCalendar" {
             if let cell = sender as? UITableViewCell {
                 let indexPath = tableView.indexPathForCell(cell)
-                selectedReminderIndex = indexPath?.row
-                if let index = selectedReminderIndex {
-                    let reminder = reminderList[indexPath!.row]
-                    selectedReminder = reminder.title
+                selectedCalendarIndex = indexPath?.row
+                if let index = selectedCalendarIndex {
+                    let calendar = calendarList[indexPath!.row]
+                    selectedCalendar = calendar.title
                 }
             }
         }
         
-        if segue.identifier == "PickReminder" {
+        if segue.identifier == "PickCalendar" {
 //            if let reminderPickerTableViewController = segue.destinationViewController as? ReminderPickerTableViewController.selectedReminder = defaultReminderList
         }
     }

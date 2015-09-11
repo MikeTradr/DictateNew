@@ -9,9 +9,22 @@
 import UIKit
 
 class SettingsEventTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    @IBOutlet weak var labelCalendarDefault: UILabel!
+    @IBOutlet weak var labelDefaultDuration: UITextField!
+    @IBOutlet weak var labelDefaultAlert: UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //TODO Mike show default calndar here from segue
+        labelCalendarDefault.text = "Default Calendar"
+        
+        //TODO Mike hardcoded fix Mike
+        labelDefaultDuration.text = "10"
+        labelDefaultAlert.text = "30"
+
+        
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -23,6 +36,25 @@ class SettingsEventTableViewController: UITableViewController, UITableViewDelega
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "SaveCalendarDetail" {
+            
+        }
+        
+        //Anil added, Mike changed for Calendar 091015
+        if segue.identifier == "PickCalendar"{
+            //usually we the value in the next controller from here
+            // in our case its not really required, since we are setting it in user defaults, will be globaly available
+            //As a better approach iam doing here to show you
+            
+            let selectedCalendarIdentifier = NSUserDefaults.standardUserDefaults().objectForKey("defaultCalendar") as? String
+            
+            //            .setObject(selectedReminder.calendarIdentifier, forKey: "defaultReminderList")
+            let calendarPickerController = segue.destinationViewController as! CalendarPickerTableViewController
+            calendarPickerController.selectedCalendar = selectedCalendarIdentifier
+        }
     }
 
 

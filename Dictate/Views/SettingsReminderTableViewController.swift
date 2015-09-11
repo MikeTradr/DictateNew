@@ -11,7 +11,7 @@ import UIKit
 class SettingsReminderTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource {
     
     //TODO check is user has thsi reminder list made or not????
-    var defaultReminderList = "Default"     //does user have this lsi tmade already? check???
+    var defaultReminderList = "Default"     //does user have this list made already? check???
 
     override func viewDidLoad() {
         super.viewDidLoad()

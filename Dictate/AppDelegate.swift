@@ -143,7 +143,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
    //     ReminderManager.sharedInstance.getLocalEventCalendars()
 
         
+        //TODO Anil can we pull users device info, sys tem version, and stuff??? to save to parse db
         
+        let app = UIApplication.sharedApplication()
+        println("p147 app: \(app)")
+        
+        println("p149 Device and Phone munber in here: \(NSUserDefaults.standardUserDefaults().dictionaryRepresentation())")
+
+        // above here attempted to get device info
         
         
         

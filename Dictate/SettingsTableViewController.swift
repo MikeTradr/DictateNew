@@ -90,14 +90,7 @@ class SettingsTableViewController: UITableViewController{
         }
     }
     
-    
-    @IBAction func buttonGoToPrefs(sender: AnyObject) {
-            
-            let storyboard = UIStoryboard(name: "Preferences", bundle: nil)
-            let vc = storyboard.instantiateViewControllerWithIdentifier("someViewController") as! UIViewController
-            self.presentViewController(vc, animated: true, completion: nil)
-        
-    }
+
     
     @IBAction func selectedReminderList(segue: UIStoryboardSegue) {
 //        if let reminderPickerTabelViewController = segue.sourceViewController as? ReminderPickerTabelViewController,

@@ -143,6 +143,9 @@
                             </items>
                         </group>
                     </items>
+                    <connections>
+                        <segue destination="chX-xC-sh2" kind="relationship" relationship="nextPage" id="2F1-W3-Atp"/>
+                    </connections>
                 </controller>
             </objects>
             <point key="canvasLocation" x="407" y="334"/>
@@ -172,7 +175,37 @@
                     </items>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="202" y="94"/>
+            <point key="canvasLocation" x="43" y="58"/>
+        </scene>
+        <!--ReminderPicker-->
+        <scene sceneID="x3Y-Pz-eh8">
+            <objects>
+                <controller identifier="ReminderPicker" id="chX-xC-sh2" customClass="ReminderListPickerIC" customModule="Dictate_WatchKit_Extension">
+                    <items>
+                        <table alignment="left" id="5ba-AY-44P">
+                            <items>
+                                <tableRow identifier="tableRowController" id="Bhy-Jg-cyg" customClass="tableRowController" customModule="Dictate_WatchKit_Extension">
+                                    <group key="rootItem" width="1" alignment="left" id="alO-dK-V8k">
+                                        <items>
+                                            <label width="1" height="1" alignment="left" text="Label" id="ZlX-Th-N00">
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                                            </label>
+                                        </items>
+                                    </group>
+                                    <connections>
+                                        <outlet property="tableRowLabel" destination="ZlX-Th-N00" id="CQZ-YW-v6q"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
+                    </items>
+                    <connections>
+                        <outlet property="table" destination="5ba-AY-44P" id="sdw-mY-tw5"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="616" y="334"/>
         </scene>
         <!--Reminders-->
         <scene sceneID="peT-G5-wcJ">

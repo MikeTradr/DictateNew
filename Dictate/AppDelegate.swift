@@ -143,7 +143,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
    //     ReminderManager.sharedInstance.getLocalEventCalendars()
 
         
-        //TODO Anil can we pull users device info, sys tem version, and stuff??? to save to parse db
+        //TODO Anil can we pull users device info, system version, users  location? city, state country? and stuff??? to save to parse db
         
         let app = UIApplication.sharedApplication()
         println("p147 app: \(app)")
@@ -152,8 +152,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // above here attempted to get device info
         
+        let defaults = NSUserDefaults.standardUserDefaults()
         
-        
+        //let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp") // from Rob's course
         
         
         

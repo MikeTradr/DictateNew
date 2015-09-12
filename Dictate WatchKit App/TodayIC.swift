@@ -11,6 +11,15 @@ import Foundation
 
 
 class TodayIC: WKInterfaceController {
+    
+    @IBAction func menuDictate() {
+        println("w16 force touch tapped, Dictate Item")
+        
+        var rawString:String = ""
+        //TODO Anil need to call that func! lol thx Bro
+      //  let (startDT, endDT, output, outputNote, day, calendarName, actionType) = MainIC.grabvoice()
+        
+    }
 
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)

@@ -143,6 +143,15 @@
                             </items>
                         </group>
                     </items>
+                    <menu key="menu" id="qVf-P4-I4C">
+                        <items>
+                            <menuItem title="Dictate" image="Mic-Menu-v6" id="oGR-If-Wyz">
+                                <connections>
+                                    <action selector="menuDictate" destination="AgC-eL-Hgc" id="PQ3-RM-6FF"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
                     <connections>
                         <segue destination="chX-xC-sh2" kind="relationship" relationship="nextPage" id="2F1-W3-Atp"/>
                     </connections>
@@ -180,26 +189,75 @@
         <!--ReminderPicker-->
         <scene sceneID="x3Y-Pz-eh8">
             <objects>
-                <controller identifier="ReminderPicker" id="chX-xC-sh2" customClass="ReminderListPickerIC" customModule="Dictate_WatchKit_Extension">
+                <controller identifier="ReminderPicker" animationDuration="1" id="chX-xC-sh2" customClass="ReminderListPickerIC" customModule="Dictate_WatchKit_Extension">
                     <items>
+                        <group width="1" alignment="left" id="1hz-oC-LH0" userLabel="Header Group">
+                            <items>
+                                <button width="16" height="16" alignment="left" verticalAlignment="center" backgroundImage="cbChecked40px" id="g8K-Tb-ahg">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </button>
+                                <label alignment="left" text="Default Reminder" id="rYo-p8-hcW">
+                                    <fontDescription key="font" type="system" pointSize="15"/>
+                                </label>
+                                <group width="6" height="2" alignment="left" verticalAlignment="center" id="rFn-mI-XG2" userLabel="hor. spacer"/>
+                            </items>
+                            <edgeInsets key="margins" left="2" right="0.0" top="0.0" bottom="0.0"/>
+                        </group>
+                        <group width="1" alignment="left" layout="vertical" id="Y5K-ee-C39" userLabel="Seperator Group">
+                            <items>
+                                <separator width="999" height="3" alignment="left" id="6Hc-Jd-wQ2">
+                                    <color key="color" red="0.43529411764705883" green="0.44313725490196076" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
+                                </separator>
+                            </items>
+                        </group>
                         <table alignment="left" id="5ba-AY-44P">
                             <items>
                                 <tableRow identifier="tableRowController" id="Bhy-Jg-cyg" customClass="tableRowController" customModule="Dictate_WatchKit_Extension">
-                                    <group key="rootItem" width="1" alignment="left" id="alO-dK-V8k">
+                                    <group key="rootItem" width="1" height="0.0" alignment="left" id="alO-dK-V8k">
                                         <items>
-                                            <label width="1" height="1" alignment="left" text="Label" id="ZlX-Th-N00">
+                                            <button width="16" height="16" alignment="left" verticalAlignment="center" backgroundImage="cbBlank40px" id="0ax-h5-5p7">
+                                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            </button>
+                                            <group width="2" height="26" alignment="left" verticalAlignment="center" id="OlC-an-15l" userLabel="VerticalBar">
+                                                <color key="backgroundColor" red="0.40000000600000002" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            </group>
+                                            <label alignment="left" text="spacer" id="tPr-pG-Xv7"/>
+                                            <label width="1" height="1" alignment="left" verticalAlignment="center" text="Label" id="ZlX-Th-N00">
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                                                <fontDescription key="font" type="system" pointSize="16"/>
                                             </label>
+                                            <separator height="16" alignment="left" id="8Dw-3x-PdF">
+                                                <color key="color" red="1" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            </separator>
+                                            <group width="2" height="2" alignment="left" verticalAlignment="center" id="Rtc-XC-BbJ" userLabel="hor. spacer"/>
+                                            <group width="2" height="28" alignment="left" id="2MK-0M-GSF" userLabel="blankVertical"/>
                                         </items>
+                                        <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
                                     </group>
                                     <connections>
+                                        <outlet property="buttonCheckbox" destination="0ax-h5-5p7" id="ajP-nP-dGm"/>
                                         <outlet property="tableRowLabel" destination="ZlX-Th-N00" id="CQZ-YW-v6q"/>
                                     </connections>
                                 </tableRow>
                             </items>
                         </table>
                     </items>
+                    <menu key="menu" id="fEq-br-LJ0">
+                        <items>
+                            <menuItem title="Dictate" image="Mic-Menu-v6" id="5Jk-Jd-rih">
+                                <connections>
+                                    <action selector="menuDictate" destination="AgC-eL-Hgc" id="7d1-7t-aQP"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Reminders" image="cbChecked40px" id="SYd-Iv-vEe">
+                                <connections>
+                                    <action selector="menuPreferences" destination="AgC-eL-Hgc" id="eXn-Xf-D4r"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
                     <connections>
                         <outlet property="table" destination="5ba-AY-44P" id="sdw-mY-tw5"/>
                     </connections>
@@ -229,6 +287,15 @@
                             </items>
                         </group>
                     </items>
+                    <menu key="menu" id="XUW-ph-wAk">
+                        <items>
+                            <menuItem title="Dictate" image="Mic-Menu-v6" id="9E0-CY-9kc">
+                                <connections>
+                                    <action selector="menuDictate" destination="AgC-eL-Hgc" id="pUg-Fo-aKe"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
                     <connections>
                         <segue destination="AgC-eL-Hgc" kind="relationship" relationship="nextPage" id="Sgd-o5-lSy"/>
                     </connections>

@@ -296,7 +296,6 @@ class MainIC: WKInterfaceController {
         
         let (startDT, endDT, output, outputNote, day, calendarName, actionType) = grabvoice()
         
-        println("p252 Str: \(str)")
     }
     
     
@@ -544,17 +543,23 @@ class MainIC: WKInterfaceController {
         // Configure interface objects here.
         
         println("p471 in MainIC")
-        
+ //TODO FIX THIS BOMBS MIKE USED TO WORK  LOL
+    
         Parse.enableLocalDatastore()
-        PFUser.enableAutomaticUser()
+      //  PFUser.enableAutomaticUser()
         
         // Enable data sharing in app extensions.
+       // Parse.enableDataSharingWithApplicationGroupIdentifier("group.com.thatsoft.dictateApp",
+       //     containingApplication: "com.thatsoft.dictateApp")
+        // Setup Parse
+ 
         Parse.enableDataSharingWithApplicationGroupIdentifier("group.com.thatsoft.dictateApp",
             containingApplication: "com.thatsoft.dictateApp")
-        // Setup Parse
+
         Parse.setApplicationId("1wwwPAQ0Of2Fp6flotUw4YzN64HFDmy3ijAlQZKE",
             clientKey: "EHeeek4uXhJQi0vXPBba945A4h0LQ4QddEGW8gSs")
-
+        
+        PFUser.enableAutomaticUser()
 
 /*
         // Enable data sharing in app extensions.

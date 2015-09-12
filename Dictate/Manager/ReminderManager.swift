@@ -381,11 +381,9 @@ class ReminderManager: NSObject {
     
     
     
-  /*
-    func createReminderArray() {        //called from AppDelegate on startup
-        
-        
-        
+  
+    func createReminderStringArray() {        //called from AppDelegate on startup
+        println("p386 we here createReminderStringArray")
         
         let calender = EKCalendar(forEntityType: EKEntityTypeReminder , eventStore: self.eventStore)
      
@@ -412,11 +410,13 @@ class ReminderManager: NSObject {
         println("p148 reminderArray: \(reminderArray)")
         println("p148 reminderArray.count: \(reminderArray.count)")
         
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setObject(reminderArray, forKey: "reminderArray")            //sets reminderArray
+       // let defaults = NSUserDefaults.standardUserDefaults()
+        let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp") // from course
+
+        defaults!.setObject(reminderArray, forKey: "reminderStringArray")            //sets reminderArray
 
     }   //func CreateReminderArray   
-*/
+
     func createCalendarArray() {        //called from AppDelegate on startup
         println("p413 we here?")
         

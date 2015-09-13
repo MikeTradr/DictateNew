@@ -100,36 +100,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         // Enable data sharing in main app.
-        
         Parse.enableDataSharingWithApplicationGroupIdentifier("group.com.thatsoft.dictateApp")
         
-        //Parse.enableDataSharingWithApplicationGroupIdentifier("group.com.parse.Dictate", containingApplication: "com.parse.Dictate")
-        
         // Setup Parse
-        //Parse.setApplicationId(“<ParseAppId>”, clientKey: “<ClientKey>”)
-        
         Parse.setApplicationId("1wwwPAQ0Of2Fp6flotUw4YzN64HFDmy3ijAlQZKE",
             clientKey: "EHeeek4uXhJQi0vXPBba945A4h0LQ4QddEGW8gSs")
         
+        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent    //set top menu to white text
         
-        
-        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
-        
-        //UITabBar.appearance().barTintColor = UIColor.blackColor()
-        //UITabBar.appearance().tintColor = UIColor.whiteColor()
-        
-        //TODO set to start at tab index 2
-        
-        //self.window.rootViewController
-        
-        //tabBarController?.selectedIndex = 0
-        
-        //works  let tabBar: UITabBarController = self.window?.rootViewController as! UITabBarController
-        
-        /// works tabBar.selectedIndex = 2
-        
+
         if let tabBarController = self.window!.rootViewController as? UITabBarController {
-            tabBarController.selectedIndex = 2
+            tabBarController.selectedIndex = 2    //set to start at tab index 2
         }
         
         //make Reminder's List Array

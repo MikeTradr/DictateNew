@@ -15,4 +15,26 @@ class tableRowController: NSObject {
     
     @IBOutlet weak var buttonCheckbox: WKInterfaceButton!
     
+    @IBOutlet weak var imageCheckBox: WKInterfaceImage!
+    
+    var checked:Bool = false
+    
+    @IBAction func buttonTapped() {
+        if self.checked {
+            // Turn bulb off
+            self.buttonCheckbox.setBackgroundImageNamed("cbBlank40px")
+            //self.imageCheckBox.setImageNamed("cbBlank40px")
+            //self.lightbulbButton.setTitle("Turn On")
+            self.checked = false
+        } else {
+            // Turn bulb on
+            self.buttonCheckbox.setBackgroundImageNamed("cbChecked40px")
+            //self.imageCheckBox.setImageNamed("cbChecked40px")
+            //self.lightbulbButton.setTitle("Turn Off")
+            self.checked = true
+        }
+        
+    }
+    
+    
 }

@@ -15,15 +15,28 @@ class ReminderListPickerIC: WKInterfaceController {
     
     var allRemindersHardcoded = [String]()
     var reminderLists = [String]()
+    var selectedRow:Int! = nil
     
     @IBOutlet weak var table: WKInterfaceTable!
     
     let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp") // from course
 
     let eventStore = EKEventStore()
+    
+   // var allReminders: Array<EKCalendar> = []
+    
+    
+    override func willActivate() {
+        // This method is called when watch view controller is about to be visible to user
+        super.willActivate()
+        NSLog("%@ will activate", self)
+        println("p93 in ReminderListPickerIC willActivate")
+        
+        loadTableData()
+    }
   
     
-    private func loadTableData () {
+    func loadTableData () {
         
         //check watch screen sixee 38mm or 42mm then set lable font size to 12 or 15
    /*
@@ -33,39 +46,67 @@ class ReminderListPickerIC: WKInterfaceController {
             set font size 12
         }
     */
-    
+        
+       // var allReminderItems: Array<EKCalendar> = ReminderManager.createReminderArray //get all individual reminders
+
+        
+         var allReminders: Array<EKCalendar>= self.eventStore.calendarsForEntityType(EKEntityTypeReminder) as! Array<EKCalendar>
+        
         if defaults?.objectForKey("reminderStringArray") != nil {
             reminderLists = defaults?.objectForKey("reminderStringArray") as! [String] //array of the items
             
             println("w30 reminderLists: \(reminderLists)")
             println("w31 reminderLists.count: \(reminderLists.count)")
             println("-----------------------------------------")
+            
+            println("w46 allReminders: \(allReminders)")
+            println("w47 allReminders.count: \(allReminders.count)")
+            println("-----------------------------------------")
+            
         }
         
-        table.setNumberOfRows(reminderLists.count, withRowType: "tableRowController")
+        table.setNumberOfRows(reminderLists.count, withRowType: "tableRow")
 
         println("p36 he here?")
         println("w37 reminderLists: \(reminderLists)")
+        println("w38 allReminders: \(allReminders)")
 
-        for (index, title) in enumerate(reminderLists) {
+
+        for (index, title) in enumerate(allReminders) {
             println("-----------------------------------")
             println("w40 index: \(index)")
             println("w41 title: \(title)")
             
             let row = table.rowControllerAtIndex(index) as! tableRowController
-   
-            row.tableRowLabel.setText(title)
             
-            println("w45 row.tableRowLabel.setText(item): \(row.tableRowLabel.setText(title))")
+            let reminder = allReminders[index]
+   
+            //row.tableRowLabel.setText(title)  //works for string array
+            
+            row.tableRowLabel.setText(reminder.title)
+            
+            println("w45 row.tableRowLabel.setText(reminder.title) \(row.tableRowLabel.setText(reminder.title))")
             
         }
         
-            println("p52 he here?")
-
+        //Same loop as above?
+        
+        for var i = 0; i < allReminders.count; i++ {
+            
+            let row = table.rowControllerAtIndex(i) as! tableRowController
+         /*
+            row.lightbulbImage.setImageNamed(lightbulbs[i]["state"])
+            if lightbulbs[i]["state"] == "off" {
+                row.lightbulbButton.setTitle("On")
+            } else {
+                row.lightbulbButton.setTitle("Off")
+            }
+        */
+        }
+        
     }
     
-    
-    
+  
 
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
@@ -91,7 +132,7 @@ class ReminderListPickerIC: WKInterfaceController {
         
         
         
-        self.eventStore.reset() //did nto fix: 2015-09-12 00:13:38.233 Dictate WatchKit Extension[68474:820907] Error getting all calendars: Error Domain=EKCADErrorDomain Code=1013 "The operation couldn’t be completed. (EKCADErrorDomain error 1013.)w69 allReminders: []
+        self.eventStore.reset() //did not fix: 2015-09-12 00:13:38.233 Dictate WatchKit Extension[68474:820907] Error getting all calendars: Error Domain=EKCADErrorDomain Code=1013 "The operation couldn’t be completed. (EKCADErrorDomain error 1013.)w69 allReminders: []
         
         var allReminders: Array<EKCalendar>= self.eventStore.calendarsForEntityType(EKEntityTypeReminder) as!  Array<EKCalendar>
         
@@ -99,7 +140,6 @@ class ReminderListPickerIC: WKInterfaceController {
         //let calendars = allCalendars.filter { $0.calendarIdentifier == self.calendarIdentifier }
         
         //println("w69 allCalendars: \(allCalendars)")
-
         
         println("w69 allReminders: \(allReminders)")
 
@@ -126,15 +166,33 @@ class ReminderListPickerIC: WKInterfaceController {
     override func table(table: WKInterfaceTable, didSelectRowAtIndex rowIndex: Int) {
         println("w119 clicked on row: \(rowIndex)")
         
+        selectedRow = rowIndex //for use with insert and delete, save selcted row index
+        
         //to remove an item from array if clicked row.
   /*      reminderLists.removeAtIndex(rowIndex)
         defaults?.setObject(reminderLists,forKey: "allRemindersHardcoded")
         defaults?.synchronize()
    */
      //TODO Mike TODO Anil get reuseablecell working
-   //     let cell = NSObject.dequeueReusableCellWithIdentifier("tableRowController", forIndexPath: indexPath) as! tableRowController
+    //    let cell = NSObject.dequeueReusableCellWithIdentifier("tableRowController", forIndexPath: indexPath) as! tableRowController
+        //need to set the background of button at index
         
-      // cell.buttonCheckbox.setBackgroundImage(UIImage(named: "cbChecked40px"))
+   //     self.table.tableRowLabel.setTextColor(UIColor.yellowColor(), context: rowIndex)
+        
+
+
+  //      self.table.buttonCheckbox.setBackgroundImage(UIImage(named: "cbChecked40px"))
+        
+        //to segue...
+       // self.pushControllerWithName("anotherController", context: rowIndex))
+        
+        // from tutorial: build a context for the data
+     //   var avgPace = RunData.paceSeconds(runData.avgPace(rowIndex))
+     //  let context: AnyObject = avgPace as AnyObject
+      //  presentControllerWithName("Info", context: context) //present the viewcontroller
+        
+        
+    
         
         loadTableData()     //reload table after item is deleted
         
@@ -142,14 +200,7 @@ class ReminderListPickerIC: WKInterfaceController {
     }
 
 
-    override func willActivate() {
-        // This method is called when watch view controller is about to be visible to user
-        super.willActivate()
-        NSLog("%@ will activate", self)
-        println("p93 in ReminderListPickerIC willActivate")
-        
-        loadTableData()
-    }
+
 
     override func didDeactivate() {
         // This method is called when watch view controller is no longer visible

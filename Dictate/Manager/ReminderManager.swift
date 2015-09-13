@@ -33,7 +33,8 @@ class ReminderManager: NSObject {
 
     
     func fetchReminders(completion:([EKReminder])->Void) {
-        
+        println("p36 we here? fetchReminders")
+
         getAccessToEventStoreForType(EKEntityTypeReminder, completion: { (granted) -> Void in
             
             if granted{

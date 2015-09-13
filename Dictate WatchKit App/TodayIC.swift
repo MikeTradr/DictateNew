@@ -17,7 +17,10 @@ class TodayIC: WKInterfaceController {
         
         var rawString:String = ""
         //TODO Anil need to call that func! lol thx Bro
-      //  let (startDT, endDT, output, outputNote, day, calendarName, actionType) = MainIC.grabvoice()
+       // let (startDT, endDT, output, outputNote, day, calendarName, actionType) = MainIC.grabvoice()
+        
+        
+
         
     }
 

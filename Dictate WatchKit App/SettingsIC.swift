@@ -1,5 +1,5 @@
 //
-//  PreferencesIC.swift
+//  SettingsIC.swift
 //  Dictate
 //
 //  Created by Mike Derr on 8/4/15.
@@ -10,7 +10,7 @@ import WatchKit
 import Foundation
 
 
-class PreferencesIC: WKInterfaceController {
+class SettingsIC: WKInterfaceController {
 
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)

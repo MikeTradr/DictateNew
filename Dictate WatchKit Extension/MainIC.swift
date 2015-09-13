@@ -123,7 +123,7 @@ class MainIC: WKInterfaceController {
     
 //#### functions #################################
     
-    func grabvoice() -> (NSDate, NSDate, String, String, String, String, String)  {  //startDT, endDT, output, outputNote, day, calendarName, actionType
+    internal func grabvoice() -> (NSDate, NSDate, String, String, String, String, String)  {  //startDT, endDT, output, outputNote, day, calendarName, actionType
         //added actionType above
         
         var rawString = ""
@@ -303,7 +303,10 @@ class MainIC: WKInterfaceController {
         println("p257 force touch tapped, Preferneces Item")
         //TODO add segue to prefs screen on watch???
         
-        pushControllerWithName("ReminderPicker", context: "Dictate")
+       // pushControllerWithName("ReminderPicker", context: "Dictate")
+        
+        presentControllerWithName("ReminderPicker", context: nil)
+
         
         //pushControllerWithName("Preferences", context: "Dictate")
 
@@ -543,8 +546,13 @@ class MainIC: WKInterfaceController {
         // Configure interface objects here.
         
         println("p471 in MainIC")
+        
+        
+      //  presentControllerWithName("Main", context: contextObj)
+        
+        
  //TODO FIX THIS BOMBS MIKE USED TO WORK  LOL
-    
+  /*
         Parse.enableLocalDatastore()
       //  PFUser.enableAutomaticUser()
         
@@ -560,12 +568,12 @@ class MainIC: WKInterfaceController {
             clientKey: "EHeeek4uXhJQi0vXPBba945A4h0LQ4QddEGW8gSs")
         
         PFUser.enableAutomaticUser()
-
+*/
 /*
         // Enable data sharing in app extensions.
         Parse.enableDataSharingWithApplicationGroupIdentifier("group.com.thatsoft.dictateApp", containingApplication: "com.thatsoft.dictateApp")
         
-        Parse.enableLocalDatastore()
+        //Parse.enableLocalDatastore()
         
         // Initialize Parse.
         Parse.setApplicationId("1wwwPAQ0Of2Fp6flotUw4YzN64HFDmy3ijAlQZKE",
@@ -596,7 +604,6 @@ class MainIC: WKInterfaceController {
         self.myLabel.setTextColor(UIColor.yellowColor())
         self.myLabel.setText("Tap Mic to dictate or force touch")
         self.buttonMicrophone.setHidden(false)  //hide mircophone
-
         
         super.willActivate()
         

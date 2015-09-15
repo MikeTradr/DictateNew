@@ -1,5 +1,5 @@
 //
-//  tableRowController.swift
+//  SettingsReminderTableRC.swift
 //  Dictate
 //
 //  Created by Mike Derr on 9/11/15.
@@ -9,7 +9,7 @@
 import UIKit
 import WatchKit
 
-class tableRowController: NSObject {
+class SettingsReminderTableRC: NSObject {
    
     @IBOutlet weak var tableRowLabel: WKInterfaceLabel!
     

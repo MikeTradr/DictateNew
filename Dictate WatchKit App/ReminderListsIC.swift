@@ -1,5 +1,5 @@
 //
-//  RemindersIC.swift
+//  ReminderListsIC.swift
 //  Dictate
 //
 //  Created by Mike Derr on 8/4/15.
@@ -11,7 +11,7 @@ import Foundation
 import EventKit
 
 
-class RemindersIC: WKInterfaceController {
+class ReminderListsIC: WKInterfaceController {
     
     @IBOutlet weak var table: WKInterfaceTable!
     
@@ -34,7 +34,7 @@ class RemindersIC: WKInterfaceController {
         super.awakeWithContext(context)
         
         // Configure interface objects here.
-           println("p19 RemindersIC")
+           println("w37 RemindersIC awakeWithContext")
         
         super.awakeWithContext(context)
         self.setTitle(context as? String)
@@ -44,7 +44,7 @@ class RemindersIC: WKInterfaceController {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
         NSLog("%@ will activate", self)
-        println("w45 in ReminderIC willActivate")
+        println("w47 in ReminderIC willActivate")
  
         //ReminderManager.sharedInstance.createNewReminderList("TestMike", items: ["asd","weer"])   //added to make reminder for testing. 
         
@@ -55,16 +55,17 @@ class RemindersIC: WKInterfaceController {
             println("w51 self.allReminders: \(self.allReminders)")
             println("w52 self.allReminders.count: \(self.allReminders.count)")
             
+            self.loadTableData()
         })
         
-        println("w60 allReminders: \(self.allReminders.count)")
+        //println("w60 allReminders: \(self.allReminders.count)")
 
  
      //   println("w57 in ReminderIC after fetch events")
      //   println("w58 self.reminders: \(self.reminders)")
 
 
-        loadTableData()
+       
     }
     
     func getAccessToEventStoreForType(type:EKEntityType, completion:(granted:Bool)->Void){
@@ -113,34 +114,34 @@ class RemindersIC: WKInterfaceController {
     func loadTableData() {
         println("w114 in loadTableData")
         println("w115 allReminders: \(allReminders)")
+        println("w116 allReminders.count: \(allReminders.count)")
+        
+        table.setNumberOfRows(allReminders.count, withRowType: "tableRow")
         
         for (index, title) in enumerate(self.allReminders) {
-            println("-----------------------------------")
             
             let reminder = self.allReminders[index]
-            
+            println("-----------------------------------")
             println("w126 index: \(index)")
             println("w127 title: \(reminder.title)")
-            //  println("w128 color: \(reminder.color)")
+            println("w128 reminder.calendarItemIdentifier: \(reminder.calendarItemIdentifier)")
             
-            let row = self.table.rowControllerAtIndex(index) as! ReminderTableRowController
-            
-            
+            let row = self.table.rowControllerAtIndex(index) as! ReminderListsTableRC
             
             //row.tableRowLabel.setText(title)  //works for string array
             
             row.tableRowLabel.setText(reminder.title)
             row.tableRowLabel.setTextColor(UIColor(CGColor: reminder.calendar.CGColor))
-            //  row.verticalBar.setBackgroundColor(UIColor(CGColor: reminder.calendar.CGColor))
+            //row.verticalBar.setBackgroundColor(UIColor(CGColor: reminder.calendar.CGColor))
             
-            println("w45 row.tableRowLabel.setText(reminder.title) \(row.tableRowLabel.setText(reminder.title))")
+           // println("w45 row.tableRowLabel.setText(reminder.title) \(row.tableRowLabel.setText(reminder.title))")
             
         }
         
     
     }
     
-    
+/*
     func loadTableDataOLD () {
         println("w46 in loadTableData")
         
@@ -241,7 +242,7 @@ class RemindersIC: WKInterfaceController {
 */
     }
     
-    
+*/
     
 
     override func didDeactivate() {

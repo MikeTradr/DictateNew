@@ -30,9 +30,49 @@ class ReminderManager: NSObject {
     
     let eventStore = EKEventStore()
     let defaults = NSUserDefaults.standardUserDefaults()
-
+    
     
     func fetchReminders(completion:([EKReminder])->Void) {
+        
+        getAccessToEventStoreForType(EKEntityTypeReminder, completion: { (granted) -> Void in
+            
+            if granted{
+                println("granted: \(granted)")
+                
+                let calendars = self.eventStore.calendarsForEntityType(EKEntityTypeReminder)
+                
+                println("p36 calendars: \(calendars)")
+                
+                var predicate = self.eventStore.predicateForIncompleteRemindersWithDueDateStarting(nil, ending: nil, calendars: calendars)
+                self.eventStore.fetchRemindersMatchingPredicate(predicate) { reminders in
+                    completion(reminders as! [EKReminder]!)
+                }
+            }
+        })
+    }
+    
+    
+    func fetchCalendarReminders(calendar:EKCalendar, completion:([EKReminder])->Void) {
+        println("p36 we here? fetchReminders")
+        
+        getAccessToEventStoreForType(EKEntityTypeReminder, completion: { (granted) -> Void in
+            
+            if granted{
+                println("granted: \(granted)")
+                
+                var predicate = self.eventStore.predicateForIncompleteRemindersWithDueDateStarting(nil, ending: nil, calendars: [calendar])
+                self.eventStore.fetchRemindersMatchingPredicate(predicate) { reminders in
+                    completion(reminders as! [EKReminder]!)
+                }
+            }
+        })
+    }
+    
+    
+    
+
+    
+    func fetchRemindersOLD(completion:([EKReminder])->Void) {
         println("p36 we here? fetchReminders")
 
         getAccessToEventStoreForType(EKEntityTypeReminder, completion: { (granted) -> Void in

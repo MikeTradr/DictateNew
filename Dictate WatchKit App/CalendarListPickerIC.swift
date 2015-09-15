@@ -1,8 +1,8 @@
 //
-//  ReminderListPickerIC.swift
+//  CalendarListPickerIC.swift
 //  Dictate
 //
-//  Created by Mike Derr on 9/11/15.
+//  Created by Mike Derr on 9/15/15.
 //  Copyright (c) 2015 ThatSoft.com. All rights reserved.
 //
 
@@ -11,10 +11,10 @@ import Foundation
 import EventKit
 
 
-class ReminderListPickerIC: WKInterfaceController {
+class CalendarListPickerIC: WKInterfaceController {
     
-    var allRemindersHardcoded = [String]()
-    var reminderLists = [String]()
+   // var allRemindersHardcoded = [String]()
+   // var allCalendarLists = [String]()
     var selectedRow:Int! = nil
     
     @IBOutlet weak var table: WKInterfaceTable!
@@ -49,45 +49,44 @@ class ReminderListPickerIC: WKInterfaceController {
         
        // var allReminderItems: Array<EKCalendar> = ReminderManager.createReminderArray //get all individual reminders
 
-        
-         var allReminderLists: Array<EKCalendar> = self.eventStore.calendarsForEntityType(EKEntityTypeReminder) as! Array<EKCalendar>
-        
+         let allCalendarLists: Array<EKCalendar> = self.eventStore.calendarsForEntityType(EKEntityTypeEvent) as! Array<EKCalendar>
+  /*
         if defaults?.objectForKey("reminderStringArray") != nil {
-            reminderLists = defaults?.objectForKey("reminderStringArray") as! [String] //array of the items
+        //    reminderLists = defaults?.objectForKey("reminderStringArray") as! [String] //array of the items
             
           //  println("w30 reminderLists: \(reminderLists)")
           //  println("w31 reminderLists.count: \(reminderLists.count)")
             println("-----------------------------------------")
             
-            println("w46 allReminders: \(allReminderLists)")
-            println("w47 allReminders.count: \(allReminderLists.count)")
+            println("w62 allCalendarLists: \(allCalendarLists)")
+            println("w63 allCalendarLists.count: \(allCalendarLists.count)")
             println("-----------------------------------------")
             
         }
-        
-        table.setNumberOfRows(allReminderLists.count, withRowType: "tableRow")
+*/
+        table.setNumberOfRows(allCalendarLists.count, withRowType: "tableRow")
 
-        println("p36 he here?")
-        println("w37 reminderLists: \(reminderLists)")
-        println("w38 allReminders: \(allReminderLists)")
+        println("p70 he here?")
+        //println("w37 reminderLists: \(reminderLists)")
+        println("w72 allCalendarLists: \(allCalendarLists)")
 
 
-        for (index, title) in enumerate(allReminderLists) {
+        for (index, title) in enumerate(allCalendarLists) {
             println("-----------------------------------")
             println("w40 index: \(index)")
             println("w41 title: \(title)")
             
-            let row = table.rowControllerAtIndex(index) as! SettingsReminderTableRC
+            let row = table.rowControllerAtIndex(index) as! SettingsCalendarTableRC
             
-            let reminder = allReminderLists[index]
+            let item = allCalendarLists[index]
    
             //row.tableRowLabel.setText(title)  //works for string array
             
-            row.tableRowLabel.setText(reminder.title)
-            row.tableRowLabel.setTextColor(UIColor(CGColor: reminder.CGColor))
-            row.verticalBar.setBackgroundColor(UIColor(CGColor: reminder.CGColor))
+            row.tableRowLabel.setText(item.title)
+            row.tableRowLabel.setTextColor(UIColor(CGColor: item.CGColor))
+            row.verticalBar.setBackgroundColor(UIColor(CGColor: item.CGColor))
             
-            println("w45 row.tableRowLabel.setText(reminder.title) \(row.tableRowLabel.setText(reminder.title))")
+            println("w45 row.tableRowLabel.setText(item.title)) \(row.tableRowLabel.setText(item.title))")
             
         }
 
@@ -238,14 +237,14 @@ class ReminderListPickerIC: WKInterfaceController {
         println("p110 in ReminderListPickerIC didDeactivate")
 
     }
-    
+/*
     override func contextForSegueWithIdentifier(segueIdentifier: String, inTable table: WKInterfaceTable, rowIndex: Int) -> AnyObject?
     {
         
-        let reminderTitle = allRemindersHardcoded[rowIndex]
-        return reminderTitle
+      //  let calendarTitle = allCalendarLists[rowIndex]
+        return //calendarTitle
     }
-    
+*/
     @IBAction func buttonMainIC() {
         
         pushControllerWithName("Main", context: "Today")

@@ -56,7 +56,7 @@ class ToDoTableViewController: UITableViewController, UITableViewDelegate, UITab
         var viewController = self
         setStartDateAndEndDate()
         
-        //Added left adn Right Swipe gestures. TODO Can add this to the General.swift Class? and call it?
+        //Added left and Right Swipe gestures. TODO Can add this to the General.swift Class? and call it?
         var leftSwipe = UISwipeGestureRecognizer(target: self, action: Selector("handleSwipes:"))
         var rightSwipe = UISwipeGestureRecognizer(target: self, action: Selector("handleSwipes:"))
         leftSwipe.direction = .Left
@@ -73,9 +73,8 @@ class ToDoTableViewController: UITableViewController, UITableViewDelegate, UITab
             self.reminders = reminders
             self.tableView.reloadData()
             
-            println("p49 self.reminders: \(self.reminders)")
-            println("p50 self.reminders.count: \(self.reminders.count)")
-            
+            println("p76 self.reminders: \(self.reminders)")
+            println("p77 self.reminders.count: \(self.reminders.count)")
             
         })
         

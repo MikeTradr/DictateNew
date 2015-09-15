@@ -19,6 +19,8 @@ class RemindersIC: WKInterfaceController {
     let eventStore = EKEventStore()
     
     var reminders:[EKReminder] = []
+    var allReminders:[EKReminder] = []
+
     var numberOfNewItems:Int    = 0
     var startDT:NSDate          = NSDate()
     var endDT:NSDate            = NSDate()
@@ -43,23 +45,26 @@ class RemindersIC: WKInterfaceController {
         super.willActivate()
         NSLog("%@ will activate", self)
         println("w45 in ReminderIC willActivate")
+ 
+        //ReminderManager.sharedInstance.createNewReminderList("TestMike", items: ["asd","weer"])   //added to make reminder for testing. 
         
         ReminderManager.sharedInstance.fetchReminders({ (reminders) -> Void in
-            self.reminders = reminders
+            self.allReminders = reminders
             //self.tableView.reloadData()
             
-            println("w51 self.reminders: \(self.reminders)")
-            println("w52 self.reminders.count: \(self.reminders.count)")
-            
+            println("w51 self.allReminders: \(self.allReminders)")
+            println("w52 self.allReminders.count: \(self.allReminders.count)")
             
         })
         
-        println("w57 in ReminderIC after fetch events")
-        println("w58 self.reminders: \(self.reminders)")
+        println("w60 allReminders: \(self.allReminders.count)")
+
+ 
+     //   println("w57 in ReminderIC after fetch events")
+     //   println("w58 self.reminders: \(self.reminders)")
 
 
         loadTableData()
-
     }
     
     func getAccessToEventStoreForType(type:EKEntityType, completion:(granted:Bool)->Void){
@@ -81,43 +86,102 @@ class RemindersIC: WKInterfaceController {
     }
     
     func fetchReminders(completion:([EKReminder])->Void) {
-        println("p36 we here? fetchReminders")
+        println("w89 we here? fetchReminders")
         
         getAccessToEventStoreForType(EKEntityTypeReminder, completion: { (granted) -> Void in
             
             if granted{
                 println("granted: \(granted)")
                 
+                let allReminders = self.eventStore.calendarsForEntityType(EKEntityTypeReminder)
                 
-                let calendars = self.eventStore.calendarsForEntityType(EKEntityTypeReminder)
+                println("w98 allReminders: \(allReminders)")
                 
-                println("p36 calendars: \(calendars)")
-                
-                var predicate = self.eventStore.predicateForIncompleteRemindersWithDueDateStarting(nil, ending: nil, calendars: calendars)
+                var predicate = self.eventStore.predicateForIncompleteRemindersWithDueDateStarting(nil, ending: nil, calendars: allReminders)
                 self.eventStore.fetchRemindersMatchingPredicate(predicate) { reminders in
                     completion(reminders as! [EKReminder]!)
                 }
             }
+            
+            println("w106 allReminders: \(self.allReminders)")
+
+            self.loadTableData()
         })
     }
  
     
+    func loadTableData() {
+        println("w114 in loadTableData")
+        println("w115 allReminders: \(allReminders)")
+        
+        for (index, title) in enumerate(self.allReminders) {
+            println("-----------------------------------")
+            
+            let reminder = self.allReminders[index]
+            
+            println("w126 index: \(index)")
+            println("w127 title: \(reminder.title)")
+            //  println("w128 color: \(reminder.color)")
+            
+            let row = self.table.rowControllerAtIndex(index) as! ReminderTableRowController
+            
+            
+            
+            //row.tableRowLabel.setText(title)  //works for string array
+            
+            row.tableRowLabel.setText(reminder.title)
+            row.tableRowLabel.setTextColor(UIColor(CGColor: reminder.calendar.CGColor))
+            //  row.verticalBar.setBackgroundColor(UIColor(CGColor: reminder.calendar.CGColor))
+            
+            println("w45 row.tableRowLabel.setText(reminder.title) \(row.tableRowLabel.setText(reminder.title))")
+            
+        }
+        
+    
+    }
     
     
-    
-    func loadTableData () {
+    func loadTableDataOLD () {
         println("w46 in loadTableData")
         
         ReminderManager.sharedInstance.fetchReminders({ (reminders) -> Void in
             self.reminders = reminders
             //self.tableView.reloadData()
             
-            println("w62 self.reminders: \(self.reminders)")
-            println("w63 self.reminders.count: \(self.reminders.count)")
-            
-        })
+            println("w117 self.reminders: \(self.reminders)")
+            println("w118 self.reminders.count: \(self.reminders.count)")
         
-        println("w69 here after call to fetchReminders")
+        
+        
+        println("w122 self.reminders: \(self.reminders)")
+        println("w123 self.reminders.count: \(self.reminders.count)")
+        println("w124 here after call to fetchReminders")
+        
+        for (index, title) in enumerate(self.reminders) {
+            println("-----------------------------------")
+            
+            let reminder = self.reminders[index]
+            
+            println("w126 index: \(index)")
+            println("w127 title: \(reminder.title)")
+          //  println("w128 color: \(reminder.color)")
+            
+            let row = self.table.rowControllerAtIndex(index) as! ReminderTableRowController
+            
+            
+            
+            //row.tableRowLabel.setText(title)  //works for string array
+            
+            row.tableRowLabel.setText(reminder.title)
+            row.tableRowLabel.setTextColor(UIColor(CGColor: reminder.calendar.CGColor))
+          //  row.verticalBar.setBackgroundColor(UIColor(CGColor: reminder.calendar.CGColor))
+            
+            println("w45 row.tableRowLabel.setText(reminder.title) \(row.tableRowLabel.setText(reminder.title))")
+            
+        }
+            
+    })
+        
 
       /*
         var allReminders: Array<EKCalendar>= self.eventStore.calendarsForEntityType(EKEntityTypeReminder) as! Array<EKCalendar>

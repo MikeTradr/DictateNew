@@ -97,9 +97,9 @@
                                     <action selector="menuDictate" destination="AgC-eL-Hgc" id="eNF-Cn-aqO"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Preferences" image="cog2-48px" id="ObU-zt-q66">
+                            <menuItem title="Settings" image="cog2-48px" id="ObU-zt-q66" userLabel="Settings">
                                 <connections>
-                                    <action selector="menuPreferences" destination="AgC-eL-Hgc" id="RLe-YB-4Oz"/>
+                                    <action selector="menuSettings" destination="AgC-eL-Hgc" id="aMN-se-0Nv"/>
                                 </connections>
                             </menuItem>
                         </items>
@@ -245,6 +245,7 @@
                                     <connections>
                                         <outlet property="buttonCheckbox" destination="0ax-h5-5p7" id="ajP-nP-dGm"/>
                                         <outlet property="tableRowLabel" destination="ZlX-Th-N00" id="CQZ-YW-v6q"/>
+                                        <outlet property="verticalBar" destination="OlC-an-15l" id="wfz-mJ-443"/>
                                     </connections>
                                 </tableRow>
                             </items>
@@ -269,7 +270,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="299" y="58"/>
+            <point key="canvasLocation" x="309" y="58"/>
         </scene>
         <!--Reminders-->
         <scene sceneID="peT-G5-wcJ">
@@ -278,16 +279,9 @@
                     <items>
                         <table alignment="left" id="ZnV-Oh-HUO">
                             <items>
-                                <tableRow identifier="tableRow" id="k7b-R0-QbO" customClass="tableRowController" customModule="Dictate_WatchKit_Extension">
+                                <tableRow identifier="tableRow" id="k7b-R0-QbO" customClass="ReminderTableRowController" customModule="Dictate_WatchKit_Extension">
                                     <group key="rootItem" width="1" height="0.0" alignment="left" id="X7O-jE-2AN">
                                         <items>
-                                            <button width="22" height="22" alignment="left" verticalAlignment="center" backgroundImage="cbBlank40px" id="r4e-Vb-Lzp">
-                                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                <connections>
-                                                    <action selector="buttonTapped" destination="k7b-R0-QbO" id="x52-xQ-vHg"/>
-                                                </connections>
-                                            </button>
                                             <group width="2" height="26" alignment="left" verticalAlignment="center" id="ytx-zs-j0Z" userLabel="VerticalBar">
                                                 <color key="backgroundColor" red="0.40000000600000002" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             </group>
@@ -308,8 +302,8 @@
                                         <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
                                     </group>
                                     <connections>
-                                        <outlet property="buttonCheckbox" destination="r4e-Vb-Lzp" id="Ukc-AP-fRY"/>
-                                        <outlet property="tableRowLabel" destination="2bK-fl-QKS" id="2GU-61-ft8"/>
+                                        <outlet property="tableRowLabel" destination="2bK-fl-QKS" id="Htv-gR-DSU"/>
+                                        <outlet property="verticalBar" destination="vtI-VA-W96" id="F3t-oq-V09"/>
                                     </connections>
                                 </tableRow>
                             </items>

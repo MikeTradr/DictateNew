@@ -17,6 +17,8 @@ class tableRowController: NSObject {
     
     @IBOutlet weak var imageCheckBox: WKInterfaceImage!
     
+    @IBOutlet weak var verticalBar: WKInterfaceGroup!
+    
     var checked:Bool = false
     
     @IBAction func buttonTapped() {

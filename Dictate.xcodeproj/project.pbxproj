@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		D3089C651BA2713B00C58D6D /* SettingsReminderListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3089C641BA2713B00C58D6D /* SettingsReminderListTableViewCell.swift */; };
-		D3188A671B6E994E00323DC0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3188A661B6E994E00323DC0 /* Main.storyboard */; };
 		D3188A691B6E9AA700323DC0 /* MailComposer3.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3188A681B6E9AA700323DC0 /* MailComposer3.swift */; };
 		D3188A6A1B6E9AA700323DC0 /* MailComposer3.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3188A681B6E9AA700323DC0 /* MailComposer3.swift */; };
 		D3188A6C1B6E9ADB00323DC0 /* MailComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3188A6B1B6E9ADB00323DC0 /* MailComposer.swift */; };
@@ -44,6 +43,7 @@
 		D33CAD081B747EBE00F59260 /* se_tap.m4a in Resources */ = {isa = PBXBuildFile; fileRef = D33CAD061B747EBE00F59260 /* se_tap.m4a */; };
 		D343956E1BA326E6002D98EA /* tableRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D343956D1BA326E6002D98EA /* tableRowController.swift */; };
 		D34395721BA32964002D98EA /* ReminderListPickerIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34395711BA32964002D98EA /* ReminderListPickerIC.swift */; };
+		D355D97C1BA7DD3F00DADD72 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D355D97B1BA7DD3F00DADD72 /* Main.storyboard */; };
 		D3795E7A1B8DF927009D3DB5 /* SettingsEventTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3795E791B8DF927009D3DB5 /* SettingsEventTableViewController.swift */; };
 		D3795E7B1B8F654F009D3DB5 /* ReminderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF818621B84FAB70087ECAD /* ReminderManager.swift */; };
 		D38C9C571B821DA3009CFC7C /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D38C9C551B821DA3009CFC7C /* Fabric.framework */; };
@@ -56,6 +56,7 @@
 		D392FADA1B9B1DFD00678B18 /* SettingsGeneralTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D392FAD91B9B1DFD00678B18 /* SettingsGeneralTableViewController.swift */; };
 		D3A0F9FC1B69F0BB00F1FEDA /* EventCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A0F9FB1B69F0BB00F1FEDA /* EventCode.swift */; };
 		D3A0F9FD1B69F0BB00F1FEDA /* EventCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A0F9FB1B69F0BB00F1FEDA /* EventCode.swift */; };
+		D3B6F5F91BA60B7E0052B639 /* DictateManagerIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B6F5F81BA60B7E0052B639 /* DictateManagerIC.swift */; };
 		D3B703801B935AC200FA1DF0 /* SettingsReminderTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B7037F1B935AC200FA1DF0 /* SettingsReminderTableViewController.swift */; };
 		D3B703821B94E90800FA1DF0 /* ReminderListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B703811B94E90800FA1DF0 /* ReminderListTableViewController.swift */; };
 		D3BD1BDE1B9F3CF10052A312 /* ReminderPickerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BD1BDD1B9F3CF10052A312 /* ReminderPickerTableViewController.swift */; };
@@ -81,6 +82,7 @@
 		D3F8AD261B696FCE0070C097 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3F8AD241B696FCD0070C097 /* Interface.storyboard */; };
 		D3F8AD281B696FCE0070C097 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3F8AD271B696FCE0070C097 /* Images.xcassets */; };
 		D3F8AD2B1B696FCE0070C097 /* Dictate WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D3F8AD0E1B696FCD0070C097 /* Dictate WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		D3FA08051BA7F6EB006A91C2 /* ReminderTableRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FA08041BA7F6EB006A91C2 /* ReminderTableRowController.swift */; };
 		EC0B487E1B6FE9B800C0AD82 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EC0B487D1B6FE9B800C0AD82 /* libsqlite3.0.dylib */; };
 		EC0B48801B6FE9C700C0AD82 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC0B487F1B6FE9C700C0AD82 /* CFNetwork.framework */; };
 		EC0B48821B6FE9D300C0AD82 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC0B48811B6FE9D300C0AD82 /* Security.framework */; };
@@ -176,7 +178,6 @@
 
 /* Begin PBXFileReference section */
 		D3089C641BA2713B00C58D6D /* SettingsReminderListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsReminderListTableViewCell.swift; path = ../SettingsReminderListTableViewCell.swift; sourceTree = "<group>"; };
-		D3188A661B6E994E00323DC0 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		D3188A681B6E9AA700323DC0 /* MailComposer3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MailComposer3.swift; sourceTree = "<group>"; };
 		D3188A6B1B6E9ADB00323DC0 /* MailComposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MailComposer.swift; sourceTree = "<group>"; };
 		D3188A6E1B6E9AE400323DC0 /* MessageCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCode.swift; sourceTree = "<group>"; };
@@ -204,6 +205,7 @@
 		D33CAD061B747EBE00F59260 /* se_tap.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = se_tap.m4a; sourceTree = "<group>"; };
 		D343956D1BA326E6002D98EA /* tableRowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tableRowController.swift; sourceTree = "<group>"; };
 		D34395711BA32964002D98EA /* ReminderListPickerIC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderListPickerIC.swift; sourceTree = "<group>"; };
+		D355D97B1BA7DD3F00DADD72 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		D3795E791B8DF927009D3DB5 /* SettingsEventTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsEventTableViewController.swift; path = Views/SettingsEventTableViewController.swift; sourceTree = "<group>"; };
 		D38C9C551B821DA3009CFC7C /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		D38C9C561B821DA3009CFC7C /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
@@ -214,6 +216,7 @@
 		D3A0F9FB1B69F0BB00F1FEDA /* EventCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCode.swift; sourceTree = "<group>"; };
 		D3B07A231B731C8800B9C2A9 /* Dictate.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Dictate.entitlements; sourceTree = "<group>"; };
 		D3B07A241B731D2A00B9C2A9 /* Dictate WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Dictate WatchKit Extension.entitlements"; sourceTree = "<group>"; };
+		D3B6F5F81BA60B7E0052B639 /* DictateManagerIC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictateManagerIC.swift; sourceTree = "<group>"; };
 		D3B7037F1B935AC200FA1DF0 /* SettingsReminderTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsReminderTableViewController.swift; path = Views/SettingsReminderTableViewController.swift; sourceTree = "<group>"; };
 		D3B703811B94E90800FA1DF0 /* ReminderListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReminderListTableViewController.swift; path = Views/ReminderListTableViewController.swift; sourceTree = "<group>"; };
 		D3BD1BDD1B9F3CF10052A312 /* ReminderPickerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderPickerTableViewController.swift; sourceTree = "<group>"; };
@@ -241,6 +244,7 @@
 		D3F8AD231B696FCD0070C097 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D3F8AD251B696FCE0070C097 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		D3F8AD271B696FCE0070C097 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		D3FA08041BA7F6EB006A91C2 /* ReminderTableRowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderTableRowController.swift; sourceTree = "<group>"; };
 		EC0B487D1B6FE9B800C0AD82 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		EC0B487F1B6FE9C700C0AD82 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		EC0B48811B6FE9D300C0AD82 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -520,17 +524,27 @@
 			children = (
 				D3E810871B70FEA0004AE5A9 /* SettingsIC.swift */,
 				D34395711BA32964002D98EA /* ReminderListPickerIC.swift */,
+				D343956D1BA326E6002D98EA /* tableRowController.swift */,
 			);
 			name = Settings;
+			sourceTree = "<group>";
+		};
+		D3B6F5F71BA607830052B639 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				D3B6F5F81BA60B7E0052B639 /* DictateManagerIC.swift */,
+			);
+			name = Managers;
 			sourceTree = "<group>";
 		};
 		D3E810861B70F4D6004AE5A9 /* WKControllers */ = {
 			isa = PBXGroup;
 			children = (
+				D3B6F5F71BA607830052B639 /* Managers */,
 				D3AEE68F1BA5C8AC004363C9 /* Settings */,
 				D3F8AD131B696FCD0070C097 /* MainIC.swift */,
 				D3E810891B710690004AE5A9 /* RemindersIC.swift */,
-				D343956D1BA326E6002D98EA /* tableRowController.swift */,
+				D3FA08041BA7F6EB006A91C2 /* ReminderTableRowController.swift */,
 				D3E810831B70F4BC004AE5A9 /* TodayIC.swift */,
 			);
 			name = WKControllers;
@@ -565,7 +579,7 @@
 				D3B07A231B731C8800B9C2A9 /* Dictate.entitlements */,
 				D32350571B6977F100939F03 /* Classes */,
 				D3F8ACF31B696FB00070C097 /* LaunchScreen.xib */,
-				D3188A661B6E994E00323DC0 /* Main.storyboard */,
+				D355D97B1BA7DD3F00DADD72 /* Main.storyboard */,
 				D3F8ACF11B696FB00070C097 /* Images.xcassets */,
 				ECB861E41B77DBFF00503C50 /* Resources */,
 				D32350601B697B9D00939F03 /* Frameworks */,
@@ -892,7 +906,6 @@
 			files = (
 				ECB861F81B77DCB000503C50 /* 289-SimpleBeep.mp3 in Resources */,
 				ECB861FB1B77DCB000503C50 /* button-14.mp3 in Resources */,
-				D3188A671B6E994E00323DC0 /* Main.storyboard in Resources */,
 				ECB861F31B77DCB000503C50 /* 124-DeleteWhoosh.mp3 in Resources */,
 				ECB861F41B77DCB000503C50 /* 212-buttonclick52.mp3 in Resources */,
 				ECB861F51B77DCB000503C50 /* 217-buttonclick03.mp3 in Resources */,
@@ -908,6 +921,7 @@
 				ECB861FD1B77DCB000503C50 /* se_tap.m4a in Resources */,
 				D3F8ACF51B696FB00070C097 /* LaunchScreen.xib in Resources */,
 				D3188A751B6E9B1500323DC0 /* CustomTableViewCell.xib in Resources */,
+				D355D97C1BA7DD3F00DADD72 /* Main.storyboard in Resources */,
 				D3F8ACF21B696FB00070C097 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1044,10 +1058,12 @@
 				D3E8108A1B710690004AE5A9 /* RemindersIC.swift in Sources */,
 				D3188A6D1B6E9ADB00323DC0 /* MailComposer.swift in Sources */,
 				D3188A701B6E9AE400323DC0 /* MessageCode.swift in Sources */,
+				D3B6F5F91BA60B7E0052B639 /* DictateManagerIC.swift in Sources */,
 				D3A0F9FD1B69F0BB00F1FEDA /* EventCode.swift in Sources */,
 				D323505F1B697B0200939F03 /* DictateCode.swift in Sources */,
 				D3D98AF51BA54D5B00BA1901 /* FavoritesManager.swift in Sources */,
 				D343956E1BA326E6002D98EA /* tableRowController.swift in Sources */,
+				D3FA08051BA7F6EB006A91C2 /* ReminderTableRowController.swift in Sources */,
 				D3F8AD141B696FCD0070C097 /* MainIC.swift in Sources */,
 				D3E810881B70FEA0004AE5A9 /* SettingsIC.swift in Sources */,
 				D3188A6A1B6E9AA700323DC0 /* MailComposer3.swift in Sources */,

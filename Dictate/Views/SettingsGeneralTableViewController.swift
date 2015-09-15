@@ -7,8 +7,20 @@
 //
 
 import UIKit
+import Parse
 
 class SettingsGeneralTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    @IBAction func buttonLogout(sender: AnyObject) {
+        PFUser.logOut()
+        var currentUser = PFUser.currentUser() // this will now be nil
+        
+        println("p18 currentUser: \(currentUser)")
+        
+        self.performSegueWithIdentifier("Logout", sender: self)
+    }
+    
+
 
     override func viewDidLoad() {
         super.viewDidLoad()

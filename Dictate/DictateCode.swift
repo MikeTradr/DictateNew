@@ -1056,7 +1056,7 @@ class DictateCode: NSObject {
                     time = "No Time Found"
                 }
                 
-    // ____ "day" word ____________________________________
+// ____ "day" word ____________________________________
                 
                 let subStringDay = (word as NSString).containsString("day")     // note: could be today also!
                 if(subStringDay){

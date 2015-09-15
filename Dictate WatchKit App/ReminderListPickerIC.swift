@@ -50,50 +50,78 @@ class ReminderListPickerIC: WKInterfaceController {
        // var allReminderItems: Array<EKCalendar> = ReminderManager.createReminderArray //get all individual reminders
 
         
-         var allReminders: Array<EKCalendar>= self.eventStore.calendarsForEntityType(EKEntityTypeReminder) as! Array<EKCalendar>
+         var allReminderLists: Array<EKCalendar>= self.eventStore.calendarsForEntityType(EKEntityTypeReminder) as! Array<EKCalendar>
         
         if defaults?.objectForKey("reminderStringArray") != nil {
             reminderLists = defaults?.objectForKey("reminderStringArray") as! [String] //array of the items
             
-            println("w30 reminderLists: \(reminderLists)")
-            println("w31 reminderLists.count: \(reminderLists.count)")
+          //  println("w30 reminderLists: \(reminderLists)")
+          //  println("w31 reminderLists.count: \(reminderLists.count)")
             println("-----------------------------------------")
             
-            println("w46 allReminders: \(allReminders)")
-            println("w47 allReminders.count: \(allReminders.count)")
+            println("w46 allReminders: \(allReminderLists)")
+            println("w47 allReminders.count: \(allReminderLists.count)")
             println("-----------------------------------------")
             
         }
         
-        table.setNumberOfRows(reminderLists.count, withRowType: "tableRow")
+        table.setNumberOfRows(allReminderLists.count, withRowType: "tableRow")
 
         println("p36 he here?")
         println("w37 reminderLists: \(reminderLists)")
-        println("w38 allReminders: \(allReminders)")
+        println("w38 allReminders: \(allReminderLists)")
 
 
-        for (index, title) in enumerate(allReminders) {
+        for (index, title) in enumerate(allReminderLists) {
             println("-----------------------------------")
             println("w40 index: \(index)")
             println("w41 title: \(title)")
             
             let row = table.rowControllerAtIndex(index) as! tableRowController
             
-            let reminder = allReminders[index]
+            let reminder = allReminderLists[index]
    
+            //row.tableRowLabel.setText(title)  //works for string array
+            
+            row.tableRowLabel.setText(reminder.title)
+            row.tableRowLabel.setTextColor(UIColor(CGColor: reminder.CGColor))
+            row.verticalBar.setBackgroundColor(UIColor(CGColor: reminder.CGColor))
+            
+            println("w45 row.tableRowLabel.setText(reminder.title) \(row.tableRowLabel.setText(reminder.title))")
+            
+        }
+
+        //Same loop as above?
+/*
+        for var i = 0; i < 16; i++ {
+            
+      //  for var i = 0; i < allReminders.count; i++ {
+
+            
+             println("w96 allReminders.count: \(allReminders.count)")
+            println("w96 i: \(i)")
+
+            
+            
+            let row = table.rowControllerAtIndex(i) as! tableRowController
+            
+            println("w96 row: \(row)")
+
+            let reminder = allReminders[i]
+            
+            println("w96 reminder: \(reminder)")
+
+            
             //row.tableRowLabel.setText(title)  //works for string array
             
             row.tableRowLabel.setText(reminder.title)
             
             println("w45 row.tableRowLabel.setText(reminder.title) \(row.tableRowLabel.setText(reminder.title))")
             
-        }
-        
-        //Same loop as above?
-        
-        for var i = 0; i < allReminders.count; i++ {
-            
-            let row = table.rowControllerAtIndex(i) as! tableRowController
+            println("w96 ----------------------------)")
+
+
+
          /*
             row.lightbulbImage.setImageNamed(lightbulbs[i]["state"])
             if lightbulbs[i]["state"] == "off" {
@@ -103,7 +131,7 @@ class ReminderListPickerIC: WKInterfaceController {
             }
         */
         }
-        
+ */
     }
     
   
@@ -157,6 +185,7 @@ class ReminderListPickerIC: WKInterfaceController {
             println("w64 allRemindersHardcoded.count: \(allRemindersHardcoded.count)")
         }
 */
+       //TODO Anil TODO Mike needed? or willActivate instead?
         loadTableData()
         
         println("p79 he here?")

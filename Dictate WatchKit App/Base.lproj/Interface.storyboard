@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="7706" systemVersion="14D131" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ei9-cN-Wbe">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ei9-cN-Wbe">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="7701"/>
@@ -280,7 +280,7 @@
                     <items>
                         <table alignment="left" id="ZnV-Oh-HUO">
                             <items>
-                                <tableRow identifier="tableRow" id="k7b-R0-QbO" customClass="ReminderTableRowController" customModule="Dictate_WatchKit_Extension">
+                                <tableRow identifier="tableRow" id="k7b-R0-QbO" customClass="ReminderListsTableRC" customModule="Dictate_WatchKit_Extension">
                                     <group key="rootItem" width="1" height="0.0" alignment="left" id="X7O-jE-2AN">
                                         <items>
                                             <group width="2" height="26" alignment="left" verticalAlignment="center" id="ytx-zs-j0Z" userLabel="VerticalBar">

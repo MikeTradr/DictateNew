@@ -10,7 +10,7 @@ import UIKit
 import Parse
 
 class LoginViewController: UIViewController {
-
+    
     var window: UIWindow?
     
     var signupActive = true
@@ -20,7 +20,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var password: UITextField!
     
     @IBOutlet weak var email: UITextField!
-   
+    
     @IBOutlet weak var signupButton: UIButton!
     
     @IBOutlet weak var registeredText: UILabel!
@@ -52,7 +52,7 @@ class LoginViewController: UIViewController {
         
     }
     
-//TODO Temp force login for testing... and Parse Mike username problems lol...
+    //TODO Temp force login for testing... and Parse Mike username problems lol...
     
     @IBAction func buttonForceGo(sender: AnyObject) {
         
@@ -93,9 +93,9 @@ class LoginViewController: UIViewController {
             }
             
         })
-
         
-    
+        
+        
         
         
         self.performSegueWithIdentifier("login", sender: self)
@@ -107,7 +107,7 @@ class LoginViewController: UIViewController {
         
         println("p44 We here buttonSignUp?")
         
-       //TODO  if username.text == "" || password.text == "" || email.text == "" {
+        //TODO  if username.text == "" || password.text == "" || email.text == "" {
         
         if username.text == "" || password.text == "" {
             
@@ -131,14 +131,14 @@ class LoginViewController: UIViewController {
                 user.username = username.text
                 user.password = password.text
                 user.email = email.text
-        //TODO so we can see password so store password in our own field on parse, userpassword
+                //TODO so we can see password so store password in our own field on parse, userpassword
                 //user.userpassword = password.text
                 
                 
                 user.signUpInBackgroundWithBlock({ (success, error) -> Void in
                     
                     println("88 We here user.signUpInBackgroundWithBlock")
-
+                    
                     self.activityIndicator.stopAnimating()
                     UIApplication.sharedApplication().endIgnoringInteractionEvents()
                     
@@ -212,7 +212,7 @@ class LoginViewController: UIViewController {
     @IBAction func buttonLogin(sender: AnyObject) {
         
         println("p134 We here buttonLogin?")
-
+        
         
         if signupActive == true {
             
@@ -223,7 +223,7 @@ class LoginViewController: UIViewController {
             loginButton.setTitle("Sign Up", forState: UIControlState.Normal)
             
             signupActive = false
-        
+            
         } else {
             
             signupButton.setTitle("Sign Up", forState: UIControlState.Normal)
@@ -242,7 +242,7 @@ class LoginViewController: UIViewController {
         let tabBarController = segue.destinationViewController as! UITabBarController
         tabBarController.selectedIndex = 2
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -255,30 +255,30 @@ class LoginViewController: UIViewController {
         PFUser.logOut()
         
         println("194 PFUser.currentUser(): \(PFUser.currentUser())")
-
+        
         
         
         
         if PFUser.currentUser() != nil {
             // TODO commented out below for testing username problem 081715 MJD
-          //  self.performSegueWithIdentifier("login", sender: self)
-        }  
+            //  self.performSegueWithIdentifier("login", sender: self)
+        }
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
+    
     /*
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // Get the new view controller using segue.destinationViewController.
+    // Pass the selected object to the new view controller.
     }
     */
-
+    
 }

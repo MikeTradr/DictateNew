@@ -19,18 +19,18 @@ class vcTest1: UIViewController {
     
     var output = ""
     var reminderTitle = ""
-
+    
     // Create a MessageComposer
     let messageComposer = MessageComposer()
-
- //   @IBOutlet weak var resultStartDate: UITextField!
     
- //   @IBOutlet weak var resultEndDate: UITextField!
+    //   @IBOutlet weak var resultStartDate: UITextField!
     
-
- //   let defaults = NSUserDefaults.standardUserDefaults()
- //   resultStartDate = defaults.stringForKey("startDT")
-
+    //   @IBOutlet weak var resultEndDate: UITextField!
+    
+    
+    //   let defaults = NSUserDefaults.standardUserDefaults()
+    //   resultStartDate = defaults.stringForKey("startDT")
+    
     @IBOutlet weak var resultType: UITextField!
     @IBOutlet weak var resultDay: UITextField!
     @IBOutlet weak var resultTime: UITextField!
@@ -42,7 +42,7 @@ class vcTest1: UIViewController {
     
     @IBOutlet weak var resultAlert: UITextField!
     @IBOutlet weak var resultRepeat: UITextField!
-
+    
     @IBOutlet weak var resultMessage: UITextView!
     @IBOutlet weak var resultError: UITextView!
     
@@ -58,7 +58,7 @@ class vcTest1: UIViewController {
     @IBOutlet weak var labelRepeat: UILabel!
     
     @IBOutlet weak var resultMultiLine1: UITextView!
-
+    
     
     
     
@@ -75,14 +75,14 @@ class vcTest1: UIViewController {
     let mainType:String     = NSUserDefaults.standardUserDefaults().stringForKey("mainType") ?? "Event"
     var actionType:String   = NSUserDefaults.standardUserDefaults().stringForKey("actionType") ?? "Event"
     
-// TODO Anil why can't have ! instead of the ?? got unwrapped nil error as it wa nil initially
+    // TODO Anil why can't have ! instead of the ?? got unwrapped nil error as it wa nil initially
     //var listName:String   = NSUserDefaults.standardUserDefaults().stringForKey("listName") ?? "Today"  //listName is Reminder Lsit naem to save reminder to
     
-  
-
     
-//#### my functions #################################
-
+    
+    
+    //#### my functions #################################
+    
     
     func switchScreen(scene: String) {
         let mainStoryboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
@@ -105,7 +105,7 @@ class vcTest1: UIViewController {
     
     
     func createReminder() {
-    
+        
         //Don't need to parse again? commented out 7/4/15 8 am
         //let (startDT, endDT, output, outputNote, day, calendarName) = DictateCode().parse(str)
         
@@ -118,7 +118,7 @@ class vcTest1: UIViewController {
     }
     
     
-    func playSound(sound: NSURL){        
+    func playSound(sound: NSURL){
         var error:NSError?
         audioPlayer = AVAudioPlayer(contentsOfURL: sound, error: &error)
         audioPlayer.prepareToPlay()
@@ -134,9 +134,9 @@ class vcTest1: UIViewController {
         }
     }
     
-
-//#### End my functions #################################
-
+    
+    //#### End my functions #################################
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -148,7 +148,7 @@ class vcTest1: UIViewController {
         rightSwipe.direction = .Right
         view.addGestureRecognizer(leftSwipe)
         view.addGestureRecognizer(rightSwipe)
-
+        
         // moved all to viewWillAppear...
     }
     
@@ -159,7 +159,7 @@ class vcTest1: UIViewController {
         //General.playSound(alertSound3!)
         
         playSound(alertSound3)
-
+        
         // Do any additional setup after loading the view.
         
         println("****p83 VIEWDIDLOAD processed?????: \(self.actionType)")
@@ -192,8 +192,8 @@ class vcTest1: UIViewController {
         
         var reminderList:String   = defaults.stringForKey("reminderList")!
         var reminderAlarm   = defaults.objectForKey("reminderAlarm")! as! NSDate
-
-
+        
+        
         
         println("p111Main day: \(day)")
         println("p111Main phone: \(phone)")
@@ -215,7 +215,7 @@ class vcTest1: UIViewController {
         println("p111Main reminderList: \(reminderList)")
         println("p111Main reminderArray: \(reminderArray)")
         println("p111Main reminderAlarm: \(reminderAlarm)")
-
+        
         
         println("p112Main Representation: \(NSUserDefaults.standardUserDefaults().dictionaryRepresentation())")
         
@@ -277,7 +277,7 @@ class vcTest1: UIViewController {
         let swiftColor = UIColor(red: 255, green: 165, blue: 0)
         let moccasin = UIColor(red: 255, green: 228, blue: 181)     //light biege color, for Word List
         let apricot = UIColor(red: 251, green: 206, blue: 177)     //light biege color, for Phrase List
-
+        
         
         switch (actionType){
         case "Reminder":
@@ -322,7 +322,7 @@ class vcTest1: UIViewController {
                 labelAlert.text = "Alarm"               // default Alert
                 resultAlert.text = fullDT
             }
-     
+            
             break;
             
         case "Event":
@@ -335,8 +335,8 @@ class vcTest1: UIViewController {
             
             //var reminderTitle:String = defaults.stringForKey("title")!
             var reminderTitle:String    = defaults.stringForKey("reminderList")! //Sets Reminder Title
-
-
+            
+            
             resultType.backgroundColor = moccasin
             buttonCreateOutlet.backgroundColor = moccasin
             buttonCreateOutlet.setTitle("Create New List", forState: UIControlState.Normal)
@@ -346,10 +346,10 @@ class vcTest1: UIViewController {
             resultStartDate.text = ""
             let stringOutput = ", ".join(wordArrTrimmed)
             
-        // ____ Data Used _____________________________________
+            // ____ Data Used _____________________________________
             labelDay.text       = "Title"   // default Day
             labelTime.text      = "Items"   // default Time
-
+            
             resultDay.text      = reminderTitle
             resultTime.text     = stringOutput
             resultMultiLine1.text = stringOutput
@@ -361,8 +361,8 @@ class vcTest1: UIViewController {
             labelCal.text = ""
             labelAlert.text = ""
             labelRepeat.text = ""
-
-        // ____ Labels _____________________________________
+            
+            // ____ Labels _____________________________________
             if labelDay.text == "" { labelDay.hidden = true } else { labelDay.hidden = false }
             if labelTime.text == "" { labelTime.hidden = true } else { labelTime.hidden = false }
             if labelTitle.text == "" { labelTitle.hidden = true } else { labelTitle.hidden = false }
@@ -377,7 +377,7 @@ class vcTest1: UIViewController {
             if labelEndDate.text == "" { labelEndDate.hidden = true } else { labelEndDate.hidden = false }
             if labelAlert.text == "" { labelAlert.hidden = true } else { labelAlert.hidden = false }
             if labelRepeat.text == "" { labelRepeat.hidden = true } else { labelRepeat.hidden = false }
-       /*
+            /*
             labelCal.hidden         = true
             labelTitle.hidden       = true
             labelPhone.hidden       = true
@@ -385,15 +385,15 @@ class vcTest1: UIViewController {
             labelEndDate.hidden     = true
             labelRepeat.hidden      = true
             labelAlert.hidden       = true
-*/
+            */
             
-        // ____ Results _____________________________________
+            // ____ Results _____________________________________
             //resultDay.hidden      = true
             //resultTime.hidden     = true
             resultCalendar.hidden   = true
             resultTitle.hidden      = true
             resultPhone.hidden      = true
-           // resultStartDate.hidden  = true
+            // resultStartDate.hidden  = true
             resultEndDate.hidden    = true
             resultRepeat.hidden     = true
             resultAlert.hidden      = true
@@ -402,7 +402,7 @@ class vcTest1: UIViewController {
                 labelAlert.hidden   = false
                 resultAlert.hidden  = false
             }
-
+            
             break;
             
         case "New OneItem List":
@@ -455,7 +455,7 @@ class vcTest1: UIViewController {
             buttonCreateOutlet.setTitle("Create Phrase List", forState: UIControlState.Normal)
             resultCalendar.text = ""
             resultTitle.text = reminderTitle
-
+            
             let stringOutput = ", ".join(wordArrTrimmed)
             
             resultDay.text = stringOutput
@@ -469,14 +469,14 @@ class vcTest1: UIViewController {
             var frame = resultMultiLine1.frame
             
             println("p364 contentSize.height:  \(contentSize.height)")
-
+            
             
             frame.size.height = contentSize.height
             resultMultiLine1.frame = frame
             
             println("p364 resultMultilne1.frame:  \(resultMultiLine1.frame)")
-
-
+            
+            
             
             
             resultEndDate.text = ""
@@ -495,7 +495,7 @@ class vcTest1: UIViewController {
             labelRepeat.hidden = true
             labelCal.hidden = true
             labelAlert.hidden = true
-      
+            
             //resultDay.hidden = true
             resultTime.hidden = true
             resultPhone.hidden = true
@@ -504,7 +504,7 @@ class vcTest1: UIViewController {
             resultRepeat.hidden = true
             resultCalendar.hidden = true
             resultAlert.hidden = true
-           
+            
             break;
             
         default:
@@ -514,35 +514,35 @@ class vcTest1: UIViewController {
             
             break;
         }
-     
+        
     }
-
-
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
     
-  
+    
     
     @IBAction func buttonCreate(sender: AnyObject) {
         
         var alertSound1 = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("217-buttonclick03", ofType: "mp3")!)
-      //  General.playSound(alertSound3!)
+        //  General.playSound(alertSound3!)
         
-      playSound(alertSound1!)
-
+        playSound(alertSound1!)
+        
         
         // CHECK Do I have to call this again??? else 12/12/2014 event
         //Don't need to parse again? commented out 7/4/15 8 am
-
+        
         //let (startDT, endDT, output, outputNote, day, calendarName) = DictateCode().parse(str)
         
         //println("### pl240 startDT: \(startDT)")
         
-       // let defaults = NSUserDefaults.standardUserDefaults()
-       var actionType:String    = defaults.stringForKey("actionType")!
+        // let defaults = NSUserDefaults.standardUserDefaults()
+        var actionType:String    = defaults.stringForKey("actionType")!
         
         println("p237 vcTest1, actionType: \(actionType)")
         
@@ -559,7 +559,7 @@ class vcTest1: UIViewController {
             
             var calendarName = ""
             var reminderCreatedFlag = false
-    
+            
             var reminderArray       = defaults.objectForKey("reminderArray") as! [String] //array of the items
             var reminderList:String     = defaults.stringForKey("reminderList")!
             
@@ -568,7 +568,7 @@ class vcTest1: UIViewController {
             
             if reminderList == "default" {
                 calendarName = reminderList
-
+                
                 output      = defaults.stringForKey("output")!
                 var outputArray:[String] = Array(arrayLiteral: output)  //make output into Array for func call below
                 
@@ -590,7 +590,7 @@ class vcTest1: UIViewController {
                 var lengthReminderList = count(reminderList)
                 //println("p537 lengthList________: \(lengthList)")
                 //println("p537 lengthReminderList: \(lengthReminderList)")
-
+                
                 if (reminderList == list) {
                     println("p528 we in condition reminderList: \(reminderList)")
                     calendarName = reminderList
@@ -610,13 +610,13 @@ class vcTest1: UIViewController {
                     resultMessage.text = "Reminder created on your \(calendarName.capitalizedString) list"
                     reminderCreatedFlag = true
                     break;
-                   
+                    
                 }
             }
             
             if !reminderCreatedFlag {   // If is false
                 println("p571  we here reminderCreatedFlag: \(reminderCreatedFlag)")
-
+                
                 calendarName = reminderList
                 
                 output      = defaults.stringForKey("output")!
@@ -625,7 +625,7 @@ class vcTest1: UIViewController {
                 ReminderManager.sharedInstance.createNewReminderList(calendarName, items: outputArray)
                 resultMessage.text = "Reminder created on your New \(calendarName.capitalizedString) list"
             }
-
+            
             break;
             
 // ____ Event Case ____________________________________
@@ -633,7 +633,7 @@ class vcTest1: UIViewController {
             println("p255 in Event Switch")
             
             EventCode().createEvent()
-
+            
             resultMessage.text = "Event created on your \(calendarName.capitalizedString) calendar!"
             break;
             
@@ -642,19 +642,19 @@ class vcTest1: UIViewController {
             
             var calendarName    = defaults.stringForKey("reminderList") //Sets Reminder Title
             var wordArrTrimmed  = defaults.objectForKey("wordArrTrimmed") as! [String] //array of the items
-
+            
             ReminderManager.sharedInstance.createNewReminderList(calendarName!, items: wordArrTrimmed)
             
             resultMessage.text = "Your List \(calendarName!) has been created"
             
             break;
             
-            
+// ____ New OneItem List ____________________________________
         case  "New OneItem List" :
             println("p543 in New OneItem List Switch")
             
             var calendarName    = defaults.stringForKey("reminderList") //Sets Reminder Title
-
+            
             output      = defaults.stringForKey("output")!
             var outputArray:[String] = Array(arrayLiteral: output)
             
@@ -664,6 +664,7 @@ class vcTest1: UIViewController {
             
             break;
             
+// ____ Phrase List ____________________________________
         case "Phrase List":
             println("p378 in phraseList Switch")
             
@@ -673,7 +674,7 @@ class vcTest1: UIViewController {
             ReminderManager.sharedInstance.createNewReminderList(calendarName!, items: wordArrTrimmed)
             
             resultMessage.text = "Your List \(calendarName!) has been created"
-  
+            
             break;
             
         case "Note":
@@ -694,7 +695,7 @@ class vcTest1: UIViewController {
         var strRaw      = defaults.stringForKey("strRaw")
         output          = defaults.stringForKey("output")!
         calendarName    = defaults.stringForKey("calendarName")!
-
+        
         
         println("p485 strRaw: \(strRaw)")
         println("p485 output: \(output)")
@@ -708,6 +709,8 @@ class vcTest1: UIViewController {
             fullDT = ""
             fullDTEnd = ""
         }
+
+// ____ Save to Parse Database ____________________________________
         
         let rawDataObject = PFObject(className: "UserData")
         rawDataObject["rawString"] = strRaw
@@ -717,60 +720,61 @@ class vcTest1: UIViewController {
         rawDataObject["actionType"] = actionType
         rawDataObject["calendarName"] = calendarName
         
-//TODO get these two fields from code!
+        //TODO get these two fields from code!
         //TODO see here:
         println("p478 Device and Phone munber in here: \(NSUserDefaults.standardUserDefaults().dictionaryRepresentation())")
         
         rawDataObject["device"] = "iPhone"               //TODO hardcoded get device from code?
         rawDataObject["userPhoneNumber"] = "608-242-7700"               //TODO hardcoded get device from code?
         
-    //TODO get this from login Screen, hard coded for now...
+        //TODO get this from login Screen, hard coded for now...
         
         println("p374 PFUser.currentUser(): \(PFUser.currentUser())")
         
-    //TODO fix PFuser when is nil can be nil???
-
+        //TODO fix PFuser when is nil can be nil???
+        
         if PFUser.currentUser() == nil {
             rawDataObject["userName"] = "Mike Coded"
         } else {
-           // rawDataObject["userName"] = "Mike Hard Coded"
+            // rawDataObject["userName"] = "Mike Hard Coded"
             
             println("p383 PFUser.currentUser().username: \(PFUser.currentUser()!.username)")
-
             
-        // todo bombs below here.
+            
+            // todo bombs below here.
             rawDataObject["userName"] = PFUser.currentUser()!.username
         }
         
         println("p384 we here? ")
-
+        
         //rawDataObject["userName"] = "Mike Coded"
         
-    // TODO used to have this alone:  rawDataObject["userName"] = PFUser.currentUser()?.username
-
+        // TODO used to have this alone:  rawDataObject["userName"] = PFUser.currentUser()?.username
+        
         
         
         var query = PFQuery(className:"UserData")
-    //TODO somehow get and save email to parse database
-       // query.whereKey(“username”, equalTo: PFUser.currentUser()?.username)
+        //TODO somehow get and save email to parse database
+        // query.whereKey(“username”, equalTo: PFUser.currentUser()?.username)
         
         println("p358 query: \(query)")
-
+        
         println("p354 PFUser.currentUser()?.email: \(PFUser.currentUser()?.email)")
         
-       // rawDataObject["userEmail"] = PFUser.currentUser()?.email
-
+        // rawDataObject["userEmail"] = PFUser.currentUser()?.email
+        
         rawDataObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
             println("p362 vcTest1 rawDataObject has been saved.")
         }
+        
+// ____ End Save to Parse Database ____________________________________
 
         
-
         General().cleardata()
-      
         
-         defaults.setObject(eventDuration, forKey: "eventDuration")
-
+        
+        defaults.setObject(eventDuration, forKey: "eventDuration")
+        
         //resultMessage.text = "Event created on your \(calendarName.capitalizedString) calendar!"
         
         //resultMessageTopRight.text = "Dicatate has created your event :) "
@@ -780,7 +784,7 @@ class vcTest1: UIViewController {
         actionType = ""
         defaults.setObject(actionType, forKey: "actionType")
         
-       
+        
         
         General().delay(2.0) {
             // do stuff
@@ -791,18 +795,18 @@ class vcTest1: UIViewController {
             self.tabBarController?.selectedIndex = 2
             
         }
-      
+        
     }
-
+    
     
     @IBAction func buttonEdit(sender: AnyObject) {
         
-       // switchScreen("EditEvent")
+        // switchScreen("EditEvent")
         //switchScreen()
-
+        
     }
     
-
+    
     @IBAction func buttonCancel(sender: AnyObject) {
         
         println("p383 in buttonCancel")
@@ -811,7 +815,7 @@ class vcTest1: UIViewController {
         //  General.playSound(alertSound3!)
         
         playSound(alertSound124!)
-
+        
         General().cleardata()
         
         resultType.text = ""
@@ -826,7 +830,7 @@ class vcTest1: UIViewController {
         resultCalendar.text = calendarName
         
         self.tabBarController?.selectedIndex = 2
-  
+        
     }
     
     override func viewWillDisappear(animated:Bool) {
@@ -867,18 +871,18 @@ class vcTest1: UIViewController {
         resultRepeat.hidden = false
         
     }
-
-
+    
+    
     /*
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // Get the new view controller using segue.destinationViewController.
+    // Pass the selected object to the new view controller.
     }
     */
-
+    
 }
 
 

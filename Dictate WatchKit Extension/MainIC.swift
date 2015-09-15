@@ -13,7 +13,7 @@ import Parse
 import AVFoundation
 //import MessageUI
 
-
+/*
 var results = []
 
 // ---- chagne strigngs here for testing ---
@@ -63,7 +63,7 @@ var outputNote:String       = strRaw
 var fullDT:String       = ""
 var fullDTEnd:String    = ""
 
-
+*/
 
 
 // ---- end set Global Varbiables ----
@@ -122,6 +122,8 @@ class MainIC: WKInterfaceController {
     
     
 //#### functions #################################
+    
+ 
     
     internal func grabvoice() -> (NSDate, NSDate, String, String, String, String, String)  {  //startDT, endDT, output, outputNote, day, calendarName, actionType
         //added actionType above
@@ -296,20 +298,23 @@ class MainIC: WKInterfaceController {
         
         let (startDT, endDT, output, outputNote, day, calendarName, actionType) = grabvoice()
         
+        //TODO Anil can we call the manager type ????
+    //    let (startDT, endDT, output, outputNote, day, calendarName, actionType) = DictateManagerIC.sharedInstance.grabVoice()
+        
     }
     
     
-    @IBAction func menuPreferences() {
+    @IBAction func menuSettings() {
         println("p257 force touch tapped, Preferneces Item")
         //TODO add segue to prefs screen on watch???
         
-       // pushControllerWithName("ReminderPicker", context: "Dictate")
+        // pushControllerWithName("ReminderPicker", context: "Dictate")
         
         presentControllerWithName("ReminderPicker", context: nil)
-
+        
         
         //pushControllerWithName("Preferences", context: "Dictate")
-
+        
     }
     
     
@@ -438,6 +443,7 @@ class MainIC: WKInterfaceController {
             fullDTEnd = ""
         }
  
+//---- Save to Parse Database ----------------------------------------
  
         let rawDataObject = PFObject(className: "UserData")
         rawDataObject["rawString"] = strRaw
@@ -451,8 +457,6 @@ class MainIC: WKInterfaceController {
         rawDataObject["device"] = "Watch"               //TODO hardcoded get device from code?
         rawDataObject["userPhoneNumber"] = "watch phone number"               //TODO hardcoded get device from code?
 
-        
-        
         //TODO get this from login Screen, hard coded for now...
         
         println("p349 PFUser.currentUser(): \(PFUser.currentUser())")
@@ -478,12 +482,12 @@ class MainIC: WKInterfaceController {
             println("p362 vcTest1 rawDataObject has been saved.")
         }
         
+//---- End Save to Parse Database ----------------------------------------
         
         cleardata()
         
         println("462 we here?")
 
-        
         General().delay(3.0) {
             // do stuff
             self.myLabel.setTextColor(UIColor.yellowColor())
@@ -552,14 +556,11 @@ class MainIC: WKInterfaceController {
         
         
  //TODO FIX THIS BOMBS MIKE USED TO WORK  LOL
-  /*
+  
         Parse.enableLocalDatastore()
       //  PFUser.enableAutomaticUser()
         
         // Enable data sharing in app extensions.
-       // Parse.enableDataSharingWithApplicationGroupIdentifier("group.com.thatsoft.dictateApp",
-       //     containingApplication: "com.thatsoft.dictateApp")
-        // Setup Parse
  
         Parse.enableDataSharingWithApplicationGroupIdentifier("group.com.thatsoft.dictateApp",
             containingApplication: "com.thatsoft.dictateApp")
@@ -568,7 +569,7 @@ class MainIC: WKInterfaceController {
             clientKey: "EHeeek4uXhJQi0vXPBba945A4h0LQ4QddEGW8gSs")
         
         PFUser.enableAutomaticUser()
-*/
+
 /*
         // Enable data sharing in app extensions.
         Parse.enableDataSharingWithApplicationGroupIdentifier("group.com.thatsoft.dictateApp", containingApplication: "com.thatsoft.dictateApp")

@@ -824,11 +824,11 @@
                         <viewControllerLayoutGuide type="bottom" id="Oz4-Z3-Gvx"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="QSQ-hc-T3O">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Welcome to Dictate™" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k8S-TC-EsF">
-                                <rect key="frame" x="23" y="61" width="274" height="21"/>
+                                <rect key="frame" x="70" y="61" width="274" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="274" id="o1E-bP-Vri"/>
                                 </constraints>
@@ -846,7 +846,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FcM-TN-DLB">
-                                <rect key="frame" x="50" y="206" width="220" height="30"/>
+                                <rect key="frame" x="97" y="206" width="220" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="220" id="yuh-gW-VKq"/>
                                 </constraints>
@@ -854,7 +854,7 @@
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eMK-eQ-fB3">
-                                <rect key="frame" x="50" y="253" width="220" height="30"/>
+                                <rect key="frame" x="97" y="253" width="220" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="220" id="Qk1-AP-5I3"/>
                                 </constraints>
@@ -862,7 +862,7 @@
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rqm-qt-CrN">
-                                <rect key="frame" x="109" y="301" width="102" height="30"/>
+                                <rect key="frame" x="156" y="301" width="102" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="102" id="Ug6-Md-r5n"/>
                                 </constraints>
@@ -897,7 +897,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HRq-41-xKn">
-                                <rect key="frame" x="160" y="339" width="0.0" height="0.0"/>
+                                <rect key="frame" x="207" y="339" width="0.0" height="0.0"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="1" id="hDC-yv-GXy"/>
                                 </constraints>
@@ -906,7 +906,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="R1o-ml-OFy">
-                                <rect key="frame" x="50" y="155" width="220" height="30"/>
+                                <rect key="frame" x="97" y="155" width="220" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="220" id="CQD-Xx-zEi"/>
                                 </constraints>
@@ -970,6 +970,7 @@
                             <constraint firstItem="I7x-DR-gS6" firstAttribute="top" secondItem="k8S-TC-EsF" secondAttribute="bottom" constant="21" id="q8s-MF-6UI"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="9hD-M4-IQg"/>
                     <connections>
                         <outlet property="email" destination="eMK-eQ-fB3" id="Wdn-Le-Gr1"/>
                         <outlet property="loginButton" destination="QPx-wW-FiG" id="qPE-Yz-3jC"/>
@@ -982,7 +983,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bcF-x0-H8r" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1058" y="263"/>
+            <point key="canvasLocation" x="-1074" y="111"/>
         </scene>
         <!--Prefs-->
         <scene sceneID="W8F-yY-z2E">
@@ -2727,6 +2728,17 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HyA-R7-sED">
+                                                    <rect key="frame" x="317" y="1" width="89" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <state key="normal" title="Logout">
+                                                        <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="buttonLogout:" destination="vey-2F-enW" eventType="touchUpInside" id="Vwz-Ft-qJJ"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.60000002379999995" green="0.60000002379999995" blue="0.60000002379999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -2746,10 +2758,15 @@
                             <outlet property="delegate" destination="vey-2F-enW" id="qWM-B6-nhB"/>
                         </connections>
                     </tableView>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" title="General" id="fWS-ma-xKz">
                         <barButtonItem key="backBarButtonItem" title="Settings" id="CUS-hS-YeV"/>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                    <connections>
+                        <segue destination="JhY-cq-KWn" kind="push" identifier="Logout" id="jfz-OU-XoP"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RqW-lR-R54" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

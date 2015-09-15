@@ -45,6 +45,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         PFUser.enableAutomaticUser()
         
+        // Enable data sharing in main app.
+        Parse.enableDataSharingWithApplicationGroupIdentifier("group.com.thatsoft.dictateApp")
+
+
+      //  Parse.enableDataSharingWithApplicationGroupIdentifier("group.com.thatsoft.dictateApp",
+       //     containingApplication: "com.thatsoft.dictateApp")
+        
+        // Setup Parse
+        Parse.setApplicationId("1wwwPAQ0Of2Fp6flotUw4YzN64HFDmy3ijAlQZKE",
+            clientKey: "EHeeek4uXhJQi0vXPBba945A4h0LQ4QddEGW8gSs")
+        
         //        let defaultACL = PFACL();
         //
         //        // If you would like all objects to be private by default, remove this line.
@@ -100,11 +111,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         // Enable data sharing in main app.
-        Parse.enableDataSharingWithApplicationGroupIdentifier("group.com.thatsoft.dictateApp")
+     //   Parse.enableDataSharingWithApplicationGroupIdentifier("group.com.thatsoft.dictateApp")
         
         // Setup Parse
-        Parse.setApplicationId("1wwwPAQ0Of2Fp6flotUw4YzN64HFDmy3ijAlQZKE",
-            clientKey: "EHeeek4uXhJQi0vXPBba945A4h0LQ4QddEGW8gSs")
+       // Parse.setApplicationId("1wwwPAQ0Of2Fp6flotUw4YzN64HFDmy3ijAlQZKE", clientKey: "EHeeek4uXhJQi0vXPBba945A4h0LQ4QddEGW8gSs")
         
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent    //set top menu to white text
         

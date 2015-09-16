@@ -17,9 +17,7 @@ class ReminderItemsIC: WKInterfaceController {
    // var allCalendarLists: Array<EKCalendar> = []
     
     let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp") // from course
-    let eventStore = EKEventStore()
-
-   // var allReminders: Array<EKCalendar> = []
+    var allReminders: Array<EKReminder> = []
     
    var reminderListID: String = ""
     
@@ -38,26 +36,25 @@ class ReminderItemsIC: WKInterfaceController {
   
     func loadTableData () {
         
-        let allCalendarLists: Array<EKCalendar> = self.eventStore.calendarsForEntityType(EKEntityTypeEvent) as! Array<EKCalendar>
         
-        if allCalendarLists.count >= 0 {
-            table.setNumberOfRows(allCalendarLists.count, withRowType: "tableRow")
+        if self.allReminders.count >= 0 {
+            table.setNumberOfRows(allReminders.count, withRowType: "tableRow")
         }
         
-        println("w45 allCalendarLists: \(allCalendarLists)")
-        println("w46 allCalendarLists.count: \(allCalendarLists.count)")
+        println("w45 allCalendarLists: \(allReminders)")
+        println("w46 allCalendarLists.count: \(allReminders.count)")
         
-        for (index, title) in enumerate(allCalendarLists) {
+        for (index, title) in enumerate(allReminders) {
             println("---------------------------------------------------")
             println("w40 index, title: \(index), \(title)")
             
             let row = table.rowControllerAtIndex(index) as! ReminderItemsTableRC
-            let item = allCalendarLists[index]
+            let item = allReminders[index]
             
             row.tableRowLabel.setText(item.title)
-            row.tableRowLabel.setTextColor(UIColor(CGColor: item.CGColor))
-            row.verticalBar.setBackgroundColor(UIColor(CGColor: item.CGColor))
-            
+            row.tableRowLabel.setTextColor(UIColor(CGColor: item.calendar.CGColor))
+            row.verticalBar.setBackgroundColor(UIColor(CGColor: item.calendar.CGColor))
+            row.reminder = item
         }
     }       // end loadTableData func
     
@@ -66,13 +63,16 @@ class ReminderItemsIC: WKInterfaceController {
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         // Configure interface objects here.
-        NSLog("%@ awakeWithContext", self)
-        println("w67 ReminderItemsIC awakeWithContext")
+    
+        let calendarId = context as! String
+        let calendar = ReminderManager.sharedInstance.eventStore.calendarWithIdentifier(calendarId)
 
-        println("w72 reminderListID: \(reminderListID)")
-
-        labelReminderListID.setText(reminderListID)
-       
+        labelReminderListID.setText(calendar.title)
+        ReminderManager.sharedInstance.fetchCalendarReminders(calendar) { (reminders) -> Void in
+            println(reminders)
+            self.allReminders = reminders as [EKReminder]
+            self.loadTableData()
+        }
       /*
         if let reminderListID = context as? Coin {
             self.coin = coin

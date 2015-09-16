@@ -50,6 +50,19 @@ class ReminderListsIC: WKInterfaceController {
         
         super.awakeWithContext(context)
         self.setTitle(context as? String)
+        ReminderManager.sharedInstance.fetchReminders({ (reminders) -> Void in
+            
+            self.allReminderLists = reminders
+            
+            //self.allReminders = reminders //TRY ABOVE LINE
+            
+            //self.tableView.reloadData()
+            
+            //println("w51 self.allReminders: \(self.allReminders)")
+            println("w71 self.allReminderLists.count: \(self.allReminderLists.count)")
+            
+            self.loadTableData()
+        })
     }
 
     override func willActivate() {
@@ -60,19 +73,7 @@ class ReminderListsIC: WKInterfaceController {
  
         //ReminderManager.sharedInstance.createNewReminderList("TestMike", items: ["asd","weer"])   //added to make reminder for testing. 
         
-        ReminderManager.sharedInstance.fetchReminders({ (reminders) -> Void in
-            
-            self.allReminderLists = reminders
-
-            //self.allReminders = reminders //TRY ABOVE LINE
      
-            //self.tableView.reloadData()
-            
-            //println("w51 self.allReminders: \(self.allReminders)")
-            println("w71 self.allReminderLists.count: \(self.allReminderLists.count)")
-            
-            self.loadTableData()
-        })
         
         //println("w60 allReminders: \(self.allReminders.count)")
 
@@ -109,8 +110,8 @@ class ReminderListsIC: WKInterfaceController {
 
    // override func contextForSegueWithIdentifier(segueIdentifier: String, inTable table: WKInterfaceTable, rowIndex: Int) -> AnyObject? {
         
-    override func contextForSegueWithIdentifier(segueIdentifier: "RemindersDetails", inTable table: WKInterfaceTable, rowIndex: Int) -> AnyObject? {
-
+    override func contextForSegueWithIdentifier(segueIdentifier: String, inTable table: WKInterfaceTable, rowIndex: Int) -> AnyObject? {
+        
         if segueIdentifier == "ReminderDetails" {
             let reminder = allReminderLists[rowIndex]
             let reminderListID = reminder.calendarItemIdentifier

@@ -13,13 +13,12 @@ import EventKit
 
 class ReminderListsIC: WKInterfaceController {
     
-    @IBOutlet weak var table: WKInterfaceTable!
-    
     let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp") // from course
     let eventStore = EKEventStore()
     
     var reminders:[EKReminder] = []
     var allReminders:[EKReminder] = []
+    var allReminderLists:[EKReminder] = []
 
     var numberOfNewItems:Int    = 0
     var startDT:NSDate          = NSDate()
@@ -27,8 +26,21 @@ class ReminderListsIC: WKInterfaceController {
     var today:NSDate            = NSDate()
     var events:NSMutableArray   = []
     
+   // var reminder: EKCalendar = EKCalendar()
+    
+    
+    @IBOutlet weak var table: WKInterfaceTable!
 
     
+    @IBAction func menuDictate() {
+        
+     //   let (startDT, endDT, output, outputNote, day, calendarName, actionType) = DictateManagerIC.sharedInstance.grabVoice()
+        
+    }
+    
+    @IBAction func menuSettings() {
+         presentControllerWithName("Settings", context: "Reminders")
+    }
 
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
@@ -49,11 +61,15 @@ class ReminderListsIC: WKInterfaceController {
         //ReminderManager.sharedInstance.createNewReminderList("TestMike", items: ["asd","weer"])   //added to make reminder for testing. 
         
         ReminderManager.sharedInstance.fetchReminders({ (reminders) -> Void in
-            self.allReminders = reminders
+            
+            self.allReminderLists = reminders
+
+            //self.allReminders = reminders //TRY ABOVE LINE
+     
             //self.tableView.reloadData()
             
-            println("w51 self.allReminders: \(self.allReminders)")
-            println("w52 self.allReminders.count: \(self.allReminders.count)")
+            //println("w51 self.allReminders: \(self.allReminders)")
+            println("w71 self.allReminderLists.count: \(self.allReminderLists.count)")
             
             self.loadTableData()
         })
@@ -67,182 +83,45 @@ class ReminderListsIC: WKInterfaceController {
 
        
     }
-    
-    func getAccessToEventStoreForType(type:EKEntityType, completion:(granted:Bool)->Void){
-        
-        let status = EKEventStore.authorizationStatusForEntityType(type)
-        if status != EKAuthorizationStatus.Authorized{
-            self.eventStore.requestAccessToEntityType(EKEntityTypeReminder, completion: {
-                granted, error in
-                if (granted) && (error == nil) {
-                    completion(granted: true)
-                }else{
-                    completion(granted: false)
-                }
-            })
-            
-        }else{
-            completion(granted: true)
-        }
-    }
-    
-    func fetchReminders(completion:([EKReminder])->Void) {
-        println("w89 we here? fetchReminders")
-        
-        getAccessToEventStoreForType(EKEntityTypeReminder, completion: { (granted) -> Void in
-            
-            if granted{
-                println("granted: \(granted)")
-                
-                let allReminders = self.eventStore.calendarsForEntityType(EKEntityTypeReminder)
-                
-                println("w98 allReminders: \(allReminders)")
-                
-                var predicate = self.eventStore.predicateForIncompleteRemindersWithDueDateStarting(nil, ending: nil, calendars: allReminders)
-                self.eventStore.fetchRemindersMatchingPredicate(predicate) { reminders in
-                    completion(reminders as! [EKReminder]!)
-                }
-            }
-            
-            println("w106 allReminders: \(self.allReminders)")
-
-            self.loadTableData()
-        })
-    }
  
     
-    func loadTableData() {
-        println("w114 in loadTableData")
-        println("w115 allReminders: \(allReminders)")
-        println("w116 allReminders.count: \(allReminders.count)")
+    func loadTableData () {
+        var allReminderLists: Array<EKCalendar> = self.eventStore.calendarsForEntityType(EKEntityTypeReminder) as! Array<EKCalendar>
         
-        table.setNumberOfRows(allReminders.count, withRowType: "tableRow")
+        table.setNumberOfRows(allReminderLists.count, withRowType: "tableRow")
         
-        for (index, title) in enumerate(self.allReminders) {
+        //println("w38 allReminderLists: \(allReminderLists)")
+        println("w39 allReminderLists.count: \(allReminderLists.count)")
+        
+        for (index, title) in enumerate(allReminderLists) {
+            println("---------------------------------------------------")
+            println("w40 index, title: \(index), \(title)")
             
-            let reminder = self.allReminders[index]
-            println("-----------------------------------")
-            println("w126 index: \(index)")
-            println("w127 title: \(reminder.title)")
-            println("w128 reminder.calendarItemIdentifier: \(reminder.calendarItemIdentifier)")
-            
-            let row = self.table.rowControllerAtIndex(index) as! ReminderListsTableRC
-            
-            //row.tableRowLabel.setText(title)  //works for string array
+            let row = table.rowControllerAtIndex(index) as! ReminderListsTableRC
+            let reminder = allReminderLists[index]
             
             row.tableRowLabel.setText(reminder.title)
-            row.tableRowLabel.setTextColor(UIColor(CGColor: reminder.calendar.CGColor))
-            //row.verticalBar.setBackgroundColor(UIColor(CGColor: reminder.calendar.CGColor))
-            
-           // println("w45 row.tableRowLabel.setText(reminder.title) \(row.tableRowLabel.setText(reminder.title))")
-            
+            row.tableRowLabel.setTextColor(UIColor(CGColor: reminder.CGColor))
+            row.verticalBar.setBackgroundColor(UIColor(CGColor: reminder.CGColor))
         }
-        
+    }   // end loadTableData func
     
-    }
-    
-/*
-    func loadTableDataOLD () {
-        println("w46 in loadTableData")
-        
-        ReminderManager.sharedInstance.fetchReminders({ (reminders) -> Void in
-            self.reminders = reminders
-            //self.tableView.reloadData()
-            
-            println("w117 self.reminders: \(self.reminders)")
-            println("w118 self.reminders.count: \(self.reminders.count)")
-        
-        
-        
-        println("w122 self.reminders: \(self.reminders)")
-        println("w123 self.reminders.count: \(self.reminders.count)")
-        println("w124 here after call to fetchReminders")
-        
-        for (index, title) in enumerate(self.reminders) {
-            println("-----------------------------------")
-            
-            let reminder = self.reminders[index]
-            
-            println("w126 index: \(index)")
-            println("w127 title: \(reminder.title)")
-          //  println("w128 color: \(reminder.color)")
-            
-            let row = self.table.rowControllerAtIndex(index) as! ReminderTableRowController
-            
-            
-            
-            //row.tableRowLabel.setText(title)  //works for string array
-            
-            row.tableRowLabel.setText(reminder.title)
-            row.tableRowLabel.setTextColor(UIColor(CGColor: reminder.calendar.CGColor))
-          //  row.verticalBar.setBackgroundColor(UIColor(CGColor: reminder.calendar.CGColor))
-            
-            println("w45 row.tableRowLabel.setText(reminder.title) \(row.tableRowLabel.setText(reminder.title))")
-            
-        }
-            
-    })
-        
 
-      /*
-        var allReminders: Array<EKCalendar>= self.eventStore.calendarsForEntityType(EKEntityTypeReminder) as! Array<EKCalendar>
+   // override func contextForSegueWithIdentifier(segueIdentifier: String, inTable table: WKInterfaceTable, rowIndex: Int) -> AnyObject? {
         
-        if defaults?.objectForKey("reminderStringArray") != nil {
-            reminderLists = defaults?.objectForKey("reminderStringArray") as! [String] //array of the items
+    override func contextForSegueWithIdentifier(segueIdentifier: "RemindersDetails", inTable table: WKInterfaceTable, rowIndex: Int) -> AnyObject? {
+
+        if segueIdentifier == "ReminderDetails" {
+            let reminder = allReminderLists[rowIndex]
+            let reminderListID = reminder.calendarItemIdentifier
+            println("w113 reminderListID \(reminderListID)")
             
-            println("w30 reminderLists: \(reminderLists)")
-            println("w31 reminderLists.count: \(reminderLists.count)")
-            println("-----------------------------------------")
-            
-            println("w46 allReminders: \(allReminders)")
-            println("w47 allReminders.count: \(allReminders.count)")
-            println("-----------------------------------------")
-            
+            return reminderListID
         }
-        
-        table.setNumberOfRows(reminderLists.count, withRowType: "tableRow")
-        
-        println("p36 he here?")
-        println("w37 reminderLists: \(reminderLists)")
-        println("w38 allReminders: \(allReminders)")
-        
-        
-        for (index, title) in enumerate(allReminders) {
-            println("-----------------------------------")
-            println("w40 index: \(index)")
-            println("w41 title: \(title)")
-            
-            let row = table.rowControllerAtIndex(index) as! tableRowController
-            
-            let reminder = allReminders[index]
-            
-            //row.tableRowLabel.setText(title)  //works for string array
-            
-            row.tableRowLabel.setText(reminder.title)
-            
-            println("w45 row.tableRowLabel.setText(reminder.title) \(row.tableRowLabel.setText(reminder.title))")
-            
-        }
-        
-        //Same loop as above?
-        
-        for var i = 0; i < allReminders.count; i++ {
-            
-            let row = table.rowControllerAtIndex(i) as! tableRowController
-            /*
-            row.lightbulbImage.setImageNamed(lightbulbs[i]["state"])
-            if lightbulbs[i]["state"] == "off" {
-            row.lightbulbButton.setTitle("On")
-            } else {
-            row.lightbulbButton.setTitle("Off")
-            }
-            */
-        }
-      
-*/
+
+        return nil
     }
     
-*/
     
 
     override func didDeactivate() {
@@ -251,13 +130,11 @@ class ReminderListsIC: WKInterfaceController {
     }
     
     @IBAction func buttonToday() {
-        pushControllerWithName("TodayEvents", context: "Reminders")
-
+        presentControllerWithName("TodayEvents", context: "Reminders")
     }
     
     @IBAction func buttonMain() {
-        pushControllerWithName("Main", context: "Reminders")
-
+        presentControllerWithName("Main", context: "Reminders")
     }
 
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ei9-cN-Wbe">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="7706" systemVersion="14D131" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ei9-cN-Wbe">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="7701"/>
@@ -116,11 +116,11 @@
                         <outlet property="resultPhone" destination="PMI-eH-MjR" id="X1n-Hr-4F0"/>
                         <outlet property="resultStart" destination="EJB-4B-o93" id="bqq-Qb-J7p"/>
                         <outlet property="resultType" destination="dZr-r8-usa" id="qXC-jt-KzR"/>
-                        <segue destination="Iem-D3-4JW" kind="relationship" relationship="nextPage" id="Vga-yg-6e5"/>
+                        <segue destination="Iem-D3-4JW" kind="relationship" relationship="nextPage" id="Pur-F7-X25"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="202" y="337.5"/>
+            <point key="canvasLocation" x="188" y="336.75"/>
         </scene>
         <!--TodayEvents-->
         <scene sceneID="sS8-Mf-H5Q">
@@ -161,27 +161,58 @@
             <objects>
                 <controller identifier="Settings" id="gYc-zu-iHZ" customClass="SettingsIC" customModule="Dictate_WatchKit_Extension">
                     <items>
-                        <group alignment="center" verticalAlignment="bottom" id="1c1-qi-y2S">
+                        <group alignment="center" verticalAlignment="bottom" id="1c1-qi-y2S" userLabel="navButtonsGroup">
                             <items>
                                 <button width="40" height="40" alignment="left" backgroundImage="check_box40px-grey50%" id="xVg-mX-Us5">
                                     <connections>
-                                        <action selector="buttonReminders" destination="AgC-eL-Hgc" id="8OL-QS-bN1"/>
+                                        <action selector="navButtonReminders" destination="gYc-zu-iHZ" id="dTw-Ff-FWc"/>
                                     </connections>
                                 </button>
                                 <button width="10" alignment="left" enabled="NO" id="vz3-6q-yX7"/>
-                                <button width="27" height="40" alignment="center" backgroundImage="dicApp-2-nb-40px" id="ns4-Fk-KhA"/>
+                                <button width="27" height="40" alignment="center" backgroundImage="dicApp-2-nb-40px" id="ns4-Fk-KhA">
+                                    <connections>
+                                        <action selector="buttonMic" destination="gYc-zu-iHZ" id="2Hu-Jr-wIa"/>
+                                    </connections>
+                                </button>
                                 <button width="10" alignment="center" enabled="NO" id="MuW-qV-8PD"/>
                                 <button width="40" height="40" alignment="right" backgroundImage="Today40px-50%" id="jrs-HL-obg">
                                     <connections>
-                                        <action selector="buttonToday" destination="AgC-eL-Hgc" id="EpZ-ba-OVJ"/>
+                                        <action selector="navButtonToday" destination="gYc-zu-iHZ" id="egm-BQ-dvx"/>
                                     </connections>
                                 </button>
                             </items>
                         </group>
+                        <group width="1" alignment="left" layout="vertical" id="j1f-wb-qz3">
+                            <items>
+                                <button width="1" alignment="left" title="Reminders" id="3tT-SN-9Va">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="font" type="boldSystem" pointSize="15"/>
+                                    <variation key="device=watch38mm">
+                                        <fontDescription key="font" type="boldSystem" pointSize="12"/>
+                                    </variation>
+                                    <connections>
+                                        <action selector="buttonReminders" destination="gYc-zu-iHZ" id="aJ0-bS-7fb"/>
+                                    </connections>
+                                </button>
+                                <button width="1" alignment="left" title="Calendars" id="9Nl-7D-ZcX">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="font" type="boldSystem" pointSize="15"/>
+                                    <variation key="device=watch38mm">
+                                        <fontDescription key="font" type="boldSystem" pointSize="12"/>
+                                    </variation>
+                                    <connections>
+                                        <action selector="buttonCalendars" destination="gYc-zu-iHZ" id="rOW-3R-gH5"/>
+                                    </connections>
+                                </button>
+                            </items>
+                            <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
+                        </group>
                     </items>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="43" y="58"/>
+            <point key="canvasLocation" x="287" y="72"/>
         </scene>
         <!--ReminderPicker-->
         <scene sceneID="x3Y-Pz-eh8">
@@ -213,7 +244,7 @@
                         </group>
                         <table alignment="left" id="5ba-AY-44P">
                             <items>
-                                <tableRow identifier="tableRow" id="Bhy-Jg-cyg" customClass="tableRowController" customModule="Dictate_WatchKit_Extension">
+                                <tableRow identifier="tableRow" id="Bhy-Jg-cyg" customClass="SettingsReminderTableRC" customModule="Dictate_WatchKit_Extension">
                                     <group key="rootItem" width="1" height="0.0" alignment="left" id="alO-dK-V8k">
                                         <items>
                                             <button width="22" height="22" alignment="left" verticalAlignment="center" backgroundImage="cbBlank40px" id="0ax-h5-5p7">
@@ -267,11 +298,10 @@
                     </menu>
                     <connections>
                         <outlet property="table" destination="5ba-AY-44P" id="sdw-mY-tw5"/>
-                        <segue destination="EK8-kp-F82" kind="relationship" relationship="nextPage" id="OKb-Cw-25r"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="309" y="58"/>
+            <point key="canvasLocation" x="94" y="72"/>
         </scene>
         <!--Reminders-->
         <scene sceneID="peT-G5-wcJ">
@@ -300,11 +330,12 @@
                                             <group width="2" height="2" alignment="left" verticalAlignment="center" id="WoQ-4q-hEH" userLabel="hor. spacer"/>
                                             <group width="2" height="28" alignment="left" id="m2B-Qr-j1H" userLabel="blankVertical"/>
                                         </items>
-                                        <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
+                                        <edgeInsets key="margins" left="6" right="2" top="2" bottom="2"/>
                                     </group>
                                     <connections>
                                         <outlet property="tableRowLabel" destination="2bK-fl-QKS" id="Htv-gR-DSU"/>
-                                        <outlet property="verticalBar" destination="vtI-VA-W96" id="F3t-oq-V09"/>
+                                        <outlet property="verticalBar" destination="ytx-zs-j0Z" id="z0U-zd-aqC"/>
+                                        <segue destination="KhT-Na-Zkk" kind="push" identifier="ReminderDetails" id="jlb-SG-ZUy"/>
                                     </connections>
                                 </tableRow>
                             </items>
@@ -324,24 +355,30 @@
                                     </connections>
                                 </button>
                             </items>
+                            <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
                         </group>
                     </items>
-                    <menu key="menu" id="XUW-ph-wAk">
+                    <menu key="menu" id="TYP-cf-iwC">
                         <items>
-                            <menuItem title="Dictate" image="Mic-Menu-v6" id="9E0-CY-9kc">
+                            <menuItem title="Dictate" image="Mic-Menu-v6" id="7dT-ip-Uxv">
                                 <connections>
-                                    <action selector="menuDictate" destination="AgC-eL-Hgc" id="pUg-Fo-aKe"/>
+                                    <action selector="menuDictate" destination="ei9-cN-Wbe" id="wgC-FH-UOZ"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Settings" image="cog2-48px" id="SoY-Fb-g6E" userLabel="Settings">
+                                <connections>
+                                    <action selector="menuSettings" destination="AgC-eL-Hgc" id="SiH-Ij-NAG"/>
                                 </connections>
                             </menuItem>
                         </items>
                     </menu>
                     <connections>
                         <outlet property="table" destination="ZnV-Oh-HUO" id="CzF-Vk-fFJ"/>
-                        <segue destination="AgC-eL-Hgc" kind="relationship" relationship="nextPage" id="Sgd-o5-lSy"/>
+                        <segue destination="AgC-eL-Hgc" kind="relationship" relationship="nextPage" id="pFe-Sv-vtW"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="-54" y="334"/>
+            <point key="canvasLocation" x="-166" y="339"/>
         </scene>
         <!--Glance Interface Controller-->
         <scene sceneID="BOz-TT-tkC">
@@ -354,7 +391,7 @@
                     <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="14"/>
                 </glanceController>
             </objects>
-            <point key="canvasLocation" x="235" y="672"/>
+            <point key="canvasLocation" x="394" y="874"/>
         </scene>
         <!--Static Notification Interface Controller-->
         <scene sceneID="AEw-b0-oYE">
@@ -382,7 +419,7 @@
         <!--CalendarPicker-->
         <scene sceneID="ZR1-jQ-hZ5">
             <objects>
-                <controller identifier="CalendarPicker" animationDuration="1" id="EK8-kp-F82" customClass="ReminderListPickerIC" customModule="Dictate_WatchKit_Extension">
+                <controller identifier="CalendarPicker" animationDuration="1" id="EK8-kp-F82" customClass="CalendarListPickerIC" customModule="Dictate_WatchKit_Extension">
                     <items>
                         <group width="1" alignment="left" id="7QS-OF-hpC" userLabel="Header Group">
                             <items>
@@ -409,7 +446,7 @@
                         </group>
                         <table alignment="left" id="fAb-J1-wcn">
                             <items>
-                                <tableRow identifier="tableRow" id="uDU-dj-iAS" customClass="tableRowController" customModule="Dictate_WatchKit_Extension">
+                                <tableRow identifier="tableRow" id="uDU-dj-iAS" customClass="SettingsCalendarTableRC" customModule="Dictate_WatchKit_Extension">
                                     <group key="rootItem" width="1" height="0.0" alignment="left" id="fOx-Iq-OXT">
                                         <items>
                                             <button width="22" height="22" alignment="left" verticalAlignment="center" backgroundImage="cbBlank40px" id="P9s-H2-DMX">
@@ -466,7 +503,86 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="514" y="58"/>
+            <point key="canvasLocation" x="475" y="72"/>
+        </scene>
+        <!--ReminderItems-->
+        <scene sceneID="sQq-zh-Lhr">
+            <objects>
+                <controller identifier="ReminderItems" animationDuration="1" id="KhT-Na-Zkk" customClass="ReminderItemsIC" customModule="Dictate_WatchKit_Extension">
+                    <items>
+                        <group width="1" alignment="left" id="Tkz-Qg-oD2" userLabel="Header Group">
+                            <items>
+                                <group width="2" height="19" alignment="left" verticalAlignment="center" id="JZ0-Yk-TFZ" userLabel="VerticalBar">
+                                    <color key="backgroundColor" red="0.40000000600000002" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </group>
+                                <group width="2" height="2" alignment="left" verticalAlignment="center" id="vSc-wF-huq" userLabel="hor. spacer"/>
+                                <label alignment="left" text="ReminderList" id="TeB-4I-mfF">
+                                    <fontDescription key="font" type="system" pointSize="15"/>
+                                    <variation key="device=watch38mm">
+                                        <fontDescription key="font" type="system" pointSize="12"/>
+                                    </variation>
+                                </label>
+                            </items>
+                            <edgeInsets key="margins" left="4" right="0.0" top="0.0" bottom="0.0"/>
+                        </group>
+                        <table alignment="left" id="efV-EY-vrF">
+                            <items>
+                                <tableRow identifier="tableRow" id="ybA-21-ZNj" customClass="ReminderItemsTableRC" customModule="Dictate_WatchKit_Extension">
+                                    <group key="rootItem" width="1" height="0.0" alignment="left" id="1O5-zS-Al1">
+                                        <items>
+                                            <button width="22" height="22" alignment="left" verticalAlignment="center" backgroundImage="cbBlank40px" id="ANT-Y3-o9Z">
+                                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <connections>
+                                                    <action selector="buttonTapped" destination="ybA-21-ZNj" id="nLe-LZ-71g"/>
+                                                </connections>
+                                            </button>
+                                            <label alignment="left" text="spacer" id="0Gp-cV-Rso"/>
+                                            <label width="1" height="1" alignment="left" verticalAlignment="center" text="Label" id="nd8-tB-ie7">
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="font" type="system" pointSize="16"/>
+                                                <variation key="device=watch38mm">
+                                                    <fontDescription key="font" type="system" pointSize="13"/>
+                                                </variation>
+                                            </label>
+                                            <separator height="16" alignment="left" id="oLK-yc-xWk">
+                                                <color key="color" red="1" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            </separator>
+                                            <group width="2" height="2" alignment="left" verticalAlignment="center" id="Ap5-IK-tH3" userLabel="hor. spacer"/>
+                                            <group width="2" height="28" alignment="left" id="ASJ-0M-VYW" userLabel="blankVertical"/>
+                                        </items>
+                                        <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
+                                    </group>
+                                    <connections>
+                                        <outlet property="buttonCheckbox" destination="ANT-Y3-o9Z" id="xY3-sX-eDE"/>
+                                        <outlet property="tableRowLabel" destination="nd8-tB-ie7" id="Gge-zl-DxR"/>
+                                        <outlet property="verticalBar" destination="JZ0-Yk-TFZ" id="SKW-j6-iWG"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
+                    </items>
+                    <menu key="menu" id="ArD-Vs-lTH">
+                        <items>
+                            <menuItem title="Dictate" image="Mic-Menu-v6" id="1JQ-22-0Do">
+                                <connections>
+                                    <action selector="menuDictate" destination="AgC-eL-Hgc" id="KeI-ZZ-Qwl"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Reminders" image="cbChecked40px" id="Zt4-0B-P2i">
+                                <connections>
+                                    <action selector="menuPreferences" destination="AgC-eL-Hgc" id="Tr8-F8-oV2"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                    <connections>
+                        <outlet property="labelReminderListID" destination="TeB-4I-mfF" id="Fea-9Z-Yb9"/>
+                        <outlet property="table" destination="efV-EY-vrF" id="eh9-Lj-L1Y"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="0.0" y="617"/>
         </scene>
     </scenes>
     <color key="tintColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>

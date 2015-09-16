@@ -43,6 +43,8 @@
 		D33CAD081B747EBE00F59260 /* se_tap.m4a in Resources */ = {isa = PBXBuildFile; fileRef = D33CAD061B747EBE00F59260 /* se_tap.m4a */; };
 		D343956E1BA326E6002D98EA /* SettingsReminderTableRC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D343956D1BA326E6002D98EA /* SettingsReminderTableRC.swift */; };
 		D34395721BA32964002D98EA /* ReminderListPickerIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34395711BA32964002D98EA /* ReminderListPickerIC.swift */; };
+		D35588BC1BA937D20052892F /* ReminderItemsIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35588BB1BA937D20052892F /* ReminderItemsIC.swift */; };
+		D35588BE1BA938A00052892F /* ReminderItemsTableRC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35588BD1BA938A00052892F /* ReminderItemsTableRC.swift */; };
 		D355D97C1BA7DD3F00DADD72 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D355D97B1BA7DD3F00DADD72 /* Main.storyboard */; };
 		D3795E7A1B8DF927009D3DB5 /* SettingsEventTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3795E791B8DF927009D3DB5 /* SettingsEventTableViewController.swift */; };
 		D3795E7B1B8F654F009D3DB5 /* ReminderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF818621B84FAB70087ECAD /* ReminderManager.swift */; };
@@ -207,6 +209,8 @@
 		D33CAD061B747EBE00F59260 /* se_tap.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = se_tap.m4a; sourceTree = "<group>"; };
 		D343956D1BA326E6002D98EA /* SettingsReminderTableRC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsReminderTableRC.swift; sourceTree = "<group>"; };
 		D34395711BA32964002D98EA /* ReminderListPickerIC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderListPickerIC.swift; sourceTree = "<group>"; };
+		D35588BB1BA937D20052892F /* ReminderItemsIC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderItemsIC.swift; sourceTree = "<group>"; };
+		D35588BD1BA938A00052892F /* ReminderItemsTableRC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderItemsTableRC.swift; sourceTree = "<group>"; };
 		D355D97B1BA7DD3F00DADD72 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		D3795E791B8DF927009D3DB5 /* SettingsEventTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsEventTableViewController.swift; path = Views/SettingsEventTableViewController.swift; sourceTree = "<group>"; };
 		D38C9C551B821DA3009CFC7C /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
@@ -551,6 +555,8 @@
 				D3F8AD131B696FCD0070C097 /* MainIC.swift */,
 				D3E810891B710690004AE5A9 /* ReminderListsIC.swift */,
 				D3FA08041BA7F6EB006A91C2 /* ReminderListsTableRC.swift */,
+				D35588BB1BA937D20052892F /* ReminderItemsIC.swift */,
+				D35588BD1BA938A00052892F /* ReminderItemsTableRC.swift */,
 				D3E810831B70F4BC004AE5A9 /* TodayIC.swift */,
 			);
 			name = WKControllers;
@@ -1062,6 +1068,7 @@
 			files = (
 				D3795E7B1B8F654F009D3DB5 /* ReminderManager.swift in Sources */,
 				D3F8AD161B696FCD0070C097 /* NotificationController.swift in Sources */,
+				D35588BE1BA938A00052892F /* ReminderItemsTableRC.swift in Sources */,
 				D3E8108A1B710690004AE5A9 /* ReminderListsIC.swift in Sources */,
 				D39AB8A01BA87679001C7570 /* SettingsCalendarTableRC.swift in Sources */,
 				D3188A6D1B6E9ADB00323DC0 /* MailComposer.swift in Sources */,
@@ -1075,6 +1082,7 @@
 				D3FA08051BA7F6EB006A91C2 /* ReminderListsTableRC.swift in Sources */,
 				D3F8AD141B696FCD0070C097 /* MainIC.swift in Sources */,
 				D3E810881B70FEA0004AE5A9 /* SettingsIC.swift in Sources */,
+				D35588BC1BA937D20052892F /* ReminderItemsIC.swift in Sources */,
 				D3188A6A1B6E9AA700323DC0 /* MailComposer3.swift in Sources */,
 				D32350631B69828900939F03 /* ReminderCode.swift in Sources */,
 				D3E810851B70F4BC004AE5A9 /* TodayIC.swift in Sources */,
@@ -1230,7 +1238,7 @@
 					"$(SDKROOT)/usr/lib/system",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c43031e2-04cc-4502-a05a-fabeb557bd3a";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Dictate/Dictate-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -1257,7 +1265,7 @@
 					"$(SDKROOT)/usr/lib/system",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c43031e2-04cc-4502-a05a-fabeb557bd3a";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Dictate/Dictate-Bridging-Header.h";
 			};
 			name = Release;
@@ -1311,7 +1319,7 @@
 				INFOPLIST_FILE = "Dictate WatchKit App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e1cc13e3-8d0a-4007-84e7-d674290353eb";
+				PROVISIONING_PROFILE = "1abcb096-9ebc-4b63-8096-3677b2af9199";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
 				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
@@ -1328,7 +1336,7 @@
 				INFOPLIST_FILE = "Dictate WatchKit App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e1cc13e3-8d0a-4007-84e7-d674290353eb";
+				PROVISIONING_PROFILE = "1abcb096-9ebc-4b63-8096-3677b2af9199";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
 				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
@@ -1357,7 +1365,7 @@
 					"$(PROJECT_DIR)/Dictate",
 				);
 				PRODUCT_NAME = "${TARGET_NAME}";
-				PROVISIONING_PROFILE = "ef52e9b5-6476-4684-b6d7-9f65eb1219e5";
+				PROVISIONING_PROFILE = "74312b1a-2dcd-4acf-acb4-97dea9f33901";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -1380,7 +1388,7 @@
 					"$(PROJECT_DIR)/Dictate",
 				);
 				PRODUCT_NAME = "${TARGET_NAME}";
-				PROVISIONING_PROFILE = "ef52e9b5-6476-4684-b6d7-9f65eb1219e5";
+				PROVISIONING_PROFILE = "74312b1a-2dcd-4acf-acb4-97dea9f33901";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;

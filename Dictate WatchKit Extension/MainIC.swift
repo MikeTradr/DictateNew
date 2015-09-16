@@ -305,16 +305,7 @@ class MainIC: WKInterfaceController {
     
     
     @IBAction func menuSettings() {
-        println("p257 force touch tapped, Preferneces Item")
-        //TODO add segue to prefs screen on watch???
-        
-        // pushControllerWithName("ReminderPicker", context: "Dictate")
-        
-        presentControllerWithName("ReminderPicker", context: nil)
-        
-        
-        //pushControllerWithName("Preferences", context: "Dictate")
-        
+        presentControllerWithName("Settings", context: "Dictate")
     }
     
     
@@ -518,15 +509,11 @@ class MainIC: WKInterfaceController {
     
     
     @IBAction func buttonToday() {
-        
-        pushControllerWithName("TodayEvents", context: "Dictate")
-
+        presentControllerWithName("TodayEvents", context: "Dictate")
     }
     
     @IBAction func buttonReminders() {
-        
-        pushControllerWithName("Reminders", context: "Dictate")
-        
+        presentControllerWithName("Reminders", context: "Dictate")
     }
     
     

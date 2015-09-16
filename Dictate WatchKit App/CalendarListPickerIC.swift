@@ -37,101 +37,25 @@ class CalendarListPickerIC: WKInterfaceController {
   
     
     func loadTableData () {
+        let allCalendarLists: Array<EKCalendar> = self.eventStore.calendarsForEntityType(EKEntityTypeEvent) as! Array<EKCalendar>
         
-        //check watch screen sixee 38mm or 42mm then set lable font size to 12 or 15
-   /*
-        if watchsize 14 {
-            set font sixe 15
-        } else {
-            set font size 12
-        }
-    */
-        
-       // var allReminderItems: Array<EKCalendar> = ReminderManager.createReminderArray //get all individual reminders
-
-         let allCalendarLists: Array<EKCalendar> = self.eventStore.calendarsForEntityType(EKEntityTypeEvent) as! Array<EKCalendar>
-  /*
-        if defaults?.objectForKey("reminderStringArray") != nil {
-        //    reminderLists = defaults?.objectForKey("reminderStringArray") as! [String] //array of the items
-            
-          //  println("w30 reminderLists: \(reminderLists)")
-          //  println("w31 reminderLists.count: \(reminderLists.count)")
-            println("-----------------------------------------")
-            
-            println("w62 allCalendarLists: \(allCalendarLists)")
-            println("w63 allCalendarLists.count: \(allCalendarLists.count)")
-            println("-----------------------------------------")
-            
-        }
-*/
         table.setNumberOfRows(allCalendarLists.count, withRowType: "tableRow")
-
-        println("p70 he here?")
-        //println("w37 reminderLists: \(reminderLists)")
-        println("w72 allCalendarLists: \(allCalendarLists)")
-
-
+        
+        //println("w45 allCalendarLists: \(allCalendarLists)")
+        println("w46 allCalendarLists.count: \(allCalendarLists.count)")
+        
         for (index, title) in enumerate(allCalendarLists) {
-            println("-----------------------------------")
-            println("w40 index: \(index)")
-            println("w41 title: \(title)")
+            println("---------------------------------------------------")
+            println("w40 index, title: \(index), \(title)")
             
             let row = table.rowControllerAtIndex(index) as! SettingsCalendarTableRC
-            
             let item = allCalendarLists[index]
-   
-            //row.tableRowLabel.setText(title)  //works for string array
             
             row.tableRowLabel.setText(item.title)
             row.tableRowLabel.setTextColor(UIColor(CGColor: item.CGColor))
             row.verticalBar.setBackgroundColor(UIColor(CGColor: item.CGColor))
-            
-            println("w45 row.tableRowLabel.setText(item.title)) \(row.tableRowLabel.setText(item.title))")
-            
         }
-
-        //Same loop as above?
-/*
-        for var i = 0; i < 16; i++ {
-            
-      //  for var i = 0; i < allReminders.count; i++ {
-
-            
-             println("w96 allReminders.count: \(allReminders.count)")
-            println("w96 i: \(i)")
-
-            
-            
-            let row = table.rowControllerAtIndex(i) as! tableRowController
-            
-            println("w96 row: \(row)")
-
-            let reminder = allReminders[i]
-            
-            println("w96 reminder: \(reminder)")
-
-            
-            //row.tableRowLabel.setText(title)  //works for string array
-            
-            row.tableRowLabel.setText(reminder.title)
-            
-            println("w45 row.tableRowLabel.setText(reminder.title) \(row.tableRowLabel.setText(reminder.title))")
-            
-            println("w96 ----------------------------)")
-
-
-
-         /*
-            row.lightbulbImage.setImageNamed(lightbulbs[i]["state"])
-            if lightbulbs[i]["state"] == "off" {
-                row.lightbulbButton.setTitle("On")
-            } else {
-                row.lightbulbButton.setTitle("Off")
-            }
-        */
-        }
- */
-    }
+    }   //end loadTableData
     
   
 

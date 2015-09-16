@@ -65,6 +65,8 @@ var fullDTEnd:String    = ""
 // ---- end set Global Varbiables ----
 
 
+//class DictateManagerIC: NSObject {
+    
 class DictateManagerIC: WKInterfaceController {
     
     class var sharedInstance : DictateManagerIC {
@@ -78,13 +80,10 @@ class DictateManagerIC: WKInterfaceController {
         return Static.instance!
     }
     
-    
-    
     var str:String      = ""
     var startDT:NSDate          = NSDate(dateString:"2014-12-12")
     var endDT:NSDate            = NSDate(dateString:"2014-12-12")
     var actionType:String   = ""        //event, reminder, singleWordList, commaList, rawList, note?, text, email
-
     
     func grabvoice() -> (NSDate, NSDate, String, String, String, String, String)  {  //startDT, endDT, output, outputNote, day, calendarName, actionType
         //added actionType above

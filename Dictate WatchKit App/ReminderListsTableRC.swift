@@ -11,9 +11,8 @@ import WatchKit
 
 class ReminderListsTableRC: NSObject {
    
-    @IBOutlet weak var tableRowLabel: WKInterfaceLabel!
-    @IBOutlet weak var verticalBar: WKInterfaceSeparator!
-    
+    @IBOutlet weak var tableRowLabel: WKInterfaceLabel!    
+    @IBOutlet weak var verticalBar: WKInterfaceGroup!
     
 /*
     @IBOutlet weak var tableRowLabel: WKInterfaceLabel!

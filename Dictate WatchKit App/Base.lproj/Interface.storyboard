@@ -516,7 +516,7 @@
                                     <color key="backgroundColor" red="0.40000000600000002" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </group>
                                 <group width="2" height="2" alignment="left" verticalAlignment="center" id="vSc-wF-huq" userLabel="hor. spacer"/>
-                                <label alignment="left" text="ReminderList" id="TeB-4I-mfF">
+                                <label alignment="left" id="TeB-4I-mfF">
                                     <fontDescription key="font" type="system" pointSize="15"/>
                                     <variation key="device=watch38mm">
                                         <fontDescription key="font" type="system" pointSize="12"/>
@@ -538,7 +538,8 @@
                                                 </connections>
                                             </button>
                                             <label alignment="left" text="spacer" id="0Gp-cV-Rso"/>
-                                            <label width="1" height="1" alignment="left" verticalAlignment="center" text="Label" id="nd8-tB-ie7">
+                                            <group width="2" height="28" alignment="left" id="ASJ-0M-VYW" userLabel="blankVertical"/>
+                                            <label width="95" height="1" alignment="left" verticalAlignment="center" text="Label" id="nd8-tB-ie7">
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="font" type="system" pointSize="16"/>
                                                 <variation key="device=watch38mm">
@@ -549,14 +550,13 @@
                                                 <color key="color" red="1" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                             </separator>
                                             <group width="2" height="2" alignment="left" verticalAlignment="center" id="Ap5-IK-tH3" userLabel="hor. spacer"/>
-                                            <group width="2" height="28" alignment="left" id="ASJ-0M-VYW" userLabel="blankVertical"/>
                                         </items>
                                         <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
                                     </group>
                                     <connections>
                                         <outlet property="buttonCheckbox" destination="ANT-Y3-o9Z" id="xY3-sX-eDE"/>
                                         <outlet property="tableRowLabel" destination="nd8-tB-ie7" id="Gge-zl-DxR"/>
-                                        <outlet property="verticalBar" destination="JZ0-Yk-TFZ" id="SKW-j6-iWG"/>
+                                        <outlet property="verticalBar" destination="ASJ-0M-VYW" id="ihP-BB-z2I"/>
                                     </connections>
                                 </tableRow>
                             </items>
@@ -577,7 +577,7 @@
                         </items>
                     </menu>
                     <connections>
-                        <outlet property="labelReminderListID" destination="TeB-4I-mfF" id="Fea-9Z-Yb9"/>
+                        <outlet property="labelReminderListID" destination="TeB-4I-mfF" id="gKx-45-Afw"/>
                         <outlet property="table" destination="efV-EY-vrF" id="eh9-Lj-L1Y"/>
                     </connections>
                 </controller>

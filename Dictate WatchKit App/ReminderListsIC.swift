@@ -18,7 +18,7 @@ class ReminderListsIC: WKInterfaceController {
     
     var reminders:[EKReminder] = []
     var allReminders:[EKReminder] = []
-    var allReminderLists:[EKReminder] = []
+    var allReminderLists:[EKCalendar] = []
 
     var numberOfNewItems:Int    = 0
     var startDT:NSDate          = NSDate()
@@ -50,19 +50,9 @@ class ReminderListsIC: WKInterfaceController {
         
         super.awakeWithContext(context)
         self.setTitle(context as? String)
-        ReminderManager.sharedInstance.fetchReminders({ (reminders) -> Void in
-            
-            self.allReminderLists = reminders
-            
-            //self.allReminders = reminders //TRY ABOVE LINE
-            
-            //self.tableView.reloadData()
-            
-            //println("w51 self.allReminders: \(self.allReminders)")
-            println("w71 self.allReminderLists.count: \(self.allReminderLists.count)")
-            
-            self.loadTableData()
-        })
+  
+        self.loadTableData()
+
     }
 
     override func willActivate() {
@@ -87,7 +77,7 @@ class ReminderListsIC: WKInterfaceController {
  
     
     func loadTableData () {
-        var allReminderLists: Array<EKCalendar> = self.eventStore.calendarsForEntityType(EKEntityTypeReminder) as! Array<EKCalendar>
+        self.allReminderLists = ReminderManager.sharedInstance.eventStore.calendarsForEntityType(EKEntityTypeReminder) as! Array<EKCalendar>
         
         table.setNumberOfRows(allReminderLists.count, withRowType: "tableRow")
         
@@ -113,8 +103,8 @@ class ReminderListsIC: WKInterfaceController {
     override func contextForSegueWithIdentifier(segueIdentifier: String, inTable table: WKInterfaceTable, rowIndex: Int) -> AnyObject? {
         
         if segueIdentifier == "ReminderDetails" {
-            let reminder = allReminderLists[rowIndex]
-            let reminderListID = reminder.calendarItemIdentifier
+            let selectedList = allReminderLists[rowIndex]
+            let reminderListID = selectedList.calendarIdentifier
             println("w113 reminderListID \(reminderListID)")
             
             return reminderListID

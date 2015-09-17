@@ -10,12 +10,18 @@ import UIKit
 
 class SettingsReminderTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource {
     
-    //TODO check is user has thsi reminder list made or not????
-    var defaultReminderList = "Default"     //does user have this list made already? check???
+    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp") // from course
+  
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //TODO Mike check is user has thia reminder list made or not????
+        var defaultReminderList = "Default"     //does user have this list made already? check???
+        
+        var defaultReminderListID = "0000"
+        
+         defaults!.setObject(defaultReminderListID, forKey: "defaultReminderListID")    //sets defaultReminderList
         
 
         // Uncomment the following line to preserve selection between presentations

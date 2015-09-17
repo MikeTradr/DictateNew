@@ -16,6 +16,9 @@ class ReminderListPickerIC: WKInterfaceController {
     var selectedRow:Int! = nil
     let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp") // from course
     let eventStore = EKEventStore()
+    var checked:Bool = false
+    var allReminders:[EKReminder] = []
+    var allReminderLists: Array<EKCalendar> = EKEventStore().calendarsForEntityType(EKEntityTypeReminder) as! Array<EKCalendar>
     
     @IBOutlet weak var table: WKInterfaceTable!
     
@@ -25,16 +28,12 @@ class ReminderListPickerIC: WKInterfaceController {
         NSLog("%@ will activate", self)
         println("w26 in ReminderListPickerIC willActivate")
         
-        loadTableData()
+        //loadTableData()
     }
   
     
     func loadTableData () {
-         var allReminderLists: Array<EKCalendar> = self.eventStore.calendarsForEntityType(EKEntityTypeReminder) as! Array<EKCalendar>
-        
         table.setNumberOfRows(allReminderLists.count, withRowType: "tableRow")
-
-        //println("w38 allReminderLists: \(allReminderLists)")
         println("w39 allReminderLists.count: \(allReminderLists.count)")
 
         for (index, title) in enumerate(allReminderLists) {
@@ -44,9 +43,16 @@ class ReminderListPickerIC: WKInterfaceController {
             let row = table.rowControllerAtIndex(index) as! SettingsReminderTableRC
             let reminder = allReminderLists[index]
             
-            row.tableRowLabel.setText(reminder.title)
-            row.tableRowLabel.setTextColor(UIColor(CGColor: reminder.CGColor))
-            row.verticalBar.setBackgroundColor(UIColor(CGColor: reminder.CGColor))
+            ReminderManager.sharedInstance.fetchCalendarReminders(reminder) { (reminders) -> Void in
+                //println(reminders)
+                self.allReminders = reminders as [EKReminder]
+                let numberOfItems = self.allReminders.count
+                //println("w98 numberOfItems: \(numberOfItems)")
+                
+                row.tableRowLabel.setText("\(reminder.title) (\(numberOfItems))")
+                row.tableRowLabel.setTextColor(UIColor(CGColor: reminder.CGColor))
+                row.verticalBar.setBackgroundColor(UIColor(CGColor: reminder.CGColor))
+            }
         }
     }   // end loadTableData func
     
@@ -55,29 +61,10 @@ class ReminderListPickerIC: WKInterfaceController {
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         // Configure interface objects here.
-        println("w58 ReminderListPickerIC")
+        println("w69 ReminderListPickerIC awakeWithContext")
         println("-----------------------------------------")
-        //someone on stackoverflow ttied this... application?  //Anil this help?
-        // http://stackoverflow.com/questions/30561310/fetching-reminders-in-background-using-eventkit
-     /*
-        // First let iOS know you're starting a background task
-        let taskIdentifier = application.beginBackgroundTaskWithExpirationHandler() {
-            () -> Void in
-            // Do something when task is taking too long
-        }
-        // Then do the async call to EKEventStore
-        eventStore.fetchRemindersMatchingPredicate(predicate, completion: {
-            [unowned self] reminders in
-            // Do what I have to do, and afterwards end the background task:
-            application.endBackgroundTask(taskIdentifier)
-            })
-        
-     */
-        
         
         loadTableData()     //reload table after item is deleted
-        
-        println("w82 we here?")
     }
 
     override func didDeactivate() {
@@ -88,23 +75,33 @@ class ReminderListPickerIC: WKInterfaceController {
 
     }
     
+    override func table(table: WKInterfaceTable, didSelectRowAtIndex rowIndex: Int) {
+        println("w94 clicked on row: \(rowIndex)")
+        
+        selectedRow = rowIndex //for use with insert and delete, save selcted row index
+        let itemRow = self.table.rowControllerAtIndex(rowIndex) as! SettingsReminderTableRC
+        
+        if self.checked {               // Turn checkmark off
+            itemRow.imageCheckbox.setImageNamed("cbBlank40px")
+            self.checked = false
+        } else {                        // Turn checkmark on
+            itemRow.imageCheckbox.setImageNamed("cbChecked40px")
+            let defaultReminderList: EKCalendar = allReminderLists[rowIndex]
+            let defaultReminderListID = defaultReminderList.calendarIdentifier
+            
+            println("w107 defaultReminderListID: \(defaultReminderListID)")
+            
+            defaults!.setObject(defaultReminderListID, forKey: "defaultReminderListID")    //sets defaultReminderListID String
+            
+            self.checked = true
+        }
+    }
+    
     override func contextForSegueWithIdentifier(segueIdentifier: String, inTable table: WKInterfaceTable, rowIndex: Int) -> AnyObject?
     {
         
       //  let reminderListID = allReminderLists[rowIndex]
         return "todo" //reminderTitle
-    }
-    
-    @IBAction func buttonMainIC() {
-        
-        pushControllerWithName("Main", context: "Reminders")
-
-    }
-
-    @IBAction func buttonReminders() {
-        
-        pushControllerWithName("Reminders", context: "Reminders")
-        
     }
 
 }

@@ -150,25 +150,27 @@ class ReminderListsIC: WKInterfaceController {
             self.allReminders = reminders as [EKReminder]
             self.numberOfItems = self.allReminders.count
             self.labelReminderListID.setText("\(calendar.title): (\(self.numberOfItems))")
+            
+            self.reminderItemsGroup.setHidden(false)  //show lower table2
+
+            if self.allReminders.count >= 0 {
+                self.table2.setNumberOfRows(self.allReminders.count, withRowType: "tableRow2")
+            }
+            
+            println("w45 allCalendarLists: \(self.allReminders)")
+            println("w46 allCalendarLists.count: \(self.allReminders.count)")
+            
+            for (index, title) in enumerate(self.allReminders) {
+                println("---------------------------------------------------")
+                println("w40 index, title: \(index), \(title)")
+                
+                let row = self.table2.rowControllerAtIndex(index) as! ReminderItemsTableRC
+                let item = self.allReminders[index]
+                
+                row.tableRowLabel.setText(item.title)
+                row.reminder = item
+            }
             //self.loadTableData()
-        }
-        
-        if self.allReminders.count >= 0 {
-            table2.setNumberOfRows(allReminders.count, withRowType: "tableRow2")
-        }
-        
-        println("w45 allCalendarLists: \(allReminders)")
-        println("w46 allCalendarLists.count: \(allReminders.count)")
-        
-        for (index, title) in enumerate(allReminders) {
-            println("---------------------------------------------------")
-            println("w40 index, title: \(index), \(title)")
-            
-            let row = table2.rowControllerAtIndex(index) as! ReminderItemsTableRC
-            let item = allReminders[index]
-            
-            row.tableRowLabel.setText(item.title)
-            row.reminder = item
         }
     }       // end loadTableData2 func
     
@@ -177,7 +179,7 @@ class ReminderListsIC: WKInterfaceController {
         //selection of data and presenting it to
         
         let selectedList = allReminderLists[rowIndex]
-        let reminderListID = selectedList.calendarIdentifier
+        reminderListID = selectedList.calendarIdentifier
         println("w156 reminderListID \(reminderListID)")
         
         reminderItemsGroup.setHidden(false)  //show lower table2

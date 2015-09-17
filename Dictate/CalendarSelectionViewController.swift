@@ -10,30 +10,34 @@ import UIKit
 import EventKit
 
 class CalendarSelectionViewController: UITableViewController {
-
+    
     var calendarList = Array<EKCalendar>()
     var allowsMultipleSelection = true
-    var selectedCalendars:Array<EKCalendar>?
+    var selectedCalendars:Array<EKCalendar> = []
     var shouldShowSpecialItems = false
     var specialItems = ["All","Default"];
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        self.view.backgroundColor  = UIColor.blackColor()
+        self.tableView.backgroundColor =  UIColor.blackColor()
+        self.tableView.tableFooterView = UIView()
+        self.tableView.separatorStyle = .None
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-
+        
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     // MARK: - Table view data source
-
+    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
@@ -42,26 +46,34 @@ class CalendarSelectionViewController: UITableViewController {
         }
         return 1
     }
-
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if shouldShowSpecialItems && section == 0{
             return self.specialItems.count
         }
         return self.calendarList.count
     }
-
+    
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
-
+        
         cell.selectionStyle = UITableViewCellSelectionStyle.None
+        cell.backgroundColor = UIColor.blackColor()
         
         if !shouldShowSpecialItems || indexPath.section == 1{
             
-        let calendar = self.calendarList[indexPath.row]
-        cell.textLabel?.text = calendar.title
-        cell.textLabel?.textColor =  UIColor(CGColor: calendar.CGColor)
+            let calendar = self.calendarList[indexPath.row]
+            cell.textLabel?.text = calendar.title
+            cell.textLabel?.textColor =  UIColor(CGColor: calendar.CGColor)
             
+            if contains( self.selectedCalendars , calendar){
+                cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+                
+            }else{
+                cell.accessoryType = UITableViewCellAccessoryType.None
+            }
+
         }
         else
         {
@@ -71,57 +83,75 @@ class CalendarSelectionViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if !shouldShowSpecialItems{
-        let selectedCalendar = self.calendarList[indexPath.row];
-//        contains( self.selectedCalendars, )
         let cell = self.tableView.cellForRowAtIndexPath(indexPath)
-        cell?.accessoryType = UITableViewCellAccessoryType.Checkmark
-        }
-    }
+        let selectedCalendar = self.calendarList[indexPath.row];
+        
+            if contains( self.selectedCalendars , selectedCalendar){
+                // Selected same cell, do nothing
+              
+                
+            }else{
+                
+                if !allowsMultipleSelection{
+                    self.selectedCalendars.removeLast()
+                    self.selectedCalendars.append(selectedCalendar)
+                    self.tableView.reloadData()
+                }
+             
 
+//                cell?.accessoryType = UITableViewCellAccessoryType.None
+//                self.selectedCalendars.removeAtIndex(find(self.selectedCalendars, selectedCalendar)!)
+//                if allowsMultipleSelection || self.selectedCalendars.count == 0{
+//
+//                cell?.accessoryType = UITableViewCellAccessoryType.Checkmark
+//                self.selectedCalendars.append(selectedCalendar)
+//                }
+            }
+    }
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the specified item to be editable.
-        return true
+    // Return NO if you do not want the specified item to be editable.
+    return true
     }
     */
-
+    
     /*
     // Override to support editing the table view.
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+    if editingStyle == .Delete {
+    // Delete the row from the data source
+    tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+    } else if editingStyle == .Insert {
+    // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+    }
     }
     */
-
+    
     /*
     // Override to support rearranging the table view.
     override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
+    
     }
     */
-
+    
     /*
     // Override to support conditional rearranging of the table view.
     override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the item to be re-orderable.
-        return true
+    // Return NO if you do not want the item to be re-orderable.
+    return true
     }
     */
-
+    
     /*
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
     }
     */
-
+    
 }

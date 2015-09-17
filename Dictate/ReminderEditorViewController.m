@@ -76,11 +76,14 @@ static NSString *kReminderCell = @"ReminderCell";
 
 @property (assign) NSInteger pickerCellRowHeight;
 
+@property (weak, nonatomic) IBOutlet UITextView *reminderTitleTextView;
 @property (nonatomic, strong) IBOutlet UIDatePicker *pickerView;
 @property (nonatomic,strong)NSString *reminderTitle;
 @property (nonatomic,strong)NSDate *alarmDate;
 @property (nonatomic,assign)BOOL isAlertOn;
 @property (nonatomic,strong)EKCalendar *calendar;
+@property (nonatomic,strong)CalendarSelectionViewController *selectionController;
+
 
 
 - (IBAction)done:(id)sender;
@@ -97,6 +100,7 @@ static NSString *kReminderCell = @"ReminderCell";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor blackColor];
     if (self.reminder.alarms.count) {
         EKAlarm *alarm = self.reminder.alarms[0];
         self.alarmDate = alarm.absoluteDate;
@@ -414,10 +418,14 @@ NSUInteger DeviceSystemMajorVersion()
     }
     else if (indexPath.section == 2){
         // Calendar list
-        CalendarSelectionViewController *selectionController = [self.storyboard instantiateViewControllerWithIdentifier:@"CalendarSelectionViewController"];
+        if (!self.selectionController){
+         self.selectionController = [self.storyboard instantiateViewControllerWithIdentifier:@"CalendarSelectionViewController"];
+        }
         NSArray *calendars = [ReminderManager.sharedInstance.eventStore calendarsForEntityType:EKEntityTypeReminder];
-        selectionController.calendarList = calendars;
-        [self.navigationController pushViewController:selectionController animated:true];
+        self.selectionController.calendarList = calendars;
+        self.selectionController.selectedCalendars = @[self.reminder.calendar];
+        self.selectionController.allowsMultipleSelection = NO;
+        [self.navigationController pushViewController:self.selectionController animated:true];
     }
     else
     {
@@ -471,6 +479,14 @@ NSUInteger DeviceSystemMajorVersion()
 
 - (IBAction)done:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
+    self.reminder.calendar = self.selectionController.selectedCalendars[0];
+    self.reminder.title = self.reminderTitleTextView.text;
+    
+//    self.reminder.ala
+    [[[ReminderManager sharedInstance]eventStore]saveCalendar: commit:true error:nil];
+}
+- (IBAction)cancel:(id)sender {
+    [self dismissViewControllerAnimated:true completion:nil];
 }
 @end
 

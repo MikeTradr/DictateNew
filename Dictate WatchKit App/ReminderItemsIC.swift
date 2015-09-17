@@ -61,6 +61,8 @@ class ReminderItemsIC: WKInterfaceController {
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         // Configure interface objects here.
+        
+
     
         let calendarId = context as! String
         let calendar = ReminderManager.sharedInstance.eventStore.calendarWithIdentifier(calendarId)
@@ -91,7 +93,7 @@ class ReminderItemsIC: WKInterfaceController {
         selectedRow = rowIndex //for use with insert and delete, save selcted row index
         let itemRow = self.table.rowControllerAtIndex(rowIndex) as! ReminderItemsTableRC
         let reminderItem = allReminders[rowIndex]
-        let veryDarkGray = UIColor(red: 77, green: 77, blue: 77)     //light biege color, for Word List
+        let veryDarkGray = UIColor(red: 128, green: 128, blue: 128)     //light biege color, for Word List
  
         if self.checked {               // Turn checkmark off
             itemRow.imageCheckbox.setImageNamed("cbBlank40px")

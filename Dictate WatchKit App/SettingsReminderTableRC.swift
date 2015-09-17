@@ -12,20 +12,7 @@ import WatchKit
 class SettingsReminderTableRC: NSObject {
    
     @IBOutlet weak var tableRowLabel: WKInterfaceLabel!
-    @IBOutlet weak var buttonCheckbox: WKInterfaceButton!
     @IBOutlet weak var verticalBar: WKInterfaceGroup!
+    @IBOutlet weak var imageCheckbox: WKInterfaceImage!
     
-    var checked:Bool = false
-    
-    @IBAction func buttonTapped() {
-        if self.checked {   // Turn checkmark off
-            self.buttonCheckbox.setBackgroundImageNamed("cbBlank40px")
-            //self.lightbulbButton.setTitle("Turn On")
-            self.checked = false
-        } else {    // Turn checkmark on
-            self.buttonCheckbox.setBackgroundImageNamed("cbChecked40px")
-            //self.lightbulbButton.setTitle("Turn Off")
-            self.checked = true
-        }
-    }   //end buttonTapped func
 }

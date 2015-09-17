@@ -13,18 +13,14 @@ import EventKit
 
 class CalendarListPickerIC: WKInterfaceController {
     
-   // var allRemindersHardcoded = [String]()
-   // var allCalendarLists = [String]()
     var selectedRow:Int! = nil
-    
+    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp") // from course
+    let eventStore = EKEventStore()
+    var checked:Bool = false
+
     @IBOutlet weak var table: WKInterfaceTable!
     
-    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp") // from course
-
-    let eventStore = EKEventStore()
-    
-   // var allReminders: Array<EKCalendar> = []
-    
+    let allCalendarLists: Array<EKCalendar> = EKEventStore().calendarsForEntityType(EKEntityTypeEvent) as! Array<EKCalendar>
     
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
@@ -32,16 +28,11 @@ class CalendarListPickerIC: WKInterfaceController {
         NSLog("%@ will activate", self)
         println("p93 in ReminderListPickerIC willActivate")
         
-        loadTableData()
+       // loadTableData()
     }
-  
     
     func loadTableData () {
-        let allCalendarLists: Array<EKCalendar> = self.eventStore.calendarsForEntityType(EKEntityTypeEvent) as! Array<EKCalendar>
-        
         table.setNumberOfRows(allCalendarLists.count, withRowType: "tableRow")
-        
-        //println("w45 allCalendarLists: \(allCalendarLists)")
         println("w46 allCalendarLists.count: \(allCalendarLists.count)")
         
         for (index, title) in enumerate(allCalendarLists) {
@@ -57,101 +48,37 @@ class CalendarListPickerIC: WKInterfaceController {
         }
     }   //end loadTableData
     
-  
-
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         // Configure interface objects here.
         println("p19 ReminderListPickerIC")
         println("-----------------------------------------")
-        //someone on stackoverflow ttied this... application?  //Anil this help?
-        // http://stackoverflow.com/questions/30561310/fetching-reminders-in-background-using-eventkit
-     /*
-        // First let iOS know you're starting a background task
-        let taskIdentifier = application.beginBackgroundTaskWithExpirationHandler() {
-            () -> Void in
-            // Do something when task is taking too long
-        }
-        // Then do the async call to EKEventStore
-        eventStore.fetchRemindersMatchingPredicate(predicate, completion: {
-            [unowned self] reminders in
-            // Do what I have to do, and afterwards end the background task:
-            application.endBackgroundTask(taskIdentifier)
-            })
-        
-     */
-        
-        
-        
-        self.eventStore.reset() //did not fix: 2015-09-12 00:13:38.233 Dictate WatchKit Extension[68474:820907] Error getting all calendars: Error Domain=EKCADErrorDomain Code=1013 "The operation couldn’t be completed. (EKCADErrorDomain error 1013.)w69 allReminders: []
-        
-        var allReminders: Array<EKCalendar>= self.eventStore.calendarsForEntityType(EKEntityTypeReminder) as!  Array<EKCalendar>
-        
-       // let allCalendars : [EKCalendar] = self.eventStore.calendarsForEntityType(EKEntityTypeEvent) as! [EKCalendar]
-        //let calendars = allCalendars.filter { $0.calendarIdentifier == self.calendarIdentifier }
-        
-        //println("w69 allCalendars: \(allCalendars)")
-        
-        println("w69 allReminders: \(allReminders)")
 
-        
- /*
-        allRemindersHardcoded = defaults?.objectForKey("allRemindersHardcoded") as! [String] //array of the items
-        
-        println("w30 allRemindersHardcoded: \(allRemindersHardcoded)")   //from rob course
-        
-        
-        if defaults?.objectForKey("allRemindersHardcoded") != nil {
-            var allRemindersHardcoded = defaults?.objectForKey("allRemindersHardcoded") as! [String] //array of the items
-            
-            println("w64 allRemindersHardcoded: \(allRemindersHardcoded)")   //from rob course
-            println("w64 allRemindersHardcoded.count: \(allRemindersHardcoded.count)")
-        }
-*/
        //TODO Anil TODO Mike needed? or willActivate instead?
         loadTableData()
-        
-        println("p79 he here?")
-
     }
     
     override func table(table: WKInterfaceTable, didSelectRowAtIndex rowIndex: Int) {
-        println("w119 clicked on row: \(rowIndex)")
+        println("w116 clicked on row: \(rowIndex)")
         
         selectedRow = rowIndex //for use with insert and delete, save selcted row index
-        
-        //to remove an item from array if clicked row.
-  /*      reminderLists.removeAtIndex(rowIndex)
-        defaults?.setObject(reminderLists,forKey: "allRemindersHardcoded")
-        defaults?.synchronize()
-   */
-     //TODO Mike TODO Anil get reuseablecell working
-    //    let cell = NSObject.dequeueReusableCellWithIdentifier("tableRowController", forIndexPath: indexPath) as! tableRowController
-        //need to set the background of button at index
-        
-   //     self.table.tableRowLabel.setTextColor(UIColor.yellowColor(), context: rowIndex)
-        
-
-
-  //      self.table.buttonCheckbox.setBackgroundImage(UIImage(named: "cbChecked40px"))
-        
-        //to segue...
-       // self.pushControllerWithName("anotherController", context: rowIndex))
-        
-        // from tutorial: build a context for the data
-     //   var avgPace = RunData.paceSeconds(runData.avgPace(rowIndex))
-     //  let context: AnyObject = avgPace as AnyObject
-      //  presentControllerWithName("Info", context: context) //present the viewcontroller
-        
-        
-    
-        
-        loadTableData()     //reload table after item is deleted
-        
-        println("p93 he here?")
+        let itemRow = self.table.rowControllerAtIndex(rowIndex) as! SettingsCalendarTableRC
+  
+        if self.checked {               // Turn checkmark off
+            itemRow.imageCheckbox.setImageNamed("cbBlank40px")
+            self.checked = false
+        } else {                        // Turn checkmark on
+            itemRow.imageCheckbox.setImageNamed("cbChecked40px")
+            let defaultCalendar: EKCalendar = allCalendarLists[rowIndex]
+            let defaultCalendarID = defaultCalendar.calendarIdentifier
+            
+            println("w130 defaultCalendarID: \(defaultCalendarID)")
+            
+            defaults!.setObject(defaultCalendarID, forKey: "defaultCalendarID")    //sets defaultReminderListID String
+            
+            self.checked = true
+        }
     }
-
-
 
 
     override func didDeactivate() {
@@ -160,25 +87,6 @@ class CalendarListPickerIC: WKInterfaceController {
         super.didDeactivate()
         println("p110 in ReminderListPickerIC didDeactivate")
 
-    }
-/*
-    override func contextForSegueWithIdentifier(segueIdentifier: String, inTable table: WKInterfaceTable, rowIndex: Int) -> AnyObject?
-    {
-        
-      //  let calendarTitle = allCalendarLists[rowIndex]
-        return //calendarTitle
-    }
-*/
-    @IBAction func buttonMainIC() {
-        
-        pushControllerWithName("Main", context: "Today")
-
-    }
-
-    @IBAction func buttonReminders() {
-        
-        pushControllerWithName("Reminders", context: "Today")
-        
     }
 
 }

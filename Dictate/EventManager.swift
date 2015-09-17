@@ -9,6 +9,8 @@
 import UIKit
 import EventKit
 
+/*
+
 class EventManager: NSObject {
     class var sharedInstance : EventManager {
         struct Static {
@@ -565,3 +567,5 @@ class EventManager: NSObject {
     
     
 }
+
+*/

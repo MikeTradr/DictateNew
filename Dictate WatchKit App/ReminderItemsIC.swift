@@ -13,17 +13,18 @@ import EventKit
 
 class ReminderItemsIC: WKInterfaceController {
     
-    var selectedRow:Int! = nil
-   // var allCalendarLists: Array<EKCalendar> = []
-    
+    var selectedRow:Int! = nil    
     let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp") // from course
     var allReminders: Array<EKReminder> = []
-    
-   var reminderListID: String = ""
+    var reminderListID: String = ""
+    var checked:Bool = false
+    var numberOfItems:Int = 0
     
     @IBOutlet weak var table: WKInterfaceTable!
- 
     @IBOutlet weak var labelReminderListID: WKInterfaceLabel!
+    @IBOutlet weak var verticalBar: WKInterfaceGroup!
+    @IBOutlet weak var buttonShowCompleted: WKInterfaceLabel!
+    @IBOutlet weak var buttonCheckbox: WKInterfaceButton!
     
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
@@ -35,7 +36,6 @@ class ReminderItemsIC: WKInterfaceController {
     }
   
     func loadTableData () {
-        
         
         if self.allReminders.count >= 0 {
             table.setNumberOfRows(allReminders.count, withRowType: "tableRow")
@@ -52,8 +52,6 @@ class ReminderItemsIC: WKInterfaceController {
             let item = allReminders[index]
             
             row.tableRowLabel.setText(item.title)
-            row.tableRowLabel.setTextColor(UIColor(CGColor: item.calendar.CGColor))
-            row.verticalBar.setBackgroundColor(UIColor(CGColor: item.calendar.CGColor))
             row.reminder = item
         }
     }       // end loadTableData func
@@ -67,19 +65,20 @@ class ReminderItemsIC: WKInterfaceController {
         let calendarId = context as! String
         let calendar = ReminderManager.sharedInstance.eventStore.calendarWithIdentifier(calendarId)
 
-        labelReminderListID.setText(calendar.title)
+        labelReminderListID.setTextColor(UIColor(CGColor: calendar.CGColor))
+        verticalBar.setBackgroundColor(UIColor(CGColor: calendar.CGColor))
+        buttonShowCompleted.setTextColor(UIColor(CGColor: calendar.CGColor))
+        
+        buttonCheckbox.setHidden(true)
+  
         ReminderManager.sharedInstance.fetchCalendarReminders(calendar) { (reminders) -> Void in
             println(reminders)
             self.allReminders = reminders as [EKReminder]
+            self.numberOfItems = self.allReminders.count
+            self.labelReminderListID.setText("\(calendar.title): (\(self.numberOfItems))")
             self.loadTableData()
         }
-      /*
-        if let reminderListID = context as? Coin {
-            self.coin = coin
-            setTitle(coin.name)
-            NSLog("\(self.coin)")
-        
-    */
+
        //TODO Anil TODO Mike neede awakeWithContent? or willActivate instead?
        // loadTableData()
         
@@ -90,6 +89,27 @@ class ReminderItemsIC: WKInterfaceController {
         println("w119 clicked on row: \(rowIndex)")
         
         selectedRow = rowIndex //for use with insert and delete, save selcted row index
+        let itemRow = self.table.rowControllerAtIndex(rowIndex) as! ReminderItemsTableRC
+        let reminderItem = allReminders[rowIndex]
+        let veryDarkGray = UIColor(red: 77, green: 77, blue: 77)     //light biege color, for Word List
+ 
+        if self.checked {               // Turn checkmark off
+            itemRow.imageCheckbox.setImageNamed("cbBlank40px")
+            itemRow.tableRowLabel.setTextColor(UIColor.whiteColor())
+            reminderItem.completed == false
+            self.checked = false
+        } else {                        // Turn checkmark on
+            itemRow.imageCheckbox.setImageNamed("cbChecked40px")
+            itemRow.tableRowLabel.setTextColor(veryDarkGray)
+            reminderItem.completed == true
+            self.checked = true
+        }
+                
+    //ReminderManager.sharedInstance.eventStore.saveCalendar(reminder?.calendar, commit: true, error: nil)
+        
+       // gameRow.rowLabel.setText(object["name"] as? String)
+
+       // table.tableRowLabel.setBackgroundColor(UIColor.yellowColor)
         
         //to remove an item from array if clicked row.
   /*      reminderLists.removeAtIndex(rowIndex)
@@ -102,7 +122,7 @@ class ReminderItemsIC: WKInterfaceController {
       //  presentControllerWithName("Info", context: context) //present the viewcontroller
 */
         
-        loadTableData()     //reload table after item is deleted
+        //loadTableData()     //reload table after item is deleted
         println("p93 he here?")
     }
 
@@ -121,4 +141,15 @@ class ReminderItemsIC: WKInterfaceController {
     }
 */
 
+}
+
+extension UIColor
+{
+    convenience init(red: Int, green: Int, blue: Int)
+    {
+        let newRed = CGFloat(red)/255
+        let newGreen = CGFloat(green)/255
+        let newBlue = CGFloat(blue)/255
+        self.init(red: newRed, green: newGreen, blue: newBlue, alpha: 1.0)
+    }
 }

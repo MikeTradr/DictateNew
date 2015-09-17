@@ -20,7 +20,7 @@ class ReminderListsIC: WKInterfaceController {
     var allReminders:[EKReminder] = []
     var allReminderLists:[EKCalendar] = []
 
-    var numberOfNewItems:Int    = 0
+    var numberOfItems:Int       = 0
     var startDT:NSDate          = NSDate()
     var endDT:NSDate            = NSDate()
     var today:NSDate            = NSDate()
@@ -91,9 +91,16 @@ class ReminderListsIC: WKInterfaceController {
             let row = table.rowControllerAtIndex(index) as! ReminderListsTableRC
             let reminder = allReminderLists[index]
             
-            row.tableRowLabel.setText(reminder.title)
+            ReminderManager.sharedInstance.fetchCalendarReminders(reminder) { (reminders) -> Void in
+                //println(reminders)
+                self.allReminders = reminders as [EKReminder]
+                let numberOfItems = self.allReminders.count
+                //println("w98 numberOfItems: \(numberOfItems)")
+
+            row.tableRowLabel.setText("\(reminder.title) (\(numberOfItems))")
             row.tableRowLabel.setTextColor(UIColor(CGColor: reminder.CGColor))
             row.verticalBar.setBackgroundColor(UIColor(CGColor: reminder.CGColor))
+            }
         }
     }   // end loadTableData func
     

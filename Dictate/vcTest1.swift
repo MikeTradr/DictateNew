@@ -188,7 +188,7 @@ class vcTest1: UIViewController {
         
         var wordArrTrimmed  = defaults.objectForKey("wordArrTrimmed") as! [String] //array of the items
         
-        var reminderArray = defaults.objectForKey("reminderArray") as! [String] //array of the items
+        var reminderArray = defaults.objectForKey("reminderArray") as? [String] //array of the items
         
         var reminderList:String   = defaults.stringForKey("reminderList")!
         var reminderAlarm   = defaults.objectForKey("reminderAlarm")! as! NSDate
@@ -560,7 +560,7 @@ class vcTest1: UIViewController {
             var calendarName = ""
             var reminderCreatedFlag = false
             
-            var reminderArray       = defaults.objectForKey("reminderArray") as! [String] //array of the items
+            var reminderArray       = defaults.objectForKey("reminderArray") as? [String] //array of the items
             var reminderList:String     = defaults.stringForKey("reminderList")!
             
             println("p518 reminderArray: \(reminderArray)")
@@ -579,8 +579,8 @@ class vcTest1: UIViewController {
                 
             }
             
-            
-            for list in reminderArray {
+            if let _reminderArray = reminderArray{
+            for list in _reminderArray {
                 
                 //var list = list.capitalizedString
                 println("p524 reminderList: \(reminderList)")
@@ -613,7 +613,7 @@ class vcTest1: UIViewController {
                     
                 }
             }
-            
+            }
             if !reminderCreatedFlag {   // If is false
                 println("p571  we here reminderCreatedFlag: \(reminderCreatedFlag)")
                 

@@ -765,12 +765,9 @@
 		ECF818611B84FA7A0087ECAD /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				ECF2404E1BA13786002BFBAE /* DataManager.swift */,
 				D3A0F9FB1B69F0BB00F1FEDA /* EventCode.swift */,
 				D38653F61BAA02F400B8CCBC /* EventManager.swift */,
-				D3D98AF31BA54D5B00BA1901 /* FavoritesManager.swift */,
 				ECF818621B84FAB70087ECAD /* ReminderManager.swift */,
-				ECF2404E1BA13786002BFBAE /* DataManager.swift */,
 				D3D98AF31BA54D5B00BA1901 /* FavoritesManager.swift */,
 				ECF2404E1BA13786002BFBAE /* DataManager.swift */,
 			);
@@ -857,6 +854,7 @@
 		D3F8ACDD1B696FB00070C097 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = ThatSoft.com;
 				TargetAttributes = {

@@ -33,7 +33,7 @@ class CalendarPickerTableViewController: UITableViewController {
     var selectedCalendar:String? = nil
     var selectedCalendarIndex:Int? = nil
     
-    let defaults = NSUserDefaults.standardUserDefaults()
+    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
     
     
    // var reminderArray = defaults.objectForKey("reminderArray") as! [String] //array of the items

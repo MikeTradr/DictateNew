@@ -11,6 +11,8 @@ import MessageUI
 
 class MailComposer3: UIViewController, MFMailComposeViewControllerDelegate {
     
+    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -27,9 +29,7 @@ class MailComposer3: UIViewController, MFMailComposeViewControllerDelegate {
     func configuredMailComposeViewController() -> MFMailComposeViewController {
         let mailComposerVC = MFMailComposeViewController()
         mailComposerVC.mailComposeDelegate = self // Extremely important to set the --mailComposeDelegate-- property, NOT the --delegate-- property
-        
-        let defaults = NSUserDefaults.standardUserDefaults()
-        
+                
         //TODO fix the forced downcast below
         let mainType:String    = defaults.stringForKey("mainType")!
         let output:String    = defaults.stringForKey("output")!

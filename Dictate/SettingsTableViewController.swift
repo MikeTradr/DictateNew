@@ -11,6 +11,8 @@ import AVFoundation
 
 class SettingsTableViewController: UITableViewController{
     
+    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+
     var defaultReminderList:String = "Default"
     
     var audioPlayer = AVAudioPlayer()
@@ -40,7 +42,7 @@ class SettingsTableViewController: UITableViewController{
         playSound(alertSound3)
         
         
-        let selectedReminderIdentifier = NSUserDefaults.standardUserDefaults().objectForKey("defaultReminderList") as? String
+        let selectedReminderIdentifier = defaults.objectForKey("defaultReminderList") as? String
         println("p44 selectedReminderIdentifier: \(selectedReminderIdentifier)")
         
         let reminder = ReminderManager.sharedInstance.eventStore.calendarWithIdentifier("selectedReminderIdentifier")
@@ -54,7 +56,7 @@ class SettingsTableViewController: UITableViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let selectedReminderIdentifier = NSUserDefaults.standardUserDefaults().objectForKey("defaultReminderList") as? String
+        let selectedReminderIdentifier = defaults.objectForKey("defaultReminderList") as? String
         
         labelReminderDefault.text = selectedReminderIdentifier
         
@@ -82,9 +84,8 @@ class SettingsTableViewController: UITableViewController{
             // in our case its not really required, since we are setting it in user defaults, will be globaly available
             //As a better approach iam doing here to show you
             
-            let selectedCalendarIdentifier = NSUserDefaults.standardUserDefaults().objectForKey("defaultReminderList") as? String
+            let selectedCalendarIdentifier = defaults.objectForKey("defaultReminderList") as? String
             
-//            .setObject(selectedReminder.calendarIdentifier, forKey: "defaultReminderList")
             let reminderPickerController = segue.destinationViewController as! ReminderPickerTableViewController
             reminderPickerController.selectedReminder = selectedCalendarIdentifier
         }

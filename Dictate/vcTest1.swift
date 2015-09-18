@@ -13,6 +13,8 @@ import AVFoundation
 
 class vcTest1: UIViewController {
     
+    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+    
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
     var audioPlayer = AVAudioPlayer()
@@ -28,7 +30,6 @@ class vcTest1: UIViewController {
     //   @IBOutlet weak var resultEndDate: UITextField!
     
     
-    //   let defaults = NSUserDefaults.standardUserDefaults()
     //   resultStartDate = defaults.stringForKey("startDT")
     
     @IBOutlet weak var resultType: UITextField!
@@ -70,10 +71,10 @@ class vcTest1: UIViewController {
     
     @IBOutlet weak var buttonCreateOutlet: UIButton!
     
-    let defaults = NSUserDefaults.standardUserDefaults()
-    
-    let mainType:String     = NSUserDefaults.standardUserDefaults().stringForKey("mainType") ?? "Event"
-    var actionType:String   = NSUserDefaults.standardUserDefaults().stringForKey("actionType") ?? "Event"
+    let mainType:String     = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+.stringForKey("mainType") ?? "Event"
+    var actionType:String   = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+.stringForKey("actionType") ?? "Event"
     
     // TODO Anil why can't have ! instead of the ?? got unwrapped nil error as it wa nil initially
     //var listName:String   = NSUserDefaults.standardUserDefaults().stringForKey("listName") ?? "Today"  //listName is Reminder Lsit naem to save reminder to
@@ -548,7 +549,6 @@ class vcTest1: UIViewController {
         
         //println("### pl240 startDT: \(startDT)")
         
-        // let defaults = NSUserDefaults.standardUserDefaults()
         var actionType:String    = defaults.stringForKey("actionType")!
         
         println("p237 vcTest1, actionType: \(actionType)")

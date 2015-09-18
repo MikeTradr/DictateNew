@@ -14,7 +14,7 @@ import EventKit
 class ReminderListPickerIC: WKInterfaceController {
     
     var selectedRow:Int! = nil
-    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp") // from course
+    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
     let eventStore = EKEventStore()
     var checked:Bool = false
     var allReminders:[EKReminder] = []
@@ -91,7 +91,7 @@ class ReminderListPickerIC: WKInterfaceController {
             
             println("w107 defaultReminderListID: \(defaultReminderListID)")
             
-            defaults!.setObject(defaultReminderListID, forKey: "defaultReminderListID")    //sets defaultReminderListID String
+            defaults.setObject(defaultReminderListID, forKey: "defaultReminderListID")    //sets defaultReminderListID String
             
             self.checked = true
         }

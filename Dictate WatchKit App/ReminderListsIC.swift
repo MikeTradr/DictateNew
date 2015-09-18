@@ -13,7 +13,7 @@ import EventKit
 
 class ReminderListsIC: WKInterfaceController {
     
-    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")
+    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
     let eventStore = EKEventStore()
     
     var reminders:[EKReminder] = []
@@ -128,6 +128,10 @@ class ReminderListsIC: WKInterfaceController {
     
     func loadTableData () {
         NSLog("%@ w102 loadTableData", self)
+        
+        reminderListsGroup.setHidden(false)  //hide lists
+        navBarGroup.setHidden(false)  //hide lists
+
 
         self.allReminderLists = ReminderManager.sharedInstance.eventStore.calendarsForEntityType(EKEntityTypeReminder) as! Array<EKCalendar>
         

@@ -22,6 +22,7 @@ class EventCode: NSObject {
     }
     
     let eventStore = EKEventStore()
+    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
 
     
     func createEvent() {
@@ -31,9 +32,6 @@ class EventCode: NSObject {
         var store : EKEventStore = EKEventStore()               // this old delete?  TODO
         
         var eventStore : EKEventStore = EKEventStore()
-        
-        
-        let defaults = NSUserDefaults.standardUserDefaults()
         
         let mainType:String    = defaults.stringForKey("mainType")!
         let actionType:String    = defaults.stringForKey("actionType")!
@@ -176,7 +174,6 @@ class EventCode: NSObject {
                 // Create Alarm aka Alert...
                 //let alertMinutes:Double = 10
                 
-                let defaults = NSUserDefaults.standardUserDefaults()
                 let eventAlert = defaults.objectForKey("eventAlert") as! Double
                 println("p1185 eventAlert = \(eventAlert)")
                 

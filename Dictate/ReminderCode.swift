@@ -13,6 +13,8 @@ import EventKit
 
 class ReminderCode: NSObject {
     
+    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+
     var store : EKEventStore = EKEventStore()
     
     var calendarDatabase = EKEventStore()   // from EKTest code...
@@ -63,8 +65,6 @@ class ReminderCode: NSObject {
     //In order to create a new calendar, you should create it and store the id in NSUserDefaults so you can retrieve it next time. I use the following function to fetch the calendar if it exists and create it if it does not:
     
     func getCalendar() -> EKCalendar? {
-        let defaults = NSUserDefaults.standardUserDefaults()
-        
         
         if let id = defaults.stringForKey("calendarID") {
             return store.calendarWithIdentifier(id)
@@ -133,9 +133,7 @@ class ReminderCode: NSObject {
     
     
     func createReminder() {
-        
-        let defaults = NSUserDefaults.standardUserDefaults()
-        
+                
         let mainType    = defaults.stringForKey("mainType")
         let actionType  = defaults.stringForKey("actionType")
         

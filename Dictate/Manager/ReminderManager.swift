@@ -27,9 +27,9 @@ class ReminderManager: NSObject {
         return Static.instance!
     }
     
-    
+    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+
     let eventStore = EKEventStore()
-    let defaults = NSUserDefaults.standardUserDefaults()
 
     func getAccessToEventStoreForType(type:EKEntityType, completion:(granted:Bool)->Void){
         
@@ -163,8 +163,6 @@ class ReminderManager: NSObject {
 // ____ addReminder func ____________________________________
     func addReminder(name:String, items:[String]){
         println("p90 in addReminder name: \(name)")
-        
-        let defaults = NSUserDefaults.standardUserDefaults()
         
         let mainType    = defaults.stringForKey("mainType")
         let actionType  = defaults.stringForKey("actionType")
@@ -375,9 +373,6 @@ class ReminderManager: NSObject {
                 }
 
 */
-        //TODO thise crash app:
-            let defaults = NSUserDefaults.standardUserDefaults()
-        //    defaults.setObject(allCalendars, forKey: "calendarArray")            //sets calendarArray
             
             return localCalendars
 
@@ -424,14 +419,11 @@ class ReminderManager: NSObject {
         
         */
         
-        //let defaults = NSUserDefaults.standardUserDefaults()
-        
-        let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp") // from course
 
         let allRemindersHardcoded = ["Reminder list1", "Today", "Tomorrow", "Groceries", "ToCode"]
-        defaults?.setObject(allRemindersHardcoded, forKey: "allRemindersHardcoded")            //sets allRemindersHardcoded
+        defaults.setObject(allRemindersHardcoded, forKey: "allRemindersHardcoded")            //sets allRemindersHardcoded
         
-        var testArrayData = defaults?.objectForKey("allRemindersHardcoded") as! [String] //array of the items
+        var testArrayData = defaults.objectForKey("allRemindersHardcoded") as! [String] //array of the items
         
         println("p372 testArrayData: \(testArrayData)")
         
@@ -470,14 +462,10 @@ class ReminderManager: NSObject {
         }
         println("p471 reminderArray: \(reminderArray)")
         println("p472 reminderArray.count: \(reminderArray.count)")
-        
-       // let defaults = NSUserDefaults.standardUserDefaults()
-        let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp") // from course
 
-        defaults!.setObject(reminderArray, forKey: "reminderStringArray")            //sets reminderArray
+        defaults.setObject(reminderArray, forKey: "reminderStringArray")            //sets reminderArray
         
-       //TODO MIKE TODO ANIL Commented Out 091815
-      //  defaults!.setObject(reminderArray, forKey: "reminderArray")            //sets reminderArray
+        defaults.setObject(reminderArray, forKey: "reminderArray")            //sets reminderArray
 
     }   //func CreateReminderArray   
 
@@ -539,7 +527,6 @@ class ReminderManager: NSObject {
         println("p193 calendarArray: \(calendarArray)")
         println("p193 calendarArray.count: \(calendarArray.count)")
         
-        let defaults = NSUserDefaults.standardUserDefaults()
         defaults.synchronize()
       //  defaults.setObject(calendarArray, forKey: "calendarArray")            //sets calendarArray
  

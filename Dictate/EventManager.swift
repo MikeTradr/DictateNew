@@ -24,8 +24,7 @@ class EventManager: NSObject {
     }
     
     let eventStore = EKEventStore()
-    let defaults = NSUserDefaults.standardUserDefaults()
-    
+    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
     
     func getAccessToEventStoreForType(type:EKEntityType, completion:(granted:Bool)->Void){
         

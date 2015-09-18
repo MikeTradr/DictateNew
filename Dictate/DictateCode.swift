@@ -66,7 +66,9 @@ class DictateCode: NSObject {
     var actionType:String   = ""        //event, reminder, singleWordList, commaList, rawList, note?, text, email
     var mainType:String   = ""
     
-    let defaults = NSUserDefaults.standardUserDefaults()
+    //let defaults = NSUserDefaults.standardUserDefaults()
+    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+
    
 // new for new start...
     var eventDuration:Double     = 10   //TODO get this from settings
@@ -95,9 +97,6 @@ class DictateCode: NSObject {
     
     func parse (str: String) -> (NSDate, NSDate, String, String, String, String, String) {
         //returning startDT, endDT, output, outputNote, day, calendarName, eventDuration, actionType
-        
-        let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
-
         
         var wordArr:[String]        = []
         
@@ -250,6 +249,9 @@ class DictateCode: NSObject {
             
             for (i, element) in enumerate(wordArr) {
                 
+                let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+
+                
                 word = wordArr[i] //as! String
                 
                 println("___")
@@ -304,7 +306,7 @@ class DictateCode: NSObject {
                         
                             println("p203: actionType \(actionType)")
                             println("p204: mainType \(mainType)")
-                            
+
                             defaults.setObject(actionType, forKey: "actionType")        //sets actionType for processing
                             defaults.setObject(mainType, forKey: "mainType")            //sets mainType
                         
@@ -497,7 +499,6 @@ class DictateCode: NSObject {
                             
                             println("p224 toPhone: \(toPhone)")
                             
-                            let defaults = NSUserDefaults.standardUserDefaults()
                             defaults.setObject(toPhone, forKey: "toPhone")
                             
                         }
@@ -520,8 +521,6 @@ class DictateCode: NSObject {
                     
                     let eventAlert = "none set yet"
                     actionType = "Text"         // set type for proper processing
-                    
-                    let defaults = NSUserDefaults.standardUserDefaults()
                     
                     defaults.setObject(eventAlert, forKey: "eventAlert")
                     defaults.setObject(actionType, forKey: "actionType")        //sets actionType
@@ -591,7 +590,6 @@ class DictateCode: NSObject {
                             
                             println("p224 toPhone: \(toPhone)")
                             
-                            let defaults = NSUserDefaults.standardUserDefaults()
                             defaults.setObject(toPhone, forKey: "toPhone")
                             
                         }
@@ -614,8 +612,6 @@ class DictateCode: NSObject {
                     
                     actionType = "Call"         // set type for proper processing
                     let eventAlert = "none set yet"
-                    
-                    let defaults = NSUserDefaults.standardUserDefaults()
                     
                     defaults.setObject(eventAlert, forKey: "eventAlert")
                     defaults.setObject(actionType, forKey: "actionType")        //sets actionType
@@ -680,7 +676,6 @@ class DictateCode: NSObject {
                             
                             println("p322 toPhone: \(toPhone)")
                             
-                            let defaults = NSUserDefaults.standardUserDefaults()
                             defaults.setObject(toPhone, forKey: "toPhone")
                             
                         }
@@ -762,7 +757,6 @@ class DictateCode: NSObject {
                             
                             println("p322 toPhone: \(toPhone)")
                             
-                            let defaults = NSUserDefaults.standardUserDefaults()
                             defaults.setObject(toPhone, forKey: "toPhone")
                             
                         }
@@ -785,8 +779,6 @@ class DictateCode: NSObject {
                     
                     actionType = "Mail"         // set type for proper processing
                     let eventAlert = "none set yet"
-                    
-                    let defaults = NSUserDefaults.standardUserDefaults()
                     
                     defaults.setObject(eventAlert, forKey: "eventAlert")
                     defaults.setObject(actionType, forKey: "actionType")        //sets actionType
@@ -1247,7 +1239,6 @@ class DictateCode: NSObject {
                     wordArrTrimmed = wordArrTrimmed.filter() { $0 != wordArr[i] }
                     println("p470 wordArrTrimmed: \(wordArrTrimmed)")
                     
-                    let defaults = NSUserDefaults.standardUserDefaults()
                     defaults.setObject(phone, forKey: "toPhone")                // to use for texting to
                     
                 }
@@ -1284,7 +1275,6 @@ class DictateCode: NSObject {
                         wordArrTrimmed = wordArrTrimmed.filter() { $0 != wordArr[i] }
                         println("p505 wordArrTrimmed: \(wordArrTrimmed)")
                         
-                        let defaults = NSUserDefaults.standardUserDefaults()
                         defaults.setObject(phone, forKey: "toPhone")                // to use for texting to
                         
                         
@@ -1309,7 +1299,7 @@ class DictateCode: NSObject {
                     
                     //var arrayCalendars = ["work", "mike", "mom", "music", "steph"]
                     
-                    var calendarArray = NSUserDefaults.standardUserDefaults().objectForKey("calendarArray") as! [String] //array of the items
+                    var calendarArray = defaults.objectForKey("calendarArray") as! [String] //array of the items
                     
                     println("p1325 calendarArray: \(calendarArray)")
                     
@@ -2022,6 +2012,7 @@ class DictateCode: NSObject {
                 
         // _____add alarm if time deteced, and type is Reminder
                 
+                
             if (actionType == "Reminder" ) && (startDT != NSDate(dateString:"2014-12-12")) {
                 reminderAlarm = startDT
                 println("p2013 reminderAlarm: \(reminderAlarm)")
@@ -2038,7 +2029,6 @@ class DictateCode: NSObject {
             
             println("p1566 actionType: \(actionType)")
             
-            let defaults = NSUserDefaults.standardUserDefaults()
             defaults.setObject(startDT, forKey: "startDT")
             
             println("p1270 MAIN startDT: \(startDT)")

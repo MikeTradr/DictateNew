@@ -14,7 +14,8 @@ import EventKit
 class ReminderItemsIC: WKInterfaceController {
     
     var selectedRow:Int! = nil    
-    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp") // from course
+    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+
     var allReminders: Array<EKReminder> = []
     var reminderListID: String = ""
     var checked:Bool = false

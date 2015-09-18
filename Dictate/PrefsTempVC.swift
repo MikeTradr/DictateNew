@@ -14,6 +14,8 @@ import AVFoundation
 
 class PrefsTempVC: UIViewController, UITextFieldDelegate  {
     
+    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+
     let userDefaultDuration:Double = 0.0
   
     var audioPlayer = AVAudioPlayer()
@@ -35,8 +37,6 @@ class PrefsTempVC: UIViewController, UITextFieldDelegate  {
     
 // TODO  get calendars from users, and make into array hard coded at prsent 7-17-15
     //let pickerData = ["User Default Calendar", "Mike", "Work", "Steph", "Bands", "Birthdays", "Reacurring" ,"Dictate Events"]
-    
-    let defaults = NSUserDefaults.standardUserDefaults()
     
     //TODO why did not work?: defaults.objectForKey("wordArrTrimmed") as! [String] //array of the items
     //var pickerCalendarArray = defaults.objectForKey("wordArrTrimmed") as! [String] //array of the items
@@ -102,8 +102,6 @@ class PrefsTempVC: UIViewController, UITextFieldDelegate  {
         self.prefsDefaultCalendar.delegate = self
         self.prefsDefaultDuration.delegate = self
         
-        let defaults = NSUserDefaults.standardUserDefaults()
-
         self.prefsDefaultCalendar.text = defaults.stringForKey("prefsDefaultCalendarName")
         
         
@@ -154,7 +152,6 @@ class PrefsTempVC: UIViewController, UITextFieldDelegate  {
     @IBAction func buttonUpdatePrefs(sender: AnyObject) {
   
         
-        let defaults = NSUserDefaults.standardUserDefaults()
        // defaults.setObject(prefsDefaultCalendar.text, forKey: "prefsDefaultCalendarName")
         
         println("p97 myLabel.text: \(myLabel.text)")
@@ -174,21 +171,16 @@ class PrefsTempVC: UIViewController, UITextFieldDelegate  {
         let seeEventDuration:Double    = defaults.objectForKey("eventDuration") as! Double
         
         println("p91 seeEventDuration from NSdefaults: \(seeEventDuration)")
-        
-        
+                
         let calendarName    = defaults.stringForKey("calendarName")
         
         let seeCalendar:String = defaults.stringForKey("calendarName") ?? "Steph"
         
         defaults.setObject(seeCalendar, forKey: "calendar")
 
-        
         println("p95 seeCalendar: \(seeCalendar)")
         
-        
-        println("p108Main Representation: \(NSUserDefaults.standardUserDefaults().dictionaryRepresentation())")
-
-        
+        println("p108Main Representation: \(defaults.dictionaryRepresentation())")
         
         //self.switchScreen("tabBarController")
         

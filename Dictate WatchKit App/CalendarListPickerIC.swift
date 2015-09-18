@@ -14,7 +14,8 @@ import EventKit
 class CalendarListPickerIC: WKInterfaceController {
     
     var selectedRow:Int! = nil
-    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp") // from course
+    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+
     let eventStore = EKEventStore()
     var checked:Bool = false
 
@@ -74,7 +75,7 @@ class CalendarListPickerIC: WKInterfaceController {
             
             println("w130 defaultCalendarID: \(defaultCalendarID)")
             
-            defaults!.setObject(defaultCalendarID, forKey: "defaultCalendarID")    //sets defaultReminderListID String
+            defaults.setObject(defaultCalendarID, forKey: "defaultCalendarID")    //sets defaultReminderListID String
             
             self.checked = true
         }

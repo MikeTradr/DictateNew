@@ -186,7 +186,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // above here attempted to get device info
         
-        let defaults = NSUserDefaults.standardUserDefaults()
+        let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
         
         //let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp") // from Rob's course
         

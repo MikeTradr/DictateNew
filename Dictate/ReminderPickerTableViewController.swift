@@ -11,6 +11,8 @@ import EventKit
 
 class ReminderPickerTableViewController: UITableViewController {
     
+    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+    
     let reminderList = ReminderManager.sharedInstance.getCalendars(EKEntityTypeReminder)
     
     var numberOfNewItems:Int    = 0
@@ -32,9 +34,6 @@ class ReminderPickerTableViewController: UITableViewController {
     
     var selectedReminder:String? = nil
     var selectedReminderIndex:Int? = nil
-    
-    let defaults = NSUserDefaults.standardUserDefaults()
-    
     
    // var reminderArray = defaults.objectForKey("reminderArray") as! [String] //array of the items
     

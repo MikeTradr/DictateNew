@@ -96,7 +96,8 @@ class DictateCode: NSObject {
     func parse (str: String) -> (NSDate, NSDate, String, String, String, String, String) {
         //returning startDT, endDT, output, outputNote, day, calendarName, eventDuration, actionType
         
-        let defaults = NSUserDefaults.standardUserDefaults()
+        let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+
         
         var wordArr:[String]        = []
         

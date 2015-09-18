@@ -123,12 +123,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             tabBarController.selectedIndex = 2    //set to start at tab index 2
         }
         
-        
-        //set NSDefault at startup
-        DataManager.sharedInstance.createDefaults()
-        
-        
-        
+        let firstLaunch: AnyObject? = NSUserDefaults.standardUserDefaults().objectForKey("isFirstLaunch")
+        if firstLaunch == nil{
+            //set NSDefault at startup
+            DataManager.sharedInstance.createDefaults()
+            NSUserDefaults.standardUserDefaults().setObject("DictateFirstLaunh", forKey: "isFirstLaunch")
+        }
+    
         
         //get Access to Reminders
         NSLog("%@ p127 appDelegate", self)

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ei9-cN-Wbe">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="7706" systemVersion="14D131" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ei9-cN-Wbe">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="7701"/>
@@ -370,11 +370,6 @@
                                             <color key="backgroundColor" red="0.40000000600000002" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </group>
                                         <label alignment="left" verticalAlignment="center" id="kE9-3h-XUA" userLabel="space"/>
-                                        <button width="16" height="16" alignment="left" verticalAlignment="center" backgroundImage="cbChecked40px" id="bY1-pS-BZv">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        </button>
-                                        <label alignment="left" verticalAlignment="center" id="n0s-0d-2XD" userLabel="space"/>
                                         <label width="120" alignment="left" verticalAlignment="center" numberOfLines="3" id="xnA-oh-8nb">
                                             <fontDescription key="font" type="system" pointSize="15"/>
                                             <variation key="device=watch38mm">
@@ -472,6 +467,7 @@
                     <connections>
                         <outlet property="labelReminderListID" destination="xnA-oh-8nb" id="Adp-7r-sAa"/>
                         <outlet property="labelShowCompleted" destination="9BG-ck-laP" id="Tr5-a2-GRQ"/>
+                        <outlet property="navBarGroup" destination="0b7-3H-Sfe" id="Wxj-TY-QaP"/>
                         <outlet property="reminderItemsGroup" destination="1uW-lO-aY1" id="F04-Ep-MFf"/>
                         <outlet property="reminderListsGroup" destination="03p-aw-ynO" id="dLW-fO-GCB"/>
                         <outlet property="table" destination="ZnV-Oh-HUO" id="CzF-Vk-fFJ"/>

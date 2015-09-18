@@ -39,7 +39,7 @@ class ReminderListsIC: WKInterfaceController {
     
     @IBOutlet weak var reminderListsGroup: WKInterfaceGroup!
     @IBOutlet weak var reminderItemsGroup: WKInterfaceGroup!
-    
+    @IBOutlet weak var navBarGroup: WKInterfaceGroup!
     
     
     @IBAction func menuDictate() {
@@ -55,6 +55,29 @@ class ReminderListsIC: WKInterfaceController {
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         NSLog("%@ w57 awakeWithContext", self)
+        
+        //get Access to Reminders
+        NSLog("%@ w60 appDelegate", self)
+        println("w61 call getAccessToEventStoreForType")
+        ReminderManager.sharedInstance.getAccessToEventStoreForType(EKEntityTypeReminder, completion: { (granted) -> Void in
+            
+            if granted{
+                println("w65 Reminders granted: \(granted)")
+            }
+        })
+        
+        //get Access to Events
+        NSLog("%@ w70 appDelegate", self)
+        println("w71 call getAccessToEventStoreForType")
+        EventManager.sharedInstance.getAccessToEventStoreForType(EKEntityTypeEvent, completion: { (granted) -> Void in
+            
+            if granted{
+                println("w75 Events granted: \(granted)")
+            }
+        })
+        
+        
+        
 
         // Configure interface objects here.
         
@@ -68,7 +91,7 @@ class ReminderListsIC: WKInterfaceController {
         
       //  reminderItemsGroup.setHidden(true)  //Hide lower table2
   
-       // self.loadTableData()
+        self.loadTableData()
         //self.loadTableData2()
 
 
@@ -78,7 +101,7 @@ class ReminderListsIC: WKInterfaceController {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
         NSLog("%@ w78 will activate", self)
-        println("w79 in ReminderIC willActivate")
+        println("w79 in ReminderListsIC willActivate")
         
         ReminderManager.sharedInstance.createNewReminderList("TestMike", items: ["item 1","item 2", "This is item 3 hehe"])   //added to make reminder for testing.
 
@@ -111,7 +134,7 @@ class ReminderListsIC: WKInterfaceController {
         table.setNumberOfRows(allReminderLists.count, withRowType: "tableRow")
         
         //println("w38 allReminderLists: \(allReminderLists)")
-        println("w39 allReminderLists.count: \(allReminderLists.count)")
+        println("w137 allReminderLists.count: \(allReminderLists.count)")
         
         if allReminderLists != [] {
             for (index, title) in enumerate(allReminderLists) {
@@ -122,10 +145,10 @@ class ReminderListsIC: WKInterfaceController {
                 let reminder = allReminderLists[index]
                 
                 ReminderManager.sharedInstance.fetchCalendarReminders(reminder) { (reminders) -> Void in
-                    //println(reminders)
+                    println("w148 reminders: \(reminders)")
                     self.allReminders = reminders as [EKReminder]
                     let numberOfItems = self.allReminders.count
-                    //println("w98 numberOfItems: \(numberOfItems)")
+                    println("w151 numberOfItems: \(numberOfItems)")
 
                 row.tableRowLabel.setText("\(reminder.title) (\(numberOfItems))")
                 row.tableRowLabel.setTextColor(UIColor(CGColor: reminder.CGColor))
@@ -185,12 +208,12 @@ class ReminderListsIC: WKInterfaceController {
         println("w156 reminderListID \(reminderListID)")
         
         reminderItemsGroup.setHidden(false)  //show lower table2
-        reminderListsGroup.setHidden(true)  //show lower table2
-        
+        reminderListsGroup.setHidden(true)  //hide lists
+        navBarGroup.setHidden(true)  //hide lists
+
         self.loadTableData2()
 
-
-       
+   
         //code goes here
         //presentControllerWithName("Info", context: context)
     }

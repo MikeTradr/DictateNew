@@ -21,6 +21,9 @@ class FavoritesManager: NSObject {
         return Static.instance!
     }
     
+    
+    
+    
     //hard code for now favorites
     //TODO make array  TODO anil  TODO Mike
     

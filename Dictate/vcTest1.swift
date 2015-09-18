@@ -187,12 +187,19 @@ class vcTest1: UIViewController {
         var reminderTitle   = defaults.stringForKey("title")
         
         var wordArrTrimmed  = defaults.objectForKey("wordArrTrimmed") as! [String] //array of the items
+
+       //TODO Mike Anil commented to fix nil error
+       // var reminderArray = defaults.objectForKey("reminderArray") as! [String] //array of the items
         
-        var reminderArray = defaults.objectForKey("reminderArray") as! [String] //array of the items
+        var reminderArray:[String] = []
+        println("p196 reminderArray: \(reminderArray)")
+
+        var reminderList   = defaults.stringForKey("reminderList")
+        println("p198 reminderList: \(reminderList)")
         
-        var reminderList:String   = defaults.stringForKey("reminderList")!
-        var reminderAlarm   = defaults.objectForKey("reminderAlarm")! as! NSDate
-        
+        var reminderAlarm  = defaults.objectForKey("reminderAlarm")! as! NSDate
+        println("p201 reminderAlarm: \(reminderAlarm)")
+
         
         
         println("p111Main day: \(day)")
@@ -217,7 +224,7 @@ class vcTest1: UIViewController {
         println("p111Main reminderAlarm: \(reminderAlarm)")
         
         
-        println("p112Main Representation: \(NSUserDefaults.standardUserDefaults().dictionaryRepresentation())")
+        // println("p112Main Representation: \(NSUserDefaults.standardUserDefaults().dictionaryRepresentation())")
         
         // println("p121Main keys.array: \(NSUserDefaults.standardUserDefaults().dictionaryRepresentation().keys.array)")
         

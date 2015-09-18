@@ -13,7 +13,7 @@ import EventKit
 
 class ReminderListsIC: WKInterfaceController {
     
-    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp") // from course
+    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")
     let eventStore = EKEventStore()
     
     var reminders:[EKReminder] = []
@@ -54,13 +54,15 @@ class ReminderListsIC: WKInterfaceController {
 
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
-        
+        NSLog("%@ w57 awakeWithContext", self)
+
         // Configure interface objects here.
-           println("w37 RemindersIC awakeWithContext")
+        
+           println("w61 RemindersIC awakeWithContext")
         
         super.awakeWithContext(context)
         
-        println("w63 context: \(context)")
+        println("w65 context: \(context)")
 // Crashed here TODO Mike
        // self.setTitle(context as? String)
         

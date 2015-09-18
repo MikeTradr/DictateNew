@@ -168,7 +168,7 @@ class ReminderCode: NSObject {
         
         let noDate = dateFormatter.dateFromString("2014-12-12 00:00:00 +0000")  //need this to match set no date from DictateCode
         
-        println("p167 Reminder: noDate: \(noDate)")
+        println("p171 Reminder: noDate: \(noDate)")
         
         if (startDT != noDate) {        // if Date != no date string, set alarm for Reminder
             alarm = EKAlarm(absoluteDate: startDT)

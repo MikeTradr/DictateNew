@@ -100,6 +100,9 @@ let str38:String = "Reminder mow the grass today 1 pm list today"  // bombs
 
 let str39:String = "4:55 test to calendar calendar Mike duration 90 minutes alert one hour"
 
+let str40:String = "11 am test after restore"
+
+let str41:String = "reminder buy milk"
 
 
 
@@ -107,7 +110,8 @@ let str39:String = "4:55 test to calendar calendar Mike duration 90 minutes aler
 
 
 // ---- change strings here for testing, shows on the dictated field---
-var str:String = ""
+var str:String = str41
+//var str:String = ""
 
 //var strRaw:String = str
 

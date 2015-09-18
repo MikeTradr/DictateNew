@@ -123,7 +123,44 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             tabBarController.selectedIndex = 2    //set to start at tab index 2
         }
         
+        
+        //set NSDefault at startup
+        DataManager.sharedInstance.createDefaults()
+        
+        
+        
+        
+        //get Access to Reminders
+        NSLog("%@ p127 appDelegate", self)
+        println("p128 call getAccessToEventStoreForType")
+        ReminderManager.sharedInstance.getAccessToEventStoreForType(EKEntityTypeReminder, completion: { (granted) -> Void in
+            
+            if granted{
+                println("p132 Reminders granted: \(granted)")
+                }
+        })
+        
+        //get Access to Events
+        NSLog("%@ p137 appDelegate", self)
+        println("p138 call getAccessToEventStoreForType")
+        EventManager.sharedInstance.getAccessToEventStoreForType(EKEntityTypeEvent, completion: { (granted) -> Void in
+            
+            if granted{
+                println("p142 Events granted: \(granted)")
+            }
+        })
+
+       
+        
+
+        
+        
+        
+        
+        
         //make Reminder's List Array
+        NSLog("%@ p127 appDelegate", self)
+        println("p128 here")
         ReminderManager.sharedInstance.createReminderArray()
         
         //make Calendar's List Array

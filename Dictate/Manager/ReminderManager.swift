@@ -1,5 +1,5 @@
 //
-//  EventMnager.swift
+//  ReminderManager.swift
 //  Renamed ReminderManager 090515 by Mike
 //  Dictate
 //
@@ -30,6 +30,24 @@ class ReminderManager: NSObject {
     
     let eventStore = EKEventStore()
     let defaults = NSUserDefaults.standardUserDefaults()
+
+    func getAccessToEventStoreForType(type:EKEntityType, completion:(granted:Bool)->Void){
+        
+        let status = EKEventStore.authorizationStatusForEntityType(type)
+        if status != EKAuthorizationStatus.Authorized{
+            self.eventStore.requestAccessToEntityType(EKEntityTypeReminder, completion: {
+                granted, error in
+                if (granted) && (error == nil) {
+                    completion(granted: true)
+                }else{
+                    completion(granted: false)
+                }
+            })
+            
+        }else{
+            completion(granted: true)
+        }
+    }
     
     
     func fetchReminders(completion:([EKReminder])->Void) {
@@ -93,11 +111,13 @@ class ReminderManager: NSObject {
         })
     }
     
-    func getAccessToEventStoreForType(type:EKEntityType, completion:(granted:Bool)->Void){
+
+    
+    func getAccessToEventStoreForType2(type:EKEntityType, completion:(granted:Bool)->Void){
         
         let status = EKEventStore.authorizationStatusForEntityType(type)
         if status != EKAuthorizationStatus.Authorized{
-            self.eventStore.requestAccessToEntityType(EKEntityTypeReminder, completion: {
+            self.eventStore.requestAccessToEntityType(EKEntityTypeEvent, completion: {
                 granted, error in
                 if (granted) && (error == nil) {
                     completion(granted: true)
@@ -220,7 +240,7 @@ class ReminderManager: NSObject {
         
         let noDate = dateFormatter.dateFromString("2014-12-12 00:00:00 +0000")  //need this to match set no date from DictateCode
         
-        println("p167 Reminder: noDate: \(noDate)")
+        println("p223 Reminder: noDate: \(noDate)")
         
         if (startDT != noDate) {        // if Date != no date string, set alarm for Reminder
             alarm = EKAlarm(absoluteDate: startDT)
@@ -448,18 +468,22 @@ class ReminderManager: NSObject {
             
             reminderArray.append(reminderTitle)
         }
-        println("p148 reminderArray: \(reminderArray)")
-        println("p148 reminderArray.count: \(reminderArray.count)")
+        println("p471 reminderArray: \(reminderArray)")
+        println("p472 reminderArray.count: \(reminderArray.count)")
         
        // let defaults = NSUserDefaults.standardUserDefaults()
         let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp") // from course
 
         defaults!.setObject(reminderArray, forKey: "reminderStringArray")            //sets reminderArray
+        
+       //TODO MIKE TODO ANIL Commented Out 091815
+      //  defaults!.setObject(reminderArray, forKey: "reminderArray")            //sets reminderArray
 
     }   //func CreateReminderArray   
 
     func createCalendarArray() {        //called from AppDelegate on startup
-        println("p413 we here?")
+        NSLog("%@ p462 createCalendarArray", self)
+        println("p413 we here? createCalendarArray")
         
         var allCalendars: Array<EKCalendar>= self.eventStore.calendarsForEntityType(EKEntityTypeEvent) as!  Array<EKCalendar>
         
@@ -478,7 +502,7 @@ class ReminderManager: NSObject {
         
         // Access list of available sources from the Event Store
         let sourcesInEventStore = eventStore.sources() as! [EKSource]
-        println("p167 sourcesInEventStore: \(sourcesInEventStore)")
+        println("p482 sourcesInEventStore: \(sourcesInEventStore)")
         
   //TODO Anil use only Local calendarsmaybe in out CalendarListArray I made???
         

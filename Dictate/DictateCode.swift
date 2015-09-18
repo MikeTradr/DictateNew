@@ -394,6 +394,10 @@ class DictateCode: NSObject {
                 
                 if(subStringReminder && (wordArr[i] == wordArr[0])){ //added last so only here if matches is first word in string!
                     
+                    println("p397: in Reminder word: \(word)")
+                    
+                    var reminderArray = defaults.objectForKey("reminderArray") as! [String] //array of the items
+                    
                     // why did I have this in ??? removed 072315 wordArrTrimmed = wordArrRaw
                     
                     wordArrTrimmed = wordArrTrimmed.filter() { $0 != wordArr[i] }   // remove "reminder" word
@@ -1366,7 +1370,7 @@ class DictateCode: NSObject {
                     println("p1357 list found at item: \(i)")
                     println("p1358 listName: \(listName)")
                     
-                    var reminderArray = NSUserDefaults.standardUserDefaults().objectForKey("reminderArray") as! [String] //array of the items
+                    var reminderArray = defaults.objectForKey("reminderArray") as! [String] //array of the items
                     
                     println("p1389 reminderArray: \(reminderArray)")
                     

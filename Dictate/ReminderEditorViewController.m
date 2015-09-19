@@ -483,7 +483,7 @@ NSUInteger DeviceSystemMajorVersion()
     self.reminder.title = self.reminderTitleTextView.text;
     
 //    self.reminder.ala
-    [[[ReminderManager sharedInstance]eventStore]saveCalendar: commit:true error:nil];
+//    [[[ReminderManager sharedInstance]eventStore]saveCalendar: commit:true error:nil];
 }
 - (IBAction)cancel:(id)sender {
     [self dismissViewControllerAnimated:true completion:nil];

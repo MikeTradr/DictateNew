@@ -9,7 +9,7 @@
 import UIKit
 import EventKit
 
-/*
+
 
 class EventManager: NSObject {
     class var sharedInstance : EventManager {
@@ -24,7 +24,35 @@ class EventManager: NSObject {
     }
     
     let eventStore = EKEventStore()
-    let defaults = NSUserDefaults.standardUserDefaults()
+    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+    
+    func getAccessToEventStoreForType(type:EKEntityType, completion:(granted:Bool)->Void){
+        
+        let status = EKEventStore.authorizationStatusForEntityType(type)
+        if status != EKAuthorizationStatus.Authorized{
+            self.eventStore.requestAccessToEntityType(EKEntityTypeEvent, completion: {
+                granted, error in
+                if (granted) && (error == nil) {
+                    completion(granted: true)
+                }else{
+                    completion(granted: false)
+                }
+            })
+            
+        }else{
+            completion(granted: true)
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+ /*
+    
+    
     
     func fetchCalendarLists(completion:([EKReminder])->Void) {
         
@@ -564,8 +592,7 @@ class EventManager: NSObject {
         
     }   //func CreateCalendarArray
     
-    
+*/
     
 }
 
-*/

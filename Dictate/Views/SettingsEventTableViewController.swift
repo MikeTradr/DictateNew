@@ -10,6 +10,8 @@ import UIKit
 
 class SettingsEventTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource {
     
+    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+
     @IBOutlet weak var labelCalendarDefault: UILabel!
     @IBOutlet weak var labelDefaultDuration: UITextField!
     @IBOutlet weak var labelDefaultAlert: UITextField!
@@ -49,7 +51,7 @@ class SettingsEventTableViewController: UITableViewController, UITableViewDelega
             // in our case its not really required, since we are setting it in user defaults, will be globaly available
             //As a better approach iam doing here to show you
             
-            let selectedCalendarIdentifier = NSUserDefaults.standardUserDefaults().objectForKey("defaultCalendar") as? String
+            let selectedCalendarIdentifier = defaults.objectForKey("defaultCalendar") as? String
             
             //            .setObject(selectedReminder.calendarIdentifier, forKey: "defaultReminderList")
             let calendarPickerController = segue.destinationViewController as! CalendarPickerTableViewController

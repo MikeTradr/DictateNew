@@ -14,6 +14,7 @@ let textMessageRecipients = ["1-608-242-7700"] // for pre-populating the recipie
 
 class MessageComposer: NSObject, MFMessageComposeViewControllerDelegate {
     
+    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
 
     
     // A wrapper function to indicate whether or not a text message can be sent from the user's device
@@ -27,7 +28,6 @@ class MessageComposer: NSObject, MFMessageComposeViewControllerDelegate {
         
         println("p29 We in MessageComposer")
         
-        let defaults    = NSUserDefaults.standardUserDefaults()
         let output:String = defaults.stringForKey("output")!
         
         

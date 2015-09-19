@@ -100,6 +100,9 @@ let str38:String = "Reminder mow the grass today 1 pm list today"  // bombs
 
 let str39:String = "4:55 test to calendar calendar Mike duration 90 minutes alert one hour"
 
+let str40:String = "11 am test after restore"
+
+let str41:String = "reminder buy milk"
 
 
 
@@ -107,6 +110,7 @@ let str39:String = "4:55 test to calendar calendar Mike duration 90 minutes aler
 
 
 // ---- change strings here for testing, shows on the dictated field---
+//var str:String = str41
 var str:String = ""
 
 //var strRaw:String = str
@@ -156,12 +160,13 @@ var now = ""
 
 class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailComposeViewControllerDelegate {
     
+    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+    
      var audioPlayer = AVAudioPlayer()
     
     // Create a MessageComposer
     let messageComposer = MessageComposer()
     
-    let defaults = NSUserDefaults.standardUserDefaults()
 //    defaults.setObject(eventDuration, forKey: "eventDuration")
     
     @IBOutlet weak var enteredText: UITextView!                     // this is under the micophone graphic
@@ -455,7 +460,6 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
         removeKeyboard()
 
         // Added get actionType from func above 7/6/15
-        //let defaults = NSUserDefaults.standardUserDefaults()
         //actionType    = defaults.stringForKey("actionType")!
         
         println("p419 DictateScene, actionType: \(actionType)")
@@ -516,7 +520,6 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
             
             resultMessage.text = "Switching to Phone for your call"
     
-            let defaults = NSUserDefaults.standardUserDefaults()
             let toPhone:String    = defaults.stringForKey("toPhone")!
             
             if let url = NSURL(string: "tel://\(toPhone)") {

@@ -12,8 +12,10 @@ import UIKit
 import Parse
 import AVFoundation
 
-class PrefsTempVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+class PrefsTempVC: UIViewController, UITextFieldDelegate  {
     
+    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+
     let userDefaultDuration:Double = 0.0
   
     var audioPlayer = AVAudioPlayer()
@@ -36,13 +38,11 @@ class PrefsTempVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
 // TODO  get calendars from users, and make into array hard coded at prsent 7-17-15
     //let pickerData = ["User Default Calendar", "Mike", "Work", "Steph", "Bands", "Birthdays", "Reacurring" ,"Dictate Events"]
     
-    let defaults = NSUserDefaults.standardUserDefaults()
-    
     //TODO why did not work?: defaults.objectForKey("wordArrTrimmed") as! [String] //array of the items
     //var pickerCalendarArray = defaults.objectForKey("wordArrTrimmed") as! [String] //array of the items
-    var pickerCalendarArray = NSUserDefaults.standardUserDefaults().objectForKey("calendarArray") as! [String] //array of the items
+  //  var pickerCalendarArray = NSUserDefaults.standardUserDefaults().objectForKey("calendarArray") as! [String] //array of the items
     
-    var pickerReminderArray = NSUserDefaults.standardUserDefaults().objectForKey("reminderArray") as! [String] //array of the items
+   // var pickerReminderArray = NSUserDefaults.standardUserDefaults().objectForKey("reminderArray") as! [String] //array of the items
     
 
     
@@ -96,18 +96,12 @@ class PrefsTempVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
         view.addGestureRecognizer(leftSwipe)
         view.addGestureRecognizer(rightSwipe)
 
-        
-        pickerCalendars.delegate = self
-        pickerCalendars.dataSource = self
-        
-        pickerReminders.delegate = self
-        pickerReminders.dataSource = self
+
+
         
         self.prefsDefaultCalendar.delegate = self
         self.prefsDefaultDuration.delegate = self
         
-        let defaults = NSUserDefaults.standardUserDefaults()
-
         self.prefsDefaultCalendar.text = defaults.stringForKey("prefsDefaultCalendarName")
         
         
@@ -158,7 +152,6 @@ class PrefsTempVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
     @IBAction func buttonUpdatePrefs(sender: AnyObject) {
   
         
-        let defaults = NSUserDefaults.standardUserDefaults()
        // defaults.setObject(prefsDefaultCalendar.text, forKey: "prefsDefaultCalendarName")
         
         println("p97 myLabel.text: \(myLabel.text)")
@@ -178,21 +171,16 @@ class PrefsTempVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
         let seeEventDuration:Double    = defaults.objectForKey("eventDuration") as! Double
         
         println("p91 seeEventDuration from NSdefaults: \(seeEventDuration)")
-        
-        
+                
         let calendarName    = defaults.stringForKey("calendarName")
         
         let seeCalendar:String = defaults.stringForKey("calendarName") ?? "Steph"
         
         defaults.setObject(seeCalendar, forKey: "calendar")
 
-        
         println("p95 seeCalendar: \(seeCalendar)")
         
-        
-        println("p108Main Representation: \(NSUserDefaults.standardUserDefaults().dictionaryRepresentation())")
-
-        
+        println("p108Main Representation: \(defaults.dictionaryRepresentation())")
         
         //self.switchScreen("tabBarController")
         
@@ -260,7 +248,7 @@ class PrefsTempVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
     
     //MARK: - Delegates and datasources
     //MARK: Data Sources
-    
+/*
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -344,7 +332,7 @@ class PrefsTempVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
         return myTitle
     }
     
-    
+
     // TODO set background color to match color of users Calendars please!!!!!
     
     func pickerView2(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView!) -> UIView {
@@ -376,7 +364,7 @@ class PrefsTempVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
     func pickerView2(pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
         return 300
     }
-
+*/
 //---------- End Reminder Picker ----------------------------------------------
     
     

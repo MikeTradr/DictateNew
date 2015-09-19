@@ -72,6 +72,8 @@ var fullDTEnd:String    = ""
 
 class MainIC: WKInterfaceController {
     
+    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+    
     var audioPlayer = AVAudioPlayer()
     
 // TODO watchOS2 var player: WKAudioFilePlayer!
@@ -111,11 +113,8 @@ class MainIC: WKInterfaceController {
     //@IBOutlet weak var groupButtons: WKInterfaceGroup!
    // @IBOutlet weak var groupResults: WKInterfaceGroup!
     
-    var actionType:String   = NSUserDefaults.standardUserDefaults().stringForKey("actionType") ?? "Event"
+    var actionType:String = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!.stringForKey("actionType") ?? "Event"
     
-    let defaults = NSUserDefaults.standardUserDefaults()
-    
-    //let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp") // from course
 
     
     
@@ -341,7 +340,6 @@ class MainIC: WKInterfaceController {
         
         //println("### pl240 startDT: \(startDT)")
         
-        // let defaults = NSUserDefaults.standardUserDefaults()
         var actionType:String    = defaults.stringForKey("actionType")!
         
         println("p299 watchIC, actionType: \(actionType)")
@@ -541,7 +539,7 @@ class MainIC: WKInterfaceController {
         
       //  presentControllerWithName("Main", context: contextObj)
         
-        
+ /*
  //TODO FIX THIS BOMBS MIKE USED TO WORK  LOL
   
         Parse.enableLocalDatastore()
@@ -556,7 +554,7 @@ class MainIC: WKInterfaceController {
             clientKey: "EHeeek4uXhJQi0vXPBba945A4h0LQ4QddEGW8gSs")
         
         PFUser.enableAutomaticUser()
-
+*/
 /*
         // Enable data sharing in app extensions.
         Parse.enableDataSharingWithApplicationGroupIdentifier("group.com.thatsoft.dictateApp", containingApplication: "com.thatsoft.dictateApp")

@@ -15,6 +15,8 @@ import CoreLocation
 
 class MessageCode: NSObject {
     
+    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+    
     var store : EKEventStore = EKEventStore()
         
     var eventStore:EKEventStore = EKEventStore()
@@ -149,9 +151,7 @@ class MessageCode: NSObject {
     
 //In order to create a new calendar, you should create it and store the id in NSUserDefaults so you can retrieve it next time. I use the following function to fetch the calendar if it exists and create it if it does not:
     
-    func getCalendar() -> EKCalendar? {
-        let defaults = NSUserDefaults.standardUserDefaults()
-        
+    func getCalendar() -> EKCalendar? {        
         
         if let id = defaults.stringForKey("calendarID") {
             return store.calendarWithIdentifier(id)

@@ -10,8 +10,7 @@ import UIKit
 
 class SettingsReminderTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource {
     
-    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp") // from course
-  
+    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +20,7 @@ class SettingsReminderTableViewController: UITableViewController, UITableViewDel
         
         var defaultReminderListID = "0000"
         
-         defaults!.setObject(defaultReminderListID, forKey: "defaultReminderListID")    //sets defaultReminderList
+         defaults.setObject(defaultReminderListID, forKey: "defaultReminderListID")    //sets defaultReminderList
         
 
         // Uncomment the following line to preserve selection between presentations

@@ -13,6 +13,8 @@ import AVFoundation
 
 class vcTest1: UIViewController {
     
+    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+    
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
     var audioPlayer = AVAudioPlayer()
@@ -28,7 +30,6 @@ class vcTest1: UIViewController {
     //   @IBOutlet weak var resultEndDate: UITextField!
     
     
-    //   let defaults = NSUserDefaults.standardUserDefaults()
     //   resultStartDate = defaults.stringForKey("startDT")
     
     @IBOutlet weak var resultType: UITextField!
@@ -70,10 +71,10 @@ class vcTest1: UIViewController {
     
     @IBOutlet weak var buttonCreateOutlet: UIButton!
     
-    let defaults = NSUserDefaults.standardUserDefaults()
-    
-    let mainType:String     = NSUserDefaults.standardUserDefaults().stringForKey("mainType") ?? "Event"
-    var actionType:String   = NSUserDefaults.standardUserDefaults().stringForKey("actionType") ?? "Event"
+    let mainType:String     = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+.stringForKey("mainType") ?? "Event"
+    var actionType:String   = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+.stringForKey("actionType") ?? "Event"
     
     // TODO Anil why can't have ! instead of the ?? got unwrapped nil error as it wa nil initially
     //var listName:String   = NSUserDefaults.standardUserDefaults().stringForKey("listName") ?? "Today"  //listName is Reminder Lsit naem to save reminder to
@@ -187,12 +188,19 @@ class vcTest1: UIViewController {
         var reminderTitle   = defaults.stringForKey("title")
         
         var wordArrTrimmed  = defaults.objectForKey("wordArrTrimmed") as! [String] //array of the items
+
+       //TODO Mike Anil commented to fix nil error
+       // var reminderArray = defaults.objectForKey("reminderArray") as! [String] //array of the items
         
-        var reminderArray = defaults.objectForKey("reminderArray") as? [String] //array of the items
+        var reminderArray:[String] = []
+        println("p196 reminderArray: \(reminderArray)")
+
+        var reminderList   = defaults.stringForKey("reminderList")
+        println("p198 reminderList: \(reminderList)")
         
-        var reminderList:String   = defaults.stringForKey("reminderList")!
-        var reminderAlarm   = defaults.objectForKey("reminderAlarm")! as! NSDate
-        
+        var reminderAlarm  = defaults.objectForKey("reminderAlarm")! as! NSDate
+        println("p201 reminderAlarm: \(reminderAlarm)")
+
         
         
         println("p111Main day: \(day)")
@@ -217,7 +225,7 @@ class vcTest1: UIViewController {
         println("p111Main reminderAlarm: \(reminderAlarm)")
         
         
-        println("p112Main Representation: \(NSUserDefaults.standardUserDefaults().dictionaryRepresentation())")
+        // println("p112Main Representation: \(NSUserDefaults.standardUserDefaults().dictionaryRepresentation())")
         
         // println("p121Main keys.array: \(NSUserDefaults.standardUserDefaults().dictionaryRepresentation().keys.array)")
         
@@ -541,7 +549,6 @@ class vcTest1: UIViewController {
         
         //println("### pl240 startDT: \(startDT)")
         
-        // let defaults = NSUserDefaults.standardUserDefaults()
         var actionType:String    = defaults.stringForKey("actionType")!
         
         println("p237 vcTest1, actionType: \(actionType)")
@@ -560,7 +567,7 @@ class vcTest1: UIViewController {
             var calendarName = ""
             var reminderCreatedFlag = false
             
-            var reminderArray       = defaults.objectForKey("reminderArray") as? [String] //array of the items
+            var reminderArray       = defaults.objectForKey("reminderArray") as! [String] //array of the items
             var reminderList:String     = defaults.stringForKey("reminderList")!
             
             println("p518 reminderArray: \(reminderArray)")
@@ -579,8 +586,8 @@ class vcTest1: UIViewController {
                 
             }
             
-            if let _reminderArray = reminderArray{
-            for list in _reminderArray {
+            
+            for list in reminderArray {
                 
                 //var list = list.capitalizedString
                 println("p524 reminderList: \(reminderList)")
@@ -613,7 +620,7 @@ class vcTest1: UIViewController {
                     
                 }
             }
-            }
+            
             if !reminderCreatedFlag {   // If is false
                 println("p571  we here reminderCreatedFlag: \(reminderCreatedFlag)")
                 

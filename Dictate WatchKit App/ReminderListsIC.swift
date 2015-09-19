@@ -43,7 +43,6 @@ class ReminderListsIC: WKInterfaceController {
     
     @IBOutlet weak var labelReminderListID: WKInterfaceLabel!
     
-  
     @IBOutlet weak var verticalBar2: WKInterfaceGroup!
     @IBOutlet weak var labelShowCompleted: WKInterfaceLabel!
     @IBOutlet weak var table2: WKInterfaceTable!
@@ -60,17 +59,21 @@ class ReminderListsIC: WKInterfaceController {
         reminderListsGroup.setHidden(false)     //show lists
         reminderItemsGroup.setHidden(true)      //Hide lower table2
         navBarGroup.setHidden(false)            //show  navBar
-        
     }
     
     @IBAction func buttonToReminders() {
         reminderListsGroup.setHidden(false)     //show lists
         reminderItemsGroup.setHidden(true)      //Hide lower table2
         navBarGroup.setHidden(false)            //show  navBar
-        
         showListsView = true
-        self.loadTableData()
-        
+        //self.loadTableData()
+    }
+    
+    @IBAction func buttonLeftArrow() {
+        reminderListsGroup.setHidden(false)     //show lists
+        reminderItemsGroup.setHidden(true)      //Hide lower table2
+        navBarGroup.setHidden(false)            //show  navBar
+        showListsView = true
     }
     
     @IBAction func menuDictate() {
@@ -151,7 +154,7 @@ class ReminderListsIC: WKInterfaceController {
         NSLog("%@ w78 will activate", self)
         println("w79 in ReminderListsIC willActivate")
         
-       // ReminderManager.sharedInstance.createNewReminderList("TestMike", items: ["item 1","item 2", "This is item 3 hehe"])   //added to make reminder for testing.
+      //  ReminderManager.sharedInstance.createNewReminderList("To Code Tomorrow", items: ["item 1","item 2", "This is item 3 hehe"])   //added to make reminder for testing.
 
         println("w83 in ReminderIC willActivate")
 
@@ -192,7 +195,7 @@ class ReminderListsIC: WKInterfaceController {
                 let row = table.rowControllerAtIndex(index) as! ReminderListsTableRC
                 let reminder = allReminderLists[index]
                 println("w146 reminder: \(reminder)")
-/*
+
                 // get count or items in each reminder list and set the Text Label
                 ReminderManager.sharedInstance.fetchCalendarReminders(reminder) { (reminders) -> Void in
                     println("w148 reminders: \(reminders)")
@@ -211,8 +214,8 @@ class ReminderListsIC: WKInterfaceController {
                         println("w162 here? reminder: \(reminder)")
                     }
                         
-                }
-             */
+                }   // end ReminderManager call
+             
                 
                 row.tableRowLabel.setText("\(reminder.title)")
                 row.tableRowLabel.setTextColor(UIColor(CGColor: reminder.CGColor))
@@ -225,6 +228,7 @@ class ReminderListsIC: WKInterfaceController {
         
         showListsView = false   //set flag when awakes to go to view user was in
         
+        backToReminders.setHidden(false)        //show text
         navBarGroup.setHidden(false)            //show  navBar
 
         let calendarId = reminderListID
@@ -241,7 +245,7 @@ class ReminderListsIC: WKInterfaceController {
             println(reminders)
             self.allReminders = reminders as [EKReminder]
             self.numberOfItems = self.allReminders.count
-            self.labelReminderListID.setText("\(calendar.title): (\(self.numberOfItems))")
+            self.labelReminderListID.setText("\(calendar.title) (\(self.numberOfItems))")
             
             self.reminderItemsGroup.setHidden(false)  //show lower table2
 

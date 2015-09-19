@@ -539,7 +539,7 @@ class MainIC: WKInterfaceController {
         
       //  presentControllerWithName("Main", context: contextObj)
         
-        
+ /*
  //TODO FIX THIS BOMBS MIKE USED TO WORK  LOL
   
         Parse.enableLocalDatastore()
@@ -554,7 +554,7 @@ class MainIC: WKInterfaceController {
             clientKey: "EHeeek4uXhJQi0vXPBba945A4h0LQ4QddEGW8gSs")
         
         PFUser.enableAutomaticUser()
-
+*/
 /*
         // Enable data sharing in app extensions.
         Parse.enableDataSharingWithApplicationGroupIdentifier("group.com.thatsoft.dictateApp", containingApplication: "com.thatsoft.dictateApp")

@@ -327,7 +327,7 @@
             <objects>
                 <controller identifier="Reminders" id="ei9-cN-Wbe" customClass="ReminderListsIC" customModule="Dictate_WatchKit_Extension">
                     <items>
-                        <group width="1" alignment="left" id="03p-aw-ynO" userLabel="ReminderListsGroup">
+                        <group width="1" alignment="left" layout="vertical" id="03p-aw-ynO" userLabel="ReminderListsGroup">
                             <items>
                                 <table alignment="left" id="ZnV-Oh-HUO">
                                     <items>
@@ -338,18 +338,13 @@
                                                         <color key="backgroundColor" red="0.40000000600000002" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     </group>
                                                     <label alignment="left" verticalAlignment="center" text="spacer" id="ZRE-C6-jWU"/>
-                                                    <label width="1" height="1" alignment="left" verticalAlignment="center" text="Label" id="2bK-fl-QKS">
+                                                    <label width="1" height="1" alignment="left" verticalAlignment="center" id="2bK-fl-QKS">
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="font" type="system" pointSize="16"/>
                                                         <variation key="device=watch38mm">
                                                             <fontDescription key="font" type="system" pointSize="13"/>
                                                         </variation>
                                                     </label>
-                                                    <separator height="16" alignment="left" id="vtI-VA-W96">
-                                                        <color key="color" red="1" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                    </separator>
-                                                    <group width="2" height="2" alignment="left" verticalAlignment="center" id="WoQ-4q-hEH" userLabel="hor. spacer"/>
-                                                    <group width="2" height="28" alignment="left" id="m2B-Qr-j1H" userLabel="blankVertical"/>
                                                 </items>
                                                 <edgeInsets key="margins" left="6" right="0.0" top="0.0" bottom="0.0"/>
                                             </group>
@@ -370,12 +365,27 @@
                                             <color key="backgroundColor" red="0.40000000600000002" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </group>
                                         <label alignment="left" verticalAlignment="center" id="kE9-3h-XUA" userLabel="space"/>
-                                        <label width="120" alignment="left" verticalAlignment="center" numberOfLines="3" id="xnA-oh-8nb">
-                                            <fontDescription key="font" type="system" pointSize="15"/>
-                                            <variation key="device=watch38mm">
-                                                <fontDescription key="font" type="system" pointSize="12"/>
-                                            </variation>
-                                        </label>
+                                        <group width="1" alignment="center" verticalAlignment="center" id="wA0-Bf-YTR" userLabel="ShowCompletedGR">
+                                            <items>
+                                                <button alignment="left" verticalAlignment="center" id="rrG-vY-DKL">
+                                                    <group key="contentGroup" width="1" alignment="left" id="eIb-jS-Ztj">
+                                                        <items>
+                                                            <label alignment="center" textAlignment="left" id="F5A-lK-ily">
+                                                                <fontDescription key="font" type="system" pointSize="15"/>
+                                                                <variation key="device=watch38mm">
+                                                                    <fontDescription key="font" type="system" pointSize="12"/>
+                                                                </variation>
+                                                            </label>
+                                                        </items>
+                                                        <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="2"/>
+                                                    </group>
+                                                    <connections>
+                                                        <action selector="buttonToReminders" destination="ei9-cN-Wbe" id="X32-hX-qo1"/>
+                                                    </connections>
+                                                </button>
+                                            </items>
+                                            <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
+                                        </group>
                                     </items>
                                     <edgeInsets key="margins" left="6" right="0.0" top="0.0" bottom="0.0"/>
                                 </group>
@@ -415,6 +425,7 @@
                                             <color key="color" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                         </separator>
                                     </items>
+                                    <edgeInsets key="margins" left="0.0" right="0.0" top="4" bottom="0.0"/>
                                 </group>
                                 <group width="1" alignment="center" verticalAlignment="center" id="4yx-7H-hDG" userLabel="ShowCompletedGR">
                                     <items>
@@ -425,13 +436,41 @@
                                                         <fontDescription key="font" type="system" pointSize="14"/>
                                                     </label>
                                                 </items>
+                                                <edgeInsets key="margins" left="0.0" right="0.0" top="4" bottom="2"/>
                                             </group>
+                                        </button>
+                                    </items>
+                                    <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
+                                </group>
+                                <group width="1" alignment="center" verticalAlignment="center" id="rgr-n9-Bj0" userLabel="BackToReminders">
+                                    <items>
+                                        <button alignment="center" verticalAlignment="center" id="sl1-DN-9md">
+                                            <group key="contentGroup" width="1" alignment="left" id="oXM-ID-A8M">
+                                                <items>
+                                                    <label alignment="center" text="&lt; Reminders" textAlignment="center" id="TCb-I7-n6p">
+                                                        <color key="textColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <fontDescription key="font" type="boldSystem" pointSize="16"/>
+                                                        <variation key="device=watch38mm">
+                                                            <fontDescription key="font" type="boldSystem" pointSize="13"/>
+                                                        </variation>
+                                                    </label>
+                                                </items>
+                                            </group>
+                                            <connections>
+                                                <action selector="buttonBackToReminders" destination="ei9-cN-Wbe" id="V0e-d5-qvl"/>
+                                            </connections>
                                         </button>
                                     </items>
                                     <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
                                 </group>
                             </items>
                         </group>
+                        <label width="120" alignment="left" verticalAlignment="center" numberOfLines="3" id="xnA-oh-8nb">
+                            <fontDescription key="font" type="system" pointSize="15"/>
+                            <variation key="device=watch38mm">
+                                <fontDescription key="font" type="system" pointSize="12"/>
+                            </variation>
+                        </label>
                         <group alignment="center" verticalAlignment="bottom" id="0b7-3H-Sfe" userLabel="navBarGroup">
                             <items>
                                 <button width="40" height="40" alignment="left" backgroundImage="Today40px-50%" id="cfO-lh-HXy">
@@ -465,7 +504,8 @@
                         </items>
                     </menu>
                     <connections>
-                        <outlet property="labelReminderListID" destination="xnA-oh-8nb" id="Adp-7r-sAa"/>
+                        <outlet property="backToReminders" destination="rgr-n9-Bj0" id="7yX-Sz-7ug"/>
+                        <outlet property="labelReminderListID" destination="F5A-lK-ily" id="h3y-6q-4nW"/>
                         <outlet property="labelShowCompleted" destination="9BG-ck-laP" id="Tr5-a2-GRQ"/>
                         <outlet property="navBarGroup" destination="0b7-3H-Sfe" id="Wxj-TY-QaP"/>
                         <outlet property="reminderItemsGroup" destination="1uW-lO-aY1" id="F04-Ep-MFf"/>
@@ -473,10 +513,11 @@
                         <outlet property="table" destination="ZnV-Oh-HUO" id="CzF-Vk-fFJ"/>
                         <outlet property="table2" destination="hiz-6C-p1R" id="da6-iQ-1mS"/>
                         <outlet property="verticalBar2" destination="GTa-6Z-2hA" id="Tds-h6-cUX"/>
+                        <segue destination="AgC-eL-Hgc" kind="relationship" relationship="nextPage" id="XiM-8F-4nJ"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="-198" y="322"/>
+            <point key="canvasLocation" x="-25" y="349.75"/>
         </scene>
         <!--Glance Interface Controller-->
         <scene sceneID="BOz-TT-tkC">
@@ -697,7 +738,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="-16" y="432"/>
+            <point key="canvasLocation" x="38" y="620"/>
         </scene>
     </scenes>
     <color key="tintColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>

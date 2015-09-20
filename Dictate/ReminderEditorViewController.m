@@ -76,7 +76,6 @@ static NSString *kReminderCell = @"ReminderCell";
 
 @property (assign) NSInteger pickerCellRowHeight;
 
-@property (weak, nonatomic) IBOutlet UITextView *reminderTitleTextView;
 @property (nonatomic, strong) IBOutlet UIDatePicker *pickerView;
 @property (nonatomic,strong)NSString *reminderTitle;
 @property (nonatomic,strong)NSDate *alarmDate;
@@ -480,10 +479,12 @@ NSUInteger DeviceSystemMajorVersion()
 - (IBAction)done:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
     self.reminder.calendar = self.selectionController.selectedCalendars[0];
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
     self.reminder.title = self.reminderTitleTextView.text;
     
+    
 //    self.reminder.ala
-//    [[[ReminderManager sharedInstance]eventStore]saveCalendar: commit:true error:nil];
+    [[[ReminderManager sharedInstance]eventStore]saveReminder:self.reminder commit:true error:nil];
 }
 - (IBAction)cancel:(id)sender {
     [self dismissViewControllerAnimated:true completion:nil];

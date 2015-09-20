@@ -2474,6 +2474,7 @@
                                 <color key="backgroundColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="0.68000000000000005" colorSpace="custom" customColorSpace="sRGB"/>
                             </tableViewCell>
                         </prototypes>
+                        <sections/>
                     </tableView>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <toolbarItems/>
@@ -2487,6 +2488,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="pickerView" destination="PNA-5L-KLs" id="i9S-pg-udu"/>
+                        <outlet property="reminderTitleTextView" destination="EIR-Ya-lo4" id="Lmv-aT-xev"/>
                         <outlet property="view" destination="HDI-dx-tjj" id="y7C-Zp-jpf"/>
                     </connections>
                 </tableViewController>
@@ -2517,6 +2519,9 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="n4j-sT-b8U">
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="0.68000000000000005" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="g14-7e-wCE" kind="relationship" relationship="rootViewController" id="dsX-bz-ecW"/>

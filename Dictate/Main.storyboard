@@ -2488,7 +2488,6 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="pickerView" destination="PNA-5L-KLs" id="i9S-pg-udu"/>
-                        <outlet property="reminderTitleTextView" destination="EIR-Ya-lo4" id="Lmv-aT-xev"/>
                         <outlet property="view" destination="HDI-dx-tjj" id="y7C-Zp-jpf"/>
                     </connections>
                 </tableViewController>

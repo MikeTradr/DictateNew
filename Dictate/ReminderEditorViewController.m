@@ -480,7 +480,7 @@ NSUInteger DeviceSystemMajorVersion()
     [self dismissViewControllerAnimated:YES completion:nil];
     self.reminder.calendar = self.selectionController.selectedCalendars[0];
     UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
-    self.reminder.title = self.reminderTitleTextView.text;
+//    self.reminder.title = self.reminderTitleTextView.text;
     
     
 //    self.reminder.ala

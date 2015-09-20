@@ -44,9 +44,28 @@ class EventManager: NSObject {
         }
     }
     
-    
-    
-    
+    func fetchEventsFrom(startDate:NSDate,endDate:NSDate,completion:([EKEvent])->Void) {
+        
+        getAccessToEventStoreForType(EKEntityTypeEvent, completion: { (granted) -> Void in
+            
+            if granted{
+                let calendars = self.eventStore.calendarsForEntityType(EKEntityTypeEvent)
+                
+                var predicate = self.eventStore.predicateForEventsWithStartDate(startDate, endDate: endDate, calendars: calendars)
+                let events = self.eventStore.eventsMatchingPredicate(predicate) as? [EKEvent]
+                if let _events = events{
+                    completion(events!)
+                }else{
+                completion([])
+                }
+            }
+            else{
+                completion([])
+            }
+        })
+    }
+}
+
     
     
     
@@ -593,6 +612,4 @@ class EventManager: NSObject {
     }   //func CreateCalendarArray
     
 */
-    
-}
 

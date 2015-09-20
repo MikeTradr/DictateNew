@@ -123,6 +123,7 @@
 		EC0B48951B6FEBA600C0AD82 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC0B48911B6FEAC400C0AD82 /* Bolts.framework */; };
 		EC0B48961B6FEBA600C0AD82 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC0B48921B6FEAC400C0AD82 /* Parse.framework */; };
 		EC82CF631BAAE26F00722611 /* UILabel+WhiteUIDatePickerLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = EC82CF621BAAE26F00722611 /* UILabel+WhiteUIDatePickerLabel.m */; };
+		ECB1DCC91BAEB7F100A67B6D /* JTDateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB8620D1B77DEBD00503C50 /* JTDateHelper.m */; };
 		ECB861E01B77DBB700503C50 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB861DC1B77DBB700503C50 /* Constants.swift */; };
 		ECB861E11B77DBB700503C50 /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB861DD1B77DBB700503C50 /* General.swift */; };
 		ECB861E21B77DBB700503C50 /* SwiftColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB861DE1B77DBB700503C50 /* SwiftColors.swift */; };
@@ -814,10 +815,8 @@
 		ECF818611B84FA7A0087ECAD /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				ECF2404E1BA13786002BFBAE /* DataManager.swift */,
 				D3A0F9FB1B69F0BB00F1FEDA /* EventCode.swift */,
 				D38653F61BAA02F400B8CCBC /* EventManager.swift */,
-				D3D98AF31BA54D5B00BA1901 /* FavoritesManager.swift */,
 				ECF818621B84FAB70087ECAD /* ReminderManager.swift */,
 				D3D98AF31BA54D5B00BA1901 /* FavoritesManager.swift */,
 				ECF2404E1BA13786002BFBAE /* DataManager.swift */,
@@ -1139,6 +1138,7 @@
 				D3795E7B1B8F654F009D3DB5 /* ReminderManager.swift in Sources */,
 				D3F8AD161B696FCD0070C097 /* NotificationController.swift in Sources */,
 				D35588BE1BA938A00052892F /* ReminderItemsTableRC.swift in Sources */,
+				ECB1DCC91BAEB7F100A67B6D /* JTDateHelper.m in Sources */,
 				D3E8108A1B710690004AE5A9 /* ReminderListsIC.swift in Sources */,
 				D38653F81BAA02F400B8CCBC /* EventManager.swift in Sources */,
 				D3188A6D1B6E9ADB00323DC0 /* MailComposer.swift in Sources */,

@@ -31,7 +31,7 @@ class TodayIC: WKInterfaceController {
     
     @IBOutlet weak var table: WKInterfaceTable!
     
-   var allEvents: Array<EKCalendar> = []
+   var allEvents: Array<EKEvent> = []
     
     
 //---- funcs below here -----------------------------------------------------------
@@ -43,7 +43,9 @@ class TodayIC: WKInterfaceController {
         let startDate =  NSDate()
         let endDate = dateHelper.addToDate(startDate, days: 7)
         
-        allEvents = CALEventManager.sharedEventManager().eventsFromDate(startDate, toDate: endDate) as! Array<EKCalendar>
+        EventManager.sharedInstance.fetchEventsFrom(startDate, endDate: endDate, completion: { (events) -> Void in
+            self.allEvents = events
+        })
         
     }
     
@@ -113,8 +115,8 @@ class TodayIC: WKInterfaceController {
             
             row.labelEventTitle.setText(item.title)
             row.labelEventTime.setText(item.title)  //get start-end times
-            row.labelEventTitle.setTextColor(UIColor(CGColor: item.CGColor))
-            row.verticalBar.setBackgroundColor(UIColor(CGColor: item.CGColor))
+            row.labelEventTitle.setTextColor(UIColor(CGColor: item.calendar.CGColor))
+            row.verticalBar.setBackgroundColor(UIColor(CGColor: item.calendar.CGColor))
         }
     }   //end loadTableData
     

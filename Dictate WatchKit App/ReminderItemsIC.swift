@@ -53,7 +53,7 @@ class ReminderItemsIC: WKInterfaceController {
             let item = allReminders[index]
             
             row.tableRowLabel.setText(item.title)
-            row.reminder = item
+            //row.reminder = item
         }
     }       // end loadTableData func
     

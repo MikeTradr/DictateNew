@@ -274,7 +274,7 @@ class ReminderListsIC: WKInterfaceController {
                 let item = self.allReminders[index]
                 
                 row.tableRowLabel.setText(item.title)
-                row.reminder = item
+               //TODO MIKE why here?  Anil row.reminder = item
             }
             //self.loadTableData()
         }

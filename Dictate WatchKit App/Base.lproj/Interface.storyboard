@@ -120,14 +120,59 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="188" y="336.75"/>
+            <point key="canvasLocation" x="214" y="420.75"/>
         </scene>
-        <!--TodayEvents-->
+        <!--Events-->
         <scene sceneID="sS8-Mf-H5Q">
             <objects>
-                <controller identifier="TodayEvents" id="Iem-D3-4JW" customClass="TodayIC" customModule="Dictate_WatchKit_Extension">
+                <controller identifier="Events" id="Iem-D3-4JW" customClass="TodayIC" customModule="Dictate_WatchKit_Extension">
                     <items>
-                        <group alignment="center" verticalAlignment="bottom" id="vG5-qB-MSl">
+                        <group width="1" alignment="left" layout="vertical" id="H9N-BU-ybb" userLabel="DayGroup">
+                            <items>
+                                <label alignment="left" text="Day" id="fKE-Cf-lN2" userLabel="Day">
+                                    <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </label>
+                                <group width="1" alignment="left" id="lbu-fN-cdR">
+                                    <items>
+                                        <table alignment="left" id="JlU-XV-yEV">
+                                            <items>
+                                                <tableRow identifier="tableRow" id="Cyt-0g-7c7" customClass="TodayEventsTableRC" customModule="Dictate_WatchKit_Extension">
+                                                    <group key="rootItem" width="1" height="0.0" alignment="left" id="p99-Tg-p2Y">
+                                                        <items>
+                                                            <group width="2" height="1" alignment="left" verticalAlignment="center" id="5Xm-nW-kBb" userLabel="VerticalBar">
+                                                                <color key="backgroundColor" red="0.40000000600000002" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                            </group>
+                                                            <label height="1" alignment="left" verticalAlignment="center" id="L1h-uX-xYy"/>
+                                                            <group width="1" alignment="left" layout="vertical" id="afh-h3-L5F">
+                                                                <items>
+                                                                    <label alignment="left" text="Label" numberOfLines="2" id="qqB-02-T53" userLabel="Title">
+                                                                        <fontDescription key="font" type="system" pointSize="16"/>
+                                                                    </label>
+                                                                    <label alignment="left" hidden="YES" text="Location" numberOfLines="2" id="W8d-rr-8G3" userLabel="Location">
+                                                                        <fontDescription key="font" type="system" pointSize="14"/>
+                                                                    </label>
+                                                                    <label alignment="left" text="Label" id="syo-w7-1UG" userLabel="Time">
+                                                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                                        <fontDescription key="font" type="system" pointSize="14"/>
+                                                                    </label>
+                                                                </items>
+                                                            </group>
+                                                        </items>
+                                                        <edgeInsets key="margins" left="6" right="0.0" top="6" bottom="0.0"/>
+                                                    </group>
+                                                    <connections>
+                                                        <outlet property="labelEventTime" destination="syo-w7-1UG" id="PYa-fh-cX2"/>
+                                                        <outlet property="labelEventTitle" destination="qqB-02-T53" id="8YA-eg-Ut8"/>
+                                                        <outlet property="verticalBar" destination="5Xm-nW-kBb" id="Fqd-dE-WrF"/>
+                                                    </connections>
+                                                </tableRow>
+                                            </items>
+                                        </table>
+                                    </items>
+                                </group>
+                            </items>
+                        </group>
+                        <group alignment="center" verticalAlignment="bottom" id="vG5-qB-MSl" userLabel="navBarGroup">
                             <items>
                                 <button width="40" height="40" alignment="right" backgroundImage="check_box40px-grey50%" id="odN-Fp-JgR">
                                     <connections>
@@ -150,11 +195,16 @@
                                     <action selector="menuDictate" destination="AgC-eL-Hgc" id="PQ3-RM-6FF"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Menu Item" image="cog2-48px" id="mnj-wx-VBO" userLabel="Settngs"/>
                         </items>
                     </menu>
+                    <connections>
+                        <outlet property="labelDate" destination="fKE-Cf-lN2" id="3oo-F6-XNZ"/>
+                        <outlet property="table" destination="JlU-XV-yEV" id="jJR-AO-0Ge"/>
+                    </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="407" y="334"/>
+            <point key="canvasLocation" x="417" y="423"/>
         </scene>
         <!--Settings-->
         <scene sceneID="ggb-XE-VMe">
@@ -219,6 +269,7 @@
                                     </variation>
                                     <connections>
                                         <action selector="buttonReminders" destination="gYc-zu-iHZ" id="aJ0-bS-7fb"/>
+                                        <segue destination="dLF-pS-Q8g" kind="modal" id="AdL-qP-RXz"/>
                                     </connections>
                                 </button>
                                 <button width="1" alignment="left" title="Calendars" id="9Nl-7D-ZcX">
@@ -229,6 +280,7 @@
                                     </variation>
                                     <connections>
                                         <action selector="buttonCalendars" destination="gYc-zu-iHZ" id="rOW-3R-gH5"/>
+                                        <segue destination="RwQ-qV-CJ3" kind="modal" id="jvv-a8-jPU"/>
                                     </connections>
                                 </button>
                             </items>
@@ -320,7 +372,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="27" y="91"/>
+            <point key="canvasLocation" x="-265" y="18"/>
         </scene>
         <!--Reminders-->
         <scene sceneID="peT-G5-wcJ">
@@ -667,7 +719,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="407" y="91"/>
+            <point key="canvasLocation" x="630" y="-15"/>
         </scene>
         <!--ReminderItems-->
         <scene sceneID="sQq-zh-Lhr">
@@ -769,7 +821,343 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="17" y="720"/>
+            <point key="canvasLocation" x="6" y="768"/>
+        </scene>
+        <!--ShowCalendars-->
+        <scene sceneID="kOf-kE-YIt">
+            <objects>
+                <controller identifier="ShowCalendars" animationDuration="1" id="kUv-Yz-AbO" customClass="ShowCalendarsIC" customModule="Dictate_WatchKit_Extension">
+                    <items>
+                        <group width="1" alignment="left" id="z2l-uO-FcZ" userLabel="Header Group">
+                            <items>
+                                <button width="16" height="16" alignment="left" verticalAlignment="center" backgroundImage="cbChecked40px" id="r7j-TZ-snm">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </button>
+                                <label alignment="left" text="Show Calendars" id="bAi-A0-v02">
+                                    <fontDescription key="font" type="system" pointSize="15"/>
+                                    <variation key="device=watch38mm">
+                                        <fontDescription key="font" type="system" pointSize="12"/>
+                                    </variation>
+                                </label>
+                                <group width="6" height="2" alignment="left" verticalAlignment="center" id="3m2-UD-W36" userLabel="hor. spacer"/>
+                            </items>
+                            <edgeInsets key="margins" left="2" right="0.0" top="0.0" bottom="0.0"/>
+                        </group>
+                        <group width="1" alignment="left" layout="vertical" id="Vsa-D3-YdK" userLabel="Seperator Group">
+                            <items>
+                                <separator width="999" height="3" alignment="left" id="qve-td-ycy">
+                                    <color key="color" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                                </separator>
+                            </items>
+                        </group>
+                        <table alignment="left" id="8xB-kF-jym">
+                            <items>
+                                <tableRow identifier="tableRow" id="V6e-sO-EMw" customClass="SettingsCalendarTableRC" customModule="Dictate_WatchKit_Extension">
+                                    <group key="rootItem" width="1" height="0.0" alignment="left" id="pZl-bt-ABr">
+                                        <items>
+                                            <imageView width="22" height="22" alignment="left" verticalAlignment="center" image="cbBlank40px" id="pLP-eT-dOu"/>
+                                            <group width="2" height="26" alignment="left" verticalAlignment="center" id="xgx-Qj-Sje" userLabel="VerticalBar">
+                                                <color key="backgroundColor" red="0.40000000600000002" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            </group>
+                                            <label alignment="left" text="spacer" id="sQI-W3-g2c"/>
+                                            <label width="1" height="1" alignment="left" verticalAlignment="center" text="Label" id="pAA-J1-qLs">
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="font" type="system" pointSize="16"/>
+                                                <variation key="device=watch38mm">
+                                                    <fontDescription key="font" type="system" pointSize="13"/>
+                                                </variation>
+                                            </label>
+                                            <separator height="16" alignment="left" id="o3I-1A-0wO">
+                                                <color key="color" red="1" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            </separator>
+                                            <group width="2" height="2" alignment="left" verticalAlignment="center" id="8XX-NF-0SG" userLabel="hor. spacer"/>
+                                            <group width="2" height="28" alignment="left" id="t8i-ez-3Wj" userLabel="blankVertical"/>
+                                        </items>
+                                        <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
+                                    </group>
+                                    <connections>
+                                        <outlet property="imageCheckbox" destination="pLP-eT-dOu" id="Lrh-c2-Jsq"/>
+                                        <outlet property="tableRowLabel" destination="pAA-J1-qLs" id="05s-uO-G3v"/>
+                                        <outlet property="verticalBar" destination="xgx-Qj-Sje" id="G6b-hf-2AK"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
+                    </items>
+                    <menu key="menu" id="Txy-iH-RlY">
+                        <items>
+                            <menuItem title="Dictate" image="Mic-Menu-v6" id="03m-SG-qpd">
+                                <connections>
+                                    <action selector="menuDictate" destination="AgC-eL-Hgc" id="cFU-iK-fK9"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Reminders" image="cbChecked40px" id="efk-cL-kvH">
+                                <connections>
+                                    <action selector="menuPreferences" destination="AgC-eL-Hgc" id="Rfh-Bh-rAR"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                    <connections>
+                        <outlet property="table" destination="8xB-kF-jym" id="r3U-FX-dPH"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="630" y="215"/>
+        </scene>
+        <!--CalendarSettings-->
+        <scene sceneID="b6Z-Mv-Z2b">
+            <objects>
+                <controller identifier="CalendarSettings" id="RwQ-qV-CJ3" customClass="CalendarSettingsIC" customModule="Dictate_WatchKit_Extension">
+                    <items>
+                        <group width="1" alignment="center" id="UVB-XQ-79g" userLabel="Header Group">
+                            <items>
+                                <imageView width="16" height="16" alignment="left" verticalAlignment="center" image="cogGray-40px" contentMode="scaleAspectFit" id="IPL-JS-lbt">
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </imageView>
+                                <label width="2" alignment="left" verticalAlignment="center" numberOfLines="3" id="eKP-ri-gga">
+                                    <fontDescription key="font" type="system" pointSize="15"/>
+                                    <variation key="device=watch38mm">
+                                        <fontDescription key="font" type="system" pointSize="12"/>
+                                    </variation>
+                                </label>
+                                <label alignment="left" text="Calendars" textAlignment="center" id="zBw-TM-Bau">
+                                    <fontDescription key="font" type="system" pointSize="15"/>
+                                    <variation key="device=watch38mm">
+                                        <fontDescription key="font" type="system" pointSize="12"/>
+                                    </variation>
+                                </label>
+                            </items>
+                            <edgeInsets key="margins" left="30" right="0.0" top="0.0" bottom="0.0"/>
+                        </group>
+                        <group width="1" alignment="left" layout="vertical" id="4JR-af-nCI" userLabel="Seperator Group">
+                            <items>
+                                <separator width="999" height="3" alignment="left" id="QRp-cM-wIS">
+                                    <color key="color" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                                </separator>
+                            </items>
+                        </group>
+                        <group alignment="center" verticalAlignment="bottom" id="tCd-PT-qaK" userLabel="navButtonsGroup">
+                            <items>
+                                <button width="40" height="40" alignment="left" backgroundImage="check_box40px-grey50%" id="qeH-UZ-g9L">
+                                    <connections>
+                                        <action selector="navButtonReminders" destination="RwQ-qV-CJ3" id="IJQ-1B-2Ig"/>
+                                    </connections>
+                                </button>
+                                <button width="10" alignment="left" enabled="NO" id="sKA-ew-2eo"/>
+                                <button width="27" height="40" alignment="center" backgroundImage="dicApp-2-nb-40px" id="1ll-jc-GTB">
+                                    <connections>
+                                        <action selector="buttonMic" destination="RwQ-qV-CJ3" id="Tss-BW-toL"/>
+                                    </connections>
+                                </button>
+                                <button width="10" alignment="center" enabled="NO" id="sbV-ft-yex"/>
+                                <button width="40" height="40" alignment="right" backgroundImage="Today40px-50%" id="5FW-ZK-AN3">
+                                    <connections>
+                                        <action selector="navButtonToday" destination="RwQ-qV-CJ3" id="JzW-DY-9Vk"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
+                        <group width="1" alignment="left" layout="vertical" id="W8E-Sh-IFv">
+                            <items>
+                                <button width="1" alignment="left" title="Set Default" id="TwN-nF-inQ">
+                                    <color key="titleColor" red="1" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="font" type="boldSystem" pointSize="15"/>
+                                    <variation key="device=watch38mm">
+                                        <fontDescription key="font" type="boldSystem" pointSize="12"/>
+                                    </variation>
+                                    <connections>
+                                        <action selector="buttonReminders" destination="RwQ-qV-CJ3" id="IJc-I3-dgn"/>
+                                        <segue destination="EK8-kp-F82" kind="modal" id="phe-uY-a24"/>
+                                    </connections>
+                                </button>
+                                <button width="1" alignment="left" title="Show Calendars" id="I4s-6k-qto">
+                                    <color key="titleColor" red="1" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="font" type="boldSystem" pointSize="15"/>
+                                    <variation key="device=watch38mm">
+                                        <fontDescription key="font" type="boldSystem" pointSize="12"/>
+                                    </variation>
+                                    <connections>
+                                        <action selector="buttonCalendars" destination="RwQ-qV-CJ3" id="ZLQ-SM-eBC"/>
+                                        <segue destination="kUv-Yz-AbO" kind="modal" id="jbc-Ug-1tm"/>
+                                    </connections>
+                                </button>
+                            </items>
+                            <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
+                        </group>
+                    </items>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="377" y="91.5"/>
+        </scene>
+        <!--ShowReminders-->
+        <scene sceneID="gnF-1t-TmE">
+            <objects>
+                <controller identifier="ShowReminders" animationDuration="1" id="tiX-bl-Egq" customClass="ShowRemindersIC" customModule="Dictate_WatchKit_Extension">
+                    <items>
+                        <group width="1" alignment="left" id="hee-n1-Yfy" userLabel="Header Group">
+                            <items>
+                                <button width="16" height="16" alignment="left" verticalAlignment="center" backgroundImage="cbChecked40px" id="4xN-VP-zPe">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </button>
+                                <label alignment="left" text="Show Reminders" id="m9V-IW-0Va">
+                                    <fontDescription key="font" type="system" pointSize="15"/>
+                                    <variation key="device=watch38mm">
+                                        <fontDescription key="font" type="system" pointSize="12"/>
+                                    </variation>
+                                </label>
+                                <group width="6" height="2" alignment="left" verticalAlignment="center" id="OY3-B1-f8o" userLabel="hor. spacer"/>
+                            </items>
+                            <edgeInsets key="margins" left="2" right="0.0" top="0.0" bottom="0.0"/>
+                        </group>
+                        <group width="1" alignment="left" layout="vertical" id="yHq-Cm-LmA" userLabel="Seperator Group">
+                            <items>
+                                <separator width="999" height="3" alignment="left" id="bOd-58-Jx4">
+                                    <color key="color" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                                </separator>
+                            </items>
+                        </group>
+                        <table alignment="left" id="B1w-P6-lDD">
+                            <items>
+                                <tableRow identifier="tableRow" id="a2u-qY-GiB" customClass="SettingsReminderTableRC" customModule="Dictate_WatchKit_Extension">
+                                    <group key="rootItem" width="1" height="0.0" alignment="left" id="V7B-mj-Hwt">
+                                        <items>
+                                            <imageView width="22" height="22" alignment="left" verticalAlignment="center" image="cbBlank40px" id="tAf-Xv-2Hy"/>
+                                            <group width="2" height="26" alignment="left" verticalAlignment="center" id="wyy-sK-140" userLabel="VerticalBar">
+                                                <color key="backgroundColor" red="0.40000000600000002" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            </group>
+                                            <label alignment="left" text="spacer" id="GND-oI-YFT"/>
+                                            <label width="1" height="1" alignment="left" verticalAlignment="center" text="Label" id="cUj-0U-rgK">
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="font" type="system" pointSize="16"/>
+                                                <variation key="device=watch38mm">
+                                                    <fontDescription key="font" type="system" pointSize="13"/>
+                                                </variation>
+                                            </label>
+                                            <separator height="16" alignment="left" id="YRi-lA-5wO">
+                                                <color key="color" red="1" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            </separator>
+                                            <group width="2" height="2" alignment="left" verticalAlignment="center" id="Jlo-P8-gJF" userLabel="hor. spacer"/>
+                                            <group width="2" height="28" alignment="left" id="rSa-qU-DFo" userLabel="blankVertical"/>
+                                        </items>
+                                        <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
+                                    </group>
+                                    <connections>
+                                        <outlet property="imageCheckbox" destination="tAf-Xv-2Hy" id="gEa-UD-rCH"/>
+                                        <outlet property="tableRowLabel" destination="cUj-0U-rgK" id="LND-Ss-SOY"/>
+                                        <outlet property="verticalBar" destination="wyy-sK-140" id="zEh-7v-kBo"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
+                    </items>
+                    <menu key="menu" id="dgb-V0-cOh">
+                        <items>
+                            <menuItem title="Dictate" image="Mic-Menu-v6" id="FUk-lQ-uk2">
+                                <connections>
+                                    <action selector="menuDictate" destination="AgC-eL-Hgc" id="DJv-Wu-JKe"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Reminders" image="cbChecked40px" id="iuK-VX-gYN">
+                                <connections>
+                                    <action selector="menuPreferences" destination="AgC-eL-Hgc" id="w5J-jt-wko"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                    <connections>
+                        <outlet property="table" destination="B1w-P6-lDD" id="Lwa-Uz-1nK"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="-271" y="267"/>
+        </scene>
+        <!--ReminderSettings-->
+        <scene sceneID="ihP-EF-mbR">
+            <objects>
+                <controller identifier="ReminderSettings" id="dLF-pS-Q8g" customClass="ReminderSettingsIC" customModule="Dictate_WatchKit_Extension">
+                    <items>
+                        <group width="1" alignment="center" id="mFO-TY-cpB" userLabel="Header Group">
+                            <items>
+                                <imageView width="16" height="16" alignment="left" verticalAlignment="center" image="cogGray-40px" contentMode="scaleAspectFit" id="3x8-g7-jHR">
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </imageView>
+                                <label width="2" alignment="left" verticalAlignment="center" numberOfLines="3" id="cxe-DA-0tA">
+                                    <fontDescription key="font" type="system" pointSize="15"/>
+                                    <variation key="device=watch38mm">
+                                        <fontDescription key="font" type="system" pointSize="12"/>
+                                    </variation>
+                                </label>
+                                <label alignment="left" text="Reminders" textAlignment="center" id="jc5-nL-yU0">
+                                    <fontDescription key="font" type="system" pointSize="15"/>
+                                    <variation key="device=watch38mm">
+                                        <fontDescription key="font" type="system" pointSize="12"/>
+                                    </variation>
+                                </label>
+                            </items>
+                            <edgeInsets key="margins" left="30" right="0.0" top="0.0" bottom="0.0"/>
+                        </group>
+                        <group width="1" alignment="left" layout="vertical" id="vuH-YJ-5Mt" userLabel="Seperator Group">
+                            <items>
+                                <separator width="999" height="3" alignment="left" id="CkE-cH-CBE">
+                                    <color key="color" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                                </separator>
+                            </items>
+                        </group>
+                        <group alignment="center" verticalAlignment="bottom" id="oj0-4v-7Hc" userLabel="navButtonsGroup">
+                            <items>
+                                <button width="40" height="40" alignment="left" backgroundImage="check_box40px-grey50%" id="0vV-hL-XO1">
+                                    <connections>
+                                        <action selector="navButtonReminders" destination="dLF-pS-Q8g" id="rEf-9L-ur4"/>
+                                    </connections>
+                                </button>
+                                <button width="10" alignment="left" enabled="NO" id="U32-s9-wIl"/>
+                                <button width="27" height="40" alignment="center" backgroundImage="dicApp-2-nb-40px" id="i2N-zE-eNi">
+                                    <connections>
+                                        <action selector="buttonMic" destination="dLF-pS-Q8g" id="CCG-YU-yKE"/>
+                                    </connections>
+                                </button>
+                                <button width="10" alignment="center" enabled="NO" id="RIR-aI-ZFb"/>
+                                <button width="40" height="40" alignment="right" backgroundImage="Today40px-50%" id="hPc-I1-bcG">
+                                    <connections>
+                                        <action selector="navButtonToday" destination="dLF-pS-Q8g" id="vDb-Hb-ox8"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
+                        <group width="1" alignment="left" layout="vertical" id="oZ3-8p-xg6">
+                            <items>
+                                <button width="1" alignment="left" title="Set Default" id="TAH-FG-27x">
+                                    <color key="titleColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="font" type="boldSystem" pointSize="15"/>
+                                    <variation key="device=watch38mm">
+                                        <fontDescription key="font" type="boldSystem" pointSize="12"/>
+                                    </variation>
+                                    <connections>
+                                        <action selector="buttonReminders" destination="dLF-pS-Q8g" id="hz9-lc-zGm"/>
+                                        <segue destination="chX-xC-sh2" kind="modal" id="9Cc-Tn-Abp"/>
+                                    </connections>
+                                </button>
+                                <button width="1" alignment="left" title="Show Calendars" id="f3b-Pa-wVX">
+                                    <color key="titleColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="font" type="boldSystem" pointSize="15"/>
+                                    <variation key="device=watch38mm">
+                                        <fontDescription key="font" type="boldSystem" pointSize="12"/>
+                                    </variation>
+                                    <connections>
+                                        <action selector="buttonCalendars" destination="dLF-pS-Q8g" id="Rnn-HC-FfV"/>
+                                        <segue destination="tiX-bl-Egq" kind="modal" id="bCX-5n-R6h"/>
+                                    </connections>
+                                </button>
+                            </items>
+                            <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
+                        </group>
+                    </items>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="-20" y="91.5"/>
         </scene>
     </scenes>
     <color key="tintColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>

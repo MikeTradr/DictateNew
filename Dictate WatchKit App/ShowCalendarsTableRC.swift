@@ -1,5 +1,5 @@
 //
-//  SettingsReminderTableRC.swift
+//  ShowCalendarsTableRC.swift
 //  Dictate
 //
 //  Created by Mike Derr on 9/11/15.
@@ -9,10 +9,10 @@
 import UIKit
 import WatchKit
 
-class SettingsReminderTableRC: NSObject {
+class ShowCalendarsTableRC: NSObject {
    
     @IBOutlet weak var tableRowLabel: WKInterfaceLabel!
-    @IBOutlet weak var verticalBar: WKInterfaceGroup!
     @IBOutlet weak var imageCheckbox: WKInterfaceImage!
-    
+    @IBOutlet weak var verticalBar: WKInterfaceGroup!
+
 }

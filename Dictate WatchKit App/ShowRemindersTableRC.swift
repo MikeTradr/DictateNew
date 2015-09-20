@@ -1,5 +1,5 @@
 //
-//  ReminderItemsTableRC.swift
+//  ShowRemindersTableRC.swift
 //  Dictate
 //
 //  Created by Mike Derr on 9/11/15.
@@ -8,13 +8,11 @@
 
 import UIKit
 import WatchKit
-import EventKit
 
-class ReminderItemsTableRC: NSObject {
-    
+class ShowRemindersTableRC: NSObject {
+   
     @IBOutlet weak var tableRowLabel: WKInterfaceLabel!
-    @IBOutlet weak var buttonCheckbox: WKInterfaceButton!
-    @IBOutlet weak var verticalBar: WKInterfaceGroup!
     @IBOutlet weak var imageCheckbox: WKInterfaceImage!
-        
+    @IBOutlet weak var verticalBar: WKInterfaceGroup!
+
 }

@@ -1,5 +1,5 @@
 //
-//  CalendarListPickerIC.swift
+//  ShowRemindersIC.swift
 //  Dictate
 //
 //  Created by Mike Derr on 9/15/15.
@@ -11,7 +11,7 @@ import Foundation
 import EventKit
 
 
-class CalendarListPickerIC: WKInterfaceController {
+class ShowRemindersIC: WKInterfaceController {
     
     var selectedRow:Int! = nil
     let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
@@ -40,7 +40,7 @@ class CalendarListPickerIC: WKInterfaceController {
             println("---------------------------------------------------")
             println("w40 index, title: \(index), \(title)")
             
-            let row = table.rowControllerAtIndex(index) as! CalendarListTableRC
+            let row = table.rowControllerAtIndex(index) as! ShowRemindersTableRC
             let item = allCalendarLists[index]
             
             row.tableRowLabel.setText(item.title)
@@ -63,8 +63,7 @@ class CalendarListPickerIC: WKInterfaceController {
         println("w116 clicked on row: \(rowIndex)")
         
         selectedRow = rowIndex //for use with insert and delete, save selcted row index
-        let itemRow = self.table.rowControllerAtIndex(rowIndex) as! CalendarListTableRC
-  
+        let itemRow = self.table.rowControllerAtIndex(rowIndex) as! ShowRemindersTableRC
         if self.checked {               // Turn checkmark off
             itemRow.imageCheckbox.setImageNamed("cbBlank40px")
             self.checked = false

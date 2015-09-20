@@ -8,6 +8,8 @@
 
 import WatchKit
 import Foundation
+import Parse
+import AVFoundation
 
 
 var results = []
@@ -62,6 +64,9 @@ var fullDTEnd:String    = ""
 
 
 
+
+
+
 // ---- end set Global Varbiables ----
 
 
@@ -84,6 +89,8 @@ class DictateManagerIC: WKInterfaceController {
     var startDT:NSDate          = NSDate(dateString:"2014-12-12")
     var endDT:NSDate            = NSDate(dateString:"2014-12-12")
     var actionType:String   = ""        //event, reminder, singleWordList, commaList, rawList, note?, text, email
+    var audioPlayer = AVAudioPlayer()
+
     
     func grabvoice() -> (NSDate, NSDate, String, String, String, String, String)  {  //startDT, endDT, output, outputNote, day, calendarName, actionType
         //added actionType above
@@ -201,7 +208,52 @@ class DictateManagerIC: WKInterfaceController {
         
     }   //end func grabvoice
     
+    func playSound(sound: NSURL){
+        var error:NSError?
+        self.audioPlayer = AVAudioPlayer(contentsOfURL: sound, error: &error)
+        self.audioPlayer.prepareToPlay()
+        //player.delegate = self player.play()
+        //audioPlayer.delegate = self
+        self.audioPlayer.play()
+    }
     
+    func delay(delay:Double, closure:()->()) {
+        dispatch_after(
+            dispatch_time(
+                DISPATCH_TIME_NOW,
+                Int64(delay * Double(NSEC_PER_SEC))
+            ),
+            dispatch_get_main_queue(), closure)
+    }
+    
+    
+   //for watchOS2
+/*    func showPopup(){
+        
+        let h0 = { print("ok")}
+        
+        let action1 = WKAlertAction(title: "Approve", style: .Default, handler:h0)
+        let action2 = WKAlertAction(title: "Decline", style: .Destructive) {}
+        let action3 = WKAlertAction(title: "Cancel", style: .Cancel) {}
+        
+        presentAlertControllerWithTitle("Voila", message: "", preferredStyle: .ActionSheet, actions: [action1, action2,action3])  
+    }
+ */
+    
+    func initalizeParse () {
+        
+        println("w207 in DictateManagerIC: initalizeParse")
+
+        Parse.enableLocalDatastore()
+        //  PFUser.enableAutomaticUser()
+    Parse.enableDataSharingWithApplicationGroupIdentifier("group.com.thatsoft.dictateApp", containingApplication: "com.thatsoft.dictateApp")
+        
+        Parse.setApplicationId("1wwwPAQ0Of2Fp6flotUw4YzN64HFDmy3ijAlQZKE",
+            clientKey: "EHeeek4uXhJQi0vXPBba945A4h0LQ4QddEGW8gSs")
+        
+        PFUser.enableAutomaticUser()
+        
+    }
     
     
     

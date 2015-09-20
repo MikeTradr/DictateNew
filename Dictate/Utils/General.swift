@@ -1,15 +1,16 @@
 //
 //  General.swift
-//  WatchInput
+//  Dictate
 //
 //  Created by Mike Derr on 6/13/15.
 //  Copyright (c) 2015 ThatSoft.com. All rights reserved.
 //
 
 import UIKit
+import MessageUI
 import AVFoundation
 
-class General: NSObject {
+class General: NSObject, UITextFieldDelegate, MFMailComposeViewControllerDelegate {
     
 
   // var sound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("Beep2", ofType: "mp3")!)
@@ -73,6 +74,14 @@ class General: NSObject {
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         // self.view.endEditing(true)
         return false
+    }
+    
+    func makeCall(toPhone:String) {
+        
+        if let url = NSURL(string: "tel://\(toPhone)") {
+            //TODO Anl can this work here?
+            //UIApplication.sharedApplication().openURL(url)
+        }
     }
     
 

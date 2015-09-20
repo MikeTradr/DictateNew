@@ -383,6 +383,43 @@ class MainIC: WKInterfaceController {
             println("p152 in note Switch")
             break;
             
+        case "Call":
+                println("w387 in Call Switch")
+                
+                //resultMessage.text = "Switching to Phone for your call"
+                
+                let toPhone:String    = defaults.stringForKey("toPhone")!
+                
+                General().makeCall(toPhone)
+                
+              //  enteredText2.text = ""      // set to blank for return
+             //   resultMessage.text = ""     // set to blank for return
+                
+                //let actionType = ""         // set to "" for next processing
+                let mainType = ""
+                defaults.setObject(actionType, forKey: "actionType")        //saves actionType
+                defaults.setObject(actionType, forKey: "mainType")        //saves actionType
+                
+                let rawDataObject = PFObject(className: "UserData")
+                rawDataObject["actionType"] = actionType
+                rawDataObject["rawString"] = outputNote
+                rawDataObject["userName"] = PFUser.currentUser()?.username
+                
+                //TODO get these two fields from code!
+                rawDataObject["device"] = "iPhone"               //TODO hardcoded get device from code?
+                rawDataObject["userPhoneNumber"] = "608-242-7700"               //TODO hardcoded get device from code?
+                
+                rawDataObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+                    println("p490 vcDictate rawDataObject has been saved.")
+                }
+               break;
+                
+     
+
+            
+            
+            
+            
         default:
             println("p155 in default switch so assume Event")
             
@@ -477,14 +514,11 @@ class MainIC: WKInterfaceController {
         
         println("462 we here?")
 
-        General().delay(3.0) {
-            // do stuff
+        General().delay(3.0) {          // do stuff
             self.myLabel.setTextColor(UIColor.yellowColor())
             self.myLabel.setText("Tap Mic to dictate or force touch")
             self.groupNavigation.setHidden(false)
             self.buttonMicrophone.setHidden(false)  //hide mircophone
-
-
         }
         
         
@@ -533,11 +567,11 @@ class MainIC: WKInterfaceController {
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         // Configure interface objects here.
-        
-        println("p471 in MainIC")
-        
-        
-      //  presentControllerWithName("Main", context: contextObj)
+        NSLog("%@ w536 MainIC awakeWithContext", self)
+        println("p471 in MainIC awakeWithContext")
+     
+       //TODO stops app from running on watch!
+       // DictateManagerIC.sharedInstance.initalizeParse()
         
  /*
  //TODO FIX THIS BOMBS MIKE USED TO WORK  LOL
@@ -565,26 +599,16 @@ class MainIC: WKInterfaceController {
         Parse.setApplicationId("1wwwPAQ0Of2Fp6flotUw4YzN64HFDmy3ijAlQZKE",
             clientKey: "EHeeek4uXhJQi0vXPBba945A4h0LQ4QddEGW8gSs")
 */
+        self.setTitle("Dictate™")
         self.myLabel.setTextColor(UIColor.yellowColor())
         self.myLabel.setText("Tap Mic to dictate or force touch")
         self.buttonMicrophone.setHidden(false)  //hide mircophone
-    
-        //  TODO Crashes
-      //  let reminderList = ReminderManager.sharedInstance.getCalendars(EKEntityTypeReminder)
-        
-     //   println("w572: reminderList: \(reminderList)")
-        
-       // if defaults.objectForKey("actionType") != nil {
-        //    println(defaults.objectForKey("actionType"))   //from rob course
-       // }
-        
-
-
 
     }
     
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
+        NSLog("%@ w536 MainIC willActivate", self)
         println("p589 in MainIC willActivate")
         
         self.myLabel.setTextColor(UIColor.yellowColor())
@@ -592,7 +616,6 @@ class MainIC: WKInterfaceController {
         self.buttonMicrophone.setHidden(false)  //hide mircophone
         
         super.willActivate()
-        
         
     }
     

@@ -69,6 +69,35 @@ class ReminderManager: NSObject {
         })
     }
     
+    func saveReminder(reminderItem:EKReminder) {
+        
+        println("p74 reminderItem: \(reminderItem)")
+        
+        getAccessToEventStoreForType(EKEntityTypeReminder, completion: { (granted) -> Void in
+            
+            if granted{
+                println("granted: \(granted)")
+                
+                let reminderLists = self.eventStore.calendarsForEntityType(EKEntityTypeReminder)
+                
+                println("p81 reminderLists: \(reminderLists)")
+                
+                var saveError: NSError? = nil // Initially sets errors to nil
+                
+                self.eventStore.saveReminder(reminderItem, commit: true, error: &saveError)
+         
+                if saveError != nil {
+                    println("p90 Saving ReminderItem to Calendar failed with error: \(saveError!)")
+                } else {
+                    println("p91 Now Completed: '\(reminderItem.title)' to '\(reminderItem.calendar.title)' calendar.")
+                }
+  
+            }
+        })
+    }
+    
+    
+    
     
     func fetchCalendarReminders(calendar:EKCalendar, completion:([EKReminder])->Void) {
         println("p36 we here? fetchReminders")
@@ -80,7 +109,7 @@ class ReminderManager: NSObject {
                 
                 var predicate = self.eventStore.predicateForIncompleteRemindersWithDueDateStarting(nil, ending: nil, calendars: [calendar])
                 self.eventStore.fetchRemindersMatchingPredicate(predicate) { reminders in
-                    completion(reminders as! [EKReminder]!)
+                    completion(reminders as! [EKReminder])
                 }
             }
         })

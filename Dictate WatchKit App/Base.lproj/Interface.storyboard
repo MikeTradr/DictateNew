@@ -366,9 +366,9 @@
                                                 <button alignment="center" verticalAlignment="center" id="e6Z-F0-qhP">
                                                     <group key="contentGroup" width="1" alignment="left" id="Ctb-5m-qWn">
                                                         <items>
-                                                            <label alignment="center" text="&lt;" textAlignment="center" id="joP-Vq-HUS">
+                                                            <label alignment="center" text="«" textAlignment="center" id="joP-Vq-HUS">
                                                                 <color key="textColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                                <fontDescription key="font" type="boldSystem" pointSize="16"/>
+                                                                <fontDescription key="font" type="boldSystem" pointSize="22"/>
                                                             </label>
                                                         </items>
                                                         <edgeInsets key="margins" left="0.0" right="0.0" top="4" bottom="2"/>
@@ -451,8 +451,15 @@
                                         <button alignment="center" verticalAlignment="center" id="bTs-Wy-mgc">
                                             <group key="contentGroup" width="1" alignment="left" id="Acu-xt-wbu">
                                                 <items>
-                                                    <label alignment="center" text="Show Completed" textAlignment="center" id="9BG-ck-laP">
+                                                    <label alignment="center" verticalAlignment="center" text="Show Completed" textAlignment="center" id="9BG-ck-laP">
                                                         <fontDescription key="font" type="system" pointSize="14"/>
+                                                    </label>
+                                                    <label alignment="center" verticalAlignment="center" hidden="YES" text="Completed" textAlignment="center" id="aCW-Ug-nGT">
+                                                        <color key="textColor" red="1" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <fontDescription key="font" type="boldSystem" pointSize="16"/>
+                                                        <variation key="device=watch38mm">
+                                                            <fontDescription key="font" type="boldSystem" pointSize="14"/>
+                                                        </variation>
                                                     </label>
                                                 </items>
                                                 <edgeInsets key="margins" left="0.0" right="0.0" top="4" bottom="2"/>
@@ -466,7 +473,11 @@
                                         <button alignment="center" verticalAlignment="center" id="sl1-DN-9md">
                                             <group key="contentGroup" width="1" alignment="left" id="oXM-ID-A8M">
                                                 <items>
-                                                    <label alignment="center" text="&lt; Reminders" textAlignment="center" id="TCb-I7-n6p">
+                                                    <label alignment="center" text="«" textAlignment="center" id="bp2-1N-Jjh">
+                                                        <color key="textColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <fontDescription key="font" type="boldSystem" pointSize="22"/>
+                                                    </label>
+                                                    <label alignment="center" verticalAlignment="center" text="Reminders" textAlignment="center" id="TCb-I7-n6p">
                                                         <color key="textColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="font" type="boldSystem" pointSize="16"/>
                                                         <variation key="device=watch38mm">
@@ -524,6 +535,7 @@
                     </menu>
                     <connections>
                         <outlet property="backToReminders" destination="rgr-n9-Bj0" id="7yX-Sz-7ug"/>
+                        <outlet property="labelCompleted" destination="aCW-Ug-nGT" id="LS9-nT-TkI"/>
                         <outlet property="labelReminderListID" destination="F5A-lK-ily" id="h3y-6q-4nW"/>
                         <outlet property="labelShowCompleted" destination="9BG-ck-laP" id="Tr5-a2-GRQ"/>
                         <outlet property="navBarGroup" destination="0b7-3H-Sfe" id="Wxj-TY-QaP"/>
@@ -536,7 +548,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="17" y="355"/>
+            <point key="canvasLocation" x="6" y="421.75"/>
         </scene>
         <!--Glance Interface Controller-->
         <scene sceneID="BOz-TT-tkC">
@@ -757,7 +769,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="38" y="620"/>
+            <point key="canvasLocation" x="17" y="720"/>
         </scene>
     </scenes>
     <color key="tintColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>

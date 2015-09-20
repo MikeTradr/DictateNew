@@ -12,19 +12,6 @@ import MessageUI
 import Parse
 import AVFoundation
 
-/*
-func delay(delay:Double, closure:()->()) {
-    dispatch_after(
-@IBOutlet weak var titleLabel: UILabel!
-@IBOutlet weak var titleLabel: UILabel!
-        dispatch_time(
-            DISPATCH_TIME_NOW,
-            Int64(delay * Double(NSEC_PER_SEC))
-        ),
-        dispatch_get_main_queue(), closure)
-}
-*/
-
 var enteredText = String()
 
 let str1:String = "new appointment tomorrow 2 AM sandra for efficiency for fall 242-1234"
@@ -107,8 +94,6 @@ let str41:String = "reminder buy milk"
 
 
 
-
-
 // ---- change strings here for testing, shows on the dictated field---
 //var str:String = str41
 var str:String = ""
@@ -133,7 +118,6 @@ var endTime:NSDate      = NSDate()
 var today:NSDate        = NSDate()
 
 var wordArr             = []
-
 
 var output:String       = ""
 var outputRaw:String    = ""
@@ -169,12 +153,12 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
     
 //    defaults.setObject(eventDuration, forKey: "eventDuration")
     
-    @IBOutlet weak var enteredText: UITextView!                     // this is under the micophone graphic
+    @IBOutlet weak var enteredText: UITextView!     //this is under the micophone graphic
     // @IBOutlet weak var resultProcessed: UITextView!
     //@IBOutlet weak var resultRaw: UITextView!
     
     
-    @IBOutlet weak var enteredText2: UITextView!                    // larger grey text field.
+    @IBOutlet weak var enteredText2: UITextView!        //larger grey text field.
     
     //@IBOutlet weak var enteredText: UITextField!
     @IBOutlet weak var resultType: UITextField!
@@ -190,13 +174,10 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
     @IBOutlet weak var resultStartDate: UITextField!
     @IBOutlet weak var resultEndDate: UITextField!
     @IBOutlet weak var resultTitle: UITextField!
-    @IBOutlet weak var resultCalendar: UITextField!
-    
+    @IBOutlet weak var resultCalendar: UITextField!    
     
     @IBOutlet weak var resultError: UITextView!
-    
-    
-    
+
     
     var startDT:NSDate = NSDate(dateString:"2014-12-12")
     var endDT:NSDate = NSDate(dateString:"2014-12-12")
@@ -342,8 +323,9 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        NSLog("%@ p326 DictateVC viewDidLoad", self)
         
-        println("p310 we here? viewDidLoad viewController")
+        println("p328 we here? viewDidLoad viewController")
         
         //Added left adn Right Swipe gestures. TODO Can add this to the General.swift Class? and call it?
         var leftSwipe = UISwipeGestureRecognizer(target: self, action: Selector("handleSwipes:"))
@@ -466,7 +448,9 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
         
 // ____ actionType Text ____________________________________
         
-        if (actionType == "Text") {
+        
+        switch (actionType) {
+        case "Text":
             println("p397 in Text Switch")
 
             resultMessage.text = "Switching to iMessage for your text"
@@ -508,14 +492,11 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
             let mainType = ""
             defaults.setObject(actionType, forKey: "actionType")        //saves actionType
             defaults.setObject(actionType, forKey: "mainType")        //saves actionType
-
-           
-
             
-        }
+        break;
         
         
-        if (actionType == "Call") {
+        case "Call":
             println("p431 in Call Switch")
             
             resultMessage.text = "Switching to Phone for your call"
@@ -547,10 +528,10 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
                 println("p490 vcDictate rawDataObject has been saved.")
             }
             
-        }
+        break;
 
 
-        if (actionType == "Mail") {
+        case "Mail":
             println("p456 in Mail Switch")
             
             resultMessage.text = "Switching to Mail for your mail"
@@ -586,8 +567,12 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
                 println("p523 vcDictate rawDataObject has been saved.")
             }
 
+        break;
             
-        }
+        default:
+            println("p573 Switch Default")
+            
+        }   //end Switch
 
         
         if ( (actionType != "Call") && (actionType != "Text") && (actionType != "Mail") ) {     // call does not need to see details screen
@@ -601,44 +586,10 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
                 tabBarController?.selectedIndex = 1
                 
             }
-            
         }
-        
-    }
-    
+}   // end func buttonProcess
 
- /*
-    
-    @IBAction func buttonCreate(sender: AnyObject) {
-        
-        // CHECK Do I have to call this again??? else 12/12/2014 event
-        
-        //let (startDT, endDT, output, outputNote, day, calendarName, eventDuration) = DictateCode().parse(str)
-        
-        println("### pl240 startDT: \(startDT)")
-        
-        let eventStore = EKEventStore()
-        DictateCode().insertEvent(eventStore, startDT: startDT, endDT: endDT, output: output, outputNote: outputNote, calendarName: calendarName )
-        
-        enteredText2.text = ""      // set to blank for return
-        
-        cleardata()
-        
-        resultMessage.text = "Event created on your \(calendarName.capitalizedString) calendar!"
-    
-        //resultMessageTopRight.text = "Dicatate has created your event :) "
-    
-        resultError.text = ""   // send any messages here... red font at botton on phone so far
-        
-        General().delay(4.0) {
-            // do stuff
-            self.resultMessage.text = ""
-            self.resultError.text = ""
-        }
-        
-    }
- */
-    
+     
     @IBAction func buttonToday(sender: AnyObject) {
          switchScreen("Today")
         

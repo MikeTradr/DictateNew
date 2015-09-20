@@ -10,6 +10,8 @@ import WatchKit
 import Foundation
 import EventKit
 import Parse
+import AVFoundation
+
 
 
 class ReminderListsIC: WKInterfaceController {
@@ -31,6 +33,10 @@ class ReminderListsIC: WKInterfaceController {
     
     var showListsView:Bool = true
     var checked:Bool = false
+    
+    var audioPlayer = AVAudioPlayer()
+    var reminderListColor:UIColor = UIColor.greenColor()
+
 
 
     
@@ -45,6 +51,8 @@ class ReminderListsIC: WKInterfaceController {
     
     @IBOutlet weak var verticalBar2: WKInterfaceGroup!
     @IBOutlet weak var labelShowCompleted: WKInterfaceLabel!
+    @IBOutlet weak var labelCompleted: WKInterfaceLabel!
+    
     @IBOutlet weak var table2: WKInterfaceTable!
     
     @IBOutlet weak var reminderListsGroup: WKInterfaceGroup!
@@ -59,6 +67,8 @@ class ReminderListsIC: WKInterfaceController {
         reminderListsGroup.setHidden(false)     //show lists
         reminderItemsGroup.setHidden(true)      //Hide lower table2
         navBarGroup.setHidden(false)            //show  navBar
+        self.setTitle("Reminders")
+
     }
     
     @IBAction func buttonToReminders() {
@@ -67,6 +77,7 @@ class ReminderListsIC: WKInterfaceController {
         navBarGroup.setHidden(false)            //show  navBar
         showListsView = true
         //self.loadTableData()
+        self.setTitle("Reminders")
     }
     
     @IBAction func buttonLeftArrow() {
@@ -74,6 +85,7 @@ class ReminderListsIC: WKInterfaceController {
         reminderItemsGroup.setHidden(true)      //Hide lower table2
         navBarGroup.setHidden(false)            //show  navBar
         showListsView = true
+        self.setTitle("Reminders")
     }
     
     @IBAction func menuDictate() {
@@ -88,7 +100,12 @@ class ReminderListsIC: WKInterfaceController {
 
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
-        NSLog("%@ w57 awakeWithContext", self)
+        // Configure interface objects here.
+
+        NSLog("%@ w193 awakeWithContext", self)
+        
+        println("w105 RemindersIC awakeWithContext")
+
    /*
         //TODO FIX THIS BOMBS MIKE USED TO WORK  LOL
         
@@ -125,27 +142,10 @@ class ReminderListsIC: WKInterfaceController {
             }
         })
         
-        
-        
-
-        // Configure interface objects here.
-        
-           println("w61 RemindersIC awakeWithContext")
-        
-        super.awakeWithContext(context)
-        
         println("w65 context: \(context)")
-// Crashed here TODO Mike
-       // self.setTitle(context as? String)
-        
-      //  reminderItemsGroup.setHidden(true)  //Hide lower table2
-        
         showListsView = true
-        
+        self.setTitle("Reminders")
         self.loadTableData()
-        //self.loadTableData2()
-
-
     }
 
     override func willActivate() {
@@ -159,13 +159,15 @@ class ReminderListsIC: WKInterfaceController {
         println("w83 in ReminderIC willActivate")
 
         self.reminderItemsGroup.setHidden(false)  //Hide lower table2
-    /*
+  
         if showListsView {
             self.loadTableData()
+            println("w165 showListsView True")
         } else {
             self.loadTableData2()
+            println("w165 showListsView False")
         }
-    */
+  
         
     }
  
@@ -186,39 +188,40 @@ class ReminderListsIC: WKInterfaceController {
         
         //println("w38 allReminderLists: \(allReminderLists)")
         println("w137 allReminderLists.count: \(allReminderLists.count)")
-        
+  
         if allReminderLists != [] {
             for (index, title) in enumerate(allReminderLists) {
                 println("---------------------------------------------------")
                 println("w40 index, title: \(index), \(title)")
                 
                 let row = table.rowControllerAtIndex(index) as! ReminderListsTableRC
-                let reminder = allReminderLists[index]
-                println("w146 reminder: \(reminder)")
-
+                let reminderList = allReminderLists[index]
+                println("w146 reminderList: \(reminderList)")
+                
+                //TODO Mike TODO Anil  this crashes watch used to work!!!!!!!
+  /*
                 // get count or items in each reminder list and set the Text Label
-                ReminderManager.sharedInstance.fetchCalendarReminders(reminder) { (reminders) -> Void in
+                ReminderManager.sharedInstance.fetchCalendarReminders(reminderList) { (reminders) -> Void in
                     println("w148 reminders: \(reminders)")
                     self.allReminders = reminders as [EKReminder]
                     let numberOfItems = self.allReminders.count
+                
                     println("w151 numberOfItems: \(numberOfItems)")
                     if numberOfItems != 0 {
-                        println("w156 reminder.title: \(reminder.title)")
+                        println("w156 reminder.title: \(reminderList.title)")
                         println("w157 numberOfItems: \(numberOfItems)")
 
-                        row.tableRowLabel.setText("\(reminder.title) (\(numberOfItems))")
+                       row.tableRowLabel.setText("\(reminderList.title) (\(numberOfItems))")
                         
-                        row.tableRowLabel.setTextColor(UIColor(CGColor: reminder.CGColor))
-                        row.verticalBar.setBackgroundColor(UIColor(CGColor: reminder.CGColor))
-                        
-                        println("w162 here? reminder: \(reminder)")
+                        println("w162 here? reminder: \(reminderList)")
                     }
-                        
+
                 }   // end ReminderManager call
-             
-                
-                row.tableRowLabel.setText("\(reminder.title)")
-                row.tableRowLabel.setTextColor(UIColor(CGColor: reminder.CGColor))
+   */
+    
+                row.tableRowLabel.setText("\(reminderList.title)")
+                row.tableRowLabel.setTextColor(UIColor(CGColor: reminderList.CGColor))
+                row.verticalBar.setBackgroundColor(UIColor(CGColor: reminderList.CGColor))
 
             }
         }
@@ -226,6 +229,8 @@ class ReminderListsIC: WKInterfaceController {
     
     func loadTableData2 () {
         
+        self.setTitle("Items")
+
         showListsView = false   //set flag when awakes to go to view user was in
         
         backToReminders.setHidden(false)        //show text
@@ -238,6 +243,11 @@ class ReminderListsIC: WKInterfaceController {
         labelReminderListID.setTextColor(UIColor(CGColor: calendar.CGColor))
         verticalBar2.setBackgroundColor(UIColor(CGColor: calendar.CGColor))
         labelShowCompleted.setTextColor(UIColor(CGColor: calendar.CGColor))
+        
+        self.reminderListColor = UIColor(CGColor: calendar.CGColor)!    //save for selected row later
+        
+        let reminderListColor:UIColor = UIColor(CGColor: calendar.CGColor)!
+
         
        // buttonCheckbox.setHidden(true)
         
@@ -274,65 +284,68 @@ class ReminderListsIC: WKInterfaceController {
     override func table(table: WKInterfaceTable, didSelectRowAtIndex rowIndex: Int) {
         //selection of data and presenting it to
         
-        let selectedList = allReminderLists[rowIndex]
-        reminderListID = selectedList.calendarIdentifier
-        println("w156 reminderListID \(reminderListID)")
-        
-        self.reminderItemsGroup.setHidden(false)  //show lower table2
-        self.reminderListsGroup.setHidden(true)  //hide lists
-        self.navBarGroup.setHidden(true)  //hide lists
+        if table == self.table {
+            let selectedList = allReminderLists[rowIndex]
+            reminderListID = selectedList.calendarIdentifier
+            println("w156 reminderListID \(reminderListID)")
+            
+            self.reminderItemsGroup.setHidden(false)  //show lower table2
+            self.reminderListsGroup.setHidden(true)  //hide lists
+            self.navBarGroup.setHidden(true)  //hide lists
 
-        self.loadTableData2()
-
-   
-        //code goes here
-        //presentControllerWithName("Info", context: context)
+            self.loadTableData2()
+        } else {
+            var selectedRow:Int! = nil
+            
+            selectedRow = rowIndex //for use with insert and delete, save selcted row index
+            let itemRow = self.table2.rowControllerAtIndex(rowIndex) as! ReminderItemsTableRC
+            let reminderItem = allReminders[rowIndex]
+            let veryDarkGray = UIColor(red: 128, green: 128, blue: 128)     //light biege color, for Word List
+            
+            if self.checked {               // Turn checkmark off
+                itemRow.imageCheckbox.setImageNamed("cbBlank40px")
+                itemRow.tableRowLabel.setTextColor(UIColor.whiteColor())
+                reminderItem.completed == false
+                self.checked = false
+                
+                var alertSound1: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("beep-08b", ofType: "mp3")!)!
+                
+                self.playSound(alertSound1)
+            } else {                        // Turn checkmark on
+                itemRow.imageCheckbox.setImageNamed("cbChecked40px")
+                itemRow.tableRowLabel.setTextColor(veryDarkGray)
+                
+                var alertSound1: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("124-DeleteWhoosh", ofType: "mp3")!)!
+                //TODO Mike TODO Anil fix sound call.
+                //DictateManagerIC.sharedInstance.playSound(alertSound1)
+                
+                self.playSound(alertSound1)
+                //self.labelShowCompleted.setText("Item Completed")
+                //self.labelShowCompleted.setTextColor(UIColor.yellowColor())
+                
+                self.labelShowCompleted.setHidden(true)
+                self.labelCompleted.setHidden(false)
+                
+                General().delay(3.0) {          // do stuff
+                    self.labelShowCompleted.setHidden(false)
+                    self.labelCompleted.setHidden(true)
+                   // self.labelShowCompleted.setText("Show Completed")
+                    //self.labelShowCompleted.setTextColor(self.reminderListColor)
+                }
+                 
+                println("w305 reminderItem: \(reminderItem)")
+                println("w306 reminderItem.completed: \(reminderItem.completed)")
+                
+                reminderItem.completed = true
+          
+                ReminderManager.sharedInstance.saveReminder(reminderItem)
+                
+                println("w325 reminderItem.completed: \(reminderItem.completed)")
+                
+                self.checked = true
+            }
+        }   //end else if table
     }
-/*
-    override func table2(table2: WKInterfaceTable, didSelectRowAtIndex rowIndex: Int) {
-        println("w119 clicked on row: \(rowIndex)")
-        
-        var selectedRow:Int! = nil
-
-        selectedRow = rowIndex //for use with insert and delete, save selcted row index
-        let itemRow = self.table.rowControllerAtIndex(rowIndex) as! ReminderItemsTableRC
-        let reminderItem = allReminders[rowIndex]
-        let veryDarkGray = UIColor(red: 128, green: 128, blue: 128)     //light biege color, for Word List
-        
-        if self.checked {               // Turn checkmark off
-            itemRow.imageCheckbox.setImageNamed("cbBlank40px")
-            itemRow.tableRowLabel.setTextColor(UIColor.whiteColor())
-            reminderItem.completed == false
-            self.checked = false
-        } else {                        // Turn checkmark on
-            itemRow.imageCheckbox.setImageNamed("cbChecked40px")
-            itemRow.tableRowLabel.setTextColor(veryDarkGray)
-            reminderItem.completed == true
-            self.checked = true
-        }
-        
-        //ReminderManager.sharedInstance.eventStore.saveCalendar(reminder?.calendar, commit: true, error: nil)
-        
-        // gameRow.rowLabel.setText(object["name"] as? String)
-        
-        // table.tableRowLabel.setBackgroundColor(UIColor.yellowColor)
-        
-        //to remove an item from array if clicked row.
-        /*      reminderLists.removeAtIndex(rowIndex)
-        defaults?.setObject(reminderLists,forKey: "allRemindersHardcoded")
-        defaults?.synchronize()
-        
-        // from tutorial: build a context for the data
-        //   var avgPace = RunData.paceSeconds(runData.avgPace(rowIndex))
-        //  let context: AnyObject = avgPace as AnyObject
-        //  presentControllerWithName("Info", context: context) //present the viewcontroller
-        */
-        
-        //loadTableData()     //reload table after item is deleted
-        println("p93 he here?")
-    }
-    
-*/
 
    // override func contextForSegueWithIdentifier(segueIdentifier: String, inTable table: WKInterfaceTable, rowIndex: Int) -> AnyObject? {
  /*  // removed for 2 table scene
@@ -350,6 +363,15 @@ class ReminderListsIC: WKInterfaceController {
         return nil
     }
 */
+    
+    func playSound(sound: NSURL){
+        var error:NSError?
+        self.audioPlayer = AVAudioPlayer(contentsOfURL: sound, error: &error)
+        self.audioPlayer.prepareToPlay()
+        //player.delegate = self player.play()
+        //audioPlayer.delegate = self
+        self.audioPlayer.play()
+    }
     
 
     override func didDeactivate() {

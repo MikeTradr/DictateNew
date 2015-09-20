@@ -34,6 +34,20 @@
 		D323505F1B697B0200939F03 /* DictateCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D323505D1B697B0200939F03 /* DictateCode.swift */; };
 		D32350621B69828900939F03 /* ReminderCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32350611B69828900939F03 /* ReminderCode.swift */; };
 		D32350631B69828900939F03 /* ReminderCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32350611B69828900939F03 /* ReminderCode.swift */; };
+		D3348D041BAE4CFD0056792D /* 124-DeleteWhoosh.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D3348D031BAE4CFD0056792D /* 124-DeleteWhoosh.mp3 */; };
+		D3348D051BAE4D130056792D /* 122-whoosh03.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ECB861E61B77DCB000503C50 /* 122-whoosh03.mp3 */; };
+		D3348D061BAE4D160056792D /* 212-buttonclick52.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ECB861E81B77DCB000503C50 /* 212-buttonclick52.mp3 */; };
+		D3348D071BAE4D1A0056792D /* 217-buttonclick03.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ECB861E91B77DCB000503C50 /* 217-buttonclick03.mp3 */; };
+		D3348D081BAE4D1D0056792D /* 218-buttonclick54.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ECB861EA1B77DCB000503C50 /* 218-buttonclick54.mp3 */; };
+		D3348D091BAE4D200056792D /* 262-buttonclick57.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ECB861EB1B77DCB000503C50 /* 262-buttonclick57.mp3 */; };
+		D3348D0A1BAE4D230056792D /* 289-SimpleBeep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ECB861EC1B77DCB000503C50 /* 289-SimpleBeep.mp3 */; };
+		D3348D0B1BAE4D270056792D /* beep-08b.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ECB861ED1B77DCB000503C50 /* beep-08b.mp3 */; };
+		D3348D0C1BAE4D2A0056792D /* Beep2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ECB861EE1B77DCB000503C50 /* Beep2.mp3 */; };
+		D3348D0D1BAE4D2D0056792D /* button-14.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ECB861EF1B77DCB000503C50 /* button-14.mp3 */; };
+		D3348D0E1BAE4D300056792D /* button-43.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ECB861F01B77DCB000503C50 /* button-43.mp3 */; };
+		D3348D0F1BAE4D330056792D /* se_tap.m4a in Resources */ = {isa = PBXBuildFile; fileRef = ECB861F11B77DCB000503C50 /* se_tap.m4a */; };
+		D3348D111BAE4D3C0056792D /* 124-DeleteWhoosh.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D3348D101BAE4D3C0056792D /* 124-DeleteWhoosh.mp3 */; };
+		D3348D121BAE4D3C0056792D /* 124-DeleteWhoosh.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D3348D101BAE4D3C0056792D /* 124-DeleteWhoosh.mp3 */; };
 		D33C13BB1B8C1EC900470F8F /* ToDoMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33C13BA1B8C1EC900470F8F /* ToDoMenuViewController.swift */; };
 		D33C13BD1B8C3CCB00470F8F /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33C13BC1B8C3CCB00470F8F /* SettingsTableViewController.swift */; };
 		D33C13BF1B8C47E800470F8F /* SettingsCalendarTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33C13BE1B8C47E800470F8F /* SettingsCalendarTableViewController.swift */; };
@@ -107,7 +121,6 @@
 		ECB861E21B77DBB700503C50 /* SwiftColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB861DE1B77DBB700503C50 /* SwiftColors.swift */; };
 		ECB861E31B77DBB700503C50 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB861DF1B77DBB700503C50 /* Utility.swift */; };
 		ECB861F21B77DCB000503C50 /* 122-whoosh03.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ECB861E61B77DCB000503C50 /* 122-whoosh03.mp3 */; };
-		ECB861F31B77DCB000503C50 /* 124-DeleteWhoosh.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ECB861E71B77DCB000503C50 /* 124-DeleteWhoosh.mp3 */; };
 		ECB861F41B77DCB000503C50 /* 212-buttonclick52.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ECB861E81B77DCB000503C50 /* 212-buttonclick52.mp3 */; };
 		ECB861F51B77DCB000503C50 /* 217-buttonclick03.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ECB861E91B77DCB000503C50 /* 217-buttonclick03.mp3 */; };
 		ECB861F61B77DCB000503C50 /* 218-buttonclick54.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ECB861EA1B77DCB000503C50 /* 218-buttonclick54.mp3 */; };
@@ -205,6 +218,8 @@
 		D31CB4B11BA28A1800EC5418 /* SettingsCalendarListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsCalendarListTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		D323505D1B697B0200939F03 /* DictateCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictateCode.swift; sourceTree = "<group>"; };
 		D32350611B69828900939F03 /* ReminderCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderCode.swift; sourceTree = "<group>"; };
+		D3348D031BAE4CFD0056792D /* 124-DeleteWhoosh.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "124-DeleteWhoosh.mp3"; sourceTree = "<group>"; };
+		D3348D101BAE4D3C0056792D /* 124-DeleteWhoosh.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "124-DeleteWhoosh.mp3"; sourceTree = "<group>"; };
 		D33C13BA1B8C1EC900470F8F /* ToDoMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ToDoMenuViewController.swift; path = ../ToDoMenuViewController.swift; sourceTree = "<group>"; };
 		D33C13BC1B8C3CCB00470F8F /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		D33C13BE1B8C47E800470F8F /* SettingsCalendarTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsCalendarTableViewController.swift; path = Views/SettingsCalendarTableViewController.swift; sourceTree = "<group>"; };
@@ -275,7 +290,6 @@
 		ECB861DE1B77DBB700503C50 /* SwiftColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftColors.swift; path = Utils/SwiftColors.swift; sourceTree = "<group>"; };
 		ECB861DF1B77DBB700503C50 /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utility.swift; path = Utils/Utility.swift; sourceTree = "<group>"; };
 		ECB861E61B77DCB000503C50 /* 122-whoosh03.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "122-whoosh03.mp3"; sourceTree = "<group>"; };
-		ECB861E71B77DCB000503C50 /* 124-DeleteWhoosh.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "124-DeleteWhoosh.mp3"; sourceTree = "<group>"; };
 		ECB861E81B77DCB000503C50 /* 212-buttonclick52.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "212-buttonclick52.mp3"; sourceTree = "<group>"; };
 		ECB861E91B77DCB000503C50 /* 217-buttonclick03.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "217-buttonclick03.mp3"; sourceTree = "<group>"; };
 		ECB861EA1B77DCB000503C50 /* 218-buttonclick54.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "218-buttonclick54.mp3"; sourceTree = "<group>"; };
@@ -528,6 +542,7 @@
 			isa = PBXGroup;
 			children = (
 				D33CAD031B74773500F59260 /* button-14.mp3 */,
+				D3348D031BAE4CFD0056792D /* 124-DeleteWhoosh.mp3 */,
 				D33CAD061B747EBE00F59260 /* se_tap.m4a */,
 			);
 			name = sounds;
@@ -695,7 +710,7 @@
 			isa = PBXGroup;
 			children = (
 				ECB861E61B77DCB000503C50 /* 122-whoosh03.mp3 */,
-				ECB861E71B77DCB000503C50 /* 124-DeleteWhoosh.mp3 */,
+				D3348D101BAE4D3C0056792D /* 124-DeleteWhoosh.mp3 */,
 				ECB861E81B77DCB000503C50 /* 212-buttonclick52.mp3 */,
 				ECB861E91B77DCB000503C50 /* 217-buttonclick03.mp3 */,
 				ECB861EA1B77DCB000503C50 /* 218-buttonclick54.mp3 */,
@@ -938,7 +953,6 @@
 			files = (
 				ECB861F81B77DCB000503C50 /* 289-SimpleBeep.mp3 in Resources */,
 				ECB861FB1B77DCB000503C50 /* button-14.mp3 in Resources */,
-				ECB861F31B77DCB000503C50 /* 124-DeleteWhoosh.mp3 in Resources */,
 				ECB861F41B77DCB000503C50 /* 212-buttonclick52.mp3 in Resources */,
 				ECB861F51B77DCB000503C50 /* 217-buttonclick03.mp3 in Resources */,
 				ECB861FA1B77DCB000503C50 /* Beep2.mp3 in Resources */,
@@ -952,6 +966,7 @@
 				D3188A7B1B6E9B4B00323DC0 /* ToDoTableViewCell.xib in Resources */,
 				ECB861FD1B77DCB000503C50 /* se_tap.m4a in Resources */,
 				D3F8ACF51B696FB00070C097 /* LaunchScreen.xib in Resources */,
+				D3348D111BAE4D3C0056792D /* 124-DeleteWhoosh.mp3 in Resources */,
 				D3188A751B6E9B1500323DC0 /* CustomTableViewCell.xib in Resources */,
 				D355D97C1BA7DD3F00DADD72 /* Main.storyboard in Resources */,
 				D3F8ACF21B696FB00070C097 /* Images.xcassets in Resources */,
@@ -969,10 +984,23 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3348D061BAE4D160056792D /* 212-buttonclick52.mp3 in Resources */,
 				D3F8AD1A1B696FCD0070C097 /* Images.xcassets in Resources */,
+				D3348D091BAE4D200056792D /* 262-buttonclick57.mp3 in Resources */,
+				D3348D041BAE4CFD0056792D /* 124-DeleteWhoosh.mp3 in Resources */,
+				D3348D0C1BAE4D2A0056792D /* Beep2.mp3 in Resources */,
+				D3348D0D1BAE4D2D0056792D /* button-14.mp3 in Resources */,
+				D3348D0F1BAE4D330056792D /* se_tap.m4a in Resources */,
 				D33CAD081B747EBE00F59260 /* se_tap.m4a in Resources */,
+				D3348D0B1BAE4D270056792D /* beep-08b.mp3 in Resources */,
 				D33CAD051B74773500F59260 /* button-14.mp3 in Resources */,
 				D3F8AD1E1B696FCD0070C097 /* Dictate WatchKit App.app in Resources */,
+				D3348D0E1BAE4D300056792D /* button-43.mp3 in Resources */,
+				D3348D121BAE4D3C0056792D /* 124-DeleteWhoosh.mp3 in Resources */,
+				D3348D081BAE4D1D0056792D /* 218-buttonclick54.mp3 in Resources */,
+				D3348D051BAE4D130056792D /* 122-whoosh03.mp3 in Resources */,
+				D3348D0A1BAE4D230056792D /* 289-SimpleBeep.mp3 in Resources */,
+				D3348D071BAE4D1A0056792D /* 217-buttonclick03.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

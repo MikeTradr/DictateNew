@@ -1,6 +1,6 @@
 //
 //  vcTest1.swift
-//  WatchInput
+//  Dictate
 //
 //  Created by Mike Derr on 6/14/15.
 //  Copyright (c) 2015 ThatSoft.com. All rights reserved.

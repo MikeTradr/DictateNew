@@ -47,7 +47,10 @@ class ReminderListsIC: WKInterfaceController {
     
     //@IBOutlet weak var labelReminderListID: WKInterfaceLabel!
     
+    //@IBOutlet weak var labelReminderListID: WKInterfaceLabel!
     @IBOutlet weak var labelReminderListID: WKInterfaceLabel!
+    
+    //@IBOutlet weak var verticalBar2: WKInterfaceGroup!
     
     @IBOutlet weak var verticalBar2: WKInterfaceGroup!
     @IBOutlet weak var labelShowCompleted: WKInterfaceLabel!
@@ -62,6 +65,19 @@ class ReminderListsIC: WKInterfaceController {
     @IBOutlet weak var backToReminders: WKInterfaceGroup!
     
 //---- funcs below here -----------------------------------------------------------
+    
+    @IBAction func backToRemindersNew() {
+        reminderListsGroup.setHidden(false)     //show lists
+        reminderItemsGroup.setHidden(true)      //Hide lower table2
+        navBarGroup.setHidden(false)            //show  navBar
+        showListsView = true
+        //self.loadTableData()
+        self.setTitle("Reminders")
+        
+    }
+    
+    
+    
     
     @IBAction func buttonBackToReminders() {
         reminderListsGroup.setHidden(false)     //show lists
@@ -101,9 +117,7 @@ class ReminderListsIC: WKInterfaceController {
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         // Configure interface objects here.
-
         NSLog("%@ w193 awakeWithContext", self)
-        
         println("w105 RemindersIC awakeWithContext")
 
    /*
@@ -197,9 +211,9 @@ class ReminderListsIC: WKInterfaceController {
                 let row = table.rowControllerAtIndex(index) as! ReminderListsTableRC
                 let reminderList = allReminderLists[index]
                 println("w146 reminderList: \(reminderList)")
-                
+ /*
                 //TODO Mike TODO Anil  this crashes watch used to work!!!!!!!
-  /*
+  
                 // get count or items in each reminder list and set the Text Label
                 ReminderManager.sharedInstance.fetchCalendarReminders(reminderList) { (reminders) -> Void in
                     println("w148 reminders: \(reminders)")
@@ -331,8 +345,10 @@ class ReminderListsIC: WKInterfaceController {
                     self.labelCompleted.setHidden(true)
                    // self.labelShowCompleted.setText("Show Completed")
                     //self.labelShowCompleted.setTextColor(self.reminderListColor)
+                    //TODO good to do this???
+                    self.loadTableData2()    //refresh table2 after item completed
                 }
-                 
+                
                 println("w305 reminderItem: \(reminderItem)")
                 println("w306 reminderItem.completed: \(reminderItem.completed)")
                 

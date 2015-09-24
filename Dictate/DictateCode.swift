@@ -1298,6 +1298,7 @@ class DictateCode: NSObject {
                     
                     
                     //var arrayCalendars = ["work", "mike", "mom", "music", "steph"]
+
                     
                     var calendarArray = defaults.objectForKey("calendarArray") as! [String] //array of the items
                     

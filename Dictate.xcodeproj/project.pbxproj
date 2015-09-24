@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D306CDA81BB1315D00FD973F /* SetCalendarIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D306CDA71BB1315D00FD973F /* SetCalendarIC.swift */; };
 		D3089C651BA2713B00C58D6D /* SettingsReminderListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3089C641BA2713B00C58D6D /* SettingsReminderListTableViewCell.swift */; };
 		D3188A691B6E9AA700323DC0 /* MailComposer3.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3188A681B6E9AA700323DC0 /* MailComposer3.swift */; };
 		D3188A6A1B6E9AA700323DC0 /* MailComposer3.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3188A681B6E9AA700323DC0 /* MailComposer3.swift */; };
@@ -30,6 +31,8 @@
 		D3188A8B1B6E9C1100323DC0 /* vcTodayTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3188A8A1B6E9C1100323DC0 /* vcTodayTable.swift */; };
 		D31CB4B01BA2897500EC5418 /* CalendarPickerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31CB4AF1BA2897500EC5418 /* CalendarPickerTableViewController.swift */; };
 		D31CB4B21BA28A1800EC5418 /* SettingsCalendarListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31CB4B11BA28A1800EC5418 /* SettingsCalendarListTableViewCell.swift */; };
+		D31E1DB71BAEEA1700BC7B99 /* EventDetailsIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31E1DB61BAEEA1700BC7B99 /* EventDetailsIC.swift */; };
+		D31E1DB91BAEEA2A00BC7B99 /* EditEventDetailsIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31E1DB81BAEEA2A00BC7B99 /* EditEventDetailsIC.swift */; };
 		D323505E1B697B0200939F03 /* DictateCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D323505D1B697B0200939F03 /* DictateCode.swift */; };
 		D323505F1B697B0200939F03 /* DictateCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D323505D1B697B0200939F03 /* DictateCode.swift */; };
 		D32350621B69828900939F03 /* ReminderCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32350611B69828900939F03 /* ReminderCode.swift */; };
@@ -59,6 +62,7 @@
 		D35588BC1BA937D20052892F /* ReminderItemsIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35588BB1BA937D20052892F /* ReminderItemsIC.swift */; };
 		D35588BE1BA938A00052892F /* ReminderItemsTableRC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35588BD1BA938A00052892F /* ReminderItemsTableRC.swift */; };
 		D355D97C1BA7DD3F00DADD72 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D355D97B1BA7DD3F00DADD72 /* Main.storyboard */; };
+		D3711F051BB04E0E00D19AE9 /* TestIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3711F041BB04E0E00D19AE9 /* TestIC.swift */; };
 		D3795E7A1B8DF927009D3DB5 /* SettingsEventTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3795E791B8DF927009D3DB5 /* SettingsEventTableViewController.swift */; };
 		D3795E7B1B8F654F009D3DB5 /* ReminderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF818621B84FAB70087ECAD /* ReminderManager.swift */; };
 		D38653F71BAA02F400B8CCBC /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38653F61BAA02F400B8CCBC /* EventManager.swift */; };
@@ -78,6 +82,7 @@
 		D3B703801B935AC200FA1DF0 /* SettingsReminderTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B7037F1B935AC200FA1DF0 /* SettingsReminderTableViewController.swift */; };
 		D3B703821B94E90800FA1DF0 /* ReminderListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B703811B94E90800FA1DF0 /* ReminderListTableViewController.swift */; };
 		D3BD1BDE1B9F3CF10052A312 /* ReminderPickerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BD1BDD1B9F3CF10052A312 /* ReminderPickerTableViewController.swift */; };
+		D3BE2D2B1BB1287C00376686 /* EventEditNotesIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BE2D2A1BB126EA00376686 /* EventEditNotesIC.swift */; };
 		D3D98AF41BA54D5B00BA1901 /* FavoritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D98AF31BA54D5B00BA1901 /* FavoritesManager.swift */; };
 		D3D98AF51BA54D5B00BA1901 /* FavoritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D98AF31BA54D5B00BA1901 /* FavoritesManager.swift */; };
 		D3DA3ACE1BAE73F4002FDD21 /* TodayEventsTableRC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA3ACD1BAE73F4002FDD21 /* TodayEventsTableRC.swift */; };
@@ -205,6 +210,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D306CDA71BB1315D00FD973F /* SetCalendarIC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetCalendarIC.swift; sourceTree = "<group>"; };
 		D3089C641BA2713B00C58D6D /* SettingsReminderListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsReminderListTableViewCell.swift; path = ../SettingsReminderListTableViewCell.swift; sourceTree = "<group>"; };
 		D3188A681B6E9AA700323DC0 /* MailComposer3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MailComposer3.swift; sourceTree = "<group>"; };
 		D3188A6B1B6E9ADB00323DC0 /* MailComposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MailComposer.swift; sourceTree = "<group>"; };
@@ -224,6 +230,8 @@
 		D3188A8A1B6E9C1100323DC0 /* vcTodayTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = vcTodayTable.swift; sourceTree = "<group>"; };
 		D31CB4AF1BA2897500EC5418 /* CalendarPickerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarPickerTableViewController.swift; sourceTree = "<group>"; };
 		D31CB4B11BA28A1800EC5418 /* SettingsCalendarListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsCalendarListTableViewCell.swift; sourceTree = SOURCE_ROOT; };
+		D31E1DB61BAEEA1700BC7B99 /* EventDetailsIC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailsIC.swift; sourceTree = "<group>"; };
+		D31E1DB81BAEEA2A00BC7B99 /* EditEventDetailsIC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditEventDetailsIC.swift; sourceTree = "<group>"; };
 		D323505D1B697B0200939F03 /* DictateCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictateCode.swift; sourceTree = "<group>"; };
 		D32350611B69828900939F03 /* ReminderCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderCode.swift; sourceTree = "<group>"; };
 		D3348D031BAE4CFD0056792D /* 124-DeleteWhoosh.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "124-DeleteWhoosh.mp3"; sourceTree = "<group>"; };
@@ -237,6 +245,7 @@
 		D35588BB1BA937D20052892F /* ReminderItemsIC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderItemsIC.swift; sourceTree = "<group>"; };
 		D35588BD1BA938A00052892F /* ReminderItemsTableRC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderItemsTableRC.swift; sourceTree = "<group>"; };
 		D355D97B1BA7DD3F00DADD72 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		D3711F041BB04E0E00D19AE9 /* TestIC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestIC.swift; sourceTree = "<group>"; };
 		D3795E791B8DF927009D3DB5 /* SettingsEventTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsEventTableViewController.swift; path = Views/SettingsEventTableViewController.swift; sourceTree = "<group>"; };
 		D38653F61BAA02F400B8CCBC /* EventManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventManager.swift; sourceTree = "<group>"; };
 		D38C9C551B821DA3009CFC7C /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
@@ -253,6 +262,7 @@
 		D3B7037F1B935AC200FA1DF0 /* SettingsReminderTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsReminderTableViewController.swift; path = Views/SettingsReminderTableViewController.swift; sourceTree = "<group>"; };
 		D3B703811B94E90800FA1DF0 /* ReminderListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReminderListTableViewController.swift; path = Views/ReminderListTableViewController.swift; sourceTree = "<group>"; };
 		D3BD1BDD1B9F3CF10052A312 /* ReminderPickerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderPickerTableViewController.swift; sourceTree = "<group>"; };
+		D3BE2D2A1BB126EA00376686 /* EventEditNotesIC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EventEditNotesIC.swift; path = ../EventEditNotesIC.swift; sourceTree = "<group>"; };
 		D3D98AF31BA54D5B00BA1901 /* FavoritesManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FavoritesManager.swift; path = Manager/FavoritesManager.swift; sourceTree = "<group>"; };
 		D3DA3ACD1BAE73F4002FDD21 /* TodayEventsTableRC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayEventsTableRC.swift; sourceTree = "<group>"; };
 		D3DA3AD21BAE8054002FDD21 /* ShowCalendarsIC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowCalendarsIC.swift; sourceTree = "<group>"; };
@@ -567,10 +577,10 @@
 			isa = PBXGroup;
 			children = (
 				D3E810871B70FEA0004AE5A9 /* SettingsIC.swift */,
-				D3DA3ADE1BAE8513002FDD21 /* CalendarSettingsIC.swift */,
 				D3DA3AE01BAE8521002FDD21 /* ReminderSettingsIC.swift */,
 				D34395711BA32964002D98EA /* ReminderListPickerIC.swift */,
 				D3DA3ADC1BAE84B2002FDD21 /* ReminderListTableRC.swift */,
+				D3DA3ADE1BAE8513002FDD21 /* CalendarSettingsIC.swift */,
 				D39AB89D1BA86D68001C7570 /* CalendarListPickerIC.swift */,
 				D3DA3ADA1BAE845C002FDD21 /* CalendarListTableRC.swift */,
 				D3DA3AD61BAE834B002FDD21 /* ShowRemindersIC.swift */,
@@ -601,6 +611,11 @@
 				D35588BD1BA938A00052892F /* ReminderItemsTableRC.swift */,
 				D3E810831B70F4BC004AE5A9 /* TodayIC.swift */,
 				D3DA3ACD1BAE73F4002FDD21 /* TodayEventsTableRC.swift */,
+				D31E1DB61BAEEA1700BC7B99 /* EventDetailsIC.swift */,
+				D31E1DB81BAEEA2A00BC7B99 /* EditEventDetailsIC.swift */,
+				D3BE2D2A1BB126EA00376686 /* EventEditNotesIC.swift */,
+				D306CDA71BB1315D00FD973F /* SetCalendarIC.swift */,
+				D3711F041BB04E0E00D19AE9 /* TestIC.swift */,
 			);
 			name = WKControllers;
 			path = "../Dictate WatchKit App";
@@ -1142,12 +1157,14 @@
 				D3E8108A1B710690004AE5A9 /* ReminderListsIC.swift in Sources */,
 				D38653F81BAA02F400B8CCBC /* EventManager.swift in Sources */,
 				D3188A6D1B6E9ADB00323DC0 /* MailComposer.swift in Sources */,
+				D31E1DB71BAEEA1700BC7B99 /* EventDetailsIC.swift in Sources */,
 				D3188A701B6E9AE400323DC0 /* MessageCode.swift in Sources */,
 				D3DA3AD31BAE8054002FDD21 /* ShowCalendarsIC.swift in Sources */,
 				D3B6F5F91BA60B7E0052B639 /* DictateManagerIC.swift in Sources */,
 				D3A0F9FD1B69F0BB00F1FEDA /* EventCode.swift in Sources */,
 				D3DA3ADF1BAE8513002FDD21 /* CalendarSettingsIC.swift in Sources */,
 				D3DA3ACE1BAE73F4002FDD21 /* TodayEventsTableRC.swift in Sources */,
+				D31E1DB91BAEEA2A00BC7B99 /* EditEventDetailsIC.swift in Sources */,
 				D3DA3ADB1BAE845C002FDD21 /* CalendarListTableRC.swift in Sources */,
 				D39AB89E1BA86D68001C7570 /* CalendarListPickerIC.swift in Sources */,
 				D323505F1B697B0200939F03 /* DictateCode.swift in Sources */,
@@ -1156,6 +1173,7 @@
 				D3F8AD141B696FCD0070C097 /* MainIC.swift in Sources */,
 				D3E810881B70FEA0004AE5A9 /* SettingsIC.swift in Sources */,
 				D35588BC1BA937D20052892F /* ReminderItemsIC.swift in Sources */,
+				D3711F051BB04E0E00D19AE9 /* TestIC.swift in Sources */,
 				D3188A6A1B6E9AA700323DC0 /* MailComposer3.swift in Sources */,
 				D32350631B69828900939F03 /* ReminderCode.swift in Sources */,
 				D3E810851B70F4BC004AE5A9 /* TodayIC.swift in Sources */,
@@ -1164,9 +1182,11 @@
 				D3DA3AD51BAE8066002FDD21 /* ShowCalendarsTableRC.swift in Sources */,
 				D3DA3AD71BAE834B002FDD21 /* ShowRemindersIC.swift in Sources */,
 				D3DA3ADD1BAE84B2002FDD21 /* ReminderListTableRC.swift in Sources */,
+				D306CDA81BB1315D00FD973F /* SetCalendarIC.swift in Sources */,
 				D3F8AD181B696FCD0070C097 /* GlanceController.swift in Sources */,
 				D3DA3AE11BAE8521002FDD21 /* ReminderSettingsIC.swift in Sources */,
 				ECB861FE1B77DCDC00503C50 /* General.swift in Sources */,
+				D3BE2D2B1BB1287C00376686 /* EventEditNotesIC.swift in Sources */,
 				D3188A731B6E9AEF00323DC0 /* MessageComposer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1387,6 +1407,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Mike Derr (PVJ5825QRB)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mike Derr (PVJ5825QRB)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1396,9 +1417,11 @@
 				IBSC_MODULE = Dictate_WatchKit_Extension;
 				INFOPLIST_FILE = "Dictate WatchKit App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "1abcb096-9ebc-4b63-8096-3677b2af9199";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 4;
 				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
 			};
@@ -1408,11 +1431,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				IBSC_MODULE = Dictate_WatchKit_Extension;
 				INFOPLIST_FILE = "Dictate WatchKit App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "1abcb096-9ebc-4b63-8096-3677b2af9199";
 				SKIP_INSTALL = YES;

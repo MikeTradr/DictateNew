@@ -67,7 +67,11 @@ class SettingsIC: WKInterfaceController {
         println("p19 PreferencesIC")
         
         super.awakeWithContext(context)
-        self.setTitle(context as? String)
+        
+        var sceneTitle:String = (context as? String)!
+        self.setTitle("«\(sceneTitle)")
+        //self.setTitle("Settings")
+
 
         
     }

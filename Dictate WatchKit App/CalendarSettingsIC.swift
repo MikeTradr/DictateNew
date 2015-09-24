@@ -67,7 +67,9 @@ class CalendarSettingsIC: WKInterfaceController {
         println("p19 PreferencesIC")
         
         super.awakeWithContext(context)
-        self.setTitle(context as? String)
+        //self.setTitle(context as? String)
+        self.setTitle("«Settings")
+
 
         
     }

@@ -34,7 +34,7 @@ class EventManager: NSObject {
                 granted, error in
                 if (granted) && (error == nil) {
                     completion(granted: true)
-                }else{
+                } else {
                     completion(granted: false)
                 }
             })
@@ -55,24 +55,72 @@ class EventManager: NSObject {
                 let events = self.eventStore.eventsMatchingPredicate(predicate) as? [EKEvent]
                 if let _events = events{
                     completion(events!)
-                }else{
+                } else {
                 completion([])
                 }
-            }
-            else{
+                println("p66 events: \(events)")
+            }else{
                 completion([])
             }
         })
     }
+
+
+    func saveEvent(event:EKEvent) {
+    
+        println("p72 event: \(event)")
+        
+        var saveError: NSError? = nil // Initially sets errors to nil
+        
+        //let eventStore = EKEventStore()
+        
+        event
+        
+        eventStore.saveEvent(event, span: EKSpanThisEvent, error: &saveError)
+        
+        if saveError != nil {
+            println("p80 Saving EventItem to Calendar failed with error: \(saveError!)")
+        } else {
+            println("p91 Now Completed: '\(event.title)' to '\(event.calendar.title)' calendar.")
+        }
+    
+    }   // end func saveEvent
+   
+  /*
+    
+    getAccessToEventStoreForType(EKEntityTypeEvent, completion: { (granted) -> Void in
+        
+        if granted{
+            println("granted: \(granted)")
+            
+            var saveError: NSError? = nil // Initially sets errors to nil
+            
+            self.eventStore.saveEvent(eventItem, commit: true, error: &saveError)
+            
+            if saveError != nil {
+                println("p84 Saving EventItem to Calendar failed with error: \(saveError!)")
+            } else {
+                println("p91 Now Completed: '\(eventItem.title)' to '\(eventItem.calendar.title)' calendar.")
+            }
+            
+        }
+    })
+
+*/
+    
+
 }
 
-    
-    
-    
+
+
+
+
+
+
  /*
-    
-    
-    
+
+
+
     func fetchCalendarLists(completion:([EKReminder])->Void) {
         
         getAccessToEventStoreForType(EKEntityTypeReminder, completion: { (granted) -> Void in

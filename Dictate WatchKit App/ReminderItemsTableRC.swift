@@ -15,6 +15,7 @@ class ReminderItemsTableRC: NSObject {
     @IBOutlet weak var tableRowLabel: WKInterfaceLabel!
     @IBOutlet weak var buttonCheckbox: WKInterfaceButton!
     @IBOutlet weak var verticalBar: WKInterfaceGroup!
+
     @IBOutlet weak var imageCheckbox: WKInterfaceImage!
         
 }

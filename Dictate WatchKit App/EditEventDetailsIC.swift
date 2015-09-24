@@ -1,5 +1,5 @@
 //
-//  TodayIC.swift
+//  EditEventDetailsIC.swift
 //  Dictate
 //
 //  Created by Mike Derr on 8/4/15.
@@ -13,19 +13,26 @@ import Parse
 import AVFoundation
 
 
-class TodayIC: WKInterfaceController {
+class EditEventDetailsIC: WKInterfaceController {
     
     let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
     
     var showCalendarsView:Bool = true
     var checked:Bool = false
-    var eventID:String = ""
-    var today:NSDate          = NSDate()
+    
+    var today:NSDate            = NSDate()
+   // var startDT:NSDate          = NSDate(dateString:"2014-12-12")
+//var endDT:NSDate            = NSDate(dateString:"2014-12-12")
     var todayPlusSeven:NSDate = NSDate()
-    var allEvents: Array<EKEvent> = []
-  
+    
+
+    
     @IBOutlet weak var labelDate: WKInterfaceLabel!
+    
     @IBOutlet weak var table: WKInterfaceTable!
+    
+   var allEvents: Array<EKEvent> = []
+    
     
 //---- funcs below here -----------------------------------------------------------
     
@@ -34,23 +41,28 @@ class TodayIC: WKInterfaceController {
         
         let dateHelper = JTDateHelper()
         let startDate =  NSDate()
-        let endDate = dateHelper.addToDate(startDate, days: 10)
+        let endDate = dateHelper.addToDate(startDate, days: 7)
         
         println("w46 startDate: \(startDate)")
         println("w46 endDate: \(endDate)")
+
+
+        
         
         EventManager.sharedInstance.fetchEventsFrom(startDate, endDate: endDate, completion: { (events) -> Void in
             self.allEvents = events
         })
         
         println("w56 self.allEvents: \(self.allEvents)")
+
         
     }
     
     
     @IBAction func menuDictate() {
         println("w16 force touch tapped, Dictate Item")
- 
+        
+
         var rawString:String = ""
         //TODO Anil need to call that func! lol thx Bro
       // let (startDT, endDT, output, outputNote, day, calendarName, actionType) = MainIC.grabvoice()
@@ -58,9 +70,7 @@ class TodayIC: WKInterfaceController {
     }
     
     
-    @IBAction func menuSettings() {
-        presentControllerWithName("Settings", context: "Events")
-    }
+    
     
 
     
@@ -103,6 +113,43 @@ class TodayIC: WKInterfaceController {
         self.loadTableData()
     }
     
+    func loadTableData () {
+        table.setNumberOfRows(allEvents.count, withRowType: "tableRow")
+        println("w46 allEvents.count: \(allEvents.count)")
+        
+        var dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "E, MMM d"
+        
+        let dateString = dateFormatter.stringFromDate(NSDate())
+   
+        self.labelDate.setText(dateString)
+        
+        for (index, title) in enumerate(allEvents) {
+            println("---------------------------------------------------")
+            println("w40 index, title: \(index), \(title)")
+            
+            let row = table.rowControllerAtIndex(index) as! TodayEventsTableRC
+            let item = allEvents[index]
+            
+            var dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "h:mm a"
+            let startTime = dateFormatter.stringFromDate(item.startDate)
+            let endTime = dateFormatter.stringFromDate(item.endDate)
+
+            let endTimeDash = "- \(endTime)"
+            
+            row.labelEventTitle.setText(item.title)
+            row.labelEventLocation.setText(item.location)
+            row.labelStartTime.setText(startTime)
+            row.labelEndTime.setText(endTimeDash)
+
+            //row.labelEventTitle.setTextColor(UIColor(CGColor: item.calendar.CGColor))
+            row.verticalBar.setBackgroundColor(UIColor(CGColor: item.calendar.CGColor))
+        }
+    }   //end loadTableData
+    
+    
+
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
@@ -116,78 +163,17 @@ class TodayIC: WKInterfaceController {
         //self.reminderItemsGroup.setHidden(false)  //Hide lower table2
         
         if showCalendarsView {
-            //  self.loadTableData()
+          //  self.loadTableData()
             println("w155 showListsView True")
         } else {
-            //   self.loadTableData2()
+         //   self.loadTableData2()
             println("w165 showListsView False")
         }
         
         loadTableData()
         
     }
-    
-    func loadTableData () {
-        table.setNumberOfRows(allEvents.count, withRowType: "tableRow")
-        println("w46 allEvents.count: \(allEvents.count)")
-        
-        for (index, title) in enumerate(allEvents) {
-        
-            println("---------------------------------------------------")
-            println("w40 index, title: \(index), \(title)")
-            
-            let row = table.rowControllerAtIndex(index) as! TodayEventsTableRC
-            let item = allEvents[index]
-            
-            var dateFormatter = NSDateFormatter()
-            dateFormatter.dateFormat = "E, MMM d"
-            
-            let dateString = dateFormatter.stringFromDate(item.startDate)
-            self.labelDate.setText(dateString)
-            
-            dateFormatter.dateFormat = "h:mm a"
-            
-            let startTimeA = dateFormatter.stringFromDate(item.startDate)
-            var startTime = startTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
-            NSLog("%@ w137", startTime)
 
-            let endTimeA = dateFormatter.stringFromDate(item.endDate)
-            var endTime = endTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
-
-            var endTimeDash = "- \(endTime)"
-            
-            if item.allDay {     // if allDay bool is true
-                startTime = ""
-                endTimeDash = "All Day"
-
-            }
-            
-            //TODO Mike TODO Anil All day event spanning multiple days does not show up on multiple days
-            
-            
-            row.labelEventTitle.setText(item.title)
-            row.labelEventLocation.setText(item.location)
-            row.labelStartTime.setText(startTime)
-            row.labelEndTime.setText(endTimeDash)
-
-            //row.labelEventTitle.setTextColor(UIColor(CGColor: item.calendar.CGColor))
-            row.verticalBar.setBackgroundColor(UIColor(CGColor: item.calendar.CGColor))
-        }
-    }   //end loadTableData
-    
-    
-    override func contextForSegueWithIdentifier(segueIdentifier: String, inTable table: WKInterfaceTable, rowIndex: Int) -> AnyObject? {
-        
-        if segueIdentifier == "EventDetails" {
-            let selectedEvent = allEvents[rowIndex]
-            eventID = selectedEvent.eventIdentifier
-            println("w113 eventID \(eventID)")
-        }
-        return eventID
-    }
-
-
-    
     override func didDeactivate() {
         // This method is called when watch view controller is no longer visible
         super.didDeactivate()

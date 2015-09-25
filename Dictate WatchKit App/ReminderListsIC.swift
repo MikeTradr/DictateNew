@@ -104,15 +104,47 @@ class ReminderListsIC: WKInterfaceController {
         self.setTitle("Reminders")
     }
     
+//---- Menu functions -------------------------------------------
     @IBAction func menuDictate() {
-        
-     //   let (startDT, endDT, output, outputNote, day, calendarName, actionType) = DictateManagerIC.sharedInstance.grabVoice()
-        
+        let (startDT, endDT, output, outputNote, day, calendarName, actionType) = DictateManagerIC.sharedInstance.grabVoice()
     }
     
     @IBAction func menuSettings() {
-         presentControllerWithName("Settings", context: "Reminders")
+        presentControllerWithName("Settings", context: "Reminders")
     }
+//---- end Menu functions ----------------------------------------
+    
+    override init() {
+        super.init()
+        
+        // Enable data sharing in app extensions.
+        Parse.enableDataSharingWithApplicationGroupIdentifier("group.com.thatsoft.dictateApp", containingApplication: "group.com.thatsoft.dictateApp")
+        
+        // Setup Parse
+        Parse.setApplicationId("1wwwPAQ0Of2Fp6flotUw4YzN64HFDmy3ijAlQZKE", clientKey: "EHeeek4uXhJQi0vXPBba945A4h0LQ4QddEGW8gSs")
+        
+           /*
+        //TODO FIX THIS BOMBS MIKE USED TO WORK  LOL
+        
+        Parse.enableLocalDatastore()
+        Parse.enableDataSharingWithApplicationGroupIdentifier("group.com.thatsoft.dictateApp",
+            containingApplication: "com.thatsoft.dictateApp")
+        Parse.setApplicationId("1wwwPAQ0Of2Fp6flotUw4YzN64HFDmy3ijAlQZKE",
+            clientKey: "EHeeek4uXhJQi0vXPBba945A4h0LQ4QddEGW8gSs")
+        PFUser.enableAutomaticUser()
+     
+       */
+        
+        // other init code, Parse queries, etc here
+        
+        
+        
+        
+        
+        
+    }
+    
+
 
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
@@ -123,7 +155,7 @@ class ReminderListsIC: WKInterfaceController {
    /*
         //TODO FIX THIS BOMBS MIKE USED TO WORK  LOL
         
-        Parse.enableLocalDatastore()
+       // Parse.enableLocalDatastore()
         //  PFUser.enableAutomaticUser()
         
         // Enable data sharing in app extensions.
@@ -135,7 +167,7 @@ class ReminderListsIC: WKInterfaceController {
             clientKey: "EHeeek4uXhJQi0vXPBba945A4h0LQ4QddEGW8gSs")
         
         PFUser.enableAutomaticUser()
- */       
+   */
         //get Access to Reminders
         NSLog("%@ w60 appDelegate", self)
         println("w61 call getAccessToEventStoreForType")
@@ -182,6 +214,7 @@ class ReminderListsIC: WKInterfaceController {
             println("w165 showListsView False")
         }
   
+        //DictateManagerIC.sharedInstance.initalizeParse()
         
     }
  
@@ -211,7 +244,7 @@ class ReminderListsIC: WKInterfaceController {
                 let row = table.rowControllerAtIndex(index) as! ReminderListsTableRC
                 let reminderList = allReminderLists[index]
                 println("w146 reminderList: \(reminderList)")
- /*
+  /*
                 //TODO Mike TODO Anil  this crashes watch used to work!!!!!!!
   
                 // get count or items in each reminder list and set the Text Label
@@ -243,7 +276,7 @@ class ReminderListsIC: WKInterfaceController {
     
     func loadTableData2 () {
         
-        self.setTitle("Items")
+        self.setTitle("")
 
         showListsView = false   //set flag when awakes to go to view user was in
         

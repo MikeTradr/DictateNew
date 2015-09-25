@@ -35,6 +35,16 @@ class ReminderItemsIC: WKInterfaceController {
         
        // loadTableData()
     }
+    
+//---- Menu functions -------------------------------------------
+    @IBAction func menuDictate() {
+        let (startDT, endDT, output, outputNote, day, calendarName, actionType) = DictateManagerIC.sharedInstance.grabVoice()
+    }
+    
+    @IBAction func menuSettings() {
+        presentControllerWithName("Settings", context: "«ShowReminders")
+    }
+//---- end Menu functions ----------------------------------------
   
     func loadTableData () {
         

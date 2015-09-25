@@ -91,11 +91,24 @@ let str40:String = "11 am test after restore"
 
 let str41:String = "reminder buy milk"
 
+let str42:String = "Tomorrow 9 PM Band calendar Mike duration 4 hours "
 
+let str43:String = "Tomorrow 9 PM at Essen Haus Josh Becker Band calendar Mike duration 4 hours "
 
+/*    ADD TEST THESE make them work...TODO Mike
+
+“meeting with Bob every Wednesday at 2:00 PM”
+
+add to dictate str   “meeting with Bob every Wednesday at noon”  //handle word noon as 12:00 pm
+
+“meeting with Bob every month at 2:00 PM Wednesday”
+
+“meeting with Bob every year at 2:00 PM July 3"
+
+*/
 
 // ---- change strings here for testing, shows on the dictated field---
-//var str:String = str41
+//var str:String = str42
 var str:String = ""
 
 //var strRaw:String = str

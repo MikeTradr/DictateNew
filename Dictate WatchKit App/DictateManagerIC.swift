@@ -92,10 +92,12 @@ class DictateManagerIC: WKInterfaceController {
     var audioPlayer = AVAudioPlayer()
 
     
-    func grabvoice() -> (NSDate, NSDate, String, String, String, String, String)  {  //startDT, endDT, output, outputNote, day, calendarName, actionType
+    func grabVoice() -> (NSDate, NSDate, String, String, String, String, String)  {  //startDT, endDT, output, outputNote, day, calendarName, actionType
         //added actionType above
         
-        var rawString = ""
+       // initalizeParse()
+        
+        var rawString:String    = ""
         var fullDT:String       = ""
         var fullDTEnd:String    = ""
         
@@ -120,8 +122,7 @@ class DictateManagerIC: WKInterfaceController {
             
             rawString = self.str
             
-           // self.myLabel.setText(self.str)
-            
+            // self.myLabel.setText(self.str)
             //let (startDT, endDT, outputNote) = self.parse(self.str)
             
             if results != nil {
@@ -144,66 +145,17 @@ class DictateManagerIC: WKInterfaceController {
                     fullDTEnd = ""
                 }
                 
-                
                 println("p164 startDT: \(startDT)")
-                
-                // self.eventStartDT = startDT
-                //  self.eventEndDT = endDT
-  /*
-                self.startDT = startDT
-                self.endDT = endDT
-                self.output = output
-                self.outputNote = outputNote
-                self.day = day
-                self.calendarName = calendarName
-                
-                if actionType == "Reminder" {
-                    println("p181 actionType setColor: \(actionType)")
-                    
-                    self.resultType.setTextColor(UIColor.yellowColor())
-                }
-                
-                if actionType == "Event" {
-                    self.resultType.setTextColor(UIColor.orangeColor())
-                }
-                
-                
-                self.resultType.setText("type: \(actionType)")
-                self.resultDay.setText("day: \(day)")
-                self.resultStart.setText("start: \(fullDT)")
-                self.resultEnd.setText("  end: \(fullDTEnd)")
-                self.resultPhone.setText("cell: \(phone)")
-                self.resultCalendar.setText("cal.: \(calendarName)")
-                
-                self.groupButtons.setHidden(false)
-                self.groupResults.setHidden(false)
-                self.groupNavigation.setHidden(true)
-                
-                self.buttonMicrophone.setHidden(true)
-                
-                
-                
-                
-                
-                //completion(“we finished!”)
-                
-            } else {
-                println("p192 No objects")
-                self.myLabel.setText("Tap Mic to dictate or force touch")
-            }
-                */
             }
         })
+        
+        
    
         println("p204 str: \(self.str)")
         println("p205 rawString: \(rawString)")
-        //println("### 115 output: \(output)")
-      //  println("p207 actionType: \(actionType)")
-        
-        //self.actionType = "Event"
-        
-        
-        //return self.str
+        // println("### 115 output: \(output)")
+        // println("p207 actionType: \(actionType)")
+
         return (startDT, endDT, output, outputNote, day, calendarName, actionType)
         
     }   //end func grabvoice
@@ -240,9 +192,9 @@ class DictateManagerIC: WKInterfaceController {
     }
  */
     
-    func initalizeParse () {
+    func initalizeParse() {
         
-        println("w207 in DictateManagerIC: initalizeParse")
+        println("w107 in DictateManagerIC: initalizeParse")
 
         Parse.enableLocalDatastore()
         //  PFUser.enableAutomaticUser()

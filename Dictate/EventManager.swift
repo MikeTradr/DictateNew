@@ -85,6 +85,24 @@ class EventManager: NSObject {
         }
     
     }   // end func saveEvent
+    
+    
+    func getLocalEventCalendars() -> [AnyObject] {
+        var allCalendars: Array<EKCalendar> = EKEventStore().calendarsForEntityType(EKEntityTypeEvent) as! Array<EKCalendar>
+       // var localCalendars: [AnyObject] = NSMutableArray() as [AnyObject]
+        var localCalendars: [EKCalendar] = []
+
+        for var i = 0; i < allCalendars.count; i++ {
+            var currentCalendar: EKCalendar = allCalendars[i]
+            
+            //TODO Anil TODO Mike  error below: Binary operator '==' cannot be applied to two EKCalendarType operands
+           // if currentCalendar.type == EKCalendarTypeLocal {
+           //     localCalendars.addObject(currentCalendar)
+           // }
+            
+        }
+        return localCalendars
+    }
    
   /*
     

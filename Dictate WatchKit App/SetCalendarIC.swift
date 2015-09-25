@@ -25,11 +25,26 @@ class SetCalendarIC: WKInterfaceController {
     
     let allCalendarLists: Array<EKCalendar> = EKEventStore().calendarsForEntityType(EKEntityTypeEvent) as! Array<EKCalendar>
     
+//---- Menu functions -------------------------------------------
+    @IBAction func menuDictate() {
+        let (startDT, endDT, output, outputNote, day, calendarName, actionType) = DictateManagerIC.sharedInstance.grabVoice()
+    }
+    
+    @IBAction func menuSettings() {
+        presentControllerWithName("Settings", context: "«Events")
+    }
+//---- end Menu functions ----------------------------------------
+    
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
         NSLog("%@ will activate", self)
         println("p93 in ReminderListPickerIC willActivate")
+        
+       // var sceneTitle:String = (context as? String)!
+        //self.setTitle("«\(sceneTitle)")
+        self.setTitle("«Event Details")
+
         
         // loadTableData()
     }
@@ -42,7 +57,7 @@ class SetCalendarIC: WKInterfaceController {
             println("---------------------------------------------------")
             println("w40 index, title: \(index), \(title)")
             
-            let row = table.rowControllerAtIndex(index) as! CalendarListTableRC
+            let row = table.rowControllerAtIndex(index) as! SetCalendarTableRC
             let item = allCalendarLists[index]
             
             row.tableRowLabel.setText(item.title)
@@ -69,7 +84,7 @@ class SetCalendarIC: WKInterfaceController {
         println("w116 clicked on row: \(rowIndex)")
         
         selectedRow = rowIndex //for use with insert and delete, save selcted row index
-        let itemRow = self.table.rowControllerAtIndex(rowIndex) as! CalendarListTableRC
+        let itemRow = self.table.rowControllerAtIndex(rowIndex) as! SetCalendarTableRC
         
         if self.checked {               // Turn checkmark off
             itemRow.imageCheckbox.setImageNamed("cbBlank40px")

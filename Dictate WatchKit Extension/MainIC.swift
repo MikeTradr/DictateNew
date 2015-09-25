@@ -289,24 +289,16 @@ class MainIC: WKInterfaceController {
     
 //---- End my General functions ----------------------------------------
     
-    
+//---- Menu functions -------------------------------------------
     @IBAction func menuDictate() {
-        println("p246 force touch tapped, Dictate Item")
-        
-        var rawString:String = ""
-        
-        let (startDT, endDT, output, outputNote, day, calendarName, actionType) = grabvoice()
-        
-        //TODO Anil can we call the manager type ????
-    //    let (startDT, endDT, output, outputNote, day, calendarName, actionType) = DictateManagerIC.sharedInstance.grabVoice()
-        
+        let (startDT, endDT, output, outputNote, day, calendarName, actionType) = DictateManagerIC.sharedInstance.grabVoice()
     }
-    
     
     @IBAction func menuSettings() {
         presentControllerWithName("Settings", context: "Dictate")
     }
-    
+//---- end Menu functions ----------------------------------------
+
     
     @IBAction func buttonMic() {
         
@@ -485,10 +477,14 @@ class MainIC: WKInterfaceController {
 
         //TODO get this from login Screen, hard coded for now...
         
+        //rawDataObject["userName"] = "Mike Watch H.Coded"
+
         println("p349 PFUser.currentUser(): \(PFUser.currentUser())")
         
         if PFUser.currentUser() == nil {
-            rawDataObject["userName"] = "Mike Watch H.Coded"
+            println("p483 we in here? PFUser.currentUser(): \(PFUser.currentUser())")
+            rawDataObject["userName"] = "Watch User"
+            
         } else {
             rawDataObject["userName"] = PFUser.currentUser()?.username
         }
@@ -504,9 +500,13 @@ class MainIC: WKInterfaceController {
         
         // rawDataObject["userEmail"] = PFUser.currentUser()?.email
         
+        var error:NSError? = nil
+
         rawDataObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
-            println("p362 vcTest1 rawDataObject has been saved.")
+            println("p502 vcTest1 rawDataObject has been saved.")
         }
+        
+         println("p505 Parse save Error: \(error)")
         
 //---- End Save to Parse Database ----------------------------------------
         

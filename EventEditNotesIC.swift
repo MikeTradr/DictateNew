@@ -34,6 +34,17 @@ class EventEditNotesIC: WKInterfaceController {
     @IBOutlet weak var groupClickHere: WKInterfaceGroup!
     @IBOutlet weak var groupNotesText: WKInterfaceGroup!
     
+    
+//---- Menu functions -------------------------------------------
+    @IBAction func menuDictate() {
+        let (startDT, endDT, output, outputNote, day, calendarName, actionType) = DictateManagerIC.sharedInstance.grabVoice()
+    }
+    
+    @IBAction func menuSettings() {
+        presentControllerWithName("Settings", context: "«Details")
+    }
+//---- end Menu functions ----------------------------------------
+    
     @IBAction func buttonGroupMic() {
       
         var alertSound1: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("button-14", ofType: "mp3")!)!

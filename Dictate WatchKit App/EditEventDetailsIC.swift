@@ -59,15 +59,15 @@ class EditEventDetailsIC: WKInterfaceController {
     }
     
     
+//---- Menu functions -------------------------------------------
     @IBAction func menuDictate() {
-        println("w16 force touch tapped, Dictate Item")
-        
-
-        var rawString:String = ""
-        //TODO Anil need to call that func! lol thx Bro
-      // let (startDT, endDT, output, outputNote, day, calendarName, actionType) = MainIC.grabvoice()
-  
+        let (startDT, endDT, output, outputNote, day, calendarName, actionType) = DictateManagerIC.sharedInstance.grabVoice()
     }
+    
+    @IBAction func menuSettings() {
+        presentControllerWithName("Settings", context: "«Details")
+    }
+//---- end Menu functions ----------------------------------------
     
     
     

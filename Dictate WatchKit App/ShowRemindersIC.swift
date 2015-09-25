@@ -55,7 +55,10 @@ class ShowRemindersIC: WKInterfaceController {
         println("p19 ReminderListPickerIC")
         println("-----------------------------------------")
 
-       //TODO Anil TODO Mike needed? or willActivate instead?
+        //var sceneTitle:String = (context as? String)!
+        self.setTitle("«Settings")
+        
+        //TODO Anil TODO Mike needed? or willActivate instead?
         loadTableData()
     }
     

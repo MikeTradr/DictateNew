@@ -21,8 +21,12 @@ class CalendarListPickerIC: WKInterfaceController {
 
     @IBOutlet weak var table: WKInterfaceTable!
     
-    let allCalendarLists: Array<EKCalendar> = EKEventStore().calendarsForEntityType(EKEntityTypeEvent) as! Array<EKCalendar>
     
+    //TODO call from EventManager get local calendars
+   // let allCalendarLists: Array<EKCalendar> = EventManager.sharedInstance.getLocalEventCalendars()
+    
+    let allCalendarLists: Array<EKCalendar> = EKEventStore().calendarsForEntityType(EKEntityTypeEvent) as! Array<EKCalendar>
+   
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
@@ -40,7 +44,7 @@ class CalendarListPickerIC: WKInterfaceController {
             println("---------------------------------------------------")
             println("w40 index, title: \(index), \(title)")
             
-            let row = table.rowControllerAtIndex(index) as! CalendarListTableRC
+            let row = table.rowControllerAtIndex(index) as! DefaultCalendarListTableRC
             let item = allCalendarLists[index]
             
             row.tableRowLabel.setText(item.title)
@@ -54,8 +58,11 @@ class CalendarListPickerIC: WKInterfaceController {
         // Configure interface objects here.
         println("p19 ReminderListPickerIC")
         println("-----------------------------------------")
-
-       //TODO Anil TODO Mike needed? or willActivate instead?
+        
+        var sceneTitle:String = (context as? String)!
+        self.setTitle("«\(sceneTitle)")
+       
+        //TODO Anil TODO Mike needed? or willActivate instead?
         loadTableData()
     }
     
@@ -63,7 +70,7 @@ class CalendarListPickerIC: WKInterfaceController {
         println("w116 clicked on row: \(rowIndex)")
         
         selectedRow = rowIndex //for use with insert and delete, save selcted row index
-        let itemRow = self.table.rowControllerAtIndex(rowIndex) as! CalendarListTableRC
+        let itemRow = self.table.rowControllerAtIndex(rowIndex) as! DefaultCalendarListTableRC
   
         if self.checked {               // Turn checkmark off
             itemRow.imageCheckbox.setImageNamed("cbBlank40px")

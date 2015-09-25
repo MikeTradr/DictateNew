@@ -523,7 +523,9 @@ class ReminderManager: NSObject {
         
         let calender = EKCalendar(forEntityType: EKEntityTypeEvent , eventStore: self.eventStore)
         println("p418 calender: \(calender)")
-
+            
+        //TODO aboveline pints to: 
+         //       p418 calender: EKCalendar <0x7f821b4e9350> {title = (null); type = Local; allowsModify = YES; color = (null);}
    
         // from https://www.andrewcbancroft.com/2015/06/17/creating-calendars-with-event-kit-and-swift/
         
@@ -571,9 +573,9 @@ class ReminderManager: NSObject {
         println("p193 calendarArray: \(calendarArray)")
         println("p193 calendarArray.count: \(calendarArray.count)")
         
+        self.defaults.setObject(calendarArray, forKey: "calendarArray")            //sets calendarArray of String the names
         self.defaults.synchronize()
-      //  defaults.setObject(calendarArray, forKey: "calendarArray")            //sets calendarArray
- 
+
             }
         })
     }   //func CreateCalendarArray

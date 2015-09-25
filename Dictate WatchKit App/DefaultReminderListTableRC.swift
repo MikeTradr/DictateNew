@@ -1,5 +1,5 @@
 //
-//  ReminderListTableRC.swift
+//  DefaultReminderListTableRC.swift
 //  Dictate
 //
 //  Created by Mike Derr on 9/11/15.
@@ -9,7 +9,7 @@
 import UIKit
 import WatchKit
 
-class ReminderListTableRC: NSObject {
+class DefaultReminderListTableRC: NSObject {
    
     @IBOutlet weak var tableRowLabel: WKInterfaceLabel!
     @IBOutlet weak var verticalBar: WKInterfaceGroup!

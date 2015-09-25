@@ -21,6 +21,7 @@ class ReminderListPickerIC: WKInterfaceController {
     var allReminderLists: Array<EKCalendar> = EKEventStore().calendarsForEntityType(EKEntityTypeReminder) as! Array<EKCalendar>
     
     @IBOutlet weak var table: WKInterfaceTable!
+
     
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
@@ -40,7 +41,7 @@ class ReminderListPickerIC: WKInterfaceController {
             println("---------------------------------------------------")
             println("w40 index, title: \(index), \(title)")
             
-            let row = table.rowControllerAtIndex(index) as! ReminderListTableRC
+            let row = table.rowControllerAtIndex(index) as! DefaultReminderListTableRC
             let reminder = allReminderLists[index]
             
             ReminderManager.sharedInstance.fetchCalendarReminders(reminder) { (reminders) -> Void in
@@ -64,6 +65,9 @@ class ReminderListPickerIC: WKInterfaceController {
         println("w69 ReminderListPickerIC awakeWithContext")
         println("-----------------------------------------")
         
+      //  var sceneTitle:String = (context as? String)!
+        self.setTitle("«Settings")
+
         loadTableData()     //reload table after item is deleted
     }
 
@@ -79,7 +83,7 @@ class ReminderListPickerIC: WKInterfaceController {
         println("w94 clicked on row: \(rowIndex)")
         
         selectedRow = rowIndex //for use with insert and delete, save selcted row index
-        let itemRow = self.table.rowControllerAtIndex(rowIndex) as! ReminderListTableRC
+        let itemRow = self.table.rowControllerAtIndex(rowIndex) as! DefaultReminderListTableRC
         
         if self.checked {               // Turn checkmark off
             itemRow.imageCheckbox.setImageNamed("cbBlank40px")

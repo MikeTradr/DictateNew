@@ -48,19 +48,15 @@ class TodayIC: WKInterfaceController {
     }
     
     
+//---- Menu functions -------------------------------------------
     @IBAction func menuDictate() {
-        println("w16 force touch tapped, Dictate Item")
- 
-        var rawString:String = ""
-        //TODO Anil need to call that func! lol thx Bro
-      // let (startDT, endDT, output, outputNote, day, calendarName, actionType) = MainIC.grabvoice()
-  
+        let (startDT, endDT, output, outputNote, day, calendarName, actionType) = DictateManagerIC.sharedInstance.grabVoice()
     }
-    
     
     @IBAction func menuSettings() {
-        presentControllerWithName("Settings", context: "Events")
+        presentControllerWithName("Settings", context: "«Events")
     }
+//---- end Menu functions ----------------------------------------
     
 
     
@@ -72,8 +68,10 @@ class TodayIC: WKInterfaceController {
         
         println("w43 Today awakeWithContext")
         
-        self.setTitle(context as? String)
-        
+      //  var sceneTitle:String = (context as? String)!
+      //  self.setTitle("«\(sceneTitle)")
+        self.setTitle("Events")
+
         //get Access to Reminders
         NSLog("%@ w60 appDelegate", self)
         println("w61 call getAccessToEventStoreForType")

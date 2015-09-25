@@ -210,7 +210,7 @@
                                     <action selector="menuDictate" destination="AgC-eL-Hgc" id="PQ3-RM-6FF"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Menu Item" image="cog2-48px" id="mnj-wx-VBO" userLabel="Settngs">
+                            <menuItem title="Settings" image="cog2-48px" id="mnj-wx-VBO" userLabel="Settngs">
                                 <connections>
                                     <action selector="menuSettings" destination="Iem-D3-4JW" id="CFU-uE-aks"/>
                                 </connections>
@@ -452,7 +452,7 @@
                     </items>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="473" y="758"/>
+            <point key="canvasLocation" x="548" y="747"/>
         </scene>
         <!--Settings-->
         <scene sceneID="ggb-XE-VMe">
@@ -572,7 +572,7 @@
                         </group>
                         <table alignment="left" id="5ba-AY-44P">
                             <items>
-                                <tableRow identifier="tableRow" id="Bhy-Jg-cyg" customClass="SettingsReminderTableRC" customModule="Dictate_WatchKit_Extension">
+                                <tableRow identifier="tableRow" id="Bhy-Jg-cyg" customClass="DefaultReminderListTableRC" customModule="Dictate_WatchKit_Extension">
                                     <group key="rootItem" width="1" height="0.0" alignment="left" id="alO-dK-V8k">
                                         <items>
                                             <imageView width="22" height="22" alignment="left" verticalAlignment="center" image="cbBlank40px" id="N8i-0g-3YZ"/>
@@ -580,7 +580,7 @@
                                                 <color key="backgroundColor" red="0.40000000600000002" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             </group>
                                             <label alignment="left" text="spacer" id="tPr-pG-Xv7"/>
-                                            <label width="1" height="1" alignment="left" verticalAlignment="center" text="Label" id="ZlX-Th-N00">
+                                            <label width="1" alignment="left" verticalAlignment="center" text="Label" numberOfLines="3" id="ZlX-Th-N00">
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="font" type="system" pointSize="16"/>
                                                 <variation key="device=watch38mm">
@@ -620,11 +620,11 @@
                         </items>
                     </menu>
                     <connections>
-                        <outlet property="table" destination="5ba-AY-44P" id="sdw-mY-tw5"/>
+                        <outlet property="table" destination="5ba-AY-44P" id="IUl-24-VGf"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="-265" y="18"/>
+            <point key="canvasLocation" x="-340" y="-52"/>
         </scene>
         <!--Reminders-->
         <scene sceneID="peT-G5-wcJ">
@@ -894,7 +894,7 @@
                         </group>
                         <table alignment="left" id="fAb-J1-wcn">
                             <items>
-                                <tableRow identifier="tableRow" id="uDU-dj-iAS" customClass="SettingsCalendarTableRC" customModule="Dictate_WatchKit_Extension">
+                                <tableRow identifier="tableRow" id="uDU-dj-iAS" customClass="DefaultCalendarListTableRC" customModule="Dictate_WatchKit_Extension">
                                     <group key="rootItem" width="1" height="0.0" alignment="left" id="fOx-Iq-OXT">
                                         <items>
                                             <imageView width="22" height="22" alignment="left" verticalAlignment="center" image="cbBlank40px" id="pap-gf-KnW"/>
@@ -1080,7 +1080,7 @@
                         </group>
                         <table alignment="left" id="8xB-kF-jym">
                             <items>
-                                <tableRow identifier="tableRow" id="V6e-sO-EMw" customClass="SettingsCalendarTableRC" customModule="Dictate_WatchKit_Extension">
+                                <tableRow identifier="tableRow" id="V6e-sO-EMw" customClass="ShowCalendarsTableRC" customModule="Dictate_WatchKit_Extension">
                                     <group key="rootItem" width="1" height="0.0" alignment="left" id="pZl-bt-ABr">
                                         <items>
                                             <imageView width="22" height="22" alignment="left" verticalAlignment="center" image="cbBlank40px" id="pLP-eT-dOu"/>
@@ -1251,7 +1251,7 @@
                         </group>
                         <table alignment="left" id="B1w-P6-lDD">
                             <items>
-                                <tableRow identifier="tableRow" id="a2u-qY-GiB" customClass="SettingsReminderTableRC" customModule="Dictate_WatchKit_Extension">
+                                <tableRow identifier="tableRow" id="a2u-qY-GiB" customClass="ShowRemindersTableRC" customModule="Dictate_WatchKit_Extension">
                                     <group key="rootItem" width="1" height="0.0" alignment="left" id="V7B-mj-Hwt">
                                         <items>
                                             <imageView width="22" height="22" alignment="left" verticalAlignment="center" image="cbBlank40px" id="tAf-Xv-2Hy"/>
@@ -1303,7 +1303,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="-271" y="267"/>
+            <point key="canvasLocation" x="-271" y="220"/>
         </scene>
         <!--ReminderSettings-->
         <scene sceneID="ihP-EF-mbR">
@@ -1372,7 +1372,7 @@
                                         <segue destination="chX-xC-sh2" kind="modal" id="9Cc-Tn-Abp"/>
                                     </connections>
                                 </button>
-                                <button width="1" alignment="left" title="Show Calendars" id="f3b-Pa-wVX">
+                                <button width="1" alignment="left" title="Show Reminders" id="f3b-Pa-wVX">
                                     <color key="titleColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
                                     <fontDescription key="font" type="boldSystem" pointSize="15"/>
@@ -1390,7 +1390,7 @@
                     </items>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="-20" y="91.5"/>
+            <point key="canvasLocation" x="-50" y="45.5"/>
         </scene>
         <!--EditEventDetails-->
         <scene sceneID="1sN-ef-xy6">
@@ -1587,7 +1587,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="894" y="873.5"/>
+            <point key="canvasLocation" x="904" y="845.5"/>
         </scene>
         <!--SetCalendar-->
         <scene sceneID="2L3-SE-iPx">
@@ -1619,7 +1619,7 @@
                         </group>
                         <table alignment="left" id="cxk-Di-4aM">
                             <items>
-                                <tableRow identifier="tableRow" id="9Oo-vb-8q3" customClass="SettingsCalendarTableRC" customModule="Dictate_WatchKit_Extension">
+                                <tableRow identifier="tableRow" id="9Oo-vb-8q3" customClass="SetCalendarTableRC" customModule="Dictate_WatchKit_Extension">
                                     <group key="rootItem" width="1" height="0.0" alignment="left" id="DcH-31-sSp">
                                         <items>
                                             <imageView width="22" height="22" alignment="left" verticalAlignment="center" image="cbBlank40px" id="c7E-Dn-ZQz"/>
@@ -1671,7 +1671,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="1002" y="350"/>
+            <point key="canvasLocation" x="1041" y="340"/>
         </scene>
     </scenes>
     <color key="tintColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>

@@ -475,11 +475,11 @@ class ReminderManager: NSObject {
             
             if granted{
         
-        let calender = EKCalendar(forEntityType: EKEntityTypeReminder , eventStore: self.eventStore)
-     
-        var error:NSError?
-        calender.source = self.eventStore.defaultCalendarForNewReminders().source
-        println("p135 Error: \(error)")
+//        let calender = EKCalendar(forEntityType: EKEntityTypeReminder , eventStore: self.eventStore)
+//     
+//        var error:NSError?
+//        calender.source = self.eventStore.defaultCalendarForNewReminders().source
+//        println("p135 Error: \(error)")
         
         let calendars = self.eventStore.calendarsForEntityType(EKEntityTypeReminder)
         

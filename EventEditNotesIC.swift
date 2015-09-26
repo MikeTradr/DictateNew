@@ -47,7 +47,7 @@ class EventEditNotesIC: WKInterfaceController {
     
     @IBAction func buttonGroupMic() {
       
-        var alertSound1: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("button-14", ofType: "mp3")!)!
+        var alertSound1: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("button-14", ofType: "mp3")!)
         //General.playSound(alertSound3!)
         
         //Second, we currently can't control sounds or haptic feedback from our app's code.
@@ -55,7 +55,7 @@ class EventEditNotesIC: WKInterfaceController {
         
         let labelNotes:String = grabvoiceNotes()
         
-        println("w32 labelNotes: \(labelNotes)")
+        print("w32 labelNotes: \(labelNotes)")
         
     }
     
@@ -65,7 +65,7 @@ class EventEditNotesIC: WKInterfaceController {
     
     @IBAction func buttonNotes() {
         
-        var alertSound1: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("button-14", ofType: "mp3")!)!
+        var alertSound1: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("button-14", ofType: "mp3")!)
         //General.playSound(alertSound3!)
         
         //Second, we currently can't control sounds or haptic feedback from our app's code.
@@ -73,7 +73,7 @@ class EventEditNotesIC: WKInterfaceController {
         
         let labelNotes:String = grabvoiceNotes()
         
-        println("w48 labelNotes: \(labelNotes)")
+        print("w48 labelNotes: \(labelNotes)")
         
         
     }
@@ -81,11 +81,11 @@ class EventEditNotesIC: WKInterfaceController {
  
     @IBAction func buttonSaveNote() {
         event.notes = self.dictateResult
-        println("w64: self.dictateResult \(self.dictateResult)")
+        print("w64: self.dictateResult \(self.dictateResult)")
         EventManager.sharedInstance.saveEvent(event)
         
         //TODO make a general func call
-        var alertSound1: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("212-buttonclick52", ofType: "mp3")!)!
+        var alertSound1: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("212-buttonclick52", ofType: "mp3")!)
        
         self.playSound(alertSound1)
         
@@ -134,12 +134,12 @@ class EventEditNotesIC: WKInterfaceController {
             //println("35 Results: \(results[0])")
             
             if results != nil {
-                println("There are objects")
-                self.dictateResult = results[0] as! String
-                println("### w47 self.dictateResult: \(self.dictateResult)")
+                print("There are objects")
+                self.dictateResult = results![0] as! String
+                print("### w47 self.dictateResult: \(self.dictateResult)")
                 
             } else {
-                println("No objects")
+                print("No objects")
             }
   
             self.labelNotes.setText(self.dictateResult)
@@ -157,7 +157,11 @@ class EventEditNotesIC: WKInterfaceController {
     
     func playSound(sound: NSURL){
         var error:NSError?
-        self.audioPlayer = AVAudioPlayer(contentsOfURL: sound, error: &error)
+        do {
+            self.audioPlayer = try AVAudioPlayer(contentsOfURL: sound)
+        } catch var error1 as NSError {
+            error = error1
+        }
         self.audioPlayer.prepareToPlay()
         //player.delegate = self player.play()
         //audioPlayer.delegate = self
@@ -168,16 +172,16 @@ class EventEditNotesIC: WKInterfaceController {
         super.awakeWithContext(context)
         // Configure interface objects here.
         NSLog("%@ w92 awakeWithContext", self)
-        println("w93 EventEditNotesIC awakeWithContext")
+        print("w93 EventEditNotesIC awakeWithContext")
         
         self.setTitle("«Event Details")
         
-        println("w102: event \(event)")
+        print("w102: event \(event)")
 
         
         eventID = context as! String
-        event = EventManager.sharedInstance.eventStore.eventWithIdentifier(eventID)
-        println("w168: event \(event)")
+        event = EventManager.sharedInstance.eventStore.eventWithIdentifier(eventID)!
+        print("w168: event \(event)")
         
         self.labelNotes.setText(event.notes)
         self.groupSaveNote.setHidden(true)
@@ -195,7 +199,7 @@ class EventEditNotesIC: WKInterfaceController {
         // This method is called when watch view controller is no longer visible
         super.didDeactivate()
         NSLog("%@ w115 didDeactivate", self)
-        println("w116 EventEditNotesIC didDeactivate")
+        print("w116 EventEditNotesIC didDeactivate")
       
 
         

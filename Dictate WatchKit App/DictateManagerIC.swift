@@ -110,15 +110,15 @@ class DictateManagerIC: WKInterfaceController {
             //println("35 Results: \(results[0])")
             
             if results != nil {
-                println("There are objects")
-                self.str = results[0] as! String
-                println("### 92 str: \(self.str)")
+                print("There are objects")
+                self.str = results![0] as! String
+                print("### 92 str: \(self.str)")
                 
             } else {
-                println("No objects")
+                print("No objects")
             }
             
-            println("### 99 str: \(self.str)")
+            print("### 99 str: \(self.str)")
             
             rawString = self.str
             
@@ -136,7 +136,7 @@ class DictateManagerIC: WKInterfaceController {
                 fullDTEnd = formatter3.stringFromDate(endDT)
                 
                 if (startDT != NSDate(dateString:"2014-12-12") ) {
-                    println("p153 startDT: \(startDT)")
+                    print("p153 startDT: \(startDT)")
                     
                     fullDT = formatter3.stringFromDate(startDT)
                     fullDTEnd = formatter3.stringFromDate(endDT)
@@ -145,14 +145,14 @@ class DictateManagerIC: WKInterfaceController {
                     fullDTEnd = ""
                 }
                 
-                println("p164 startDT: \(startDT)")
+                print("p164 startDT: \(startDT)")
             }
         })
         
         
    
-        println("p204 str: \(self.str)")
-        println("p205 rawString: \(rawString)")
+        print("p204 str: \(self.str)")
+        print("p205 rawString: \(rawString)")
         // println("### 115 output: \(output)")
         // println("p207 actionType: \(actionType)")
 
@@ -161,8 +161,11 @@ class DictateManagerIC: WKInterfaceController {
     }   //end func grabvoice
     
     func playSound(sound: NSURL){
-        var error:NSError?
-        self.audioPlayer = AVAudioPlayer(contentsOfURL: sound, error: &error)
+        do {
+            self.audioPlayer = try AVAudioPlayer(contentsOfURL: sound)
+        } catch {
+       
+        }
         self.audioPlayer.prepareToPlay()
         //player.delegate = self player.play()
         //audioPlayer.delegate = self
@@ -194,7 +197,7 @@ class DictateManagerIC: WKInterfaceController {
     
     func initalizeParse() {
         
-        println("w107 in DictateManagerIC: initalizeParse")
+        print("w107 in DictateManagerIC: initalizeParse")
 
         Parse.enableLocalDatastore()
         //  PFUser.enableAutomaticUser()

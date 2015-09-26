@@ -43,8 +43,8 @@ class EditEventDetailsIC: WKInterfaceController {
         let startDate =  NSDate()
         let endDate = dateHelper.addToDate(startDate, days: 7)
         
-        println("w46 startDate: \(startDate)")
-        println("w46 endDate: \(endDate)")
+        print("w46 startDate: \(startDate)")
+        print("w46 endDate: \(endDate)")
 
 
         
@@ -53,7 +53,7 @@ class EditEventDetailsIC: WKInterfaceController {
             self.allEvents = events
         })
         
-        println("w56 self.allEvents: \(self.allEvents)")
+        print("w56 self.allEvents: \(self.allEvents)")
 
         
     }
@@ -80,31 +80,31 @@ class EditEventDetailsIC: WKInterfaceController {
         
         NSLog("%@ w41 TodayIC awakeWithContext", self)
         
-        println("w43 Today awakeWithContext")
+        print("w43 Today awakeWithContext")
         
         self.setTitle(context as? String)
         
         //get Access to Reminders
         NSLog("%@ w60 appDelegate", self)
-        println("w61 call getAccessToEventStoreForType")
-        ReminderManager.sharedInstance.getAccessToEventStoreForType(EKEntityTypeReminder, completion: { (granted) -> Void in
+        print("w61 call getAccessToEventStoreForType")
+        ReminderManager.sharedInstance.getAccessToEventStoreForType(EKEntityType.Reminder, completion: { (granted) -> Void in
             
             if granted{
-                println("w65 Reminders granted: \(granted)")
+                print("w65 Reminders granted: \(granted)")
             }
         })
         
         //get Access to Events
         NSLog("%@ w70 appDelegate", self)
-        println("w71 call getAccessToEventStoreForType")
-        EventManager.sharedInstance.getAccessToEventStoreForType(EKEntityTypeEvent, completion: { (granted) -> Void in
+        print("w71 call getAccessToEventStoreForType")
+        EventManager.sharedInstance.getAccessToEventStoreForType(EKEntityType.Event, completion: { (granted) -> Void in
             
             if granted{
-                println("w75 Events granted: \(granted)")
+                print("w75 Events granted: \(granted)")
             }
         })
         
-        println("w65 context: \(context)")
+        print("w65 context: \(context)")
        // showListsView = true
         self.setTitle("Events")
         
@@ -115,23 +115,23 @@ class EditEventDetailsIC: WKInterfaceController {
     
     func loadTableData () {
         table.setNumberOfRows(allEvents.count, withRowType: "tableRow")
-        println("w46 allEvents.count: \(allEvents.count)")
+        print("w46 allEvents.count: \(allEvents.count)")
         
-        var dateFormatter = NSDateFormatter()
+        let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "E, MMM d"
         
         let dateString = dateFormatter.stringFromDate(NSDate())
    
         self.labelDate.setText(dateString)
         
-        for (index, title) in enumerate(allEvents) {
-            println("---------------------------------------------------")
-            println("w40 index, title: \(index), \(title)")
+        for (index, title) in allEvents.enumerate() {
+            print("---------------------------------------------------")
+            print("w40 index, title: \(index), \(title)")
             
             let row = table.rowControllerAtIndex(index) as! TodayEventsTableRC
             let item = allEvents[index]
             
-            var dateFormatter = NSDateFormatter()
+            let dateFormatter = NSDateFormatter()
             dateFormatter.dateFormat = "h:mm a"
             let startTime = dateFormatter.stringFromDate(item.startDate)
             let endTime = dateFormatter.stringFromDate(item.endDate)
@@ -154,20 +154,20 @@ class EditEventDetailsIC: WKInterfaceController {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
         NSLog("%@ w78 TodayIC will activate", self)
-        println("w79 TodayIC willActivate")
+        print("w79 TodayIC willActivate")
         
         //  ReminderManager.sharedInstance.createNewReminderList("To Code Tomorrow", items: ["item 1","item 2", "This is item 3 hehe"])   //added to make reminder for testing.
         
-        println("w83 in ShowIC willActivate")
+        print("w83 in ShowIC willActivate")
         
         //self.reminderItemsGroup.setHidden(false)  //Hide lower table2
         
         if showCalendarsView {
           //  self.loadTableData()
-            println("w155 showListsView True")
+            print("w155 showListsView True")
         } else {
          //   self.loadTableData2()
-            println("w165 showListsView False")
+            print("w165 showListsView False")
         }
         
         loadTableData()

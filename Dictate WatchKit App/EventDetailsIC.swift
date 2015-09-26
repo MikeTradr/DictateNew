@@ -73,17 +73,17 @@ class EventDetailsIC: WKInterfaceController {
         
         NSLog("%@ w41 TodayIC awakeWithContext", self)
         
-        println("w43 Today awakeWithContext")
+        print("w43 Today awakeWithContext")
         
         self.setTitle("«Events")
         
         let eventID = context as! String
         
-        event = eventStore.eventWithIdentifier(eventID)
+        event = eventStore.eventWithIdentifier(eventID)!
         
-        println("w81 event: \(event)")
+        print("w81 event: \(event)")
         
-        var dateFormatter = NSDateFormatter()
+        let dateFormatter = NSDateFormatter()
         let dateString = dateFormatter.stringFromDate(event.startDate)
         
         dateFormatter.dateFormat = "h:mm a"
@@ -92,7 +92,7 @@ class EventDetailsIC: WKInterfaceController {
         var startTime = startTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
         
         let endTimeA = dateFormatter.stringFromDate(event.endDate)
-        var endTime = endTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
+        let endTime = endTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
         
         var endTimeDash = "- \(endTime)"
         
@@ -123,21 +123,21 @@ class EventDetailsIC: WKInterfaceController {
         if event.hasRecurrenceRules {
             self.groupRepeats.setHidden(false)
         } else {
-            println("w132 we here")
+            print("w132 we here")
             self.groupRepeats.setHidden(true)
         }
         
         if event.hasAlarms {
             self.groupAlarms.setHidden(false)
         } else {
-            println("w139 we here")
+            print("w139 we here")
             self.groupAlarms.setHidden(true)
         }
         
         if event.hasAttendees {
             self.groupAttendees.setHidden(false)
         } else {
-            println("w146 we here")
+            print("w146 we here")
             self.groupAttendees.setHidden(true)
         }
         
@@ -150,7 +150,7 @@ class EventDetailsIC: WKInterfaceController {
         if event.hasNotes {
             self.groupNotes.setHidden(false)
         } else {
-            println("w156 here? groupNotes: \(groupNotes)")
+            print("w156 here? groupNotes: \(groupNotes)")
             self.groupNotes.setHidden(true)
         }
 
@@ -163,12 +163,12 @@ class EventDetailsIC: WKInterfaceController {
   override func contextForSegueWithIdentifier(segueIdentifier: String) ->  AnyObject? {
         if segueIdentifier == "EditNotes" {
             sendID = event.eventIdentifier
-            println("w171 sendID \(sendID)")
+            print("w171 sendID \(sendID)")
         }
     
         if segueIdentifier == "SetCalendar" {
             sendID = event.eventIdentifier
-            println("w178 sendID \(sendID)")
+            print("w178 sendID \(sendID)")
         }
     
             return sendID

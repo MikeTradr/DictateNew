@@ -35,7 +35,7 @@ class ReminderManager: NSObject {
         
         let status = EKEventStore.authorizationStatusForEntityType(type)
         if status != EKAuthorizationStatus.Authorized{
-            self.eventStore.requestAccessToEntityType(EKEntityTypeReminder, completion: {
+            self.eventStore.requestAccessToEntityType(EKEntityType.Reminder, completion: {
                 granted, error in
                 if (granted) && (error == nil) {
                     completion(granted: true)
@@ -52,14 +52,14 @@ class ReminderManager: NSObject {
     
     func fetchReminders(completion:([EKReminder])->Void) {
         
-        getAccessToEventStoreForType(EKEntityTypeReminder, completion: { (granted) -> Void in
+        getAccessToEventStoreForType(EKEntityType.Reminder, completion: { (granted) -> Void in
             
             if granted{
-                println("granted: \(granted)")
+                print("granted: \(granted)")
                 
-                let calendars = self.eventStore.calendarsForEntityType(EKEntityTypeReminder)
+                let calendars = self.eventStore.calendarsForEntityType(EKEntityType.Reminder)
                 
-                println("p36 calendars: \(calendars)")
+                print("p36 calendars: \(calendars)")
                 
                 var predicate = self.eventStore.predicateForIncompleteRemindersWithDueDateStarting(nil, ending: nil, calendars: calendars)
                 self.eventStore.fetchRemindersMatchingPredicate(predicate) { reminders in
@@ -71,25 +71,31 @@ class ReminderManager: NSObject {
     
     func saveReminder(reminderItem:EKReminder) {
         
-        println("p74 reminderItem: \(reminderItem)")
+        print("p74 reminderItem: \(reminderItem)")
         
-        getAccessToEventStoreForType(EKEntityTypeReminder, completion: { (granted) -> Void in
+        getAccessToEventStoreForType(EKEntityType.Reminder, completion: { (granted) -> Void in
             
             if granted{
-                println("granted: \(granted)")
+                print("granted: \(granted)")
                 
-                let reminderLists = self.eventStore.calendarsForEntityType(EKEntityTypeReminder)
+                let reminderLists = self.eventStore.calendarsForEntityType(EKEntityType.Reminder)
                 
-                println("p81 reminderLists: \(reminderLists)")
+                print("p81 reminderLists: \(reminderLists)")
                 
                 var saveError: NSError? = nil // Initially sets errors to nil
                 
-                self.eventStore.saveReminder(reminderItem, commit: true, error: &saveError)
+                do {
+                    try self.eventStore.saveReminder(reminderItem, commit: true)
+                } catch var error as NSError {
+                    saveError = error
+                } catch {
+                    fatalError()
+                }
          
                 if saveError != nil {
-                    println("p90 Saving ReminderItem to Calendar failed with error: \(saveError!)")
+                    print("p90 Saving ReminderItem to Calendar failed with error: \(saveError!)")
                 } else {
-                    println("p91 Now Completed: '\(reminderItem.title)' to '\(reminderItem.calendar.title)' calendar.")
+                    print("p91 Now Completed: '\(reminderItem.title)' to '\(reminderItem.calendar.title)' calendar.")
                 }
   
             }
@@ -100,16 +106,20 @@ class ReminderManager: NSObject {
     
     
     func fetchCalendarReminders(calendar:EKCalendar, completion:([EKReminder])->Void) {
-        println("p36 we here? fetchReminders")
+        print("p36 we here? fetchReminders")
         
-        getAccessToEventStoreForType(EKEntityTypeReminder, completion: { (granted) -> Void in
+        getAccessToEventStoreForType(EKEntityType.Reminder, completion: { (granted) -> Void in
             
             if granted{
-                println("granted: \(granted)")
+                print("granted: \(granted)")
                 
-                var predicate = self.eventStore.predicateForIncompleteRemindersWithDueDateStarting(nil, ending: nil, calendars: [calendar])
+                let predicate = self.eventStore.predicateForIncompleteRemindersWithDueDateStarting(nil, ending: nil, calendars: [calendar])
                 self.eventStore.fetchRemindersMatchingPredicate(predicate) { reminders in
-                    completion(reminders as! [EKReminder])
+                    if let _reminders = reminders{
+                        completion(reminders!)
+                    }else{
+                        completion([])
+                    }
                 }
             }
         })
@@ -120,17 +130,17 @@ class ReminderManager: NSObject {
 
     
     func fetchRemindersOLD(completion:([EKReminder])->Void) {
-        println("p36 we here? fetchReminders")
+        print("p36 we here? fetchReminders")
 
-        getAccessToEventStoreForType(EKEntityTypeReminder, completion: { (granted) -> Void in
+        getAccessToEventStoreForType(EKEntityType.Reminder, completion: { (granted) -> Void in
             
             if granted{
-                println("granted: \(granted)")
+                print("granted: \(granted)")
                 
               
-                let calendars = self.eventStore.calendarsForEntityType(EKEntityTypeReminder)
+                let calendars = self.eventStore.calendarsForEntityType(EKEntityType.Reminder)
                 
-                println("p36 calendars: \(calendars)")
+                print("p36 calendars: \(calendars)")
   
                 var predicate = self.eventStore.predicateForIncompleteRemindersWithDueDateStarting(nil, ending: nil, calendars: calendars)
                 self.eventStore.fetchRemindersMatchingPredicate(predicate) { reminders in
@@ -146,7 +156,7 @@ class ReminderManager: NSObject {
         
         let status = EKEventStore.authorizationStatusForEntityType(type)
         if status != EKAuthorizationStatus.Authorized{
-            self.eventStore.requestAccessToEntityType(EKEntityTypeEvent, completion: {
+            self.eventStore.requestAccessToEntityType(EKEntityType.Event, completion: {
                 granted, error in
                 if (granted) && (error == nil) {
                     completion(granted: true)
@@ -161,15 +171,24 @@ class ReminderManager: NSObject {
     }
     
     func createNewReminderList(name:String, items:[String]){    //forgor e in create -added Mike 082915
-        getAccessToEventStoreForType(EKEntityTypeReminder, completion: { (granted) -> Void in
+        getAccessToEventStoreForType(EKEntityType.Reminder, completion: { (granted) -> Void in
             
             if granted{
-        let calender = EKCalendar(forEntityType: EKEntityTypeReminder , eventStore: self.eventStore)
+        let calender = EKCalendar(forEntityType: EKEntityType.Reminder , eventStore: self.eventStore)
         calender.title = name
         var error:NSError? = nil                                // = nil added by Mike 082915
         calender.source = self.eventStore.defaultCalendarForNewReminders().source
-        let calendarWasSaved = self.eventStore.saveCalendar(calender, commit: true, error: &error)
-        println("Error: \(error)")
+        let calendarWasSaved: Bool
+        do {
+            try self.eventStore.saveCalendar(calender, commit: true)
+            calendarWasSaved = true
+        } catch var error1 as NSError {
+            error = error1
+            calendarWasSaved = false
+        } catch {
+            fatalError()
+        }
+        print("Error: \(error)")
         
         // Handle situation if the calendar could not be saved
         if calendarWasSaved == false {
@@ -188,7 +207,13 @@ class ReminderManager: NSObject {
             let reminder = EKReminder(eventStore: self.eventStore)
             reminder.title = item
             reminder.calendar = calender
-            self.eventStore.saveReminder(reminder, commit: true, error: &error)
+            do {
+                try self.eventStore.saveReminder(reminder, commit: true)
+            } catch var error1 as NSError {
+                error = error1
+            } catch {
+                fatalError()
+            }
         }
             }
         })
@@ -196,7 +221,7 @@ class ReminderManager: NSObject {
     
 // ____ addReminder func ____________________________________
     func addReminder(name:String, items:[String]){
-        println("p90 in addReminder name: \(name)")
+        print("p90 in addReminder name: \(name)")
         
         let mainType    = defaults.stringForKey("mainType")
         let actionType  = defaults.stringForKey("actionType")
@@ -211,10 +236,10 @@ class ReminderManager: NSObject {
         let duration    = defaults.stringForKey("eventDuration")
         let calendarName    = defaults.stringForKey("calendarName")
         let alert       = defaults.objectForKey("eventAlert") as! Double
-        let repeat      = defaults.stringForKey("eventRepeat")
+        let `repeat`      = defaults.stringForKey("eventRepeat")
     
         var destCalendar:EKCalendar?
-        let calendars = self.eventStore.calendarsForEntityType(EKEntityTypeReminder)
+        let calendars = self.eventStore.calendarsForEntityType(EKEntityType.Reminder)
         
         //var reminderArray:[String] = []
 /*
@@ -253,8 +278,8 @@ class ReminderManager: NSObject {
             
             // var calendarTitle = calendar.title
             
-            println("p110 calendar.title: \(calendar.title)")
-            println("p112 _________name: \(name)")
+            print("p110 calendar.title: \(calendar.title)")
+            print("p112 _________name: \(name)")
             
             if calendar.title == name {
                 destCalendar = calendar as? EKCalendar
@@ -272,7 +297,7 @@ class ReminderManager: NSObject {
         
         let noDate = dateFormatter.dateFromString("2014-12-12 00:00:00 +0000")  //need this to match set no date from DictateCode
         
-        println("p223 Reminder: noDate: \(noDate)")
+        print("p223 Reminder: noDate: \(noDate)")
         
         if (startDT != noDate) {        // if Date != no date string, set alarm for Reminder
             alarm = EKAlarm(absoluteDate: startDT)
@@ -285,42 +310,50 @@ class ReminderManager: NSObject {
 
         
         
-        println("p123 destCalendar: \(destCalendar)")
+        print("p123 destCalendar: \(destCalendar)")
         
         if destCalendar != nil{
             for item in items{
                // let reminder = EKReminder(eventStore: self.eventStore)
                 reminder.title = item
-                println("p126 reminder.title: \(reminder.title)")
-                println("p126 calendar: \(destCalendar)")
+                print("p126 reminder.title: \(reminder.title)")
+                print("p126 calendar: \(destCalendar)")
                 
-                reminder.calendar = destCalendar
-                println("p130 reminder.calendar: \(reminder.calendar)")
-                println("p130 reminder: \(reminder)")
+                reminder.calendar = destCalendar!
+                print("p130 reminder.calendar: \(reminder.calendar)")
+                print("p130 reminder: \(reminder)")
                 
                
                 var error:NSError?
-                self.eventStore.saveReminder(reminder, commit: true, error: &error)
-                println("p97 Error: \(error)")
+                do {
+                    try self.eventStore.saveReminder(reminder, commit: true)
+                } catch var error1 as NSError {
+                    error = error1
+                }
+                print("p97 Error: \(error)")
                 
             }   //for item...
         } else {    //Save tp default calendar as no name matched.
             
-            println("p145 we here??? destCalendar: \(destCalendar)")
+            print("p145 we here??? destCalendar: \(destCalendar)")
 
             let reminder = EKReminder(eventStore: self.eventStore)
 
-            let calender = EKCalendar(forEntityType: EKEntityTypeReminder , eventStore: self.eventStore)
+            let calender = EKCalendar(forEntityType: EKEntityType.Reminder , eventStore: self.eventStore)
             calender.title = name
             calender.source = eventStore.defaultCalendarForNewReminders().source
             
             var tempString = ""
-            let reminderTitle = tempString.join(items)  //convert [String] to String for reminder content
+            let reminderTitle = items.joinWithSeparator(tempString)  //convert [String] to String for reminder content
             reminder.title = reminderTitle
 
             var error:NSError? = nil                                // = nil added by Mike 082915
             reminder.calendar = eventStore.defaultCalendarForNewReminders()
-            self.eventStore.saveReminder(reminder, commit: true, error: &error)
+            do {
+                try self.eventStore.saveReminder(reminder, commit: true)
+            } catch var error1 as NSError {
+                error = error1
+            }
 
         }   // if dest...
     }
@@ -329,16 +362,16 @@ class ReminderManager: NSObject {
     
 //Add item to Reminder List - Mike 082915
     func addReminderMike(name:String, items:[String]){
-        let calender = EKCalendar(forEntityType: EKEntityTypeReminder , eventStore: self.eventStore)
+        let calender = EKCalendar(forEntityType: EKEntityType.Reminder , eventStore: self.eventStore)
         calender.title = name
         var error:NSError?
         calender.source = eventStore.defaultCalendarForNewReminders().source
      //   self.eventStore.saveCalendar(calender, commit: true, error: &error)
-        println("p84 Error: \(error)")
+        print("p84 Error: \(error)")
         
-        println("p84 calender.title: \(calender.title)")
+        print("p84 calender.title: \(calender.title)")
         
-        let calendars = self.eventStore.calendarsForEntityType(EKEntityTypeReminder)
+        let calendars = self.eventStore.calendarsForEntityType(EKEntityType.Reminder)
         
         var reminderArray:[String] = []
         
@@ -347,30 +380,34 @@ class ReminderManager: NSObject {
             
            // var calendarTitle = calendar.title
 
-            println("p95 calendarTitle: \(calendarTitle)")
+            print("p95 calendarTitle: \(calendarTitle)")
             
             reminderArray.append(calendarTitle)
             
-            println("p95 reminderArray: \(reminderArray)")
+            print("p95 reminderArray: \(reminderArray)")
        
             
         }
         
-        println("p94 calendars: \(calendars)")
+        print("p94 calendars: \(calendars)")
 
         
         for item in items{
             let reminder = EKReminder(eventStore: self.eventStore)
             reminder.title = item
-            println("p84 reminder.title: \(reminder.title)")
-            println("p84 calendar: \(calender)")
+            print("p84 reminder.title: \(reminder.title)")
+            print("p84 calendar: \(calender)")
 
             reminder.calendar = calender
-            println("p84 reminder.calendar: \(reminder.calendar)")
-            println("p84 reminder: \(reminder)")
+            print("p84 reminder.calendar: \(reminder.calendar)")
+            print("p84 reminder: \(reminder)")
             
-            self.eventStore.saveReminder(reminder, commit: true, error: &error)
-            println("p97 Error: \(error)")
+            do {
+                try self.eventStore.saveReminder(reminder, commit: true)
+            } catch var error1 as NSError {
+                error = error1
+            }
+            print("p97 Error: \(error)")
             
             
 
@@ -393,8 +430,8 @@ class ReminderManager: NSObject {
         
         
         func getLocalEventCalendars() -> [AnyObject] {
-            var allCalendars: [AnyObject] = self.eventStore.calendarsForEntityType(EKEntityTypeEvent)
-            println("p296 allCalendars: \(allCalendars)")
+            var allCalendars: [AnyObject] = self.eventStore.calendarsForEntityType(EKEntityType.Event)
+            print("p296 allCalendars: \(allCalendars)")
             
             var localCalendars: [AnyObject] = NSMutableArray() as [AnyObject]
             
@@ -433,13 +470,13 @@ class ReminderManager: NSObject {
     func createReminderArray() -> [AnyObject]  {        //called from AppDelegate on startup
         
         
-        var allReminders: Array<EKCalendar>= self.eventStore.calendarsForEntityType(EKEntityTypeReminder) as!  Array<EKCalendar>
+        var allReminders: Array<EKCalendar>= self.eventStore.calendarsForEntityType(EKEntityType.Reminder) as!  Array<EKCalendar>
         
         var calendarList = Array<EKCalendar>()
 
         
      //   var allReminders: [AnyObject] = self.eventStore.calendarsForEntityType(EKEntityTypeReminder)
-        println("p337 allReminders: \(allReminders)")
+        print("p337 allReminders: \(allReminders)")
         
         var localReminders: [AnyObject] = NSMutableArray() as [AnyObject]
         
@@ -459,7 +496,7 @@ class ReminderManager: NSObject {
         
         var testArrayData = defaults.objectForKey("allRemindersHardcoded") as! [String] //array of the items
         
-        println("p372 testArrayData: \(testArrayData)")
+        print("p372 testArrayData: \(testArrayData)")
         
         return allReminders
         
@@ -470,8 +507,8 @@ class ReminderManager: NSObject {
     
   
     func createReminderStringArray() {        //called from AppDelegate on startup
-        println("p386 we here createReminderStringArray")
-        getAccessToEventStoreForType(EKEntityTypeReminder, completion: { (granted) -> Void in
+        print("p386 we here createReminderStringArray")
+        getAccessToEventStoreForType(EKEntityType.Reminder, completion: { (granted) -> Void in
             
             if granted{
         
@@ -481,24 +518,21 @@ class ReminderManager: NSObject {
 //        calender.source = self.eventStore.defaultCalendarForNewReminders().source
 //        println("p135 Error: \(error)")
         
-        let calendars = self.eventStore.calendarsForEntityType(EKEntityTypeReminder)
+        let calendars = self.eventStore.calendarsForEntityType(EKEntityType.Reminder)
         
         var reminderArray:[String] = []
-        
-        var remindersAnil:NSArray = [ReminderManager.sharedInstance.eventStore, EKEntityTypeReminder];
-        println("p299 remindersAnil: \(remindersAnil)")
-
+    
         
         for calendar in calendars {
             var reminderTitle:String! = calendar.title
             //println("p229 reminderTitle: \(reminderTitle)")
-            var length = count(reminderTitle)
+            var length = reminderTitle.characters.count
             //println("p231 length: \(length)")
             
             reminderArray.append(reminderTitle)
         }
-        println("p471 reminderArray: \(reminderArray)")
-        println("p472 reminderArray.count: \(reminderArray.count)")
+        print("p471 reminderArray: \(reminderArray)")
+        print("p472 reminderArray.count: \(reminderArray.count)")
 
         self.defaults.setObject(reminderArray, forKey: "reminderStringArray")            //sets reminderArray
         
@@ -510,19 +544,19 @@ class ReminderManager: NSObject {
 
     func createCalendarArray() {        //called from AppDelegate on startup
         
-        getAccessToEventStoreForType(EKEntityTypeReminder, completion: { (granted) -> Void in
+        getAccessToEventStoreForType(EKEntityType.Reminder, completion: { (granted) -> Void in
             
             if granted{
                 
         NSLog("%@ p462 createCalendarArray", self)
-        println("p413 we here? createCalendarArray")
+        print("p413 we here? createCalendarArray")
         
-        var allCalendars: Array<EKCalendar>= self.eventStore.calendarsForEntityType(EKEntityTypeEvent) as!  Array<EKCalendar>
+        var allCalendars: Array<EKCalendar>= self.eventStore.calendarsForEntityType(EKEntityType.Event) as!  Array<EKCalendar>
         
-        println("p416 allCalendars: \(allCalendars)")
+        print("p416 allCalendars: \(allCalendars)")
         
-        let calender = EKCalendar(forEntityType: EKEntityTypeEvent , eventStore: self.eventStore)
-        println("p418 calender: \(calender)")
+        let calender = EKCalendar(forEntityType: EKEntityType.Event , eventStore: self.eventStore)
+        print("p418 calender: \(calender)")
             
         //TODO aboveline pints to: 
          //       p418 calender: EKCalendar <0x7f821b4e9350> {title = (null); type = Local; allowsModify = YES; color = (null);}
@@ -531,12 +565,12 @@ class ReminderManager: NSObject {
         
         // Use Event Store to create a new calendar instance
         // Configure its title
-        let newCalendar = EKCalendar(forEntityType: EKEntityTypeEvent, eventStore: self.eventStore)
+        let newCalendar = EKCalendar(forEntityType: EKEntityType.Event, eventStore: self.eventStore)
         newCalendar.title = "Some New Calendar Title"
         
         // Access list of available sources from the Event Store
-        let sourcesInEventStore = self.eventStore.sources() as! [EKSource]
-        println("p482 sourcesInEventStore: \(sourcesInEventStore)")
+        let sourcesInEventStore = self.eventStore.sources as! [EKSource]
+        print("p482 sourcesInEventStore: \(sourcesInEventStore)")
         
   //TODO Anil use only Local calendarsmaybe in out CalendarListArray I made???
         
@@ -551,27 +585,27 @@ class ReminderManager: NSObject {
         
         newCalendar.source = sourcesInEventStore.filter{
             (source: EKSource) -> Bool in
-            source.sourceType.value == EKSourceTypeLocal.value
-            }.first
+            source.sourceType == EKSourceType.Local
+            }.first!
         
         
         
         var error:NSError?
         calender.source = self.eventStore.defaultCalendarForNewEvents.source
-        println("p181 Error: \(error)")
+        print("p181 Error: \(error)")
         
-        let calendars = self.eventStore.calendarsForEntityType(EKEntityTypeEvent)
+        let calendars = self.eventStore.calendarsForEntityType(EKEntityType.Event)
         
         var calendarArray:[String] = []
         
         for calendar in calendars {
             var calendarTitle:String! = calendar.title
-            println("p189 calendarTitle: \(calendarTitle)")
+            print("p189 calendarTitle: \(calendarTitle)")
             
             calendarArray.append(calendarTitle)
         }
-        println("p193 calendarArray: \(calendarArray)")
-        println("p193 calendarArray.count: \(calendarArray.count)")
+        print("p193 calendarArray: \(calendarArray)")
+        print("p193 calendarArray.count: \(calendarArray.count)")
         
         self.defaults.setObject(calendarArray, forKey: "calendarArray")            //sets calendarArray of String the names
         self.defaults.synchronize()

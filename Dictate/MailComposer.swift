@@ -26,7 +26,7 @@ class MessageComposer: NSObject, MFMessageComposeViewControllerDelegate {
     // Configures and returns a MFMessageComposeViewController instance
     func configuredMessageComposeViewController() -> MFMessageComposeViewController {
         
-        println("p29 We in MessageComposer")
+        print("p29 We in MessageComposer")
         
         let output:String = defaults.stringForKey("output")!
         
@@ -38,7 +38,7 @@ class MessageComposer: NSObject, MFMessageComposeViewControllerDelegate {
         
         toPhone.append(tempPhone)
         
-        println("p41 toPhone: \(toPhone)")
+        print("p41 toPhone: \(toPhone)")
 
         
         let newOutput = "\(output) - sent from Dictate™ App"
@@ -61,7 +61,7 @@ class MessageComposer: NSObject, MFMessageComposeViewControllerDelegate {
     }
     
     // MFMessageComposeViewControllerDelegate callback - dismisses the view controller when the user is finished with it
-    func messageComposeViewController(controller: MFMessageComposeViewController!, didFinishWithResult result: MessageComposeResult) {
+    func messageComposeViewController(controller: MFMessageComposeViewController, didFinishWithResult result: MessageComposeResult) {
         controller.dismissViewControllerAnimated(true, completion: nil)
     }
 }

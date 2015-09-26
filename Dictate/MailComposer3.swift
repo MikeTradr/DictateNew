@@ -38,7 +38,7 @@ class MailComposer3: UIViewController, MFMailComposeViewControllerDelegate {
         var toRecipents:[String] = []
         toRecipents.append(toPhone)
         
-        var newOutput = "\(output) \n\n\n Sent from Dictate™ App"
+        let newOutput = "\(output) \n\n\n Sent from Dictate™ App"
         let messageBody = newOutput
         
         
@@ -66,7 +66,7 @@ class MailComposer3: UIViewController, MFMailComposeViewControllerDelegate {
     }
     
     // MARK: MFMailComposeViewControllerDelegate Method
-    func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!) {
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
         controller.dismissViewControllerAnimated(true, completion: nil)
     }
 }

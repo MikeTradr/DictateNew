@@ -30,7 +30,7 @@ class EventManager: NSObject {
         
         let status = EKEventStore.authorizationStatusForEntityType(type)
         if status != EKAuthorizationStatus.Authorized{
-            self.eventStore.requestAccessToEntityType(EKEntityTypeEvent, completion: {
+            self.eventStore.requestAccessToEntityType(EKEntityType.Event, completion: {
                 granted, error in
                 if (granted) && (error == nil) {
                     completion(granted: true)
@@ -46,19 +46,19 @@ class EventManager: NSObject {
     
     func fetchEventsFrom(startDate:NSDate,endDate:NSDate,completion:([EKEvent])->Void) {
         
-        getAccessToEventStoreForType(EKEntityTypeEvent, completion: { (granted) -> Void in
+        getAccessToEventStoreForType(EKEntityType.Event, completion: { (granted) -> Void in
             
             if granted{
-                let calendars = self.eventStore.calendarsForEntityType(EKEntityTypeEvent)
+                let calendars = self.eventStore.calendarsForEntityType(EKEntityType.Event)
                 
-                var predicate = self.eventStore.predicateForEventsWithStartDate(startDate, endDate: endDate, calendars: calendars)
+                let predicate = self.eventStore.predicateForEventsWithStartDate(startDate, endDate: endDate, calendars: calendars)
                 let events = self.eventStore.eventsMatchingPredicate(predicate) as? [EKEvent]
                 if let _events = events{
                     completion(events!)
                 } else {
                 completion([])
                 }
-                println("p66 events: \(events)")
+                print("p66 events: \(events)")
             }else{
                 completion([])
             }
@@ -68,29 +68,25 @@ class EventManager: NSObject {
 
     func saveEvent(event:EKEvent) {
     
-        println("p72 event: \(event)")
+        print("p72 event: \(event)")
         
-        var saveError: NSError? = nil // Initially sets errors to nil
         
-        //let eventStore = EKEventStore()
-        
-        event
-        
-        eventStore.saveEvent(event, span: EKSpanThisEvent, error: &saveError)
-        
-        if saveError != nil {
-            println("p80 Saving EventItem to Calendar failed with error: \(saveError!)")
-        } else {
-            println("p91 Now Completed: '\(event.title)' to '\(event.calendar.title)' calendar.")
+        do {
+            try eventStore.saveEvent(event, span: EKSpan.ThisEvent)
+            print("p91 Now Completed: '\(event.title)' to '\(event.calendar.title)' calendar.")
+
+        } catch{
+                print("p80 Saving EventItem to Calendar failed with error")
         }
+        
     
     }   // end func saveEvent
     
     
     func getLocalEventCalendars() -> [AnyObject] {
-        var allCalendars: Array<EKCalendar> = EKEventStore().calendarsForEntityType(EKEntityTypeEvent) as! Array<EKCalendar>
+        var allCalendars: Array<EKCalendar> = EKEventStore().calendarsForEntityType(EKEntityType.Event) 
        // var localCalendars: [AnyObject] = NSMutableArray() as [AnyObject]
-        var localCalendars: [EKCalendar] = []
+        let localCalendars: [EKCalendar] = []
 
         for var i = 0; i < allCalendars.count; i++ {
             var currentCalendar: EKCalendar = allCalendars[i]

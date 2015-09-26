@@ -87,13 +87,13 @@ class vcTest1: UIViewController {
     
     func switchScreen(scene: String) {
         let mainStoryboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-        let vc : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier(scene) as! UIViewController
+        let vc : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier(scene) 
         self.presentViewController(vc, animated: true, completion: nil)
     }
     
     func displayAlert(title: String, message: String) {
         
-        var alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction((UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
             
             self.dismissViewControllerAnimated(true, completion: nil)
@@ -121,7 +121,11 @@ class vcTest1: UIViewController {
     
     func playSound(sound: NSURL){
         var error:NSError?
-        audioPlayer = AVAudioPlayer(contentsOfURL: sound, error: &error)
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOfURL: sound)
+        } catch var error1 as NSError {
+            error = error1
+        }
         audioPlayer.prepareToPlay()
         audioPlayer.play()
     }
@@ -143,8 +147,8 @@ class vcTest1: UIViewController {
         super.viewDidLoad()
         
         //Added left adn Right Swipe gestures. TODO Can add this to the General.swift Class? and call it?
-        var leftSwipe = UISwipeGestureRecognizer(target: self, action: Selector("handleSwipes:"))
-        var rightSwipe = UISwipeGestureRecognizer(target: self, action: Selector("handleSwipes:"))
+        let leftSwipe = UISwipeGestureRecognizer(target: self, action: Selector("handleSwipes:"))
+        let rightSwipe = UISwipeGestureRecognizer(target: self, action: Selector("handleSwipes:"))
         leftSwipe.direction = .Left
         rightSwipe.direction = .Right
         view.addGestureRecognizer(leftSwipe)
@@ -156,16 +160,16 @@ class vcTest1: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated);
         
-        var alertSound3: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("se_tap", ofType: "m4a")!)!
+        var alertSound3: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("se_tap", ofType: "m4a")!)
         //General.playSound(alertSound3!)
         
         playSound(alertSound3)
         
         // Do any additional setup after loading the view.
         
-        println("****p83 VIEWDIDLOAD processed?????: \(self.actionType)")
+        print("****p83 VIEWDIDLOAD processed?????: \(self.actionType)")
         
-        println("p85Main self.actionType: \(self.actionType)")
+        print("p85Main self.actionType: \(self.actionType)")
         
         let day         = defaults.stringForKey("day")
         let phone       = defaults.stringForKey("phone")
@@ -179,7 +183,7 @@ class vcTest1: UIViewController {
         var calendarName    = defaults.stringForKey("calendarName")
         
         let alert       = defaults.objectForKey("eventAlert") as! Double
-        let repeat      = defaults.stringForKey("eventRepeat")
+        let `repeat`      = defaults.stringForKey("eventRepeat")
         
         let strRaw      = defaults.stringForKey("strRaw")
         
@@ -193,36 +197,36 @@ class vcTest1: UIViewController {
        // var reminderArray = defaults.objectForKey("reminderArray") as! [String] //array of the items
         
         var reminderArray:[String] = []
-        println("p196 reminderArray: \(reminderArray)")
+        print("p196 reminderArray: \(reminderArray)")
 
         var reminderList   = defaults.stringForKey("reminderList")
-        println("p198 reminderList: \(reminderList)")
+        print("p198 reminderList: \(reminderList)")
         
         var reminderAlarm  = defaults.objectForKey("reminderAlarm")! as! NSDate
-        println("p201 reminderAlarm: \(reminderAlarm)")
+        print("p201 reminderAlarm: \(reminderAlarm)")
 
         
         
-        println("p111Main day: \(day)")
-        println("p111Main phone: \(phone)")
-        println("p111Main startDT: \(startDT)")
-        println("p111Main endDT: \(endDT)")
-        println("p111Main output: \(output)")
-        println("p111Main outputNote: \(outputNote)")
-        println("p111Main duration: \(duration)")
-        println("p111Main calandarName: \(calendarName)")
-        println("p111Main alert: \(alert)")
-        println("p111Main repeat: \(repeat)")
-        println("p111Main strRaw: \(strRaw)")
+        print("p111Main day: \(day)")
+        print("p111Main phone: \(phone)")
+        print("p111Main startDT: \(startDT)")
+        print("p111Main endDT: \(endDT)")
+        print("p111Main output: \(output)")
+        print("p111Main outputNote: \(outputNote)")
+        print("p111Main duration: \(duration)")
+        print("p111Main calandarName: \(calendarName)")
+        print("p111Main alert: \(alert)")
+        print("p111Main repeat: \(`repeat`)")
+        print("p111Main strRaw: \(strRaw)")
         
-        println("p111Main mainType: \(mainType)")
-        println("p111Main actionType: \(actionType)")
+        print("p111Main mainType: \(mainType)")
+        print("p111Main actionType: \(actionType)")
         
-        println("p111Main reminderTitle: \(reminderTitle)")
-        println("p111Main wordArrTrimmed: \(wordArrTrimmed)")
-        println("p111Main reminderList: \(reminderList)")
-        println("p111Main reminderArray: \(reminderArray)")
-        println("p111Main reminderAlarm: \(reminderAlarm)")
+        print("p111Main reminderTitle: \(reminderTitle)")
+        print("p111Main wordArrTrimmed: \(wordArrTrimmed)")
+        print("p111Main reminderList: \(reminderList)")
+        print("p111Main reminderArray: \(reminderArray)")
+        print("p111Main reminderAlarm: \(reminderAlarm)")
         
         
         // println("p112Main Representation: \(NSUserDefaults.standardUserDefaults().dictionaryRepresentation())")
@@ -249,8 +253,8 @@ class vcTest1: UIViewController {
         
         //resultDur.text = "test"    // BOMBS WHY????
         
-        println("p137 actionType: \(actionType)")
-        println("p138 resultType.text: \(resultType.text)")
+        print("p137 actionType: \(actionType)")
+        print("p138 resultType.text: \(resultType.text)")
         
         resultCalendar.text = calendarName
         
@@ -265,10 +269,10 @@ class vcTest1: UIViewController {
             resultAlert.text = "\(String(alertAsInt)) minutes"
         }
         
-        if (repeat == "0") {
+        if (`repeat` == "0") {
             resultRepeat.text = ""
         } else {
-            resultRepeat.text = repeat
+            resultRepeat.text = `repeat`
         }
         
         if (timeString == "00:00 PM") {
@@ -322,7 +326,7 @@ class vcTest1: UIViewController {
             resultRepeat.hidden = true
             resultAlert.hidden = true
             
-            println("p317 fullDT: \(fullDT)")
+            print("p317 fullDT: \(fullDT)")
             
             if fullDT != "12-12-2014 12:00 AM" {        // means a blank date
                 labelAlert.hidden = false
@@ -352,7 +356,7 @@ class vcTest1: UIViewController {
             resultTitle.text = reminderTitle
             resultEndDate.text = ""
             resultStartDate.text = ""
-            let stringOutput = ", ".join(wordArrTrimmed)
+            let stringOutput = wordArrTrimmed.joinWithSeparator(", ")
             
             // ____ Data Used _____________________________________
             labelDay.text       = "Title"   // default Day
@@ -426,7 +430,7 @@ class vcTest1: UIViewController {
             resultTitle.text = reminderTitle
             resultEndDate.text = ""
             resultStartDate.text = ""
-            let stringOutput = ", ".join(wordArrTrimmed)
+            let stringOutput = wordArrTrimmed.joinWithSeparator(", ")
             //resultDay.text = stringOutput
             resultDay.text = output
             
@@ -464,7 +468,7 @@ class vcTest1: UIViewController {
             resultCalendar.text = ""
             resultTitle.text = reminderTitle
             
-            let stringOutput = ", ".join(wordArrTrimmed)
+            let stringOutput = wordArrTrimmed.joinWithSeparator(", ")
             
             resultDay.text = stringOutput
             resultDay.sizeToFit()
@@ -476,13 +480,13 @@ class vcTest1: UIViewController {
             
             var frame = resultMultiLine1.frame
             
-            println("p364 contentSize.height:  \(contentSize.height)")
+            print("p364 contentSize.height:  \(contentSize.height)")
             
             
             frame.size.height = contentSize.height
             resultMultiLine1.frame = frame
             
-            println("p364 resultMultilne1.frame:  \(resultMultiLine1.frame)")
+            print("p364 resultMultilne1.frame:  \(resultMultiLine1.frame)")
             
             
             
@@ -539,7 +543,7 @@ class vcTest1: UIViewController {
         var alertSound1 = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("217-buttonclick03", ofType: "mp3")!)
         //  General.playSound(alertSound3!)
         
-        playSound(alertSound1!)
+        playSound(alertSound1)
         
         
         // CHECK Do I have to call this again??? else 12/12/2014 event
@@ -551,7 +555,7 @@ class vcTest1: UIViewController {
         
         var actionType:String    = defaults.stringForKey("actionType")!
         
-        println("p237 vcTest1, actionType: \(actionType)")
+        print("p237 vcTest1, actionType: \(actionType)")
         
         //actionType = "Reminder"
         
@@ -560,7 +564,7 @@ class vcTest1: UIViewController {
             
 // ____ Reminder Case buttonCreate____________________________________
         case "Reminder":
-            println("p242 in Reminder Switch")
+            print("p242 in Reminder Switch")
             
             let title:String = output
             
@@ -570,8 +574,8 @@ class vcTest1: UIViewController {
             var reminderArray       = defaults.objectForKey("reminderArray") as! [String] //array of the items
             var reminderList:String     = defaults.stringForKey("reminderList")!
             
-            println("p518 reminderArray: \(reminderArray)")
-            println("p519 reminderList: \(reminderList)")
+            print("p518 reminderArray: \(reminderArray)")
+            print("p519 reminderList: \(reminderList)")
             
             if reminderList == "default" {
                 calendarName = reminderList
@@ -579,8 +583,8 @@ class vcTest1: UIViewController {
                 output      = defaults.stringForKey("output")!
                 var outputArray:[String] = Array(arrayLiteral: output)  //make output into Array for func call below
                 
-                println("p550 calendarName: \(calendarName)")
-                println("p551 outputArray: \(outputArray)")
+                print("p550 calendarName: \(calendarName)")
+                print("p551 outputArray: \(outputArray)")
                 
                 ReminderManager.sharedInstance.addReminder(calendarName, items: outputArray)
                 
@@ -590,27 +594,27 @@ class vcTest1: UIViewController {
             for list in reminderArray {
                 
                 //var list = list.capitalizedString
-                println("p524 reminderList: \(reminderList)")
-                println("p525 list________: \(list)")
+                print("p524 reminderList: \(reminderList)")
+                print("p525 list________: \(list)")
                 
-                var lengthList = count(list)
-                var lengthReminderList = count(reminderList)
+                var lengthList = list.characters.count
+                var lengthReminderList = reminderList.characters.count
                 //println("p537 lengthList________: \(lengthList)")
                 //println("p537 lengthReminderList: \(lengthReminderList)")
                 
                 if (reminderList == list) {
-                    println("p528 we in condition reminderList: \(reminderList)")
+                    print("p528 we in condition reminderList: \(reminderList)")
                     calendarName = reminderList
                     
-                    println("p478 calendarName: \(calendarName)")
+                    print("p478 calendarName: \(calendarName)")
                     
                     resultCalendar.text = calendarName
                     
                     output      = defaults.stringForKey("output")!
                     var outputArray:[String] = Array(arrayLiteral: output)  //make output into Array for func call below
                     
-                    println("p550 calendarName: \(calendarName)")
-                    println("p551 outputArray: \(outputArray)")
+                    print("p550 calendarName: \(calendarName)")
+                    print("p551 outputArray: \(outputArray)")
                     
                     ReminderManager.sharedInstance.addReminder(calendarName, items: outputArray)
                     
@@ -622,7 +626,7 @@ class vcTest1: UIViewController {
             }
             
             if !reminderCreatedFlag {   // If is false
-                println("p571  we here reminderCreatedFlag: \(reminderCreatedFlag)")
+                print("p571  we here reminderCreatedFlag: \(reminderCreatedFlag)")
                 
                 calendarName = reminderList
                 
@@ -637,7 +641,7 @@ class vcTest1: UIViewController {
             
 // ____ Event Case ____________________________________
         case "Event":
-            println("p255 in Event Switch")
+            print("p255 in Event Switch")
             
             EventCode().createEvent()
             
@@ -645,7 +649,7 @@ class vcTest1: UIViewController {
             break;
             
         case "New List", "List" :
-            println("p530 in list Switch")
+            print("p530 in list Switch")
             
             var calendarName    = defaults.stringForKey("reminderList") //Sets Reminder Title
             var wordArrTrimmed  = defaults.objectForKey("wordArrTrimmed") as! [String] //array of the items
@@ -658,7 +662,7 @@ class vcTest1: UIViewController {
             
 // ____ New OneItem List ____________________________________
         case  "New OneItem List" :
-            println("p543 in New OneItem List Switch")
+            print("p543 in New OneItem List Switch")
             
             var calendarName    = defaults.stringForKey("reminderList") //Sets Reminder Title
             
@@ -673,7 +677,7 @@ class vcTest1: UIViewController {
             
 // ____ Phrase List ____________________________________
         case "Phrase List":
-            println("p378 in phraseList Switch")
+            print("p378 in phraseList Switch")
             
             var calendarName    = defaults.stringForKey("calendarName") //Sets Reminder Title
             var wordArrTrimmed  = defaults.objectForKey("wordArrTrimmed") as! [String] //array of the items
@@ -685,11 +689,11 @@ class vcTest1: UIViewController {
             break;
             
         case "Note":
-            println("p152 in note Switch")
+            print("p152 in note Switch")
             break;
             
         default:
-            println("p155 in default switch so assume Event")
+            print("p155 in default switch so assume Event")
             
             //TODO MIke add back fixed call...
             //DictateCode().insertEvent(eventStore, startDT: startDT, endDT: endDT, output: output, outputNote: outputNote, calendarName: calendarName )
@@ -704,13 +708,13 @@ class vcTest1: UIViewController {
         calendarName    = defaults.stringForKey("calendarName")!
         
         
-        println("p485 strRaw: \(strRaw)")
-        println("p485 output: \(output)")
-        println("p485 outputNote: \(outputNote)")
-        println("p485 fullDT: \(fullDT)")
-        println("p485 fullDTEnd: \(fullDTEnd)")
-        println("p485 calendarName: \(calendarName)")
-        println("p485 actionType: \(actionType)")
+        print("p485 strRaw: \(strRaw)")
+        print("p485 output: \(output)")
+        print("p485 outputNote: \(outputNote)")
+        print("p485 fullDT: \(fullDT)")
+        print("p485 fullDTEnd: \(fullDTEnd)")
+        print("p485 calendarName: \(calendarName)")
+        print("p485 actionType: \(actionType)")
         
         if (fullDT == "12-12-2014 12:00 AM") {      // set to "" for database
             fullDT = ""
@@ -729,14 +733,14 @@ class vcTest1: UIViewController {
         
         //TODO get these two fields from code!
         //TODO see here:
-        println("p478 Device and Phone munber in here: \(NSUserDefaults.standardUserDefaults().dictionaryRepresentation())")
+        print("p478 Device and Phone munber in here: \(NSUserDefaults.standardUserDefaults().dictionaryRepresentation())")
         
         rawDataObject["device"] = "iPhone"               //TODO hardcoded get device from code?
         rawDataObject["userPhoneNumber"] = "608-242-7700"               //TODO hardcoded get device from code?
         
         //TODO get this from login Screen, hard coded for now...
         
-        println("p374 PFUser.currentUser(): \(PFUser.currentUser())")
+        print("p374 PFUser.currentUser(): \(PFUser.currentUser())")
         
         //TODO fix PFuser when is nil can be nil???
         
@@ -745,14 +749,14 @@ class vcTest1: UIViewController {
         } else {
             // rawDataObject["userName"] = "Mike Hard Coded"
             
-            println("p383 PFUser.currentUser().username: \(PFUser.currentUser()!.username)")
+            print("p383 PFUser.currentUser().username: \(PFUser.currentUser()!.username)")
             
             
             // todo bombs below here.
             rawDataObject["userName"] = PFUser.currentUser()!.username
         }
         
-        println("p384 we here? ")
+        print("p384 we here? ")
         
         //rawDataObject["userName"] = "Mike Coded"
         
@@ -764,14 +768,14 @@ class vcTest1: UIViewController {
         //TODO somehow get and save email to parse database
         // query.whereKey(“username”, equalTo: PFUser.currentUser()?.username)
         
-        println("p358 query: \(query)")
+        print("p358 query: \(query)")
         
-        println("p354 PFUser.currentUser()?.email: \(PFUser.currentUser()?.email)")
+        print("p354 PFUser.currentUser()?.email: \(PFUser.currentUser()?.email)")
         
         // rawDataObject["userEmail"] = PFUser.currentUser()?.email
         
         rawDataObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
-            println("p362 vcTest1 rawDataObject has been saved.")
+            print("p362 vcTest1 rawDataObject has been saved.")
         }
         
 // ____ End Save to Parse Database ____________________________________
@@ -816,12 +820,12 @@ class vcTest1: UIViewController {
     
     @IBAction func buttonCancel(sender: AnyObject) {
         
-        println("p383 in buttonCancel")
+        print("p383 in buttonCancel")
         
         var alertSound124 = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("124-DeleteWhoosh", ofType: "mp3")!)
         //  General.playSound(alertSound3!)
         
-        playSound(alertSound124!)
+        playSound(alertSound124)
         
         General().cleardata()
         
@@ -906,7 +910,7 @@ extension UIColor
 }
 
 extension vcTest1 : UITextFieldDelegate {
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.view.endEditing(true)
     }
 }

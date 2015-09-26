@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SettingsCalendarTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource {
+class SettingsCalendarTableViewController: UITableViewController{
 
     override func viewDidLoad() {
         super.viewDidLoad()

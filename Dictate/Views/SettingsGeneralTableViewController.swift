@@ -9,13 +9,13 @@
 import UIKit
 import Parse
 
-class SettingsGeneralTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource {
+class SettingsGeneralTableViewController: UITableViewController{
     
     @IBAction func buttonLogout(sender: AnyObject) {
         PFUser.logOut()
-        var currentUser = PFUser.currentUser() // this will now be nil
+        let currentUser = PFUser.currentUser() // this will now be nil
         
-        println("p18 currentUser: \(currentUser)")
+        print("p18 currentUser: \(currentUser)")
         
         self.performSegueWithIdentifier("Logout", sender: self)
     }

@@ -56,7 +56,7 @@ class CalendarSelectionViewController: UITableViewController {
     
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) 
         
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         cell.backgroundColor = UIColor.blackColor()
@@ -67,7 +67,7 @@ class CalendarSelectionViewController: UITableViewController {
             cell.textLabel?.text = calendar.title
             cell.textLabel?.textColor =  UIColor(CGColor: calendar.CGColor)
             
-            if contains( self.selectedCalendars , calendar){
+            if self.selectedCalendars.contains(calendar){
                 cell.accessoryType = UITableViewCellAccessoryType.Checkmark
                 
             }else{
@@ -86,7 +86,7 @@ class CalendarSelectionViewController: UITableViewController {
         let cell = self.tableView.cellForRowAtIndexPath(indexPath)
         let selectedCalendar = self.calendarList[indexPath.row];
         
-            if contains( self.selectedCalendars , selectedCalendar){
+            if self.selectedCalendars.contains(selectedCalendar){
                 // Selected same cell, do nothing
               
                 

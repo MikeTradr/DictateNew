@@ -13,7 +13,7 @@ class ReminderPickerTableViewController: UITableViewController {
     
     let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
     
-    let reminderList = ReminderManager.sharedInstance.getCalendars(EKEntityTypeReminder)
+    let reminderList = ReminderManager.sharedInstance.getCalendars(EKEntityType.Reminder)
     
     var numberOfNewItems:Int    = 0
     var startDate:NSDate!
@@ -52,10 +52,10 @@ class ReminderPickerTableViewController: UITableViewController {
     }
 
     override func viewWillAppear(animated: Bool) {
-      let reminderList = ReminderManager.sharedInstance.getCalendars(EKEntityTypeReminder)
+      let reminderList = ReminderManager.sharedInstance.getCalendars(EKEntityType.Reminder)
 
-            println("p49 reminderList: \(reminderList)")
-            println("p50 reminderList.count: \(reminderList.count)")
+            print("p49 reminderList: \(reminderList)")
+            print("p50 reminderList.count: \(reminderList.count)")
             
         }
         
@@ -197,8 +197,8 @@ class ReminderPickerTableViewController: UITableViewController {
         selectedReminderIndex = indexPath.row
         let selectedReminder = reminderList[indexPath.row]
 
-        println("p192 selectedReminder: \(selectedReminder)")
-        println("p193 selectedReminder.title: \(selectedReminder.title)")
+        print("p192 selectedReminder: \(selectedReminder)")
+        print("p193 selectedReminder.title: \(selectedReminder.title)")
 
         //Anil added
         defaults.setObject(selectedReminder.calendarIdentifier, forKey: "defaultReminderList")            //sets title to calendarName for ParseDB

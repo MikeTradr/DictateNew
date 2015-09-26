@@ -93,7 +93,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         if application.respondsToSelector("registerUserNotificationSettings:") {
-            let userNotificationTypes = UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound
+            let userNotificationTypes: UIUserNotificationType = [UIUserNotificationType.Alert, UIUserNotificationType.Badge, UIUserNotificationType.Sound]
             let settings = UIUserNotificationSettings(forTypes: userNotificationTypes, categories: nil)
             application.registerUserNotificationSettings(settings)
             application.registerForRemoteNotifications()
@@ -103,7 +103,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             application.registerForRemoteNotificationTypes(types)
             */
             
-            let types = UIUserNotificationType.Badge | UIUserNotificationType.Alert | UIUserNotificationType.Sound
+            let types: UIUserNotificationType = [UIUserNotificationType.Badge, UIUserNotificationType.Alert, UIUserNotificationType.Sound]
             //TODO FIX ERROR HERE
             // application.registerForRemoteNotificationTypes(types)
             
@@ -133,21 +133,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //get Access to Reminders
         NSLog("%@ p127 appDelegate", self)
-        println("p128 call getAccessToEventStoreForType")
-        ReminderManager.sharedInstance.getAccessToEventStoreForType(EKEntityTypeReminder, completion: { (granted) -> Void in
+        print("p128 call getAccessToEventStoreForType")
+        ReminderManager.sharedInstance.getAccessToEventStoreForType(EKEntityType.Reminder, completion: { (granted) -> Void in
             
             if granted{
-                println("p132 Reminders granted: \(granted)")
+                print("p132 Reminders granted: \(granted)")
                 }
         })
         
         //get Access to Events
         NSLog("%@ p137 appDelegate", self)
-        println("p138 call getAccessToEventStoreForType")
-        EventManager.sharedInstance.getAccessToEventStoreForType(EKEntityTypeEvent, completion: { (granted) -> Void in
+        print("p138 call getAccessToEventStoreForType")
+        EventManager.sharedInstance.getAccessToEventStoreForType(EKEntityType.Event, completion: { (granted) -> Void in
             
             if granted{
-                println("p142 Events granted: \(granted)")
+                print("p142 Events granted: \(granted)")
             }
         })
 
@@ -161,7 +161,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //make Reminder's List Array
         NSLog("%@ p127 appDelegate", self)
-        println("p128 here")
+        print("p128 here")
         ReminderManager.sharedInstance.createReminderArray()
         
         //make Calendar's List Array
@@ -180,9 +180,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //TODO Anil can we pull users device info, system version, users  location? city, state country? and stuff??? to save to parse db
         
         let app = UIApplication.sharedApplication()
-        println("p147 app: \(app)")
+        print("p147 app: \(app)")
         
-        println("p149 Device and Phone munber in here: \(NSUserDefaults.standardUserDefaults().dictionaryRepresentation())")
+        print("p149 Device and Phone munber in here: \(NSUserDefaults.standardUserDefaults().dictionaryRepresentation())")
 
         // above here attempted to get device info
         
@@ -204,9 +204,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
         if error.code == 3010 {
-            println("Push notifications are not supported in the iOS Simulator.")
+            print("Push notifications are not supported in the iOS Simulator.")
         } else {
-            println("application:didFailToRegisterForRemoteNotificationsWithError: %@", error)
+            print("application:didFailToRegisterForRemoteNotificationsWithError: %@", error)
         }
     }
     

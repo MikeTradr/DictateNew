@@ -21,7 +21,11 @@ class SettingsTableViewController: UITableViewController{
     
     func playSound(sound: NSURL){
         var error:NSError?
-        audioPlayer = AVAudioPlayer(contentsOfURL: sound, error: &error)
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOfURL: sound)
+        } catch var error1 as NSError {
+            error = error1
+        }
         audioPlayer.prepareToPlay()
         audioPlayer.play()
     }
@@ -37,17 +41,17 @@ class SettingsTableViewController: UITableViewController{
     }
     
     override func viewWillAppear(animated: Bool) {
-        var alertSound3: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("262-buttonclick57", ofType: "mp3")!)!
+        var alertSound3: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("262-buttonclick57", ofType: "mp3")!)
         //General.playSound(alertSound3!)
         playSound(alertSound3)
         
         
         let selectedReminderIdentifier = defaults.objectForKey("defaultReminderList") as? String
-        println("p44 selectedReminderIdentifier: \(selectedReminderIdentifier)")
+        print("p44 selectedReminderIdentifier: \(selectedReminderIdentifier)")
         
         let reminder = ReminderManager.sharedInstance.eventStore.calendarWithIdentifier("selectedReminderIdentifier")
         
-        println("p46 reminder: \(reminder)")
+        print("p46 reminder: \(reminder)")
         
         // labelReminderDefault.text = reminder.title
         
@@ -161,7 +165,7 @@ class SettingsTableViewController: UITableViewController{
 }
 
 extension SettingsTableViewController : UITextFieldDelegate {
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.view.endEditing(true)
     }
 }

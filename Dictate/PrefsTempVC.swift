@@ -48,7 +48,11 @@ class PrefsTempVC: UIViewController, UITextFieldDelegate  {
     
     func playSound(sound: NSURL){
         var error:NSError?
-        audioPlayer = AVAudioPlayer(contentsOfURL: sound, error: &error)
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOfURL: sound)
+        } catch var error1 as NSError {
+            error = error1
+        }
         audioPlayer.prepareToPlay()
         audioPlayer.play()
     }
@@ -65,7 +69,7 @@ class PrefsTempVC: UIViewController, UITextFieldDelegate  {
     
     func switchScreen(scene: String) {
         let mainStoryboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-        let vc : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier(scene) as! UIViewController
+        let vc : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier(scene) 
         self.presentViewController(vc, animated: true, completion: nil)
     }
     
@@ -74,7 +78,7 @@ class PrefsTempVC: UIViewController, UITextFieldDelegate  {
             self.tabBarController?.selectedIndex = 1
         }
         if (sender.direction == .Right) {
-            var alertSound3: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("122-whoosh03", ofType: "mp3")!)!
+            var alertSound3: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("122-whoosh03", ofType: "mp3")!)
             //General.playSound(alertSound3!)
             playSound(alertSound3)
             
@@ -107,21 +111,21 @@ class PrefsTempVC: UIViewController, UITextFieldDelegate  {
         
         
         
-        println("p27 prefsDefaultCalendar.text: \(prefsDefaultCalendar.text)")
-        println("p30 prefsDefaultDuration.text: \(prefsDefaultDuration.text)")
+        print("p27 prefsDefaultCalendar.text: \(prefsDefaultCalendar.text)")
+        print("p30 prefsDefaultDuration.text: \(prefsDefaultDuration.text)")
         
-        let userDefaultDuration = (prefsDefaultDuration.text as NSString).doubleValue
+        let userDefaultDuration = NSString(string:prefsDefaultDuration.text!).doubleValue
         
         defaults.setObject(prefsDefaultCalendar.text, forKey: "calendarName")
         defaults.setObject(userDefaultDuration, forKey: "eventDuration")
         
         let seeEventDuration:Double    = defaults.objectForKey("eventDuration") as! Double
         
-        println("p59 seeEventDuration from NSdefaults: \(seeEventDuration)")
+        print("p59 seeEventDuration from NSdefaults: \(seeEventDuration)")
         
         
         let calendarName    = defaults.stringForKey("calendarName")
-        println("p62 calandarName: \(calendarName)")
+        print("p62 calandarName: \(calendarName)")
         
         self.myLabel.text = defaults.stringForKey("prefsDefaultCalendarName")
 
@@ -130,7 +134,7 @@ class PrefsTempVC: UIViewController, UITextFieldDelegate  {
     }
     
     override func viewWillAppear(animated: Bool) {
-        var alertSound3: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("262-buttonclick57", ofType: "mp3")!)!
+        var alertSound3: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("262-buttonclick57", ofType: "mp3")!)
         //General.playSound(alertSound3!)
         playSound(alertSound3)
     }
@@ -143,7 +147,7 @@ class PrefsTempVC: UIViewController, UITextFieldDelegate  {
     @IBAction func buttonGoToNewSettingsScene(sender: AnyObject) {
         
         let storyboard = UIStoryboard(name: "Settings", bundle: nil)
-        let vc = storyboard.instantiateViewControllerWithIdentifier("someViewController") as! UIViewController
+        let vc = storyboard.instantiateViewControllerWithIdentifier("someViewController") 
         self.presentViewController(vc, animated: true, completion: nil)
         
     }
@@ -154,15 +158,15 @@ class PrefsTempVC: UIViewController, UITextFieldDelegate  {
         
        // defaults.setObject(prefsDefaultCalendar.text, forKey: "prefsDefaultCalendarName")
         
-        println("p97 myLabel.text: \(myLabel.text)")
+        print("p97 myLabel.text: \(myLabel.text)")
 
         defaults.setObject(myLabel.text, forKey: "prefsDefaultCalendarName")
         
         let testPrefsCal = defaults.stringForKey("prefsDefaultCalendarName")
         
-        println("p103 testPrefsCal: \(testPrefsCal)")
+        print("p103 testPrefsCal: \(testPrefsCal)")
         
-        println("p105 userDefaultDuration: \(userDefaultDuration)")
+        print("p105 userDefaultDuration: \(userDefaultDuration)")
 
         
         
@@ -170,7 +174,7 @@ class PrefsTempVC: UIViewController, UITextFieldDelegate  {
         
         let seeEventDuration:Double    = defaults.objectForKey("eventDuration") as! Double
         
-        println("p91 seeEventDuration from NSdefaults: \(seeEventDuration)")
+        print("p91 seeEventDuration from NSdefaults: \(seeEventDuration)")
                 
         let calendarName    = defaults.stringForKey("calendarName")
         
@@ -178,9 +182,9 @@ class PrefsTempVC: UIViewController, UITextFieldDelegate  {
         
         defaults.setObject(seeCalendar, forKey: "calendar")
 
-        println("p95 seeCalendar: \(seeCalendar)")
+        print("p95 seeCalendar: \(seeCalendar)")
         
-        println("p108Main Representation: \(defaults.dictionaryRepresentation())")
+        print("p108Main Representation: \(defaults.dictionaryRepresentation())")
         
         //self.switchScreen("tabBarController")
         
@@ -194,12 +198,12 @@ class PrefsTempVC: UIViewController, UITextFieldDelegate  {
         
         //TODO Mike add Parse databse logout code.
         
-        println("p163 Prefs, Logout Func")
+        print("p163 Prefs, Logout Func")
         
         PFUser.logOut()
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewControllerWithIdentifier("Login") as! UIViewController
+        let vc = storyboard.instantiateViewControllerWithIdentifier("Login") 
         self.presentViewController(vc, animated: true, completion: nil)
         
         //self.performSegueWithIdentifier("login", sender: self)
@@ -373,8 +377,8 @@ class PrefsTempVC: UIViewController, UITextFieldDelegate  {
 }
 
 
-extension PrefsTempVC : UITextFieldDelegate {
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+extension PrefsTempVC {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.view.endEditing(true)
     }
 }

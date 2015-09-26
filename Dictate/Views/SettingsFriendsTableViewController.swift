@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SettingsFriendsTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource {
+class SettingsFriendsTableViewController: UITableViewController{
 
     override func viewDidLoad() {
         super.viewDidLoad()

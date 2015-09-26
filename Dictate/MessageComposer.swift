@@ -26,7 +26,7 @@ class SendMessage: UIViewController, MFMessageComposeViewControllerDelegate {
     }
     
     // this function will be called after the user presses the cancel button or sends the text
-    func messageComposeViewController(controller: MFMessageComposeViewController!, didFinishWithResult result: MessageComposeResult) {
+    func messageComposeViewController(controller: MFMessageComposeViewController, didFinishWithResult result: MessageComposeResult) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     

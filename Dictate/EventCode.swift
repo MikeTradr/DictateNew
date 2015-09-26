@@ -27,7 +27,7 @@ class EventCode: NSObject {
     
     func createEvent() {
         
-        println("p18 WE HERE func createEvent")
+        print("p18 WE HERE func createEvent")
         
         var store : EKEventStore = EKEventStore()               // this old delete?  TODO
         
@@ -36,8 +36,8 @@ class EventCode: NSObject {
         let mainType:String    = defaults.stringForKey("mainType")!
         let actionType:String    = defaults.stringForKey("actionType")!
         
-        println("p75 mainType: \(mainType)")
-        println("p26 actionType: \(actionType)")
+        print("p75 mainType: \(mainType)")
+        print("p26 actionType: \(actionType)")
         
         let day         = defaults.stringForKey("day")
         let phone       = defaults.stringForKey("phone")
@@ -52,42 +52,42 @@ class EventCode: NSObject {
         var calendarName    = defaults.stringForKey("calendarName")
         
         let alert       = defaults.objectForKey("eventAlert") as! Double
-        let repeat      = defaults.stringForKey("eventRepeat")
+        let `repeat`      = defaults.stringForKey("eventRepeat")
         
         let strRaw      = defaults.stringForKey("strRaw")
         
         
         
-        println("p71 phone: \(phone)")
-        println("p79 eventDuration: \(eventDuration)")
-        println("p80 outputNote: \(outputNote)")
-        println("p81 output: \(output)")
-        println("p98 mainType: \(mainType)")
+        print("p71 phone: \(phone)")
+        print("p79 eventDuration: \(eventDuration)")
+        print("p80 outputNote: \(outputNote)")
+        print("p81 output: \(output)")
+        print("p98 mainType: \(mainType)")
         
-        println("p114 calandarName: \(calendarName)")       //TODO WHY is "" ????
+        print("p114 calandarName: \(calendarName)")       //TODO WHY is "" ????
         
         if (calendarName == "") {                       // calendarName not set in parse so pill it from prefDefault
             calendarName = defaults.stringForKey("prefsDefaultCalendarName")
         }
         
-        println("628 *** startDT: \(startDT)")
-        println("629 endDT: \(endDT)")
-        println("######## p804 calendarName: \(calendarName)")
+        print("628 *** startDT: \(startDT)")
+        print("629 endDT: \(endDT)")
+        print("######## p804 calendarName: \(calendarName)")
         
         if (calendarName == "") {
-            println("p68 we here: \(calendarName)")
+            print("p68 we here: \(calendarName)")
             var calendarName = "dictate events"
         }
         
         //calendarName = "dictate events"
         
         
-        println("p71 calendarName: \(calendarName)")
+        print("p71 calendarName: \(calendarName)")
         
         
         // 1
-        let calendars = eventStore.calendarsForEntityType(EKEntityTypeEvent)
-            as! [EKCalendar]
+        let calendars = eventStore.calendarsForEntityType(EKEntityType.Event)
+            
         
         var userCalendarsArr = [String]()
  /*
@@ -110,13 +110,13 @@ class EventCode: NSObject {
         var event:EKEvent = EKEvent(eventStore: eventStore)
         
         event.calendar = eventStore.defaultCalendarForNewEvents
-        println("p97 event.calendar = \(event.calendar)")
+        print("p97 event.calendar = \(event.calendar)")
         
         var calendarTitle = event.calendar.title
-        println("p100 calendarTitle = \(calendarTitle)")
+        print("p100 calendarTitle = \(calendarTitle)")
         
         var calendarColor = event.calendar.CGColor
-        println("p103 calendarColor = \(calendarColor)")
+        print("p103 calendarColor = \(calendarColor)")
         
         
         
@@ -130,8 +130,8 @@ class EventCode: NSObject {
             
             // TODO FIX
             
-            println("p119 calendar.title.lowercaseString = \(calendar.title.lowercaseString)")
-            println("p120 calendarName.lowercaseString = \(calendarName!.lowercaseString)")
+            print("p119 calendar.title.lowercaseString = \(calendar.title.lowercaseString)")
+            print("p120 calendarName.lowercaseString = \(calendarName!.lowercaseString)")
             
             
             
@@ -140,13 +140,13 @@ class EventCode: NSObject {
                 //if calendar.title.lowercaseString == calendarTitle.lowercaseString {     //need match here to create event on calendar!!!
                 
                 
-                println("p839 WE HERE?: \(calendarName)")
+                print("p839 WE HERE?: \(calendarName)")
                 
                 // 3
                 //let startDate = NSDate()
-                println("p638 *** startDT: \(startDT)")
-                println("p639 endDT: \(endDT)")
-                println("p833 calendarName = \(calendarName)")
+                print("p638 *** startDT: \(startDT)")
+                print("p639 endDT: \(endDT)")
+                print("p833 calendarName = \(calendarName)")
                 
                 
                 // Duration, set End Date Time
@@ -175,7 +175,7 @@ class EventCode: NSObject {
                 //let alertMinutes:Double = 10
                 
                 let eventAlert = defaults.objectForKey("eventAlert") as! Double
-                println("p1185 eventAlert = \(eventAlert)")
+                print("p1185 eventAlert = \(eventAlert)")
                 
                 if (eventAlert != 0.0){
                     let alertOffset:Double = -( eventAlert * 60 )            //60 minutes * 60 seconds = 1 hour
@@ -198,15 +198,15 @@ class EventCode: NSObject {
                 
                 let eventRepeat:Int = defaults.objectForKey("eventRepeat") as! Int
                 
-                println("p1456 eventRepeat = \(eventRepeat)")
+                print("p1456 eventRepeat = \(eventRepeat)")
                 
-                let everySunday = EKRecurrenceDayOfWeek(1)
+                let everySunday = EKRecurrenceDayOfWeek()
                 let january = 1
                 
                 var returnValue: String = ""
                 
                 // TODO Fix why this below errors????
-                let endRecurrence: EKRecurrenceEnd = EKRecurrenceEnd.recurrenceEndWithOccurrenceCount(5) as! EKRecurrenceEnd
+                let endRecurrence: EKRecurrenceEnd = EKRecurrenceEnd(occurrenceCount: 5)
                 //let endRecurrence: Int = 5
                 
                 let oneYear:NSTimeInterval = 365 * 24 * 60 * 60
@@ -215,16 +215,16 @@ class EventCode: NSObject {
                 let oneYearFromNow = startDT.dateByAddingTimeInterval(oneYear)
                 let fiveDaysFromNow = startDT.dateByAddingTimeInterval(fiveDays)
                 
-                let recurringEnd = EKRecurrenceEnd.recurrenceEndWithEndDate(oneYearFromNow) as! EKRecurrenceEnd
+                let recurringEnd = EKRecurrenceEnd(endDate:oneYearFromNow)
                 
-                let recurringFive = EKRecurrenceEnd.recurrenceEndWithEndDate(fiveDaysFromNow) as! EKRecurrenceEnd
+                let recurringFive = EKRecurrenceEnd(endDate: fiveDaysFromNow)
                 
                 
                 
                 switch (eventRepeat){  // 1 = daily, 2 = weekly, 3 = yearly, 4 = monthly   I made this to pass then change later in event method
                 case 1:
                     let recur = EKRecurrenceRule(
-                        recurrenceWithFrequency:EKRecurrenceFrequencyDaily,
+                        recurrenceWithFrequency:EKRecurrenceFrequency.Daily,
                         interval:3,                     // test 3 days
                         //daysOfTheWeek:[everySunday],
                         daysOfTheWeek:nil,
@@ -244,10 +244,10 @@ class EventCode: NSObject {
                     
                     
                 case 2:
-                    println("p1491  in case 2? eventRepeat = \(eventRepeat)")
+                    print("p1491  in case 2? eventRepeat = \(eventRepeat)")
                     
                     let recur = EKRecurrenceRule(
-                        recurrenceWithFrequency:EKRecurrenceFrequencyWeekly,
+                        recurrenceWithFrequency:EKRecurrenceFrequency.Weekly,
                         interval:1,
                         end: recurringEnd)
                     
@@ -257,7 +257,7 @@ class EventCode: NSObject {
                     
                 case 3:
                     let recur = EKRecurrenceRule(
-                        recurrenceWithFrequency:EKRecurrenceFrequencyYearly,
+                        recurrenceWithFrequency:EKRecurrenceFrequency.Yearly,
                         interval:1,
                         //daysOfTheWeek:[everySunday],
                         daysOfTheWeek:nil,
@@ -275,7 +275,7 @@ class EventCode: NSObject {
                     
                 case 4:
                     let recur = EKRecurrenceRule(
-                        recurrenceWithFrequency:EKRecurrenceFrequencyMonthly,
+                        recurrenceWithFrequency:EKRecurrenceFrequency.Monthly,
                         interval:1,
                         //daysOfTheWeek:[everySunday],
                         daysOfTheWeek:nil,
@@ -291,18 +291,18 @@ class EventCode: NSObject {
                     
                     break;
                     
-                default:   println("p1511 no eventRepeat word matched")
+                default:   print("p1511 no eventRepeat word matched")
                 break;
                 }
                 
 
  
-                println("p862 output: \(output)")
-                println("p863 startDT: \(startDT)")
-                println("p864 endDT: \(endDT)")
-                println("p865 from func endDate: \(endDate)")
+                print("p862 output: \(output)")
+                print("p863 startDT: \(startDT)")
+                print("p864 endDT: \(endDT)")
+                print("p865 from func endDate: \(endDate)")
                 
-                event.title = output
+                event.title = output!
                 event.startDate = startDT
                 event.endDate = endDate
                 event.notes = outputNote
@@ -311,17 +311,15 @@ class EventCode: NSObject {
                 
                 // TODO ADD eventDuration field to screen
                 
-                var saveError : NSError? = nil // Initially sets errors to nil
-                
-                let result = eventStore.saveEvent(event, span: EKSpanThisEvent, error: &saveError)  // Commits changes and allows saveEvent to change error from nil
-                
-                
-                //// Following checks for errors and prints result to Debug Area ////
-                if saveError != nil {
-                    println("Saving event to Calendar failed with error: \(saveError!)")
-                } else {
-                    println("p283 Successfully saved '\(event.title)' to '\(event.calendar.title)' calendar.")
-                }
+                let result: Bool
+                do {
+                    try eventStore.saveEvent(event, span: EKSpan.ThisEvent)
+                    result = true
+                    print("p283 Successfully saved '\(event.title)' to '\(event.calendar.title)' calendar.")
+                } catch  let error as NSError{
+                    result = false
+                    print("Saving event to Calendar failed with error: \(error.description)")
+                }  // Commits changes and allows saveEvent to change error from nil
                 
             }
             

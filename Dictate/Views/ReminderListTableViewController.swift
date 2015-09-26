@@ -8,14 +8,14 @@
 
 import UIKit
 
-class ReminderListableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource {
+class ReminderListableViewController: UITableViewController{
     
     @IBOutlet weak var buttonBackToReminders: UIButton!
     
     @IBAction func buttonBackToReminders(sender: AnyObject) {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewControllerWithIdentifier("ToDoList") as! UIViewController
+        let vc = storyboard.instantiateViewControllerWithIdentifier("ToDoList") 
         self.presentViewController(vc, animated: true, completion: nil)
     }
     

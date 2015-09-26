@@ -16,7 +16,7 @@ class SettingsIC: WKInterfaceController {
     var audioPlayer = AVAudioPlayer()
     
     @IBAction func buttonReminders() {
-        println("w19 in buttom Reminders")
+        print("w19 in buttom Reminders")
           presentControllerWithName("ReminderPicker", context: "Settings")    //TODO why no "settings" shown ???
     }
     
@@ -30,7 +30,7 @@ class SettingsIC: WKInterfaceController {
     
     
     @IBAction func buttonMic() {
-        var alertSound1: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("button-14", ofType: "mp3")!)!
+        var alertSound1: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("button-14", ofType: "mp3")!)
         //General.playSound(alertSound3!)
         
         //Second, we currently can't control sounds or haptic feedback from our app's code.
@@ -53,7 +53,11 @@ class SettingsIC: WKInterfaceController {
 
     func playSound(sound: NSURL){
         var error:NSError?
-        self.audioPlayer = AVAudioPlayer(contentsOfURL: sound, error: &error)
+        do {
+            self.audioPlayer = try AVAudioPlayer(contentsOfURL: sound)
+        } catch var error1 as NSError {
+            error = error1
+        }
         self.audioPlayer.prepareToPlay()
         //player.delegate = self player.play()
         //audioPlayer.delegate = self
@@ -64,11 +68,11 @@ class SettingsIC: WKInterfaceController {
         super.awakeWithContext(context)
         
         // Configure interface objects here.
-        println("p19 PreferencesIC")
+        print("p19 PreferencesIC")
         
         super.awakeWithContext(context)
         
-        var sceneTitle:String = (context as? String)!
+        let sceneTitle:String = (context as? String)!
         self.setTitle("«\(sceneTitle)")
         //self.setTitle("Settings")
 
@@ -79,7 +83,7 @@ class SettingsIC: WKInterfaceController {
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
-        println("p30 in PreferncesIC willActivate")
+        print("p30 in PreferncesIC willActivate")
 
     }
 

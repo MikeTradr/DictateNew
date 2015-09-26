@@ -31,7 +31,7 @@ class LoginViewController: UIViewController {
     
     func displayAlert(title: String, message: String) {
         
-        var alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
             self.dismissViewControllerAnimated(true, completion: nil)
         }))
@@ -46,7 +46,7 @@ class LoginViewController: UIViewController {
         
         
         let storyboard = UIStoryboard(name: "oldPrefs", bundle: nil)
-        let vc = storyboard.instantiateViewControllerWithIdentifier("someViewController") as! UIViewController
+        let vc = storyboard.instantiateViewControllerWithIdentifier("someViewController") 
         self.presentViewController(vc, animated: true, completion: nil)
         
         
@@ -56,7 +56,7 @@ class LoginViewController: UIViewController {
     
     @IBAction func buttonForceGo(sender: AnyObject) {
         
-        println("p47 We here buttonForceGo?")
+        print("p47 We here buttonForceGo?")
         
         var errorMessage = "Please try again later"
         
@@ -64,7 +64,7 @@ class LoginViewController: UIViewController {
         
         PFUser.logInWithUsernameInBackground("force", password: "force", block: { (user, error) -> Void in
             
-            println("119 We here logged in?")
+            print("119 We here logged in?")
             
             self.activityIndicator.stopAnimating()
             UIApplication.sharedApplication().endIgnoringInteractionEvents()
@@ -76,13 +76,13 @@ class LoginViewController: UIViewController {
                 
             } else {
                 
-                if let errorString = error!.userInfo?["error"] as? String {
+                if let errorString = error!.userInfo["error"] as? String {
                     
                     errorMessage = errorString
                     
                 }
                 
-                println("140 We here failed signup?")
+                print("140 We here failed signup?")
                 //println("140 username.text: \(username.text)")
                 //println("140 password.text: \(password.text)")
                 //println("140 self.email.text: \(email.text)")
@@ -105,7 +105,7 @@ class LoginViewController: UIViewController {
     
     @IBAction func signUp(sender: AnyObject) {
         
-        println("p44 We here buttonSignUp?")
+        print("p44 We here buttonSignUp?")
         
         //TODO  if username.text == "" || password.text == "" || email.text == "" {
         
@@ -137,7 +137,7 @@ class LoginViewController: UIViewController {
                 
                 user.signUpInBackgroundWithBlock({ (success, error) -> Void in
                     
-                    println("88 We here user.signUpInBackgroundWithBlock")
+                    print("88 We here user.signUpInBackgroundWithBlock")
                     
                     self.activityIndicator.stopAnimating()
                     UIApplication.sharedApplication().endIgnoringInteractionEvents()
@@ -150,7 +150,7 @@ class LoginViewController: UIViewController {
                         
                     } else {
                         
-                        if let errorString = error!.userInfo?["error"] as? String {
+                        if let errorString = error!.userInfo["error"] as? String {
                             
                             errorMessage = errorString
                             
@@ -165,13 +165,13 @@ class LoginViewController: UIViewController {
                 
             } else {
                 
-                println("136 username.text: \(username.text)")
-                println("136 password.text: \(password.text)")
-                println("136 self.email.text: \(email.text)")
+                print("136 username.text: \(username.text)")
+                print("136 password.text: \(password.text)")
+                print("136 self.email.text: \(email.text)")
                 
-                PFUser.logInWithUsernameInBackground(username.text, password: password.text, block: { (user, error) -> Void in
+                PFUser.logInWithUsernameInBackground(username.text!, password: password.text!, block: { (user, error) -> Void in
                     
-                    println("119 We here logged in?")
+                    print("119 We here logged in?")
                     
                     self.activityIndicator.stopAnimating()
                     UIApplication.sharedApplication().endIgnoringInteractionEvents()
@@ -183,13 +183,13 @@ class LoginViewController: UIViewController {
                         
                     } else {
                         
-                        if let errorString = error!.userInfo?["error"] as? String {
+                        if let errorString = error!.userInfo["error"] as? String {
                             
                             errorMessage = errorString
                             
                         }
                         
-                        println("140 We here failed signup?")
+                        print("140 We here failed signup?")
                         //println("140 username.text: \(username.text)")
                         //println("140 password.text: \(password.text)")
                         //println("140 self.email.text: \(email.text)")
@@ -211,7 +211,7 @@ class LoginViewController: UIViewController {
     
     @IBAction func buttonLogin(sender: AnyObject) {
         
-        println("p134 We here buttonLogin?")
+        print("p134 We here buttonLogin?")
         
         
         if signupActive == true {
@@ -250,11 +250,11 @@ class LoginViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         
-        println("190 We in LoginViewController viewDidAppear")
+        print("190 We in LoginViewController viewDidAppear")
         
         PFUser.logOut()
         
-        println("194 PFUser.currentUser(): \(PFUser.currentUser())")
+        print("194 PFUser.currentUser(): \(PFUser.currentUser())")
         
         
         

@@ -13,7 +13,7 @@ import EventKit
 import EventKitUI
 import AVFoundation
 
-class ToDoTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource {
+class ToDoTableViewController: UITableViewController {
     
 
     var audioPlayer = AVAudioPlayer()
@@ -41,7 +41,7 @@ class ToDoTableViewController: UITableViewController, UITableViewDelegate, UITab
     @IBAction func buttonReminderListSelector(sender: AnyObject) {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewControllerWithIdentifier("ShowReminders") as! UIViewController
+        let vc = storyboard.instantiateViewControllerWithIdentifier("ShowReminders") 
         self.presentViewController(vc, animated: true, completion: nil)
         
         
@@ -57,8 +57,8 @@ class ToDoTableViewController: UITableViewController, UITableViewDelegate, UITab
         setStartDateAndEndDate()
         
         //Added left and Right Swipe gestures. TODO Can add this to the General.swift Class? and call it?
-        var leftSwipe = UISwipeGestureRecognizer(target: self, action: Selector("handleSwipes:"))
-        var rightSwipe = UISwipeGestureRecognizer(target: self, action: Selector("handleSwipes:"))
+        let leftSwipe = UISwipeGestureRecognizer(target: self, action: Selector("handleSwipes:"))
+        let rightSwipe = UISwipeGestureRecognizer(target: self, action: Selector("handleSwipes:"))
         leftSwipe.direction = .Left
         rightSwipe.direction = .Right
         view.addGestureRecognizer(leftSwipe)
@@ -73,8 +73,8 @@ class ToDoTableViewController: UITableViewController, UITableViewDelegate, UITab
             self.reminders = reminders
             self.tableView.reloadData()
             
-            println("p76 self.reminders: \(self.reminders)")
-            println("p77 self.reminders.count: \(self.reminders.count)")
+            print("p76 self.reminders: \(self.reminders)")
+            print("p77 self.reminders.count: \(self.reminders.count)")
             
         })
         
@@ -93,12 +93,12 @@ class ToDoTableViewController: UITableViewController, UITableViewDelegate, UITab
         if (self.numberOfNewItems == 0) {
             self.tabBarItem.badgeValue = nil;
         } else {
-            println("p60 we here? self.numberOfNewItems: \(self.numberOfNewItems)")
+            print("p60 we here? self.numberOfNewItems: \(self.numberOfNewItems)")
             self.tabBarItem.badgeValue = String(self.reminders.count)
         }
         
         
-        var alertSound3: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("button-14", ofType: "mp3")!)!
+        var alertSound3: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("button-14", ofType: "mp3")!)
         //General.playSound(alertSound3!)
         playSound(alertSound3)
     }
@@ -117,7 +117,11 @@ class ToDoTableViewController: UITableViewController, UITableViewDelegate, UITab
     
     func playSound(sound: NSURL){       //Added by Mike 082215
         var error:NSError?
-        audioPlayer = AVAudioPlayer(contentsOfURL: sound, error: &error)
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOfURL: sound)
+        } catch var error1 as NSError {
+            error = error1
+        }
         audioPlayer.prepareToPlay()
         audioPlayer.play()
     }
@@ -178,7 +182,7 @@ class ToDoTableViewController: UITableViewController, UITableViewDelegate, UITab
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        var cell:ToDoTableCell = tableView.dequeueReusableCellWithIdentifier("ReminderCell") as! ToDoTableCell
+        let cell:ToDoTableCell = tableView.dequeueReusableCellWithIdentifier("ReminderCell") as! ToDoTableCell
         cell.selectionStyle = .None
         let reminder = reminders[indexPath.row]
         cell.titleLabel.text = reminder.title
@@ -229,7 +233,7 @@ class ToDoTableViewController: UITableViewController, UITableViewDelegate, UITab
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if segue.identifier == "ReminderEditSegue"{
-            let indexPath = self.tableView.indexPathForSelectedRow()!
+            let indexPath = self.tableView.indexPathForSelectedRow!
             let selectedReminder =  reminders[indexPath.row];
             let navController = segue.destinationViewController as! UINavigationController
             let destController = navController.topViewController as! ReminderEditorViewController

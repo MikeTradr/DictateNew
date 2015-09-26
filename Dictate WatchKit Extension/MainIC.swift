@@ -140,15 +140,15 @@ class MainIC: WKInterfaceController {
             //println("35 Results: \(results[0])")
             
             if results != nil {
-                println("There are objects")
-                self.str = results[0] as! String
-                println("### 92 str: \(self.str)")
+                print("There are objects")
+                self.str = results![0] as! String
+                print("### 92 str: \(self.str)")
                 
             } else {
-                println("No objects")
+                print("No objects")
             }
             
-            println("### 99 str: \(self.str)")
+            print("### 99 str: \(self.str)")
             
             rawString = self.str
             
@@ -167,7 +167,7 @@ class MainIC: WKInterfaceController {
                 fullDTEnd = formatter3.stringFromDate(endDT)
                 
                 if (startDT != NSDate(dateString:"2014-12-12") ) {
-                    println("p153 startDT: \(startDT)")
+                    print("p153 startDT: \(startDT)")
                     
                     fullDT = formatter3.stringFromDate(startDT)
                     fullDTEnd = formatter3.stringFromDate(endDT)
@@ -177,7 +177,7 @@ class MainIC: WKInterfaceController {
                 }
                 
                 
-                println("p164 startDT: \(startDT)")
+                print("p164 startDT: \(startDT)")
                 
                 // self.eventStartDT = startDT
                 //  self.eventEndDT = endDT
@@ -190,7 +190,7 @@ class MainIC: WKInterfaceController {
                 self.calendarName = calendarName
                 
                 if actionType == "Reminder" {
-                    println("p181 actionType setColor: \(actionType)")
+                    print("p181 actionType setColor: \(actionType)")
 
                     self.resultType.setTextColor(UIColor.yellowColor())
                 }
@@ -220,15 +220,15 @@ class MainIC: WKInterfaceController {
                 //completion(“we finished!”)
                 
             } else {
-                println("p192 No objects")
+                print("p192 No objects")
                 self.myLabel.setText("Tap Mic to dictate or force touch")
             }
         })
         
-        println("p204 str: \(self.str)")
-        println("p205 rawString: \(rawString)")
+        print("p204 str: \(self.str)")
+        print("p205 rawString: \(rawString)")
         //println("### 115 output: \(output)")
-        println("p207 actionType: \(actionType)")
+        print("p207 actionType: \(actionType)")
         
         //self.actionType = "Event"
         
@@ -241,7 +241,7 @@ class MainIC: WKInterfaceController {
 //---- my General functions ----------------------------------------
     
     func cleardata() {
-        println("MainIC 236 we here cleardata: \(date)")
+        print("MainIC 236 we here cleardata: \(date)")
         
         date = ""
         phone = ""
@@ -274,7 +274,11 @@ class MainIC: WKInterfaceController {
     
     func playSound(sound: NSURL){
         var error:NSError?
-        self.audioPlayer = AVAudioPlayer(contentsOfURL: sound, error: &error)
+        do {
+            self.audioPlayer = try AVAudioPlayer(contentsOfURL: sound)
+        } catch var error1 as NSError {
+            error = error1
+        }
         self.audioPlayer.prepareToPlay()
         //player.delegate = self player.play()
         //audioPlayer.delegate = self
@@ -302,7 +306,7 @@ class MainIC: WKInterfaceController {
     
     @IBAction func buttonMic() {
         
-        var alertSound1: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("button-14", ofType: "mp3")!)!
+        var alertSound1: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("button-14", ofType: "mp3")!)
         //General.playSound(alertSound3!)
         
 //Second, we currently can't control sounds or haptic feedback from our app's code.
@@ -310,10 +314,10 @@ class MainIC: WKInterfaceController {
        
         let (startDT, endDT, output, outputNote, day, calendarName, actionType) = grabvoice()
         
-        println("p268 startDT: \(startDT)")
-        println("p269 endDT: \(endDT)")
-        println("p270 actionType: \(actionType)")
-        println("p271 calendarName: \(calendarName)")
+        print("p268 startDT: \(startDT)")
+        print("p269 endDT: \(endDT)")
+        print("p270 actionType: \(actionType)")
+        print("p271 calendarName: \(calendarName)")
     }
     
 
@@ -322,8 +326,8 @@ class MainIC: WKInterfaceController {
         
         self.buttonMicrophone.setHidden(true)  //hide mircophone
         
-        println("p277 eventStart: \(startDT)")
-        println("p278 calendarName: \(calendarName)")
+        print("p277 eventStart: \(startDT)")
+        print("p278 calendarName: \(calendarName)")
         
         // CHECK Do I have to call this again??? else 12/12/2014 event
         //Don't need to parse again? commented out 7/4/15 8 am
@@ -334,13 +338,13 @@ class MainIC: WKInterfaceController {
         
         var actionType:String    = defaults.stringForKey("actionType")!
         
-        println("p299 watchIC, actionType: \(actionType)")
+        print("p299 watchIC, actionType: \(actionType)")
         
         //actionType = "Reminder"
         
         switch (actionType){
         case "Reminder":
-            println("p242 in Reminder Switch")
+            print("p242 in Reminder Switch")
             //createReminder()                      // worked with nothing in func call??? why?
             
             let title:String = output
@@ -353,7 +357,7 @@ class MainIC: WKInterfaceController {
             break;
             
         case "Event":
-            println("p255 in Event Switch")
+            print("p255 in Event Switch")
             
             // TODO MIKE  remove this parsing again! pass with NSUser Data in method
             //   let (startDT, endDT, output, outputNote, day, calendarName, actionType) = DictateCode().parse(str)
@@ -366,17 +370,17 @@ class MainIC: WKInterfaceController {
             break;
             
         case "List":
-            println("p150 in list Switch")
+            print("p150 in list Switch")
             break;
         case "CommaList":
-            println("p151 in commaList Switch")
+            print("p151 in commaList Switch")
             break;
         case "Note":
-            println("p152 in note Switch")
+            print("p152 in note Switch")
             break;
             
         case "Call":
-                println("w387 in Call Switch")
+                print("w387 in Call Switch")
                 
                 //resultMessage.text = "Switching to Phone for your call"
                 
@@ -402,7 +406,7 @@ class MainIC: WKInterfaceController {
                 rawDataObject["userPhoneNumber"] = "608-242-7700"               //TODO hardcoded get device from code?
                 
                 rawDataObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
-                    println("p490 vcDictate rawDataObject has been saved.")
+                    print("p490 vcDictate rawDataObject has been saved.")
                 }
                break;
                 
@@ -413,7 +417,7 @@ class MainIC: WKInterfaceController {
             
             
         default:
-            println("p155 in default switch so assume Event")
+            print("p155 in default switch so assume Event")
             
             //TODO MIke add back fixed call...
             //DictateCode().insertEvent(eventStore, startDT: startDT, endDT: endDT, output: output, outputNote: outputNote, calendarName: calendarName )
@@ -432,11 +436,8 @@ class MainIC: WKInterfaceController {
         
         let font:UIFont? = UIFont(name: "Arial", size: 22.0)
         
-        let attributedString = NSAttributedString(
-            string: labelText,
-            attributes: NSDictionary(
-                object: font!,
-                forKey: NSFontAttributeName) as [NSObject : AnyObject])
+        let attributedString =  NSAttributedString(string: labelText, attributes: [NSFontAttributeName : font!])
+
         
         self.myLabel.setAttributedText(attributedString)
         
@@ -448,13 +449,13 @@ class MainIC: WKInterfaceController {
         calendarName    = defaults.stringForKey("calendarName")!
         
         
-        println("p485 strRaw: \(strRaw)")
-        println("p485 output: \(output)")
-        println("p485 outputNote: \(outputNote)")
-        println("p485 fullDT: \(fullDT)")
-        println("p485 fullDTEnd: \(fullDTEnd)")
-        println("p485 calendarName: \(calendarName)")
-        println("p485 actionType: \(actionType)")
+        print("p485 strRaw: \(strRaw)")
+        print("p485 output: \(output)")
+        print("p485 outputNote: \(outputNote)")
+        print("p485 fullDT: \(fullDT)")
+        print("p485 fullDTEnd: \(fullDTEnd)")
+        print("p485 calendarName: \(calendarName)")
+        print("p485 actionType: \(actionType)")
         
         if (fullDT == "12-12-2014 12:00 AM") {      // set to "" for database
             fullDT = ""
@@ -479,10 +480,10 @@ class MainIC: WKInterfaceController {
         
         //rawDataObject["userName"] = "Mike Watch H.Coded"
 
-        println("p349 PFUser.currentUser(): \(PFUser.currentUser())")
+        print("p349 PFUser.currentUser(): \(PFUser.currentUser())")
         
         if PFUser.currentUser() == nil {
-            println("p483 we in here? PFUser.currentUser(): \(PFUser.currentUser())")
+            print("p483 we in here? PFUser.currentUser(): \(PFUser.currentUser())")
             rawDataObject["userName"] = "Watch User"
             
         } else {
@@ -494,25 +495,25 @@ class MainIC: WKInterfaceController {
         //TODO somehow get and save email to parse database
         // query.whereKey(“username”, equalTo: PFUser.currentUser()?.username)
         
-        println("p358 query: \(query)")
+        print("p358 query: \(query)")
         
-        println("p354 PFUser.currentUser()?.email: \(PFUser.currentUser()?.email)")
+        print("p354 PFUser.currentUser()?.email: \(PFUser.currentUser()?.email)")
         
         // rawDataObject["userEmail"] = PFUser.currentUser()?.email
         
         var error:NSError? = nil
 
         rawDataObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
-            println("p502 vcTest1 rawDataObject has been saved.")
+            print("p502 vcTest1 rawDataObject has been saved.")
         }
         
-         println("p505 Parse save Error: \(error)")
+         print("p505 Parse save Error: \(error)")
         
 //---- End Save to Parse Database ----------------------------------------
         
         cleardata()
         
-        println("462 we here?")
+        print("462 we here?")
 
         General().delay(3.0) {          // do stuff
             self.myLabel.setTextColor(UIColor.yellowColor())
@@ -568,7 +569,7 @@ class MainIC: WKInterfaceController {
         super.awakeWithContext(context)
         // Configure interface objects here.
         NSLog("%@ w536 MainIC awakeWithContext", self)
-        println("p471 in MainIC awakeWithContext")
+        print("p471 in MainIC awakeWithContext")
      
        //TODO stops app from running on watch!
        // DictateManagerIC.sharedInstance.initalizeParse()
@@ -609,7 +610,7 @@ class MainIC: WKInterfaceController {
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
         NSLog("%@ w536 MainIC willActivate", self)
-        println("p589 in MainIC willActivate")
+        print("p589 in MainIC willActivate")
         
         self.myLabel.setTextColor(UIColor.yellowColor())
         self.myLabel.setText("Tap Mic to dictate or force touch")

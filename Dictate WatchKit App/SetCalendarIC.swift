@@ -23,7 +23,7 @@ class SetCalendarIC: WKInterfaceController {
     
     @IBOutlet weak var table: WKInterfaceTable!
     
-    let allCalendarLists: Array<EKCalendar> = EKEventStore().calendarsForEntityType(EKEntityTypeEvent) as! Array<EKCalendar>
+    let allCalendarLists: Array<EKCalendar> = EKEventStore().calendarsForEntityType(EKEntityType.Event) 
     
 //---- Menu functions -------------------------------------------
     @IBAction func menuDictate() {
@@ -39,7 +39,7 @@ class SetCalendarIC: WKInterfaceController {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
         NSLog("%@ will activate", self)
-        println("p93 in ReminderListPickerIC willActivate")
+        print("p93 in ReminderListPickerIC willActivate")
         
        // var sceneTitle:String = (context as? String)!
         //self.setTitle("«\(sceneTitle)")
@@ -51,11 +51,11 @@ class SetCalendarIC: WKInterfaceController {
     
     func loadTableData () {
         table.setNumberOfRows(allCalendarLists.count, withRowType: "tableRow")
-        println("w46 allCalendarLists.count: \(allCalendarLists.count)")
+        print("w46 allCalendarLists.count: \(allCalendarLists.count)")
         
-        for (index, title) in enumerate(allCalendarLists) {
-            println("---------------------------------------------------")
-            println("w40 index, title: \(index), \(title)")
+        for (index, title) in allCalendarLists.enumerate() {
+            print("---------------------------------------------------")
+            print("w40 index, title: \(index), \(title)")
             
             let row = table.rowControllerAtIndex(index) as! SetCalendarTableRC
             let item = allCalendarLists[index]
@@ -69,19 +69,19 @@ class SetCalendarIC: WKInterfaceController {
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         // Configure interface objects here.
-        println("p19 ReminderListPickerIC")
-        println("-----------------------------------------")
+        print("p19 ReminderListPickerIC")
+        print("-----------------------------------------")
         
         eventID = context as! String
-        event = EventManager.sharedInstance.eventStore.eventWithIdentifier(eventID)
-        println("w168: event \(event)")
+        event = EventManager.sharedInstance.eventStore.eventWithIdentifier(eventID)!
+        print("w168: event \(event)")
         
         //TODO Anil TODO Mike needed? or willActivate instead?
         loadTableData()
     }
     
     override func table(table: WKInterfaceTable, didSelectRowAtIndex rowIndex: Int) {
-        println("w116 clicked on row: \(rowIndex)")
+        print("w116 clicked on row: \(rowIndex)")
         
         selectedRow = rowIndex //for use with insert and delete, save selcted row index
         let itemRow = self.table.rowControllerAtIndex(rowIndex) as! SetCalendarTableRC
@@ -94,7 +94,7 @@ class SetCalendarIC: WKInterfaceController {
             let defaultCalendar: EKCalendar = allCalendarLists[rowIndex]
             let defaultCalendarID = defaultCalendar.calendarIdentifier
             
-            println("w130 defaultCalendarID: \(defaultCalendarID)")
+            print("w130 defaultCalendarID: \(defaultCalendarID)")
             
             defaults.setObject(defaultCalendarID, forKey: "defaultCalendarID")    //sets defaultReminderListID String
             
@@ -107,7 +107,7 @@ class SetCalendarIC: WKInterfaceController {
         // This method is called when watch view controller is no longer visible
         NSLog("%@ did deactivate", self)
         super.didDeactivate()
-        println("p110 in ReminderListPickerIC didDeactivate")
+        print("p110 in ReminderListPickerIC didDeactivate")
         
     }
     

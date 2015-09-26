@@ -18,7 +18,7 @@ class ReminderListPickerIC: WKInterfaceController {
     let eventStore = EKEventStore()
     var checked:Bool = false
     var allReminders:[EKReminder] = []
-    var allReminderLists: Array<EKCalendar> = EKEventStore().calendarsForEntityType(EKEntityTypeReminder) as! Array<EKCalendar>
+    var allReminderLists: Array<EKCalendar> = EKEventStore().calendarsForEntityType(EKEntityType.Reminder) 
     
     @IBOutlet weak var table: WKInterfaceTable!
 
@@ -27,7 +27,7 @@ class ReminderListPickerIC: WKInterfaceController {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
         NSLog("%@ will activate", self)
-        println("w26 in ReminderListPickerIC willActivate")
+        print("w26 in ReminderListPickerIC willActivate")
         
         //loadTableData()
     }
@@ -35,11 +35,11 @@ class ReminderListPickerIC: WKInterfaceController {
     
     func loadTableData () {
         table.setNumberOfRows(allReminderLists.count, withRowType: "tableRow")
-        println("w39 allReminderLists.count: \(allReminderLists.count)")
+        print("w39 allReminderLists.count: \(allReminderLists.count)")
 
-        for (index, title) in enumerate(allReminderLists) {
-            println("---------------------------------------------------")
-            println("w40 index, title: \(index), \(title)")
+        for (index, title) in allReminderLists.enumerate() {
+            print("---------------------------------------------------")
+            print("w40 index, title: \(index), \(title)")
             
             let row = table.rowControllerAtIndex(index) as! DefaultReminderListTableRC
             let reminder = allReminderLists[index]
@@ -62,8 +62,8 @@ class ReminderListPickerIC: WKInterfaceController {
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         // Configure interface objects here.
-        println("w69 ReminderListPickerIC awakeWithContext")
-        println("-----------------------------------------")
+        print("w69 ReminderListPickerIC awakeWithContext")
+        print("-----------------------------------------")
         
       //  var sceneTitle:String = (context as? String)!
         self.setTitle("«Settings")
@@ -75,12 +75,12 @@ class ReminderListPickerIC: WKInterfaceController {
         // This method is called when watch view controller is no longer visible
         NSLog("%@ did deactivate", self)
         super.didDeactivate()
-        println("w89 in ReminderListPickerIC didDeactivate")
+        print("w89 in ReminderListPickerIC didDeactivate")
 
     }
     
     override func table(table: WKInterfaceTable, didSelectRowAtIndex rowIndex: Int) {
-        println("w94 clicked on row: \(rowIndex)")
+        print("w94 clicked on row: \(rowIndex)")
         
         selectedRow = rowIndex //for use with insert and delete, save selcted row index
         let itemRow = self.table.rowControllerAtIndex(rowIndex) as! DefaultReminderListTableRC
@@ -93,7 +93,7 @@ class ReminderListPickerIC: WKInterfaceController {
             let defaultReminderList: EKCalendar = allReminderLists[rowIndex]
             let defaultReminderListID = defaultReminderList.calendarIdentifier
             
-            println("w107 defaultReminderListID: \(defaultReminderListID)")
+            print("w107 defaultReminderListID: \(defaultReminderListID)")
             
             defaults.setObject(defaultReminderListID, forKey: "defaultReminderListID")    //sets defaultReminderListID String
             

@@ -26,19 +26,19 @@ class ReminderCode: NSObject {
         
         // 'EKEntityTypeReminder' or 'EKEntityTypeEvent'
         
-        eventStore.requestAccessToEntityType(EKEntityTypeEvent, completion: {
+        eventStore.requestAccessToEntityType(EKEntityType.Event, completion: {
             (granted, error) in
             
             //added
-            let calendars = self.store.calendarsForEntityType(EKEntityTypeEvent)
-                as! [EKCalendar]
+            let calendars = self.store.calendarsForEntityType(EKEntityType.Event)
+                
             
             //if calendar.title == "Mike" {       //added
             
             
             if (granted) && (error == nil) {
-                println("p24 granted \(granted)")
-                println("p25 error \(error)")
+                print("p24 granted \(granted)")
+                print("p25 error \(error)")
                 
                 var event:EKEvent = EKEvent(eventStore: eventStore)
                 
@@ -48,13 +48,16 @@ class ReminderCode: NSObject {
                 event.notes = "This is a note"
                 event.calendar = eventStore.defaultCalendarForNewEvents
                 
-                //           var calendarMike: EKCalendar! = Mike
-                //          event.calendar = calendarMike
+                do {
+                    //           var calendarMike: EKCalendar! = Mike
+                    //          event.calendar = calendarMike
                 
+                    
+                    try eventStore.saveEvent(event, span: EKSpan.ThisEvent)
+                } catch _ {
+                }
                 
-                eventStore.saveEvent(event, span: EKSpanThisEvent, error: nil)
-                
-                println("p39 Saved Event")
+                print("p39 Saved Event")
             }
             
             // } // if clendat.title
@@ -69,14 +72,18 @@ class ReminderCode: NSObject {
         if let id = defaults.stringForKey("calendarID") {
             return store.calendarWithIdentifier(id)
         } else {
-            var calendar = EKCalendar(forEntityType: EKEntityTypeEvent, eventStore: self.store)
+            let calendar = EKCalendar(forEntityType: EKEntityType.Event, eventStore: self.store)
             
             calendar.title = "My New Calendar"
             //  calendar.CGColor = UIColor.redColor()
             calendar.source = self.store.defaultCalendarForNewEvents.source
             
             var error: NSError?
-            self.store.saveCalendar(calendar, commit: true, error: &error)
+            do {
+                try self.store.saveCalendar(calendar, commit: true)
+            } catch let error1 as NSError {
+                error = error1
+            }
             
             if error == nil {
                 defaults.setObject(calendar.calendarIdentifier, forKey: "calendarID")
@@ -104,9 +111,12 @@ class ReminderCode: NSObject {
         newEvent.startDate = someStartDate
         newEvent.endDate = someEndDate
         newEvent.notes = someMoreInfo
-        newEvent.calendar = getCalendar()
+        newEvent.calendar = getCalendar()!
         
-        self.store.saveEvent(newEvent, span: EKSpanThisEvent, commit: true, error: nil)
+        do {
+            try self.store.saveEvent(newEvent, span: EKSpan.ThisEvent, commit: true)
+        } catch _ {
+        }
     }
     
     
@@ -114,20 +124,18 @@ class ReminderCode: NSObject {
     
     func eventStoreAccessReminders() {
         
-        calendarDatabase.requestAccessToEntityType(EKEntityTypeReminder, completion: {(granted: Bool, error:NSError!) -> Void in
+        calendarDatabase.requestAccessToEntityType(EKEntityType.Reminder) { (granted, error) -> Void in
             if !granted {
-                println("Access to store not granted")
-                println(error.localizedDescription)
+                print("Access to store not granted")
+                print(error?.localizedDescription)
             }
-        })
-        
     }
-    
+    }
     func accessCalendarInTheDatabase() {
-        var calendars = calendarDatabase.calendarsForEntityType(EKEntityTypeReminder)
+        let calendars = calendarDatabase.calendarsForEntityType(EKEntityType.Reminder)
         
-        for calendar in calendars as! [EKCalendar] {
-            println("••• p130 Calendar = \(calendar.title)")
+        for calendar in calendars {
+            print("••• p130 Calendar = \(calendar.title)")
         }
     }
     
@@ -147,17 +155,17 @@ class ReminderCode: NSObject {
         let duration    = defaults.stringForKey("eventDuration")
         let calendarName    = defaults.stringForKey("calendarName")
         let alert       = defaults.objectForKey("eventAlert") as! Double
-        let repeat      = defaults.stringForKey("eventRepeat")
+        let `repeat`      = defaults.stringForKey("eventRepeat")
         
         let reminderTitle = output
         
         let reminder = EKReminder(eventStore: calendarDatabase)
         
-        reminder.title = reminderTitle
+        reminder.title = reminderTitle!
         
         //____ add Reminder Alarm ____________________
 
-        println("p161 Reminder: startDT: \(startDT)")
+        print("p161 Reminder: startDT: \(startDT)")
         
         var alarm = EKAlarm()
         
@@ -166,7 +174,7 @@ class ReminderCode: NSObject {
         
         let noDate = dateFormatter.dateFromString("2014-12-12 00:00:00 +0000")  //need this to match set no date from DictateCode
         
-        println("p171 Reminder: noDate: \(noDate)")
+        print("p171 Reminder: noDate: \(noDate)")
         
         if (startDT != noDate) {        // if Date != no date string, set alarm for Reminder
             alarm = EKAlarm(absoluteDate: startDT)
@@ -181,20 +189,24 @@ class ReminderCode: NSObject {
         
         //reminder.calendar = calendarDatabase.calendarWithIdentifier("0x1702ae400")
         
-        println("p192 reminder.calendar: \(reminder.calendar)")
+        print("p192 reminder.calendar: \(reminder.calendar)")
 
         //reminder.calendar = calendarDatabase.defaultCalendarForNewReminders()
         
         var error: NSError?
         
         if error != nil{
-            println("errors: \(error?.localizedDescription)")
+            print("errors: \(error?.localizedDescription)")
         }
         
-        println("p192 reminder: \(reminder)")
-        println("p192 reminder.calendar: \(reminder.calendar)")
+        print("p192 reminder: \(reminder)")
+        print("p192 reminder.calendar: \(reminder.calendar)")
 
-        calendarDatabase.saveReminder(reminder, commit: true, error: &error)
+        do {
+            try calendarDatabase.saveReminder(reminder, commit: true)
+        } catch let error1 as NSError {
+            error = error1
+        }
     }
     
     
@@ -214,10 +226,14 @@ class ReminderCode: NSObject {
         var error: NSError?
         
         if error != nil{
-            println("errors: \(error?.localizedDescription)")
+            print("errors: \(error?.localizedDescription)")
         }
         
-        calendarDatabase.saveReminder(reminder, commit: true, error: &error)
+        do {
+            try calendarDatabase.saveReminder(reminder, commit: true)
+        } catch let error1 as NSError {
+            error = error1
+        }
     }
     
     

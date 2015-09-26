@@ -29,12 +29,12 @@ class General: NSObject, UITextFieldDelegate, MFMailComposeViewControllerDelegat
     
     func switchScreen(scene: String) {
         let mainStoryboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-        let vc : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier(scene) as! UIViewController
+        let vc : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier(scene) 
         // TODO FIX    self.presentViewController(vc, animated: true, completion: nil)
     }
     
     func cleardata() {
-        println("General 29 we here cleardata")
+        print("General 29 we here cleardata")
         
         var mainType = ""
         var day = ""

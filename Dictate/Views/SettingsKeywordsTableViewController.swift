@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SettingsKeywordsTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource {
+class SettingsKeywordsTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SettingsEventTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource {
+class SettingsEventTableViewController: UITableViewController{
     
     let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
 

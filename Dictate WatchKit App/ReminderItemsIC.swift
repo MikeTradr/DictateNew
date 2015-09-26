@@ -31,7 +31,7 @@ class ReminderItemsIC: WKInterfaceController {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
         NSLog("%@ will activate", self)
-        println("w33 in ReminderItemsIC willActivate")
+        print("w33 in ReminderItemsIC willActivate")
         
        // loadTableData()
     }
@@ -52,12 +52,12 @@ class ReminderItemsIC: WKInterfaceController {
             table.setNumberOfRows(allReminders.count, withRowType: "tableRow")
         }
         
-        println("w45 allCalendarLists: \(allReminders)")
-        println("w46 allCalendarLists.count: \(allReminders.count)")
+        print("w45 allCalendarLists: \(allReminders)")
+        print("w46 allCalendarLists.count: \(allReminders.count)")
         
-        for (index, title) in enumerate(allReminders) {
-            println("---------------------------------------------------")
-            println("w40 index, title: \(index), \(title)")
+        for (index, title) in allReminders.enumerate() {
+            print("---------------------------------------------------")
+            print("w40 index, title: \(index), \(title)")
             
             let row = table.rowControllerAtIndex(index) as! ReminderItemsTableRC
             let item = allReminders[index]
@@ -78,28 +78,28 @@ class ReminderItemsIC: WKInterfaceController {
         let calendarId = context as! String
         let calendar = ReminderManager.sharedInstance.eventStore.calendarWithIdentifier(calendarId)
 
-        labelReminderListID.setTextColor(UIColor(CGColor: calendar.CGColor))
-        verticalBar.setBackgroundColor(UIColor(CGColor: calendar.CGColor))
-        buttonShowCompleted.setTextColor(UIColor(CGColor: calendar.CGColor))
+        labelReminderListID.setTextColor(UIColor(CGColor: calendar!.CGColor))
+        verticalBar.setBackgroundColor(UIColor(CGColor: calendar!.CGColor))
+        buttonShowCompleted.setTextColor(UIColor(CGColor: calendar!.CGColor))
         
         buttonCheckbox.setHidden(true)
   
-        ReminderManager.sharedInstance.fetchCalendarReminders(calendar) { (reminders) -> Void in
-            println(reminders)
+        ReminderManager.sharedInstance.fetchCalendarReminders(calendar!) { (reminders) -> Void in
+            print(reminders)
             self.allReminders = reminders as [EKReminder]
             self.numberOfItems = self.allReminders.count
-            self.labelReminderListID.setText("\(calendar.title): (\(self.numberOfItems))")
+            self.labelReminderListID.setText("\(calendar!.title): (\(self.numberOfItems))")
             self.loadTableData()
         }
 
        //TODO Anil TODO Mike neede awakeWithContent? or willActivate instead?
        // loadTableData()
         
-        println("w73 he here?")
+        print("w73 he here?")
     }
     
     override func table(table: WKInterfaceTable, didSelectRowAtIndex rowIndex: Int) {
-        println("w119 clicked on row: \(rowIndex)")
+        print("w119 clicked on row: \(rowIndex)")
         
         selectedRow = rowIndex //for use with insert and delete, save selcted row index
         let itemRow = self.table.rowControllerAtIndex(rowIndex) as! ReminderItemsTableRC
@@ -136,14 +136,14 @@ class ReminderItemsIC: WKInterfaceController {
 */
         
         //loadTableData()     //reload table after item is deleted
-        println("p93 he here?")
+        print("p93 he here?")
     }
 
     override func didDeactivate() {
         // This method is called when watch view controller is no longer visible
         NSLog("%@ did deactivate", self)
         super.didDeactivate()
-        println("p110 in ReminderListPickerIC didDeactivate")
+        print("p110 in ReminderListPickerIC didDeactivate")
 
     }
 /*

@@ -11,7 +11,7 @@ import EventKit
 
 class CalendarPickerTableViewController: UITableViewController {
     
-    let calendarList = ReminderManager.sharedInstance.getCalendars(EKEntityTypeEvent)
+    let calendarList = ReminderManager.sharedInstance.getCalendars(EKEntityType.Event)
     
     var numberOfNewItems:Int    = 0
     var startDate:NSDate!
@@ -53,10 +53,10 @@ class CalendarPickerTableViewController: UITableViewController {
     }
 */
     override func viewWillAppear(animated: Bool) {
-        let calendarList = ReminderManager.sharedInstance.getCalendars(EKEntityTypeEvent)
+        let calendarList = ReminderManager.sharedInstance.getCalendars(EKEntityType.Event)
 
-            println("p58 calendarList: \(calendarList)")
-            println("p59 calendarList.count: \(calendarList.count)")
+            print("p58 calendarList: \(calendarList)")
+            print("p59 calendarList.count: \(calendarList.count)")
             
         }
         
@@ -199,8 +199,8 @@ class CalendarPickerTableViewController: UITableViewController {
         selectedCalendarIndex = indexPath.row
         let selectedCalendar = calendarList[indexPath.row]
 
-        println("p192 selectedCalendar: \(selectedCalendar)")
-        println("p193 selectedCalendar.title: \(selectedCalendar.title)")
+        print("p192 selectedCalendar: \(selectedCalendar)")
+        print("p193 selectedCalendar.title: \(selectedCalendar.title)")
 
         //Anil added
         defaults.setObject(selectedCalendar.calendarIdentifier, forKey: "selectedCalendar")            //sets title to calendarName for ParseDB

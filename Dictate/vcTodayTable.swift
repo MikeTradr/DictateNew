@@ -30,7 +30,7 @@ titleLabel.text = title
 */
 
 
-class vcTodayTable: UITableViewController, UITableViewDelegate, UITableViewDataSource {
+class vcTodayTable: UITableViewController {
     
     var audioPlayer = AVAudioPlayer()
     
@@ -49,11 +49,11 @@ class vcTodayTable: UITableViewController, UITableViewDelegate, UITableViewDataS
         var eventStore : EKEventStore = EKEventStore()
         // 'EKEntityTypeReminder' or 'EKEntityTypeEvent' TODO use for Reminders? Mike
         
-        eventStore.requestAccessToEntityType(EKEntityTypeEvent, completion: {
+        eventStore.requestAccessToEntityType(EKEntityType.Event, completion: {
             granted, error in
             if (granted) && (error == nil) {
-                println("granted: \(granted)")
-                println("error:  \(error)")
+                print("granted: \(granted)")
+                print("error:  \(error)")
                 
                 var event:EKEvent = EKEvent(eventStore: eventStore)
                 /*
@@ -72,8 +72,8 @@ class vcTodayTable: UITableViewController, UITableViewDelegate, UITableViewDataS
         // This lists every reminder
         var predicate = eventStore.predicateForRemindersInCalendars([])
         eventStore.fetchRemindersMatchingPredicate(predicate) { reminders in
-            for reminder in reminders {
-                println("•p73: reminder title: \(reminder.title)")
+            for reminder in reminders! {
+                print("•p73: reminder title: \(reminder.title)")
                 
                 //TODO Mike get reminders going :)
                 
@@ -89,34 +89,34 @@ class vcTodayTable: UITableViewController, UITableViewDelegate, UITableViewDataS
         var endDate = startDate.dateByAddingTimeInterval(60*60*24)
         var predicate2 = eventStore.predicateForEventsWithStartDate(startDate, endDate: endDate, calendars: nil)
         
-        println("startDate:\(startDate) endDate:\(endDate)")
-        var eV = eventStore.eventsMatchingPredicate(predicate2) as! [EKEvent]!
+        print("startDate:\(startDate) endDate:\(endDate)")
+        var eV = eventStore.eventsMatchingPredicate(predicate2) as [EKEvent]!
         
         //println("p68 eV: \(eV)" )         // prints Event details! good.
         
         if eV != nil {
             
             if eV.count == 0 {
-                println("No events could be found")
+                print("No events could be found")
             } else {
                 
                 events = NSMutableArray(array: eventStore.eventsMatchingPredicate(predicate2))
                 //println("p88 events  \(events)" )
                 
                 for i in eV {
-                    println("p66 Title  \(i.title)" )
-                    println("p67 stareDate: \(i.startDate)" )
-                    println("p68 endDate: \(i.endDate)" )
+                    print("p66 Title  \(i.title)" )
+                    print("p67 stareDate: \(i.startDate)" )
+                    print("p68 endDate: \(i.endDate)" )
                     
                     
                     // Access list of available sources from the Event Store
-                    let sourcesInEventStore = eventStore.sources() as! [EKSource]
+                    let sourcesInEventStore = eventStore.sources as! [EKSource]
                     
           // http://www.andrewcbancroft.com/2015/06/17/creating-calendars-with-event-kit-and-swift/
                     
                     
                     if i.title == "Test Title" {
-                        println("YES" )
+                        print("YES" )
                         // Uncomment if you want to delete
                         //eventStore.removeEvent(i, span: EKSpanThisEvent, error: nil)
                     }
@@ -131,7 +131,11 @@ class vcTodayTable: UITableViewController, UITableViewDelegate, UITableViewDataS
     
     func playSound(sound: NSURL){
         var error:NSError?
-        audioPlayer = AVAudioPlayer(contentsOfURL: sound, error: &error)
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOfURL: sound)
+        } catch var error1 as NSError {
+            error = error1
+        }
         audioPlayer.prepareToPlay()
         audioPlayer.play()
     }
@@ -166,7 +170,7 @@ class vcTodayTable: UITableViewController, UITableViewDelegate, UITableViewDataS
     }
     
     override func viewWillAppear(animated: Bool) {
-        var alertSound3: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("se_tap", ofType: "m4a")!)!
+        var alertSound3: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("se_tap", ofType: "m4a")!)
         //General.playSound(alertSound3!)
         
         playSound(alertSound3)
@@ -179,7 +183,7 @@ class vcTodayTable: UITableViewController, UITableViewDelegate, UITableViewDataS
         
         var viewController = self
         
-        println("p182 vcToday viewController: \(viewController)" )
+        print("p182 vcToday viewController: \(viewController)" )
 
         
         // TODO Mike move this to EventCode class???
@@ -210,7 +214,7 @@ class vcTodayTable: UITableViewController, UITableViewDelegate, UITableViewDataS
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let object: AnyObject = events[indexPath.row]
+        let object: EKEvent = events[indexPath.row] as! EKEvent
         
         var cell:TableCell = tableView.dequeueReusableCellWithIdentifier("customCell") as! TableCell
         // cell.selectionStyle = .None
@@ -294,7 +298,7 @@ class vcTodayTable: UITableViewController, UITableViewDelegate, UITableViewDataS
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
         
-        var alertSound3: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("se_tap", ofType: "m4a")!)!
+        var alertSound3: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("se_tap", ofType: "m4a")!)
         
         //General.playSound(alertSound3!)
         

@@ -213,7 +213,7 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
     // TODO need to call this func yet I think... had good dialog.
     
     func determineStatus() -> Bool {
-        let type = EKEntityTypeEvent
+        let type = EKEntityType.Event
         let stat = EKEventStore.authorizationStatusForEntityType(type)
         switch stat {
         case .Authorized:
@@ -242,31 +242,31 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
     
     
     func calendarWithName( name:String ) -> EKCalendar? {
-        let calendars = self.database.calendarsForEntityType(EKEntityTypeEvent) as! [EKCalendar]
+        let calendars = self.database.calendarsForEntityType(EKEntityType.Event) 
         for cal in calendars { // (should be using identifier)
             if cal.title == name {
                 return cal
             }
         }
-        println ("failed to find calendar")
+        print ("failed to find calendar")
         return nil
     }
     
     func switchScreenOld() {
         let mainStoryboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-        let vc : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("eventDetails") as! UIViewController
+        let vc : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("eventDetails") 
         self.presentViewController(vc, animated: true, completion: nil)
     }
     
     func switchScreenTester() {
         let mainStoryboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-        let vc : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("eventTester") as! UIViewController
+        let vc : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("eventTester") 
         self.presentViewController(vc, animated: true, completion: nil)
     }
     
     func switchScreen(scene: String) {
         let mainStoryboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-        let vc : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier(scene) as! UIViewController
+        let vc : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier(scene) 
         self.presentViewController(vc, animated: true, completion: nil)
     }
     
@@ -278,7 +278,7 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
 //---- my General functions ----------------------------------------
     
     func cleardata() {
-        println("ViewController 262 we here cleardata: \(date)")
+        print("ViewController 262 we here cleardata: \(date)")
         
         date = ""
         phone = ""
@@ -320,7 +320,7 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
             self.tabBarController?.selectedIndex = 3
         }
         if (sender.direction == .Right) {
-            var alertSound3: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("122-whoosh03", ofType: "mp3")!)!
+            var alertSound3: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("122-whoosh03", ofType: "mp3")!)
             //General.playSound(alertSound3!)
             playSound(alertSound3)
             self.tabBarController?.selectedIndex = 1
@@ -338,7 +338,7 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
         // Do any additional setup after loading the view, typically from a nib.
         NSLog("%@ p326 DictateVC viewDidLoad", self)
         
-        println("p328 we here? viewDidLoad viewController")
+        print("p328 we here? viewDidLoad viewController")
         
         //Added left adn Right Swipe gestures. TODO Can add this to the General.swift Class? and call it?
         var leftSwipe = UISwipeGestureRecognizer(target: self, action: Selector("handleSwipes:"))
@@ -351,7 +351,7 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
         let testObject = PFObject(className: "TestObject")
         testObject["foo"] = "does send?"
         testObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
-            println("Object has been saved.")
+            print("Object has been saved.")
         }
         
         //...
@@ -365,31 +365,30 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
         let eventStore = EKEventStore()
         
         // 2
-        switch EKEventStore.authorizationStatusForEntityType(EKEntityTypeEvent) {
+        switch EKEventStore.authorizationStatusForEntityType(EKEntityType.Event) {
         case .Authorized:
-            println("p176 Access Authorized")
+            print("p176 Access Authorized")
             //insertEvent(eventStore)
         case .Denied:
-            println("Access denied")
+            print("Access denied")
         case .NotDetermined:
             // 3
-            eventStore.requestAccessToEntityType(EKEntityTypeEvent, completion:
-                {[weak self] (granted: Bool, error: NSError!) -> Void in
+            eventStore.requestAccessToEntityType(EKEntityType.Event, completion: { (granted, error) -> Void in
                     if granted {
                         //self!.insertEvent(eventStore)
-                        println("p186 Access Authorized")
+                        print("p186 Access Authorized")
                     } else {
-                        println("Access denied")
+                        print("Access denied")
                     }
                 })
         default:
-            println("Case Default")
+            print("Case Default")
         }
 
 
 //#### for testing comment out besides for simulator in xCode
         
-        println("p375 str: \(str)")
+        print("p375 str: \(str)")
 
         enteredText2.text = str        // comment out besides for simulator in xCode
         resultMessage.text = str
@@ -405,7 +404,7 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
         var alertSound218 = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("218-buttonclick54", ofType: "mp3")!)
         //  General.playSound(alertSound3!)
         
-        playSound(alertSound218!)
+        playSound(alertSound218)
         
     }
     
@@ -419,7 +418,11 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
     
     func playSound(sound: NSURL){
         var error:NSError?
-        audioPlayer = AVAudioPlayer(contentsOfURL: sound, error: &error)
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOfURL: sound)
+        } catch var error1 as NSError {
+            error = error1
+        }
         audioPlayer.prepareToPlay()
         audioPlayer.play()
     }
@@ -431,12 +434,12 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
         
         var alertSound1 = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("se_tap", ofType: "m4a")!)
         //  General.playSound(alertSound3!)
-        playSound(alertSound1!)
+        playSound(alertSound1)
 
         //cleardata()
         
         let strRaw = enteredText.text
-        println("827 strRaw: \(strRaw)")
+        print("827 strRaw: \(strRaw)")
         
         resultMessage.text = strRaw
         
@@ -446,7 +449,7 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
             str = enteredText2.text
         }
         
-        println("### 684 str: \(str)")
+        print("### 684 str: \(str)")
         
         // CALL main parsing of string...  Only call this here once! Check TODO Mike...
         
@@ -457,14 +460,14 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
         // Added get actionType from func above 7/6/15
         //actionType    = defaults.stringForKey("actionType")!
         
-        println("p419 DictateScene, actionType: \(actionType)")
+        print("p419 DictateScene, actionType: \(actionType)")
         
 // ____ actionType Text ____________________________________
         
         
         switch (actionType) {
         case "Text":
-            println("p397 in Text Switch")
+            print("p397 in Text Switch")
 
             resultMessage.text = "Switching to iMessage for your text"
             
@@ -479,7 +482,7 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
             rawDataObject["userPhoneNumber"] = "608-242-7700"               //TODO hardcoded get device from code?
             
             rawDataObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
-                println("p433 vcDictate rawDataObject has been saved.")
+                print("p433 vcDictate rawDataObject has been saved.")
             }
             
             // Make sure the device can send text messages
@@ -510,7 +513,7 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
         
         
         case "Call":
-            println("p431 in Call Switch")
+            print("p431 in Call Switch")
             
             resultMessage.text = "Switching to Phone for your call"
     
@@ -538,14 +541,14 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
             rawDataObject["userPhoneNumber"] = "608-242-7700"               //TODO hardcoded get device from code?
             
             rawDataObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
-                println("p490 vcDictate rawDataObject has been saved.")
+                print("p490 vcDictate rawDataObject has been saved.")
             }
             
         break;
 
 
         case "Mail":
-            println("p456 in Mail Switch")
+            print("p456 in Mail Switch")
             
             resultMessage.text = "Switching to Mail for your mail"
             
@@ -556,7 +559,7 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
                 MailComposer3().showSendMailErrorAlert()
             }
             
-            println("p485 after MailComposer call")
+            print("p485 after MailComposer call")
 
             enteredText2.text = ""      // set to blank for return
             resultMessage.text = ""     // set to blank for return
@@ -577,13 +580,13 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
             rawDataObject["userPhoneNumber"] = "608-242-7700"               //TODO hardcoded get device from code?
             
             rawDataObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
-                println("p523 vcDictate rawDataObject has been saved.")
+                print("p523 vcDictate rawDataObject has been saved.")
             }
 
         break;
             
         default:
-            println("p573 Switch Default")
+            print("p573 Switch Default")
             
         }   //end Switch
 
@@ -625,8 +628,8 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
 }   // end ViewController
 
 
-extension ViewControllerDictate : UITextFieldDelegate {
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+extension ViewControllerDictate  {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.view.endEditing(true)
     }
 }

@@ -96,7 +96,7 @@ class DataManager: NSObject {
     
     func createDefaults() {
         NSLog("%@ p94 func createDefaults", self)
-        println("p95 startDT: \(startDT)")
+        print("p95 startDT: \(startDT)")
     
         defaults.setObject(actionType, forKey: "actionType")
         defaults.setObject(mainType, forKey: "mainType")
@@ -116,18 +116,18 @@ class DataManager: NSObject {
         defaults.setObject(reminderTitle, forKey: "reminderTitle")
 
         let test   = defaults.objectForKey("reminderArray") as! [String]
-        println("119 test: \(test)")
+        print("119 test: \(test)")
 
 
         
-        println("#####################################################")
+        print("#####################################################")
         //println("111 Main Representation: \(NSUserDefaults.standardUserDefaults().dictionaryRepresentation())")
-        println("111 Main keys.array: \(NSUserDefaults.standardUserDefaults().dictionaryRepresentation().keys.array)")
-        println("-----------------------------------------------------")
-        println("112: \(NSUserDefaults.standardUserDefaults().dictionaryRepresentation())")
-        println("-----------------------------------------------------")
-        println("113 Main values.array: \(NSUserDefaults.standardUserDefaults().dictionaryRepresentation().values.array)")
-        println("#####################################################")
+        print("111 Main keys.array: \(NSUserDefaults.standardUserDefaults().dictionaryRepresentation().keys)")
+        print("-----------------------------------------------------")
+        print("112: \(NSUserDefaults.standardUserDefaults().dictionaryRepresentation())")
+        print("-----------------------------------------------------")
+        print("113 Main values.array: \(NSUserDefaults.standardUserDefaults().dictionaryRepresentation().values)")
+        print("#####################################################")
 
         //TODO Mike TODO Anil can't we print to log the items saved in NSUserDefaults???
     

@@ -34,6 +34,8 @@ class DictateCode: NSObject {
     var priorWord2:String       = ""
     var nextWord:String         = ""
     var nextWord2:String        = ""
+    var nextWord3:String        = ""
+
     var numberFound:String      = ""
     var startDate:String        = ""
     var currentMonthNumber:Int  = 0
@@ -646,7 +648,20 @@ class DictateCode: NSObject {
                         nextWord = ""
                     }
                     
-                    if ( nextWord != "" ) {
+                    if (i < arrayLength-2) {
+                        nextWord2 = wordArr[i+2]
+                    } else {
+                        nextWord2 = ""
+                    }
+                    
+                    if (i < arrayLength-3) {
+                        nextWord3 = wordArr[i+3]
+                    } else {
+                        nextWord3 = ""
+                    }
+
+                    
+                    if ( nextWord != "") {
 
                         let matched = listMatches("[a-z]{3,10}", inString: nextWord)   // alpha characters length 3 to 10
                         
@@ -668,7 +683,9 @@ class DictateCode: NSObject {
                             case "john", "jonathan":    toPhone  = "jonathanmwild@gmail.com"; break;
                             case "mom":                 toPhone  = "germangirl1988@gmail.com"; break;
                             case "andrew":              toPhone  = "aw@rouse.biz"; break;
-                                
+                            case "anil":                toPhone  = "anil@thatsoft.com"; break;
+                            case "bro":                 toPhone  = "anil@thatsoft.com"; break;
+                         
                             default:
                                 toPhone = ""
                                 break;
@@ -680,26 +697,55 @@ class DictateCode: NSObject {
                             
                         }
                         
+                        
+                        let notes = strRaw              //origonal string
+                        mainType = "Mail"
+                        actionType = "Mail"             //sets actionType for processing
+                        
+                        let joiner = " "
+                        output = wordArrTrimmed.joinWithSeparator(joiner)
+                        let title = output
+                        print("p341 title: \(title)")
+                        
+                        //TODO  tried to set the bales to "" for the detail screen  no luck
+                        
+                        actionType = "Mail"         // set type for proper processing
+                        let eventAlert = "none set yet"
+                        
+                        defaults.setObject(eventAlert, forKey: "eventAlert")
+                        defaults.setObject(actionType, forKey: "actionType")        //sets actionType
+                        defaults.setObject(mainType, forKey: "mainType")            //sets actionType
+                        
                     }
                     
-              
-                    let notes = strRaw              //origonal string
-                    mainType = "Mail"
-                    actionType = "Mail"             //sets actionType for processing
                     
-                    let joiner = " "
-                    output = wordArrTrimmed.joinWithSeparator(joiner)
-                    let title = output
-                    print("p341 title: \(title)")
+                    if ( (nextWord2 == "list") || (nextWord2 == "reminders") || (nextWord2 == "reminder")) {
+                        
+                        print("p695 in List nextWord2: \(nextWord2)")
                     
-                    //TODO  tried to set the bales to "" for the detail screen  no luck
+                        wordArrTrimmed = wordArrTrimmed.filter() { $0 != nextWord2}   // remove "list" word
+                        
+                        actionType = "Mail List"         // set type for proper processing
+                        defaults.setObject(actionType, forKey: "actionType")        //sets actionType
+
+
+                        if ( nextWord3 != "" ) {
+                            
+                            //TODO Mike add Reminder Title List array lookup
+                            
+                            let reminderList = nextWord3
+                            defaults.setObject(reminderList, forKey: "reminderList")
+
+                        } else {
+                            //TODO Mike add code to send users default set list. so no need to save the list name "mail mike list)
+                            let reminderList = "userDefault"    //set to this then email users set defualt list
+                            defaults.setObject(reminderList, forKey: "reminderList")
+                        }
+                        
+                        
+                    }
                     
-                    actionType = "Mail"         // set type for proper processing
-                    let eventAlert = "none set yet"
-                    
-                    defaults.setObject(eventAlert, forKey: "eventAlert")
-                    defaults.setObject(actionType, forKey: "actionType")        //sets actionType
-                    defaults.setObject(mainType, forKey: "mainType")            //sets actionType
+
                     
                     
                     break;       //added 083115 my Mike to break out of the loop

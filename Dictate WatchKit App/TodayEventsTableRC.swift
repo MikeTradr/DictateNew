@@ -18,7 +18,10 @@ class TodayEventsTableRC: NSObject {
     @IBOutlet weak var labelEndTime: WKInterfaceLabel!
     
     @IBOutlet weak var labelEventLocation: WKInterfaceLabel!
+   
+    @IBOutlet var imageVertBar: WKInterfaceImage!
     
     @IBOutlet weak var verticalBar: WKInterfaceGroup!
     
+    @IBOutlet var groupEvent: WKInterfaceGroup!
 }

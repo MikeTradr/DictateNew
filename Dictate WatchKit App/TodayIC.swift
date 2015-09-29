@@ -27,6 +27,7 @@ class TodayIC: WKInterfaceController {
     @IBOutlet weak var labelDate: WKInterfaceLabel!
     @IBOutlet weak var table: WKInterfaceTable!
     
+    
 //---- funcs below here -----------------------------------------------------------
     
     
@@ -169,7 +170,29 @@ class TodayIC: WKInterfaceController {
             row.labelEndTime.setText(endTimeDash)
 
             //row.labelEventTitle.setTextColor(UIColor(CGColor: item.calendar.CGColor))
+           // row.labelStartTime.setTextColor(UIColor(CGColor: item.calendar.CGColor))
+           // row.labelEndTime.setTextColor(UIColor(CGColor: item.calendar.CGColor))
+            
+            row.labelStartTime.setTextColor(UIColor.whiteColor().colorWithAlphaComponent(0.8))
+            row.labelEndTime.setTextColor(UIColor.whiteColor().colorWithAlphaComponent(0.65))
+
+            row.labelEventLocation.setTextColor(UIColor(CGColor: item.calendar.CGColor))
+     
             row.verticalBar.setBackgroundColor(UIColor(CGColor: item.calendar.CGColor))
+            
+            row.imageVertBar.setTintColor(UIColor(CGColor: item.calendar.CGColor))
+                
+           // row.imageVertBar.image = [row.imageVertBar imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
+            
+            
+            
+            row.groupEvent.setBackgroundColor(UIColor(CGColor: item.calendar.CGColor).colorWithAlphaComponent(0.375))
+        
+            
+            
+            
+            
+        
         }
     }   //end loadTableData
     

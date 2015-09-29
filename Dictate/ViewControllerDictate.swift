@@ -95,6 +95,9 @@ let str42:String = "Tomorrow 9 PM Band calendar Mike duration 4 hours "
 
 let str43:String = "Tomorrow 9 PM at Essen Haus Josh Becker Band calendar Mike duration 4 hours "
 
+let str44:String = "Mail bro list work"
+
+
 /*    ADD TEST THESE make them work...TODO Mike
 
 “meeting with Bob every Wednesday at 2:00 PM”
@@ -108,8 +111,8 @@ add to dictate str   “meeting with Bob every Wednesday at noon”  //handle wo
 */
 
 // ---- change strings here for testing, shows on the dictated field---
-//var str:String = str42
-var str:String = ""
+var str:String = str44
+//var str:String = ""
 
 //var strRaw:String = str
 
@@ -568,7 +571,6 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
             let mainType = ""
             defaults.setObject(actionType, forKey: "actionType")        //saves actionType
             defaults.setObject(actionType, forKey: "mainType")        //saves actionType
-
             let rawDataObject = PFObject(className: "UserData")
             rawDataObject["actionType"] = actionType
             rawDataObject["rawString"] = outputNote
@@ -584,6 +586,47 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
             }
 
         break;
+            
+        case "Mail List":
+            print("p588 in Mail List Switch")
+            
+            resultMessage.text = "Switching to Mail for your mail"
+            
+            let mailComposeViewController = MailComposer3().mailList()
+            if MFMailComposeViewController.canSendMail() {
+                self.presentViewController(mailComposeViewController, animated: true, completion: nil)
+            } else {
+                MailComposer3().showSendMailErrorAlert()
+            }
+            
+            print("p485 after MailComposer call")
+            
+            enteredText2.text = ""      // set to blank for return
+            resultMessage.text = ""     // set to blank for return
+            
+            //let actionType = ""         // set to "" for next processing
+            let mainType = ""
+            defaults.setObject(actionType, forKey: "actionType")        //saves actionType
+            defaults.setObject(actionType, forKey: "mainType")        //saves actionType
+            let rawDataObject = PFObject(className: "UserData")
+            rawDataObject["actionType"] = actionType
+            rawDataObject["rawString"] = outputNote
+            rawDataObject["output"] = output
+            rawDataObject["userName"] = PFUser.currentUser()?.username
+            
+            //TODO get these two fields from code!
+            rawDataObject["device"] = "iPhone"               //TODO hardcoded get device from code?
+            rawDataObject["userPhoneNumber"] = "608-242-7700"               //TODO hardcoded get device from code?
+            
+            rawDataObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+                print("p523 vcDictate rawDataObject has been saved.")
+            }
+            
+            break;
+    
+            
+            
+            
             
         default:
             print("p573 Switch Default")

@@ -52,6 +52,13 @@ class EventDetailsIC: WKInterfaceController {
     @IBOutlet weak var groupAttendees: WKInterfaceGroup!
     @IBOutlet weak var groupNotes: WKInterfaceGroup!
     
+    @IBOutlet var buttonGrCalendarName: WKInterfaceButton!
+    
+    @IBOutlet var groupCalendar: WKInterfaceGroup!
+    
+    @IBOutlet var imageVerticalBar: WKInterfaceImage!
+    
+    
 //---- funcs below here -----------------------------------------------------------
     
 //---- Menu functions -------------------------------------------
@@ -104,12 +111,24 @@ class EventDetailsIC: WKInterfaceController {
         
         
         self.labelEventTitle.setText(event.title)
-        self.labelStartTime.setText(startTime)
-        self.labelEndTime.setText(endTimeDash)
+        //self.labelStartTime.setText(startTime)
+        //self.labelEndTime.setText(endTimeDash)
         self.labelLocation.setText(event.location)
         
+        self.labelStartTime.setTextColor(UIColor.whiteColor().colorWithAlphaComponent(0.8))
+        
+        self.labelEndTime.setTextColor(UIColor.whiteColor().colorWithAlphaComponent(0.65))
+        
         self.verticalBar.setBackgroundColor(UIColor(CGColor: event.calendar.CGColor))
-        self.calendarName.setTextColor(UIColor(CGColor: event.calendar.CGColor))
+        
+        self.imageVerticalBar.setTintColor(UIColor(CGColor: event.calendar.CGColor))
+        
+        self.buttonGrCalendarName.setBackgroundColor(UIColor(CGColor: event.calendar.CGColor))
+        
+         self.groupCalendar.setBackgroundColor(UIColor(CGColor: event.calendar.CGColor).colorWithAlphaComponent(0.375))
+        
+        
+       // self.calendarName.setTextColor(UIColor(CGColor: event.calendar.CGColor))
         self.calendarName.setText(event.calendar.title)
         self.labelRepeats.setText(event.recurrenceRules as? String)
         self.labelAlarms.setText(event.alarms as? String)

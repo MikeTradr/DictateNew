@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="7706" systemVersion="14D131" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ei9-cN-Wbe">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ei9-cN-Wbe">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="8092"/>
     </dependencies>
     <scenes>
         <!--Main-->
@@ -10,11 +10,15 @@
             <objects>
                 <controller identifier="Main" id="AgC-eL-Hgc" customClass="MainIC" customModule="Dictate_WatchKit_Extension">
                     <items>
-                        <button width="40" height="68" alignment="center" backgroundImage="dicApp-2-no-back-180" id="O2a-qB-bgG">
-                            <connections>
-                                <action selector="buttonMic" destination="AgC-eL-Hgc" id="z3v-MG-ylF"/>
-                            </connections>
-                        </button>
+                        <group width="1" alignment="left" id="qWx-Ch-dAb">
+                            <items>
+                                <button width="40" height="68" alignment="center" backgroundImage="dicApp-2-no-back-180" id="O2a-qB-bgG">
+                                    <connections>
+                                        <action selector="buttonMic" destination="AgC-eL-Hgc" id="z3v-MG-ylF"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
                         <label width="1" alignment="center" text="Tap Mic to dictate or force touch" textAlignment="center" numberOfLines="10" id="Wh0-Sx-ekC">
                             <color key="textColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
@@ -139,7 +143,10 @@
                                                 <tableRow identifier="tableRow" id="Cyt-0g-7c7" customClass="TodayEventsTableRC" customModule="Dictate_WatchKit_Extension">
                                                     <group key="rootItem" width="1" height="0.0" alignment="left" id="p99-Tg-p2Y">
                                                         <items>
-                                                            <group width="3" height="1" alignment="left" verticalAlignment="center" radius="2" id="5Xm-nW-kBb" userLabel="VerticalBar">
+                                                            <imageView width="3" height="1" alignment="left" verticalAlignment="center" image="watchbar" id="6kb-fI-hQm">
+                                                                <color key="tintColor" red="1" green="0.40000000596046448" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                            </imageView>
+                                                            <group width="3" height="1" alignment="left" verticalAlignment="center" hidden="YES" radius="7" id="5Xm-nW-kBb" userLabel="VerticalBar">
                                                                 <color key="backgroundColor" red="0.40000000600000002" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                             </group>
                                                             <label height="1" alignment="left" verticalAlignment="center" id="L1h-uX-xYy"/>
@@ -168,9 +175,12 @@
                                                                 </items>
                                                             </group>
                                                         </items>
-                                                        <edgeInsets key="margins" left="6" right="0.0" top="6" bottom="0.0"/>
+                                                        <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="0.90000000000000002" colorSpace="calibratedRGB"/>
+                                                        <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
                                                     </group>
                                                     <connections>
+                                                        <outlet property="groupEvent" destination="p99-Tg-p2Y" id="HGP-YW-wyH"/>
+                                                        <outlet property="imageVertBar" destination="6kb-fI-hQm" id="Qb4-XV-xoZ"/>
                                                         <outlet property="labelEndTime" destination="Lmg-j4-p9D" id="PeW-b3-BG6"/>
                                                         <outlet property="labelEventLocation" destination="W8d-rr-8G3" id="1iz-0X-0Xp"/>
                                                         <outlet property="labelEventTitle" destination="qqB-02-T53" id="8YA-eg-Ut8"/>
@@ -232,7 +242,7 @@
                     <items>
                         <group width="1" alignment="left" layout="vertical" id="00f-mj-gAa" userLabel="GroupTitle&amp;Location">
                             <items>
-                                <label alignment="left" text="Label" numberOfLines="2" id="64s-4c-VbF" userLabel="Title">
+                                <label alignment="left" text="Label" numberOfLines="15" id="64s-4c-VbF" userLabel="Title">
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <fontDescription key="font" type="system" weight="semibold" pointSize="18"/>
                                 </label>
@@ -273,7 +283,10 @@
                                 <button alignment="left" id="7bp-kJ-5pU" userLabel="SubInfo">
                                     <group key="contentGroup" width="1" height="36" alignment="left" id="yfs-1c-20A">
                                         <items>
-                                            <group width="3" height="1" alignment="left" verticalAlignment="center" radius="2" id="6Ke-ox-3Sm" userLabel="VerticalBar">
+                                            <imageView width="3" height="1" alignment="left" verticalAlignment="center" image="watchbar" id="G0Z-j4-UqM">
+                                                <color key="tintColor" red="1" green="0.40000000600000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            </imageView>
+                                            <group width="3" height="1" alignment="left" verticalAlignment="center" hidden="YES" radius="7" id="6Ke-ox-3Sm" userLabel="VerticalBar">
                                                 <color key="backgroundColor" red="0.40000000600000002" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             </group>
                                             <label alignment="left" id="DiT-9n-5GB" userLabel="Space"/>
@@ -282,7 +295,7 @@
                                             </label>
                                         </items>
                                         <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="0.70000000000000007" colorSpace="calibratedRGB"/>
-                                        <edgeInsets key="margins" left="5" right="0.0" top="0.0" bottom="0.0"/>
+                                        <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
                                     </group>
                                     <connections>
                                         <segue destination="27t-QR-fE5" kind="modal" identifier="SetCalendar" id="d6p-dM-vte"/>
@@ -420,13 +433,16 @@
                         </group>
                     </items>
                     <connections>
+                        <outlet property="buttonGrCalendarName" destination="7bp-kJ-5pU" id="dVk-9u-Bmx"/>
                         <outlet property="calendarName" destination="igi-hU-oJA" id="ddy-3o-WMf"/>
                         <outlet property="groupAlarms" destination="o7C-6z-enj" id="sbv-aH-gQi"/>
                         <outlet property="groupAttendees" destination="y3P-gX-D89" id="j1N-Re-rsu"/>
+                        <outlet property="groupCalendar" destination="yfs-1c-20A" id="hS8-Cr-Ekp"/>
                         <outlet property="groupNotes" destination="epY-UA-etM" id="gcm-am-DNd"/>
                         <outlet property="groupRepeats" destination="oYB-hd-kEF" id="NVj-2K-fvB"/>
                         <outlet property="groupTravel" destination="vsT-GK-Jk5" id="206-Qy-2OL"/>
                         <outlet property="groupURL" destination="Sei-lS-9WN" id="Jwg-33-8pd"/>
+                        <outlet property="imageVerticalBar" destination="G0Z-j4-UqM" id="rtC-Q9-N40"/>
                         <outlet property="labelAlarms" destination="zXf-T1-exM" id="c57-l2-Cwy"/>
                         <outlet property="labelAttendees" destination="5F4-Es-CLJ" id="Agy-Zm-skl"/>
                         <outlet property="labelEndTime" destination="swE-a3-x4J" id="sbV-gw-j22"/>
@@ -449,6 +465,9 @@
                 <controller identifier="TestIC" id="IDp-7V-lkE" customClass="TestIC" customModule="Dictate_WatchKit_Extension">
                     <items>
                         <label alignment="left" text="test of go back title" id="UtS-Pv-8qS"/>
+                        <imageView alignment="left" image="babymonkey166x200" id="7kE-b5-9O7">
+                            <color key="tintColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </imageView>
                     </items>
                 </controller>
             </objects>
@@ -638,22 +657,25 @@
                                         <tableRow identifier="tableRow" id="k7b-R0-QbO" customClass="ReminderListsTableRC" customModule="Dictate_WatchKit_Extension">
                                             <group key="rootItem" width="1" height="0.0" alignment="left" id="X7O-jE-2AN">
                                                 <items>
-                                                    <group width="2" height="1" alignment="left" verticalAlignment="center" radius="2" id="ytx-zs-j0Z" userLabel="VerticalBar">
+                                                    <imageView width="3" height="1" alignment="left" image="watchbarShort" id="j4i-jT-MjP"/>
+                                                    <imageView width="2" height="32" alignment="left" id="bLd-Pc-dR9"/>
+                                                    <group width="3" height="1" alignment="left" verticalAlignment="center" hidden="YES" radius="2" id="ytx-zs-j0Z" userLabel="VerticalBar">
                                                         <color key="backgroundColor" red="0.40000000600000002" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     </group>
                                                     <label height="1" alignment="left" verticalAlignment="center" id="ZRE-C6-jWU"/>
-                                                    <label width="120" alignment="left" verticalAlignment="center" numberOfLines="3" id="2bK-fl-QKS">
+                                                    <label width="120" alignment="left" verticalAlignment="center" text="test" numberOfLines="3" id="2bK-fl-QKS">
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <fontDescription key="font" type="system" pointSize="16"/>
+                                                        <fontDescription key="font" type="system" weight="semibold" pointSize="16"/>
                                                         <variation key="device=watch38mm">
-                                                            <fontDescription key="font" type="system" pointSize="13"/>
+                                                            <fontDescription key="font" type="system" weight="semibold" pointSize="13"/>
                                                         </variation>
                                                     </label>
                                                 </items>
                                                 <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
-                                                <edgeInsets key="margins" left="6" right="0.0" top="6" bottom="6"/>
+                                                <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
                                             </group>
                                             <connections>
+                                                <outlet property="imageVerticalBar" destination="j4i-jT-MjP" id="PAx-M5-2s6"/>
                                                 <outlet property="tableRowLabel" destination="2bK-fl-QKS" id="Htv-gR-DSU"/>
                                                 <outlet property="verticalBar" destination="ytx-zs-j0Z" id="z0U-zd-aqC"/>
                                             </connections>
@@ -826,7 +848,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="6" y="421"/>
+            <point key="canvasLocation" x="6" y="420.5"/>
         </scene>
         <!--Glance Interface Controller-->
         <scene sceneID="BOz-TT-tkC">

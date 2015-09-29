@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "dicApp-2-nb-40px.png"
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "dicApp-2-nb-40px.png",
       "scale" : "2x"
     },
     {

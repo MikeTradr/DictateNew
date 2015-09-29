@@ -269,6 +269,8 @@ class ReminderListsIC: WKInterfaceController {
                 row.tableRowLabel.setText("\(reminderList.title)")
                 row.tableRowLabel.setTextColor(UIColor(CGColor: reminderList.CGColor))
                 row.verticalBar.setBackgroundColor(UIColor(CGColor: reminderList.CGColor))
+                
+                row.imageVerticalBar.setTintColor(UIColor(CGColor: reminderList.CGColor))
 
             }
         }

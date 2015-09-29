@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "cogGray-40px.png"
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "cogGray-40px.png",
       "scale" : "2x"
     },
     {

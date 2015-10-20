@@ -1006,18 +1006,27 @@
             <objects>
                 <glanceController spacing="0.0" id="0uZ-2p-rRc" customClass="GlanceController" customModule="Dictate_WatchKit_App" customModuleProvider="target">
                     <items>
-                        <group alignment="left" id="t8f-Gd-c4y">
+                        <group alignment="left" layout="vertical" id="t8f-Gd-c4y">
                             <items>
-                                <imageView width="20.25" height="30" alignment="left" verticalAlignment="center" image="dicApp-2-no-back-180" id="cPC-Az-Izx"/>
-                                <label alignment="left" verticalAlignment="center" text="Day" id="uQR-4p-Zzg" userLabel="Day">
-                                    <color key="textColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <fontDescription key="font" type="system" weight="semibold" pointSize="24"/>
+                                <group width="1" alignment="left" id="6eB-3c-sn6">
+                                    <items>
+                                        <imageView width="16.199999999999999" height="24" alignment="left" verticalAlignment="center" image="dicApp-2-no-back-180" id="cPC-Az-Izx"/>
+                                        <label alignment="left" text=" " id="9zJ-8F-7iF"/>
+                                        <label alignment="left" verticalAlignment="center" text="Day" id="uQR-4p-Zzg" userLabel="Day">
+                                            <color key="textColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="font" type="system" weight="semibold" pointSize="22"/>
+                                        </label>
+                                    </items>
+                                    <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
+                                </group>
+                                <label alignment="left" text="now" id="zzb-hL-zmo">
+                                    <fontDescription key="font" type="system" pointSize="17"/>
                                 </label>
                             </items>
+                            <edgeInsets key="margins" left="6" right="0.0" top="0.0" bottom="0.0"/>
                         </group>
                         <group alignment="left" layout="vertical" id="uCw-4Q-Ouw">
                             <items>
-                                <label alignment="left" text="now" id="zzb-hL-zmo"/>
                                 <label alignment="left" text="in 30 minutes" id="U9O-iu-o5P">
                                     <color key="textColor" red="0.50196081400000003" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <fontDescription key="font" type="system" pointSize="20"/>

@@ -64,12 +64,12 @@
 		D35588BC1BA937D20052892F /* ReminderItemsIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35588BB1BA937D20052892F /* ReminderItemsIC.swift */; };
 		D35588BE1BA938A00052892F /* ReminderItemsTableRC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35588BD1BA938A00052892F /* ReminderItemsTableRC.swift */; };
 		D355D97C1BA7DD3F00DADD72 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D355D97B1BA7DD3F00DADD72 /* Main.storyboard */; };
+		D36DBDD51BD6DA870076A5C2 /* GlanceTodayEventsTableRC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36DBDD41BD6DA870076A5C2 /* GlanceTodayEventsTableRC.swift */; settings = {ASSET_TAGS = (); }; };
 		D3711F051BB04E0E00D19AE9 /* TestIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3711F041BB04E0E00D19AE9 /* TestIC.swift */; };
 		D3795E7A1B8DF927009D3DB5 /* SettingsEventTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3795E791B8DF927009D3DB5 /* SettingsEventTableViewController.swift */; };
 		D3795E7B1B8F654F009D3DB5 /* ReminderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF818621B84FAB70087ECAD /* ReminderManager.swift */; };
 		D38653F71BAA02F400B8CCBC /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38653F61BAA02F400B8CCBC /* EventManager.swift */; };
 		D38653F81BAA02F400B8CCBC /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38653F61BAA02F400B8CCBC /* EventManager.swift */; };
-		D38C832F1BD68238008F37AA /* GlanceTodayEventsTableRC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38C832E1BD68238008F37AA /* GlanceTodayEventsTableRC.swift */; settings = {ASSET_TAGS = (); }; };
 		D38C9C571B821DA3009CFC7C /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D38C9C551B821DA3009CFC7C /* Fabric.framework */; };
 		D38C9C581B821DA3009CFC7C /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D38C9C551B821DA3009CFC7C /* Fabric.framework */; };
 		D38C9C591B821DA3009CFC7C /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D38C9C561B821DA3009CFC7C /* Crashlytics.framework */; };
@@ -249,10 +249,10 @@
 		D35588BB1BA937D20052892F /* ReminderItemsIC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderItemsIC.swift; sourceTree = "<group>"; };
 		D35588BD1BA938A00052892F /* ReminderItemsTableRC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderItemsTableRC.swift; sourceTree = "<group>"; };
 		D355D97B1BA7DD3F00DADD72 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		D36DBDD41BD6DA870076A5C2 /* GlanceTodayEventsTableRC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlanceTodayEventsTableRC.swift; sourceTree = "<group>"; };
 		D3711F041BB04E0E00D19AE9 /* TestIC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestIC.swift; sourceTree = "<group>"; };
 		D3795E791B8DF927009D3DB5 /* SettingsEventTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsEventTableViewController.swift; path = Views/SettingsEventTableViewController.swift; sourceTree = "<group>"; };
 		D38653F61BAA02F400B8CCBC /* EventManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventManager.swift; sourceTree = "<group>"; };
-		D38C832E1BD68238008F37AA /* GlanceTodayEventsTableRC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GlanceTodayEventsTableRC.swift; path = "../../DictateNew 1 error complications/Dictate WatchKit App/GlanceTodayEventsTableRC.swift"; sourceTree = "<group>"; };
 		D38C9C551B821DA3009CFC7C /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		D38C9C561B821DA3009CFC7C /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		D392FAD31B9B1BA800678B18 /* SettingsFriendsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsFriendsTableViewController.swift; path = Views/SettingsFriendsTableViewController.swift; sourceTree = "<group>"; };
@@ -616,7 +616,7 @@
 				D35588BD1BA938A00052892F /* ReminderItemsTableRC.swift */,
 				D3E810831B70F4BC004AE5A9 /* TodayIC.swift */,
 				D3DA3ACD1BAE73F4002FDD21 /* TodayEventsTableRC.swift */,
-				D38C832E1BD68238008F37AA /* GlanceTodayEventsTableRC.swift */,
+				D36DBDD41BD6DA870076A5C2 /* GlanceTodayEventsTableRC.swift */,
 				D31E1DB61BAEEA1700BC7B99 /* EventDetailsIC.swift */,
 				D31E1DB81BAEEA2A00BC7B99 /* EditEventDetailsIC.swift */,
 				D3BE2D2A1BB126EA00376686 /* EventEditNotesIC.swift */,
@@ -1197,8 +1197,8 @@
 				D3DA3AE11BAE8521002FDD21 /* ReminderSettingsIC.swift in Sources */,
 				ECB861FE1B77DCDC00503C50 /* General.swift in Sources */,
 				D3BE2D2B1BB1287C00376686 /* EventEditNotesIC.swift in Sources */,
-				D38C832F1BD68238008F37AA /* GlanceTodayEventsTableRC.swift in Sources */,
 				D3188A731B6E9AEF00323DC0 /* MessageComposer.swift in Sources */,
+				D36DBDD51BD6DA870076A5C2 /* GlanceTodayEventsTableRC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

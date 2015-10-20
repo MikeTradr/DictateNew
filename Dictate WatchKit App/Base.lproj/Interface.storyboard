@@ -1036,7 +1036,7 @@
                                                     <label height="1" alignment="left" verticalAlignment="center" id="QDt-LA-10q"/>
                                                     <group width="1" alignment="left" layout="vertical" id="cPn-Va-SzY">
                                                         <items>
-                                                            <label alignment="left" text="Label" numberOfLines="2" id="9Kl-UA-QXL" userLabel="Title">
+                                                            <label height="18" alignment="left" text="Label" numberOfLines="2" id="9Kl-UA-QXL" userLabel="Title">
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <fontDescription key="font" type="boldSystem" pointSize="15"/>
                                                             </label>

@@ -271,6 +271,8 @@ class ReminderListsIC: WKInterfaceController {
                 row.verticalBar.setBackgroundColor(UIColor(CGColor: reminderList.CGColor))
                 
                 row.imageVerticalBar.setTintColor(UIColor(CGColor: reminderList.CGColor))
+                
+                row.imageVerticalBarRT.setTintColor(UIColor(CGColor: reminderList.CGColor))
 
             }
         }
@@ -349,7 +351,7 @@ class ReminderListsIC: WKInterfaceController {
             selectedRow = rowIndex //for use with insert and delete, save selcted row index
             let itemRow = self.table2.rowControllerAtIndex(rowIndex) as! ReminderItemsTableRC
             let reminderItem = allReminders[rowIndex]
-            let veryDarkGray = UIColor(red: 128, green: 128, blue: 128)     //light biege color, for Word List
+            let veryDarkGray = UIColor(red: 128, green: 128, blue: 128, alpha: 1)     //light biege color, for Word List
             
             if self.checked {               // Turn checkmark off
                 itemRow.imageCheckbox.setImageNamed("cbBlank40px")

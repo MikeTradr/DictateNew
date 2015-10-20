@@ -13,66 +13,12 @@ import Parse
 import AVFoundation
 //import MessageUI
 
-/*
-var results = []
-
-// ---- chagne strigngs here for testing ---
-var str:String      = ""
-
-var strRaw:String   = str
-
-
-// ---- set Global Varbiables ----
-var time:String         = ""
-var mainType:String     = ""
-var aptType:String      = ""
-var phone:String        = ""
-var day:String          = ""
-var date:String         = ""
-var todayDay:String     = ""
-var timestamp:String    = ""
-var word:String         = ""
-var timeString:String   = ""
-var endTime:NSDate      = NSDate()
-
-var today               = NSDate()
-
-var wordArr             = []
-
-
-var output:String           = ""
-var outputRaw:String        = ""
-
-var resultProcessed:String  = ""
-var resultRaw:String        = ""
-var resultStartDate:String  = ""
-var resultEndDate:String    = ""
-var resultTitle:String      = ""
-var resultCalendar:String   = ""
-
-var calendarName            = ""
-
-var eventDuration:Double     = 10
-
-//var startDate = ""
-
-var now = ""
-
-var outputNote:String       = strRaw
-
-var fullDT:String       = ""
-var fullDTEnd:String    = ""
-
-*/
-
-
-// ---- end set Global Varbiables ----
-
-
 
 class MainIC: WKInterfaceController {
     
-    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+    //let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+    var defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+
     
     var audioPlayer = AVAudioPlayer()
     
@@ -87,45 +33,91 @@ class MainIC: WKInterfaceController {
     var eventEndDT:NSDate       = NSDate(dateString:"2015-06-01")
     
     var calendarName:String     = ""
+    var reminderTitle:String    = ""
     
-    var output:String           = ""
+    //var output:String           = ""
     var outputNote:String       = ""
     var day:String              = ""
     
+   // var labelCreated:String     = ""
+    
+    //var player: WKAudioFilePlayer!
+    
    // @IBOutlet weak var myLabel: WKInterfaceLabel!
     
-    @IBOutlet weak var myLabel: WKInterfaceLabel!
+   // @IBOutlet weak var myLabel: WKInterfaceLabel!
+    
+    @IBOutlet var myLabel: WKInterfaceLabel!
+    
     @IBOutlet weak var resultType: WKInterfaceLabel!
     @IBOutlet weak var resultDay: WKInterfaceLabel!
     @IBOutlet weak var resultStart: WKInterfaceLabel!
-    @IBOutlet weak var resultEnd: WKInterfaceLabel!
+   // @IBOutlet weak var resultEnd: WKInterfaceLabel!
     @IBOutlet weak var resultPhone: WKInterfaceLabel!
     @IBOutlet weak var resultCalendar: WKInterfaceLabel!
     
+    @IBOutlet var resultTitle: WKInterfaceLabel!
+    
+    @IBOutlet var groupLabelTitle: WKInterfaceGroup!
+    
+    @IBOutlet var resultAlarm: WKInterfaceLabel!
+    @IBOutlet var resultRepeat: WKInterfaceLabel!
+    
+    
+    @IBOutlet var labelCreated: WKInterfaceLabel!   //large Green label after create button
+    
     @IBOutlet weak var groupResults: WKInterfaceGroup!
-    
     @IBOutlet weak var groupButtons: WKInterfaceGroup!
-    
     @IBOutlet weak var groupNavigation: WKInterfaceGroup!
     
-    @IBOutlet weak var buttonMicrophone: WKInterfaceButton! // added to set microphone to hidden
+    @IBOutlet var labelButtonCreate: WKInterfaceLabel!
     
-    //@IBOutlet weak var groupButtons: WKInterfaceGroup!
-   // @IBOutlet weak var groupResults: WKInterfaceGroup!
     
-    var actionType:String = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!.stringForKey("actionType") ?? "Event"
+    @IBOutlet var buttonMicGr: WKInterfaceButton!
     
+    @IBOutlet var groupMicMain: WKInterfaceGroup!
+    @IBOutlet var buttonGrType: WKInterfaceButton!
+    @IBOutlet var buttonGrDay: WKInterfaceButton!
+    @IBOutlet var buttonGrPhone: WKInterfaceButton!
+    
+   
+    @IBOutlet var buttonGrCalendar: WKInterfaceButton!
+    @IBOutlet var buttonGrStart: WKInterfaceButton!
+    //@IBOutlet var buttonGrEnd: WKInterfaceButton!
+    
+    @IBOutlet var buttonGrTitle: WKInterfaceButton!
+    
+    @IBOutlet var buttonGrAlarm: WKInterfaceButton!
+    @IBOutlet var buttonGrRepeat: WKInterfaceButton!
+ 
 
     
+    var actionType:String = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!.stringForKey("actionType") ?? "Event"
+
+    var alert       = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!.objectForKey("eventAlert") as? Double
+
+    let eventRepeat      = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!.stringForKey("eventRepeat")
+
     
+    var output      = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!.stringForKey("output") ?? ""
     
+    var phone       = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!.stringForKey("phone")
     
+    var wordArrTrimmed  = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!.objectForKey("wordArrTrimmed") as? [String] ?? [] //array of the items
+
+    
+    let lightPink = UIColor(red: 255, green: 204, blue: 255, alpha: 1)
+    let swiftColor = UIColor(red: 255, green: 165, blue: 0, alpha: 1)
+    let moccasin = UIColor(red: 255, green: 228, blue: 181, alpha: 1)     //light biege color, for Word List
+    let apricot = UIColor(red: 251, green: 206, blue: 177, alpha: 1)
+
+
 //#### functions #################################
-    
- 
     
     internal func grabvoice() -> (NSDate, NSDate, String, String, String, String, String)  {  //startDT, endDT, output, outputNote, day, calendarName, actionType
         //added actionType above
+        
+        self.buttonMicGr.setHidden(true)
         
         var rawString = ""
         var fullDT:String       = ""
@@ -133,8 +125,66 @@ class MainIC: WKInterfaceController {
         
     // uncomment line below to get a string from simulator Anil :)
        // self.presentTextInputControllerWithSuggestions(["Today 2 PM test Appointment"], allowedInputMode: WKTextInputMode.Plain, completion: { results -> Void in
-            
-        self.presentTextInputControllerWithSuggestions([], allowedInputMode: WKTextInputMode.Plain, completion: { results -> Void in
+        
+        let str31:String = "todo today, call mom, meeting at 10 AM, play tennis, pick up kids" // comma deliminated list, first phrase or word before comma is title
+        
+        let str27:String = "new list groceries cheese milk carrots lettace eggs tomatoes carrots crackers salsa dip pizza dressing water beer wine salt file newspapers"
+        
+        let str32:String = "list shower work workout dinner sleep"  //raw list one word speed list, title = "untitled list"
+        
+        let str38:String = "Reminder mow the grass today 1 pm list today"
+        
+        let str3:String = "New appointment 11 AM today show apartment with Sandi"
+
+
+ 
+        
+        
+        var str:String = str3
+        let str1:String = "Reminder wash the car"
+        
+        var suggestionArray:[String] = []
+         suggestionArray = [str, str1]       //TODO Comment out for non-testing
+        
+        var phone       = defaults.stringForKey("phone")
+        var alert       = defaults.objectForKey("eventAlert") as? Double
+        let duration    = defaults.stringForKey("eventDuration")
+        let eventRepeat = defaults.stringForKey("eventRepeat")
+        let strRaw      = defaults.stringForKey("strRaw")
+        var reminderTitle  = defaults.stringForKey("title") ?? ""
+        var wordArrTrimmed  = defaults.objectForKey("wordArrTrimmed") as? [String] ?? [] //array of the items
+        
+        //TODO Mike Anil commented to fix nil error
+        // var reminderArray = defaults.objectForKey("reminderArray") as! [String] //array of the items
+        
+        var reminderArray:[String] = []
+        var reminderList    = defaults.stringForKey("reminderList") ?? ""
+        
+        var reminderAlarm   = defaults.objectForKey("reminderAlarm") as? NSDate
+        var allDayFlag = self.defaults.objectForKey("allDayFlag") as? Bool ?? false     //Anil helped here :)
+        
+        print("w111Defaults ==================================")
+        print("w111Defaults phone: \(phone)")
+        print("w111Defaults alert: \(alert)")
+        print("w111Defaults duration: \(duration)")
+        print("w111Defaults eventRepeat: \(eventRepeat)")
+        print("w111Defaults strRaw: \(strRaw)")
+        print("w111Defaults reminderTitle: \(reminderTitle)")
+        print("w111Defaults wordArrTrimmed: \(wordArrTrimmed)")
+
+        print("w111Defaults reminderArray: \(reminderArray)")
+        print("w111Defaults reminderList: \(reminderList)")
+        print("w111Defaults reminderAlarm: \(reminderAlarm)")
+        print("w111Defaults allDayFlag: \(allDayFlag)")
+  
+        print("w111FromDefaults end ==============================")
+
+
+
+
+
+       
+        self.presentTextInputControllerWithSuggestions(suggestionArray, allowedInputMode: WKTextInputMode.Plain, completion: { results -> Void in
 
             //println("34 Results: \(results)")
             //println("35 Results: \(results[0])")
@@ -160,6 +210,32 @@ class MainIC: WKInterfaceController {
                 
                 let (startDT, endDT, output, outputNote, day, calendarName, actionType) = DictateCode().parse(self.str)
                 
+                print("w200Main ==================================")
+                print("w200Main startDT: \(startDT)")
+                print("w200Main endDT: \(endDT)")
+                print("w200Main output: \(output)")
+                print("w200Main outputNote: \(outputNote)")
+                print("w200Main day: \(day)")
+                print("w200Main calandarName: \(calendarName)")
+                print("w200Main actionType: \(actionType)")
+                print("w200Main dictate ==================================")
+
+                print("w200Main phone: \(phone)")
+                print("w200Main duration: \(duration)")
+                print("w200Main alert: \(alert)")
+                print("w200Main eventRepeat: \(eventRepeat)")
+                print("w200Main strRaw: \(strRaw)")
+                print("w200Main mainType: \(mainType)")
+                print("w200Main reminderTitle: \(reminderTitle)")
+                print("w200Main wordArrTrimmed: \(wordArrTrimmed)")
+                print("w200Main reminderList: \(reminderList)")
+                print("w200Main reminderArray: \(reminderArray)")
+                print("w200Main reminderAlarm: \(reminderAlarm)")
+                
+                print("w200Main allDayFlag: \(allDayFlag)")
+                print("w200Main end ==================================")
+        
+                
                 var formatter3 = NSDateFormatter()
                 formatter3.dateFormat = "M-dd-yyyy h:mm a"
                 
@@ -167,7 +243,7 @@ class MainIC: WKInterfaceController {
                 fullDTEnd = formatter3.stringFromDate(endDT)
                 
                 if (startDT != NSDate(dateString:"2014-12-12") ) {
-                    print("p153 startDT: \(startDT)")
+                    print("w153 startDT: \(startDT)")
                     
                     fullDT = formatter3.stringFromDate(startDT)
                     fullDTEnd = formatter3.stringFromDate(endDT)
@@ -176,52 +252,210 @@ class MainIC: WKInterfaceController {
                     fullDTEnd = ""
                 }
                 
+                print("w245 startDT: \(startDT)")
+                print("w246 fullDT: \(fullDT)")
                 
-                print("p164 startDT: \(startDT)")
-                
-                // self.eventStartDT = startDT
-                //  self.eventEndDT = endDT
-                
-                self.startDT = startDT
-                self.endDT = endDT
-                self.output = output
+                self.startDT    = startDT
+                self.endDT      = endDT
+                self.output     = output
                 self.outputNote = outputNote
-                self.day = day
+                self.day        = day
                 self.calendarName = calendarName
                 
-                if actionType == "Reminder" {
-                    print("p181 actionType setColor: \(actionType)")
+                
+               //format Times to look great!
+                let dateFormatter = NSDateFormatter()
+                let dateString = dateFormatter.stringFromDate(startDT)
+                
+                dateFormatter.dateFormat = "h:mm a"
+                
+                let startTimeA = dateFormatter.stringFromDate(startDT)
+                var startTime = startTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
+                
+                let endTimeA = dateFormatter.stringFromDate(endDT)
+                let endTime = endTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
+                
+                var endTimeDash = "-\(endTime)"
+                
+                let time = "\(startTime)\(endTimeDash)"
+                
+                //var allDayFlag = self.defaults.objectForKey("allDayFlag") as? Bool ?? false
 
-                    self.resultType.setTextColor(UIColor.yellowColor())
+                if allDayFlag {   // if allDay bool is true
+                    startTime = ""
+                    endTimeDash = "All Day"
                 }
                 
-                if actionType == "Event" {
-                    self.resultType.setTextColor(UIColor.orangeColor())
+        
+                self.resultType.setText("Type: \(actionType)")
+                
+                if (self.day == ""){
+                    self.resultDay.setText("")
+                    self.buttonGrDay.setHidden(true)
+                } else {
+                    self.resultDay.setText("Day: \(day)")
+                    self.buttonGrDay.setHidden(false)
+                }
+               
+                
+                self.resultStart.setText("Time: \(time)")
+                
+                //self.resultEnd.setText("  end: \(fullDTEnd)")
+                //self.buttonGrEnd.setHidden(true)                //no longer used
+
+                
+                self.resultPhone.setText("Cell: \(self.phone)")
+                self.resultCalendar.setText("Cal.: \(calendarName)")
+                
+                self.resultTitle.setText("\"\(output)\"")
+                
+                var alertAsInt = 0
+                if self.alert != nil {
+                    alertAsInt = Int(self.alert!)               // to format 10.0  to 10  for minutes result
                 }
                 
+                if (self.alert == 0.0 || self.alert == nil){
+                    self.resultAlarm.setText("")
+                    self.buttonGrAlarm.setHidden(true)
+                } else {
+                    self.resultAlarm.setText("Alert: \(String(alertAsInt)) minutes")
+                    self.buttonGrAlarm.setHidden(false)
+                }
                 
-                self.resultType.setText("type: \(actionType)")
-                self.resultDay.setText("day: \(day)")
-                self.resultStart.setText("start: \(fullDT)")
-                self.resultEnd.setText("  end: \(fullDTEnd)")
-                self.resultPhone.setText("cell: \(phone)")
-                self.resultCalendar.setText("cal.: \(calendarName)")
+                if (self.eventRepeat == "0" || self.eventRepeat == nil) {
+                    self.resultRepeat.setText("")
+                    self.buttonGrRepeat.setHidden(true)
+                } else {
+                    self.resultRepeat.setText("Repeat: \(self.eventRepeat)")
+                    self.buttonGrRepeat.setHidden(false)
+                }
 
                 self.groupButtons.setHidden(false)
                 self.groupResults.setHidden(false)
                 self.groupNavigation.setHidden(true)
+                self.groupMicMain.setHidden(true)
                 
-                self.buttonMicrophone.setHidden(true)
+                if self.phone == "" || self.phone == nil {
+                    self.buttonGrPhone.setHidden(true)
+                } else {
+                    self.buttonGrPhone.setHidden(false)
+                }
+                
+                
+                // ____ actionType Text ____________________________________
+                
+                //TODO Can we pass to phone or do these things on watch as we do on phone?
+                switch (actionType) {
+                case "Text":
+                    print("w196 in Text Switch")
+                    
+                    break;
+                    
+                case "Call":
+                    print("w431 in Call Switch")
+                    
+                    let toPhone:String    = self.defaults.stringForKey("toPhone")!
+                    General().makeCall(toPhone)
+                    
+                    break;
+                    
+                case "Mail":
+                    print("w456 in Mail Switch")
+                    
+                    break;
+                    
+                case "Mail List":
+                    print("w588 in Mail List Switch")
+                    
+                    break;
+                    
+                case "Mail Events":
+                    print("w632 in Mail Events Switch")
+                    
+                    break;
+                    
+                case "Reminder":
+                    print("w224 in Reminder Switch")
+                    self.resultType.setTextColor(UIColor.yellowColor())
+                    self.labelButtonCreate.setText("Create Reminder")
+                    if day == "No Day Found" {
+                        self.buttonGrDay.setHidden(true)
+                    }
+                    
+                    print("w317 fullDT: \(fullDT)")
+                    if ( fullDT == "" ) {        // added 072315 no need to show if no date used
+                        self.buttonGrStart.setHidden(true)
+                    }
+                    
+                    let reminderTitle = self.defaults.stringForKey("reminderList") ?? ""
+                    self.resultCalendar.setText("List: \(reminderTitle)")
+                    self.resultTitle.setText("Items: \(output)")
+                    
+                   //if fullDT != "12-12-2014 12:00 AM" {        // means a blank date
+                    if fullDT != "" {        // means a blank date
+                        self.buttonGrAlarm.setHidden(false)
+                        self.resultAlarm.setText("Alarm: \(startTime)")
+                    }
+                    
+                    self.buttonGrStart.setHidden(true)
+                    
+                    break;
+                    
+                case "Event":
+                    self.resultType.setTextColor(self.swiftColor)
+                    //self.groupLabelTitle.setBackgroundColor(self.swiftColor)
+                    self.labelButtonCreate.setText("Create Event")
+                    self.resultCalendar.setText("Calendar: \(calendarName)")
+                    self.resultTitle.setText("Title: \(output)")
+                    break;
+                    
+                case "New List", "List":
+                    let wordArrTrimmed  = self.defaults.objectForKey("wordArrTrimmed") as? [String] ?? [] //array of the items
+                    let stringOutput = wordArrTrimmed.joinWithSeparator(", ")
+                    let reminderTitle = self.defaults.stringForKey("reminderList") ?? ""
+                    self.resultType.setTextColor(self.moccasin)
+                    self.labelButtonCreate.setText("Create New List")
+                    self.resultCalendar.setText("List: \(reminderTitle)")
+                    self.resultTitle.setText("Items: \(stringOutput)")
+                    if ( fullDT == "" ) {
+                        self.buttonGrStart.setHidden(true)
+                    }
+                    break;
+                
+                case "New OneItem List":
+                    let wordArrTrimmed  = self.defaults.objectForKey("wordArrTrimmed") as? [String] ?? [] //array of the items
+                    let stringOutput = wordArrTrimmed.joinWithSeparator(", ")
+                    let reminderTitle = self.defaults.stringForKey("reminderList") ?? ""
+                    self.resultType.setTextColor(self.moccasin)
+                    self.labelButtonCreate.setText("Create New List")
+                    self.resultCalendar.setText("List: \(reminderTitle)")
+                    self.resultTitle.setText("Items: \(stringOutput)")
+                    break;
+                    
+                case "Phrase List":
+                    let wordArrTrimmed  = self.defaults.objectForKey("wordArrTrimmed") as? [String] ?? [] //array of the items
+                    let stringOutput = wordArrTrimmed.joinWithSeparator(", ")
+                    let reminderTitle  = self.defaults.stringForKey("reminderList") ?? ""
+                    self.resultType.setTextColor(self.apricot)
+                    self.labelButtonCreate.setText("Create Phrase List")
+                    self.resultCalendar.setText("List: \(reminderTitle)")
+                    self.resultTitle.setText("Items: \(stringOutput)")
+                    if ( fullDT == "" ) {        // added 072315 no need to show if no date used
+                        self.buttonGrStart.setHidden(true)
+                    }
+                    break;
+                    
+                default:
+                    print("w200 Switch Default")
+                    
+                }   //end Switch
 
-                
-                
-                
-                
                 //completion(“we finished!”)
                 
             } else {
-                print("p192 No objects")
+                print("p192 No objects or canceled")
                 self.myLabel.setText("Tap Mic to dictate or force touch")
+                self.buttonMicGr.setHidden(false)
             }
         })
         
@@ -244,7 +478,7 @@ class MainIC: WKInterfaceController {
         print("MainIC 236 we here cleardata: \(date)")
         
         date = ""
-        phone = ""
+        self.phone = ""
         startDT = NSDate(dateString:"2014-12-12")
         endDT = NSDate(dateString:"2014-12-12")
         
@@ -254,9 +488,9 @@ class MainIC: WKInterfaceController {
         self.resultType.setText("")
         self.resultDay.setText("")
         self.resultStart.setText("")
-        self.resultEnd.setText("")
         self.resultPhone.setText("")
         self.resultCalendar.setText("")
+        self.resultStart.setHidden(false)
         
         self.groupButtons.setHidden(true)
         self.groupResults.setHidden(true)
@@ -302,45 +536,39 @@ class MainIC: WKInterfaceController {
         presentControllerWithName("Settings", context: "Dictate")
     }
 //---- end Menu functions ----------------------------------------
-
     
-    @IBAction func buttonMic() {
-        
+    
+    @IBAction func buttonGroupMic() {
         var alertSound1: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("button-14", ofType: "mp3")!)
         //General.playSound(alertSound3!)
         
-//Second, we currently can't control sounds or haptic feedback from our app's code.
+        //Second, we currently can't control sounds or haptic feedback from our app's code.
         self.playSound(alertSound1)
-       
+        
         let (startDT, endDT, output, outputNote, day, calendarName, actionType) = grabvoice()
         
         print("p268 startDT: \(startDT)")
         print("p269 endDT: \(endDT)")
         print("p270 actionType: \(actionType)")
         print("p271 calendarName: \(calendarName)")
+        
+
+        
     }
     
-
     
     @IBAction func buttonCreate() {
         
-        self.buttonMicrophone.setHidden(true)  //hide mircophone
+        self.buttonMicGr.setHidden(true)  //hide mircophone
         
         print("p277 eventStart: \(startDT)")
         print("p278 calendarName: \(calendarName)")
-        
-        // CHECK Do I have to call this again??? else 12/12/2014 event
-        //Don't need to parse again? commented out 7/4/15 8 am
-        
-        //let (startDT, endDT, output, outputNote, day, calendarName) = DictateCode().parse(str)
-        
-        //println("### pl240 startDT: \(startDT)")
         
         var actionType:String    = defaults.stringForKey("actionType")!
         
         print("p299 watchIC, actionType: \(actionType)")
         
-        //actionType = "Reminder"
+// ---- switch actionType in button Create ------------------------------------
         
         switch (actionType){
         case "Reminder":
@@ -353,96 +581,117 @@ class MainIC: WKInterfaceController {
             //ReminderCode().createReminder(title, notes: notes, startDT: startDT)
             ReminderCode().createReminder()
             
-           // resultMessage.text = "Reminder created on your \(calendarName.capitalizedString) list"
+            self.labelCreated.setText("Reminder created on your \(calendarName.capitalizedString) list")
             break;
             
         case "Event":
-            print("p255 in Event Switch")
+            print("w568 in Event Switch")
             
-            // TODO MIKE  remove this parsing again! pass with NSUser Data in method
-            //   let (startDT, endDT, output, outputNote, day, calendarName, actionType) = DictateCode().parse(str)
+            EventManager().createEvent()
             
-            //DictateCode().insertEvent(eventStore, startDT: startDT, endDT: endDT, output: output, outputNote: outputNote, calendarName: calendarName )
-            
-            EventCode().createEvent()
-            
-            //resultMessage.text = "Event created on your \(calendarName.capitalizedString) calendar!"
+            self.labelCreated.setText("Event created on your \(calendarName.capitalizedString) calendar!")
+
             break;
+            
+        case "New List", "List":
+            
+            let reminderTitle  = defaults.stringForKey("reminderList") ?? ""
+            
+            ReminderManager.sharedInstance.createNewReminderList(calendarName, items: wordArrTrimmed)
+            
+            self.labelCreated.setText("New List, \(reminderTitle), has been created")
+            
+            break;
+            
+        case "New OneItem List":
+            
+            let reminderTitle  = defaults.stringForKey("reminderList") ?? ""
+
+            output      = defaults.stringForKey("output") ?? ""
+            let outputArray:[String] = Array(arrayLiteral: output)
+            
+            ReminderManager.sharedInstance.createNewReminderList(calendarName, items: outputArray)
+            
+            self.labelCreated.setText("New List, \(reminderTitle), has been created")
+            
+            break;
+            
+    // ____ Phrase List ____________________________________
+        case "Phrase List":
+            print("w589 in phraseList Switch")
+            
+            let reminderTitle  = defaults.stringForKey("reminderList") ?? ""
+            
+            ReminderManager.sharedInstance.createNewReminderList(calendarName, items: wordArrTrimmed)
+            
+            self.labelCreated.setText("New Phrase List, \(reminderTitle), has been created")
+
+            break;
+            
             
         case "List":
-            print("p150 in list Switch")
+            print("w150 in list Switch")
+             self.labelCreated.setText("List created on your \(calendarName.capitalizedString) calendar!")
+           
             break;
+            
         case "CommaList":
-            print("p151 in commaList Switch")
+            print("w151 in commaList Switch")
+             self.labelCreated.setText("New Reminder List created: \(calendarName.capitalizedString)")
             break;
+            
         case "Note":
-            print("p152 in note Switch")
+            print("w152 in note Switch")
             break;
             
         case "Call":
-                print("w387 in Call Switch")
-                
-                //resultMessage.text = "Switching to Phone for your call"
-                
-                let toPhone:String    = defaults.stringForKey("toPhone")!
-                
-                General().makeCall(toPhone)
-                
-              //  enteredText2.text = ""      // set to blank for return
-             //   resultMessage.text = ""     // set to blank for return
-                
-                //let actionType = ""         // set to "" for next processing
-                let mainType = ""
-                defaults.setObject(actionType, forKey: "actionType")        //saves actionType
-                defaults.setObject(actionType, forKey: "mainType")        //saves actionType
-                
-                let rawDataObject = PFObject(className: "UserData")
-                rawDataObject["actionType"] = actionType
-                rawDataObject["rawString"] = outputNote
-                rawDataObject["userName"] = PFUser.currentUser()?.username
-                
-                //TODO get these two fields from code!
-                rawDataObject["device"] = "iPhone"               //TODO hardcoded get device from code?
-                rawDataObject["userPhoneNumber"] = "608-242-7700"               //TODO hardcoded get device from code?
-                
-                rawDataObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
-                    print("p490 vcDictate rawDataObject has been saved.")
-                }
-               break;
-                
+            print("w387 in Call Switch")
+            
+            //resultMessage.text = "Switching to Phone for your call"
+            
+            let toPhone:String    = defaults.stringForKey("toPhone")!
+            
+            General().makeCall(toPhone)
+            
+            //  enteredText2.text = ""      // set to blank for return
+            //   resultMessage.text = ""     // set to blank for return
+            
+            //let actionType = ""         // set to "" for next processing
+            let mainType = ""
+            defaults.setObject(actionType, forKey: "actionType")        //saves actionType
+            defaults.setObject(actionType, forKey: "mainType")        //saves actionType
+            
+            let rawDataObject = PFObject(className: "UserData")
+            rawDataObject["actionType"] = actionType
+            rawDataObject["rawString"] = outputNote
+            rawDataObject["userName"] = PFUser.currentUser()?.username
+            
+            //TODO get these two fields from code!
+            rawDataObject["device"] = "iPhone"               //TODO hardcoded get device from code?
+            rawDataObject["userPhoneNumber"] = "608-242-7700"               //TODO hardcoded get device from code?
+            
+            rawDataObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+                print("p490 vcDictate rawDataObject has been saved.")
+            }
+            break;
+            
      
-
-            
-            
-            
-            
         default:
             print("p155 in default switch so assume Event")
             
-            //TODO MIke add back fixed call...
-            //DictateCode().insertEvent(eventStore, startDT: startDT, endDT: endDT, output: output, outputNote: outputNote, calendarName: calendarName )
-            EventCode().createEvent()
+            EventManager().createEvent()
             
-           // resultMessage.text = "Event created on your \(calendarName.capitalizedString) calendar!"
+            // resultMessage.text = "Event created on your \(calendarName.capitalizedString) calendar!"
             break;
         }
         
+    // ---- end switch actionType in button Create ------------------------------------
         
-        self.myLabel.setTextColor(UIColor.greenColor())
         
-        self.buttonMicrophone.setHidden(true)  //hide mircophone
+        self.labelCreated.setHidden(false)
+        self.labelCreated.setTextColor(UIColor.greenColor())
         
-        let labelText = "Event created on your \(calendarName.capitalizedString) calendar!"
-        
-        let font:UIFont? = UIFont(name: "Arial", size: 22.0)
-        
-        let attributedString =  NSAttributedString(string: labelText, attributes: [NSFontAttributeName : font!])
-
-        
-        self.myLabel.setAttributedText(attributedString)
-        
-       // ORGINAL self.myLabel.setText("Event created on your \(calendarName.capitalizedString) calendar!")
-
+        self.buttonMicGr.setHidden(true)  //hide mircophone
         
         strRaw          = defaults.stringForKey("strRaw")!
         output          = defaults.stringForKey("output")!
@@ -461,9 +710,9 @@ class MainIC: WKInterfaceController {
             fullDT = ""
             fullDTEnd = ""
         }
- 
-//---- Save to Parse Database ----------------------------------------
- 
+        
+        //---- Save to Parse Database ----------------------------------------
+        
         let rawDataObject = PFObject(className: "UserData")
         rawDataObject["rawString"] = strRaw
         rawDataObject["output"] = output
@@ -472,14 +721,14 @@ class MainIC: WKInterfaceController {
         rawDataObject["actionType"] = actionType
         rawDataObject["calendarName"] = calendarName
         
-//TODO get these two fields from code!
+        //TODO Anil TODO Mike get these two fields from code!
         rawDataObject["device"] = "Watch"               //TODO hardcoded get device from code?
         rawDataObject["userPhoneNumber"] = "watch phone number"               //TODO hardcoded get device from code?
-
+        
         //TODO get this from login Screen, hard coded for now...
         
         //rawDataObject["userName"] = "Mike Watch H.Coded"
-
+        
         print("p349 PFUser.currentUser(): \(PFUser.currentUser())")
         
         if PFUser.currentUser() == nil {
@@ -495,31 +744,33 @@ class MainIC: WKInterfaceController {
         //TODO somehow get and save email to parse database
         // query.whereKey(“username”, equalTo: PFUser.currentUser()?.username)
         
-        print("p358 query: \(query)")
+        print("w575 query: \(query)")
         
-        print("p354 PFUser.currentUser()?.email: \(PFUser.currentUser()?.email)")
+        print("w577 PFUser.currentUser()?.email: \(PFUser.currentUser()?.email)")
         
         // rawDataObject["userEmail"] = PFUser.currentUser()?.email
         
         var error:NSError? = nil
-
+        
         rawDataObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
-            print("p502 vcTest1 rawDataObject has been saved.")
+            print("w584 vcTest1 rawDataObject has been saved.")
         }
         
-         print("p505 Parse save Error: \(error)")
+        print("w587 Parse save Error: \(error)")
         
-//---- End Save to Parse Database ----------------------------------------
+        //---- End Save to Parse Database ----------------------------------------
         
         cleardata()
         
-        print("462 we here?")
-
+        print("w593 we here?")
+        
         General().delay(3.0) {          // do stuff
             self.myLabel.setTextColor(UIColor.yellowColor())
             self.myLabel.setText("Tap Mic to dictate or force touch")
             self.groupNavigation.setHidden(false)
-            self.buttonMicrophone.setHidden(false)  //hide mircophone
+            self.buttonMicGr.setHidden(false)  //show mircophone
+            self.labelCreated.setHidden(true)
+            
         }
         
         
@@ -534,10 +785,29 @@ class MainIC: WKInterfaceController {
         actionType = ""
         defaults.setObject(actionType, forKey: "actionType")
         
-        //self.buttonMicrophone.setHidden(false)  //display mircophone
+        
+        self.groupMicMain.setHidden(false)
+        
+        
+    }       // end buttonCreate
 
+    
+    
+    
+    
+    @IBAction func buttonCancel() {
+        //self.buttonMicGr.setHidden(false)  //display mircophone
+        self.myLabel.setText("Tap Mic to dictate or force touch")
+        cleardata()
+        self.groupMicMain.setHidden(false)       //show mircophone
+        self.groupNavigation.setHidden(false)
+        self.groupResults.setHidden(true)
         
+        self.buttonMicGr.setHidden(false)  //show mircophone
+        self.labelCreated.setHidden(true)
         
+        cleardata()
+    
     }
     
     
@@ -550,17 +820,7 @@ class MainIC: WKInterfaceController {
     }
     
     
-    
-    @IBAction func buttonEdit() {
-    }
 
-    
-    @IBAction func buttonCancel() {
-        self.buttonMicrophone.setHidden(false)  //display mircophone
-        self.myLabel.setText("Tap Mic to dictate or force touch")
-        cleardata()
-        
-    }
     
 
 //---- Override functions ----------------------------------------
@@ -568,54 +828,36 @@ class MainIC: WKInterfaceController {
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         // Configure interface objects here.
-        NSLog("%@ w536 MainIC awakeWithContext", self)
-        print("p471 in MainIC awakeWithContext")
+        NSLog("%@ w657 MainIC awakeWithContext", self)
+        print("w658 in MainIC awakeWithContext")
      
-       //TODO stops app from running on watch!
-       // DictateManagerIC.sharedInstance.initalizeParse()
-        
- /*
- //TODO FIX THIS BOMBS MIKE USED TO WORK  LOL
-  
-        Parse.enableLocalDatastore()
-      //  PFUser.enableAutomaticUser()
-        
-        // Enable data sharing in app extensions.
- 
-        Parse.enableDataSharingWithApplicationGroupIdentifier("group.com.thatsoft.dictateApp",
-            containingApplication: "com.thatsoft.dictateApp")
-
-        Parse.setApplicationId("1wwwPAQ0Of2Fp6flotUw4YzN64HFDmy3ijAlQZKE",
-            clientKey: "EHeeek4uXhJQi0vXPBba945A4h0LQ4QddEGW8gSs")
-        
-        PFUser.enableAutomaticUser()
-*/
-/*
-        // Enable data sharing in app extensions.
-        Parse.enableDataSharingWithApplicationGroupIdentifier("group.com.thatsoft.dictateApp", containingApplication: "com.thatsoft.dictateApp")
-        
-        //Parse.enableLocalDatastore()
-        
-        // Initialize Parse.
-        Parse.setApplicationId("1wwwPAQ0Of2Fp6flotUw4YzN64HFDmy3ijAlQZKE",
-            clientKey: "EHeeek4uXhJQi0vXPBba945A4h0LQ4QddEGW8gSs")
-*/
         self.setTitle("Dictate™")
         self.myLabel.setTextColor(UIColor.yellowColor())
         self.myLabel.setText("Tap Mic to dictate or force touch")
-        self.buttonMicrophone.setHidden(false)  //hide mircophone
+        self.buttonMicGr.setHidden(false)       //show mircophone
+        self.groupNavigation.setHidden(false)   //show navigation
+        //hide these:
+        self.groupResults.setHidden(true)       //hide results
+        self.labelCreated.setHidden(true)       //hide label
+        self.groupButtons.setHidden(true)
+
 
     }
-    
+//===== willActivate ==================================================
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
-        NSLog("%@ w536 MainIC willActivate", self)
-        print("p589 in MainIC willActivate")
-        
+        NSLog("%@ w671 MainIC willActivate", self)
+        print("w672 in MainIC willActivate")
+     /*
         self.myLabel.setTextColor(UIColor.yellowColor())
         self.myLabel.setText("Tap Mic to dictate or force touch")
-        self.buttonMicrophone.setHidden(false)  //hide mircophone
-        
+        self.buttonMicGr.setHidden(false)       //show mircophone
+        self.groupNavigation.setHidden(false)   //show navigation
+        //hide these:
+        self.groupResults.setHidden(true)       //hide results
+        self.labelCreated.setHidden(true)       //hide label
+        self.groupButtons.setHidden(true)       //hide buttons
+     */
         super.willActivate()
         
     }
@@ -630,3 +872,6 @@ class MainIC: WKInterfaceController {
     //---- End Override functions ----------------------------------------
     
 }   // end InterfaceController
+
+
+

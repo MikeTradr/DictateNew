@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ei9-cN-Wbe">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ei9-cN-Wbe">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="8092"/>
@@ -10,83 +10,208 @@
             <objects>
                 <controller identifier="Main" id="AgC-eL-Hgc" customClass="MainIC" customModule="Dictate_WatchKit_Extension">
                     <items>
-                        <group width="1" alignment="left" id="qWx-Ch-dAb">
+                        <group width="1" alignment="center" id="BII-2S-Kpq">
                             <items>
-                                <button width="40" height="68" alignment="center" backgroundImage="dicApp-2-no-back-180" id="O2a-qB-bgG">
+                                <button alignment="center" id="l5e-dx-S9F" userLabel="SubInfo">
+                                    <group key="contentGroup" width="1" alignment="left" layout="vertical" id="bcs-HZ-YGV">
+                                        <items>
+                                            <imageView width="40" height="68" alignment="center" image="dicApp-2-no-back-180" contentMode="scaleAspectFill" id="i8E-Et-b3r">
+                                                <variation key="device=watch38mm" height="54.399999999999999" width="32"/>
+                                            </imageView>
+                                            <group width="1" alignment="left" id="AQd-Xh-XwC">
+                                                <items>
+                                                    <label width="1" alignment="center" text="Tap to dictate or force touch" textAlignment="center" numberOfLines="10" id="nX1-zu-d1I">
+                                                        <color key="textColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <fontDescription key="font" type="system" weight="semibold" pointSize="16"/>
+                                                        <variation key="device=watch38mm">
+                                                            <fontDescription key="font" type="system" weight="semibold" pointSize="16"/>
+                                                        </variation>
+                                                    </label>
+                                                </items>
+                                                <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
+                                            </group>
+                                        </items>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
+                                    </group>
                                     <connections>
-                                        <action selector="buttonMic" destination="AgC-eL-Hgc" id="z3v-MG-ylF"/>
+                                        <action selector="buttonGroupMic" destination="AgC-eL-Hgc" id="OUJ-ZP-d8x"/>
                                     </connections>
                                 </button>
                             </items>
+                            <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
                         </group>
-                        <label width="1" alignment="center" text="Tap Mic to dictate or force touch" textAlignment="center" numberOfLines="10" id="Wh0-Sx-ekC">
-                            <color key="textColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
-                        </label>
+                        <group width="1" alignment="center" verticalAlignment="center" id="CJ2-gd-rf4">
+                            <items>
+                                <label width="1" alignment="center" verticalAlignment="center" text="labelCreated" textAlignment="center" numberOfLines="10" id="LD0-LA-5Mp">
+                                    <color key="textColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="font" type="system" weight="semibold" pointSize="22"/>
+                                    <variation key="device=watch38mm">
+                                        <fontDescription key="font" type="system" weight="semibold" pointSize="20"/>
+                                    </variation>
+                                </label>
+                            </items>
+                            <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
+                        </group>
                         <group alignment="center" verticalAlignment="bottom" id="zPJ-tz-Iw3">
                             <items>
-                                <button width="40" height="40" alignment="left" backgroundImage="check_box40px-grey50%" id="voa-7n-w13">
+                                <button width="40" height="40" alignment="left" backgroundImage="check_box4062" id="voa-7n-w13">
                                     <connections>
                                         <action selector="buttonReminders" destination="AgC-eL-Hgc" id="fk9-69-9Eb"/>
                                     </connections>
                                 </button>
-                                <button width="10" alignment="left" enabled="NO" id="drI-Ny-pCP"/>
-                                <button width="40" height="40" alignment="right" backgroundImage="Today40px-50%" id="Kqo-x8-f9R">
+                                <button width="10" alignment="left" enabled="NO" id="drI-Ny-pCP">
+                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </button>
+                                <button width="40" height="40" alignment="right" backgroundImage="Today53pxGray4062" id="Kqo-x8-f9R">
                                     <connections>
                                         <action selector="buttonToday" destination="AgC-eL-Hgc" id="Ead-nG-8vd"/>
                                     </connections>
                                 </button>
                             </items>
                         </group>
-                        <group width="1" alignment="left" hidden="YES" layout="vertical" id="0HL-J3-Tja">
+                        <group width="1" alignment="left" layout="vertical" id="0HL-J3-Tja">
                             <items>
-                                <label width="1" alignment="left" text="type" id="dZr-r8-usa">
-                                    <color key="textColor" red="1" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <fontDescription key="font" type="system" pointSize="16"/>
-                                </label>
-                                <label alignment="left" text="day" id="Rd4-17-QaH">
-                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                    <fontDescription key="font" type="system" pointSize="16"/>
-                                </label>
-                                <label alignment="left" text="start" id="EJB-4B-o93">
-                                    <color key="textColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
-                                </label>
-                                <label alignment="left" text="end" id="YGV-OF-sni">
-                                    <color key="textColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
-                                </label>
-                                <label alignment="left" text="phone" id="PMI-eH-MjR">
-                                    <fontDescription key="font" type="system" pointSize="16"/>
-                                </label>
-                                <label alignment="left" text="calendar" id="Cqu-yl-ZGP">
-                                    <color key="textColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    <fontDescription key="font" type="system" pointSize="16"/>
-                                </label>
+                                <group width="1" alignment="left" hidden="YES" layout="vertical" id="FnW-fe-tL2" userLabel="CalendarGroup">
+                                    <items>
+                                        <button alignment="left" id="Eaj-H5-RKr">
+                                            <group key="contentGroup" width="1" alignment="left" id="fTp-9R-XkV"/>
+                                        </button>
+                                        <label height="15" alignment="left" text="CALENDAR" id="Pye-LV-tWh" userLabel="Calendar">
+                                            <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="font" type="system" pointSize="13"/>
+                                        </label>
+                                        <button alignment="left" id="hyI-cv-HHC" userLabel="SubInfo">
+                                            <group key="contentGroup" width="1" height="16" alignment="left" id="dl7-QO-voi">
+                                                <items>
+                                                    <imageView width="3" height="1" alignment="left" verticalAlignment="center" image="watchbar" id="kUu-7g-rbg">
+                                                        <color key="tintColor" red="1" green="0.40000000600000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </imageView>
+                                                    <group width="3" height="1" alignment="left" verticalAlignment="center" hidden="YES" radius="7" id="yU1-6O-Eoi" userLabel="VerticalBar">
+                                                        <color key="backgroundColor" red="0.40000000600000002" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </group>
+                                                    <label alignment="left" id="v8J-k3-3HU" userLabel="Space"/>
+                                                    <label alignment="left" verticalAlignment="center" text="CalendarName" numberOfLines="3" id="FZ8-xb-aqV" userLabel="CalendarTitle">
+                                                        <fontDescription key="font" type="system" pointSize="14"/>
+                                                    </label>
+                                                </items>
+                                                <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
+                                                <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
+                                            </group>
+                                        </button>
+                                    </items>
+                                    <edgeInsets key="margins" left="4" right="0.0" top="0.0" bottom="0.0"/>
+                                </group>
+                                <button alignment="left" id="Mgz-rg-YCZ" userLabel="ButtonType">
+                                    <group key="contentGroup" width="1" alignment="left" id="uPk-L4-WP7">
+                                        <items>
+                                            <label width="1" alignment="left" text="type" id="dZr-r8-usa">
+                                                <color key="textColor" red="1" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="font" type="system" pointSize="16"/>
+                                            </label>
+                                        </items>
+                                    </group>
+                                </button>
+                                <button alignment="left" id="vKp-xG-Fap" userLabel="ButtonDay">
+                                    <group key="contentGroup" width="1" alignment="left" id="hL2-Bz-qsZ">
+                                        <items>
+                                            <label alignment="left" text="day" id="Rd4-17-QaH">
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                <fontDescription key="font" type="system" pointSize="16"/>
+                                            </label>
+                                        </items>
+                                    </group>
+                                </button>
+                                <button alignment="left" id="fvS-9W-qCz" userLabel="ButtonStart">
+                                    <group key="contentGroup" width="1" alignment="left" id="yKh-Pt-4Kn">
+                                        <items>
+                                            <label alignment="left" text="start" id="EJB-4B-o93">
+                                                <color key="textColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="font" type="system" pointSize="16"/>
+                                            </label>
+                                        </items>
+                                    </group>
+                                </button>
+                                <button alignment="left" id="mXZ-4n-ofZ" userLabel="ButtonPhone">
+                                    <group key="contentGroup" width="1" alignment="left" id="SM3-X2-Len">
+                                        <items>
+                                            <label alignment="left" text="phone" id="PMI-eH-MjR">
+                                                <fontDescription key="font" type="system" pointSize="16"/>
+                                            </label>
+                                        </items>
+                                    </group>
+                                </button>
+                                <button alignment="left" id="B42-1Z-IeF" userLabel="ButtonCalendar">
+                                    <group key="contentGroup" width="1" alignment="left" id="Eog-GI-aBV">
+                                        <items>
+                                            <label alignment="left" text="calendar" id="Cqu-yl-ZGP">
+                                                <color key="textColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="font" type="system" pointSize="16"/>
+                                            </label>
+                                        </items>
+                                    </group>
+                                </button>
+                                <button alignment="left" id="zxP-GP-YRl" userLabel="ButtonTitle">
+                                    <group key="contentGroup" width="150" alignment="left" layout="vertical" id="8Ln-ih-jAT">
+                                        <items>
+                                            <label width="150" alignment="left" text="title" numberOfLines="15" id="DiQ-s9-OhK" userLabel="Title">
+                                                <fontDescription key="font" type="system" pointSize="16"/>
+                                                <variation key="device=watch38mm" width="130"/>
+                                            </label>
+                                        </items>
+                                    </group>
+                                </button>
+                                <button alignment="left" id="R2h-dY-NSQ" userLabel="ButtonAlarm">
+                                    <group key="contentGroup" width="1" alignment="left" layout="vertical" id="eml-19-yoD">
+                                        <items>
+                                            <label alignment="left" text="alarm" id="Hlx-4x-K5I" userLabel="Alarm">
+                                                <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="font" type="system" pointSize="16"/>
+                                            </label>
+                                        </items>
+                                    </group>
+                                </button>
+                                <button alignment="left" id="EYc-NA-Uoa" userLabel="ButtonRepeat">
+                                    <group key="contentGroup" width="1" alignment="left" layout="vertical" id="zg5-g7-BX3">
+                                        <items>
+                                            <label alignment="left" text="repeat" id="cSb-Hu-tob" userLabel="Repeat">
+                                                <color key="textColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="font" type="system" pointSize="16"/>
+                                            </label>
+                                        </items>
+                                    </group>
+                                </button>
                             </items>
                         </group>
-                        <group width="1" alignment="left" hidden="YES" id="L45-SR-M1E">
+                        <group width="1" alignment="center" verticalAlignment="center" layout="vertical" id="L45-SR-M1E">
                             <items>
-                                <button width="0.33329999999999999" alignment="center" verticalAlignment="center" title="edit" id="Pp3-cw-89M">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                <button alignment="center" id="nIe-JK-ODd">
+                                    <group key="contentGroup" width="1" alignment="left" layout="vertical" id="16Z-OF-i9e">
+                                        <items>
+                                            <label alignment="center" verticalAlignment="center" text="Create Hehe" textAlignment="center" numberOfLines="2" id="kWf-mK-76c">
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="font" type="system" weight="semibold" pointSize="17"/>
+                                            </label>
+                                        </items>
+                                        <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <edgeInsets key="margins" left="0.0" right="0.0" top="5" bottom="5"/>
+                                    </group>
                                     <connections>
-                                        <action selector="buttonEdit" destination="AgC-eL-Hgc" id="zla-sP-3Nd"/>
+                                        <action selector="buttonCreate" destination="AgC-eL-Hgc" id="4U6-Ep-O3j"/>
                                     </connections>
                                 </button>
-                                <button width="0.33329999999999999" alignment="left" verticalAlignment="center" title="cxl" id="LqW-ZT-10I">
+                                <button width="1" height="30" alignment="center" verticalAlignment="center" title="Cancel" id="LqW-ZT-10I">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                    <fontDescription key="font" type="system" weight="semibold" pointSize="17"/>
                                     <connections>
                                         <action selector="buttonCancel" destination="AgC-eL-Hgc" id="Bot-sx-3CD"/>
                                     </connections>
                                 </button>
-                                <button width="0.33329999999999999" alignment="center" verticalAlignment="center" title="+" id="Kv9-FC-BDH">
+                                <button width="0.5" alignment="center" verticalAlignment="center" hidden="YES" title="create" id="Kv9-FC-BDH">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <fontDescription key="font" type="boldSystem" pointSize="24"/>
+                                    <fontDescription key="font" type="system" weight="semibold" pointSize="17"/>
                                     <connections>
                                         <action selector="buttonCreate" destination="AgC-eL-Hgc" id="9MT-8G-Td1"/>
                                     </connections>
@@ -109,22 +234,36 @@
                         </items>
                     </menu>
                     <connections>
-                        <outlet property="buttonMicrophone" destination="O2a-qB-bgG" id="HE1-X2-2cA"/>
+                        <outlet property="buttonGrAlarm" destination="R2h-dY-NSQ" id="It2-QJ-xqQ"/>
+                        <outlet property="buttonGrCalendar" destination="B42-1Z-IeF" id="wa6-rh-Wzq"/>
+                        <outlet property="buttonGrDay" destination="vKp-xG-Fap" id="UE4-Es-pQv"/>
+                        <outlet property="buttonGrPhone" destination="mXZ-4n-ofZ" id="gxr-ap-fZf"/>
+                        <outlet property="buttonGrRepeat" destination="EYc-NA-Uoa" id="QUk-dl-Tq0"/>
+                        <outlet property="buttonGrStart" destination="fvS-9W-qCz" id="STp-Kt-5zF"/>
+                        <outlet property="buttonGrTitle" destination="zxP-GP-YRl" id="f5U-YP-XRA"/>
+                        <outlet property="buttonGrType" destination="Mgz-rg-YCZ" id="ecg-Hd-IJS"/>
+                        <outlet property="buttonMicGr" destination="l5e-dx-S9F" id="wxZ-Ob-trB"/>
                         <outlet property="groupButtons" destination="L45-SR-M1E" id="Znx-BF-AlL"/>
+                        <outlet property="groupLabelTitle" destination="uPk-L4-WP7" id="t2L-yz-V1z"/>
+                        <outlet property="groupMicMain" destination="BII-2S-Kpq" id="bLj-Ag-3PF"/>
                         <outlet property="groupNavigation" destination="zPJ-tz-Iw3" id="6Xp-QK-N6H"/>
                         <outlet property="groupResults" destination="0HL-J3-Tja" id="eE4-hO-HJr"/>
-                        <outlet property="myLabel" destination="Wh0-Sx-ekC" id="grP-Ta-USV"/>
+                        <outlet property="labelButtonCreate" destination="kWf-mK-76c" id="L10-ax-IEk"/>
+                        <outlet property="labelCreated" destination="LD0-LA-5Mp" id="bxO-T5-g4e"/>
+                        <outlet property="myLabel" destination="nX1-zu-d1I" id="hiQ-8w-kpS"/>
+                        <outlet property="resultAlarm" destination="Hlx-4x-K5I" id="Gsv-su-gGI"/>
                         <outlet property="resultCalendar" destination="Cqu-yl-ZGP" id="XdI-O1-I6n"/>
                         <outlet property="resultDay" destination="Rd4-17-QaH" id="dKe-sq-jBJ"/>
-                        <outlet property="resultEnd" destination="YGV-OF-sni" id="ey5-gh-6E4"/>
                         <outlet property="resultPhone" destination="PMI-eH-MjR" id="X1n-Hr-4F0"/>
+                        <outlet property="resultRepeat" destination="cSb-Hu-tob" id="DHW-RD-vBL"/>
                         <outlet property="resultStart" destination="EJB-4B-o93" id="bqq-Qb-J7p"/>
+                        <outlet property="resultTitle" destination="DiQ-s9-OhK" id="56p-qo-sWA"/>
                         <outlet property="resultType" destination="dZr-r8-usa" id="qXC-jt-KzR"/>
                         <segue destination="Iem-D3-4JW" kind="relationship" relationship="nextPage" id="Pur-F7-X25"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="214" y="420.75"/>
+            <point key="canvasLocation" x="188" y="477"/>
         </scene>
         <!--Events-->
         <scene sceneID="sS8-Mf-H5Q">
@@ -199,13 +338,15 @@
                         </group>
                         <group alignment="center" verticalAlignment="bottom" id="vG5-qB-MSl" userLabel="navBarGroup">
                             <items>
-                                <button width="40" height="40" alignment="right" backgroundImage="check_box40px-grey50%" id="odN-Fp-JgR">
+                                <button width="40" height="40" alignment="right" backgroundImage="check_box4062" id="odN-Fp-JgR">
                                     <connections>
                                         <action selector="buttonReminders" destination="Iem-D3-4JW" id="arD-OV-5lk"/>
                                     </connections>
                                 </button>
-                                <button width="10" alignment="center" enabled="NO" id="Hdc-gQ-ojn"/>
-                                <button width="27" height="40" alignment="left" backgroundImage="dicApp-2-nb-40px" id="NXn-HE-V7o">
+                                <button width="10" alignment="center" enabled="NO" id="Hdc-gQ-ojn">
+                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </button>
+                                <button width="27" height="40" alignment="left" backgroundImage="dicApp-2-no-back-180" id="NXn-HE-V7o">
                                     <connections>
                                         <action selector="buttonMainIC" destination="Iem-D3-4JW" id="i5s-D7-gUY"/>
                                     </connections>
@@ -233,7 +374,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="417" y="423"/>
+            <point key="canvasLocation" x="394" y="615"/>
         </scene>
         <!--EventDetails-->
         <scene sceneID="ZzI-hs-W5w">
@@ -293,6 +434,7 @@
                                             <label alignment="left" verticalAlignment="center" text="CalendarName" numberOfLines="3" id="igi-hU-oJA" userLabel="CalendarTitle">
                                                 <fontDescription key="font" type="system" pointSize="14"/>
                                             </label>
+                                            <imageView width="3" height="1" alignment="right" image="watchbarRT" id="UAn-iN-Mui"/>
                                         </items>
                                         <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="0.70000000000000007" colorSpace="calibratedRGB"/>
                                         <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
@@ -443,6 +585,7 @@
                         <outlet property="groupTravel" destination="vsT-GK-Jk5" id="206-Qy-2OL"/>
                         <outlet property="groupURL" destination="Sei-lS-9WN" id="Jwg-33-8pd"/>
                         <outlet property="imageVerticalBar" destination="G0Z-j4-UqM" id="rtC-Q9-N40"/>
+                        <outlet property="imageVerticalBarRT" destination="UAn-iN-Mui" id="1u8-nl-h4o"/>
                         <outlet property="labelAlarms" destination="zXf-T1-exM" id="c57-l2-Cwy"/>
                         <outlet property="labelAttendees" destination="5F4-Es-CLJ" id="Agy-Zm-skl"/>
                         <outlet property="labelEndTime" destination="swE-a3-x4J" id="sbV-gw-j22"/>
@@ -471,7 +614,7 @@
                     </items>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="548" y="747"/>
+            <point key="canvasLocation" x="630" y="784"/>
         </scene>
         <!--Settings-->
         <scene sceneID="ggb-XE-VMe">
@@ -507,19 +650,23 @@
                         </group>
                         <group alignment="center" verticalAlignment="bottom" id="1c1-qi-y2S" userLabel="navButtonsGroup">
                             <items>
-                                <button width="40" height="40" alignment="left" backgroundImage="check_box40px-grey50%" id="xVg-mX-Us5">
+                                <button width="40" height="40" alignment="left" backgroundImage="check_box4062" id="xVg-mX-Us5">
                                     <connections>
                                         <action selector="navButtonReminders" destination="gYc-zu-iHZ" id="dTw-Ff-FWc"/>
                                     </connections>
                                 </button>
-                                <button width="10" alignment="left" enabled="NO" id="vz3-6q-yX7"/>
-                                <button width="27" height="40" alignment="center" backgroundImage="dicApp-2-nb-40px" id="ns4-Fk-KhA">
+                                <button width="10" alignment="left" enabled="NO" id="vz3-6q-yX7">
+                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </button>
+                                <button width="27" height="40" alignment="center" backgroundImage="dicApp-2-no-back-180" id="ns4-Fk-KhA">
                                     <connections>
                                         <action selector="buttonMic" destination="gYc-zu-iHZ" id="2Hu-Jr-wIa"/>
                                     </connections>
                                 </button>
-                                <button width="10" alignment="center" enabled="NO" id="MuW-qV-8PD"/>
-                                <button width="40" height="40" alignment="right" backgroundImage="Today40px-50%" id="jrs-HL-obg">
+                                <button width="10" alignment="center" enabled="NO" id="MuW-qV-8PD">
+                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </button>
+                                <button width="40" height="40" alignment="right" backgroundImage="Today53pxGray4062" id="jrs-HL-obg">
                                     <connections>
                                         <action selector="navButtonToday" destination="gYc-zu-iHZ" id="egm-BQ-dvx"/>
                                     </connections>
@@ -670,12 +817,14 @@
                                                             <fontDescription key="font" type="system" weight="semibold" pointSize="13"/>
                                                         </variation>
                                                     </label>
+                                                    <imageView width="3" height="1" alignment="right" image="watchbarShortRT" id="0Fx-yG-dSh"/>
                                                 </items>
                                                 <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
                                                 <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
                                             </group>
                                             <connections>
                                                 <outlet property="imageVerticalBar" destination="j4i-jT-MjP" id="PAx-M5-2s6"/>
+                                                <outlet property="imageVerticalBarRT" destination="0Fx-yG-dSh" id="vWT-In-2kd"/>
                                                 <outlet property="tableRowLabel" destination="2bK-fl-QKS" id="Htv-gR-DSU"/>
                                                 <outlet property="verticalBar" destination="ytx-zs-j0Z" id="z0U-zd-aqC"/>
                                             </connections>
@@ -803,13 +952,15 @@
                         </label>
                         <group alignment="center" verticalAlignment="bottom" id="0b7-3H-Sfe" userLabel="navBarGroup">
                             <items>
-                                <button width="40" height="40" alignment="left" backgroundImage="Today40px-50%" id="cfO-lh-HXy">
+                                <button width="40" height="40" alignment="left" backgroundImage="Today53pxGray4062" id="cfO-lh-HXy">
                                     <connections>
                                         <action selector="buttonToday" destination="ei9-cN-Wbe" id="n23-C4-8KX"/>
                                     </connections>
                                 </button>
-                                <button width="10" alignment="left" enabled="NO" id="9Fe-kV-x7C"/>
-                                <button width="27" height="40" alignment="center" backgroundImage="dicApp-2-nb-40px" id="FgP-jg-Rkw">
+                                <button width="10" alignment="left" enabled="NO" id="9Fe-kV-x7C">
+                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </button>
+                                <button width="27" height="40" alignment="center" backgroundImage="dicApp-2-no-back-180" id="FgP-jg-Rkw">
                                     <color key="titleColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <connections>
                                         <action selector="buttonMain" destination="ei9-cN-Wbe" id="q10-IO-Gm7"/>
@@ -855,10 +1006,84 @@
             <objects>
                 <glanceController spacing="0.0" id="0uZ-2p-rRc" customClass="GlanceController" customModule="Dictate_WatchKit_App" customModuleProvider="target">
                     <items>
-                        <group alignment="left" id="t8f-Gd-c4y"/>
-                        <group alignment="left" id="uCw-4Q-Ouw"/>
+                        <group alignment="left" id="t8f-Gd-c4y">
+                            <items>
+                                <imageView width="20.25" height="30" alignment="left" verticalAlignment="center" image="dicApp-2-no-back-180" id="cPC-Az-Izx"/>
+                                <label alignment="left" verticalAlignment="center" text="Day" id="uQR-4p-Zzg" userLabel="Day">
+                                    <color key="textColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="font" type="system" weight="semibold" pointSize="24"/>
+                                </label>
+                            </items>
+                        </group>
+                        <group alignment="left" layout="vertical" id="uCw-4Q-Ouw">
+                            <items>
+                                <label alignment="left" text="now" id="zzb-hL-zmo"/>
+                                <label alignment="left" text="in 30 minutes" id="U9O-iu-o5P">
+                                    <color key="textColor" red="0.50196081400000003" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="font" type="system" pointSize="20"/>
+                                </label>
+                                <table alignment="left" id="E2V-zD-T4H">
+                                    <items>
+                                        <tableRow identifier="tableRow" id="GeV-U8-XbH" customClass="GlanceTodayEventsTableRC" customModule="Dictate_WatchKit_Extension">
+                                            <group key="rootItem" width="1" height="0.0" alignment="left" id="rN0-kI-qxT">
+                                                <items>
+                                                    <imageView width="3" height="1" alignment="left" verticalAlignment="center" image="watchbar" id="IpQ-5S-NdK">
+                                                        <color key="tintColor" red="1" green="0.40000000600000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </imageView>
+                                                    <group width="3" height="1" alignment="left" verticalAlignment="center" hidden="YES" radius="7" id="hFA-ub-FUs" userLabel="VerticalBar">
+                                                        <color key="backgroundColor" red="0.40000000600000002" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </group>
+                                                    <label height="1" alignment="left" verticalAlignment="center" id="QDt-LA-10q"/>
+                                                    <group width="1" alignment="left" layout="vertical" id="cPn-Va-SzY">
+                                                        <items>
+                                                            <label alignment="left" text="Label" numberOfLines="2" id="9Kl-UA-QXL" userLabel="Title">
+                                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <fontDescription key="font" type="boldSystem" pointSize="15"/>
+                                                            </label>
+                                                            <group width="1" alignment="left" id="g01-wr-CCo">
+                                                                <items>
+                                                                    <label alignment="left" text="Label" id="Cfj-Wb-5oR" userLabel="startTime">
+                                                                        <color key="textColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                                        <fontDescription key="font" type="system" weight="medium" pointSize="12"/>
+                                                                    </label>
+                                                                    <label alignment="left" text="Label" id="8GP-9J-jAO" userLabel="endTime">
+                                                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                                        <fontDescription key="font" type="system" pointSize="12"/>
+                                                                    </label>
+                                                                </items>
+                                                            </group>
+                                                            <label alignment="left" text="Location" numberOfLines="2" id="BvB-N6-Cyw" userLabel="Location">
+                                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <fontDescription key="font" type="system" pointSize="12"/>
+                                                            </label>
+                                                        </items>
+                                                    </group>
+                                                </items>
+                                                <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="0.90000000000000002" colorSpace="calibratedRGB"/>
+                                                <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
+                                            </group>
+                                            <connections>
+                                                <outlet property="groupEvent" destination="rN0-kI-qxT" id="0UW-w2-068"/>
+                                                <outlet property="imageVertBar" destination="IpQ-5S-NdK" id="LHJ-qU-FFc"/>
+                                                <outlet property="labelEndTime" destination="8GP-9J-jAO" id="cGM-I6-rEE"/>
+                                                <outlet property="labelEventLocation" destination="BvB-N6-Cyw" id="gBT-jM-s5v"/>
+                                                <outlet property="labelEventTitle" destination="9Kl-UA-QXL" id="cdw-J0-xvC"/>
+                                                <outlet property="labelStartTime" destination="Cfj-Wb-5oR" id="MQL-oU-cRa"/>
+                                                <outlet property="verticalBar" destination="hFA-ub-FUs" id="4cP-ou-3WY"/>
+                                            </connections>
+                                        </tableRow>
+                                    </items>
+                                </table>
+                            </items>
+                        </group>
                     </items>
                     <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="14"/>
+                    <connections>
+                        <outlet property="labelDate" destination="uQR-4p-Zzg" id="JOR-8h-KfD"/>
+                        <outlet property="labelNow" destination="zzb-hL-zmo" id="CzU-i3-DD5"/>
+                        <outlet property="labelinTime" destination="U9O-iu-o5P" id="XDp-T9-qx5"/>
+                        <outlet property="table" destination="E2V-zD-T4H" id="A0A-Vl-pUR"/>
+                    </connections>
                 </glanceController>
             </objects>
             <point key="canvasLocation" x="394" y="874"/>
@@ -1070,7 +1295,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="176" y="700"/>
+            <point key="canvasLocation" x="31" y="734"/>
         </scene>
         <!--ShowCalendars-->
         <scene sceneID="kOf-kE-YIt">
@@ -1190,19 +1415,23 @@
                         </group>
                         <group alignment="center" verticalAlignment="bottom" id="tCd-PT-qaK" userLabel="navButtonsGroup">
                             <items>
-                                <button width="40" height="40" alignment="left" backgroundImage="check_box40px-grey50%" id="qeH-UZ-g9L">
+                                <button width="40" height="40" alignment="left" backgroundImage="check_box4062" id="qeH-UZ-g9L">
                                     <connections>
                                         <action selector="navButtonReminders" destination="RwQ-qV-CJ3" id="IJQ-1B-2Ig"/>
                                     </connections>
                                 </button>
-                                <button width="10" alignment="left" enabled="NO" id="sKA-ew-2eo"/>
-                                <button width="27" height="40" alignment="center" backgroundImage="dicApp-2-nb-40px" id="1ll-jc-GTB">
+                                <button width="10" alignment="left" enabled="NO" id="sKA-ew-2eo">
+                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </button>
+                                <button width="27" height="40" alignment="center" backgroundImage="dicApp-2-no-back-180" id="1ll-jc-GTB">
                                     <connections>
                                         <action selector="buttonMic" destination="RwQ-qV-CJ3" id="Tss-BW-toL"/>
                                     </connections>
                                 </button>
-                                <button width="10" alignment="center" enabled="NO" id="sbV-ft-yex"/>
-                                <button width="40" height="40" alignment="right" backgroundImage="Today40px-50%" id="5FW-ZK-AN3">
+                                <button width="10" alignment="center" enabled="NO" id="sbV-ft-yex">
+                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </button>
+                                <button width="40" height="40" alignment="right" backgroundImage="Today53pxGray4062" id="5FW-ZK-AN3">
                                     <connections>
                                         <action selector="navButtonToday" destination="RwQ-qV-CJ3" id="JzW-DY-9Vk"/>
                                     </connections>
@@ -1361,19 +1590,23 @@
                         </group>
                         <group alignment="center" verticalAlignment="bottom" id="oj0-4v-7Hc" userLabel="navButtonsGroup">
                             <items>
-                                <button width="40" height="40" alignment="left" backgroundImage="check_box40px-grey50%" id="0vV-hL-XO1">
+                                <button width="40" height="40" alignment="left" backgroundImage="check_box4062" id="0vV-hL-XO1">
                                     <connections>
                                         <action selector="navButtonReminders" destination="dLF-pS-Q8g" id="rEf-9L-ur4"/>
                                     </connections>
                                 </button>
-                                <button width="10" alignment="left" enabled="NO" id="U32-s9-wIl"/>
-                                <button width="27" height="40" alignment="center" backgroundImage="dicApp-2-nb-40px" id="i2N-zE-eNi">
+                                <button width="10" alignment="left" enabled="NO" id="U32-s9-wIl">
+                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </button>
+                                <button width="27" height="40" alignment="center" backgroundImage="dicApp-2-no-back-180" id="i2N-zE-eNi">
                                     <connections>
                                         <action selector="buttonMic" destination="dLF-pS-Q8g" id="CCG-YU-yKE"/>
                                     </connections>
                                 </button>
-                                <button width="10" alignment="center" enabled="NO" id="RIR-aI-ZFb"/>
-                                <button width="40" height="40" alignment="right" backgroundImage="Today40px-50%" id="hPc-I1-bcG">
+                                <button width="10" alignment="center" enabled="NO" id="RIR-aI-ZFb">
+                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </button>
+                                <button width="40" height="40" alignment="right" backgroundImage="Today53pxGray4062" id="hPc-I1-bcG">
                                     <connections>
                                         <action selector="navButtonToday" destination="dLF-pS-Q8g" id="vDb-Hb-ox8"/>
                                     </connections>

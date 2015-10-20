@@ -9,10 +9,10 @@
 /* Begin PBXBuildFile section */
 		D306CDA81BB1315D00FD973F /* SetCalendarIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D306CDA71BB1315D00FD973F /* SetCalendarIC.swift */; };
 		D3089C651BA2713B00C58D6D /* SettingsReminderListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3089C641BA2713B00C58D6D /* SettingsReminderListTableViewCell.swift */; };
-		D3188A691B6E9AA700323DC0 /* MailComposer3.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3188A681B6E9AA700323DC0 /* MailComposer3.swift */; };
-		D3188A6A1B6E9AA700323DC0 /* MailComposer3.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3188A681B6E9AA700323DC0 /* MailComposer3.swift */; };
-		D3188A6C1B6E9ADB00323DC0 /* MailComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3188A6B1B6E9ADB00323DC0 /* MailComposer.swift */; };
-		D3188A6D1B6E9ADB00323DC0 /* MailComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3188A6B1B6E9ADB00323DC0 /* MailComposer.swift */; };
+		D3188A691B6E9AA700323DC0 /* MailComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3188A681B6E9AA700323DC0 /* MailComposer.swift */; };
+		D3188A6A1B6E9AA700323DC0 /* MailComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3188A681B6E9AA700323DC0 /* MailComposer.swift */; };
+		D3188A6C1B6E9ADB00323DC0 /* MailComposerOLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3188A6B1B6E9ADB00323DC0 /* MailComposerOLD.swift */; };
+		D3188A6D1B6E9ADB00323DC0 /* MailComposerOLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3188A6B1B6E9ADB00323DC0 /* MailComposerOLD.swift */; };
 		D3188A6F1B6E9AE400323DC0 /* MessageCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3188A6E1B6E9AE400323DC0 /* MessageCode.swift */; };
 		D3188A701B6E9AE400323DC0 /* MessageCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3188A6E1B6E9AE400323DC0 /* MessageCode.swift */; };
 		D3188A721B6E9AEF00323DC0 /* MessageComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3188A711B6E9AEE00323DC0 /* MessageComposer.swift */; };
@@ -69,6 +69,7 @@
 		D3795E7B1B8F654F009D3DB5 /* ReminderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF818621B84FAB70087ECAD /* ReminderManager.swift */; };
 		D38653F71BAA02F400B8CCBC /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38653F61BAA02F400B8CCBC /* EventManager.swift */; };
 		D38653F81BAA02F400B8CCBC /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38653F61BAA02F400B8CCBC /* EventManager.swift */; };
+		D38C832F1BD68238008F37AA /* GlanceTodayEventsTableRC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38C832E1BD68238008F37AA /* GlanceTodayEventsTableRC.swift */; settings = {ASSET_TAGS = (); }; };
 		D38C9C571B821DA3009CFC7C /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D38C9C551B821DA3009CFC7C /* Fabric.framework */; };
 		D38C9C581B821DA3009CFC7C /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D38C9C551B821DA3009CFC7C /* Fabric.framework */; };
 		D38C9C591B821DA3009CFC7C /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D38C9C561B821DA3009CFC7C /* Crashlytics.framework */; };
@@ -214,8 +215,8 @@
 /* Begin PBXFileReference section */
 		D306CDA71BB1315D00FD973F /* SetCalendarIC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetCalendarIC.swift; sourceTree = "<group>"; };
 		D3089C641BA2713B00C58D6D /* SettingsReminderListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsReminderListTableViewCell.swift; path = ../SettingsReminderListTableViewCell.swift; sourceTree = "<group>"; };
-		D3188A681B6E9AA700323DC0 /* MailComposer3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MailComposer3.swift; sourceTree = "<group>"; };
-		D3188A6B1B6E9ADB00323DC0 /* MailComposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MailComposer.swift; sourceTree = "<group>"; };
+		D3188A681B6E9AA700323DC0 /* MailComposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MailComposer.swift; sourceTree = "<group>"; };
+		D3188A6B1B6E9ADB00323DC0 /* MailComposerOLD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MailComposerOLD.swift; sourceTree = "<group>"; };
 		D3188A6E1B6E9AE400323DC0 /* MessageCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCode.swift; sourceTree = "<group>"; };
 		D3188A711B6E9AEE00323DC0 /* MessageComposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageComposer.swift; sourceTree = "<group>"; };
 		D3188A741B6E9B1500323DC0 /* CustomTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomTableViewCell.xib; sourceTree = "<group>"; };
@@ -251,6 +252,7 @@
 		D3711F041BB04E0E00D19AE9 /* TestIC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestIC.swift; sourceTree = "<group>"; };
 		D3795E791B8DF927009D3DB5 /* SettingsEventTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsEventTableViewController.swift; path = Views/SettingsEventTableViewController.swift; sourceTree = "<group>"; };
 		D38653F61BAA02F400B8CCBC /* EventManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventManager.swift; sourceTree = "<group>"; };
+		D38C832E1BD68238008F37AA /* GlanceTodayEventsTableRC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GlanceTodayEventsTableRC.swift; path = "../../DictateNew 1 error complications/Dictate WatchKit App/GlanceTodayEventsTableRC.swift"; sourceTree = "<group>"; };
 		D38C9C551B821DA3009CFC7C /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		D38C9C561B821DA3009CFC7C /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		D392FAD31B9B1BA800678B18 /* SettingsFriendsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsFriendsTableViewController.swift; path = Views/SettingsFriendsTableViewController.swift; sourceTree = "<group>"; };
@@ -445,8 +447,8 @@
 			children = (
 				D323505D1B697B0200939F03 /* DictateCode.swift */,
 				D32350611B69828900939F03 /* ReminderCode.swift */,
-				D3188A681B6E9AA700323DC0 /* MailComposer3.swift */,
-				D3188A6B1B6E9ADB00323DC0 /* MailComposer.swift */,
+				D3188A681B6E9AA700323DC0 /* MailComposer.swift */,
+				D3188A6B1B6E9ADB00323DC0 /* MailComposerOLD.swift */,
 				D3188A6E1B6E9AE400323DC0 /* MessageCode.swift */,
 				D3188A711B6E9AEE00323DC0 /* MessageComposer.swift */,
 			);
@@ -614,6 +616,7 @@
 				D35588BD1BA938A00052892F /* ReminderItemsTableRC.swift */,
 				D3E810831B70F4BC004AE5A9 /* TodayIC.swift */,
 				D3DA3ACD1BAE73F4002FDD21 /* TodayEventsTableRC.swift */,
+				D38C832E1BD68238008F37AA /* GlanceTodayEventsTableRC.swift */,
 				D31E1DB61BAEEA1700BC7B99 /* EventDetailsIC.swift */,
 				D31E1DB81BAEEA2A00BC7B99 /* EditEventDetailsIC.swift */,
 				D3BE2D2A1BB126EA00376686 /* EventEditNotesIC.swift */,
@@ -1100,9 +1103,9 @@
 				ECB862331B77DEBD00503C50 /* JTCalendarPageView.m in Sources */,
 				ECB862341B77DEBD00503C50 /* JTCalendarWeekDayView.m in Sources */,
 				ECB8622C1B77DEBD00503C50 /* JTCalendarManager.m in Sources */,
-				D3188A6C1B6E9ADB00323DC0 /* MailComposer.swift in Sources */,
+				D3188A6C1B6E9ADB00323DC0 /* MailComposerOLD.swift in Sources */,
 				D33C13BF1B8C47E800470F8F /* SettingsCalendarTableViewController.swift in Sources */,
-				D3188A691B6E9AA700323DC0 /* MailComposer3.swift in Sources */,
+				D3188A691B6E9AA700323DC0 /* MailComposer.swift in Sources */,
 				D3188A6F1B6E9AE400323DC0 /* MessageCode.swift in Sources */,
 				ECB862361B77DEBD00503C50 /* JTHorizontalCalendarView.m in Sources */,
 				D3188A851B6E9BED00323DC0 /* PrefsTempVC.swift in Sources */,
@@ -1162,7 +1165,7 @@
 				ECB1DCC91BAEB7F100A67B6D /* JTDateHelper.m in Sources */,
 				D3E8108A1B710690004AE5A9 /* ReminderListsIC.swift in Sources */,
 				D38653F81BAA02F400B8CCBC /* EventManager.swift in Sources */,
-				D3188A6D1B6E9ADB00323DC0 /* MailComposer.swift in Sources */,
+				D3188A6D1B6E9ADB00323DC0 /* MailComposerOLD.swift in Sources */,
 				D31E1DB71BAEEA1700BC7B99 /* EventDetailsIC.swift in Sources */,
 				D3188A701B6E9AE400323DC0 /* MessageCode.swift in Sources */,
 				D3DA3AD31BAE8054002FDD21 /* ShowCalendarsIC.swift in Sources */,
@@ -1180,7 +1183,7 @@
 				D3E810881B70FEA0004AE5A9 /* SettingsIC.swift in Sources */,
 				D35588BC1BA937D20052892F /* ReminderItemsIC.swift in Sources */,
 				D3711F051BB04E0E00D19AE9 /* TestIC.swift in Sources */,
-				D3188A6A1B6E9AA700323DC0 /* MailComposer3.swift in Sources */,
+				D3188A6A1B6E9AA700323DC0 /* MailComposer.swift in Sources */,
 				D32350631B69828900939F03 /* ReminderCode.swift in Sources */,
 				D3E810851B70F4BC004AE5A9 /* TodayIC.swift in Sources */,
 				D34395721BA32964002D98EA /* ReminderListPickerIC.swift in Sources */,
@@ -1194,6 +1197,7 @@
 				D3DA3AE11BAE8521002FDD21 /* ReminderSettingsIC.swift in Sources */,
 				ECB861FE1B77DCDC00503C50 /* General.swift in Sources */,
 				D3BE2D2B1BB1287C00376686 /* EventEditNotesIC.swift in Sources */,
+				D38C832F1BD68238008F37AA /* GlanceTodayEventsTableRC.swift in Sources */,
 				D3188A731B6E9AEF00323DC0 /* MessageComposer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1344,7 +1348,7 @@
 					"$(SDKROOT)/usr/lib/system",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "15ad0e4c-e466-4ca4-9bc8-ba5c36c5ebe9";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Dictate/Dictate-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -1372,7 +1376,7 @@
 					"$(SDKROOT)/usr/lib/system",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "15ad0e4c-e466-4ca4-9bc8-ba5c36c5ebe9";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Dictate/Dictate-Bridging-Header.h";
 			};
 			name = Release;
@@ -1417,8 +1421,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Mike Derr (PVJ5825QRB)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mike Derr (PVJ5825QRB)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1429,7 +1433,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "1abcb096-9ebc-4b63-8096-3677b2af9199";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 4;
@@ -1443,14 +1447,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				IBSC_MODULE = Dictate_WatchKit_Extension;
 				INFOPLIST_FILE = "Dictate WatchKit App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "1abcb096-9ebc-4b63-8096-3677b2af9199";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
 				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
@@ -1480,7 +1484,7 @@
 					"$(PROJECT_DIR)/Dictate",
 				);
 				PRODUCT_NAME = "${TARGET_NAME}";
-				PROVISIONING_PROFILE = "74312b1a-2dcd-4acf-acb4-97dea9f33901";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Dictate/Dictate-Bridging-Header.h";
 			};
@@ -1505,7 +1509,7 @@
 					"$(PROJECT_DIR)/Dictate",
 				);
 				PRODUCT_NAME = "${TARGET_NAME}";
-				PROVISIONING_PROFILE = "74312b1a-2dcd-4acf-acb4-97dea9f33901";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Dictate/Dictate-Bridging-Header.h";
 			};

@@ -173,49 +173,49 @@ class ReminderManager: NSObject {
     func createNewReminderList(name:String, items:[String]){    //forgor e in create -added Mike 082915
         getAccessToEventStoreForType(EKEntityType.Reminder, completion: { (granted) -> Void in
             
-            if granted{
-        let calender = EKCalendar(forEntityType: EKEntityType.Reminder , eventStore: self.eventStore)
-        calender.title = name
-        var error:NSError? = nil                                // = nil added by Mike 082915
-        calender.source = self.eventStore.defaultCalendarForNewReminders().source
-        let calendarWasSaved: Bool
-        do {
-            try self.eventStore.saveCalendar(calender, commit: true)
-            calendarWasSaved = true
-        } catch var error1 as NSError {
-            error = error1
-            calendarWasSaved = false
-        } catch {
-            fatalError()
-        }
-        print("Error: \(error)")
-        
-        // Handle situation if the calendar could not be saved
-        if calendarWasSaved == false {
-            let alert = UIAlertController(title: "Calendar could not save", message: error?.localizedDescription, preferredStyle: .Alert)
-            let OKAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
-            alert.addAction(OKAction)
-            
-    //        self.presentViewController(alert, animated: true, completion: nil)
-        } else {
-            
-    //todo Anil erro line below here
-       //     NSUserDefaults.standardUserDefaults().setObject(newCalendar.calendarIdentifier, forKey: "EventTrackerPrimaryCalendar")
-        }
-        
-        for item in items{
-            let reminder = EKReminder(eventStore: self.eventStore)
-            reminder.title = item
-            reminder.calendar = calender
+        if granted{
+            let calender = EKCalendar(forEntityType: EKEntityType.Reminder , eventStore: self.eventStore)
+            calender.title = name
+            var error:NSError? = nil                                // = nil added by Mike 082915
+            calender.source = self.eventStore.defaultCalendarForNewReminders().source
+            let calendarWasSaved: Bool
             do {
-                try self.eventStore.saveReminder(reminder, commit: true)
+                try self.eventStore.saveCalendar(calender, commit: true)
+                calendarWasSaved = true
             } catch var error1 as NSError {
                 error = error1
+                calendarWasSaved = false
             } catch {
                 fatalError()
             }
-        }
+            print("Error: \(error)")
+            
+            // Handle situation if the calendar could not be saved
+            if calendarWasSaved == false {
+                let alert = UIAlertController(title: "Calendar could not save", message: error?.localizedDescription, preferredStyle: .Alert)
+                let OKAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                alert.addAction(OKAction)
+                
+        //        self.presentViewController(alert, animated: true, completion: nil)
+            } else {
+                
+        //todo Anil erro line below here
+           //     NSUserDefaults.standardUserDefaults().setObject(newCalendar.calendarIdentifier, forKey: "EventTrackerPrimaryCalendar")
             }
+            
+            for item in items{
+                let reminder = EKReminder(eventStore: self.eventStore)
+                reminder.title = item
+                reminder.calendar = calender
+                do {
+                    try self.eventStore.saveReminder(reminder, commit: true)
+                } catch var error1 as NSError {
+                    error = error1
+                } catch {
+                    fatalError()
+                }
+            }
+                }
         })
     }
     

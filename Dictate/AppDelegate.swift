@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  WatchInput
+//  Dictate
 //
 //  Created by Mike Derr on 5/8/15.
 //  Copyright (c) 2015 ThatSoft.com. All rights reserved.
@@ -10,7 +10,7 @@ import UIKit
 import Parse
 import Bolts
 import Fabric
-import Crashlytics
+//import Crashlytics
 
 
 @UIApplicationMain
@@ -24,9 +24,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
        // Crashlytics().debugMode = true
-        Fabric.with([Crashlytics()])    // added 081715 for Crash reporting   MJD
-
+       //CRASHES  Fabric.with([Crashlytics()])    // added 081715 for Crash reporting   MJD
         
+        // TODO: Move this to where you establish a user session
+        self.logUser()
+   
         Parse.enableLocalDatastore()
         
         // ****************************************************************************
@@ -189,12 +191,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
         
         //let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp") // from Rob's course
+
+        //put badge on app icon here...
+        let restartGameCategory = UIMutableUserNotificationCategory()
         
+        application.registerUserNotificationSettings(
+            UIUserNotificationSettings(
+                forTypes: [.Alert, .Badge, .Sound],
+                categories: (NSSet(array: [restartGameCategory])) as? Set<UIUserNotificationCategory>))
         
+        let count:Int = EventManager.sharedInstance.countEventsToday(0)
+        application.applicationIconBadgeNumber = count
         
         return true
         
     }
+    
+    func logUser() {
+        //TODO Mike TODO Anil add user informatione here...
+        // TODO: Use the current user's information
+        // You can call any combination of these three methods
+      //  Crashlytics.sharedInstance().setUserEmail("user@fabric.io")
+      //  Crashlytics.sharedInstance().setUserIdentifier("12345")
+     //   Crashlytics.sharedInstance().setUserName("Test User")
+    }
+
     
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
         let installation = PFInstallation.currentInstallation()
@@ -217,12 +238,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
+    
+
+    
 }
+
+
 
 
 /*
 
-    
+
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         

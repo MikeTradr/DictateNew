@@ -46,6 +46,7 @@ class DictateCode: NSObject {
     var calendarName:String     = ""
     var listName:String         = ""
     var listToUse:String        = ""
+    var allDayFlag:Bool         = false
 
     
     //var startDate:String        = ""
@@ -186,7 +187,9 @@ class DictateCode: NSObject {
              
                 defaults.setObject(actionType, forKey: "actionType")    //sets actionType for processing
                 defaults.setObject(mainType, forKey: "mainType")
-                defaults.setObject(reminderTitle, forKey: "title")      //sets reminderTitle
+                //defaults.setObject(reminderTitle, forKey: "title")      //sets reminderTitle
+                defaults.setObject(reminderTitle, forKey: "reminderList")      //sets reminderTitle
+                
                 defaults.setObject(reminderTitle, forKey: "calendarName")   //sets title to calendarName for ParseDB
                 
                 defaults.setObject(wordArrTrimmed, forKey: "wordArrTrimmed")            //sets reminderItems
@@ -401,7 +404,9 @@ class DictateCode: NSObject {
                     
                     print("p397: in Reminder word: \(word)")
                     
-                    var reminderArray = defaults.objectForKey("reminderArray") as! [String] //array of the items
+                    if defaults.objectForKey("reminderArray") != nil {
+                        var reminderArray = defaults.objectForKey("reminderArray") as! [String] //array of the items
+                    }
                     
                     // why did I have this in ??? removed 072315 wordArrTrimmed = wordArrRaw
                     
@@ -626,7 +631,7 @@ class DictateCode: NSObject {
                     
                     //TODO Handle Reminder or Calendar Event more efficiently????
                     
-                    break;      //added 083115 my Mike to break out of the loop
+                  //  break;      //added 083115 my Mike to break out of the loop
 
                     
                 }
@@ -718,7 +723,8 @@ class DictateCode: NSObject {
                         
                     }
                     
-                    
+                // ----- mail Reminder items for said list --------------------------
+     
                     if ( (nextWord2 == "list") || (nextWord2 == "reminders") || (nextWord2 == "reminder")) {
                         
                         print("p695 in List nextWord2: \(nextWord2)")
@@ -745,10 +751,24 @@ class DictateCode: NSObject {
                         
                     }
                     
+               // ----- mail Todays Events --------------------------
+                    if ( (nextWord2 == "today") || (nextWord2 == "events") || (nextWord2 == "calendar")) {
+                        
+                        print("p752 in List nextWord2: \(nextWord2)")
+                        
+                        wordArrTrimmed = wordArrTrimmed.filter() { $0 != nextWord2}   // remove "today" word
+                        
+                        actionType = "Mail Events"         // set type for proper processing
+                        defaults.setObject(actionType, forKey: "actionType")        //sets actionType
+                        
+                        //set to one day so far. could add a # days events to mail TODO v2
+              
+                    }
+                    
 
                     
                     
-                    break;       //added 083115 my Mike to break out of the loop
+                    //break;       //added 083115 my Mike to break out of the loop
                 }
                 
                 
@@ -1099,14 +1119,59 @@ class DictateCode: NSObject {
                     time = "No Time Found"
                 }
                 
+// ____ "all day" word ____________________________________
+                
+                
+                
+                let all = (word as NSString).containsString("all") // see all then process time at word
+                print(all)
+                if(all && (time == "No Time Found")){
+                    print("p1124 all found at item \(i)")
+                    
+                    if (i < arrayLength-1) {
+                        nextWord = wordArr[i+1]
+                    } else {
+                        nextWord = ""
+                    }
+                    
+                    if nextWord == "day" {
+                        allDayFlag = true
+                        time = "all-day"
+                        day = "Today"
+       
+                        wordArrTrimmed = wordArrTrimmed.filter() { $0 != wordArr[i] }
+                        wordArrTrimmed = wordArrTrimmed.filter() { $0 != nextWord }
+                    }
+                    
+                    print("p1140 wordArrTrimmed: \(wordArrTrimmed)")
+                    print("p1141 allDayFlag: \(allDayFlag)")
+                    
+                    if (startDate == "") {                              //add today for Reminder if a time only
+                        let dateFormatter = NSDateFormatter()
+                        dateFormatter.dateFormat = "M-dd-yyyy"
+                        
+                        startDate = dateFormatter.stringFromDate(NSDate())      // no day found so assume today
+                        print("p475 startDate: \(startDate)")
+                    }
+                    
+                } else if time == "" {
+                    time = "No Time Found"
+                }
+   
+                
+                
+                
+                
 // ____ "day" word ____________________________________
                 
                 let subStringDay = (word as NSString).containsString("day")     // note: could be today also!
                 if(subStringDay){
                     print("253: day found at item \(i)")
                     
-                    day = wordArr[i].capitalizedString
-                    print(day)
+                    if day == "" {
+                        day = wordArr[i].capitalizedString
+                        print(day)
+                    }
                     
                     var priorWord:String = ""
                     var priorWord2:String = ""
@@ -1187,10 +1252,10 @@ class DictateCode: NSObject {
                     if (actionType != "Reminder") {
                         startDate = dateFormatter.stringFromDate(NSDate())      // no day found so assume today
                         print("p638 startDate: \(startDate)")
-                        
+                        day = "Today"       // moved into this if so Reminders do nto get day set! was below here 2 lines 10/04/15 Mike
                     }
                     
-                    day = "Today"
+                   
                 }
                 
     // ____ Months Words ____________________________________
@@ -1987,7 +2052,7 @@ class DictateCode: NSObject {
             // #### Date Time code to get time correct ###############################################
             
             today = NSDate()                        // equals today as NSDate 5-18-2015
-            print("496 today: \(today)")          //412 today: 2015-05-18 19:23:26 +0000
+            print("p2046 today: \(today)")          //412 today: 2015-05-18 19:23:26 +0000
             
             if (timeString == "") {
                 timeString = "00:00 PM"
@@ -1995,7 +2060,7 @@ class DictateCode: NSObject {
             
             let fullDT:String = startDate + " " + timeString       // combine strings startDate and timesTring into one
             
-            print("p1106 fullDT: \(fullDT)")
+            print("p2054 fullDT: \(fullDT)")
             
             let formatter3 = NSDateFormatter()
             formatter3.dateFormat = "M-dd-yyyy h:mm a"
@@ -2003,11 +2068,11 @@ class DictateCode: NSObject {
             // CRASHES if fullDT not proper format:  fullDT: 6-06-2015 see:00 AM
             
             if(fullDT != " 00:00 PM") {
-                
                 print("p1633 MAIN we here? fullDT: \(fullDT)")
-                
                 startDT = formatter3.dateFromString(fullDT) ?? today
             }
+                
+            
             
             let endDT:NSDate = startDT.dateByAddingTimeInterval(eventDuration * 60.0)
             
@@ -2077,9 +2142,11 @@ class DictateCode: NSObject {
             print("p1566 actionType: \(actionType)")
             
             defaults.setObject(startDT, forKey: "startDT")
-            
+
             print("p1270 MAIN startDT: \(startDT)")
-            
+                
+            defaults.setObject(allDayFlag, forKey: "allDayFlag")
+                
             defaults.setObject(mainType, forKey: "mainType")
             defaults.setObject(actionType, forKey: "actionType")
             

@@ -155,6 +155,8 @@ class TodayIC: WKInterfaceController {
 
             var endTimeDash = "- \(endTime)"
             
+
+            
             if item.allDay {     // if allDay bool is true
                 startTime = ""
                 endTimeDash = "All Day"

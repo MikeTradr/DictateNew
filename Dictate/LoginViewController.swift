@@ -177,8 +177,7 @@ class LoginViewController: UIViewController {
                     UIApplication.sharedApplication().endIgnoringInteractionEvents()
                     
                     if user != nil {
-                        // lpgged In!
-                        
+                        // logged In!
                         self.performSegueWithIdentifier("login", sender: self)
                         
                     } else {

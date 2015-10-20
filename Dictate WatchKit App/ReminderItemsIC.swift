@@ -104,7 +104,7 @@ class ReminderItemsIC: WKInterfaceController {
         selectedRow = rowIndex //for use with insert and delete, save selcted row index
         let itemRow = self.table.rowControllerAtIndex(rowIndex) as! ReminderItemsTableRC
         let reminderItem = allReminders[rowIndex]
-        let veryDarkGray = UIColor(red: 128, green: 128, blue: 128)     //light biege color, for Word List
+        let veryDarkGray = UIColor(red: 128, green: 128, blue: 128, alpha: 1)     //light biege color, for Word List
  
         if self.checked {               // Turn checkmark off
             itemRow.imageCheckbox.setImageNamed("cbBlank40px")
@@ -155,7 +155,7 @@ class ReminderItemsIC: WKInterfaceController {
 */
 
 }
-
+/*
 extension UIColor
 {
     convenience init(red: Int, green: Int, blue: Int)
@@ -166,3 +166,4 @@ extension UIColor
         self.init(red: newRed, green: newGreen, blue: newBlue, alpha: 1.0)
     }
 }
+*/

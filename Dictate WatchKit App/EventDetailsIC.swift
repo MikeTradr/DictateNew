@@ -58,6 +58,7 @@ class EventDetailsIC: WKInterfaceController {
     
     @IBOutlet var imageVerticalBar: WKInterfaceImage!
     
+    @IBOutlet var imageVerticalBarRT: WKInterfaceImage!
     
 //---- funcs below here -----------------------------------------------------------
     
@@ -103,6 +104,7 @@ class EventDetailsIC: WKInterfaceController {
         
         var endTimeDash = "- \(endTime)"
         
+        
         if event.allDay {   // if allDay bool is true
             startTime = ""
             endTimeDash = "All Day"
@@ -111,8 +113,8 @@ class EventDetailsIC: WKInterfaceController {
         
         
         self.labelEventTitle.setText(event.title)
-        //self.labelStartTime.setText(startTime)
-        //self.labelEndTime.setText(endTimeDash)
+        self.labelStartTime.setText(startTime)
+        self.labelEndTime.setText(endTimeDash)
         self.labelLocation.setText(event.location)
         
         self.labelStartTime.setTextColor(UIColor.whiteColor().colorWithAlphaComponent(0.8))
@@ -122,6 +124,7 @@ class EventDetailsIC: WKInterfaceController {
         self.verticalBar.setBackgroundColor(UIColor(CGColor: event.calendar.CGColor))
         
         self.imageVerticalBar.setTintColor(UIColor(CGColor: event.calendar.CGColor))
+        self.imageVerticalBarRT.setTintColor(UIColor(CGColor: event.calendar.CGColor))
         
         self.buttonGrCalendarName.setBackgroundColor(UIColor(CGColor: event.calendar.CGColor))
         

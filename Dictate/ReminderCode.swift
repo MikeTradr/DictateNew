@@ -174,7 +174,7 @@ class ReminderCode: NSObject {
         
         let noDate = dateFormatter.dateFromString("2014-12-12 00:00:00 +0000")  //need this to match set no date from DictateCode
         
-        print("p171 Reminder: noDate: \(noDate)")
+        print("p171 Reminder noDate: \(noDate)")
         
         if (startDT != noDate) {        // if Date != no date string, set alarm for Reminder
             alarm = EKAlarm(absoluteDate: startDT)
@@ -188,6 +188,10 @@ class ReminderCode: NSObject {
         reminder.calendar = calendarDatabase.defaultCalendarForNewReminders()   // WORKS to Default
         
         //reminder.calendar = calendarDatabase.calendarWithIdentifier("0x1702ae400")
+        
+        //TODO Crashes... Error getting default calendar for new reminders: Error Domain=EKCADErrorDomain Code=1014 "(null)"
+       // (lldb) po reminder.calendar
+       // <uninitialized>
         
         print("p192 reminder.calendar: \(reminder.calendar)")
 

@@ -15,4 +15,5 @@ class ReminderListsTableRC: NSObject {
     @IBOutlet weak var verticalBar: WKInterfaceGroup!
     @IBOutlet var imageVerticalBar: WKInterfaceImage!
 
+    @IBOutlet var imageVerticalBarRT: WKInterfaceImage!
 }

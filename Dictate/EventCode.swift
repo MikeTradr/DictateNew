@@ -23,9 +23,29 @@ class EventCode: NSObject {
     
     let eventStore = EKEventStore()
     let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+    
+    func getAccessToEventStoreForType(type:EKEntityType, completion:(granted:Bool)->Void){
+        
+        let status = EKEventStore.authorizationStatusForEntityType(type)
+        if status != EKAuthorizationStatus.Authorized{
+            self.eventStore.requestAccessToEntityType(EKEntityType.Event, completion: {
+                granted, error in
+                if (granted) && (error == nil) {
+                    completion(granted: true)
+                } else {
+                    completion(granted: false)
+                }
+            })
+            
+        }else{
+            completion(granted: true)
+        }
+    }
 
     
     func createEvent() {
+        
+ 
         
         print("p18 WE HERE func createEvent")
         
@@ -48,6 +68,7 @@ class EventCode: NSObject {
         let outputNote  = defaults.stringForKey("outputNote")
         let eventDuration    = defaults.objectForKey("eventDuration") as! Double
         
+        let allDayFlag  = defaults.objectForKey("allDayFlag") as! Bool
         
         var calendarName    = defaults.stringForKey("calendarName")
         
@@ -307,8 +328,10 @@ class EventCode: NSObject {
                 event.endDate = endDate
                 event.notes = outputNote
                 
-                
-                
+                if allDayFlag {
+                    event.allDay = true
+                }
+                 
                 // TODO ADD eventDuration field to screen
                 
                 let result: Bool

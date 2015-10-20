@@ -68,8 +68,8 @@ let str29:String = "Reminder Wash the car tonight"
 
 let str30:String = "Reminder go to the bank list today"    // test to see if added to list "today"
 
-let str31:String = "todo today, call mom, meeting at 10 AM, play tennis, pick up kids" // comma deliminaed list, first phrase or word before comma is title
-let str32:String = "list shower work workout dinner sleep"  //raw list one word speed list, ""untitled list"
+let str31:String = "todo today, call mom, meeting at 10 AM, play tennis, pick up kids" // comma deliminated list, first phrase or word before comma is title
+let str32:String = "list shower work workout dinner sleep"  //raw list one word speed list, title = "untitled list"
 
 let str33:String = "Reminder go to the store list to do tomorrow"    // test to see if new list "to do downtown" is created
 
@@ -83,7 +83,7 @@ let str36:String = "Reminder Mike Call Mom Today repeat daily for 3 days" //TODO
 
 let str37:String = "Appointment today 3:00 pm repeat monthly calendar Mike Call Mom"
 
-let str38:String = "Reminder mow the grass today 1 pm list today"  // bombs
+let str38:String = "Reminder mow the grass today 1 pm list today"
 
 let str39:String = "4:55 test to calendar calendar Mike duration 90 minutes alert one hour"
 
@@ -97,6 +97,24 @@ let str43:String = "Tomorrow 9 PM at Essen Haus Josh Becker Band calendar Mike d
 
 let str44:String = "Mail bro list work"
 
+let str45:String = "Mail mike events"
+
+let str46:String = "Mail mike list default"
+
+let str47:String = "Today all day Program Dictate calendar Mike"
+
+let str48:String = "Reminder wash the car"
+
+
+
+
+
+
+
+//BOMBS test n fix Mike TODO MIKE, from Siri
+
+let str100:String = "Thursday 12 PM meet lunch with Rob calendar Mike duration one hour alert one hour"
+ 
 
 /*    ADD TEST THESE make them work...TODO Mike
 
@@ -111,8 +129,8 @@ add to dictate str   “meeting with Bob every Wednesday at noon”  //handle wo
 */
 
 // ---- change strings here for testing, shows on the dictated field---
-var str:String = str44
-//var str:String = ""
+//var str:String = str38
+var str:String = ""
 
 //var strRaw:String = str
 
@@ -555,11 +573,11 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
             
             resultMessage.text = "Switching to Mail for your mail"
             
-            let mailComposeViewController = MailComposer3().configuredMailComposeViewController()
+            let mailComposeViewController = MailComposer().configuredMailComposeViewController()
             if MFMailComposeViewController.canSendMail() {
                 self.presentViewController(mailComposeViewController, animated: true, completion: nil)
             } else {
-                MailComposer3().showSendMailErrorAlert()
+                MailComposer().showSendMailErrorAlert()
             }
             
             print("p485 after MailComposer call")
@@ -592,14 +610,59 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
             
             resultMessage.text = "Switching to Mail for your mail"
             
-            let mailComposeViewController = MailComposer3().mailList()
+            let mailComposeViewController = MailComposer().mailList()
             if MFMailComposeViewController.canSendMail() {
                 self.presentViewController(mailComposeViewController, animated: true, completion: nil)
             } else {
-                MailComposer3().showSendMailErrorAlert()
+                MailComposer().showSendMailErrorAlert()
             }
             
             print("p485 after MailComposer call")
+            
+            enteredText2.text = ""      // set to blank for return
+            resultMessage.text = ""     // set to blank for return
+            
+            print("p616 actionType: \(actionType)")
+            
+            //let actionType = ""         // set to "" for next processing
+            let mainType = ""
+            defaults.setObject(actionType, forKey: "actionType")        //saves actionType
+            defaults.setObject(actionType, forKey: "mainType")        //saves actionType
+            let rawDataObject = PFObject(className: "UserData")
+            rawDataObject["actionType"] = actionType
+            rawDataObject["rawString"] = outputNote
+            rawDataObject["output"] = output
+            
+            print("p630 PFUser.currentUser()?.username: \(PFUser.currentUser()?.username)")
+            if PFUser.currentUser()?.username != nil {
+                rawDataObject["userName"] = PFUser.currentUser()?.username
+            }
+            
+            //TODO get these two fields from code!
+            rawDataObject["device"] = "iPhone"               //TODO hardcoded get device from code?
+            rawDataObject["userPhoneNumber"] = "608-242-7700"               //TODO hardcoded get device from code?
+            
+            rawDataObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+                print("p523 vcDictate rawDataObject has been saved.")
+            }
+            
+            break;
+            
+        case "Mail Events":
+            print("p632 in Mail Events Switch")
+            
+            resultMessage.text = "Switching to Mail for your mail"
+            
+            let mailComposeViewController = MailComposer().mailEvents()
+            if MFMailComposeViewController.canSendMail() {
+                self.presentViewController(mailComposeViewController, animated: true, completion: nil)
+            } else {
+                MailComposer().showSendMailErrorAlert()
+            }
+            
+            print("p643 after MailComposer call")
+            print("p616 actionType: \(actionType)")
+
             
             enteredText2.text = ""      // set to blank for return
             resultMessage.text = ""     // set to blank for return
@@ -612,7 +675,14 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
             rawDataObject["actionType"] = actionType
             rawDataObject["rawString"] = outputNote
             rawDataObject["output"] = output
-            rawDataObject["userName"] = PFUser.currentUser()?.username
+            
+            print("p666 PFUser.currentUser()?.username: \(PFUser.currentUser()?.username)")
+            if PFUser.currentUser()?.username != nil {
+                rawDataObject["userName"] = PFUser.currentUser()?.username
+            }
+            
+            print("p669 after userName save")
+
             
             //TODO get these two fields from code!
             rawDataObject["device"] = "iPhone"               //TODO hardcoded get device from code?
@@ -623,8 +693,6 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
             }
             
             break;
-    
-            
             
             
             
@@ -656,7 +724,7 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
     
     
     @IBAction func buttonEdit(sender: AnyObject) {
-       EventCode().createEvent()
+       EventManager().createEvent()
         
         switchScreen("Event")
         

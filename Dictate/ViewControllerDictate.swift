@@ -380,18 +380,16 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
             width = 0
         }
         var frame: CGRect = vuMeter.frame
-        frame.size.width = width + 10
+        frame.size.width = width + 5
         vuMeter.frame = frame
     }
     
-// /* TODO Anil for Nuance voice level
     func updateVUMeter() {
-        let width: CGFloat = (90 + voiceSearch!.audioLevel) * 5 / 2
+        let width: CGFloat = ( 90 + CGFloat(voiceSearch!.audioLevel) * 5 / 2 ) * 4
+       // let width: CGFloat = (90 + voiceSearch!.audioLevel) * 5 / 2
         self.setVUMeterWidth(width)
-        self.performSelector("updateVUMeter", withObject: nil, afterDelay: 0.05)
+        self.performSelector("updateVUMeter", withObject: nil, afterDelay: 0.025)
     }
-    
-// */
     
     func recognizerDidBeginRecording(recognizer: SKRecognizer) {
         NSLog("p402 Recording started.")

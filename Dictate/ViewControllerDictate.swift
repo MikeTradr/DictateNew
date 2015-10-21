@@ -11,6 +11,8 @@ import EventKit
 import MessageUI
 import Parse
 import AVFoundation
+import AudioToolbox         //needed for Nuance? or no?
+import SystemConfiguration   //needed for Nuance? or no?
 
 var enteredText = String()
 
@@ -176,7 +178,9 @@ var now = ""
 // ---- end set Global Varbiables ----
 
 
-class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailComposeViewControllerDelegate {
+class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailComposeViewControllerDelegate, SpeechKitDelegate, SKRecognizerDelegate {
+    
+    var voiceSearch: SKRecognizer?
     
     let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
     
@@ -386,6 +390,11 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
         
         print("p328 we here? viewDidLoad viewController")
         
+        //Setup SpeechKit
+        SpeechKit.setupWithID("NMDPTRIAL_miketradr_gmail_com20151020235701", host: "sandbox.nmdp.nuancemobility.net", port: 443, useSSL: false, delegate: self)
+    
+
+    
         //Added left adn Right Swipe gestures. TODO Can add this to the General.swift Class? and call it?
         var leftSwipe = UISwipeGestureRecognizer(target: self, action: Selector("handleSwipes:"))
         var rightSwipe = UISwipeGestureRecognizer(target: self, action: Selector("handleSwipes:"))
@@ -473,6 +482,27 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
         audioPlayer.play()
     }
     
+//---- Nuance funcs -----------
+    func recognizerDidBeginRecording(recognizer: SKRecognizer!)
+    {
+        //The recording has started
+    }
+    
+    func recognizerDidFinishRecording(recognizer: SKRecognizer!)
+    {
+        //The recording has stopped
+    }
+    
+    func recognizer(recognizer: SKRecognizer!, didFinishWithResults results: SKRecognition!)
+    {
+        //The voice recognition process has understood something
+    }
+    
+    func recognizer(recognizer: SKRecognizer!, didFinishWithError error: NSError!, suggestion: String!)
+    {
+        //an error has occurred
+    }
+    
     
     //#### functions end ##############################
     
@@ -486,6 +516,9 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
         let soundListening = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("earcon_listening", ofType: "wav")!)
         //  General.playSound(alertSound3!)
         playSound(soundListening)
+        
+        self.voiceSearch = SKRecognizer(type: SKSearchRecognizerType, detection: UInt(SKLongEndOfSpeechDetection), language:"eng-USA", delegate: self)
+
 
         
         

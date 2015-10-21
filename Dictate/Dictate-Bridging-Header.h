@@ -9,8 +9,6 @@
 #import "ReminderEditorViewController.h"
 #import "JTDateHelper.h"
 
-//#import <SpeechKit/SpeechKit.h>
-#import "SpeechKit.h"
+#import <SpeechKit/SpeechKit.h>
 
 
-#import "NuanceHeader.h"

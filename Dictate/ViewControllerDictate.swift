@@ -408,7 +408,8 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
         labelRecording.text = "Processing..."
     }
     
-    func recognizer(recognizer: SKRecognizer, didFinishWithResults results: SKRecognition) {
+    func recognizer(recognizer: SKRecognizer!, didFinishWithResults results: SKRecognition!) {
+    
         NSLog("p419 didFinishWithResults Got results.")
         NSLog("Session id [%@].", SpeechKit.sessionID())
         var numOfResults: Int = results.results.count
@@ -420,7 +421,8 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
         voiceSearch = nil
     }
 
-    func recognizer(recognizer: SKRecognizer, didFinishWithError error: NSErrorPointer, suggestion: String) {
+    func recognizer(recognizer: SKRecognizer!, didFinishWithError error: NSError!, suggestion: String!) {
+        
         NSLog("p424 didFinishWithError Got error.")
         NSLog("Session id [%@].", SpeechKit.sessionID())
         transactionState = "TS_IDLE"
@@ -445,13 +447,14 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
        //     textReadSoFar.text = textReadSoFar.text.stringByAppendingString(text).stringByAppendingString("\n")
        // }
     }
-/*
+
+  
     func vocalizer(vocalizer: SKVocalizer, willSpeakTextAtCharacter index: UInt, ofString text: String) {
         NSLog("Session id [%@].", SpeechKit.sessionID())
         //textReadSoFar.text = text.substringToIndex(index)
     }
-*/
-    func vocalizer(vocalizer: SKVocalizer, didFinishSpeakingString text: String, withError error: NSErrorPointer) {
+
+    func vocalizer(vocalizer: SKVocalizer!, didFinishSpeakingString text: String!, withError error: NSError!) {
         NSLog("p453 didFinishSpeakingString")
         NSLog("Session id [%@].", SpeechKit.sessionID())
         isSpeaking = false

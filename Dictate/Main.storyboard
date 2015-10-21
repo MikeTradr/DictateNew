@@ -720,6 +720,11 @@
                                     <action selector="buttonMic:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Jf8-fQ-H9l"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0sT-Aq-Nw3">
+                                <rect key="frame" x="66" y="340" width="0.0" height="22"/>
+                                <animations/>
+                                <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="  Audio Level" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GiY-sw-rI2">
                                 <rect key="frame" x="56" y="311" width="300" height="21"/>
                                 <animations/>
@@ -742,11 +747,14 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0sT-Aq-Nw3">
-                                <rect key="frame" x="66" y="340" width="0.0" height="22"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Brt-uV-ask">
+                                <rect key="frame" x="179" y="461" width="48" height="30"/>
                                 <animations/>
-                                <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
+                                <state key="normal" title="Read It"/>
+                                <connections>
+                                    <action selector="buttonReadIt:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="IYm-yE-akd"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -756,6 +764,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
                         <outlet property="enteredText2" destination="bDq-ty-eHN" id="q3Z-73-6gL"/>
+                        <outlet property="labelReadIt" destination="Brt-uV-ask" id="PSc-UG-Sle"/>
                         <outlet property="labelRecording" destination="D2u-c3-LUY" id="eXv-1N-XBK"/>
                         <outlet property="resultError" destination="QX8-Ok-s2k" id="Cih-oO-4ux"/>
                         <outlet property="resultMessage" destination="cXS-vd-lzg" id="fAv-xn-pJj"/>

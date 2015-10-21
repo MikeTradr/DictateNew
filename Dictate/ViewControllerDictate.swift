@@ -178,7 +178,7 @@ var now = ""
 // ---- end set Global Varbiables ----
 
 
-class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailComposeViewControllerDelegate, SpeechKitDelegate, SKRecognizerDelegate {
+class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailComposeViewControllerDelegate, SpeechKitDelegate, SKRecognizerDelegate, SKVocalizerDelegate {
     
     var voiceSearch: SKRecognizer?
     
@@ -192,7 +192,7 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
     
  */
     
-    
+    var isSpeaking: Bool = false
     
     
     
@@ -234,6 +234,7 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
    
     @IBOutlet weak var labelRecording: UILabel!
     
+    @IBOutlet weak var labelReadIt: UIButton!
 
     
     var startDT:NSDate = NSDate(dateString:"2014-12-12")
@@ -371,16 +372,15 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
         }
     }
     
-//---- From Nuance funcs -----------
-
+//---- From Nuance funcs ----------------------------------------------------------
+//---- Speach to Text --------------
     
-///* TODO Anil for Nuance voice level
     func setVUMeterWidth (var width: CGFloat) {
         if width < 0 {
             width = 0
         }
         var frame: CGRect = vuMeter.frame
-        frame.size.width = width + 5
+        frame.size.width = width + 5        //5 is initial bar width
         vuMeter.frame = frame
     }
     
@@ -388,11 +388,11 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
         let width: CGFloat = ( 90 + CGFloat(voiceSearch!.audioLevel) * 5 / 2 ) * 4
        // let width: CGFloat = (90 + voiceSearch!.audioLevel) * 5 / 2
         self.setVUMeterWidth(width)
-        self.performSelector("updateVUMeter", withObject: nil, afterDelay: 0.025)
+        self.performSelector("updateVUMeter", withObject: nil, afterDelay: 0.05)
     }
     
     func recognizerDidBeginRecording(recognizer: SKRecognizer) {
-        NSLog("p402 Recording started.")
+        NSLog("p402 recognizerDidBeginRecording Recording started.")
         var transactionState = "TS_RECORDING"
         
         labelRecording.text = "Recording..."
@@ -401,15 +401,15 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
     }
     
     func recognizerDidFinishRecording(recognizer: SKRecognizer) {
-        NSLog("p408 Recording finished.")
+        NSLog("p408 recognizerDidFinishRecording Recording finished.")
         NSObject.cancelPreviousPerformRequestsWithTarget(self, selector: "updateVUMeter", object: nil)
-      //  self.setVUMeterWidth(0)
-    //    transactionState = TS_PROCESSING
+        self.setVUMeterWidth(0)
+        transactionState = "TS_PROCESSING"
         labelRecording.text = "Processing..."
     }
     
     func recognizer(recognizer: SKRecognizer, didFinishWithResults results: SKRecognition) {
-        NSLog("p419 Got results.")
+        NSLog("p419 didFinishWithResults Got results.")
         NSLog("Session id [%@].", SpeechKit.sessionID())
         var numOfResults: Int = results.results.count
         transactionState = "TS_IDLE"
@@ -419,7 +419,57 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
 
         voiceSearch = nil
     }
+
+    func recognizer(recognizer: SKRecognizer, didFinishWithError error: NSErrorPointer, suggestion: String) {
+        NSLog("p424 didFinishWithError Got error.")
+        NSLog("Session id [%@].", SpeechKit.sessionID())
+        transactionState = "TS_IDLE"
+        //recordButton.setTitle("Record", forState: UIControlStateNormal)
+        
+        if error != nil {
+            let alert = UIAlertController(title: "Error", message: error.debugDescription, preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+        
+      //  voiceSearch.release()
+        voiceSearch = nil
+    }
     
+//---- Read Text --------------
+    
+    func vocalizer(vocalizer: SKVocalizer, willBeginSpeakingString text: String) {
+        isSpeaking = true
+        labelReadIt.setTitle("Stop", forState: UIControlState.Normal)
+       // if text {
+       //     textReadSoFar.text = textReadSoFar.text.stringByAppendingString(text).stringByAppendingString("\n")
+       // }
+    }
+/*
+    func vocalizer(vocalizer: SKVocalizer, willSpeakTextAtCharacter index: UInt, ofString text: String) {
+        NSLog("Session id [%@].", SpeechKit.sessionID())
+        //textReadSoFar.text = text.substringToIndex(index)
+    }
+*/
+    func vocalizer(vocalizer: SKVocalizer, didFinishSpeakingString text: String, withError error: NSErrorPointer) {
+        NSLog("p453 didFinishSpeakingString")
+        NSLog("Session id [%@].", SpeechKit.sessionID())
+        isSpeaking = false
+        labelReadIt.setTitle("Read It", forState: UIControlState.Normal)
+        //speakButton.setTitle("Read It", forState: UIControlStateNormal)
+        
+        if error != nil {
+            let alert = UIAlertController(title: "Error", message: error.debugDescription, preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+    }
+    
+    
+    
+//---- END From Nuance funcs ----------------------------------------------------------
+    
+
 //---- end my Gerneral functions -------------------------------------
     
 //---- Override functions --------------------------------------------
@@ -433,9 +483,13 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
         
         //Setup SpeechKit
         SpeechKit.setupWithID("NMDPTRIAL_miketradr_gmail_com20151020235701", host: "sandbox.nmdp.nuancemobility.net", port: 443, useSSL: false, delegate: self)
+        
+        //TODO Anil TODO Mike UInt to Int Error here.
+      //  SpeechKit.setEarcon(earconStart, forType: SKStartRecordingEarconType)
+      //  SpeechKit.setEarcon(earconStop, forType: SKStopRecordingEarconType)
+      //  SpeechKit.setEarcon(earconCancel, forType: SKCancelRecordingEarconType)
     
-
-    
+        
         //Added left adn Right Swipe gestures. TODO Can add this to the General.swift Class? and call it?
         var leftSwipe = UISwipeGestureRecognizer(target: self, action: Selector("handleSwipes:"))
         var rightSwipe = UISwipeGestureRecognizer(target: self, action: Selector("handleSwipes:"))
@@ -545,13 +599,13 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
         
 //        var enteredText2 = SKRecognition()
     }
-  */
+
     func recognizer(recognizer: SKRecognizer!, didFinishWithError error: NSError!, suggestion: String!)
     {
         //an error has occurred
         print("p549 a SKRecognizer error has occurred")
     }
-    
+ */
     
     //#### functions end ##############################
     
@@ -572,12 +626,27 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
         
         self.voiceSearch = SKRecognizer(type: SKSearchRecognizerType, detection: UInt(SKLongEndOfSpeechDetection), language:"eng-USA", delegate: self)
 
-
-        print("p525 after SKRecognizer")
-
-        
+        print("p599 after SKRecognizer")
         
     }
+    
+    @IBAction func buttonReadIt(sender: AnyObject) {
+        print("p604 button Read It pressed")
+        
+        let vocalizer = SKVocalizer(language: "en_US", delegate: self)
+        
+        if isSpeaking {
+            vocalizer.cancel()
+            isSpeaking = false
+        } else {
+            isSpeaking = true
+            vocalizer.speakString(enteredText2.text)
+            //textReadSoFar.text = ""
+        }
+
+        print("p617 after Read It Button")
+    }
+    
     
     
     @IBAction func buttonProcess(sender: AnyObject) {

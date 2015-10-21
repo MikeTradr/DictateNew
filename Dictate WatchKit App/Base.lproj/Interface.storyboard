@@ -125,7 +125,7 @@
                                 <button alignment="left" id="fvS-9W-qCz" userLabel="ButtonStart">
                                     <group key="contentGroup" width="1" alignment="left" id="yKh-Pt-4Kn">
                                         <items>
-                                            <label alignment="left" text="start" id="EJB-4B-o93">
+                                            <label alignment="left" text="start" numberOfLines="2" id="EJB-4B-o93">
                                                 <color key="textColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="font" type="system" pointSize="16"/>
                                             </label>
@@ -144,7 +144,7 @@
                                 <button alignment="left" id="B42-1Z-IeF" userLabel="ButtonCalendar">
                                     <group key="contentGroup" width="1" alignment="left" id="Eog-GI-aBV">
                                         <items>
-                                            <label alignment="left" text="calendar" id="Cqu-yl-ZGP">
+                                            <label alignment="left" text="calendar" numberOfLines="2" id="Cqu-yl-ZGP">
                                                 <color key="textColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="font" type="system" pointSize="16"/>
                                             </label>

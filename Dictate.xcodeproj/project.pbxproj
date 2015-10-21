@@ -90,6 +90,12 @@
 		D3B703821B94E90800FA1DF0 /* ReminderListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B703811B94E90800FA1DF0 /* ReminderListTableViewController.swift */; };
 		D3BD1BDE1B9F3CF10052A312 /* ReminderPickerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BD1BDD1B9F3CF10052A312 /* ReminderPickerTableViewController.swift */; };
 		D3BE2D2B1BB1287C00376686 /* EventEditNotesIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BE2D2A1BB126EA00376686 /* EventEditNotesIC.swift */; };
+		D3CEC17D1BD77A76001A50F8 /* earcon_cancel.wav in Resources */ = {isa = PBXBuildFile; fileRef = D3CEC17C1BD77A76001A50F8 /* earcon_cancel.wav */; settings = {ASSET_TAGS = (); }; };
+		D3CEC17E1BD77A76001A50F8 /* earcon_cancel.wav in Resources */ = {isa = PBXBuildFile; fileRef = D3CEC17C1BD77A76001A50F8 /* earcon_cancel.wav */; settings = {ASSET_TAGS = (); }; };
+		D3CEC1801BD77A7F001A50F8 /* earcon_done_listening.wav in Resources */ = {isa = PBXBuildFile; fileRef = D3CEC17F1BD77A7F001A50F8 /* earcon_done_listening.wav */; settings = {ASSET_TAGS = (); }; };
+		D3CEC1811BD77A7F001A50F8 /* earcon_done_listening.wav in Resources */ = {isa = PBXBuildFile; fileRef = D3CEC17F1BD77A7F001A50F8 /* earcon_done_listening.wav */; settings = {ASSET_TAGS = (); }; };
+		D3CEC1831BD77A88001A50F8 /* earcon_listening.wav in Resources */ = {isa = PBXBuildFile; fileRef = D3CEC1821BD77A88001A50F8 /* earcon_listening.wav */; settings = {ASSET_TAGS = (); }; };
+		D3CEC1841BD77A88001A50F8 /* earcon_listening.wav in Resources */ = {isa = PBXBuildFile; fileRef = D3CEC1821BD77A88001A50F8 /* earcon_listening.wav */; settings = {ASSET_TAGS = (); }; };
 		D3D98AF41BA54D5B00BA1901 /* FavoritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D98AF31BA54D5B00BA1901 /* FavoritesManager.swift */; };
 		D3D98AF51BA54D5B00BA1901 /* FavoritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D98AF31BA54D5B00BA1901 /* FavoritesManager.swift */; };
 		D3DA3ACE1BAE73F4002FDD21 /* TodayEventsTableRC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA3ACD1BAE73F4002FDD21 /* TodayEventsTableRC.swift */; };
@@ -253,9 +259,6 @@
 		D33FEBAE1BD769EB003E6755 /* NuanceHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NuanceHeader.h; sourceTree = "<group>"; };
 		D33FEBB11BD76A70003E6755 /* NuanceHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NuanceHeader.m; sourceTree = "<group>"; };
 		D34395711BA32964002D98EA /* ReminderListPickerIC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderListPickerIC.swift; sourceTree = "<group>"; };
-		D34798BE1BD762440019503B /* earcon_cancel.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = earcon_cancel.wav; path = ../../../../DragonMobileSDK_1.4.21/DragonMobileRecognizer/earcon_cancel.wav; sourceTree = "<group>"; };
-		D34798C11BD762510019503B /* earcon_done_listening.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = earcon_done_listening.wav; path = ../../../../DragonMobileSDK_1.4.21/DragonMobileRecognizer/earcon_done_listening.wav; sourceTree = "<group>"; };
-		D34798C41BD762570019503B /* earcon_listening.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = earcon_listening.wav; path = ../../../../DragonMobileSDK_1.4.21/DragonMobileRecognizer/earcon_listening.wav; sourceTree = "<group>"; };
 		D35588BB1BA937D20052892F /* ReminderItemsIC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderItemsIC.swift; sourceTree = "<group>"; };
 		D35588BD1BA938A00052892F /* ReminderItemsTableRC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderItemsTableRC.swift; sourceTree = "<group>"; };
 		D355D97B1BA7DD3F00DADD72 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -278,6 +281,9 @@
 		D3B703811B94E90800FA1DF0 /* ReminderListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReminderListTableViewController.swift; path = Views/ReminderListTableViewController.swift; sourceTree = "<group>"; };
 		D3BD1BDD1B9F3CF10052A312 /* ReminderPickerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderPickerTableViewController.swift; sourceTree = "<group>"; };
 		D3BE2D2A1BB126EA00376686 /* EventEditNotesIC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EventEditNotesIC.swift; path = ../EventEditNotesIC.swift; sourceTree = "<group>"; };
+		D3CEC17C1BD77A76001A50F8 /* earcon_cancel.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = earcon_cancel.wav; sourceTree = "<group>"; };
+		D3CEC17F1BD77A7F001A50F8 /* earcon_done_listening.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = earcon_done_listening.wav; sourceTree = "<group>"; };
+		D3CEC1821BD77A88001A50F8 /* earcon_listening.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = earcon_listening.wav; sourceTree = "<group>"; };
 		D3D98AF31BA54D5B00BA1901 /* FavoritesManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FavoritesManager.swift; path = Manager/FavoritesManager.swift; sourceTree = "<group>"; };
 		D3DA3ACD1BAE73F4002FDD21 /* TodayEventsTableRC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayEventsTableRC.swift; sourceTree = "<group>"; };
 		D3DA3AD21BAE8054002FDD21 /* ShowCalendarsIC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowCalendarsIC.swift; sourceTree = "<group>"; };
@@ -787,10 +793,10 @@
 				ECB861EE1B77DCB000503C50 /* Beep2.mp3 */,
 				ECB861EF1B77DCB000503C50 /* button-14.mp3 */,
 				ECB861F01B77DCB000503C50 /* button-43.mp3 */,
+				D3CEC17C1BD77A76001A50F8 /* earcon_cancel.wav */,
+				D3CEC17F1BD77A7F001A50F8 /* earcon_done_listening.wav */,
+				D3CEC1821BD77A88001A50F8 /* earcon_listening.wav */,
 				ECB861F11B77DCB000503C50 /* se_tap.m4a */,
-				D34798BE1BD762440019503B /* earcon_cancel.wav */,
-				D34798C11BD762510019503B /* earcon_done_listening.wav */,
-				D34798C41BD762570019503B /* earcon_listening.wav */,
 			);
 			name = Sounds;
 			path = Dictate/Resources/Sounds;
@@ -1020,6 +1026,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3CEC1831BD77A88001A50F8 /* earcon_listening.wav in Resources */,
 				ECB861F81B77DCB000503C50 /* 289-SimpleBeep.mp3 in Resources */,
 				ECB861FB1B77DCB000503C50 /* button-14.mp3 in Resources */,
 				ECB861F41B77DCB000503C50 /* 212-buttonclick52.mp3 in Resources */,
@@ -1032,12 +1039,14 @@
 				D33CAD071B747EBE00F59260 /* se_tap.m4a in Resources */,
 				ECB861F61B77DCB000503C50 /* 218-buttonclick54.mp3 in Resources */,
 				ECB861F21B77DCB000503C50 /* 122-whoosh03.mp3 in Resources */,
+				D3CEC1801BD77A7F001A50F8 /* earcon_done_listening.wav in Resources */,
 				D3188A7B1B6E9B4B00323DC0 /* ToDoTableViewCell.xib in Resources */,
 				ECB861FD1B77DCB000503C50 /* se_tap.m4a in Resources */,
 				D3F8ACF51B696FB00070C097 /* LaunchScreen.xib in Resources */,
 				D3348D111BAE4D3C0056792D /* 124-DeleteWhoosh.mp3 in Resources */,
 				D3188A751B6E9B1500323DC0 /* CustomTableViewCell.xib in Resources */,
 				D355D97C1BA7DD3F00DADD72 /* Main.storyboard in Resources */,
+				D3CEC17D1BD77A76001A50F8 /* earcon_cancel.wav in Resources */,
 				D3F8ACF21B696FB00070C097 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1059,12 +1068,15 @@
 				D3348D041BAE4CFD0056792D /* 124-DeleteWhoosh.mp3 in Resources */,
 				D3348D0C1BAE4D2A0056792D /* Beep2.mp3 in Resources */,
 				D3348D0D1BAE4D2D0056792D /* button-14.mp3 in Resources */,
+				D3CEC1811BD77A7F001A50F8 /* earcon_done_listening.wav in Resources */,
 				D3348D0F1BAE4D330056792D /* se_tap.m4a in Resources */,
 				D33CAD081B747EBE00F59260 /* se_tap.m4a in Resources */,
 				D3348D0B1BAE4D270056792D /* beep-08b.mp3 in Resources */,
 				D33CAD051B74773500F59260 /* button-14.mp3 in Resources */,
 				D3F8AD1E1B696FCD0070C097 /* Dictate WatchKit App.app in Resources */,
+				D3CEC1841BD77A88001A50F8 /* earcon_listening.wav in Resources */,
 				D3348D0E1BAE4D300056792D /* button-43.mp3 in Resources */,
+				D3CEC17E1BD77A76001A50F8 /* earcon_cancel.wav in Resources */,
 				D3348D121BAE4D3C0056792D /* 124-DeleteWhoosh.mp3 in Resources */,
 				D3348D081BAE4D1D0056792D /* 218-buttonclick54.mp3 in Resources */,
 				D3348D051BAE4D130056792D /* 122-whoosh03.mp3 in Resources */,

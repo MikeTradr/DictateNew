@@ -14,7 +14,7 @@ import AVFoundation
 import AudioToolbox         //needed for Nuance? or no?
 import SystemConfiguration   //needed for Nuance? or no?
 
-var enteredText = String()
+//var enteredText = String()
 
 let str1:String = "new appointment tomorrow 2 AM sandra for efficiency for fall 242-1234"
 
@@ -182,6 +182,20 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
     
     var voiceSearch: SKRecognizer?
     
+    var earconStart: SKEarcon = SKEarcon.earconWithName("earcon_listening.wav") as! SKEarcon
+    var earconStop: SKEarcon = SKEarcon.earconWithName("earcon_done_listening.wav") as! SKEarcon
+    var earconCancel: SKEarcon = SKEarcon.earconWithName("earcon_cancel.wav") as! SKEarcon
+  /*
+    SpeechKit.setEarcon(earconStart, forType: SKStartRecordingEarconType)
+    SpeechKit.setEarcon(earconStop, forType: SKStopRecordingEarconType)
+    SpeechKit.setEarcon(earconCancel, forType: SKCancelRecordingEarconType)
+    
+ */
+    
+    
+    
+    
+    
     let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
     
      var audioPlayer = AVAudioPlayer()
@@ -191,7 +205,7 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
     
 //    defaults.setObject(eventDuration, forKey: "eventDuration")
     
-    @IBOutlet weak var enteredText: UITextView!     //this is under the micophone graphic
+  //  @IBOutlet weak var enteredText: UITextView!     //this is under the micophone graphic
     // @IBOutlet weak var resultProcessed: UITextView!
     //@IBOutlet weak var resultRaw: UITextView!
     
@@ -218,6 +232,7 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
     
     @IBOutlet weak var vuMeter: UIView! //yellwo meter Bro for voice level!
    
+    @IBOutlet weak var labelRecording: UILabel!
     
 
     
@@ -230,9 +245,12 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
     var calendarName:String = ""
     
     var database = EKEventStore()
-    var napid : String!
+    var napid: String!
     
-    var width:CGFloat = 0
+    var width: Float = 0
+    
+    var transactionState:String = ""
+
     
     
     
@@ -331,7 +349,7 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
     }
     
     func removeKeyboard() {
-        enteredText.resignFirstResponder()
+       // enteredText.resignFirstResponder()
         enteredText2.resignFirstResponder()
     }
     
@@ -339,12 +357,7 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
         self.view.endEditing(true)
         return false
     }
-    
-    func textFieldDidBeginEditing(enteredText: UITextField){
-        
-        //Put a break point here and test
-    
-    }
+
     
     func handleSwipes(sender:UISwipeGestureRecognizer) {
         if (sender.direction == .Left) {
@@ -358,8 +371,11 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
         }
     }
     
+//---- From Nuance funcs -----------
+
+    
 ///* TODO Anil for Nuance voice level
-    func setVUMeterWidthvar (var width: CGFloat) {
+    func setVUMeterWidth (var width: CGFloat) {
         if width < 0 {
             width = 0
         }
@@ -368,16 +384,43 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
         vuMeter.frame = frame
     }
     
-///* TODO Anil for Nuance voice level
+// /* TODO Anil for Nuance voice level
     func updateVUMeter() {
-   //     var width: Float = (90 + voiceSearch.audioLevel) * 5 / 2
-   //     self.setVUMeterWidth(width)
+        let width: CGFloat = (90 + voiceSearch!.audioLevel) * 5 / 2
+        self.setVUMeterWidth(width)
         self.performSelector("updateVUMeter", withObject: nil, afterDelay: 0.05)
     }
     
-//*/
+// */
     
+    func recognizerDidBeginRecording(recognizer: SKRecognizer) {
+        NSLog("p402 Recording started.")
+        var transactionState = "TS_RECORDING"
+        
+        labelRecording.text = "Recording..."
+       // recordButton.setTitle("Recording...", forState: UIControlStateNormal)
+        self.performSelector("updateVUMeter", withObject: nil, afterDelay: 0.05)
+    }
     
+    func recognizerDidFinishRecording(recognizer: SKRecognizer) {
+        NSLog("p408 Recording finished.")
+        NSObject.cancelPreviousPerformRequestsWithTarget(self, selector: "updateVUMeter", object: nil)
+      //  self.setVUMeterWidth(0)
+    //    transactionState = TS_PROCESSING
+        labelRecording.text = "Processing..."
+    }
+    
+    func recognizer(recognizer: SKRecognizer, didFinishWithResults results: SKRecognition) {
+        NSLog("p419 Got results.")
+        NSLog("Session id [%@].", SpeechKit.sessionID())
+        var numOfResults: Int = results.results.count
+        transactionState = "TS_IDLE"
+        labelRecording.text = ""
+        
+        enteredText2.text = results.firstResult()
+
+        voiceSearch = nil
+    }
     
 //---- end my Gerneral functions -------------------------------------
     
@@ -470,39 +513,45 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
     }
     
 //---- End Override functions ----------------------------------------
-    
+
     func playSound(sound: NSURL){
         var error:NSError?
         do {
             audioPlayer = try AVAudioPlayer(contentsOfURL: sound)
-        } catch var error1 as NSError {
+            
+        } catch  {
+           
+        }
+   /*     } catch var error1 as NSError {
             error = error1
         }
+*/
         audioPlayer.prepareToPlay()
         audioPlayer.play()
     }
-    
+
 //---- Nuance funcs -----------
-    func recognizerDidBeginRecording(recognizer: SKRecognizer!)
+ /*   func recognizerDidBeginRecording(recognizer: SKRecognizer!)
     {
         //The recording has started
     }
-    
+ 
     func recognizerDidFinishRecording(recognizer: SKRecognizer!)
     {
         //The recording has stopped
     }
-    
+ 
     func recognizer(recognizer: SKRecognizer!, didFinishWithResults results: SKRecognition!)
     {
         //The voice recognition process has understood something
         
 //        var enteredText2 = SKRecognition()
     }
-    
+  */
     func recognizer(recognizer: SKRecognizer!, didFinishWithError error: NSError!, suggestion: String!)
     {
         //an error has occurred
+        print("p549 a SKRecognizer error has occurred")
     }
     
     
@@ -517,12 +566,17 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
         
         let soundListening = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("earcon_listening", ofType: "wav")!)
         //  General.playSound(alertSound3!)
-        playSound(soundListening)
+        
+        let se_tap = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("se_tap", ofType: "m4a")!)
+        //  General.playSound(alertSound3!)
+        
+        playSound(se_tap)
         
         self.voiceSearch = SKRecognizer(type: SKSearchRecognizerType, detection: UInt(SKLongEndOfSpeechDetection), language:"eng-USA", delegate: self)
 
 
-        
+        print("p525 after SKRecognizer")
+
         
         
     }
@@ -535,18 +589,16 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
         playSound(alertSound1)
 
         //cleardata()
+ /*
+     //   let strRaw = enteredText.text
+      //  print("827 strRaw: \(strRaw)")
         
-        let strRaw = enteredText.text
-        print("827 strRaw: \(strRaw)")
-        
-        resultMessage.text = strRaw
-        
-        if ( enteredText.text != "" ) {
-            str = enteredText.text
-        } else {
+     //   resultMessage.text = strRaw
+*/
+        if ( enteredText2.text != "" ) {
             str = enteredText2.text
         }
-        
+
         print("### 684 str: \(str)")
         
         // CALL main parsing of string...  Only call this here once! Check TODO Mike...

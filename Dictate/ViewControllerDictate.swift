@@ -496,6 +496,8 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
     func recognizer(recognizer: SKRecognizer!, didFinishWithResults results: SKRecognition!)
     {
         //The voice recognition process has understood something
+        
+        var enteredText2 = SKRecognition
     }
     
     func recognizer(recognizer: SKRecognizer!, didFinishWithError error: NSError!, suggestion: String!)

@@ -109,6 +109,7 @@ class ReminderListsIC: WKInterfaceController {
         let (startDT, endDT, output, outputNote, day, calendarName, actionType) = DictateManagerIC.sharedInstance.grabVoice()
     }
     
+    
     @IBAction func menuSettings() {
         presentControllerWithName("Settings", context: "Reminders")
     }

@@ -211,6 +211,10 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
     @IBOutlet weak var resultCalendar: UITextField!    
     
     @IBOutlet weak var resultError: UITextView!
+    
+    @IBOutlet weak var vuMeter: UIView! //yellwo meter Bro for voice level!
+   
+    
 
     
     var startDT:NSDate = NSDate(dateString:"2014-12-12")
@@ -223,6 +227,8 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
     
     var database = EKEventStore()
     var napid : String!
+    
+    var width:CGFloat = 0
     
     
     
@@ -348,6 +354,25 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
         }
     }
     
+///* TODO Anil for Nuance voice level
+    func setVUMeterWidthvar (var width: CGFloat) {
+        if width < 0 {
+            width = 0
+        }
+        var frame: CGRect = vuMeter.frame
+        frame.size.width = width + 10
+        vuMeter.frame = frame
+    }
+    
+///* TODO Anil for Nuance voice level
+    func updateVUMeter() {
+   //     var width: Float = (90 + voiceSearch.audioLevel) * 5 / 2
+   //     self.setVUMeterWidth(width)
+        self.performSelector("updateVUMeter", withObject: nil, afterDelay: 0.05)
+    }
+    
+//*/
+    
     
     
 //---- end my Gerneral functions -------------------------------------
@@ -451,9 +476,26 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
     
     //#### functions end ##############################
     
+    
+    @IBAction func buttonMic(sender: AnyObject) {
+        
+        //TODO Bro, Anil, ADD call to Nuance voice here please. Thx Bro...
+        // put results into var enteredText2 to show on screen!
+        print("p484 mic button pressed")
+        
+        let soundListening = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("earcon_listening", ofType: "wav")!)
+        //  General.playSound(alertSound3!)
+        playSound(soundListening)
+
+        
+        
+        
+    }
+    
+    
     @IBAction func buttonProcess(sender: AnyObject) {
         
-        var alertSound1 = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("se_tap", ofType: "m4a")!)
+        let alertSound1 = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("se_tap", ofType: "m4a")!)
         //  General.playSound(alertSound3!)
         playSound(alertSound1)
 

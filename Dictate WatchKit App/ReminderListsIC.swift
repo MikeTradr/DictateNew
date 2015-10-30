@@ -9,7 +9,7 @@
 import WatchKit
 import Foundation
 import EventKit
-import Parse
+//import Parse
 import AVFoundation
 
 
@@ -119,10 +119,10 @@ class ReminderListsIC: WKInterfaceController {
         super.init()
         
         // Enable data sharing in app extensions.
-        Parse.enableDataSharingWithApplicationGroupIdentifier("group.com.thatsoft.dictateApp", containingApplication: "group.com.thatsoft.dictateApp")
+   //parse     Parse.enableDataSharingWithApplicationGroupIdentifier("group.com.thatsoft.dictateApp", containingApplication: "group.com.thatsoft.dictateApp")
         
         // Setup Parse
-        Parse.setApplicationId("1wwwPAQ0Of2Fp6flotUw4YzN64HFDmy3ijAlQZKE", clientKey: "EHeeek4uXhJQi0vXPBba945A4h0LQ4QddEGW8gSs")
+  //parse      Parse.setApplicationId("1wwwPAQ0Of2Fp6flotUw4YzN64HFDmy3ijAlQZKE", clientKey: "EHeeek4uXhJQi0vXPBba945A4h0LQ4QddEGW8gSs")
         
            /*
         //TODO FIX THIS BOMBS MIKE USED TO WORK  LOL

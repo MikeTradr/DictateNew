@@ -107,6 +107,12 @@ let str47:String = "Today all day Program Dictate calendar Mike"
 
 let str48:String = "Reminder wash the car"
 
+let str49:String = "tomorrow all day study for exam calendar Mike"
+
+let str50:String = "Monday all day study for exam"
+
+
+
 
 
 
@@ -131,8 +137,8 @@ add to dictate str   “meeting with Bob every Wednesday at noon”  //handle wo
 */
 
 // ---- change strings here for testing, shows on the dictated field---
-//var str:String = str38
-var str:String = ""
+var str:String = str42
+//var str:String = ""
 
 //var strRaw:String = str
 
@@ -185,17 +191,9 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
     var earconStart: SKEarcon = SKEarcon.earconWithName("earcon_listening.wav") as! SKEarcon
     var earconStop: SKEarcon = SKEarcon.earconWithName("earcon_done_listening.wav") as! SKEarcon
     var earconCancel: SKEarcon = SKEarcon.earconWithName("earcon_cancel.wav") as! SKEarcon
-  /*
-    SpeechKit.setEarcon(earconStart, forType: SKStartRecordingEarconType)
-    SpeechKit.setEarcon(earconStop, forType: SKStopRecordingEarconType)
-    SpeechKit.setEarcon(earconCancel, forType: SKCancelRecordingEarconType)
-    
- */
     
     var isSpeaking: Bool = false
-    
-    
-    
+
     let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
     
      var audioPlayer = AVAudioPlayer()
@@ -417,6 +415,12 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
         labelRecording.text = ""
         
         enteredText2.text = results.firstResult()
+        
+        if enteredText2.text == "" {
+            labelReadIt.hidden = true   //hide read label at beginning as nothing to read
+        } else {
+            labelReadIt.hidden = false
+        }
 
         voiceSearch = nil
     }
@@ -429,7 +433,9 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
         //recordButton.setTitle("Record", forState: UIControlStateNormal)
         
         if error != nil {
-            let alert = UIAlertController(title: "Error", message: error.debugDescription, preferredStyle: UIAlertControllerStyle.Alert)
+           //let alert = UIAlertController(title: "Error", message: error.debugDescription, preferredStyle: UIAlertControllerStyle.Alert)
+            
+            let alert = UIAlertController(title: "Error", message: "Problem to connecting to speech server. Try again", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
         }
@@ -458,11 +464,16 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
         NSLog("p453 didFinishSpeakingString")
         NSLog("Session id [%@].", SpeechKit.sessionID())
         isSpeaking = false
-        labelReadIt.setTitle("Read It", forState: UIControlState.Normal)
+        labelReadIt.setTitle("speak your result", forState: UIControlState.Normal)
         //speakButton.setTitle("Read It", forState: UIControlStateNormal)
         
         if error != nil {
-            let alert = UIAlertController(title: "Error", message: error.debugDescription, preferredStyle: UIAlertControllerStyle.Alert)
+           // let alert = UIAlertController(title: "Error", message: error.debugDescription, preferredStyle: UIAlertControllerStyle.Alert)
+            print("p465 error.debugDescription: \(error.debugDescription)")
+
+        
+            let alert = UIAlertController(title: "Error", message: "Problem to connecting to speech server. Try again", preferredStyle: UIAlertControllerStyle.Alert)
+
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
         }
@@ -488,10 +499,15 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
         SpeechKit.setupWithID("NMDPTRIAL_miketradr_gmail_com20151020235701", host: "sandbox.nmdp.nuancemobility.net", port: 443, useSSL: false, delegate: self)
         
         //TODO Anil TODO Mike UInt to Int Error here.
-      //  SpeechKit.setEarcon(earconStart, forType: SKStartRecordingEarconType)
-      //  SpeechKit.setEarcon(earconStop, forType: SKStopRecordingEarconType)
-      //  SpeechKit.setEarcon(earconCancel, forType: SKCancelRecordingEarconType)
-    
+        SpeechKit.setEarcon(earconStart, forType: UInt(SKStartRecordingEarconType))
+        SpeechKit.setEarcon(earconStop, forType: UInt(SKStopRecordingEarconType))
+        SpeechKit.setEarcon(earconCancel, forType: UInt(SKCancelRecordingEarconType))
+        
+        if enteredText2.text == "" {
+            labelReadIt.hidden = true   //hide read label at beginning as nothing to read
+        } else {
+             labelReadIt.hidden = false
+        }
         
         //Added left adn Right Swipe gestures. TODO Can add this to the General.swift Class? and call it?
         var leftSwipe = UISwipeGestureRecognizer(target: self, action: Selector("handleSwipes:"))
@@ -559,6 +575,12 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
         
         playSound(alertSound218)
         
+        if enteredText2.text == "" {
+            labelReadIt.hidden = true   //hide read label at beginning as nothing to read
+        } else {
+            labelReadIt.hidden = false
+        }
+        
     }
     
     
@@ -619,22 +641,17 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
         // put results into var enteredText2 to show on screen!
         print("p484 mic button pressed")
         
-        let soundListening = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("earcon_listening", ofType: "wav")!)
-        //  General.playSound(alertSound3!)
-        
-        let se_tap = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("se_tap", ofType: "m4a")!)
-        //  General.playSound(alertSound3!)
-        
-        playSound(se_tap)
-        
+        removeKeyboard()
+
         self.voiceSearch = SKRecognizer(type: SKSearchRecognizerType, detection: UInt(SKLongEndOfSpeechDetection), language:"eng-USA", delegate: self)
 
         print("p599 after SKRecognizer")
-        
     }
     
     @IBAction func buttonReadIt(sender: AnyObject) {
         print("p604 button Read It pressed")
+        
+        removeKeyboard()
         
         let vocalizer = SKVocalizer(language: "en_US", delegate: self)
         
@@ -667,6 +684,9 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
 */
         if ( enteredText2.text != "" ) {
             str = enteredText2.text
+            labelReadIt.hidden = false
+        } else {
+            labelReadIt.hidden = true   //hide read label at beginning as nothing to read
         }
 
         print("### 684 str: \(str)")
@@ -909,7 +929,7 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
                 // do stuff
                  //self.switchScreen("EventDetails")
                 
-                tabBarController?.selectedIndex = 1
+                self.tabBarController?.selectedIndex = 1
                 
             }
         }

@@ -201,7 +201,7 @@ class DictateManagerIC: WKInterfaceController {
 
         Parse.enableLocalDatastore()
         //  PFUser.enableAutomaticUser()
-    Parse.enableDataSharingWithApplicationGroupIdentifier("group.com.thatsoft.dictateApp", containingApplication: "com.thatsoft.dictateApp")
+        Parse.enableDataSharingWithApplicationGroupIdentifier("group.com.thatsoft.dictateApp", containingApplication: "com.thatsoft.dictateApp")
         
         Parse.setApplicationId("1wwwPAQ0Of2Fp6flotUw4YzN64HFDmy3ijAlQZKE",
             clientKey: "EHeeek4uXhJQi0vXPBba945A4h0LQ4QddEGW8gSs")

@@ -10,7 +10,7 @@ import UIKit
 import Parse
 import Bolts
 import Fabric
-//import Crashlytics
+import Crashlytics
 
 
 @UIApplicationMain
@@ -23,8 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
-       // Crashlytics().debugMode = true
-       //CRASHES  Fabric.with([Crashlytics()])    // added 081715 for Crash reporting   MJD
+        Fabric.with([Crashlytics.self])
         
         // TODO: Move this to where you establish a user session
         self.logUser()

@@ -9,7 +9,7 @@
 import WatchKit
 import Foundation
 import EventKit
-import Parse
+//import Parse
 import AVFoundation
 
 

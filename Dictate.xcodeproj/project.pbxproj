@@ -38,7 +38,7 @@
 		D323505F1B697B0200939F03 /* DictateCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D323505D1B697B0200939F03 /* DictateCode.swift */; };
 		D32350621B69828900939F03 /* ReminderCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32350611B69828900939F03 /* ReminderCode.swift */; };
 		D32350631B69828900939F03 /* ReminderCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32350611B69828900939F03 /* ReminderCode.swift */; };
-		D32AB8F41BB96DC800139112 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3F8ACF11B696FB00070C097 /* Images.xcassets */; settings = {ASSET_TAGS = (); }; };
+		D32AB8F41BB96DC800139112 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3F8ACF11B696FB00070C097 /* Images.xcassets */; };
 		D3348D041BAE4CFD0056792D /* 124-DeleteWhoosh.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D3348D031BAE4CFD0056792D /* 124-DeleteWhoosh.mp3 */; };
 		D3348D051BAE4D130056792D /* 122-whoosh03.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ECB861E61B77DCB000503C50 /* 122-whoosh03.mp3 */; };
 		D3348D061BAE4D160056792D /* 212-buttonclick52.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ECB861E81B77DCB000503C50 /* 212-buttonclick52.mp3 */; };
@@ -60,24 +60,21 @@
 		D33CAD051B74773500F59260 /* button-14.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D33CAD031B74773500F59260 /* button-14.mp3 */; };
 		D33CAD071B747EBE00F59260 /* se_tap.m4a in Resources */ = {isa = PBXBuildFile; fileRef = D33CAD061B747EBE00F59260 /* se_tap.m4a */; };
 		D33CAD081B747EBE00F59260 /* se_tap.m4a in Resources */ = {isa = PBXBuildFile; fileRef = D33CAD061B747EBE00F59260 /* se_tap.m4a */; };
-		D33FEBAF1BD769EB003E6755 /* NuanceHeader.h in Sources */ = {isa = PBXBuildFile; fileRef = D33FEBAE1BD769EB003E6755 /* NuanceHeader.h */; settings = {ASSET_TAGS = (); }; };
-		D33FEBB01BD769F6003E6755 /* NuanceHeader.h in Sources */ = {isa = PBXBuildFile; fileRef = D33FEBAE1BD769EB003E6755 /* NuanceHeader.h */; settings = {ASSET_TAGS = (); }; };
-		D33FEBB21BD76A70003E6755 /* NuanceHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = D33FEBB11BD76A70003E6755 /* NuanceHeader.m */; settings = {ASSET_TAGS = (); }; };
-		D33FEBB31BD76A70003E6755 /* NuanceHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = D33FEBB11BD76A70003E6755 /* NuanceHeader.m */; settings = {ASSET_TAGS = (); }; };
+		D33FEBAF1BD769EB003E6755 /* NuanceHeader.h in Sources */ = {isa = PBXBuildFile; fileRef = D33FEBAE1BD769EB003E6755 /* NuanceHeader.h */; };
+		D33FEBB01BD769F6003E6755 /* NuanceHeader.h in Sources */ = {isa = PBXBuildFile; fileRef = D33FEBAE1BD769EB003E6755 /* NuanceHeader.h */; };
+		D33FEBB21BD76A70003E6755 /* NuanceHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = D33FEBB11BD76A70003E6755 /* NuanceHeader.m */; };
+		D33FEBB31BD76A70003E6755 /* NuanceHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = D33FEBB11BD76A70003E6755 /* NuanceHeader.m */; };
 		D34395721BA32964002D98EA /* ReminderListPickerIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34395711BA32964002D98EA /* ReminderListPickerIC.swift */; };
 		D35588BC1BA937D20052892F /* ReminderItemsIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35588BB1BA937D20052892F /* ReminderItemsIC.swift */; };
 		D35588BE1BA938A00052892F /* ReminderItemsTableRC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35588BD1BA938A00052892F /* ReminderItemsTableRC.swift */; };
 		D355D97C1BA7DD3F00DADD72 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D355D97B1BA7DD3F00DADD72 /* Main.storyboard */; };
-		D36DBDD51BD6DA870076A5C2 /* GlanceTodayEventsTableRC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36DBDD41BD6DA870076A5C2 /* GlanceTodayEventsTableRC.swift */; settings = {ASSET_TAGS = (); }; };
+		D36DBDD51BD6DA870076A5C2 /* GlanceTodayEventsTableRC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36DBDD41BD6DA870076A5C2 /* GlanceTodayEventsTableRC.swift */; };
 		D3711F051BB04E0E00D19AE9 /* TestIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3711F041BB04E0E00D19AE9 /* TestIC.swift */; };
 		D3795E7A1B8DF927009D3DB5 /* SettingsEventTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3795E791B8DF927009D3DB5 /* SettingsEventTableViewController.swift */; };
 		D3795E7B1B8F654F009D3DB5 /* ReminderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF818621B84FAB70087ECAD /* ReminderManager.swift */; };
+		D37CFBF51BD95F130005320D /* NuanceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37CFBF41BD95F130005320D /* NuanceTest.swift */; };
 		D38653F71BAA02F400B8CCBC /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38653F61BAA02F400B8CCBC /* EventManager.swift */; };
 		D38653F81BAA02F400B8CCBC /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38653F61BAA02F400B8CCBC /* EventManager.swift */; };
-		D38C9C571B821DA3009CFC7C /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D38C9C551B821DA3009CFC7C /* Fabric.framework */; };
-		D38C9C581B821DA3009CFC7C /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D38C9C551B821DA3009CFC7C /* Fabric.framework */; };
-		D38C9C591B821DA3009CFC7C /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D38C9C561B821DA3009CFC7C /* Crashlytics.framework */; };
-		D38C9C5A1B821DA3009CFC7C /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D38C9C561B821DA3009CFC7C /* Crashlytics.framework */; };
 		D392FAD41B9B1BA800678B18 /* SettingsFriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D392FAD31B9B1BA800678B18 /* SettingsFriendsTableViewController.swift */; };
 		D392FAD61B9B1C7E00678B18 /* SettingsInstructionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D392FAD51B9B1C7E00678B18 /* SettingsInstructionsTableViewController.swift */; };
 		D392FAD81B9B1D3600678B18 /* SettingsKeywordsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D392FAD71B9B1D3600678B18 /* SettingsKeywordsTableViewController.swift */; };
@@ -85,17 +82,21 @@
 		D39AB89E1BA86D68001C7570 /* CalendarListPickerIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39AB89D1BA86D68001C7570 /* CalendarListPickerIC.swift */; };
 		D3A0F9FC1B69F0BB00F1FEDA /* EventCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A0F9FB1B69F0BB00F1FEDA /* EventCode.swift */; };
 		D3A0F9FD1B69F0BB00F1FEDA /* EventCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A0F9FB1B69F0BB00F1FEDA /* EventCode.swift */; };
+		D3B6E24E1BD977B200C7B822 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3B6E24C1BD977B200C7B822 /* Fabric.framework */; };
+		D3B6E24F1BD977B200C7B822 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3B6E24C1BD977B200C7B822 /* Fabric.framework */; };
+		D3B6E2501BD977B200C7B822 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3B6E24D1BD977B200C7B822 /* Crashlytics.framework */; };
+		D3B6E2511BD977B200C7B822 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3B6E24D1BD977B200C7B822 /* Crashlytics.framework */; };
 		D3B6F5F91BA60B7E0052B639 /* DictateManagerIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B6F5F81BA60B7E0052B639 /* DictateManagerIC.swift */; };
 		D3B703801B935AC200FA1DF0 /* SettingsReminderTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B7037F1B935AC200FA1DF0 /* SettingsReminderTableViewController.swift */; };
 		D3B703821B94E90800FA1DF0 /* ReminderListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B703811B94E90800FA1DF0 /* ReminderListTableViewController.swift */; };
 		D3BD1BDE1B9F3CF10052A312 /* ReminderPickerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BD1BDD1B9F3CF10052A312 /* ReminderPickerTableViewController.swift */; };
 		D3BE2D2B1BB1287C00376686 /* EventEditNotesIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BE2D2A1BB126EA00376686 /* EventEditNotesIC.swift */; };
-		D3CEC17D1BD77A76001A50F8 /* earcon_cancel.wav in Resources */ = {isa = PBXBuildFile; fileRef = D3CEC17C1BD77A76001A50F8 /* earcon_cancel.wav */; settings = {ASSET_TAGS = (); }; };
-		D3CEC17E1BD77A76001A50F8 /* earcon_cancel.wav in Resources */ = {isa = PBXBuildFile; fileRef = D3CEC17C1BD77A76001A50F8 /* earcon_cancel.wav */; settings = {ASSET_TAGS = (); }; };
-		D3CEC1801BD77A7F001A50F8 /* earcon_done_listening.wav in Resources */ = {isa = PBXBuildFile; fileRef = D3CEC17F1BD77A7F001A50F8 /* earcon_done_listening.wav */; settings = {ASSET_TAGS = (); }; };
-		D3CEC1811BD77A7F001A50F8 /* earcon_done_listening.wav in Resources */ = {isa = PBXBuildFile; fileRef = D3CEC17F1BD77A7F001A50F8 /* earcon_done_listening.wav */; settings = {ASSET_TAGS = (); }; };
-		D3CEC1831BD77A88001A50F8 /* earcon_listening.wav in Resources */ = {isa = PBXBuildFile; fileRef = D3CEC1821BD77A88001A50F8 /* earcon_listening.wav */; settings = {ASSET_TAGS = (); }; };
-		D3CEC1841BD77A88001A50F8 /* earcon_listening.wav in Resources */ = {isa = PBXBuildFile; fileRef = D3CEC1821BD77A88001A50F8 /* earcon_listening.wav */; settings = {ASSET_TAGS = (); }; };
+		D3CEC17D1BD77A76001A50F8 /* earcon_cancel.wav in Resources */ = {isa = PBXBuildFile; fileRef = D3CEC17C1BD77A76001A50F8 /* earcon_cancel.wav */; };
+		D3CEC17E1BD77A76001A50F8 /* earcon_cancel.wav in Resources */ = {isa = PBXBuildFile; fileRef = D3CEC17C1BD77A76001A50F8 /* earcon_cancel.wav */; };
+		D3CEC1801BD77A7F001A50F8 /* earcon_done_listening.wav in Resources */ = {isa = PBXBuildFile; fileRef = D3CEC17F1BD77A7F001A50F8 /* earcon_done_listening.wav */; };
+		D3CEC1811BD77A7F001A50F8 /* earcon_done_listening.wav in Resources */ = {isa = PBXBuildFile; fileRef = D3CEC17F1BD77A7F001A50F8 /* earcon_done_listening.wav */; };
+		D3CEC1831BD77A88001A50F8 /* earcon_listening.wav in Resources */ = {isa = PBXBuildFile; fileRef = D3CEC1821BD77A88001A50F8 /* earcon_listening.wav */; };
+		D3CEC1841BD77A88001A50F8 /* earcon_listening.wav in Resources */ = {isa = PBXBuildFile; fileRef = D3CEC1821BD77A88001A50F8 /* earcon_listening.wav */; };
 		D3D98AF41BA54D5B00BA1901 /* FavoritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D98AF31BA54D5B00BA1901 /* FavoritesManager.swift */; };
 		D3D98AF51BA54D5B00BA1901 /* FavoritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D98AF31BA54D5B00BA1901 /* FavoritesManager.swift */; };
 		D3DA3ACE1BAE73F4002FDD21 /* TodayEventsTableRC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA3ACD1BAE73F4002FDD21 /* TodayEventsTableRC.swift */; };
@@ -265,9 +266,8 @@
 		D36DBDD41BD6DA870076A5C2 /* GlanceTodayEventsTableRC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlanceTodayEventsTableRC.swift; sourceTree = "<group>"; };
 		D3711F041BB04E0E00D19AE9 /* TestIC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestIC.swift; sourceTree = "<group>"; };
 		D3795E791B8DF927009D3DB5 /* SettingsEventTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsEventTableViewController.swift; path = Views/SettingsEventTableViewController.swift; sourceTree = "<group>"; };
+		D37CFBF41BD95F130005320D /* NuanceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NuanceTest.swift; sourceTree = "<group>"; };
 		D38653F61BAA02F400B8CCBC /* EventManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventManager.swift; sourceTree = "<group>"; };
-		D38C9C551B821DA3009CFC7C /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
-		D38C9C561B821DA3009CFC7C /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		D392FAD31B9B1BA800678B18 /* SettingsFriendsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsFriendsTableViewController.swift; path = Views/SettingsFriendsTableViewController.swift; sourceTree = "<group>"; };
 		D392FAD51B9B1C7E00678B18 /* SettingsInstructionsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsInstructionsTableViewController.swift; path = Views/SettingsInstructionsTableViewController.swift; sourceTree = "<group>"; };
 		D392FAD71B9B1D3600678B18 /* SettingsKeywordsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsKeywordsTableViewController.swift; path = Views/SettingsKeywordsTableViewController.swift; sourceTree = "<group>"; };
@@ -276,6 +276,8 @@
 		D3A0F9FB1B69F0BB00F1FEDA /* EventCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCode.swift; sourceTree = "<group>"; };
 		D3B07A231B731C8800B9C2A9 /* Dictate.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Dictate.entitlements; sourceTree = "<group>"; };
 		D3B07A241B731D2A00B9C2A9 /* Dictate WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Dictate WatchKit Extension.entitlements"; sourceTree = "<group>"; };
+		D3B6E24C1BD977B200C7B822 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		D3B6E24D1BD977B200C7B822 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		D3B6F5F81BA60B7E0052B639 /* DictateManagerIC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictateManagerIC.swift; sourceTree = "<group>"; };
 		D3B7037F1B935AC200FA1DF0 /* SettingsReminderTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsReminderTableViewController.swift; path = Views/SettingsReminderTableViewController.swift; sourceTree = "<group>"; };
 		D3B703811B94E90800FA1DF0 /* ReminderListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReminderListTableViewController.swift; path = Views/ReminderListTableViewController.swift; sourceTree = "<group>"; };
@@ -407,6 +409,7 @@
 			files = (
 				EC3E611B1BD774030034E568 /* SpeechKit.framework in Frameworks */,
 				EC0B488A1B6FE9FF00C0AD82 /* AudioToolbox.framework in Frameworks */,
+				D3B6E2501BD977B200C7B822 /* Crashlytics.framework in Frameworks */,
 				EC0B48931B6FEAC400C0AD82 /* Bolts.framework in Frameworks */,
 				EC0B48941B6FEAC400C0AD82 /* Parse.framework in Frameworks */,
 				EC0B488E1B6FEA1F00C0AD82 /* CoreGraphics.framework in Frameworks */,
@@ -416,8 +419,7 @@
 				EC0B48821B6FE9D300C0AD82 /* Security.framework in Frameworks */,
 				EC0B48801B6FE9C700C0AD82 /* CFNetwork.framework in Frameworks */,
 				EC0B487E1B6FE9B800C0AD82 /* libsqlite3.0.dylib in Frameworks */,
-				D38C9C591B821DA3009CFC7C /* Crashlytics.framework in Frameworks */,
-				D38C9C571B821DA3009CFC7C /* Fabric.framework in Frameworks */,
+				D3B6E24E1BD977B200C7B822 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,9 +434,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D38C9C581B821DA3009CFC7C /* Fabric.framework in Frameworks */,
+				D3B6E24F1BD977B200C7B822 /* Fabric.framework in Frameworks */,
 				D3E8FE8D1B73ABE50050A37C /* Security.framework in Frameworks */,
-				D38C9C5A1B821DA3009CFC7C /* Crashlytics.framework in Frameworks */,
+				D3B6E2511BD977B200C7B822 /* Crashlytics.framework in Frameworks */,
 				D3E8FE8C1B73ABDB0050A37C /* SystemConfiguration.framework in Frameworks */,
 				D3E8FE8B1B73ABB00050A37C /* libsqlite3.0.dylib in Frameworks */,
 				D3E8FE8A1B73AB680050A37C /* AudioToolbox.framework in Frameworks */,
@@ -543,9 +545,9 @@
 		D32350601B697B9D00939F03 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D3B6E24C1BD977B200C7B822 /* Fabric.framework */,
+				D3B6E24D1BD977B200C7B822 /* Crashlytics.framework */,
 				EC3E611A1BD774030034E568 /* SpeechKit.framework */,
-				D38C9C551B821DA3009CFC7C /* Fabric.framework */,
-				D38C9C561B821DA3009CFC7C /* Crashlytics.framework */,
 				EC0B48911B6FEAC400C0AD82 /* Bolts.framework */,
 				EC0B48921B6FEAC400C0AD82 /* Parse.framework */,
 				EC0B488D1B6FEA1F00C0AD82 /* CoreGraphics.framework */,
@@ -636,12 +638,13 @@
 		D3E810861B70F4D6004AE5A9 /* WKControllers */ = {
 			isa = PBXGroup;
 			children = (
+				D37CFBF41BD95F130005320D /* NuanceTest.swift */,
 				D3B6F5F71BA607830052B639 /* Managers */,
 				D3AEE68F1BA5C8AC004363C9 /* Settings */,
 				D3F8AD131B696FCD0070C097 /* MainIC.swift */,
 				D3E810891B710690004AE5A9 /* ReminderListsIC.swift */,
-				D3FA08041BA7F6EB006A91C2 /* ReminderListsTableRC.swift */,
 				D35588BB1BA937D20052892F /* ReminderItemsIC.swift */,
+				D3FA08041BA7F6EB006A91C2 /* ReminderListsTableRC.swift */,
 				D35588BD1BA938A00052892F /* ReminderItemsTableRC.swift */,
 				D3E810831B70F4BC004AE5A9 /* TodayIC.swift */,
 				D3DA3ACD1BAE73F4002FDD21 /* TodayEventsTableRC.swift */,
@@ -908,6 +911,7 @@
 				D3F8ACF61B696FB00070C097 /* Sources */,
 				D3F8ACF71B696FB00070C097 /* Frameworks */,
 				D3F8ACF81B696FB00070C097 /* Resources */,
+				D3B6E24B1BD9741D00C7B822 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1111,6 +1115,19 @@
 			shellPath = /bin/sh;
 			shellScript = "./Fabric.framework/run 76e4b5192632a88784fb617b0700bd9df0ee7574 13006cf4d877642c70fb2ec98889d5916ceb01b5c3e7240bbc3497f125ae386e";
 		};
+		D3B6E24B1BD9741D00C7B822 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run 76e4b5192632a88784fb617b0700bd9df0ee7574 13006cf4d877642c70fb2ec98889d5916ceb01b5c3e7240bbc3497f125ae386e";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1229,6 +1246,7 @@
 				D3E810851B70F4BC004AE5A9 /* TodayIC.swift in Sources */,
 				D34395721BA32964002D98EA /* ReminderListPickerIC.swift in Sources */,
 				D3DA3AD91BAE8379002FDD21 /* ShowRemindersTableRC.swift in Sources */,
+				D37CFBF51BD95F130005320D /* NuanceTest.swift in Sources */,
 				D3DA3AD51BAE8066002FDD21 /* ShowCalendarsTableRC.swift in Sources */,
 				D3DA3AD71BAE834B002FDD21 /* ShowRemindersIC.swift in Sources */,
 				D3DA3ADD1BAE84B2002FDD21 /* DefaultReminderListTableRC.swift in Sources */,

@@ -235,6 +235,10 @@ class vcTest1: UIViewController {
         print("p111Main reminderAlarm: \(reminderAlarm)")
         
         print("p111Main allDayFlag: \(allDayFlag)")
+        print("p111Main timeString: \(timeString)")
+
+        
+        
         print("p111Main end =================================")
 
         
@@ -294,11 +298,19 @@ class vcTest1: UIViewController {
         }
         
         if allDayFlag {                             //if flag = true
-            resultTime.text     = "all-day"
+            formatter3.dateFormat = "M-dd-yyyy"
+            fullDT = formatter3.stringFromDate(startDT)
+    
+            resultTime.text     = "\(fullDT), All-Day"
             labelStartDate.hidden = true
             labelEndDate.hidden = true
             resultStartDate.hidden = true
             resultEndDate.hidden = true
+        }
+        
+        if resultTime.text == "" {
+            labelTime.hidden = true
+            resultTime.hidden = true
         }
         
         if resultPhone.text == "" {
@@ -316,10 +328,17 @@ class vcTest1: UIViewController {
             resultEndDate.hidden = true
         }
         
+        print("p319 resultAlert.text: \(resultAlert.text)")
+
+        
         if resultAlert.text == "" {
             labelAlert.hidden = true
             resultAlert.hidden = true
-        }
+        } //else {
+           // labelAlert.hidden = false
+           // resultAlert.hidden = false
+       // }
+            
         
         if resultRepeat.text == "" {
             labelRepeat.hidden = true
@@ -490,6 +509,7 @@ class vcTest1: UIViewController {
             labelStartDate.hidden = true
             labelEndDate.hidden = true
             labelCal.hidden = true
+            labelAlert.hidden = true
             labelRepeat.hidden = true
             
             //resultDay.hidden = true
@@ -498,8 +518,9 @@ class vcTest1: UIViewController {
             resultStartDate.hidden = true
             resultEndDate.hidden = true
             resultCalendar.hidden = true
+            resultAlert.hidden = true
             resultRepeat.hidden = true
-            
+        
             break;
             
             
@@ -920,6 +941,7 @@ class vcTest1: UIViewController {
         labelStartDate.hidden = false
         labelEndDate.hidden = false
         labelRepeat.hidden = false
+        labelAlert.hidden = false
         
         resultDay.hidden = false
         resultTime.hidden = false
@@ -927,6 +949,7 @@ class vcTest1: UIViewController {
         resultStartDate.hidden = false
         resultEndDate.hidden = false
         resultRepeat.hidden = false
+        resultAlert.hidden =  false
         
     }
     

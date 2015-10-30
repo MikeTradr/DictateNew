@@ -132,19 +132,25 @@ class MainIC: WKInterfaceController {
         
         let str32:String = "list shower work workout dinner sleep"  //raw list one word speed list, title = "untitled list"
         
+        let str38a:String = "Reminder mow the grass today 1 pm"
+        
         let str38:String = "Reminder mow the grass today 1 pm list today"
         
-        let str3:String = "New appointment 11 AM today show apartment with Sandi"
+        let str3:String = "New appointment 11 AM today show apartment with Sandi calendar Mike"
+        
+        let str49:String = "tomorrow all day study for exam calendar Mike"
+
+        let str50:String = "Monday all day study for exam"
 
 
  
         
         
-        var str:String = str3
+        var str:String = str38
         let str1:String = "Reminder wash the car"
         
         var suggestionArray:[String] = []
-         suggestionArray = [str, str1]       //TODO Comment out for non-testing
+        suggestionArray = [str, str1]       //TODO Comment out for non-testing
         
         var phone       = defaults.stringForKey("phone")
         var alert       = defaults.objectForKey("eventAlert") as? Double
@@ -190,7 +196,7 @@ class MainIC: WKInterfaceController {
             //println("35 Results: \(results[0])")
             
             if results != nil {
-                print("There are objects")
+                print("w197 There are objects")
                 self.str = results![0] as! String
                 print("### 92 str: \(self.str)")
                 
@@ -277,13 +283,16 @@ class MainIC: WKInterfaceController {
                 
                 var endTimeDash = "-\(endTime)"
                 
-                let time = "\(startTime)\(endTimeDash)"
+                var time = "\(startTime)\(endTimeDash)"
                 
                 //var allDayFlag = self.defaults.objectForKey("allDayFlag") as? Bool ?? false
 
                 if allDayFlag {   // if allDay bool is true
+                    formatter3.dateFormat = "M-dd-yyyy"
+                    fullDT = formatter3.stringFromDate(startDT)
+                    
                     startTime = ""
-                    endTimeDash = "All Day"
+                    time = "\(fullDT), All Day"
                 }
                 
         

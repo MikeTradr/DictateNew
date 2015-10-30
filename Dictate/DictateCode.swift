@@ -877,7 +877,8 @@ class DictateCode: NSObject {
                 //println("p121 timeString: \(timeString)")
                 //println("p122 subStringAM: \(subStringAM)")
                 
-                if(subStringAM && (word.characters.count <= 5) ){
+                //if(subStringAM && (word.characters.count <= 5) ){
+                if(subStringAM && (word.characters.count <= 2) ){
                     print("p126 am time found at item: \(i)")
                     time = "\(wordArr[i-1]) \(wordArr[i])"
                     
@@ -1137,10 +1138,15 @@ class DictateCode: NSObject {
                     if nextWord == "day" {
                         allDayFlag = true
                         time = "all-day"
-                        day = "Today"
+                        if day == "" {
+                            day = "Today"
+                        }
        
                         wordArrTrimmed = wordArrTrimmed.filter() { $0 != wordArr[i] }
                         wordArrTrimmed = wordArrTrimmed.filter() { $0 != nextWord }
+                    
+                        timeString = ""
+                    
                     }
                     
                     print("p1140 wordArrTrimmed: \(wordArrTrimmed)")
@@ -1404,15 +1410,12 @@ class DictateCode: NSObject {
                 if (subStringCalendar) {
                     print("p943: calendar found at item \(i)")
                     print("p944: calendarName \(calendarName)")
-                    
-                    // TODO pull this from EKEvntkit get users lsit of calendar's
-                    
-                    
-                    //var arrayCalendars = ["work", "mike", "mom", "music", "steph"]
 
+                 //   let calendarArray = defaults.objectForKey("calendarArray") as! [String] //array of the items
+                 //   let calendarArray = defaults.objectForKey("calendarArray") as! [String] ?? [] //array of the items // added [] to fix nil watch crash
                     
                     let calendarArray = defaults.objectForKey("calendarArray") as! [String] //array of the items
-                    
+
                     print("p1325 calendarArray: \(calendarArray)")
                     
                     if (i < arrayLength-1) {
@@ -1453,10 +1456,7 @@ class DictateCode: NSObject {
                 }
                 
                 //TODO Pull from prefs
-                
-                
-                
-                
+ 
                 // no word "calendar" found in string so set to thsi canendar for now.
                 // TODO take from prefs users default calendar
                 print("p817: calendarName \(calendarName)")
@@ -1962,8 +1962,9 @@ class DictateCode: NSObject {
                     break;
                     
                 case "tomorrow":
-                    print("311 set date to tomorrow")
+                 
                     day = "Tomorrow"
+                    print("p1965 set day to tomorrow: \(day)")
                     
                     let dateFormatter = NSDateFormatter()
                     dateFormatter.dateFormat = "M-dd-yyyy"                 // superset of OP's format
@@ -1977,7 +1978,7 @@ class DictateCode: NSObject {
                     let newDate = NSCalendar.currentCalendar().dateByAddingComponents(components,toDate: today,options: [])
                     let dateTomorrow = dateFormatter.stringFromDate(newDate!)
                     
-                    print("320 date: \(dateTomorrow)")
+                    print("p1980 date: \(dateTomorrow)")
                     
                     startDate = dateTomorrow
                     wordArrTrimmed = wordArrTrimmed.filter() { $0 != wordArr[i] }
@@ -2176,6 +2177,8 @@ class DictateCode: NSObject {
             print("p1401 calendarName: \(calendarName)")
             
             print("p1599 actionType: \(actionType)")
+                
+            print("p2178 day: \(day)")
             
             // Not for extension saveToDatabase()    // save data to database call function
             

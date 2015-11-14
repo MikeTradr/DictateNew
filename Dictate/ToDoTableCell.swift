@@ -15,12 +15,13 @@ class ToDoTableCell: UITableViewCell {
     
     @IBOutlet weak var verticalBarView: UIView!
     @IBOutlet weak var checkBox: BFPaperCheckbox!
+    weak var reminder:EKReminder!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         
-        self.checkBox.rippleFromTapLocation = false
+//        self.checkBox.rippleFromTapLocation = false
 //        self.checkBox.tapCirclePositiveColor = UIColor.paperColorAmber() // We could use [UIColor colorWithAlphaComponent] here to make a better tap-circle.
 //        self.checkBox.tapCircleNegativeColor = UIColor.paperColorRed()  // We could use [UIColor colorWithAlphaComponent] here to make a better tap-circle.
         self.checkBox.checkmarkColor = UIColor.paperColorLightBlue()
@@ -32,4 +33,8 @@ class ToDoTableCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    @IBAction func checkBoxTapped(sender: AnyObject) {
+       
+        
+    }
 }

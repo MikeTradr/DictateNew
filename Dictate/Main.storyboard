@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="JhY-cq-KWn">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="JhY-cq-KWn">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -807,7 +807,7 @@
         <scene sceneID="IXE-dy-qQl">
             <objects>
                 <tableViewController storyboardIdentifier="ToDoList" title="ToDoList" id="dXF-g5-diV" customClass="ToDoTableViewController" customModule="Dictate" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="32" id="KN6-hI-mTG">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" delaysContentTouches="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="32" id="KN6-hI-mTG">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
@@ -818,8 +818,8 @@
                             <rect key="frame" x="0.0" y="64" width="414" height="70"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wvl-A6-aau">
-                                    <rect key="frame" x="19" y="0.0" width="167" height="40"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wvl-A6-aau">
+                                    <rect key="frame" x="19" y="0.0" width="140" height="40"/>
                                     <animations/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
                                     <state key="normal" title="List Button &gt;">
@@ -830,15 +830,7 @@
                                         <action selector="buttonReminderListSelector:" destination="dXF-g5-diV" eventType="touchUpInside" id="KHt-9Z-aCb"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5VO-bn-J5Z">
-                                    <rect key="frame" x="341" y="27" width="65" height="30"/>
-                                    <animations/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <state key="normal" title="Edit">
-                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                </button>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="# of items in list" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wd8-bI-ax9">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="# of items in list" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wd8-bI-ax9">
                                     <rect key="frame" x="19" y="32" width="145" height="21"/>
                                     <animations/>
                                     <constraints>
@@ -851,6 +843,32 @@
                             </subviews>
                             <animations/>
                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="Wvl-A6-aau" firstAttribute="leading" secondItem="NrZ-6e-h5B" secondAttribute="leading" constant="19" id="6O4-cp-oI7"/>
+                                <constraint firstItem="Wvl-A6-aau" firstAttribute="top" secondItem="NrZ-6e-h5B" secondAttribute="top" id="FUK-UA-IFI"/>
+                                <constraint firstItem="wd8-bI-ax9" firstAttribute="leading" secondItem="Wvl-A6-aau" secondAttribute="leading" id="Y6N-3b-Ro9"/>
+                                <constraint firstItem="wd8-bI-ax9" firstAttribute="top" secondItem="Wvl-A6-aau" secondAttribute="bottom" constant="-8" id="rEe-Ds-FBT"/>
+                            </constraints>
+                        </view>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="zAb-6V-Tic">
+                            <rect key="frame" x="0.0" y="216" width="414" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XlM-Ra-CY5">
+                                    <rect key="frame" x="138" y="5.5" width="139" height="34"/>
+                                    <state key="normal" title="Show Completed">
+                                        <color key="titleColor" red="0.40000000600000002" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="showHideCompletedReminders:" destination="dXF-g5-diV" eventType="touchUpInside" id="yil-4q-4oB"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="XlM-Ra-CY5" firstAttribute="centerY" secondItem="zAb-6V-Tic" secondAttribute="centerY" id="0dc-a9-d7n"/>
+                                <constraint firstItem="XlM-Ra-CY5" firstAttribute="centerX" secondItem="zAb-6V-Tic" secondAttribute="centerX" id="AtX-6Q-KHv"/>
+                            </constraints>
                         </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ReminderCell" rowHeight="60" id="u1E-qD-F64" customClass="ToDoTableCell" customModule="Dictate" customModuleProvider="target">
@@ -912,9 +930,6 @@
                                                             <real key="value" value="0.34000000000000002"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
-                                                    <connections>
-                                                        <action selector="checkBoxTapped:" destination="dXF-g5-diV" eventType="valueChanged" id="AmR-Ip-VnZ"/>
-                                                    </connections>
                                                 </view>
                                             </subviews>
                                             <animations/>
@@ -965,8 +980,9 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
                         <outlet property="ToDoTableView" destination="KN6-hI-mTG" id="tEz-gQ-b58"/>
-                        <outlet property="buttonReminderListSelector" destination="Wvl-A6-aau" id="SKd-JE-tNm"/>
-                        <outlet property="labelNumberListItems" destination="wd8-bI-ax9" id="61D-WD-nyN"/>
+                        <outlet property="listItemsNumberLabel" destination="wd8-bI-ax9" id="Jfp-O8-tGD"/>
+                        <outlet property="reminderListButton" destination="Wvl-A6-aau" id="wBZ-va-cjo"/>
+                        <outlet property="showHideButton" destination="XlM-Ra-CY5" id="P23-RK-I1w"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zsG-Et-SPO" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2757,11 +2773,11 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Alarm" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8r9-wG-xNi">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alarm" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8r9-wG-xNi">
                                             <rect key="frame" x="15" y="11" width="78" height="22"/>
                                             <animations/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="47" id="Qx2-GX-Nlv"/>
+                                                <constraint firstAttribute="width" constant="78" id="Qx2-GX-Nlv"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2787,7 +2803,7 @@
                                         <constraint firstItem="n5Z-BA-b06" firstAttribute="centerY" secondItem="Dvi-QY-xCr" secondAttribute="centerY" id="60u-FP-FM4"/>
                                         <constraint firstAttribute="centerY" secondItem="8r9-wG-xNi" secondAttribute="centerY" id="Cxp-V3-wiP"/>
                                         <constraint firstItem="8r9-wG-xNi" firstAttribute="leading" secondItem="bqT-2g-Xjh" secondAttribute="leading" constant="15" id="KJQ-ST-WK6"/>
-                                        <constraint firstItem="n5Z-BA-b06" firstAttribute="leading" secondItem="8r9-wG-xNi" secondAttribute="trailing" constant="30" id="bZM-yO-4ee"/>
+                                        <constraint firstItem="n5Z-BA-b06" firstAttribute="leading" secondItem="8r9-wG-xNi" secondAttribute="trailing" constant="-1" id="bZM-yO-4ee"/>
                                         <constraint firstAttribute="centerY" secondItem="Dvi-QY-xCr" secondAttribute="centerY" id="geQ-2i-NB8"/>
                                         <constraint firstAttribute="trailing" secondItem="Dvi-QY-xCr" secondAttribute="trailing" constant="8" id="hFd-pt-BxM"/>
                                         <constraint firstItem="Dvi-QY-xCr" firstAttribute="leading" secondItem="n5Z-BA-b06" secondAttribute="trailing" constant="16" id="pxY-rp-2k8"/>

@@ -50,20 +50,38 @@ class ReminderManager: NSObject {
     }
     
     
-    func fetchReminders(completion:([EKReminder])->Void) {
+    func fetchRemindersFromCalendars(calendars:[EKCalendar]? = nil,includeCompleted:Bool = false, completion:([EKReminder])->Void) {
         
         getAccessToEventStoreForType(EKEntityType.Reminder, completion: { (granted) -> Void in
             
             if granted{
                 print("granted: \(granted)")
                 
-                let calendars = self.eventStore.calendarsForEntityType(EKEntityType.Reminder)
+                let cal = calendars ?? self.eventStore.calendarsForEntityType(EKEntityType.Reminder)
                 
                 print("p36 calendars: \(calendars)")
                 
-                var predicate = self.eventStore.predicateForIncompleteRemindersWithDueDateStarting(nil, ending: nil, calendars: calendars)
+                var reminderArray:[EKReminder] = []
+                let predicate = self.eventStore.predicateForIncompleteRemindersWithDueDateStarting(nil, ending: nil, calendars: cal)
                 self.eventStore.fetchRemindersMatchingPredicate(predicate) { reminders in
-                    completion(reminders as! [EKReminder]!)
+                    
+                    if reminders?.count > 0{
+                        reminderArray.appendContentsOf(reminders!)
+ 
+                    }
+                    if includeCompleted{
+                        let predicate = self.eventStore.predicateForCompletedRemindersWithCompletionDateStarting(nil, ending: nil, calendars: cal)
+                        self.eventStore.fetchRemindersMatchingPredicate(predicate) { reminders in
+                            if reminders?.count > 0{
+                                reminderArray.appendContentsOf(reminders!)
+                                
+                            }
+                            completion(reminderArray as [EKReminder]!)
+
+                        }
+                    }else{
+                        completion(reminderArray as [EKReminder]!)
+                    }
                 }
             }
         })

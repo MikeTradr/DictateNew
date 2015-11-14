@@ -14,8 +14,8 @@ class CalendarSelectionViewController: UITableViewController {
     var calendarList = Array<EKCalendar>()
     var allowsMultipleSelection = true
     var selectedCalendars:Array<EKCalendar> = []
-    var shouldShowSpecialItems = false
-    var specialItems = ["All","Default"];
+    var shouldShowAll = false
+    var specialItems = ["All"];
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,15 +41,15 @@ class CalendarSelectionViewController: UITableViewController {
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
-        if shouldShowSpecialItems{
+        if shouldShowAll{
             return 2
         }
         return 1
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if shouldShowSpecialItems && section == 0{
-            return self.specialItems.count
+        if shouldShowAll && section == 0{
+            return 1
         }
         return self.calendarList.count
     }
@@ -61,7 +61,7 @@ class CalendarSelectionViewController: UITableViewController {
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         cell.backgroundColor = UIColor.blackColor()
         
-        if !shouldShowSpecialItems || indexPath.section == 1{
+        if !shouldShowAll || indexPath.section == 1{
             
             let calendar = self.calendarList[indexPath.row]
             cell.textLabel?.text = calendar.title
@@ -78,35 +78,55 @@ class CalendarSelectionViewController: UITableViewController {
         else
         {
             cell.textLabel?.text = self.specialItems[indexPath.row]
+            cell.textLabel?.textColor = UIColor.whiteColor()
+            if selectedCalendars.count == 0{
+                cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+            }else{
+                cell.accessoryType = UITableViewCellAccessoryType.None
+
+            }
         }
         return cell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = self.tableView.cellForRowAtIndexPath(indexPath)
-        let selectedCalendar = self.calendarList[indexPath.row];
         
+        if indexPath.section == 0{
+            
+            // All -
+            selectedCalendars.removeAll()
+            tableView.reloadData()
+            
+        }else{
+            let selectedCalendar = self.calendarList[indexPath.row];
+            
             if self.selectedCalendars.contains(selectedCalendar){
                 // Selected same cell, do nothing
-              
+                
                 
             }else{
                 
                 if !allowsMultipleSelection{
-                    self.selectedCalendars.removeLast()
+                    if !self.selectedCalendars.isEmpty{
+                        self.selectedCalendars.removeLast()
+                        
+                    }
                     self.selectedCalendars.append(selectedCalendar)
                     self.tableView.reloadData()
                 }
-             
-
-//                cell?.accessoryType = UITableViewCellAccessoryType.None
-//                self.selectedCalendars.removeAtIndex(find(self.selectedCalendars, selectedCalendar)!)
-//                if allowsMultipleSelection || self.selectedCalendars.count == 0{
-//
-//                cell?.accessoryType = UITableViewCellAccessoryType.Checkmark
-//                self.selectedCalendars.append(selectedCalendar)
-//                }
+                
+                
+                //                cell?.accessoryType = UITableViewCellAccessoryType.None
+                //                self.selectedCalendars.removeAtIndex(find(self.selectedCalendars, selectedCalendar)!)
+                //                if allowsMultipleSelection || self.selectedCalendars.count == 0{
+                //
+                //                cell?.accessoryType = UITableViewCellAccessoryType.Checkmark
+                //                self.selectedCalendars.append(selectedCalendar)
+                //                }
             }
+        }
+  
     }
     
     /*

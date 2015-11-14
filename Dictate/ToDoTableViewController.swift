@@ -13,7 +13,7 @@ import EventKit
 import EventKitUI
 import AVFoundation
 
-class ToDoTableViewController: UITableViewController {
+class ToDoTableViewController: UITableViewController,BFPaperCheckboxDelegate {
     
 
     var audioPlayer = AVAudioPlayer()
@@ -30,21 +30,32 @@ class ToDoTableViewController: UITableViewController {
         return _dateFormatter
         }()
     
+    var selectionController:CalendarSelectionViewController!
+    var showCompleted = false
     @IBOutlet var ToDoTableView: UITableView!
     
-    @IBOutlet weak var buttonReminderListSelector: UIButton!
-    @IBOutlet weak var labelNumberListItems: UILabel!
+    @IBOutlet weak var reminderListButton: UIButton!
+    @IBOutlet weak var listItemsNumberLabel: UILabel!
     
+    @IBOutlet weak var showHideButton: UIButton!
     
     // TODO Anil get calendars from users, Add to array: All, Default, Last, +Array and make into array hard coded at prsent 7-17-15
     
     @IBAction func buttonReminderListSelector(sender: AnyObject) {
         
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewControllerWithIdentifier("ShowReminders") 
-        self.presentViewController(vc, animated: true, completion: nil)
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        let vc = storyboard.instantiateViewControllerWithIdentifier("ShowReminders") 
+//        self.presentViewController(vc, animated: true, completion: nil)
         
-        
+        if (self.selectionController == nil){
+            self.selectionController = self.storyboard!.instantiateViewControllerWithIdentifier("CalendarSelectionViewController") as! CalendarSelectionViewController
+        }
+        let calendars = ReminderManager.sharedInstance.eventStore.calendarsForEntityType(EKEntityType.Reminder)
+        self.selectionController.calendarList = calendars;
+//        self.selectionController.selectedCalendars = [self.reminder.calendar]
+        self.selectionController.allowsMultipleSelection = false
+        self.selectionController.shouldShowAll = true
+        self.navigationController?.pushViewController(self.selectionController, animated: true)
         
     }
     
@@ -69,15 +80,52 @@ class ToDoTableViewController: UITableViewController {
     
     
     override func viewWillAppear(animated: Bool) {
-        ReminderManager.sharedInstance.fetchReminders({ (reminders) -> Void in
+        
+        showHideButton.setTitle("Show Completed", forState: .Normal)
+        showHideButton.selected = true
+        showCompleted = false
+        
+        fetchReminders()
+        //Play sound
+        var alertSound3: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("button-14", ofType: "mp3")!)
+        //General.playSound(alertSound3!)
+//        playSound(alertSound3)
+    }
+    
+    func fetchReminders(){
+        if let _selectionController = selectionController where selectionController.selectedCalendars.count > 0{
+            self.fetchRemindersFromCalendars(_selectionController.selectedCalendars, showComplted: showCompleted)
+            
+        }else{
+            //Fatch all reminders
+            self.fetchRemindersFromCalendars(showComplted:showCompleted)
+        }
+    }
+    
+    func fetchRemindersFromCalendars(calendars:[EKCalendar]? = nil, showComplted:Bool=false){
+        
+        ReminderManager.sharedInstance.fetchRemindersFromCalendars(calendars,includeCompleted:showComplted ) { (reminders) -> Void in
             self.reminders = reminders
-            self.tableView.reloadData()
             
             print("p76 self.reminders: \(self.reminders)")
             print("p77 self.reminders.count: \(self.reminders.count)")
             
-        })
-        
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.tableView.reloadData()
+                self.setTabBarBadge()
+                if let _selectionController = self.selectionController where self.selectionController.selectedCalendars.count > 0{
+                    self.reminderListButton.setTitle("List: \(_selectionController.selectedCalendars[0].title) >", forState: .Normal)
+                    
+                }else{
+                    self.reminderListButton.setTitle("List: All >", forState: .Normal)
+                }
+                
+                self.listItemsNumberLabel.text = "\(self.reminders.count) items"
+            })
+        }
+    }
+    
+    func setTabBarBadge(){
         var tabArray = self.tabBarController?.tabBar.items as NSArray!  //added by Mike 082315 here and viewDidLoad appear?
         var tabItem = tabArray.objectAtIndex(3) as! UITabBarItem              // set 4th tab item
         
@@ -96,11 +144,6 @@ class ToDoTableViewController: UITableViewController {
             print("p60 we here? self.numberOfNewItems: \(self.numberOfNewItems)")
             self.tabBarItem.badgeValue = String(self.reminders.count)
         }
-        
-        
-        var alertSound3: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("button-14", ofType: "mp3")!)
-        //General.playSound(alertSound3!)
-        playSound(alertSound3)
     }
     
     func setStartDateAndEndDate()
@@ -185,10 +228,16 @@ class ToDoTableViewController: UITableViewController {
         let cell:ToDoTableCell = tableView.dequeueReusableCellWithIdentifier("ReminderCell") as! ToDoTableCell
         cell.selectionStyle = .None
         let reminder = reminders[indexPath.row]
+        cell.reminder = reminder
         cell.titleLabel.text = reminder.title
         cell.calendarName.text = reminder.calendar.title
         cell.calendarName.textColor = UIColor(CGColor: reminder.calendar.CGColor)
         cell.verticalBarView.backgroundColor = UIColor(CGColor: reminder.calendar.CGColor)
+        cell.checkBox.tag = indexPath.row
+        cell.checkBox.delegate = self
+        if reminder.completed{
+           cell.checkBox.checkAnimated(false)
+        }
         
         return cell
     }
@@ -217,10 +266,14 @@ class ToDoTableViewController: UITableViewController {
         return 70
     }
     
-    @IBAction func checkBoxTapped(sender: CheckBox) {
-        let indexPath = indexPathForView(sender)!
-        
+    func paperCheckboxChangedState(checkbox: BFPaperCheckbox!) {
+        let row = checkbox.tag
+        let reminder = self.reminders[row]
+        reminder.completed = !reminder.completed
+        try? ReminderManager.sharedInstance.eventStore.saveReminder(reminder, commit: true)
+//        fetchRemindersFromCalendars(nil, showComplted: <#T##Bool#>)
     }
+
     
     func indexPathForView(view: UIView) -> NSIndexPath? {
         let viewOrigin = view.bounds.origin
@@ -228,6 +281,23 @@ class ToDoTableViewController: UITableViewController {
         let viewLocation = tableView.convertPoint(viewOrigin, fromView: view)
         
         return tableView.indexPathForRowAtPoint(viewLocation)
+    }
+    
+    @IBAction func showHideCompletedReminders(sender: UIButton) {
+        
+        if sender.selected{
+            sender.selected = false
+            sender.setTitle("Hide Completed", forState: .Normal)
+            showCompleted = true
+            fetchReminders()
+
+        }else{
+            sender.selected = true
+            sender.setTitle("Show Completed", forState: .Normal)
+            showCompleted = false
+            fetchReminders()
+
+        }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

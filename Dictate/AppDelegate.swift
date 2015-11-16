@@ -18,7 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
 
-    //Anill's 
+
+    //Anill's
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
@@ -123,12 +124,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let tabBarController = self.window!.rootViewController as? UITabBarController {
             tabBarController.selectedIndex = 2    //set to start at tab index 2
         }
-        
-        let firstLaunch: AnyObject? = NSUserDefaults.standardUserDefaults().objectForKey("isFirstLaunch")
+   /*
+       // let firstLaunch: AnyObject? = NSUserDefaults.standardUserDefaults().objectForKey("isFirstLaunch")
         if firstLaunch == nil{
             //set NSDefault at startup
             DataManager.sharedInstance.createDefaults()
             NSUserDefaults.standardUserDefaults().setObject("DictateFirstLaunh", forKey: "isFirstLaunch")
+        }
+   */
+        let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+        
+        let firstLaunch = defaults.boolForKey("isFirstLaunch")
+        if firstLaunch  {
+            print("p139 Not first launch.")
+        } else {
+            print("p141 First launch, setting NSUserDefault.")
+            defaults.setBool(true, forKey: "isFirstLaunch")
+            
+            //initialize defaults first time app launched...
+            DataManager.sharedInstance.createDefaults()
         }
     
         
@@ -157,27 +171,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         
         
-        
-        
+    
+//_____ Initialize calls ______________________________________________________
         
         //make Reminder's List Array
         NSLog("%@ p127 appDelegate", self)
         print("p128 here")
-        ReminderManager.sharedInstance.createReminderArray()
+   //     ReminderManager.sharedInstance.createReminderArray()
         
         //make Calendar's List Array
-        ReminderManager.sharedInstance.createCalendarArray()
+        EventManager.sharedInstance.createCalendarArray()
         
         //make ReminderStringList Array
         ReminderManager.sharedInstance.createReminderStringArray()
         
-        
-        
-        
-        //make Calendar's List Array
+        //make Calendar's List Array LOCAL CALENDARS TODO
    //     ReminderManager.sharedInstance.getLocalEventCalendars()
-
         
+       
         //TODO Anil can we pull users device info, system version, users  location? city, state country? and stuff??? to save to parse db
         
         let app = UIApplication.sharedApplication()
@@ -186,10 +197,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("p149 Device and Phone munber in here: \(NSUserDefaults.standardUserDefaults().dictionaryRepresentation())")
 
         // above here attempted to get device info
-        
-        let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
-        
-        //let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp") // from Rob's course
+                
+//_____ End Initialize calls ______________________________________________________
+      
+
 
         //put badge on app icon here...
         let restartGameCategory = UIMutableUserNotificationCategory()

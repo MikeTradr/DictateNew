@@ -123,9 +123,6 @@ class MainIC: WKInterfaceController {
         var fullDT:String       = ""
         var fullDTEnd:String    = ""
         
-    // uncomment line below to get a string from simulator Anil :)
-       // self.presentTextInputControllerWithSuggestions(["Today 2 PM test Appointment"], allowedInputMode: WKTextInputMode.Plain, completion: { results -> Void in
-        
         let str31:String = "todo today, call mom, meeting at 10 AM, play tennis, pick up kids" // comma deliminated list, first phrase or word before comma is title
         
         let str27:String = "new list groceries cheese milk carrots lettace eggs tomatoes carrots crackers salsa dip pizza dressing water beer wine salt file newspapers"
@@ -142,15 +139,17 @@ class MainIC: WKInterfaceController {
 
         let str50:String = "Monday all day study for exam"
 
+        let str27a:String = "new list groceries cheese milk carrots lettace eggs"
+        
+        let str4:String = "Appointment at 1:30 PM to see efficiency with Tony 608-255-9876"
 
- 
-        
-        
-        var str:String = str38
+   
+        var str:String = str27a
         let str1:String = "Reminder wash the car"
+        let str2:String = str4
         
         var suggestionArray:[String] = []
-        suggestionArray = [str, str1]       //TODO Comment out for non-testing
+        suggestionArray = [str, str1, str2]       //TODO Comment out for non-testing
         
         var phone       = defaults.stringForKey("phone")
         var alert       = defaults.objectForKey("eventAlert") as? Double
@@ -857,6 +856,13 @@ class MainIC: WKInterfaceController {
         // This method is called when watch view controller is about to be visible to user
         NSLog("%@ w671 MainIC willActivate", self)
         print("w672 in MainIC willActivate")
+        
+        //make Calendar's List Array
+        ReminderManager.sharedInstance.createCalendarArray()
+        
+        //make ReminderStringList Array
+        ReminderManager.sharedInstance.createReminderStringArray()
+
      /*
         self.myLabel.setTextColor(UIColor.yellowColor())
         self.myLabel.setText("Tap Mic to dictate or force touch")

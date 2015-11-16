@@ -8,32 +8,87 @@
 
 import UIKit
 
-class SettingsEventTableViewController: UITableViewController{
+class SettingsEventTableViewController: UITableViewController, UITextFieldDelegate{
     
     let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+    
+    let calendars = ReminderManager.sharedInstance.getCalendars(EKEntityType.Event)  //EKCalendar Array
 
     @IBOutlet weak var labelCalendarDefault: UILabel!
     @IBOutlet weak var labelDefaultDuration: UITextField!
     @IBOutlet weak var labelDefaultAlert: UITextField!
+    
+    override func viewWillAppear(animated: Bool) {
+        
+        if defaults.stringForKey("defaultCalendarID") != "" {
+            if let defaultCalendarID  = defaults.stringForKey("defaultCalendarID") {
+                
+                if let calendar:EKCalendar = EventManager.sharedInstance.getCalendar(defaultCalendarID) {
+                    labelCalendarDefault.text = calendar.title
+                    labelCalendarDefault.textColor = UIColor(CGColor: calendar.CGColor)
+                }
+            }
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //TODO Mike show default calndar here from segue
-        labelCalendarDefault.text = "Default Calendar"
+        labelDefaultDuration.delegate = self
+        labelDefaultAlert.delegate = self
         
-        //TODO Mike hardcoded fix Mike
-        labelDefaultDuration.text = "10"
-        labelDefaultAlert.text = "30"
+        if defaults.stringForKey("defaultCalendarID") != "" {
+            if let defaultCalendarID  = defaults.stringForKey("defaultCalendarID") {
+                
+                if let calendar:EKCalendar = EventManager.sharedInstance.getCalendar(defaultCalendarID) {
+                    labelCalendarDefault.text = calendar.title
+                    labelCalendarDefault.textColor = UIColor(CGColor: calendar.CGColor)
+                }
+            }
+        }
+        
+        let duration    = defaults.objectForKey("eventDuration") as! Int
+        let alert       = defaults.objectForKey("eventAlert") as! Int
+        labelDefaultDuration.text = "\(duration)"
+        labelDefaultAlert.text = "\(alert)"
 
-        
+    }
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+        // Uncommentthe following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    //}
+    
+    
+     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool  {
+        
+        if (textField == labelDefaultDuration) {
+            let currentString = (textField.text! as NSString).stringByReplacingCharactersInRange(range, withString: string)
+            
+            if currentString.isEmpty {
+                //empty field
+            } else {
+                let newDuration = Int(currentString)
+                defaults.setObject(newDuration, forKey: "eventDuration")
+            }
+        }
+        
+        if (textField == labelDefaultAlert) {
+            let currentString = (textField.text! as NSString).stringByReplacingCharactersInRange(range, withString: string)
+            
+            if currentString.isEmpty {
+                //empty field
+            } else {
+                let newAlert = Int(currentString)!
+                defaults.setObject(newAlert, forKey: "eventAlert")
+            }
+        }
+        
+        return true;
     }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -115,4 +170,10 @@ class SettingsEventTableViewController: UITableViewController{
     }
     */
 
+}
+
+extension SettingsEventTableViewController  {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.view.endEditing(true)
+    }
 }

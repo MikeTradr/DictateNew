@@ -137,8 +137,8 @@ add to dictate str   “meeting with Bob every Wednesday at noon”  //handle wo
 */
 
 // ---- change strings here for testing, shows on the dictated field---
-var str:String = str42
-//var str:String = ""
+//var str:String = str42
+var str:String = ""
 
 //var strRaw:String = str
 
@@ -175,7 +175,7 @@ var resultEndDate:String    = ""
 var resultTitle:String      = ""
 var resultCalendar:String   = ""
 
-var eventDuration:Double    = 10
+var eventDuration:Int       = 10
 
 //TODO add this as a preference
 

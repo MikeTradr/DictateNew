@@ -50,7 +50,7 @@ var resultCalendar:String   = ""
 
 var calendarName            = ""
 
-var eventDuration:Double     = 10
+var eventDuration:Double    = 10
 
 //var startDate = ""
 

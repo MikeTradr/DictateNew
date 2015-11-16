@@ -57,7 +57,7 @@ class DictateCode: NSObject {
     var wordArrTrimmed:[String] = []
     
     var userAlertMinutes:Double = 0
-    var eventAlert:Double       = 0
+    //var eventAlert:Double       = 0
     var eventRepeatInterval:Int = 0
     
     var numberWordArray:[String] = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"]
@@ -69,12 +69,15 @@ class DictateCode: NSObject {
     var actionType:String   = ""        //event, reminder, singleWordList, commaList, rawList, note?, text, email
     var mainType:String   = ""
     
-    //let defaults = NSUserDefaults.standardUserDefaults()
     let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
 
    
 // new for new start...
-    var eventDuration:Double     = 10   //TODO get this from settings
+    
+    var eventDuration    = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!.objectForKey("eventDuration") as! Int
+    
+    var eventAlert    = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!.objectForKey("eventAlert") as! Int
+    
     var now = ""
     var word = ""
     var timeString = ""
@@ -112,12 +115,12 @@ class DictateCode: NSObject {
         //eventDuration = 10  // TODO get from defaults screen
         //eventDuration = 0  // TODO get from defaults screen
         
-        var eventDuration:Double     = 10
+       // var eventDuration:Double     = 10
 
         
         defaults.setObject(actionType, forKey: "actionType")        //sets actionType for processing
         defaults.setObject(mainType, forKey: "mainType")            //sets mainType
-        defaults.setObject(eventDuration, forKey: "eventDuration")
+       // defaults.setObject(eventDuration, forKey: "eventDuration")
         defaults.setObject(wordArrTrimmed, forKey: "wordArrTrimmed")
 
         
@@ -1472,12 +1475,16 @@ class DictateCode: NSObject {
                 if (subStringList) {
                     print("p1357 list found at item: \(i)")
                     print("p1358 listName: \(listName)")
+                    let tempArray = defaults.objectForKey("reminderArray")
+                    print("p1475 defaults.objectForKey(reminderArray): \(tempArray)")
+
                     
-                    let reminderArray = defaults.objectForKey("reminderArray") as! [String] //array of the items
                     
-                    print("p1389 reminderArray: \(reminderArray)")
+                    let reminderStringArray = defaults.objectForKey("reminderArray") as! [String] //array of the items
                     
-                    let reminderArrayLowerCased = reminderArray.map { return $0.lowercaseString}    //lowercase ever word in array -from Anil 083115 thank you Bro :)
+                    print("p1389 reminderStringArray: \(reminderStringArray)")
+                    
+                    let reminderArrayLowerCased = reminderStringArray.map { return $0.lowercaseString}    //lowercase ever word in array -from Anil 083115 thank you Bro :)
 
                     if (i < arrayLength-1) {
                         nextWord = wordArr[i+1]
@@ -1638,7 +1645,9 @@ class DictateCode: NSObject {
                         }
                         
                         print("p1082 userDuration: \(userDuration)")
-                        eventDuration = Double(userDuration)
+                        //eventDuration = Double(userDuration)
+                        eventDuration = userDuration
+                        
                         wordArrTrimmed = wordArrTrimmed.filter() { $0 != wordArr[i] }
                         
                     }
@@ -1677,7 +1686,9 @@ class DictateCode: NSObject {
                             
                             print("p547 userDuration \(userDuration)")
                             
-                            eventDuration = Double(userDuration)
+                           // eventDuration = Double(userDuration)
+                            eventDuration = userDuration
+
                             wordArrTrimmed = wordArrTrimmed.filter() { $0 != wordArr[i+1] }
                         }   // end (durationNumberString != [])
                     }   //end nextWord != ""
@@ -1779,11 +1790,12 @@ class DictateCode: NSObject {
                             
                             print("p779 userAlert: \(userAlert)")
                             
-                            let userAlertMinutes: Double = Double(userAlert)
+                            //let userAlertMinutes: Double = Double(userAlert)
+                            let userAlertMinutes:Int = userAlert
                             
                             print("p655 userAlertMinutes: \(userAlertMinutes)")
                             
-                            let eventAlert:Double = userAlertMinutes                        // thsi name for NSUserDefaults
+                            let eventAlert:Int = userAlertMinutes    // this name for NSUserDefaults
                             
                             self.eventAlert = userAlertMinutes
                             
@@ -1841,11 +1853,11 @@ class DictateCode: NSObject {
                             
                             print("p644 userAlert: \(userAlert)")
                             
-                            let userAlertMinutes: Double = Double(userAlert)
+                            let userAlertMinutes:Int = userAlert
                             
                             print("p655 userAlertMinutes: \(userAlertMinutes)")
                             
-                            let eventAlert:Double = userAlertMinutes                        // thsi name for NSUserDefaults
+                            let eventAlert:Int = userAlertMinutes   // this name for NSUserDefaults
                             
                             self.eventAlert = userAlertMinutes
                             
@@ -1895,7 +1907,7 @@ class DictateCode: NSObject {
                         nextWord2 = ""
                     }
                     
-                    let frequencyArray = ["daily", "weekly", "yearly", "monthly"]   // added trying monthly 090415 Mike
+                    let frequencyArray = ["daily", "weekly", "yearly", "annually", "monthly"]   // added trying monthly 090415 Mike
                     
                     if (nextWord != "") && ( frequencyArray.contains(nextWord) ) {    // check if word is in array
                         
@@ -1910,7 +1922,7 @@ class DictateCode: NSObject {
                         switch (nextWord){  // 1 = daily, 2 = weekly, 3 = yearly   I made this to pass then change later in event method
                         case "daily": returnValue   = 1;   break;
                         case "weekly": returnValue  = 2;   break;
-                        case "yearly": returnValue  = 3;   break;
+                        case "yearly", "annually": returnValue  = 3;   break;
                         case "monthly": returnValue  = 4;   break;
                             
                         default:   print("p923 no repeat word matched")
@@ -2072,10 +2084,10 @@ class DictateCode: NSObject {
                 print("p1633 MAIN we here? fullDT: \(fullDT)")
                 startDT = formatter3.dateFromString(fullDT) ?? today
             }
-                
             
+            let doubleTimeDuration:Double = Double(eventDuration * 60)  //convert Int to Double for next calc.
             
-            let endDT:NSDate = startDT.dateByAddingTimeInterval(eventDuration * 60.0)
+            let endDT:NSDate = startDT.dateByAddingTimeInterval(doubleTimeDuration)
             
             var fullDTEnd = formatter3.stringFromDate(endDT)
             

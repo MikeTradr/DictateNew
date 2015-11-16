@@ -181,11 +181,11 @@ class vcTest1: UIViewController {
         let endDT       = defaults.objectForKey("endDT")! as! NSDate
         var output      = defaults.stringForKey("output")
         let outputNote  = defaults.stringForKey("outputNote")
-        let duration    = defaults.stringForKey("eventDuration")
         
         var calendarName    = defaults.stringForKey("calendarName")
         
-        let alert       = defaults.objectForKey("eventAlert") as! Double
+        let duration    = defaults.objectForKey("eventDuration") as! Int
+        let alert       = defaults.objectForKey("eventAlert") as! Int
         let eventRepeat = defaults.stringForKey("eventRepeat")
         
         let strRaw      = defaults.stringForKey("strRaw")
@@ -209,7 +209,9 @@ class vcTest1: UIViewController {
         print("p201 reminderAlarm: \(reminderAlarm)")
         
         let allDayFlag  = defaults.objectForKey("allDayFlag") as! Bool
-
+        
+        let defaultCalendarID  = defaults.stringForKey("defaultCalendarID")
+        let defaultReminderID = defaults.stringForKey("defaultReminderID")
 
         
         print("p111Main ===================================")
@@ -236,9 +238,11 @@ class vcTest1: UIViewController {
         
         print("p111Main allDayFlag: \(allDayFlag)")
         print("p111Main timeString: \(timeString)")
-
         
+        print("p111Main selectedCalendarID: \(defaultCalendarID)")     //defaultCalendarID
+        print("p111Main defaultReminderID: \(defaultReminderID)")     //defaultReminderID
         
+    
         print("p111Main end =================================")
 
         
@@ -274,15 +278,15 @@ class vcTest1: UIViewController {
         
         resultCalendar.text = calendarName
         
-        let alertAsInt = Int(alert)               // to format 10.0  to 10  for minutes result
+        //let alertAsInt = alert               // to format 10.0  to 10  for minutes result
         
         //TODO could add an "userAlertString to NSUSerDefaults to display here better, "2 hours", "1 day", etc...
         // or a better way besides using NSUserDefualts? Data processed in DictateCode.swift... and passed vs NSUSerDefaults at present.
         
-        if (alert == 0.0){
+        if (alert == 0){
             resultAlert.text = ""
         } else {
-            resultAlert.text = "\(String(alertAsInt)) minutes"
+            resultAlert.text = "\(String(alert)) minutes"
         }
         
         if (eventRepeat == "0") {
@@ -474,7 +478,7 @@ class vcTest1: UIViewController {
             resultRepeat.hidden     = true
             resultAlert.hidden      = true
             
-            if alert != 0.0 {
+            if alert != 0 {
                 labelAlert.hidden   = false
                 resultAlert.hidden  = false
             }

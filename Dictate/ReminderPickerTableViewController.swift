@@ -35,12 +35,14 @@ class ReminderPickerTableViewController: UITableViewController {
     var selectedReminder:String? = nil
     var selectedReminderIndex:Int? = nil
     
-   // var reminderArray = defaults.objectForKey("reminderArray") as! [String] //array of the items
+    var allReminders:[EKReminder] = []
+
+
     
+   // var reminderArray = defaults.objectForKey("reminderArray") as! [String] //array of the items
    // var reminderArray: Array<EKCalendar> = NSUserDefaults.standardUserDefaults().objectForKey("reminderArray") //array of the items
-
     // var reminderArray: Array<EKCalendar> = ReminderManager.createReminderArray
-
+    
     
    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
     
@@ -49,10 +51,28 @@ class ReminderPickerTableViewController: UITableViewController {
         view!.backgroundColor = UIColor(CGColor: reminder.CGColor)
     
     
+    
+        if defaults.stringForKey("defaultReminderID") != "" {
+            if let defaultReminderID  = defaults.stringForKey("defaultReminderID") {
+                
+                print("p133 defaultReminderID: \(defaultReminderID)")
+                print("p134 reminder.calendarIdentifier: \(reminder.calendarIdentifier)")
+                
+                if reminder.calendarIdentifier == defaultReminderID {               // add checkmark for default reminder
+                    print("p135 WE HERE")
+                    cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+                } else {
+                    cell.accessoryType = UITableViewCellAccessoryType.None
+                }
+            }
+        }
+    
+  
+    
     }
 
     override func viewWillAppear(animated: Bool) {
-      let reminderList = ReminderManager.sharedInstance.getCalendars(EKEntityType.Reminder)
+        let reminderList = ReminderManager.sharedInstance.getCalendars(EKEntityType.Reminder)
 
             print("p49 reminderList: \(reminderList)")
             print("p50 reminderList.count: \(reminderList.count)")
@@ -70,11 +90,13 @@ class ReminderPickerTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
          self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
-        if let defaultReminderList = selectedReminder {
         
+        if let defaultReminderList = selectedReminder {
             
 //            selectedReminderIndex = find(reminderList.title, defaultReminderList)!
         }
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -98,25 +120,21 @@ class ReminderPickerTableViewController: UITableViewController {
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-       // let cell = tableView.dequeueReusableCellWithIdentifier("ReminderCell", forIndexPath: indexPath) as! UITableViewCell
-        
-        
-     //   var cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("ReminderCell") as! UITableViewCell
-        
-        // var cell = tableView.dequeueReusableCellWithIdentifier("ReminderCell") as! SettingsReminderListTableViewCell
         
         let cell = tableView.dequeueReusableCellWithIdentifier("ReminderCell", forIndexPath: indexPath) as! SettingsReminderListTableViewCell
         
         cell.selectionStyle = .None
-    
-        let reminder = reminderList[indexPath.row]
         
+        let reminder = reminderList[indexPath.row]
         cell.labelTitle.text = reminder.title
-        //TODO Anil help how can we count # items in each Reminder list?
-        cell.labelNumberItems.text = "\(reminderList.count) items"
-      
-        cell.labelTitle.textColor = UIColor(CGColor: reminder.CGColor)
-        cell.labelNumberItems.textColor = UIColor(CGColor: reminder.CGColor)
+        
+        ReminderManager.sharedInstance.fetchCalendarReminders(reminder) { (reminders) -> Void in
+            self.allReminders = reminders as [EKReminder]
+            let numberOfItems = self.allReminders.count
+            cell.labelNumberItems.text = "\(numberOfItems) items"
+            cell.labelTitle.textColor = UIColor(CGColor: reminder.CGColor)
+            cell.labelNumberItems.textColor = UIColor(CGColor: reminder.CGColor)
+        }
         
         //Anil added
         if reminder.calendarIdentifier == self.selectedReminder{
@@ -124,17 +142,7 @@ class ReminderPickerTableViewController: UITableViewController {
         }else{
             cell.accessoryType = UITableViewCellAccessoryType.None
         }
-    
-      
 
-        // Configure the cell...
-     //   let calendar = self.calendarList[indexPath.row]
-    //    cell.textLabel?.text = calendar.title
-   //     cell.textLabel?.textColor =  UIColor(CGColor: calendar.CGColor)
-     //   cell.textLabel?.text = reminders[indexPath.row]
-      //  cell.textLabel?.textColor =  UIColor(CGColor: calendar.CGColor)
-
-        //Anil removed
         return cell
     }
     
@@ -197,13 +205,11 @@ class ReminderPickerTableViewController: UITableViewController {
         selectedReminderIndex = indexPath.row
         let selectedReminder = reminderList[indexPath.row]
 
-        print("p192 selectedReminder: \(selectedReminder)")
-        print("p193 selectedReminder.title: \(selectedReminder.title)")
-
-        //Anil added
-        defaults.setObject(selectedReminder.calendarIdentifier, forKey: "defaultReminderList")            //sets title to calendarName for ParseDB
-
+        print("p200 selectedReminder: \(selectedReminder)")
+        print("p201 selectedReminder.title: \(selectedReminder.title)")
+        print("p202 selectedReminder.calendarIdentifier: \(selectedReminder.calendarIdentifier)")
         
+        defaults.setObject(selectedReminder.calendarIdentifier, forKey: "defaultReminderID") //sets Default Selected Reminder CalendarIdentifier
         
         //update the checkmark for the current row
         let cell = tableView.cellForRowAtIndexPath(indexPath)

@@ -44,8 +44,19 @@ class ReminderManager: NSObject {
                 }
             })
             
-        }else{
+        } else {
             completion(granted: true)
+        
+            let defaultReminderID = defaults.stringForKey("defaultReminderID")
+            if defaultReminderID == "" {    //added by Mike 11112015 to save users default reminder to NSUserDefaults for defaultReminderID
+                let reminder = EKReminder(eventStore: self.eventStore)
+                reminder.calendar = eventStore.defaultCalendarForNewReminders()
+                let defaultReminderID = reminder.calendar.calendarIdentifier
+                if defaultReminderID != "" {
+                    defaults.setObject(defaultReminderID, forKey: "defaultReminderID") //sets Default Selected Reminder CalendarIdentifier
+                }
+            }
+
         }
     }
     
@@ -426,16 +437,22 @@ class ReminderManager: NSObject {
                 error = error1
             }
             print("p97 Error: \(error)")
-            
-            
+   
 
         }
     }
     
     
+    func getCalendar(id:String) -> EKCalendar? {            //returns EKCalendar from CalendarID
+            return self.eventStore.calendarWithIdentifier(id)
+        }
+    
+    
     func getCalendars(type:EKEntityType) -> [EKCalendar]{
         return self.eventStore.calendarsForEntityType(type) as! [EKCalendar]
     }
+    
+    
     
     //let reminderList = ReminderManager.sharedInstance.getCalendars(EKEntityTypeReminder)
    // let calendarList = ReminderManager.sharedInstance.getCalendars(EKEntityTypeEvent)
@@ -484,12 +501,11 @@ class ReminderManager: NSObject {
         Let’s discuss it a bit. At first, you notice that we get an array with all calendars of any type using the calendarsForEntityType: method of the event store object and by specifying the EKEntityTypeEvent as the kind of the calendars we want to get. Note that this array contains calendars of all types, so we must get only the local ones. For that reason, we initialize a mutable array, and using a loop we check the type of each returned calendar. Every local calendar found in the first array is stored to the mutable one, which is returned at the end. Inside the loop, each calendar (the current calendar) is stored to a EKCalendar object temporarily. As you understand, the EKCalendar class represents a calendar in the Event Kit framework.
         
 */
-        
+/*
     func createReminderArray() -> [AnyObject]  {        //called from AppDelegate on startup
         
         
-        var allReminders: Array<EKCalendar>= self.eventStore.calendarsForEntityType(EKEntityType.Reminder) as!  Array<EKCalendar>
-        
+        var allReminders: Array<EKCalendar>= self.eventStore.calendarsForEntityType(EKEntityType.Reminder)
         var calendarList = Array<EKCalendar>()
 
         
@@ -497,31 +513,32 @@ class ReminderManager: NSObject {
         print("p337 allReminders: \(allReminders)")
         
         var localReminders: [AnyObject] = NSMutableArray() as [AnyObject]
+        var reminderStringArray:[String] = []
         
-    /*
-        for var i = 0; i < allReminders.count; i++ {
-        var currentCalendar: EKCalendar = allReminders.objectAtIndex(i)
+        if allReminders != [] {
+            for (index, title) in allReminders.enumerate() {
+                let reminderList = allReminders[index]
+                reminderStringArray.append(reminderList.title)
+                }
+            }
         
-        if currentCalendar.type == EKCalendarTypeLocal {
-        localCalendars.addObject(currentCalendar)
-        }
-        
-        */
         
 
-        let allRemindersHardcoded = ["Reminder list1", "Today", "Tomorrow", "Groceries", "ToCode"]
-        defaults.setObject(allRemindersHardcoded, forKey: "allRemindersHardcoded")            //sets allRemindersHardcoded
+      //  let allRemindersHardcoded = ["Reminder list1", "Today", "Tomorrow", "Groceries", "ToCode"]
+      //  defaults.setObject(allRemindersHardcoded, forKey: "allRemindersHardcoded")            //sets allRemindersHardcoded
         
-        var testArrayData = defaults.objectForKey("allRemindersHardcoded") as! [String] //array of the items
+     //   var testArrayData = defaults.objectForKey("allRemindersHardcoded") as! [String] //array of the items
         
-        print("p372 testArrayData: \(testArrayData)")
+        print("p497 reminderStringArray: \(reminderStringArray)")
+    
+        defaults.setObject(reminderStringArray, forKey: "reminderArray")
         
         return allReminders
         
     }
 
     
-    
+*/
     
   
     func createReminderStringArray() {        //called from AppDelegate on startup

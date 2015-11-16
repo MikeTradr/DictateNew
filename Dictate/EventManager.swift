@@ -42,8 +42,18 @@ class EventManager: NSObject {
                 }
             })
             
-        }else{
+        } else {
             completion(granted: true)
+            
+            let defaultCalendarID = defaults.stringForKey("defaultCalendarID")
+            if defaultCalendarID == "" {    //added by Mike 11112015 to save users default Calendar to NSUserDefaults for defaultReminderID
+                let calendar = EKEvent(eventStore: self.eventStore)
+                calendar.calendar = eventStore.defaultCalendarForNewEvents
+                let defaultCalendarID = calendar.calendar.calendarIdentifier
+                if defaultCalendarID != "" {
+                    defaults.setObject(defaultCalendarID, forKey: "defaultCalendarID") //sets Default Selected Calendar CalendarIdentifier
+                }
+            }
         }
     }
 
@@ -383,12 +393,124 @@ class EventManager: NSObject {
                 } else {
                 completion([])
                 }
-                print("p66 events: \(events)")
+               // print("p396 events: \(events)")
             }else{
                 completion([])
             }
         })
     }
+    
+    func createCalendarArray() {        //called from AppDelegate on startup, makes String Array of Calendar titles
+        
+        getAccessToEventStoreForType(EKEntityType.Reminder, completion: { (granted) -> Void in
+            
+            if granted{
+                
+                NSLog("%@ p462 createCalendarArray", self)
+                print("p413 we here? createCalendarArray")
+                
+                var allCalendars: Array<EKCalendar> = self.eventStore.calendarsForEntityType(EKEntityType.Event) //as! Array<EKCalendar>
+
+                
+                print("p416 allCalendars: \(allCalendars)")
+                
+                let calender = EKCalendar(forEntityType: EKEntityType.Event , eventStore: self.eventStore)
+                print("p418 calender: \(calender)")
+                
+                //TODO aboveline pints to:
+                //       p418 calender: EKCalendar <0x7f821b4e9350> {title = (null); type = Local; allowsModify = YES; color = (null);}
+                
+                // from https://www.andrewcbancroft.com/2015/06/17/creating-calendars-with-event-kit-and-swift/
+                
+                // Use Event Store to create a new calendar instance
+                // Configure its title
+                let newCalendar = EKCalendar(forEntityType: EKEntityType.Event, eventStore: self.eventStore)
+                newCalendar.title = "Some New Calendar Title"
+                
+                // Access list of available sources from the Event Store
+                let sourcesInEventStore = self.eventStore.sources as! [EKSource]
+                print("p482 sourcesInEventStore: \(sourcesInEventStore)")
+                
+                //TODO Anil use only Local calendarsmaybe in out CalendarListArray I made???
+                
+                //     p167 sourcesInEventStore: [EKSource <0x1700cf880> {UUID = 855E381A-DEF0-4F78-846E-7B7EC1EE990D; type = Local; title = Default; externalID = (null)}, EKSource <0x1700cf5e0> {UUID = BA48C2E6-DA4E-40BA-BCE8-D20FA3F957AF; type = Other; title = Other; externalID = (null)}, EKSource <0x1700cf570> {UUID = 0B17DA80-1504-4142-AAE4-51CB6DC52327; type = CalDAV; title = iCloud; externalID = 0B17DA80-1504-4142-AAE4-51CB6DC52327}, EKSource <0x1700cf730> {UUID = 17673175-ACD9-4C7E-BE76-AE60BF850880; type = Subcribed; title = Subscribed Calendars; externalID = Subscribed Calendars}, EKSource <0x1700d0840> {UUID = 2F54B94E-CDED-491C-A812-760833A10C7A; type = CalDAV; title = Mike Main; externalID = 2F54B94E-CDED-491C-A812-760833A10C7A}, EKSource <0x1700d08b0> {UUID = CC9633E4-021B-4E85-8EE0-082AFFB5A232; type = CalDAV; title = MikeTradr; externalID = CC9633E4-021B-4E85-8EE0-082AFFB5A232}]
+                
+                
+                // Filter the available sources and select the "Local" source to assign to the new calendar's
+                // source property
+                
+                //TODO Anil can we filter for local calndars only. I get in Arry Mike Derr twice!
+                //TODO Anil help we need to file ter calendars of type = calDAV
+                
+                newCalendar.source = sourcesInEventStore.filter{
+                    (source: EKSource) -> Bool in
+                    source.sourceType == EKSourceType.Local
+                    }.first!
+                
+                
+                
+                var error:NSError?
+                calender.source = self.eventStore.defaultCalendarForNewEvents.source
+                print("p181 Error: \(error)")
+                
+                let calendars = self.eventStore.calendarsForEntityType(EKEntityType.Event)
+                
+                var calendarArray:[String] = []
+                
+                for calendar in calendars {
+                    var calendarTitle:String! = calendar.title
+                    print("p189 calendarTitle: \(calendarTitle)")
+                    
+                    calendarArray.append(calendarTitle)
+                }
+                print("p193 calendarArray: \(calendarArray)")
+                print("p193 calendarArray.count: \(calendarArray.count)")
+                
+                self.defaults.setObject(calendarArray, forKey: "calendarArray")            //sets calendarArray of String the names
+                self.defaults.synchronize()
+                
+            }
+        })
+    }
+    
+    func getCalendar(id:String) -> EKCalendar? {            //returns EKCalendar from CalendarID
+        return self.eventStore.calendarWithIdentifier(id)
+    }
+    
+    func getCalendarName(calendarID:String,completion:String->Void) {   //TODO NO LONGER CALLED
+        
+        var calendarTitle = ""
+        print("p479 calendarID: \(calendarID)")
+        
+        getAccessToEventStoreForType(EKEntityType.Event, completion: { (granted) -> Void in
+            
+            if granted{
+                let calendars = self.eventStore.calendarsForEntityType(EKEntityType.Event)
+                
+                for (index, title) in calendars.enumerate() {
+                    print("---------------------------------------------------")
+                    print("p485 index, title: \(index), \(title)")
+                    
+                    let item = calendars[index]
+                    
+                    print("p492 calendarID: \(calendarID)")
+                    print("p493 item.calendarIdentifier: \(item.calendarIdentifier)")
+                    
+                    if calendarID == item.calendarIdentifier {
+                        calendarTitle = item.title
+                        print("p497 calendarTitle: \(calendarTitle)")
+                        completion(calendarTitle)
+
+                    }
+                }
+            } else {
+                
+                print("p502 calendarTitle: \(calendarTitle)")
+                completion(calendarTitle)
+            }
+        })
+    }
+    
 
 
     func saveEvent(event:EKEvent) {
@@ -457,6 +579,68 @@ class EventManager: NSObject {
         
     }
     
+    
+    
+    func getFirstAndLastDateOfMonth(date: NSDate) -> (firstDay: NSDate, lastDay: NSDate) {
+        
+        let date = NSDate()
+        let calendar = NSCalendar.currentCalendar()
+        let dateComponents = calendar.components([NSCalendarUnit.Month, NSCalendarUnit.Year], fromDate: date)
+        let firstDay = self.returnDateForMonth(dateComponents.month, year: dateComponents.year, day: 1)
+        let lastDay = self.returnDateForMonth(dateComponents.month + 1, year: dateComponents.year, day: 0)
+
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "dd-MMM-yy"
+        
+        //print("First day of this month: \(firstDay)") // 01-Nov-15
+        //print("Last day of this month: \(lastDay)") // 30-Nov-15
+        
+        return (firstDay,lastDay)
+
+    }
+    
+    func returnDateForMonth(month:NSInteger, year:NSInteger, day:NSInteger)->NSDate{
+        let comp = NSDateComponents()
+        comp.month = month
+        comp.year = year
+        comp.day = day
+        
+        let gregorian = NSCalendar.currentCalendar()
+        return gregorian.dateFromComponents(comp)!
+    }
+    
+    
+    
+    
+       //
+ /*
+        let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
+        let calendarUnits = NSCalendarUnit.CalendarUnitYear | NSCalendarUnit.CalendarUnitMonth
+        let dateComponents = calendar?.components(calendarUnits, fromDate: date)
+        
+        let fistDateOfMonth = self.returnedDateForMonth(dateComponents!.month, year: dateComponents!.year, day: 1)
+        let lastDateOfMonth = self.returnedDateForMonth(dateComponents!.month + 1, year: dateComponents!.year, day: 0)
+        
+        println("fistDateOfMonth \(fistDateOfMonth)")
+        println("lastDateOfMonth \(lastDateOfMonth)")
+        
+        return (fistDateOfMonth!,lastDateOfMonth!)
+    }
+    
+    func returnedDateForMonth(month: NSInteger, year: NSInteger, day: NSInteger) -> NSDate? {
+        var components = NSDateComponents()
+        components.day = day
+        components.month = month
+        components.year = year
+        
+        let gregorian = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
+        
+        return gregorian!.dateFromComponents(components)
+    }
+    
+    
+    
+   */
     
    
   /*

@@ -45,24 +45,46 @@ class SettingsTableViewController: UITableViewController{
         //General.playSound(alertSound3!)
         playSound(alertSound3)
         
-        
-        let selectedReminderIdentifier = defaults.objectForKey("defaultReminderList") as? String
-        print("p44 selectedReminderIdentifier: \(selectedReminderIdentifier)")
-        
-        let reminder = ReminderManager.sharedInstance.eventStore.calendarWithIdentifier("selectedReminderIdentifier")
-        
-        print("p46 reminder: \(reminder)")
-        
-        // labelReminderDefault.text = reminder.title
-        
+        if defaults.stringForKey("defaultReminderID") != "" {
+            if let defaultReminderID  = defaults.stringForKey("defaultReminderID") {
+                
+                print("p83 defaultReminderID: \(defaultReminderID)")
+                
+                //  if let reminder:EKCalendar = ReminderManager.sharedInstance.eventStore.calendarWithIdentifier("defaultReminderID") {
+                
+                if let reminder:EKCalendar = ReminderManager.sharedInstance.getCalendar(defaultReminderID) {
+                    
+                    print("p87 reminder: \(reminder)")
+                    
+                    labelReminderDefault.text = reminder.title
+                    labelReminderDefault.textColor = UIColor(CGColor: reminder.CGColor)
+                }
+            }
+        }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let selectedReminderIdentifier = defaults.objectForKey("defaultReminderList") as? String
+        if defaults.stringForKey("defaultReminderID") != "" {
+            if let defaultReminderID  = defaults.stringForKey("defaultReminderID") {
+                
+                print("p83 defaultReminderID: \(defaultReminderID)")
+                
+                if let reminder:EKCalendar = ReminderManager.sharedInstance.eventStore.calendarWithIdentifier("defaultReminderID") {
+                    
+                    print("p87 reminder: \(reminder)")
+
+                    labelReminderDefault.text = reminder.title
+                    labelReminderDefault.textColor = UIColor(CGColor: reminder.CGColor)
+                }
+            }
+        }
         
-        labelReminderDefault.text = selectedReminderIdentifier
+     //   let defaultReminderID = defaults.stringForKey("defaultReminderID")
+
+        
+       // labelReminderDefault.text = defaultReminderID
         
 
         // Uncomment the following line to preserve selection between presentations

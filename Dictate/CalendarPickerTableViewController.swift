@@ -52,11 +52,42 @@ class CalendarPickerTableViewController: UITableViewController {
     
     }
 */
+    
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        let view = cell.viewWithTag(1)
+        let calendar = calendarList[indexPath.row]
+        view!.backgroundColor = UIColor(CGColor: calendar.CGColor)
+        
+        
+        
+        if defaults.stringForKey("defaultCalendarID") != "" {
+            if let defaultCalendarID  = defaults.stringForKey("defaultCalendarID") {
+                
+                //print("p67 defaultCalendarID: \(defaultCalendarID)")
+                //print("p68 calendar: \(calendar.calendarIdentifier)")
+                
+                if calendar.calendarIdentifier == defaultCalendarID {               // add checkmark for default calendar
+                    //print("71 WE HERE")
+                    cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+                } else {
+                    cell.accessoryType = UITableViewCellAccessoryType.None
+                }
+            }
+        }
+        
+        
+        
+    }
+    
+    
+    
+    
     override func viewWillAppear(animated: Bool) {
         let calendarList = ReminderManager.sharedInstance.getCalendars(EKEntityType.Event)
 
-            print("p58 calendarList: \(calendarList)")
-            print("p59 calendarList.count: \(calendarList.count)")
+            //print("p58 calendarList: \(calendarList)")
+            //print("p59 calendarList.count: \(calendarList.count)")
             
         }
         
@@ -101,7 +132,6 @@ class CalendarPickerTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
        // let cell = tableView.dequeueReusableCellWithIdentifier("ReminderCell", forIndexPath: indexPath) as! UITableViewCell
         
-        
      //   var cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("ReminderCell") as! UITableViewCell
         
         // var cell = tableView.dequeueReusableCellWithIdentifier("ReminderCell") as! SettingsReminderListTableViewCell
@@ -111,19 +141,40 @@ class CalendarPickerTableViewController: UITableViewController {
         cell.selectionStyle = .None
     
         let calendar = calendarList[indexPath.row]
-        
         cell.labelTitle.text = calendar.title
-        //TODO Anil help how can we count # items in each Reminder list?
-        cell.labelNumberItems.text = "\(calendarList.count) items"
-      
+        
+        let date = NSDate() //todays date, we get month from here, so we get current month
+        let (firstDay, lastDay) = EventManager.sharedInstance.getFirstAndLastDateOfMonth(date)
+        
+        //print("p154 firstDay: \(firstDay)")
+        //print("p155 lastDay: \(lastDay)")
+        
+        EventManager.sharedInstance.fetchEventsFrom(firstDay, endDate: lastDay, completion: { (events) -> Void in
+            
+            let filteredArray = events.filter{$0.calendar == calendar}
+            //print("p164 filteredArray: \(filteredArray)")
+            let numberOfEvents:String = "\(filteredArray.count)"
+            cell.labelNumberItems.text = "\(numberOfEvents) items this month"
+        })
+        
         cell.labelTitle.textColor = UIColor(CGColor: calendar.CGColor)
         cell.labelNumberItems.textColor = UIColor(CGColor: calendar.CGColor)
         cell.verticalBarView.backgroundColor = UIColor(CGColor: calendar.CGColor)
-        
+
         //Anil added, Mike changed
         if calendar.calendarIdentifier == self.selectedCalendar{
             cell.accessoryType = UITableViewCellAccessoryType.Checkmark
-        }else{
+            
+            let defaultCalendarID: String  = defaults.stringForKey("defaultCalendarID")!
+            
+            if self.selectedCalendar != defaultCalendarID {
+                
+                //TODO Anil how do we uncheck the old default cell row???
+                
+            }
+            
+            
+        } else {
             cell.accessoryType = UITableViewCellAccessoryType.None
         }
     
@@ -199,13 +250,12 @@ class CalendarPickerTableViewController: UITableViewController {
         selectedCalendarIndex = indexPath.row
         let selectedCalendar = calendarList[indexPath.row]
 
-        print("p192 selectedCalendar: \(selectedCalendar)")
-        print("p193 selectedCalendar.title: \(selectedCalendar.title)")
+        print("p202 selectedCalendar: \(selectedCalendar)")
+        print("p203 selectedCalendar.title: \(selectedCalendar.title)")
+        print("p204 selectedCalendar.calendarIdentifier: \(selectedCalendar.calendarIdentifier)")
 
         //Anil added
-        defaults.setObject(selectedCalendar.calendarIdentifier, forKey: "selectedCalendar")            //sets title to calendarName for ParseDB
-
-        
+        defaults.setObject(selectedCalendar.calendarIdentifier, forKey: "defaultCalendarID") //sets Default Selected Calendar CalendarIdentifier
         
         //update the checkmark for the current row
         let cell = tableView.cellForRowAtIndexPath(indexPath)

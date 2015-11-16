@@ -67,7 +67,7 @@ class DataManager: NSObject {
     var mainType:String   = ""
 
     // new for new start...
-    var eventDuration:Double     = 10   //TODO get this from settings
+    //var eventDuration:Double     = 10   //TODO get this from settings
     var now         = ""
     var word        = ""
     var timeString  = ""
@@ -79,16 +79,14 @@ class DataManager: NSObject {
     
     var defaultReminderListID: String   = ""
     var defaultEventListID: String      = ""
-    var defaultEventDuration: Double    = 10
+    var defaultEventDuration: Int       = 10
+    var defaultEventAlert: Int          = 30
+    
     var reminderList:String             = ""
     var reminderArray:[String]          = []
     var reminderTitle: String           = ""
-
-
-
-
     
-    //let defaults = NSUserDefaults.standardUserDefaults()
+
     let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
     
 //_____ end Variables for new users start____________________________
@@ -100,7 +98,10 @@ class DataManager: NSObject {
     
         defaults.setObject(actionType, forKey: "actionType")
         defaults.setObject(mainType, forKey: "mainType")
+        
         defaults.setObject(eventDuration, forKey: "eventDuration")
+        defaults.setObject(defaultEventAlert, forKey: "eventAlert")
+
         defaults.setObject(wordArrTrimmed, forKey: "wordArrTrimmed")
         defaults.setObject(calendarName, forKey: "calendarName")
         defaults.setObject(startDT, forKey: "startDT")
@@ -109,11 +110,13 @@ class DataManager: NSObject {
 
         defaults.setObject(defaultReminderListID, forKey: "defaultReminderListID")
         defaults.setObject(defaultEventListID, forKey: "defaultEventListID")
-        defaults.setObject(defaultEventDuration, forKey: "defaultEventDuration")
+        defaults.setObject(defaultEventAlert, forKey: "eventAlert")
+        
         defaults.setObject(reminderList, forKey: "reminderList")
         defaults.setObject(reminderAlarm, forKey: "reminderAlarm")
         defaults.setObject(reminderArray, forKey: "reminderArray")
         defaults.setObject(reminderTitle, forKey: "reminderTitle")
+        
 
         let test   = defaults.objectForKey("reminderArray") as! [String]
         print("119 test: \(test)")

@@ -27,7 +27,7 @@ class ShowRemindersIC: WKInterfaceController {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
         NSLog("%@ will activate", self)
-        print("p93 in ReminderListPickerIC willActivate")
+        print("w30 in ShowRemindersIC willActivate")
         
        // loadTableData()
     }
@@ -52,7 +52,7 @@ class ShowRemindersIC: WKInterfaceController {
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         // Configure interface objects here.
-        print("p19 ReminderListPickerIC")
+        print("w55 ShowRemindersIC")
         print("-----------------------------------------")
 
         //var sceneTitle:String = (context as? String)!
@@ -66,12 +66,12 @@ class ShowRemindersIC: WKInterfaceController {
         print("w116 clicked on row: \(rowIndex)")
         
         selectedRow = rowIndex //for use with insert and delete, save selcted row index
-        let itemRow = self.table.rowControllerAtIndex(rowIndex) as! ShowRemindersTableRC
+        let row = self.table.rowControllerAtIndex(rowIndex) as! ShowRemindersTableRC
         if self.checked {               // Turn checkmark off
-            itemRow.imageCheckbox.setImageNamed("cbBlank40px")
+            row.imageCheckbox.setImageNamed("cbBlank40px")
             self.checked = false
         } else {                        // Turn checkmark on
-            itemRow.imageCheckbox.setImageNamed("cbChecked40px")
+            row.imageCheckbox.setImageNamed("cbChecked40px")
             let defaultCalendar: EKCalendar = allCalendarLists[rowIndex]
             let defaultCalendarID = defaultCalendar.calendarIdentifier
             
@@ -88,7 +88,7 @@ class ShowRemindersIC: WKInterfaceController {
         // This method is called when watch view controller is no longer visible
         NSLog("%@ did deactivate", self)
         super.didDeactivate()
-        print("p110 in ReminderListPickerIC didDeactivate")
+        print("w91 in ShowRemindersIC didDeactivate")
 
     }
 

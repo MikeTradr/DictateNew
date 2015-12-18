@@ -34,6 +34,7 @@ class MainIC: WKInterfaceController {
     
     var calendarName:String     = ""
     var reminderTitle:String    = ""
+    var reminderList:String     = ""
     
     //var output:String           = ""
     var outputNote:String       = ""
@@ -94,10 +95,9 @@ class MainIC: WKInterfaceController {
     
     var actionType:String = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!.stringForKey("actionType") ?? "Event"
 
-    var alert       = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!.objectForKey("eventAlert") as? Double
+    var alert       = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!.objectForKey("defaultEventAlert") as? Double //added defualt 112715
 
-    let eventRepeat      = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!.stringForKey("eventRepeat")
-
+    let eventRepeat      = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!.stringForKey("defaultEventRepeat") //added defualt 112715
     
     var output      = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!.stringForKey("output") ?? ""
     
@@ -149,11 +149,11 @@ class MainIC: WKInterfaceController {
         let str2:String = str4
         
         var suggestionArray:[String] = []
-        suggestionArray = [str, str1, str2]       //TODO Comment out for non-testing
+       // suggestionArray = [str, str1, str2]       //TODO Comment out for non-testing
         
         var phone       = defaults.stringForKey("phone")
-        var alert       = defaults.objectForKey("eventAlert") as? Double
-        let duration    = defaults.stringForKey("eventDuration")
+        var alert       = defaults.objectForKey("defaultEventAlert") as? Double //added defualt 112715
+        let duration    = defaults.stringForKey("defaultEventDuration")         //added defualt 112715
         let eventRepeat = defaults.stringForKey("eventRepeat")
         let strRaw      = defaults.stringForKey("strRaw")
         var reminderTitle  = defaults.stringForKey("title") ?? ""
@@ -403,6 +403,8 @@ class MainIC: WKInterfaceController {
                     if fullDT != "" {        // means a blank date
                         self.buttonGrAlarm.setHidden(false)
                         self.resultAlarm.setText("Alarm: \(startTime)")
+                    } else {
+                        self.buttonGrAlarm.setHidden(true)
                     }
                     
                     self.buttonGrStart.setHidden(true)
@@ -428,6 +430,9 @@ class MainIC: WKInterfaceController {
                     if ( fullDT == "" ) {
                         self.buttonGrStart.setHidden(true)
                     }
+                    //no alerts for lists so set to hidden
+                    self.resultAlarm.setText("")
+                    self.buttonGrAlarm.setHidden(true)
                     break;
                 
                 case "New OneItem List":
@@ -438,6 +443,9 @@ class MainIC: WKInterfaceController {
                     self.labelButtonCreate.setText("Create New List")
                     self.resultCalendar.setText("List: \(reminderTitle)")
                     self.resultTitle.setText("Items: \(stringOutput)")
+                    //no alerts for lists so set to hidden
+                    self.resultAlarm.setText("")
+                    self.buttonGrAlarm.setHidden(true)
                     break;
                     
                 case "Phrase List":
@@ -451,6 +459,9 @@ class MainIC: WKInterfaceController {
                     if ( fullDT == "" ) {        // added 072315 no need to show if no date used
                         self.buttonGrStart.setHidden(true)
                     }
+                    //no alerts for lists so set to hidden
+                    self.resultAlarm.setText("")
+                    self.buttonGrAlarm.setHidden(true)
                     break;
                     
                 default:
@@ -569,18 +580,18 @@ class MainIC: WKInterfaceController {
         
         self.buttonMicGr.setHidden(true)  //hide mircophone
         
-        print("p277 eventStart: \(startDT)")
-        print("p278 calendarName: \(calendarName)")
+        print("w581 eventStart: \(startDT)")
+        print("w582 calendarName: \(calendarName)")
         
         var actionType:String    = defaults.stringForKey("actionType")!
         
-        print("p299 watchIC, actionType: \(actionType)")
+        print("w586 mainIC, actionType: \(actionType)")
         
 // ---- switch actionType in button Create ------------------------------------
         
         switch (actionType){
         case "Reminder":
-            print("p242 in Reminder Switch")
+            print("w592 in Reminder Switch")
             //createReminder()                      // worked with nothing in func call??? why?
             
             let title:String = output
@@ -589,7 +600,11 @@ class MainIC: WKInterfaceController {
             //ReminderCode().createReminder(title, notes: notes, startDT: startDT)
             ReminderCode().createReminder()
             
-            self.labelCreated.setText("Reminder created on your \(calendarName.capitalizedString) list")
+            var reminderList    = defaults.stringForKey("reminderList") ?? ""
+            
+            print("w601 reminderList: \(reminderList)")
+            
+            self.labelCreated.setText("Reminder created on your \(reminderList.capitalizedString) list")
             break;
             
         case "Event":
@@ -605,7 +620,7 @@ class MainIC: WKInterfaceController {
             
             let reminderTitle  = defaults.stringForKey("reminderList") ?? ""
             
-            ReminderManager.sharedInstance.createNewReminderList(calendarName, items: wordArrTrimmed)
+            ReminderManager.sharedInstance.createNewReminderList(reminderList, items: wordArrTrimmed)
             
             self.labelCreated.setText("New List, \(reminderTitle), has been created")
             
@@ -618,7 +633,7 @@ class MainIC: WKInterfaceController {
             output      = defaults.stringForKey("output") ?? ""
             let outputArray:[String] = Array(arrayLiteral: output)
             
-            ReminderManager.sharedInstance.createNewReminderList(calendarName, items: outputArray)
+            ReminderManager.sharedInstance.createNewReminderList(reminderList, items: outputArray)
             
             self.labelCreated.setText("New List, \(reminderTitle), has been created")
             
@@ -630,7 +645,7 @@ class MainIC: WKInterfaceController {
             
             let reminderTitle  = defaults.stringForKey("reminderList") ?? ""
             
-            ReminderManager.sharedInstance.createNewReminderList(calendarName, items: wordArrTrimmed)
+            ReminderManager.sharedInstance.createNewReminderList(reminderList, items: wordArrTrimmed)
             
             self.labelCreated.setText("New Phrase List, \(reminderTitle), has been created")
 
@@ -639,13 +654,13 @@ class MainIC: WKInterfaceController {
             
         case "List":
             print("w150 in list Switch")
-             self.labelCreated.setText("List created on your \(calendarName.capitalizedString) calendar!")
+             self.labelCreated.setText("List created on your \(reminderList.capitalizedString) calendar!")
            
             break;
             
         case "CommaList":
             print("w151 in commaList Switch")
-             self.labelCreated.setText("New Reminder List created: \(calendarName.capitalizedString)")
+             self.labelCreated.setText("New Reminder List created: \(reminderList.capitalizedString)")
             break;
             
         case "Note":
@@ -820,7 +835,7 @@ class MainIC: WKInterfaceController {
     
     
     @IBAction func buttonToday() {
-        presentControllerWithName("TodayEvents", context: "Dictate")
+        presentControllerWithName("Events", context: "Dictate")
     }
     
     @IBAction func buttonReminders() {

@@ -55,7 +55,7 @@ class TodayIC: WKInterfaceController {
     }
     
     @IBAction func menuSettings() {
-        presentControllerWithName("Settings", context: "«Events")
+        presentControllerWithName("Settings", context: "Events")
     }
 //---- end Menu functions ----------------------------------------
     
@@ -65,9 +65,8 @@ class TodayIC: WKInterfaceController {
         super.awakeWithContext(context)
         // Configure interface objects here.
         
-        NSLog("%@ w41 TodayIC awakeWithContext", self)
-        
-        print("w43 Today awakeWithContext")
+        NSLog("%@ w68 TodayIC awakeWithContext", self)
+        print("w70 TodayIC awakeWithContext")
         
       //  var sceneTitle:String = (context as? String)!
       //  self.setTitle("«\(sceneTitle)")
@@ -93,7 +92,7 @@ class TodayIC: WKInterfaceController {
             }
         })
         
-        print("w65 context: \(context)")
+        print("w95 context: \(context)")
        // showListsView = true
         self.setTitle("Events")
         
@@ -109,9 +108,7 @@ class TodayIC: WKInterfaceController {
         print("w79 TodayIC willActivate")
         
         //  ReminderManager.sharedInstance.createNewReminderList("To Code Tomorrow", items: ["item 1","item 2", "This is item 3 hehe"])   //added to make reminder for testing.
-        
-        print("w83 in ShowIC willActivate")
-        
+                
         //self.reminderItemsGroup.setHidden(false)  //Hide lower table2
         
         if showCalendarsView {

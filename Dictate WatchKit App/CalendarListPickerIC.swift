@@ -31,7 +31,7 @@ class CalendarListPickerIC: WKInterfaceController {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
         NSLog("%@ will activate", self)
-        print("p93 in ReminderListPickerIC willActivate")
+        print("w34 in CalendarListPickerIC willActivate")
         
        // loadTableData()
     }
@@ -56,31 +56,30 @@ class CalendarListPickerIC: WKInterfaceController {
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         // Configure interface objects here.
-        print("p19 ReminderListPickerIC")
+        print("w59 CalendarListPickerIC")
         print("-----------------------------------------")
         
-        let sceneTitle:String = (context as? String)!
-        self.setTitle("«\(sceneTitle)")
-       
+        self.setTitle("«Settings")
+        
         //TODO Anil TODO Mike needed? or willActivate instead?
         loadTableData()
     }
     
     override func table(table: WKInterfaceTable, didSelectRowAtIndex rowIndex: Int) {
-        print("w116 clicked on row: \(rowIndex)")
+        print("w72 clicked on row: \(rowIndex)")
         
         selectedRow = rowIndex //for use with insert and delete, save selcted row index
-        let itemRow = self.table.rowControllerAtIndex(rowIndex) as! DefaultCalendarListTableRC
+        let row = self.table.rowControllerAtIndex(rowIndex) as! DefaultCalendarListTableRC
   
         if self.checked {               // Turn checkmark off
-            itemRow.imageCheckbox.setImageNamed("cbBlank40px")
+            row.imageCheckbox.setImageNamed("cbBlank40px")
             self.checked = false
         } else {                        // Turn checkmark on
-            itemRow.imageCheckbox.setImageNamed("cbChecked40px")
+            row.imageCheckbox.setImageNamed("cbChecked40px")
             let defaultCalendar: EKCalendar = allCalendarLists[rowIndex]
             let defaultCalendarID = defaultCalendar.calendarIdentifier
             
-            print("w130 defaultCalendarID: \(defaultCalendarID)")
+            print("w85 defaultCalendarID: \(defaultCalendarID)")
             
             defaults.setObject(defaultCalendarID, forKey: "defaultCalendarID")    //sets defaultReminderListID String
             
@@ -93,7 +92,7 @@ class CalendarListPickerIC: WKInterfaceController {
         // This method is called when watch view controller is no longer visible
         NSLog("%@ did deactivate", self)
         super.didDeactivate()
-        print("p110 in ReminderListPickerIC didDeactivate")
+        print("w98 in CalendarListPickerIC didDeactivate")
 
     }
 

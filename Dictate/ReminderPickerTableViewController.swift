@@ -51,7 +51,7 @@ class ReminderPickerTableViewController: UITableViewController {
         view!.backgroundColor = UIColor(CGColor: reminder.CGColor)
     
     
-    
+        // Check if deafults is there, then set default item to be checked
         if defaults.stringForKey("defaultReminderID") != "" {
             if let defaultReminderID  = defaults.stringForKey("defaultReminderID") {
                 

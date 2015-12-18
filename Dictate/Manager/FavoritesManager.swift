@@ -30,7 +30,7 @@ class FavoritesManager: NSObject {
     var favorites = [
         ["name":"Mike",         "phone":"608-242-7700",     "email":"mike@thatsoft.com"],
         ["name":"Stephanie",    "phone":"608-692-6132",     "email":"steph@derr.ws"],
-        ["name":"Mom",          "phone":"608-693-8347",     "email":"germangirl1988@gmail.com"],
+        ["name":"Mom",          "phone":"608-963-8347",     "email":"germangirl1988@gmail.com"],
         ["name":"Jonathan",     "phone":"608-220-8543",     "email":"jonathanmwild@gmail.coms"],
         ["name":"Andrew",       "phone":"262-412-8745",     "email":"aw@rouse.biz"],
     ]

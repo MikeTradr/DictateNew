@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class SettingsEventTableViewController: UITableViewController, UITextFieldDelegate{
     
     let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
@@ -47,10 +48,15 @@ class SettingsEventTableViewController: UITableViewController, UITextFieldDelega
             }
         }
         
-        let duration    = defaults.objectForKey("eventDuration") as! Int
-        let alert       = defaults.objectForKey("eventAlert") as! Int
+        let duration    = defaults.objectForKey("defaultEventDuration") as! Int     //changed from eventDuration 112715
+        let alert       = defaults.objectForKey("defaultEventAlert") as! Int        //changed from eventAlert 112715
         labelDefaultDuration.text = "\(duration)"
         labelDefaultAlert.text = "\(alert)"
+        
+        
+        //Looks for single or multiple taps.
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        view.addGestureRecognizer(tap)
 
     }
 
@@ -60,6 +66,12 @@ class SettingsEventTableViewController: UITableViewController, UITextFieldDelega
         // Uncommentthe following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     //}
+    
+    //Calls this function when the tap is recognized.
+    func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
+    }
     
     
      func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool  {
@@ -71,7 +83,7 @@ class SettingsEventTableViewController: UITableViewController, UITextFieldDelega
                 //empty field
             } else {
                 let newDuration = Int(currentString)
-                defaults.setObject(newDuration, forKey: "eventDuration")
+                defaults.setObject(newDuration, forKey: "defaultEventDuration")
             }
         }
         
@@ -81,12 +93,18 @@ class SettingsEventTableViewController: UITableViewController, UITextFieldDelega
             if currentString.isEmpty {
                 //empty field
             } else {
-                let newAlert = Int(currentString)!
-                defaults.setObject(newAlert, forKey: "eventAlert")
+                let newAlert = Int(currentString)
+                defaults.setObject(newAlert, forKey: "defaultEventAlert")
             }
         }
         
         return true;
+    }
+    
+    
+    func removeKeyboard() {
+        labelDefaultAlert.resignFirstResponder()
+        labelDefaultDuration.resignFirstResponder()
     }
     
 

@@ -15,13 +15,17 @@ class CalendarSettingsIC: WKInterfaceController {
     
     var audioPlayer = AVAudioPlayer()
     
-    @IBAction func buttonReminders() {
-        print("w19 in buttom Reminders")
-          presentControllerWithName("ReminderPicker", context: "Settings")    //TODO why no "settings" shown ???
+    
+    @IBAction func buttonDefaults() {
+        
+        print("w26 in buttom Reminders")
+        presentControllerWithName("CalendarPicker", context: "Settings")    //TODO why no "settings" shown ???
+        
     }
     
+    
     @IBAction func buttonCalendars() {
-         presentControllerWithName("CalendarPicker", context: "Settings")
+         presentControllerWithName("ShowCalendars", context: "Settings")
     }
 //----- Navigation Buttons ---------------------------------
     @IBAction func navButtonReminders() {
@@ -46,7 +50,7 @@ class CalendarSettingsIC: WKInterfaceController {
     }
     
     @IBAction func navButtonToday() {
-          presentControllerWithName("TodayEvents", context: nil)
+          presentControllerWithName("Events", context: nil)
     }
     
 //----- Navigation Buttons ---------------------------------

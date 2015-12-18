@@ -12,12 +12,10 @@ import Bolts
 import Fabric
 import Crashlytics
 
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-
 
     //Anill's
 
@@ -184,6 +182,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //make ReminderStringList Array
         ReminderManager.sharedInstance.createReminderStringArray()
+   /*
+        //temp to remove TODO  112715  added for new variables here. SEt on first initialization so maybe ok to remove now.
+        let newAlert = 30
+        defaults.setObject(newAlert, forKey: "defaultEventAlert")
+        
+        let duration = 10
+        defaults.setObject(duration, forKey: "defaultEventDuration")
+ */
         
         //make Calendar's List Array LOCAL CALENDARS TODO
    //     ReminderManager.sharedInstance.getLocalEventCalendars()

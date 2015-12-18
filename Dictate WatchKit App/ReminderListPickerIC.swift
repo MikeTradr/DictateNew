@@ -44,6 +44,26 @@ class ReminderListPickerIC: WKInterfaceController {
             let row = table.rowControllerAtIndex(index) as! DefaultReminderListTableRC
             let reminder = allReminderLists[index]
             
+            
+            // Check if deafults is there, then set default item to be checked
+            if defaults.stringForKey("defaultReminderID") != "" {
+                if let defaultReminderID  = defaults.stringForKey("defaultReminderID") {
+                    
+                    print("p133 defaultReminderID: \(defaultReminderID)")
+                    print("p134 reminder.calendarIdentifier: \(reminder.calendarIdentifier)")
+                    
+                    if reminder.calendarIdentifier == defaultReminderID {               // add checkmark for default reminder
+                        print("p135 WE HERE")
+                        
+                        row.imageCheckbox.setImageNamed("cbChecked40px")    // Turn checkmark on
+                    } else {
+                        row.imageCheckbox.setImageNamed("cbBlank40px")      // Turn checkmark off
+                    }
+                }
+            }
+            
+            
+            
             ReminderManager.sharedInstance.fetchCalendarReminders(reminder) { (reminders) -> Void in
                 //println(reminders)
                 self.allReminders = reminders as [EKReminder]
@@ -55,6 +75,13 @@ class ReminderListPickerIC: WKInterfaceController {
                 row.verticalBar.setBackgroundColor(UIColor(CGColor: reminder.CGColor))
             }
         }
+        
+  
+
+
+        
+        
+        
     }   // end loadTableData func
     
   
@@ -83,19 +110,21 @@ class ReminderListPickerIC: WKInterfaceController {
         print("w94 clicked on row: \(rowIndex)")
         
         selectedRow = rowIndex //for use with insert and delete, save selcted row index
-        let itemRow = self.table.rowControllerAtIndex(rowIndex) as! DefaultReminderListTableRC
+        let row = self.table.rowControllerAtIndex(rowIndex) as! DefaultReminderListTableRC
         
         if self.checked {               // Turn checkmark off
-            itemRow.imageCheckbox.setImageNamed("cbBlank40px")
+            row.imageCheckbox.setImageNamed("cbBlank40px")
             self.checked = false
         } else {                        // Turn checkmark on
-            itemRow.imageCheckbox.setImageNamed("cbChecked40px")
+            row.imageCheckbox.setImageNamed("cbChecked40px")
             let defaultReminderList: EKCalendar = allReminderLists[rowIndex]
-            let defaultReminderListID = defaultReminderList.calendarIdentifier
+            let defaultReminderID = defaultReminderList.calendarIdentifier
             
-            print("w107 defaultReminderListID: \(defaultReminderListID)")
+            print("w122 defaultReminderID: \(defaultReminderID)")
             
-            defaults.setObject(defaultReminderListID, forKey: "defaultReminderListID")    //sets defaultReminderListID String
+           // defaults.setObject(defaultReminderListID, forKey: "defaultReminderListID")    //sets defaultReminderListID String   //removed had old key. 121215
+            
+            defaults.setObject(defaultReminderID, forKey: "defaultReminderID")    //sets defaultReminderListID String
             
             self.checked = true
         }

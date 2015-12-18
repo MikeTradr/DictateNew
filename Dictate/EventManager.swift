@@ -27,7 +27,6 @@ class EventManager: NSObject {
     let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
     var allEvents: Array<EKEvent> = []
     var numberEventsToday:Int = 0
-
     
     func getAccessToEventStoreForType(type:EKEntityType, completion:(granted:Bool)->Void){
         
@@ -45,13 +44,20 @@ class EventManager: NSObject {
         } else {
             completion(granted: true)
             
+            print("##p47 WE HERE func getAccessToEventStoreForType")
+            
             let defaultCalendarID = defaults.stringForKey("defaultCalendarID")
-            if defaultCalendarID == "" {    //added by Mike 11112015 to save users default Calendar to NSUserDefaults for defaultReminderID
+            
+            print("p52 defaultCalendarID: \(defaultCalendarID)")
+            
+            if defaultCalendarID == nil {    //added by Mike 11112015 to save users default Calendar to NSUserDefaults for defaultReminderID
                 let calendar = EKEvent(eventStore: self.eventStore)
                 calendar.calendar = eventStore.defaultCalendarForNewEvents
                 let defaultCalendarID = calendar.calendar.calendarIdentifier
                 if defaultCalendarID != "" {
                     defaults.setObject(defaultCalendarID, forKey: "defaultCalendarID") //sets Default Selected Calendar CalendarIdentifier
+                    let calendarName = calendar.title
+                    defaults.setObject(calendarName, forKey: "calendarName") //sets Default Selected Calendar calendarName  //added 112615
                 }
             }
         }
@@ -116,7 +122,7 @@ class EventManager: NSObject {
                 
                 if (calendarName == "") {
                     print("p68 we here: \(calendarName)")
-                    var calendarName = "dictate events"
+                    var calendarName:String = "dictate events"
                 }
                 
                 //calendarName = "dictate events"
@@ -172,8 +178,6 @@ class EventManager: NSObject {
                     
                     print("p119 calendar.title.lowercaseString = \(calendar.title.lowercaseString)")
                     print("p120 calendarName.lowercaseString = \(calendarName!.lowercaseString)")
-                    
-                    
                     
                     if calendar.title.lowercaseString == calendarName!.lowercaseString {     //need match here to create event on calendar!!!
                         
@@ -414,8 +418,10 @@ class EventManager: NSObject {
                 
                 print("p416 allCalendars: \(allCalendars)")
                 
-                let calender = EKCalendar(forEntityType: EKEntityType.Event , eventStore: self.eventStore)
+                let calender = EKCalendar(forEntityType: EKEntityType.Event, eventStore: self.eventStore)
                 print("p418 calender: \(calender)")
+                
+                
                 
                 //TODO aboveline pints to:
                 //       p418 calender: EKCalendar <0x7f821b4e9350> {title = (null); type = Local; allowsModify = YES; color = (null);}
@@ -429,7 +435,20 @@ class EventManager: NSObject {
                 
                 // Access list of available sources from the Event Store
                 let sourcesInEventStore = self.eventStore.sources as! [EKSource]
-                print("p482 sourcesInEventStore: \(sourcesInEventStore)")
+                print("p434 sourcesInEventStore: \(sourcesInEventStore)")
+                
+                // Filter the available sources and select the "Local" source to assign to the new calendar's
+                // source property
+                
+                
+                newCalendar.source = sourcesInEventStore.filter{
+                    (source: EKSource) -> Bool in
+                    source.sourceType == EKSourceType.Local
+                    }.first!
+                
+                
+                
+                
                 
                 //TODO Anil use only Local calendarsmaybe in out CalendarListArray I made???
                 
@@ -440,31 +459,104 @@ class EventManager: NSObject {
                 // source property
                 
                 //TODO Anil can we filter for local calndars only. I get in Arry Mike Derr twice!
-                //TODO Anil help we need to file ter calendars of type = calDAV
-                
-                newCalendar.source = sourcesInEventStore.filter{
-                    (source: EKSource) -> Bool in
-                    source.sourceType == EKSourceType.Local
-                    }.first!
-                
-                
+                //TODO Anil help we need to filter calendars of type = calDAV
+   
                 
                 var error:NSError?
                 calender.source = self.eventStore.defaultCalendarForNewEvents.source
-                print("p181 Error: \(error)")
+                print("p463 Error: \(error)")
                 
                 let calendars = self.eventStore.calendarsForEntityType(EKEntityType.Event)
                 
                 var calendarArray:[String] = []
                 
+                enum EKCalendarType : Int {
+                    case Local
+                    case CalDAV
+                    case Exchange
+                    case Subscription
+                    case Birthday
+                }
+                
+                var myLocalSource: EKSource? = nil
+                for calendarSource: EKSource in self.eventStore.sources {
+                    if calendarSource.sourceType == EKSourceType.Local {
+                        myLocalSource = calendarSource
+                        
+                        print("p482 myLocalSource: \(myLocalSource)")
+
+                        
+                    }
+                }
+            
+                
+                
                 for calendar in calendars {
                     var calendarTitle:String! = calendar.title
-                    print("p189 calendarTitle: \(calendarTitle)")
                     
-                    calendarArray.append(calendarTitle)
+                    
+                   // print("p468 EKCalendar: \(EKCalendar)")
+                    
+                    
+                    var myLocalSource: EKSource? = nil
+                    for calendarSource: EKSource in self.eventStore.sources {
+                        if calendarSource.sourceType == EKSourceType.Local {
+                            let myLocalSource:EKSource = calendarSource
+                            
+                            print("p507 myLocalSource: \(myLocalSource)")
+                            print("p503 calendarTitle: \(calendarTitle)")
+
+                       
+                        }
+                    }
+
+                    print("p468 calendarTitle: \(calendarTitle)")
+                    print("p469 calendar.source.sourceType: \(calendar.source.sourceType)")
+                    print("p469 EKSourceType.Local: \(EKSourceType.Local)")
+                    print("p477 calendar.type: \(calendar.type)")
+
+    
+                    print("---------------------------------------------------------")
+
+                    
+                    
+                    let type = calendar.type
+                //    print("pType calendar.type: \(EKSourceType.local)")
+
+                    
+                   // var sourceType:EKSourceType = nil
+                    
+               //     if calendar.type == "CalDAV" {
+                //        print("p472 we here in match?")
+                //        calendarArray.append(calendarTitle)
+               //     }
+                    
+                    
+               //     if calendar.type == EKCalendarType.CalDAV {
+                 //       print("p472 we here in match?")
+                //       calendarArray.append(calendarTitle)
+                //    }
+                    
+                    
+                   // let filteredCalendars:[EKCalendar] = allCalendars.filter{ $0.type == EKCalendarType.CalDAV}
+                    
+             //       newCalendar.source = sourcesInEventStore.filter{
+              //          $0.sourceType == EKSourceType.Local
+              //      }
+                    
+
+                    if calendar.source.sourceType == EKSourceType.Local {
+                        print("p472 we here in match?")
+                        calendarArray.append(calendarTitle)
+                    }
+                    
+                    
+                    
                 }
-                print("p193 calendarArray: \(calendarArray)")
-                print("p193 calendarArray.count: \(calendarArray.count)")
+                print("p479 calendarArray: \(calendarArray)")
+                print("p480 calendarArray.count: \(calendarArray.count)")
+                print("==============================================================")
+
                 
                 self.defaults.setObject(calendarArray, forKey: "calendarArray")            //sets calendarArray of String the names
                 self.defaults.synchronize()

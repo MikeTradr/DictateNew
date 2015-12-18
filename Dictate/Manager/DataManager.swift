@@ -99,8 +99,8 @@ class DataManager: NSObject {
         defaults.setObject(actionType, forKey: "actionType")
         defaults.setObject(mainType, forKey: "mainType")
         
-        defaults.setObject(eventDuration, forKey: "eventDuration")
-        defaults.setObject(defaultEventAlert, forKey: "eventAlert")
+        defaults.setObject(eventDuration, forKey: "defaultEventDuration")   //added defualt 112715
+        defaults.setObject(defaultEventAlert, forKey: "defaultEventAlert")  //added defualt 112715
 
         defaults.setObject(wordArrTrimmed, forKey: "wordArrTrimmed")
         defaults.setObject(calendarName, forKey: "calendarName")

@@ -10,28 +10,54 @@ import WatchKit
 import Foundation
 import AVFoundation
 
-
 class ReminderSettingsIC: WKInterfaceController {
     
     var audioPlayer = AVAudioPlayer()
+   // var player: WKAudioFilePlayer!
     
-    @IBAction func buttonReminders() {
+    
+    @IBAction func buttonSetDefault() {
         print("w19 in buttom Reminders")
-          presentControllerWithName("ReminderPicker", context: "Settings")    //TODO why no "settings" shown ???
+        presentControllerWithName("ReminderPicker", context: "Settings")
     }
     
-    @IBAction func buttonCalendars() {
-         presentControllerWithName("CalendarPicker", context: "Settings")
+    @IBAction func buttonShowReminders() {
+          presentControllerWithName("ShowReminders", context: "Settings")
     }
+
 //----- Navigation Buttons ---------------------------------
     @IBAction func navButtonReminders() {
           presentControllerWithName("Reminders", context: nil)
     }
     
-    
     @IBAction func buttonMic() {
         let alertSound1: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("button-14", ofType: "mp3")!)
         //General.playSound(alertSound3!)
+ 
+        // TODO Fix sound playing on watch
+        let filePath = NSBundle.mainBundle().pathForResource("se_tap", ofType: "m4a")!
+        let fileUrl = NSURL.fileURLWithPath(filePath)
+/*        let asset = WKAudioFileAsset(URL: fileUrl)
+        let playerItem = WKAudioFilePlayerItem(asset: asset)
+        player = WKAudioFilePlayer(playerItem: playerItem)
+        
+        
+        
+        self.presentMediaPlayerControllerWithURL(alertSound1,
+            options: [WKMediaPlayerControllerOptionsAutoplayKey: true],
+            completion: { (didPlayToEnd : Bool,
+                endTime : NSTimeInterval,
+                error : NSError?) -> Void in
+                if let anErrorOccurred = error {
+                    // Handle the error.
+                }
+                // Perform other tasks
+        })
+        
+ */
+        
+        
+        
         
         //Second, we currently can't control sounds or haptic feedback from our app's code.
         self.playSound(alertSound1)
@@ -46,7 +72,7 @@ class ReminderSettingsIC: WKInterfaceController {
     }
     
     @IBAction func navButtonToday() {
-          presentControllerWithName("TodayEvents", context: nil)
+          presentControllerWithName("Events", context: nil)
     }
     
 //----- Navigation Buttons ---------------------------------

@@ -102,18 +102,18 @@ class ReminderItemsIC: WKInterfaceController {
         print("w119 clicked on row: \(rowIndex)")
         
         selectedRow = rowIndex //for use with insert and delete, save selcted row index
-        let itemRow = self.table.rowControllerAtIndex(rowIndex) as! ReminderItemsTableRC
+        let row = self.table.rowControllerAtIndex(rowIndex) as! ReminderItemsTableRC
         let reminderItem = allReminders[rowIndex]
         let veryDarkGray = UIColor(red: 128, green: 128, blue: 128, alpha: 1)     //light biege color, for Word List
  
         if self.checked {               // Turn checkmark off
-            itemRow.imageCheckbox.setImageNamed("cbBlank40px")
-            itemRow.tableRowLabel.setTextColor(UIColor.whiteColor())
+            row.imageCheckbox.setImageNamed("cbBlank40px")
+            row.tableRowLabel.setTextColor(UIColor.whiteColor())
             reminderItem.completed == false
             self.checked = false
         } else {                        // Turn checkmark on
-            itemRow.imageCheckbox.setImageNamed("cbChecked40px")
-            itemRow.tableRowLabel.setTextColor(veryDarkGray)
+            row.imageCheckbox.setImageNamed("cbChecked40px")
+            row.tableRowLabel.setTextColor(veryDarkGray)
             reminderItem.completed == true
             self.checked = true
         }

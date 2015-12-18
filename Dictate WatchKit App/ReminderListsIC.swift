@@ -350,13 +350,13 @@ class ReminderListsIC: WKInterfaceController {
             var selectedRow:Int! = nil
             
             selectedRow = rowIndex //for use with insert and delete, save selcted row index
-            let itemRow = self.table2.rowControllerAtIndex(rowIndex) as! ReminderItemsTableRC
+            let row = self.table2.rowControllerAtIndex(rowIndex) as! ReminderItemsTableRC
             let reminderItem = allReminders[rowIndex]
             let veryDarkGray = UIColor(red: 128, green: 128, blue: 128, alpha: 1)     //light biege color, for Word List
             
             if self.checked {               // Turn checkmark off
-                itemRow.imageCheckbox.setImageNamed("cbBlank40px")
-                itemRow.tableRowLabel.setTextColor(UIColor.whiteColor())
+                row.imageCheckbox.setImageNamed("cbBlank40px")
+                row.tableRowLabel.setTextColor(UIColor.whiteColor())
                 reminderItem.completed == false
                 self.checked = false
                 
@@ -364,8 +364,8 @@ class ReminderListsIC: WKInterfaceController {
                 
                 self.playSound(alertSound1)
             } else {                        // Turn checkmark on
-                itemRow.imageCheckbox.setImageNamed("cbChecked40px")
-                itemRow.tableRowLabel.setTextColor(veryDarkGray)
+                row.imageCheckbox.setImageNamed("cbChecked40px")
+                row.tableRowLabel.setTextColor(veryDarkGray)
                 
                 var alertSound1: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("124-DeleteWhoosh", ofType: "mp3")!)
                 //TODO Mike TODO Anil fix sound call.
@@ -436,7 +436,7 @@ class ReminderListsIC: WKInterfaceController {
     }
     
     @IBAction func buttonToday() {
-        presentControllerWithName("TodayEvents", context: "Reminders")
+        presentControllerWithName("Events", context: "Reminders")
     }
     
     @IBAction func buttonMain() {

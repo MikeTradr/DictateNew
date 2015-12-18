@@ -68,13 +68,9 @@ class SettingsTableViewController: UITableViewController{
         
         if defaults.stringForKey("defaultReminderID") != "" {
             if let defaultReminderID  = defaults.stringForKey("defaultReminderID") {
-                
                 print("p83 defaultReminderID: \(defaultReminderID)")
-                
                 if let reminder:EKCalendar = ReminderManager.sharedInstance.eventStore.calendarWithIdentifier("defaultReminderID") {
-                    
-                    print("p87 reminder: \(reminder)")
-
+                    print("p75 reminder: \(reminder)")
                     labelReminderDefault.text = reminder.title
                     labelReminderDefault.textColor = UIColor(CGColor: reminder.CGColor)
                 }

@@ -48,12 +48,15 @@ class ReminderManager: NSObject {
             completion(granted: true)
         
             let defaultReminderID = defaults.stringForKey("defaultReminderID")
-            if defaultReminderID == "" {    //added by Mike 11112015 to save users default reminder to NSUserDefaults for defaultReminderID
+            if defaultReminderID == nil {    //added by Mike 11112015 to save users default reminder to NSUserDefaults for defaultReminderID
                 let reminder = EKReminder(eventStore: self.eventStore)
                 reminder.calendar = eventStore.defaultCalendarForNewReminders()
                 let defaultReminderID = reminder.calendar.calendarIdentifier
                 if defaultReminderID != "" {
                     defaults.setObject(defaultReminderID, forKey: "defaultReminderID") //sets Default Selected Reminder CalendarIdentifier
+                    //need to fix def reminer list??? check 112615
+                    let calendarName = reminder.title
+                    defaults.setObject(calendarName, forKey: "reminderList") //sets Default Selected Calendar reminderList  //added 112615          
                 }
             }
 
@@ -444,6 +447,9 @@ class ReminderManager: NSObject {
     
     
     func getCalendar(id:String) -> EKCalendar? {            //returns EKCalendar from CalendarID
+            print("p447 we here? id: \(id)")
+            let temp:EKCalendar = (self.eventStore.calendarWithIdentifier(id))!
+            print("p449 temp: \(temp)")
             return self.eventStore.calendarWithIdentifier(id)
         }
     

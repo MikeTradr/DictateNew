@@ -27,7 +27,7 @@ class ShowCalendarsIC: WKInterfaceController {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
         NSLog("%@ will activate", self)
-        print("p93 in ReminderListPickerIC willActivate")
+        print("w30 in ShowCalendarsIC willActivate")
         
        // loadTableData()
     }
@@ -52,11 +52,10 @@ class ShowCalendarsIC: WKInterfaceController {
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         // Configure interface objects here.
-        print("p19 ReminderListPickerIC")
+        print("w55 ShowCalendarsIC")
         print("-----------------------------------------")
 
-        let sceneTitle:String = (context as? String)!
-        self.setTitle("«\(sceneTitle)")
+        self.setTitle("«Settings")
         
         //TODO Anil TODO Mike needed? or willActivate instead?
         loadTableData()
@@ -66,13 +65,13 @@ class ShowCalendarsIC: WKInterfaceController {
         print("w116 clicked on row: \(rowIndex)")
         
         selectedRow = rowIndex //for use with insert and delete, save selcted row index
-        let itemRow = self.table.rowControllerAtIndex(rowIndex) as! ShowCalendarsTableRC
+        let row = self.table.rowControllerAtIndex(rowIndex) as! ShowCalendarsTableRC
   
         if self.checked {               // Turn checkmark off
-            itemRow.imageCheckbox.setImageNamed("cbBlank40px")
+            row.imageCheckbox.setImageNamed("cbBlank40px")
             self.checked = false
         } else {                        // Turn checkmark on
-            itemRow.imageCheckbox.setImageNamed("cbChecked40px")
+            row.imageCheckbox.setImageNamed("cbChecked40px")
             let defaultCalendar: EKCalendar = allCalendarLists[rowIndex]
             let defaultCalendarID = defaultCalendar.calendarIdentifier
             
@@ -89,7 +88,7 @@ class ShowCalendarsIC: WKInterfaceController {
         // This method is called when watch view controller is no longer visible
         NSLog("%@ did deactivate", self)
         super.didDeactivate()
-        print("p110 in ReminderListPickerIC didDeactivate")
+        print("w94 in ShowCalendarsIC didDeactivate")
 
     }
 

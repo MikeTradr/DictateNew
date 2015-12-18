@@ -46,7 +46,7 @@ class SettingsIC: WKInterfaceController {
     }
     
     @IBAction func navButtonToday() {
-          presentControllerWithName("TodayEvents", context: nil)
+          presentControllerWithName("Events", context: nil)
     }
     
 //----- Navigation Buttons ---------------------------------
@@ -83,7 +83,7 @@ class SettingsIC: WKInterfaceController {
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
-        print("p30 in PreferncesIC willActivate")
+        print("w86 in SettingsIC willActivate")
 
     }
 

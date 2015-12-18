@@ -93,7 +93,7 @@ let str40:String = "11 am test after restore"
 
 let str41:String = "reminder buy milk"
 
-let str42:String = "Tomorrow 9 PM Band calendar Mike duration 4 hours "
+let str42:String = "Tomorrow 6 PM duration 4 hours Dress Rehersal alert 30 minutes"
 
 let str43:String = "Tomorrow 9 PM at Essen Haus Josh Becker Band calendar Mike duration 4 hours "
 
@@ -110,6 +110,9 @@ let str48:String = "Reminder wash the car"
 let str49:String = "tomorrow all day study for exam calendar Mike"
 
 let str50:String = "Monday all day study for exam"
+
+let str51:String = "6 am test alert 44 minutes"
+
 
 
 
@@ -137,7 +140,7 @@ add to dictate str   “meeting with Bob every Wednesday at noon”  //handle wo
 */
 
 // ---- change strings here for testing, shows on the dictated field---
-//var str:String = str42
+//var str:String = str51
 var str:String = ""
 
 //var strRaw:String = str

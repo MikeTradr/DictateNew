@@ -34,7 +34,7 @@ class General: NSObject, UITextFieldDelegate, MFMailComposeViewControllerDelegat
     }
     
     func cleardata() {
-        print("General 29 we here cleardata")
+        print("General p37 we here cleardata")
         
         var mainType = ""
         var day = ""

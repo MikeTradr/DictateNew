@@ -1,6 +1,6 @@
 //
 //  ViewController.swift
-//  Parse v1
+//  Dictate
 //
 //  Created by Mike Derr on 5/6/15.
 //  Copyright (c) 2015 ThatSoft.com. All rights reserved.

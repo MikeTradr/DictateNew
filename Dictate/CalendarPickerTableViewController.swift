@@ -58,31 +58,24 @@ class CalendarPickerTableViewController: UITableViewController {
         let view = cell.viewWithTag(1)
         let calendar = calendarList[indexPath.row]
         view!.backgroundColor = UIColor(CGColor: calendar.CGColor)
-        
-        
-        
+      
         if defaults.stringForKey("defaultCalendarID") != "" {
             if let defaultCalendarID  = defaults.stringForKey("defaultCalendarID") {
                 
                 //print("p67 defaultCalendarID: \(defaultCalendarID)")
                 //print("p68 calendar: \(calendar.calendarIdentifier)")
                 
-                if calendar.calendarIdentifier == defaultCalendarID {               // add checkmark for default calendar
-                    //print("71 WE HERE")
+                if calendar.calendarIdentifier == defaultCalendarID {   // add checkmark for default calendar
                     cell.accessoryType = UITableViewCellAccessoryType.Checkmark
                 } else {
                     cell.accessoryType = UITableViewCellAccessoryType.None
                 }
             }
         }
-        
-        
-        
     }
     
     
-    
-    
+
     override func viewWillAppear(animated: Bool) {
         let calendarList = ReminderManager.sharedInstance.getCalendars(EKEntityType.Event)
 
@@ -171,6 +164,7 @@ class CalendarPickerTableViewController: UITableViewController {
                 
                 //TODO Anil how do we uncheck the old default cell row???
                 
+                 cell.accessoryType = .None
             }
             
             

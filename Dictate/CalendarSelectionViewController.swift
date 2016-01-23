@@ -5,6 +5,7 @@
 //  Created by Anil Varghese on 07/09/15.
 //  Copyright (c) 2015 ThatSoft.com. All rights reserved.
 //
+// 122415 mods by Mike, added ability to remember last selection to NSUserDefaults...
 
 import UIKit
 import EventKit
@@ -16,6 +17,9 @@ class CalendarSelectionViewController: UITableViewController {
     var selectedCalendars:Array<EKCalendar> = []
     var shouldShowAll = false
     var specialItems = ["All"];
+    
+    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!  //122415 MJD to retain selection
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,9 +78,7 @@ class CalendarSelectionViewController: UITableViewController {
                 cell.accessoryType = UITableViewCellAccessoryType.None
             }
 
-        }
-        else
-        {
+        } else {
             cell.textLabel?.text = self.specialItems[indexPath.row]
             cell.textLabel?.textColor = UIColor.whiteColor()
             if selectedCalendars.count == 0{
@@ -104,6 +106,10 @@ class CalendarSelectionViewController: UITableViewController {
             if self.selectedCalendars.contains(selectedCalendar){
                 // Selected same cell, do nothing
                 
+                //save calendarID to use to show for next time...
+                //TODO Anil
+                //added by 122415 by mike. need to handle multiple calendars, and all cases!
+                defaults.setObject(selectedCalendar.calendarIdentifier, forKey: "defaultListShowID")
                 
             }else{
                 

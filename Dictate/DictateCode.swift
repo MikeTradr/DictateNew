@@ -1,6 +1,6 @@
 //
 //  DictateCode.swift
-//  WatchInput
+//  Dictate
 //
 //  Created by Mike Derr on 5/20/15.
 //  Copyright (c) 2015 ThatSoft.com. All rights reserved.

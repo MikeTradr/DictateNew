@@ -812,7 +812,7 @@ class vcTest1: UIViewController {
         
         //TODO get this from login Screen, hard coded for now...
         
-        print("p374 PFUser.currentUser(): \(PFUser.currentUser())")
+        print("p815 PFUser.currentUser(): \(PFUser.currentUser()!)")
         
         //TODO fix PFuser when is nil can be nil???
         
@@ -821,40 +821,37 @@ class vcTest1: UIViewController {
         } else {
             // rawDataObject["userName"] = "Mike Hard Coded"
             
-            print("p383 PFUser.currentUser().username: \(PFUser.currentUser()!.username)")
-            
+            print("p824 PFUser.currentUser().username: \(PFUser.currentUser()!.username!)")
             
             // todo bombs below here.
-            rawDataObject["userName"] = PFUser.currentUser()!.username
+            //TODO Anil I chnged as had nil, when we no longer sue login screen 123115 MJD
+            //rawDataObject["userName"] = PFUser.currentUser()!.username
+            rawDataObject["userName"] = PFUser.currentUser()!
         }
         
-        print("p384 we here? ")
+        print("p833 we here? ")
         
         //rawDataObject["userName"] = "Mike Coded"
         
         // TODO used to have this alone:  rawDataObject["userName"] = PFUser.currentUser()?.username
         
-        
-        
         var query = PFQuery(className:"UserData")
         //TODO somehow get and save email to parse database
         // query.whereKey(“username”, equalTo: PFUser.currentUser()?.username)
         
-        print("p358 query: \(query)")
+        print("p843 query: \(query)")
         
-        print("p354 PFUser.currentUser()?.email: \(PFUser.currentUser()?.email)")
+        print("p845 PFUser.currentUser()?.email: \(PFUser.currentUser()?.email)")
         
         // rawDataObject["userEmail"] = PFUser.currentUser()?.email
         
         rawDataObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
-            print("p362 vcTest1 rawDataObject has been saved.")
+            print("p850 vcTest1 rawDataObject has been saved.")
         }
         
 // ____ End Save to Parse Database ____________________________________
-
         
         General().cleardata()
-        
         
         defaults.setObject(eventDuration, forKey: "eventDuration")
         
@@ -866,8 +863,6 @@ class vcTest1: UIViewController {
         
         actionType = ""
         defaults.setObject(actionType, forKey: "actionType")
-        
-        
         
         General().delay(2.0) {
             // do stuff

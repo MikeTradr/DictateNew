@@ -1,11 +1,12 @@
 //
 //  ToDoTableViewController.swift
-//  WatchInput
+//  Dictate
 //
 //  Created by Mike Derr on 6/22/15.
 //  Copyright (c) 2015 ThatSoft.com. All rights reserved.
 //
 // did Anil do this code?
+// 122415 mods by Mike, see comments... added the activityController code...
 
 
 import UIKit
@@ -14,7 +15,6 @@ import EventKitUI
 import AVFoundation
 
 class ToDoTableViewController: UITableViewController,BFPaperCheckboxDelegate {
-    
 
     var audioPlayer = AVAudioPlayer()
     
@@ -32,6 +32,12 @@ class ToDoTableViewController: UITableViewController,BFPaperCheckboxDelegate {
     
     var selectionController:CalendarSelectionViewController!
     var showCompleted = false
+    
+    var listName:String = ""        //added by Mike 122415 for activityVC
+    var listCount:String = ""       //added by Mike 122415 for activityVC
+    var body:String = ""            //added by Mike 122415 for activityVC
+
+    
     @IBOutlet var ToDoTableView: UITableView!
     
     @IBOutlet weak var reminderListButton: UIButton!
@@ -57,6 +63,197 @@ class ToDoTableViewController: UITableViewController,BFPaperCheckboxDelegate {
         self.selectionController.shouldShowAll = true
         self.navigationController?.pushViewController(self.selectionController, animated: true)
         
+    }
+    
+    
+    
+    @IBAction func shareButtonTapped(sender: AnyObject) {   //added by Mike 122415
+        
+    //TODO Anil, Mike need to give the data, maybe see the mail html format Mike does!
+        
+      //  let image:UIImage = UIGraphicsGetImageFromCurrentImageContext()
+      //  UIGraphicsEndImageContext()
+        
+      // let someText:String = "List: \(selectionController.selectedCalendars[0].title)"
+/*
+        if let _selectionController = self.selectionController where self.selectionController.selectedCalendars.count > 0{
+            self.reminderListButton.setTitle("List: \(_selectionController.selectedCalendars[0].title) >", forState: .Normal)
+            
+            let someText:String = "List \(_selectionController.selectedCalendars[0].title) >"
+            
+            // let's add a String and an NSURL
+            let activityViewController = UIActivityViewController(
+                activityItems: [someText, someText],
+                applicationActivities: nil)
+            
+            self.presentViewController(activityViewController, animated: true, completion: { () -> Void in
+                
+            })
+
+        }
+*/
+        //remindersForTexting()
+        
+       remindersForMailing()
+
+        
+      //  let someText:String = "List: \(listName), \(listCount)"
+        
+        let mailSubjectText:String = "✉ List: \(listName) (\(listCount))"
+        
+        
+      //  let url = NSURL(string: "http://thumbs.dreamstime.com/x/cocker-spaniel-illustration-20140870.jpg")!
+        
+        //let image : AnyObject = UIImage(named:"http://thumbs.dreamstime.com/x/cocker-spaniel-illustration-20140870.jpg")!
+/*
+        let url = NSURL(string: "http://thumbs.dreamstime.com/x/cocker-spaniel-illustration-20140870.jpg")
+        let data = NSData(contentsOfURL: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check
+        var image = UIImage(data: data!)
+*/
+
+        // let's add a String and an NSURL
+        let activityViewController = UIActivityViewController(
+            //activityItems: [someText, body],
+            //activityItems: [body, url, image!],
+           // activityItems: [body, image!],
+
+
+           activityItems: [body],
+            
+           // activityItems: [body,url],
+            applicationActivities: nil)
+        
+        
+        //New Excluded Activities Code
+        activityViewController.excludedActivityTypes = [UIActivityTypeAirDrop, UIActivityTypeAddToReadingList]
+        //
+        
+        activityViewController.setValue(mailSubjectText, forKey: "Subject") //set subject for mail
+        
+        activityViewController.completionWithItemsHandler = {(activityType, completed, returnedItems, activityError) -> Void in
+            
+
+            
+            if !completed {
+                print("p 125 cancelled")
+                return
+            }
+            
+            if activityType == UIActivityTypeMessage {
+                print("p130 text")
+                self.remindersForTexting()
+                self.body = self.body + "\r\n" + "💬 from Dictate™ App 😀"
+            }
+            
+            if activityType == UIActivityTypeMail {
+                print("p136 mail")
+                self.remindersForMailing()
+                self.body = self.body + "\r\n" + "📩 Sent from Dictate™ App 😀" //use this for the mail case...
+            }
+            
+            if activityType == UIActivityTypePostToTwitter {
+                print("p142 twitter")
+                self.body = self.body + "\r\n" + "Tweeted from Dictate™ App 😀"
+            }
+            
+            if activityType == UIActivityTypePostToFacebook {
+                print("p147 facebook")
+                self.body = self.body + "\r\n" + "posted from Dictate™ App 😀"
+            }
+            
+        }
+
+        
+        
+        self.presentViewController(activityViewController, animated: true, completion: nil)
+        
+        activityViewController.completionWithItemsHandler = {(activityType, completed:Bool, returnedItems:[AnyObject]?, error: NSError?) in
+            
+            // Return if cancelled
+            if !completed {
+                print("p125 cancelled")
+                return
+            }
+            
+            if activityType == UIActivityTypeMessage {
+                print("p130 text")
+                self.remindersForTexting()
+                self.body = self.body + "\r\n" + "💬 from Dictate™ App 😀"
+            }
+            
+            if activityType == UIActivityTypeMail {
+                print("p136 mail")
+                self.remindersForMailing()
+                self.body = self.body + "\r\n" + "📩 Sent from Dictate™ App 😀" //use this for the mail case...
+            }
+            
+            if activityType == UIActivityTypePostToTwitter {
+                print("p142 twitter")
+                self.body = self.body + "\r\n" + "Tweeted from Dictate™ App 😀"
+            }
+            
+            if activityType == UIActivityTypePostToFacebook {
+                print("p147 facebook")
+                self.body = self.body + "\r\n" + "posted from Dictate™ App 😀"
+            }
+            
+            //activity complete
+            //some code here
+            
+            
+        }
+        
+        
+   /*
+   
+        self.presentViewController(activityViewController, animated: true, completion: { () -> Void in
+            
+          // self.presentViewController(activityViewController.completionHandler, animated: true, completion: { () -> Void in
+  
+       //     self.presentViewController(activityViewController.completionHandler = {(activityType, completed:Bool) in
+                
+                activityViewController.excludedActivityTypes =  [
+                    UIActivityTypePostToTwitter,
+                    UIActivityTypePostToFacebook,
+                    UIActivityTypePostToWeibo,
+                   // UIActivityTypeMessage,
+                   // UIActivityTypeMail,
+                    UIActivityTypePrint,
+                    UIActivityTypeCopyToPasteboard,
+                    UIActivityTypeAssignToContact,
+                    UIActivityTypeSaveToCameraRoll,
+                    UIActivityTypeAddToReadingList,
+                    UIActivityTypePostToFlickr,
+                    UIActivityTypePostToVimeo,
+                    UIActivityTypePostToTencentWeibo
+                ]
+            
+        
+        })
+        
+        
+*/
+   
+        
+    }
+    
+
+    
+    
+    
+    
+
+
+    
+    
+    func activityViewController(activityViewController: UIActivityViewController, itemForActivityType activityType: String) -> AnyObject? {
+        if activityType == UIActivityTypeMessage {
+            return NSLocalizedString("Like this!", comment: "comment")
+        } else if activityType == UIActivityTypePostToTwitter {
+            return NSLocalizedString("Retweet this!", comment: "comment")
+        } else {
+            return nil
+        }
     }
     
     
@@ -92,6 +289,133 @@ class ToDoTableViewController: UITableViewController,BFPaperCheckboxDelegate {
 //        playSound(alertSound3)
     }
     
+    func remindersForTexting(){   //step throught reminders and format for texting activityViewController
+        
+        var numberOfItems:Int = self.reminders.count
+        
+        var alarmString = ""
+        //  var firstAlarm:EKAlarm
+        
+        body = "List: \(listName) (\(listCount))" + "\r"
+        
+        //body = "<html><body>"
+        //body = "\(body)<font size=\"6\" color=\"red\"><b>\(reminderListTitle.title)</b></font><br><hr> "
+        
+        for (index, title) in self.reminders.enumerate() {
+            print("---------------------------------------------------")
+            print("p191 index, title: \(index), \(title)")
+            
+            let item = self.reminders[index]
+            print("p194 item.title: \(item.title)")
+            
+            let title = item.title
+            //TODO Mike TODO Anil how do we get location from a Reminder? This worked forevent see func below!
+            let location = item.location!
+            
+            let alarms = item.alarms
+            let firstAlarm = alarms?[0]
+            
+            if item.alarms != nil {
+                if !alarms!.isEmpty{
+                    //you have atleast one alarm in that array
+                    let firstAlarm = alarms![0]
+                    print("p207 firstAlarm: \(firstAlarm)")
+                }
+            }
+            
+            print("p211 location: \(location)")
+            
+            if location != "" {
+                
+              //  body = "\(body)<font size=\"5\"><b>❑ \(title)</b></font><br><font color=\"gray\">Location:<br><i>\(location)</i></font><p>"+ "\r"
+                
+                body = "\(body)❑ \(title), Location: \(location)" + "\r"
+            } else if firstAlarm != nil {
+                
+               // body = "\(body)<font size=\"5\"><b>❑ \(title)</b></font><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;🕑 \(firstAlarm)<p>"+ "\r"
+                
+                body = "\(body)❑ \(title), 🕑\(firstAlarm)" + "\r"
+            } else {
+                
+               // body = "\(body)<font size=\"5\"><b>❑ \(title)</b></font><br><p>"
+                body = "\(body)❑ \(title)" + "\r"
+            }
+            
+        }       // end If loop through items...
+        
+       // body = body + "<br><hr><br>📩 Sent from Dictate™ App 😀</body></html>"
+        body = body + "\r" + "💬 from Dictate™ App 😀"
+        print("p306 body: \(body)")
+        
+    }
+    
+    func remindersForMailing(){   //step throught reminders and format for mailing activityViewController
+        
+        var numberOfItems:Int = self.reminders.count
+        
+        var alarmString = ""
+        //  var firstAlarm:EKAlarm
+        
+        body = "List: \(listName) (\(listCount))" + "\r\n"
+        
+        //body = "<html><body>"
+        //body = "\(body)<font size=\"6\" color=\"red\"><b>\(reminderListTitle.title)</b></font><br><hr> "
+        
+        for (index, title) in self.reminders.enumerate() {
+            print("---------------------------------------------------")
+            print("p273 index, title: \(index), \(title)")
+            
+            let item = self.reminders[index]
+            print("p276 item.title: \(item.title)")
+            
+            let title = item.title
+            //TODO Mike TODO Anil how do we get location from a Reminder? This worked forevent see func below!
+            let location = item.location!
+            
+            let alarms = item.alarms
+            let firstAlarm = alarms?[0]
+            
+            if item.alarms != nil {
+                if !alarms!.isEmpty{
+                    //you have atleast one alarm in that array
+                    let firstAlarm = alarms![0]
+                    print("p289 firstAlarm: \(firstAlarm)")
+                }
+            }
+            
+            print("p293 location: \(location)")
+            
+            if location != "" {
+                
+                //  body = "\(body)<font size=\"5\"><b>❑ \(title)</b></font><br><font color=\"gray\">Location:<br><i>\(location)</i></font><p>"+ "\r"
+                
+                body = "\(body)❑ \(title), Location: \(location)" + "\r\n"
+            } else if firstAlarm != nil {
+                
+                // body = "\(body)<font size=\"5\"><b>❑ \(title)</b></font><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;🕑 \(firstAlarm)<p>"+ "\r"
+                
+                body = "\(body)❑ \(title), 🕑\(firstAlarm)" + "\r\n"
+            } else {
+                
+                // body = "\(body)<font size=\"5\"><b>❑ \(title)</b></font><br><p>"
+                body = "\(body)❑ \(title)" + "\r\n"
+            }
+            
+        }       // end If loop through items...
+        
+        // body = body + "<br><hr><br>📩 Sent from Dictate™ App 😀</body></html>"
+        
+        body = body + "\r\n" + "📩 Sent from Dictate™ App 😀" //use this for the mail case...
+        // body = body + "\r\n" + "💬 from Dictate™ App 😀"
+
+        print("p368 body: \(body)")
+        
+        return
+        
+    }
+    
+    
+    
     func fetchReminders(){
         if let _selectionController = selectionController where selectionController.selectedCalendars.count > 0{
             self.fetchRemindersFromCalendars(_selectionController.selectedCalendars, showComplted: showCompleted)
@@ -116,11 +440,17 @@ class ToDoTableViewController: UITableViewController,BFPaperCheckboxDelegate {
                 if let _selectionController = self.selectionController where self.selectionController.selectedCalendars.count > 0{
                     self.reminderListButton.setTitle("List: \(_selectionController.selectedCalendars[0].title) >", forState: .Normal)
                     
+                    self.listName = "\(_selectionController.selectedCalendars[0].title)"    //for activityVC
+                    
                 }else{
                     self.reminderListButton.setTitle("List: All >", forState: .Normal)
+                    self.listName = "All Lists" //for activityVC
+
                 }
                 
                 self.listItemsNumberLabel.text = "\(self.reminders.count) items"
+                self.listCount = "\(self.reminders.count) items"            //for activityVC
+                
             })
         }
     }

@@ -74,6 +74,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // [Optional] Track statistics around application opens.
         PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
         
+        //from LittleApp
+        
+        PFUser.currentUser()!.incrementKey("RunCount")
+        PFUser.currentUser()!.saveInBackground()
+        PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
+        
+        
+        
         // Register for Push Notitications
         if application.applicationState != UIApplicationState.Background {
             // Track an app open here if we launch with a push, unless

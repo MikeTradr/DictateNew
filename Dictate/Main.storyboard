@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="JhY-cq-KWn">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="WgF-Na-eRh">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -738,8 +738,8 @@
                                         <action selector="buttonReminderListSelector:" destination="dXF-g5-diV" eventType="touchUpInside" id="KHt-9Z-aCb"/>
                                     </connections>
                                 </button>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="# of items in list" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wd8-bI-ax9">
-                                    <rect key="frame" x="19" y="32" width="145" height="21"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="# of items in list" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wd8-bI-ax9">
+                                    <rect key="frame" x="75" y="32" width="145" height="21"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="145" id="Tbf-YR-RbV"/>
                                     </constraints>
@@ -874,7 +874,14 @@
                             <outlet property="delegate" destination="dXF-g5-diV" id="SqO-0K-rwU"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="TODO" id="SLN-9H-I4j"/>
+                    <navigationItem key="navigationItem" title="TODO" id="SLN-9H-I4j">
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="action" id="gVL-GU-nBY">
+                            <color key="tintColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="shareButtonTapped:" destination="dXF-g5-diV" id="2Cu-Mo-q14"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
                         <outlet property="ToDoTableView" destination="KN6-hI-mTG" id="tEz-gQ-b58"/>
@@ -1046,7 +1053,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bcF-x0-H8r" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1074" y="111"/>
+            <point key="canvasLocation" x="-1046" y="-46"/>
         </scene>
         <!--Prefs-->
         <scene sceneID="W8F-yY-z2E">
@@ -1976,7 +1983,7 @@
         <!--Events-->
         <scene sceneID="586-oq-2Dy">
             <objects>
-                <tableViewController id="i1r-J8-AQL" customClass="SettingsEventTableViewController" customModule="Dictate" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="Events" id="i1r-J8-AQL" customClass="SettingsEventTableViewController" customModule="Dictate" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="KsX-Zw-E3z">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2029,7 +2036,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
-                                            <segue destination="aLf-7v-gIY" kind="push" id="HRd-Ki-yKn"/>
+                                            <segue destination="aLf-7v-gIY" kind="push" id="4LH-wm-BGU"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="50" id="3I1-lU-68a">
@@ -2889,10 +2896,10 @@
             </objects>
             <point key="canvasLocation" x="-399" y="3109"/>
         </scene>
-        <!--Default Calendar-->
+        <!--DefaultCalendar-->
         <scene sceneID="l5a-ZW-ZjG">
             <objects>
-                <tableViewController id="aLf-7v-gIY" customClass="CalendarPickerTableViewController" customModule="Dictate" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="DefaultCalendar" id="aLf-7v-gIY" customClass="CalendarPickerTableViewController" customModule="Dictate" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="51" sectionHeaderHeight="22" sectionFooterHeight="22" id="KTO-Qt-0Eu">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2953,7 +2960,7 @@
     </scenes>
     <resources>
         <image name="Calendar-icon" width="512" height="512"/>
-        <image name="Cog38px" width="320" height="568"/>
+        <image name="Cog38px" width="19" height="27"/>
         <image name="Contacts_iOS7-Icon" width="1024" height="1024"/>
         <image name="Fantastical-2-icon-220x220" width="220" height="220"/>
         <image name="Reminders-icon" width="512" height="512"/>

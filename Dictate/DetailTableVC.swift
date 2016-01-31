@@ -8,36 +8,30 @@
 
 import UIKit
 
-class DetailTableVC: UITableViewController {
+class DetailTableVC: UIViewController {
     
     @IBOutlet weak var tableV: UITableView!
     
-    let dataSourceArray = ["item 1", "item 2", "item 3"]
+    let labels = ["Input", "Type", "Day", "Time", "Cell#", "Start", "End", "Title", "Cal.", "Alert", "Repeat"]
+    
+    let results = ["data1", "data2", "data3", "data4", "data5", "data1", "data1", "data1", "data1", "data1", "data11"]
+
+    
+    @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var data: UILabel!
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-/*
-        labels = ["Buckingham Palace",
-            "The Eiffel Tower",
-            "The Grand Canyon",
-            "Windsor Castle",
-            "Empire State Building"]
-        
-        data = ["data1",
-            "data2",
-            "d3The Grand Canyon",
-            "data4",
-            "d5 Empire State Building"]
-
-*/
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        tableV.tableFooterView = UIView(frame:CGRectZero)    //removes blank lines
+
     }
     
     override func didReceiveMemoryWarning() {
@@ -47,96 +41,36 @@ class DetailTableVC: UITableViewController {
     
     // MARK: - Table view data source
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
         
         //return 11
-        return dataSourceArray.count
+        return labels.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         // let cell = self.tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
         
-        let cell = tableView.dequeueReusableCellWithIdentifier( "BasicCell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier( "BasicCell", forIndexPath: indexPath) as! DetailsTableViewCell
         
-        cell.textLabel?.text = dataSourceArray[indexPath.row]
-        
-        
-        /*
-        
-        let row = indexPath.row
-        cell.col1.font =
-        UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
-        cell.col1.text = labels[row]
-        cell.col2.text = data[row]
+        cell.label.text = labels[indexPath.row]
+        cell.data.text = results[indexPath.row]
 
-        let shortPath = (indexPath.section, indexPath.row)
-        switch shortPath {
-        case (0, 0):    cell.textLabel?.text = "Input"
-        case (0, 1):    cell.textLabel?.text = "Type"
-        case (0, 2):    cell.textLabel?.text = "Day"
-        case (0, 3):    cell.textLabel?.text = "Time"
-        case (0, 4):    cell.textLabel?.text = "Cell#"
-        case (0, 5):    cell.textLabel?.text = "Start"
-        case (0, 6):    cell.textLabel?.text = "End"
-        case (0, 7):    cell.textLabel?.text = "Title"
-        case (0, 8):    cell.textLabel?.text = "Cal."
-        case (0, 9):    cell.textLabel?.text = "Alert"
-        case (0, 10):    cell.textLabel?.text = "Repeat"
-            
-        default:
-            print("done lol")
-            //cell.textLabel?.text = "¯\\_(ツ)_/¯"
-        }
-        
-        */
         return cell
     }
     
-    // Configure the cell...
-    //cell.textLabel?.text = "Section \(indexPath.section) Row \(indexPath.row)"
-    //   cell.textLabel?.text = "Row \(indexPath.row)"
-    /*
-    let shortPath = (indexPath.section, indexPath.row)
-    switch shortPath {
-    case (0, 0):    cell.textLabel?.text = "Input"
-    case (0, 1):    cell.textLabel?.text = "Type"
-    case (0, 2):    cell.textLabel?.text = "Day"
-    case (0, 3):    cell.textLabel?.text = "Time"
-    case (0, 4):    cell.textLabel?.text = "Cell#"
-    case (0, 5):    cell.textLabel?.text = "Start"
-    case (0, 6):    cell.textLabel?.text = "End"
-    case (0, 7):    cell.textLabel?.text = "Title"
-    case (0, 8):    cell.textLabel?.text = "Cal."
-    case (0, 9):    cell.textLabel?.text = "Alert"
-    case (0, 10):    cell.textLabel?.text = "Repeat"
-    
-    /*
-    case (1, 0):
-    cell.textLabel?.text = "nameone"
-    case (1, 1):
-    cell.textLabel?.text = "nametwo"
-    case (1, 2):
-    cell.textLabel?.text = "namethree"
-    */
-    
-    default:
-    print("done lol")
-    //cell.textLabel?.text = "¯\\_(ツ)_/¯"
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        print("p68 You selected cell #\(indexPath.row)!")
     }
-    
-    
-    return cell
-    }
-    */
+
     /*
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
     

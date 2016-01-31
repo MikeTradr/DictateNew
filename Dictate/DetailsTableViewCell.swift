@@ -9,9 +9,8 @@
 import UIKit
 
 class DetailsTableViewCell: UITableViewCell {
-    
-    @IBOutlet weak var col1: UILabel!
-    
-    @IBOutlet weak var col2: UILabel!
+   
+    @IBOutlet weak var label: UILabel!
 
+    @IBOutlet weak var data: UILabel!
 }

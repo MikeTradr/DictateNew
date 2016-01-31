@@ -82,6 +82,11 @@
 		D39AB89E1BA86D68001C7570 /* CalendarListPickerIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39AB89D1BA86D68001C7570 /* CalendarListPickerIC.swift */; };
 		D3A0F9FC1B69F0BB00F1FEDA /* EventCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A0F9FB1B69F0BB00F1FEDA /* EventCode.swift */; };
 		D3A0F9FD1B69F0BB00F1FEDA /* EventCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A0F9FB1B69F0BB00F1FEDA /* EventCode.swift */; };
+		D3AD9B521C5D2992006387C4 /* DetailsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AD9B511C5D2992006387C4 /* DetailsTVC.swift */; };
+		D3AD9B541C5D5439006387C4 /* DetailsTableVC_OLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AD9B531C5D5439006387C4 /* DetailsTableVC_OLD.swift */; };
+		D3AD9B561C5D93BB006387C4 /* DetailsTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AD9B551C5D93BB006387C4 /* DetailsTableVC.swift */; };
+		D3AD9B581C5E3475006387C4 /* DetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AD9B571C5E3475006387C4 /* DetailsTableViewCell.swift */; };
+		D3AD9B5A1C5E5245006387C4 /* DetailTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AD9B591C5E5245006387C4 /* DetailTableVC.swift */; };
 		D3B6E24E1BD977B200C7B822 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3B6E24C1BD977B200C7B822 /* Fabric.framework */; };
 		D3B6E24F1BD977B200C7B822 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3B6E24C1BD977B200C7B822 /* Fabric.framework */; };
 		D3B6E2501BD977B200C7B822 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3B6E24D1BD977B200C7B822 /* Crashlytics.framework */; };
@@ -274,6 +279,11 @@
 		D392FAD91B9B1DFD00678B18 /* SettingsGeneralTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsGeneralTableViewController.swift; path = Views/SettingsGeneralTableViewController.swift; sourceTree = "<group>"; };
 		D39AB89D1BA86D68001C7570 /* CalendarListPickerIC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarListPickerIC.swift; sourceTree = "<group>"; };
 		D3A0F9FB1B69F0BB00F1FEDA /* EventCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCode.swift; sourceTree = "<group>"; };
+		D3AD9B511C5D2992006387C4 /* DetailsTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailsTVC.swift; path = ../DetailsTVC.swift; sourceTree = "<group>"; };
+		D3AD9B531C5D5439006387C4 /* DetailsTableVC_OLD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsTableVC_OLD.swift; sourceTree = "<group>"; };
+		D3AD9B551C5D93BB006387C4 /* DetailsTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsTableVC.swift; sourceTree = "<group>"; };
+		D3AD9B571C5E3475006387C4 /* DetailsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsTableViewCell.swift; sourceTree = "<group>"; };
+		D3AD9B591C5E5245006387C4 /* DetailTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailTableVC.swift; sourceTree = "<group>"; };
 		D3B07A231B731C8800B9C2A9 /* Dictate.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Dictate.entitlements; sourceTree = "<group>"; };
 		D3B07A241B731D2A00B9C2A9 /* Dictate WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Dictate WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 		D3B6E24C1BD977B200C7B822 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
@@ -494,6 +504,11 @@
 			children = (
 				D33C13C01B8C480500470F8F /* Settings */,
 				EC82CF641BAAE6EE00722611 /* Reminder */,
+				D3AD9B511C5D2992006387C4 /* DetailsTVC.swift */,
+				D3AD9B531C5D5439006387C4 /* DetailsTableVC_OLD.swift */,
+				D3AD9B551C5D93BB006387C4 /* DetailsTableVC.swift */,
+				D3AD9B591C5E5245006387C4 /* DetailTableVC.swift */,
+				D3AD9B571C5E3475006387C4 /* DetailsTableViewCell.swift */,
 				D3188A7C1B6E9B7700323DC0 /* ViewControllerDictate.swift */,
 				D3188A7E1B6E9B7F00323DC0 /* LoginViewController.swift */,
 				D3F8ACEC1B696FB00070C097 /* ViewController.swift */,
@@ -1141,6 +1156,7 @@
 				D3BD1BDE1B9F3CF10052A312 /* ReminderPickerTableViewController.swift in Sources */,
 				D392FAD61B9B1C7E00678B18 /* SettingsInstructionsTableViewController.swift in Sources */,
 				ECB8622E1B77DEBD00503C50 /* JTDateHelper.m in Sources */,
+				D3AD9B581C5E3475006387C4 /* DetailsTableViewCell.swift in Sources */,
 				ECB8622D1B77DEBD00503C50 /* JTCalendarSettings.m in Sources */,
 				ECF818601B83B7E10087ECAD /* CheckBoxLayer.swift in Sources */,
 				D3B703801B935AC200FA1DF0 /* SettingsReminderTableViewController.swift in Sources */,
@@ -1173,20 +1189,24 @@
 				ECB8622B1B77DEBD00503C50 /* CALEventManager.m in Sources */,
 				D3188A811B6E9B9900323DC0 /* tabBarController.swift in Sources */,
 				D33C13BB1B8C1EC900470F8F /* ToDoMenuViewController.swift in Sources */,
+				D3AD9B541C5D5439006387C4 /* DetailsTableVC_OLD.swift in Sources */,
 				ECB862351B77DEBD00503C50 /* JTCalendarWeekView.m in Sources */,
 				ECF8185F1B83B7E10087ECAD /* CheckBox.swift in Sources */,
 				D3F8ACEB1B696FB00070C097 /* AppDelegate.swift in Sources */,
 				D32350621B69828900939F03 /* ReminderCode.swift in Sources */,
 				ECB862381B77DEBD00503C50 /* NSDate+CALAddition.m in Sources */,
 				D3089C651BA2713B00C58D6D /* SettingsReminderListTableViewCell.swift in Sources */,
+				D3AD9B561C5D93BB006387C4 /* DetailsTableVC.swift in Sources */,
 				D3D98AF41BA54D5B00BA1901 /* FavoritesManager.swift in Sources */,
 				ECB8622F1B77DEBD00503C50 /* JTCalendarDelegateManager.m in Sources */,
 				D392FADA1B9B1DFD00678B18 /* SettingsGeneralTableViewController.swift in Sources */,
 				ECB861E11B77DBB700503C50 /* General.swift in Sources */,
+				D3AD9B5A1C5E5245006387C4 /* DetailTableVC.swift in Sources */,
 				D3188A771B6E9B2600323DC0 /* TableCell.swift in Sources */,
 				ECF240481B9C947E002BFBAE /* DateTableViewCell.swift in Sources */,
 				ECB862321B77DEBD00503C50 /* JTCalendarMenuView.m in Sources */,
 				ECF818691B851B830087ECAD /* UIColor+BFPaperColors.m in Sources */,
+				D3AD9B521C5D2992006387C4 /* DetailsTVC.swift in Sources */,
 				D3188A7D1B6E9B7700323DC0 /* ViewControllerDictate.swift in Sources */,
 				ECF818661B8519F80087ECAD /* BFPaperCheckbox.m in Sources */,
 				D3795E7A1B8DF927009D3DB5 /* SettingsEventTableViewController.swift in Sources */,
@@ -1400,7 +1420,7 @@
 					"$(PROJECT_DIR)/Dictate",
 				);
 				INFOPLIST_FILE = Dictate/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1428,7 +1448,7 @@
 					"$(PROJECT_DIR)/Dictate",
 				);
 				INFOPLIST_FILE = Dictate/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

@@ -444,7 +444,7 @@ class EventManager: NSObject {
                 newCalendar.source = sourcesInEventStore.filter{
                     (source: EKSource) -> Bool in
                     source.sourceType == EKSourceType.Local
-                    }.first!
+                    }.first!    //TODO CRASHES here NIL!!! iphone6 simulator
                 
                 
                 

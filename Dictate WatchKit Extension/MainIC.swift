@@ -11,6 +11,7 @@ import Foundation
 import EventKit
 import Parse
 import AVFoundation
+import CoreTelephony
 //import MessageUI
 
 
@@ -694,7 +695,7 @@ class MainIC: WKInterfaceController {
             rawDataObject["userPhoneNumber"] = "608-242-7700"               //TODO hardcoded get device from code?
             
             rawDataObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
-                print("p490 vcDictate rawDataObject has been saved.")
+                print("p697 MainIC rawDataObject has been saved.")
             }
             break;
             
@@ -734,6 +735,113 @@ class MainIC: WKInterfaceController {
             fullDTEnd = ""
         }
         
+// ____ Save to Parse Database ____________________________________
+        
+        // Setup Parse
+        Parse.setApplicationId("1wwwPAQ0Of2Fp6flotUw4YzN64HFDmy3ijAlQZKE",
+            clientKey: "EHeeek4uXhJQi0vXPBba945A4h0LQ4QddEGW8gSs")
+        
+        let rawDataObject = PFObject(className: "UserData")
+        rawDataObject["rawString"] = strRaw
+        rawDataObject["output"] = output
+        rawDataObject["fullDT"] = fullDT
+        rawDataObject["fullDTEnd"] = fullDTEnd
+        rawDataObject["actionType"] = actionType
+        rawDataObject["calendarName"] = calendarName
+        
+        //TODO get these two fields from code!
+        //TODO see here:
+        print("p478 Device and Phone munber in here: \(NSUserDefaults.standardUserDefaults().dictionaryRepresentation())")
+        
+        let uuid = UIDevice.currentDevice().identifierForVendor!.UUIDString
+        let device = UIDevice.currentDevice().model
+        
+        let systemVersion = UIDevice.currentDevice().systemVersion
+        
+        //let modelName = UIDevice.currentDevice().modelName
+        let modelName = "Watch"
+
+        
+        let memory = NSProcessInfo.processInfo().physicalMemory/(1024 * 1024 * 1024)    //to convert to GB
+        // memory = memory/(1024 * 1024 * 1024)
+        
+        // Setup the Network Info and create a CTCarrier object
+        let networkInfo = CTTelephonyNetworkInfo()
+        let carrier = networkInfo.subscriberCellularProvider
+        
+        // Get carrier name
+        let carrierName: String = carrier!.carrierName!
+        
+        
+        print("p822 uuid: \(uuid)")
+        print("p822 device: \(device)")
+        print("p822 systemVersion: \(systemVersion)")
+        print("p822 modelName: \(modelName)")
+        print("p822 memory: \(memory)")
+        print("p822 carrierName: \(carrierName)")
+        
+        
+       // let deviceComplete = "\(modelName) - \(memory) GB"    //was memory I desired capacity on phones.
+        let deviceComplete = "\(modelName)"
+        
+        print("p822 deviceComplete: \(deviceComplete)")
+        
+        
+        rawDataObject["device"] = deviceComplete
+        rawDataObject["system"] = systemVersion
+        rawDataObject["carrier"] = carrierName
+        
+        
+        rawDataObject["userPhoneNumber"] = "608-242-7700"               //TODO hardcoded get device from code?
+        
+        //TODO get this from login Screen, hard coded for now...
+        
+        print("p796 PFUser.currentUser()!: \(PFUser.currentUser()!)")
+        
+        //TODO fix PFuser when is nil can be nil???
+        
+        if PFUser.currentUser() == nil {
+            rawDataObject["userName"] = "Mike Coded"
+        } else {
+            // rawDataObject["userName"] = "Mike Hard Coded"
+            
+            print("p824 PFUser.currentUser().username: \(PFUser.currentUser()!.username!)")
+            
+            // todo bombs below here.
+            //TODO Anil I chnged as had nil, when we no longer sue login screen 123115 MJD
+            //rawDataObject["userName"] = PFUser.currentUser()!.username
+            rawDataObject["userName"] = PFUser.currentUser()!
+        }
+        
+        print("p813 we here? ")
+        
+        //TODO works, hard coded name for now Anil help
+        rawDataObject["userName"] = "Mike Watch Coded"
+        
+        // TODO used to have this alone:  rawDataObject["userName"] = PFUser.currentUser()?.username
+        
+        var query = PFQuery(className:"UserData")
+        //TODO somehow get and save email to parse database
+        // query.whereKey(“username”, equalTo: PFUser.currentUser()?.username)
+        
+        print("p824 query: \(query)")
+        
+        print("p826 PFUser.currentUser()?.email: \(PFUser.currentUser()?.email)")
+        
+        // rawDataObject["userEmail"] = PFUser.currentUser()?.email
+        
+        rawDataObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+            print("p831 MainIC rawDataObject has been saved.")
+        }
+        
+// ____ End Save to Parse Database ____________________________________
+        
+        
+        
+        
+        
+        
+ /*
         //---- Save to Parse Database ----------------------------------------
         
         let rawDataObject = PFObject(className: "UserData")
@@ -762,6 +870,9 @@ class MainIC: WKInterfaceController {
             rawDataObject["userName"] = PFUser.currentUser()?.username
         }
         
+        rawDataObject["userName"] = "Mike Watch Coded"
+
+        
         
         var query = PFQuery(className:"UserData")
         //TODO somehow get and save email to parse database
@@ -782,7 +893,7 @@ class MainIC: WKInterfaceController {
         print("w587 Parse save Error: \(error)")
         
         //---- End Save to Parse Database ----------------------------------------
-        
+*/
         cleardata()
         
         print("w593 we here?")

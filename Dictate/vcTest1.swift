@@ -10,6 +10,7 @@ import UIKit
 import EventKit
 import Parse
 import AVFoundation
+import CoreTelephony
 
 class vcTest1: UIViewController {
     
@@ -60,9 +61,6 @@ class vcTest1: UIViewController {
     @IBOutlet weak var labelRepeat: UILabel!
     
     @IBOutlet weak var resultMultiLine1: UITextView!
-    
-    
-    
     
     //@IBOutlet weak var resultRaw: UITextView!
     
@@ -184,8 +182,8 @@ class vcTest1: UIViewController {
         
         var calendarName    = defaults.stringForKey("calendarName")
         
-        let duration    = defaults.objectForKey("eventDuration") as! Int
-        let alert       = defaults.objectForKey("eventAlert") as! Int
+        let duration    = defaults.objectForKey("eventDuration") as! Int ?? 10
+        let alert       = defaults.objectForKey("eventAlert") as! Int ?? 10
         let eventRepeat = defaults.stringForKey("eventRepeat")
         
         let strRaw      = defaults.stringForKey("strRaw")
@@ -212,6 +210,8 @@ class vcTest1: UIViewController {
         
         let defaultCalendarID  = defaults.stringForKey("defaultCalendarID")
         let defaultReminderID = defaults.stringForKey("defaultReminderID")
+        
+        let processNow = defaults.objectForKey("ProcessNow") as! Bool
 
         
         print("p111Main ===================================")
@@ -239,9 +239,10 @@ class vcTest1: UIViewController {
         print("p111Main allDayFlag: \(allDayFlag)")
         print("p111Main timeString: \(timeString)")
         
-        print("p111Main selectedCalendarID: \(defaultCalendarID)")     //defaultCalendarID
-        print("p111Main defaultReminderID: \(defaultReminderID)")     //defaultReminderID
-        
+        print("p111Main selectedCalendarID: \(defaultCalendarID)")      //defaultCalendarID
+        print("p111Main defaultReminderID: \(defaultReminderID)")       //defaultReminderID
+        print("p111Main processNow: \(processNow)")                     //processNow Bool
+
     
         print("p111Main end =================================")
 
@@ -598,6 +599,13 @@ class vcTest1: UIViewController {
             break;
         }
         
+        print("p604 processNow: \(processNow)")
+        if (processNow == true) {
+            buttonCreate(nil)   //go to this class
+        }
+        
+        
+        
     }
     
     
@@ -605,11 +613,12 @@ class vcTest1: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+
     
     
-    
-    
-    @IBAction func buttonCreate(sender: AnyObject) {
+    //@IBAction func buttonCreate(sender: AnyObject) {
+    @IBAction func buttonCreate(sender: UIButton?) {
+
         
         var alertSound1 = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("217-buttonclick03", ofType: "mp3")!)
         //  General.playSound(alertSound3!)
@@ -775,6 +784,8 @@ class vcTest1: UIViewController {
             break;
         }
         
+// ____ End Switch Statement ____________________________________
+        
         var strRaw      = defaults.stringForKey("strRaw")
         output          = defaults.stringForKey("output")!
         calendarName    = defaults.stringForKey("calendarName")!
@@ -792,6 +803,11 @@ class vcTest1: UIViewController {
             fullDT = ""
             fullDTEnd = ""
         }
+        
+        General().saveToParse()
+
+        
+ /*
 
 // ____ Save to Parse Database ____________________________________
         
@@ -807,7 +823,41 @@ class vcTest1: UIViewController {
         //TODO see here:
         print("p478 Device and Phone munber in here: \(NSUserDefaults.standardUserDefaults().dictionaryRepresentation())")
         
-        rawDataObject["device"] = "iPhone"               //TODO hardcoded get device from code?
+        let uuid = UIDevice.currentDevice().identifierForVendor!.UUIDString
+        let device = UIDevice.currentDevice().model
+        let systemVersion = UIDevice.currentDevice().systemVersion
+        
+        let modelName = UIDevice.currentDevice().modelName
+        
+        let memory = NSProcessInfo.processInfo().physicalMemory/(1024 * 1024 * 1024)    //to convert to GB
+       // memory = memory/(1024 * 1024 * 1024)
+        
+        // Setup the Network Info and create a CTCarrier object
+        let networkInfo = CTTelephonyNetworkInfo()
+        let carrier = networkInfo.subscriberCellularProvider
+        
+        // Get carrier name
+        let carrierName: String = carrier!.carrierName!
+
+
+        print("p822 uuid: \(uuid)")
+        print("p822 device: \(device)")
+        print("p822 systemVersion: \(systemVersion)")
+        print("p822 modelName: \(modelName)")
+        print("p822 memory: \(memory)")
+        print("p822 carrierName: \(carrierName)")
+
+        
+        let deviceComplete = "\(modelName) - \(memory) GB"
+
+        print("p822 deviceComplete: \(deviceComplete)")
+
+        
+        rawDataObject["device"] = deviceComplete
+        rawDataObject["system"] = systemVersion
+        rawDataObject["carrier"] = carrierName
+
+
         rawDataObject["userPhoneNumber"] = "608-242-7700"               //TODO hardcoded get device from code?
         
         //TODO get this from login Screen, hard coded for now...
@@ -831,7 +881,8 @@ class vcTest1: UIViewController {
         
         print("p833 we here? ")
         
-        //rawDataObject["userName"] = "Mike Coded"
+        //TODO works, hard coded name for now Anil help
+        rawDataObject["userName"] = "Mike TEST Coded"
         
         // TODO used to have this alone:  rawDataObject["userName"] = PFUser.currentUser()?.username
         
@@ -850,7 +901,7 @@ class vcTest1: UIViewController {
         }
         
 // ____ End Save to Parse Database ____________________________________
-        
+*/
         General().cleardata()
         
         defaults.setObject(eventDuration, forKey: "eventDuration")
@@ -864,23 +915,19 @@ class vcTest1: UIViewController {
         actionType = ""
         defaults.setObject(actionType, forKey: "actionType")
         
-        General().delay(2.0) {
+        General().delay(3.0) {
             // do stuff
             self.resultMessage.text = ""
             self.resultError.text = ""
+            
+            let processNow = false
+            self.defaults.setObject(processNow, forKey: "ProcessNow")
+            
             //self.switchScreen("tabBarController")
             
             self.tabBarController?.selectedIndex = 2
             
         }
-        
-    }
-    
-    
-    @IBAction func buttonEdit(sender: AnyObject) {
-        
-        // switchScreen("EditEvent")
-        //switchScreen()
         
     }
     
@@ -964,6 +1011,9 @@ class vcTest1: UIViewController {
     */
     
 }
+
+
+
 
 
 extension UIColor

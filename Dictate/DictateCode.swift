@@ -2000,6 +2000,21 @@ class DictateCode: NSObject {
                 
             }
             
+            //POWER USER AUTO create code...
+                let lastElement = wordArr.last                          //last element in array
+                if (lastElement == "go" || lastElement == "process" || lastElement == "done" || lastElement == "create") {
+                    let processNow:Bool = true
+                    defaults.setObject(processNow, forKey: "ProcessNow")
+                    wordArrTrimmed = wordArrTrimmed.filter() { $0 != wordArr.last}  // trim last word
+                    
+                } else {
+                    let processNow = false
+                    let autoCreate:Bool = false
+                    defaults.setObject(autoCreate, forKey: "AutoCreate")
+                    defaults.setObject(processNow, forKey: "ProcessNow")
+                }
+                
+                
             
             
             
@@ -2151,8 +2166,7 @@ class DictateCode: NSObject {
             
             defaults.setObject(eventAlert, forKey: "eventAlert")
                 
-            defaults.synchronize() // from Rob course
-                
+            defaults.synchronize() // from Rob course                
             
             // TODO  not used yet we see!
             let eventRepeat = eventRepeatInterval

@@ -25,8 +25,6 @@
 		D3188A7D1B6E9B7700323DC0 /* ViewControllerDictate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3188A7C1B6E9B7700323DC0 /* ViewControllerDictate.swift */; };
 		D3188A7F1B6E9B7F00323DC0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3188A7E1B6E9B7F00323DC0 /* LoginViewController.swift */; };
 		D3188A811B6E9B9900323DC0 /* tabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3188A801B6E9B9900323DC0 /* tabBarController.swift */; };
-		D3188A831B6E9BD500323DC0 /* PrefsTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3188A821B6E9BD500323DC0 /* PrefsTableVC.swift */; };
-		D3188A851B6E9BED00323DC0 /* PrefsTempVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3188A841B6E9BED00323DC0 /* PrefsTempVC.swift */; };
 		D3188A871B6E9BF900323DC0 /* vcTest1.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3188A861B6E9BF900323DC0 /* vcTest1.swift */; };
 		D3188A891B6E9C0800323DC0 /* ToDoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3188A881B6E9C0800323DC0 /* ToDoTableViewController.swift */; };
 		D3188A8B1B6E9C1100323DC0 /* vcTodayTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3188A8A1B6E9C1100323DC0 /* vcTodayTable.swift */; };
@@ -245,8 +243,6 @@
 		D3188A7C1B6E9B7700323DC0 /* ViewControllerDictate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerDictate.swift; sourceTree = "<group>"; };
 		D3188A7E1B6E9B7F00323DC0 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		D3188A801B6E9B9900323DC0 /* tabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tabBarController.swift; sourceTree = "<group>"; };
-		D3188A821B6E9BD500323DC0 /* PrefsTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrefsTableVC.swift; sourceTree = "<group>"; };
-		D3188A841B6E9BED00323DC0 /* PrefsTempVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrefsTempVC.swift; sourceTree = "<group>"; };
 		D3188A861B6E9BF900323DC0 /* vcTest1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = vcTest1.swift; sourceTree = "<group>"; };
 		D3188A881B6E9C0800323DC0 /* ToDoTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoTableViewController.swift; sourceTree = "<group>"; };
 		D3188A8A1B6E9C1100323DC0 /* vcTodayTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = vcTodayTable.swift; sourceTree = "<group>"; };
@@ -515,8 +511,6 @@
 				D3188A7E1B6E9B7F00323DC0 /* LoginViewController.swift */,
 				D3F8ACEC1B696FB00070C097 /* ViewController.swift */,
 				D3188A801B6E9B9900323DC0 /* tabBarController.swift */,
-				D3188A821B6E9BD500323DC0 /* PrefsTableVC.swift */,
-				D3188A841B6E9BED00323DC0 /* PrefsTempVC.swift */,
 				D3B703811B94E90800FA1DF0 /* ReminderListTableViewController.swift */,
 				D3188A861B6E9BF900323DC0 /* vcTest1.swift */,
 				D33C13BA1B8C1EC900470F8F /* ToDoMenuViewController.swift */,
@@ -1184,7 +1178,6 @@
 				D33FEBAF1BD769EB003E6755 /* NuanceHeader.h in Sources */,
 				D3188A6F1B6E9AE400323DC0 /* MessageCode.swift in Sources */,
 				ECB862361B77DEBD00503C50 /* JTHorizontalCalendarView.m in Sources */,
-				D3188A851B6E9BED00323DC0 /* PrefsTempVC.swift in Sources */,
 				D3188A891B6E9C0800323DC0 /* ToDoTableViewController.swift in Sources */,
 				ECB862311B77DEBD00503C50 /* JTCalendarDayView.m in Sources */,
 				ECF2404F1BA13786002BFBAE /* DataManager.swift in Sources */,
@@ -1222,7 +1215,6 @@
 				ECB861E01B77DBB700503C50 /* Constants.swift in Sources */,
 				D323505E1B697B0200939F03 /* DictateCode.swift in Sources */,
 				D3A0F9FC1B69F0BB00F1FEDA /* EventCode.swift in Sources */,
-				D3188A831B6E9BD500323DC0 /* PrefsTableVC.swift in Sources */,
 				EC82CF631BAAE26F00722611 /* UILabel+WhiteUIDatePickerLabel.m in Sources */,
 				D3188A721B6E9AEF00323DC0 /* MessageComposer.swift in Sources */,
 			);

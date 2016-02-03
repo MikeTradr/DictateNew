@@ -9,6 +9,7 @@
 import UIKit
 import EventKit
 import AVFoundation
+import EventKitUI
 
 
 
@@ -218,6 +219,7 @@ class DetailTableVC: UIViewController {
         
         if labels[indexPath.row] == "Input" {               //selected Input row...
             self.tabBarController?.selectedIndex = 2        //go to main dictate microphone screen
+            
         } else if labels[indexPath.row] == "Title" {               //selected Input row...
 
        
@@ -230,15 +232,33 @@ class DetailTableVC: UIViewController {
                 print("p230 textField.text: \(textField.text)")
                 
                 self.output = textField.text!
-     
+    
             })
-        
-           
-            
+  
             self.presentViewController(alert, animated: true, completion: nil)
            
             
-        }
+        } else if (labels[indexPath.row] == "Start" || labels[indexPath.row] == "End") {
+            //load EKEventEditViewController
+            // create Event ViewController
+          
+            
+            let evc = EKEventEditViewController()
+            evc.eventStore = EKEventStore()
+       //     evc.editViewDelegate = self
+            evc.modalPresentationStyle = .Popover
+            self.presentViewController(evc, animated: true, completion: nil)
+            
+//no idea here...
+            func eventEditViewController(controller: EKEventEditViewController,
+                didCompleteWithAction action: EKEventEditViewAction) {
+                    print("did complete: \(action.rawValue), \(controller.event)")
+                    self.dismissViewControllerAnimated(true, completion: nil)
+            }
+            
+            
+            
+        }   //end Start and Date edit VC.
         
         
         
@@ -655,7 +675,7 @@ class DetailTableVC: UIViewController {
             break;
         }
         
-        // ____ End Switch Statement ____________________________________
+// ____ End Switch Statement ____________________________________
         
         var strRaw      = defaults.stringForKey("strRaw")
         output          = defaults.stringForKey("output")!
@@ -683,7 +703,9 @@ class DetailTableVC: UIViewController {
        // defaults.setObject(actionType, forKey: "actionType")
         
         print("p977 actionType: \(actionType)")
-   
+        
+// ____ Alert Dialog ____________________________________
+        
         let alertTitle = messageString
         let labelFont = UIFont(name: "HelveticaNeue-Bold", size: 22)
         let attributedString = NSAttributedString(string: alertTitle, attributes: [
@@ -701,46 +723,10 @@ class DetailTableVC: UIViewController {
         let alert = UIAlertController(title: alertTitle, message: textLine2, preferredStyle: UIAlertControllerStyle.Alert)
         alert.setValue(attributedString, forKey: "attributedTitle")
         alert.setValue(attributedString2, forKey: "attributedMessage")
-
-
-
- /*
-        let alertTitle = messageString
-        let labelFont2 = UIFont(name: "HelveticaNeue-Bold", size: 22)
-        
-        let attributedString2 = NSAttributedString(string: alertTitle, attributes: [
-            NSFontAttributeName : labelFont2!,
-            NSForegroundColorAttributeName : UIColor.blueColor()
-            ])
-        
-        
-        
-        let textLine2 = "by Dictate™ App 😀"
-        let labelFont = UIFont(name: "HelveticaNeue-Bold", size: 16)
-
-        let attributedString = NSAttributedString(string: textLine2, attributes: [
-            NSFontAttributeName : labelFont!,
-            NSForegroundColorAttributeName : UIColor.blackColor()
-            ])
-        
-        
-        let alert = UIAlertController(title: alertTitle, message: self.messageString, preferredStyle: UIAlertControllerStyle.Alert)
-        
-    
-        
-        alert.setValue(attributedString2, forKey: "attributedTitle")
-
-        
-       // alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.Default, handler: nil))   //adds a button
-        
-        alert.setValue(attributedString, forKey: "attributedMessage")
-
-        
-     //   alert.view.tintColor = UIColor.blueColor()        //sets button font color
-    //   alert.view.backgroundColor = UIColor.orangeColor()  //sets dialog background color
-*/
-        
+  
         self.presentViewController(alert, animated: true, completion: nil)
+        
+// ____ End Alert Dialog ____________________________________
         
         //General().cleardata()
 
@@ -756,7 +742,6 @@ class DetailTableVC: UIViewController {
             self.tabBarController?.selectedIndex = 2
             
         }
-        
     }
     
     

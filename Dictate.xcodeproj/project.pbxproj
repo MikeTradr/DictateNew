@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D305C8121C614C4B00529926 /* PZDisclosureIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D305C8111C614C4B00529926 /* PZDisclosureIndicator.swift */; };
 		D306CDA81BB1315D00FD973F /* SetCalendarIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D306CDA71BB1315D00FD973F /* SetCalendarIC.swift */; };
 		D3089C651BA2713B00C58D6D /* SettingsReminderListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3089C641BA2713B00C58D6D /* SettingsReminderListTableViewCell.swift */; };
 		D3188A691B6E9AA700323DC0 /* MailComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3188A681B6E9AA700323DC0 /* MailComposer.swift */; };
@@ -230,6 +231,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D305C8111C614C4B00529926 /* PZDisclosureIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PZDisclosureIndicator.swift; sourceTree = "<group>"; };
 		D306CDA71BB1315D00FD973F /* SetCalendarIC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetCalendarIC.swift; sourceTree = "<group>"; };
 		D3089C641BA2713B00C58D6D /* SettingsReminderListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsReminderListTableViewCell.swift; path = ../SettingsReminderListTableViewCell.swift; sourceTree = "<group>"; };
 		D3188A681B6E9AA700323DC0 /* MailComposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MailComposer.swift; sourceTree = "<group>"; };
@@ -551,6 +553,7 @@
 			children = (
 				ECB861DC1B77DBB700503C50 /* Constants.swift */,
 				ECB861DD1B77DBB700503C50 /* General.swift */,
+				D305C8111C614C4B00529926 /* PZDisclosureIndicator.swift */,
 				ECB861DE1B77DBB700503C50 /* SwiftColors.swift */,
 				ECB861DF1B77DBB700503C50 /* Utility.swift */,
 			);
@@ -1160,6 +1163,7 @@
 				ECB8622D1B77DEBD00503C50 /* JTCalendarSettings.m in Sources */,
 				ECF818601B83B7E10087ECAD /* CheckBoxLayer.swift in Sources */,
 				D3B703801B935AC200FA1DF0 /* SettingsReminderTableViewController.swift in Sources */,
+				D305C8121C614C4B00529926 /* PZDisclosureIndicator.swift in Sources */,
 				ECF2404D1B9DFF7F002BFBAE /* CalendarSelectionViewController.swift in Sources */,
 				D392FAD81B9B1D3600678B18 /* SettingsKeywordsTableViewController.swift in Sources */,
 				D3188A871B6E9BF900323DC0 /* vcTest1.swift in Sources */,

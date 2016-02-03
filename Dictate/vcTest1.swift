@@ -1015,7 +1015,7 @@ class vcTest1: UIViewController {
 
 
 
-
+/*
 extension UIColor
 {
     convenience init(red: Int, green: Int, blue: Int)
@@ -1027,6 +1027,7 @@ extension UIColor
         self.init(red: newRed, green: newGreen, blue: newBlue, alpha: 1.0)
     }
 }
+*/
 
 extension vcTest1 : UITextFieldDelegate {
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {

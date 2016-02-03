@@ -113,6 +113,9 @@ let str50:String = "Monday all day study for exam"
 
 let str51:String = "6 am test alert 44 minutes"
 
+let str52:String = "reminder shovel snow"
+
+
 
 
 
@@ -140,7 +143,7 @@ add to dictate str   “meeting with Bob every Wednesday at noon”  //handle wo
 */
 
 // ---- change strings here for testing, shows on the dictated field---
-//var str:String = str51
+//var str:String = str52
 var str:String = ""
 
 //var strRaw:String = str

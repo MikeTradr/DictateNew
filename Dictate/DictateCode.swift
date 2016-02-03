@@ -389,6 +389,80 @@ class DictateCode: NSObject {
                     }
                 }
                 
+        // ____ "list" word (new might be first word, then 3rd word is title) ____________________________________
+                
+                let subStringList = (word as NSString).containsString("list") // see calendar then process
+                if (subStringList) {
+                    print("p1357 list found at item: \(i)")
+                    print("p1358 listName: \(listName)")
+                    let tempArray = defaults.objectForKey("reminderArray")
+                    print("p1475 defaults.objectForKey(reminderArray): \(tempArray)")
+                    
+                    let reminderStringArray = defaults.objectForKey("reminderArray") as! [String] //array of the items
+                    
+                    print("p1389 reminderStringArray: \(reminderStringArray)")
+                    
+                    let reminderArrayLowerCased = reminderStringArray.map { return $0.lowercaseString}    //lowercase ever word in array -from Anil 083115 thank you Bro :)
+                    
+                    if (i < arrayLength-1) {
+                        nextWord = wordArr[i+1]
+                    } else {
+                        nextWord = ""
+                    }
+                    print("p1378 nextWord: \(nextWord)")
+                    
+                    let startIndex = i+1    //start at word after "list"
+                    listName = ""
+                    for word in wordArr[startIndex..<wordArr.count] {   // make list title from words after List to end
+                        print("p1428: \(word)")
+                        listName = listName + " \(word)"
+                        print("p1430: \(listName)")
+                    }
+                    
+                    if listName != "" {
+                        listName = String(listName.characters.dropFirst()) //remove first space I added above in loop.
+                        
+                        listName = listName.capitalizedString   //capitalzie first letter of each word for Calendar match
+                    }
+                    
+                    wordArrTrimmed = wordArrTrimmed.filter() { $0 != wordArr[i] }
+                    
+                    print("p138 wordArrTrimmed: \(wordArrTrimmed)")
+                    print("p1388 wordArrTrimmed.count: \(wordArrTrimmed.count)")
+                    
+                    var end = (i-1)
+                    print("p1390 i: \(i)")
+                    print("p1390 end: \(end)")
+                    
+                    if end >= wordArrTrimmed.count {
+                        end = wordArrTrimmed.count
+                    }
+                    
+                    let slice = wordArrTrimmed[0..<end]
+                    
+                    print("p1440 slice: \(slice)")
+                    
+                    wordArrTrimmed = Array(slice)
+                    
+                    if (listName == ""){
+                        print("p1482 we in new one item list???: \(listName)")
+                        
+                        mainType = "New OneItem List"
+                        actionType = "New OneItem List"             //sets actionType for processing
+                        listName = "New List"
+                        
+                        defaults.setObject(actionType, forKey: "actionType")    //sets actionType
+                        defaults.setObject(listName, forKey: "reminderList")    //sets reminderList
+                        defaults.setObject(listName, forKey: "calendarName")    //sets List to calendarName for ParseDB
+                        defaults.setObject(wordArrTrimmed, forKey: "wordArrTrimmed")    //sets List to calendarName for ParseDB
+                    }
+                    
+                    print("p1394 listName: \(listName)")
+                    defaults.setObject(listName, forKey: "reminderList")    //sets actionType
+                    
+                    break;
+                    
+                }
                 
 // ____ "reminder" or "remind" word ____________________________________
                 
@@ -440,7 +514,7 @@ class DictateCode: NSObject {
                         }
                     }
                
-                    
+                    var reminderList = listName
                    // listName = "Default"                            //save reminder to default Reminder List
                     
                     print("p424 actionType: \(actionType)")
@@ -458,6 +532,11 @@ class DictateCode: NSObject {
                     defaults.setObject(mainType, forKey: "mainType")            //sets mainType
                     defaults.setObject(output, forKey: "output")                //sets output
                     defaults.setObject(listName, forKey: "reminderList")        //sets reminderList
+                    
+                    defaults.setObject(reminderList, forKey: "title")            //sets reminderTitle
+
+                    defaults.setObject(reminderList, forKey: "calendarName")            //sets title to calendarName for ParseDB
+                    defaults.setObject(wordArrTrimmed, forKey: "wordArrTrimmed")            //sets reminderTitle
         
                 }
                 
@@ -1207,7 +1286,9 @@ class DictateCode: NSObject {
                     print("p370 wordArrTrimmed: \(wordArrTrimmed)")
                     
                 } else if day == "" {
-                    day = "No Day Found"
+                   // day = "No Day Found"
+                    day = ""            //020216 changed to "" for detail table processing
+
                     let dateFormatter = NSDateFormatter()
                     dateFormatter.dateFormat = "M-dd-yyyy"
                     
@@ -1416,78 +1497,6 @@ class DictateCode: NSObject {
                 //let defaults = NSUserDefaults.standardUserDefaults()
                 //set above in IF statement. defaults.setObject(calendarName, forKey: "calendar")
                 
-        // ____ "list" word ____________________________________
-                
-                let subStringList = (word as NSString).containsString("list") // see calendar then process
-                if (subStringList) {
-                    print("p1357 list found at item: \(i)")
-                    print("p1358 listName: \(listName)")
-                    let tempArray = defaults.objectForKey("reminderArray")
-                    print("p1475 defaults.objectForKey(reminderArray): \(tempArray)")
-                    
-                    let reminderStringArray = defaults.objectForKey("reminderArray") as! [String] //array of the items
-                    
-                    print("p1389 reminderStringArray: \(reminderStringArray)")
-                    
-                    let reminderArrayLowerCased = reminderStringArray.map { return $0.lowercaseString}    //lowercase ever word in array -from Anil 083115 thank you Bro :)
-
-                    if (i < arrayLength-1) {
-                        nextWord = wordArr[i+1]
-                    } else {
-                        nextWord = ""
-                    }
-                    print("p1378 nextWord: \(nextWord)")
-                 
-                    let startIndex = i+1    //start at word after "list"
-                    listName = ""
-                    for word in wordArr[startIndex..<wordArr.count] {   // make list title from words after List to end
-                        print("p1428: \(word)")
-                        listName = listName + " \(word)"
-                        print("p1430: \(listName)")
-                    }
-                    
-                    if listName != "" {
-                        listName = String(listName.characters.dropFirst()) //remove first space I added above in loop.
-                
-                        listName = listName.capitalizedString   //capitalzie first letter of each word for Calendar match
-                    }
-                    
-                    wordArrTrimmed = wordArrTrimmed.filter() { $0 != wordArr[i] }
-                    
-                    print("p138 wordArrTrimmed: \(wordArrTrimmed)")
-                    print("p1388 wordArrTrimmed.count: \(wordArrTrimmed.count)")
-                    
-                    var end = (i-1)
-                    print("p1390 i: \(i)")
-                    print("p1390 end: \(end)")
-                    
-                    if end >= wordArrTrimmed.count {
-                        end = wordArrTrimmed.count
-                    }
-                    
-                    let slice = wordArrTrimmed[0..<end]
-                    
-                    print("p1440 slice: \(slice)")
-                    
-                    wordArrTrimmed = Array(slice)
-                    
-                    if (listName == ""){
-                        mainType = "New OneItem List"
-                        actionType = "New OneItem List"             //sets actionType for processing
-                        listName = "New List"
-                        
-                        defaults.setObject(actionType, forKey: "actionType")    //sets actionType
-                        defaults.setObject(listName, forKey: "reminderList")    //sets reminderList
-                        defaults.setObject(listName, forKey: "calendarName")    //sets List to calendarName for ParseDB
-                        defaults.setObject(wordArrTrimmed, forKey: "wordArrTrimmed")    //sets List to calendarName for ParseDB
-                    }
-                    
-                    print("p1394 listName: \(listName)")
-                    defaults.setObject(listName, forKey: "reminderList")    //sets actionType
-                    
-                    break;
-
-                }
                 
                 //TODO Pull from prefs
                 

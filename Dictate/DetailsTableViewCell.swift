@@ -12,5 +12,7 @@ class DetailsTableViewCell: UITableViewCell {
    
     @IBOutlet weak var label: UILabel!
 
-    @IBOutlet weak var data: UILabel!
+    @IBOutlet weak var resultsTextField: UITextField!
+
+    
 }

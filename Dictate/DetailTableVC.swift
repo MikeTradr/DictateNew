@@ -22,6 +22,7 @@ class DetailTableVC: UIViewController {
     
     @IBOutlet weak var tableViewOutlet: UITableView!
     
+    @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var buttonCreateOutlet: UIButton!
     @IBOutlet weak var resultMessage: UITextView!
     
@@ -135,12 +136,13 @@ class DetailTableVC: UIViewController {
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
-        if results[indexPath.row] == "" || results[indexPath.row] == "0"  {
-            print("p143 we here hide rows: \(indexPath.row)!")
-            return 0
-        } else {
-            return 25 //space heigh
-        }
+//        if results[indexPath.row] == "" || results[indexPath.row] == "0"  {
+//            print("p143 we here hide rows: \(indexPath.row)!")
+//            return 0
+//        } else {
+//            return 25 //space heigh
+//        }
+        return 35
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -495,6 +497,8 @@ class DetailTableVC: UIViewController {
         print("p555 labels: \(labels)")
         print("p555 results: \(results)")
         
+        
+        tableViewHeightConstraint.constant = CGFloat(results.count * 35)
         tableViewOutlet.reloadData()
         
       //  defaults.setObject(results, forKey: "results")      //save items for results table

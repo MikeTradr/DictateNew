@@ -15,6 +15,10 @@ import CoreTelephony
 class General: NSObject, UITextFieldDelegate, MFMailComposeViewControllerDelegate {
     
     let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+    var carrierName = ""
+    var mcc = ""
+    var mnc = ""
+    
 
     
 
@@ -129,11 +133,21 @@ class General: NSObject, UITextFieldDelegate, MFMailComposeViewControllerDelegat
         // Setup the Network Info and create a CTCarrier object
         let networkInfo = CTTelephonyNetworkInfo()
         let carrier = networkInfo.subscriberCellularProvider
-        let carrierName: String = "no carrier"
+        //let carrierName: String = "no carrier"
+        
+        print("p127 networkInfo: \(networkInfo)")
+        print("p127 carrier: \(carrier)")
+        
+     
         
         // Get carrier name
         if carrier != nil {
-            let carrierName: String = carrier!.carrierName!
+            carrierName = carrier!.carrierName!
+            print("p139 carrierName: \(carrierName)")
+            mcc = carrier!.mobileCountryCode!
+            mnc = carrier!.mobileNetworkCode!
+
+            
         }
         
         //print("p\(__LINE__) uuid: \(uuid)")
@@ -143,7 +157,9 @@ class General: NSObject, UITextFieldDelegate, MFMailComposeViewControllerDelegat
         print("p127 modelName: \(modelName)")
         print("p127 memory: \(memory)")
         print("p127 carrierName: \(carrierName)")
-        
+        print("p157 mcc: \(mcc)")
+        print("p157 mnc: \(mnc)")
+    
         let deviceComplete = "\(modelName) - \(memory) GB"
         
         print("p127 deviceComplete: \(deviceComplete)")
@@ -151,6 +167,8 @@ class General: NSObject, UITextFieldDelegate, MFMailComposeViewControllerDelegat
         rawDataObject["device"] = deviceComplete
         rawDataObject["system"] = systemVersion
         rawDataObject["carrier"] = carrierName
+        rawDataObject["mcc"] = mcc
+        rawDataObject["mnc"] = mnc
         
         rawDataObject["userPhoneNumber"] = "608-242-7700"               //TODO hardcoded get device from code?
         
@@ -193,7 +211,7 @@ class General: NSObject, UITextFieldDelegate, MFMailComposeViewControllerDelegat
         }
         
         rawDataObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
-            print("p186 General rawDataObject has been saved.")
+            print("p214 General rawDataObject has been saved.")
         }
         
         // ____ End Save to Parse Database ____________________________________

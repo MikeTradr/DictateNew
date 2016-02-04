@@ -115,6 +115,9 @@ let str51:String = "6 am test alert 44 minutes"
 
 let str52:String = "reminder shovel snow"
 
+let str53:String = "call mike"
+
+
 
 
 
@@ -255,6 +258,8 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
     var width: Float = 0
     
     var transactionState:String = ""
+    var actionType = ""
+
 
     
     
@@ -383,7 +388,7 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
         if (processNow == true) {
             print("p381 we here: \(processNow)")
 
-            vcTest1()   //go to this class
+            DetailTableVC()   //go to this class
         
        // enteredText2.text = ""      // set to blank for return
         }
@@ -440,18 +445,21 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
 
 //code for super auto create no button at all.
         
-        let wordArrTemp = enteredText2.text.componentsSeparatedByString(" ")      //** use for SPACE seperated list, or phrases
+        var wordArrTemp = enteredText2.text.componentsSeparatedByString(" ")      //** use for SPACE seperated list, or phrases
+        
         print("p427 wordArrTemp: \(wordArrTemp)")
 
-        let lastElement = wordArrTemp.last                          //last element in array
+        var lastElement:String = wordArrTemp.last!                          //last element in array
+        lastElement = lastElement.lowercaseString
+        
         if (lastElement == "go" || lastElement == "done" || lastElement == "create") {
             let str = enteredText2.text
             
-            print("p432 we here???? lastElement: \(lastElement!)")
+            print("p432 we here???? lastElement: \(lastElement)")
 
             let (startDT, endDT, output, outputNote, day, calendarName, actionType) = DictateCode().parse(str)
             
-            print("p449 we here????: \(lastElement!)")
+            print("p449 we here????: \(lastElement)")
             
             General().delay(3.0) {
                 // do stuff
@@ -461,20 +469,45 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
             }
 
             //self.tabBarController?.selectedIndex = 1
-
-            
-
-
-
             
         }
         
+        var firstElement:String = wordArrTemp.first!                          //first element in array
+        firstElement = firstElement.lowercaseString
         
         
+        switch (firstElement) {
+            case "call", "phone":
+                self.actionType = "Call"
+                let (startDT, endDT, output, outputNote, day, calendarName, actionType) = DictateCode().parse(str)
+                General().delay(1.5) {  // delay to show text in dialog
+                    self.buttonProcess(self)
+                }
+            break;
+            
+            case "text", "message":
+                self.actionType = "Text"
+                let (startDT, endDT, output, outputNote, day, calendarName, actionType) = DictateCode().parse(str)
+                General().delay(1.5) {  // delay to show text in dialog
+                    self.buttonProcess(self)
+                }
+            break;
+            
+            case "mail", "email":
+                self.actionType = "Mail"
+                let (startDT, endDT, output, outputNote, day, calendarName, actionType) = DictateCode().parse(str)
+                General().delay(1.5) {  // delay to show text in dialog
+                    self.buttonProcess(self)
+                }
+            break;
+      
+
+        default:
+            print("p491 Switch firstElement")
+            
+        }   //end Switch
         
-        
-        
-        
+    
         if enteredText2.text == "" {
             labelReadIt.hidden = true   //hide read label at beginning as nothing to read
         } else {
@@ -776,30 +809,10 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
         
 // ____ actionType Text ____________________________________
         
-        
         switch (actionType) {
         case "Text":
             print("p397 in Text Switch")
-
             resultMessage.text = "Switching to iMessage for your text"
-            
-        //    General().saveToParse()         //call method to save data to parse DB.
-/*
-            let rawDataObject = PFObject(className: "UserData")
-            rawDataObject["actionType"] = actionType
-            rawDataObject["rawString"] = outputNote
-            rawDataObject["output"] = output
-            rawDataObject["userName"] = PFUser.currentUser()?.username
-            
-            //TODO get these two fields from code!
-            rawDataObject["device"] = "iPhone"               //TODO hardcoded get device from code?
-            rawDataObject["userPhoneNumber"] = "608-242-7700"               //TODO hardcoded get device from code?
-            
-            rawDataObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
-                print("p433 vcDictate rawDataObject has been saved.")
-            }
-            
-*/
             
             // Make sure the device can send text messages
             if (messageComposer.canSendText()) {
@@ -814,7 +827,7 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
             } else {
                 // Let the user know if his/her device isn't able to send text messages
                 let errorAlert = UIAlertView(title: "Cannot Send Text Message", message: "Your device is not able to send text messages.", delegate: self, cancelButtonTitle: "OK")
-                errorAlert.show()
+                    errorAlert.show()
             }
             
             enteredText2.text = ""      // set to blank for return
@@ -825,12 +838,11 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
             defaults.setObject(actionType, forKey: "actionType")        //saves actionType
             defaults.setObject(actionType, forKey: "mainType")        //saves actionType
             
+            General().saveToParse()
         break;
-        
         
         case "Call":
             print("p431 in Call Switch")
-            
             resultMessage.text = "Switching to Phone for your call"
     
             let toPhone:String    = defaults.stringForKey("toPhone")!
@@ -838,37 +850,17 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
             if let url = NSURL(string: "tel://\(toPhone)") {
                 UIApplication.sharedApplication().openURL(url)
             }
-        
-     //       enteredText2.text = ""      // set to blank for return
-     //       resultMessage.text = ""     // set to blank for return
             
             //let actionType = ""         // set to "" for next processing
             let mainType = ""
             defaults.setObject(actionType, forKey: "actionType")        //saves actionType
             defaults.setObject(actionType, forKey: "mainType")        //saves actionType
             
-       //     General().saveToParse()         //call method to save data to parse DB.
-/*
-            let rawDataObject = PFObject(className: "UserData")
-             rawDataObject["actionType"] = actionType
-            rawDataObject["rawString"] = outputNote
-            rawDataObject["userName"] = PFUser.currentUser()?.username
-            
-            //TODO get these two fields from code!
-            rawDataObject["device"] = "iPhone"               //TODO hardcoded get device from code?
-            rawDataObject["userPhoneNumber"] = "608-242-7700"               //TODO hardcoded get device from code?
-            
-            rawDataObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
-                print("p490 vcDictate rawDataObject has been saved.")
-            }
-*/
-        
+            General().saveToParse()
         break;
-
 
         case "Mail":
             print("p456 in Mail Switch")
-            
             resultMessage.text = "Switching to Mail for your mail"
             
             let mailComposeViewController = MailComposer().configuredMailComposeViewController()
@@ -879,35 +871,12 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
             }
             
             print("p485 after MailComposer call")
-
-     //       enteredText2.text = ""      // set to blank for return
-     //       resultMessage.text = ""     // set to blank for return
             
-     //       General().saveToParse()         //call method to save data to parse DB.
-/*
-            //let actionType = ""         // set to "" for next processing
-            let mainType = ""
-            defaults.setObject(actionType, forKey: "actionType")        //saves actionType
-            defaults.setObject(actionType, forKey: "mainType")        //saves actionType
-            let rawDataObject = PFObject(className: "UserData")
-            rawDataObject["actionType"] = actionType
-            rawDataObject["rawString"] = outputNote
-            rawDataObject["output"] = output
-            rawDataObject["userName"] = PFUser.currentUser()?.username
-            
-            //TODO get these two fields from code!
-            rawDataObject["device"] = "iPhone"               //TODO hardcoded get device from code?
-            rawDataObject["userPhoneNumber"] = "608-242-7700"               //TODO hardcoded get device from code?
-            
-            rawDataObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
-                print("p523 vcDictate rawDataObject has been saved.")
-            }
-*/
+            General().saveToParse()
         break;
             
         case "Mail List":
             print("p588 in Mail List Switch")
-            
             resultMessage.text = "Switching to Mail for your mail"
             
             let mailComposeViewController = MailComposer().mailList()
@@ -919,41 +888,11 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
             
             print("p485 after MailComposer call")
             
-     //       enteredText2.text = ""      // set to blank for return
-     //       resultMessage.text = ""     // set to blank for return
-            
-      //      General().saveToParse()         //call method to save data to parse DB.
-/*
-            
-            print("p616 actionType: \(actionType)")
-            
-            //let actionType = ""         // set to "" for next processing
-            let mainType = ""
-            defaults.setObject(actionType, forKey: "actionType")        //saves actionType
-            defaults.setObject(actionType, forKey: "mainType")        //saves actionType
-            let rawDataObject = PFObject(className: "UserData")
-            rawDataObject["actionType"] = actionType
-            rawDataObject["rawString"] = outputNote
-            rawDataObject["output"] = output
-            
-            print("p630 PFUser.currentUser()?.username: \(PFUser.currentUser()?.username)")
-            if PFUser.currentUser()?.username != nil {
-                rawDataObject["userName"] = PFUser.currentUser()?.username
-            }
-            
-            //TODO get these two fields from code!
-            rawDataObject["device"] = "iPhone"               //TODO hardcoded get device from code?
-            rawDataObject["userPhoneNumber"] = "608-242-7700"               //TODO hardcoded get device from code?
-            
-            rawDataObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
-                print("p523 vcDictate rawDataObject has been saved.")
-            }
-*/
-            break;
+            General().saveToParse()
+        break;
             
         case "Mail Events":
             print("p632 in Mail Events Switch")
-            
             resultMessage.text = "Switching to Mail for your mail"
             
             let mailComposeViewController = MailComposer().mailEvents()
@@ -965,42 +904,10 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
             
             print("p643 after MailComposer call")
             print("p616 actionType: \(actionType)")
-
             
-     //       enteredText2.text = ""      // set to blank for return
-     //       resultMessage.text = ""     // set to blank for return
-            
-      //      General().saveToParse()         //call method to save data to parse DB.
-     /*
-            //let actionType = ""         // set to "" for next processing
-            let mainType = ""
-            defaults.setObject(actionType, forKey: "actionType")        //saves actionType
-            defaults.setObject(actionType, forKey: "mainType")        //saves actionType
-            let rawDataObject = PFObject(className: "UserData")
-            rawDataObject["actionType"] = actionType
-            rawDataObject["rawString"] = outputNote
-            rawDataObject["output"] = output
-            
-            print("p666 PFUser.currentUser()?.username: \(PFUser.currentUser()?.username)")
-            if PFUser.currentUser()?.username != nil {
-                rawDataObject["userName"] = PFUser.currentUser()?.username
-            }
-            
-            print("p669 after userName save")
-
-            
-            //TODO get these two fields from code!
-            rawDataObject["device"] = "iPhone"               //TODO hardcoded get device from code?
-            rawDataObject["userPhoneNumber"] = "608-242-7700"               //TODO hardcoded get device from code?
-            
-            rawDataObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
-                print("p523 vcDictate rawDataObject has been saved.")
-            }
-   */         
-            break;
-
-            
-            
+            General().saveToParse()
+        break;
+       
         default:
             print("p573 Switch Default")
             
@@ -1009,10 +916,8 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
         enteredText2.text = ""      // set to blank for return
         resultMessage.text = ""     // set to blank for return
         
-        General().saveToParse()         //call method to save data to parse DB.
+       // General().saveToParse()         //call method to save data to parse DB.
 
-
-        
         if ( (actionType != "Call") && (actionType != "Text") && (actionType != "Mail") ) {     // call does not need to see details screen
             
             enteredText2.text = ""      // set to blank for return
@@ -1021,29 +926,23 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
                 // do stuff
                 self.tabBarController?.selectedIndex = 1
             }
-            
         }
 }   // end func buttonProcess
 
      
     @IBAction func buttonToday(sender: AnyObject) {
          switchScreen("Today")
-        
     }
     
     
     @IBAction func buttonEdit(sender: AnyObject) {
-       EventManager().createEvent()
-        
+        EventManager().createEvent()
         switchScreen("Event")
-        
     }
     
     @IBAction func buttonCancel(sender: AnyObject) {
-        
         cleardata()
     }
-    
     
 }   // end ViewController
 

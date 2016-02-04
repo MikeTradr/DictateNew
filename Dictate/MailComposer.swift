@@ -36,7 +36,7 @@ class MailComposer: UIViewController, MFMailComposeViewControllerDelegate {
     func configuredMailComposeViewController() -> MFMailComposeViewController {
         let mailComposerVC = MFMailComposeViewController()
         mailComposerVC.mailComposeDelegate = self // Extremely important to set the --mailComposeDelegate-- property, NOT the --delegate-- property
-                
+        
         //TODO fix the forced downcast below
         let mainType:String    = defaults.stringForKey("mainType")!
         let output:String    = defaults.stringForKey("output")!
@@ -74,7 +74,7 @@ class MailComposer: UIViewController, MFMailComposeViewControllerDelegate {
         let toPhone:String    = defaults.stringForKey("toPhone")!
         var reminderList:String = defaults.stringForKey("reminderList")!
         
-      //  var firstAlarm:EKAlarm
+        //  var firstAlarm:EKAlarm
         
         var toRecipents:[String] = []
         toRecipents.append(toPhone)
@@ -90,16 +90,16 @@ class MailComposer: UIViewController, MFMailComposeViewControllerDelegate {
         
         if allReminderLists != [] {
             for (index, title) in allReminderLists.enumerate() {
-               // print("---------------------------------------------------")
-               // print("p82 index, title: \(index), \(title)")
+                // print("---------------------------------------------------")
+                // print("p82 index, title: \(index), \(title)")
                 
                 let reminderListTitle = allReminderLists[index]
-               // print("p86 reminderListTitle: \(reminderListTitle)")
+                // print("p86 reminderListTitle: \(reminderListTitle)")
                 
                 if reminderListTitle.title == reminderList {
                     
                     if reminderListTitle != "" {   //TODO Mike TODO Anil trying Checking if Reminder List has items!
-                 
+                        
                         ReminderManager.sharedInstance.fetchCalendarReminders(reminderListTitle) { (reminders) -> Void in
                             print(reminders)
                             
@@ -108,9 +108,9 @@ class MailComposer: UIViewController, MFMailComposeViewControllerDelegate {
                             
                             var body:String = ""
                             var alarmString = ""
-                          //  var firstAlarm:EKAlarm
-
-
+                            //  var firstAlarm:EKAlarm
+                            
+                            
                             body = "<html><body>"
                             body = "\(body)<font size=\"6\" color=\"red\"><b>\(reminderListTitle.title)</b></font><br><hr> "
                             
@@ -124,7 +124,7 @@ class MailComposer: UIViewController, MFMailComposeViewControllerDelegate {
                                 let title = item.title
                                 //TODO Mike TODO Anil how do we get location from a Reminder? This worked forevent see func below!
                                 let location = item.location!
-                            
+                                
                                 let alarms = item.alarms
                                 let firstAlarm = alarms?[0]
                                 
@@ -135,7 +135,7 @@ class MailComposer: UIViewController, MFMailComposeViewControllerDelegate {
                                         print("p130 firstAlarm: \(firstAlarm)")
                                     }
                                 }
-
+                                
                                 print("p133 location: \(location)")
                                 
                                 if location != "" {
@@ -151,13 +151,13 @@ class MailComposer: UIViewController, MFMailComposeViewControllerDelegate {
                                     body = "\(body)<font size=\"5\"><b>❑ \(title)</b></font><br><p>"
                                     
                                 }
-   
-              
+                                
+                                
                             }       // end If loop through items...
                             
                             body = body + "<br><hr><br>📩 Sent from Dictate™ App 😀</body></html>"
                             mailComposerVC.setMessageBody(body, isHTML: true)
-            
+                            
                         }       // end closure
                         
                     }       //end If trying to check if list has items
@@ -173,7 +173,7 @@ class MailComposer: UIViewController, MFMailComposeViewControllerDelegate {
     func mailEvents() -> MFMailComposeViewController {
         let mailComposerVC = MFMailComposeViewController()
         mailComposerVC.mailComposeDelegate = self // Extremely important to set the --mailComposeDelegate-- property, NOT the --delegate-- property
-      
+        
         
         //TODO fix the forced downcast below
         let mainType:String    = defaults.stringForKey("mainType")!
@@ -186,7 +186,7 @@ class MailComposer: UIViewController, MFMailComposeViewControllerDelegate {
         
         let dateHelper = JTDateHelper()
         let startDate =  NSDate()
-       // let endDate = dateHelper.addToDate(startDate, days: 1)
+        // let endDate = dateHelper.addToDate(startDate, days: 1)
         
         let today = NSDate()
         let tomorrow:NSDate = NSCalendar.currentCalendar().dateByAddingUnit(
@@ -194,10 +194,10 @@ class MailComposer: UIViewController, MFMailComposeViewControllerDelegate {
             value: 1,
             toDate: today,
             options: NSCalendarOptions(rawValue: 0))!
-       
+        
         let cal = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
         let endDate = cal.startOfDayForDate(tomorrow)   // this is midnight today really or 0:00 tomorrow = 12 am = midnight
-    
+        
         print("p178 startDate: \(startDate)")
         print("p179 endDate: \(endDate)")
         
@@ -245,46 +245,46 @@ class MailComposer: UIViewController, MFMailComposeViewControllerDelegate {
                     if location != "" {
                         
                         body = "\(body)<font size=\"5\"><b>• \(title)</b></font><br>&nbsp;&nbsp;&nbsp;&nbsp;🕑 \(time)<br><font color=\"gray\">Location:<br><i>\(location)</i></font><p>"
-
-                       // self.newOutput = "\(self.newOutput)\n ❍ \(title)\n    🕑 \(time)\nLocation:\n\(location)\n"
+                        
+                        // self.newOutput = "\(self.newOutput)\n ❍ \(title)\n    🕑 \(time)\nLocation:\n\(location)\n"
                         //print("p176 self.newOutput: \(self.newOutput)")
-
+                        
                         
                     } else {
-                    
+                        
                         body = "\(body)<font size=\"5\"><b>• \(title)</b></font><br>&nbsp;&nbsp;&nbsp;&nbsp;🕑 \(time)<p>"
                         
                         // tried 1 line format. body = "\(body)• \(time)&nbsp;&nbsp;&nbsp;&nbsp;<font size=\"5\"><b>\(title)</b></font><p>"
                         
                         //self.newOutput = "\(self.newOutput)\n ❍ \(title)\n    🕑 \(time)"
-                       // print("p176 self.newOutput: \(self.newOutput)")
+                        // print("p176 self.newOutput: \(self.newOutput)")
                     }
-
+                    
                     
                 }   // end If loop through items...
                 
                 body = body + "<br><hr><br>📩 Sent from Dictate™ App 😀</body></html>"
                 mailComposerVC.setMessageBody(body, isHTML: true)
-
+                
                 self.presentViewController(mailComposerVC, animated: true, completion: nil)
-
                 
-               // self.messageBody = "\(self.newOutput)\n\n\n📩 Sent from Dictate™ App 😀"
                 
-               
+                // self.messageBody = "\(self.newOutput)\n\n\n📩 Sent from Dictate™ App 😀"
+                
+                
                 
                 print("p136 self.messageBody: \(self.messageBody)")
                 
-             //   mailComposerVC.setMessageBody(self.messageBody, isHTML: false)
+                //   mailComposerVC.setMessageBody(self.messageBody, isHTML: false)
                 
                 // self.presentViewController(mailComposerVC, animated: true, completion: nil)
-            
+                
             }   //end if self.allEvents != []
             
             
             
         })  // end closure
-
+        
         
         return mailComposerVC
         
@@ -312,7 +312,7 @@ class MailComposer: UIViewController, MFMailComposeViewControllerDelegate {
         }
         
     }
-
+    
     
     // MARK: MFMailComposeViewControllerDelegate Method
     func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {

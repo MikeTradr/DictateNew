@@ -2012,21 +2012,20 @@ class DictateCode: NSObject {
             //POWER USER AUTO create code...
                 let lastElement = wordArr.last                          //last element in array
                 if (lastElement == "go" || lastElement == "process" || lastElement == "done" || lastElement == "create") {
+                    print("p2015 we here? lastElement: \(lastElement)")
+                    
                     let processNow:Bool = true
                     defaults.setObject(processNow, forKey: "ProcessNow")
                     wordArrTrimmed = wordArrTrimmed.filter() { $0 != wordArr.last}  // trim last word
-                    
+                    print("p2020 processNow: \(processNow)")
+
                 } else {
                     let processNow = false
                     let autoCreate:Bool = false
-                    defaults.setObject(autoCreate, forKey: "AutoCreate")
                     defaults.setObject(processNow, forKey: "ProcessNow")
+                    print("p2027 processNow: \(processNow)")
                 }
-                
-                
-            
-            
-            
+       
             
             // Set End Time for now 10 minutes get from prefs?
             

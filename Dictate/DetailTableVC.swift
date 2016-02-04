@@ -11,9 +11,6 @@ import EventKit
 import AVFoundation
 import EventKitUI
 
-
-
-
 class DetailTableVC: UIViewController {
     
     @IBOutlet weak var tableV: UITableView!
@@ -33,7 +30,7 @@ class DetailTableVC: UIViewController {
     var output = ""
     var messageString = ""
  
-    var results = ["", "", "", "", "", "", "", "", "", "", ""]
+    var results = ["temp", "temp", "temp", "temp", "temp", "temp", "temp", "temp", "temp", "temp", "temp"]
     var labels = ["Input", "Type", "Day","Time", "Cell#", "Start", "End", "Title", "Cal.", "Alert", "Repeat"]
 
     var labelInput = "Input"
@@ -48,8 +45,6 @@ class DetailTableVC: UIViewController {
     var labelAlert = "Alert"
     var labelRepeat = "Repeat"
     
-    // var labels = [labelInput, labelType, labelDay, labelTime, labelCell, labelStart, labelEnd, labelTitle, labelCal, labelAlert, labelRepeat]
-    
     let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
     var audioPlayer = AVAudioPlayer()
     
@@ -59,6 +54,10 @@ class DetailTableVC: UIViewController {
     let swiftColor = UIColor(red: 255, green: 165, blue: 0)
     let moccasin = UIColor(red: 255, green: 228, blue: 181)     //light biege color, for Word List
     let apricot = UIColor(red: 251, green: 206, blue: 177)     //light biege color, for Phrase List
+    
+    var deleteRowCountArray: [Int] = []
+    var numberRowsToDelete = 0
+
 
 //#### my functions #################################
     
@@ -131,23 +130,48 @@ class DetailTableVC: UIViewController {
         // Return the number of rows in the section.
         
         //return 11
+        // 11 fields (rows) total!
         return results.count
     }
-    
+
+
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
-//        if results[indexPath.row] == "" || results[indexPath.row] == "0"  {
-//            print("p143 we here hide rows: \(indexPath.row)!")
-//            return 0
-//        } else {
-//            return 25 //space heigh
-//        }
-        return 35
-    }
+       // print("p149 deleteRowCountArray: \(deleteRowCountArray)")
+        //print("p153 results: \(results)")
+        //print("p154 results[indexPath.row]: \(results[indexPath.row])")
+
+        if (results[indexPath.row] == "" || results[indexPath.row] == "0")  {
+            print("p148 we here hide rows: \(indexPath.row)")
+            
+            deleteRowCountArray.append(indexPath.row)
+            
+            print("p152 deleteRowCountArray: \(deleteRowCountArray)")
+            
+            let uniqueRowArray = Array(Set(deleteRowCountArray))    //removes duplicates
+            
+            print("p162 uniqueRowArray: \(uniqueRowArray)")
+            print("p173 uniqueRowArray.count: \(uniqueRowArray.count)")
+            
+            numberRowsToDelete = uniqueRowArray.count
+            
+            print("p173 numberRowsToDelete: \(numberRowsToDelete)")
+      
+            return 0
+        
+        } else {
+        
+            return 35 //space heigh
+        }
+        
+        //return 35
+    }   // end func heightForRowAtIndexPath
+    
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier( "BasicCell", forIndexPath: indexPath) as! DetailsTableViewCell
+        
         
         cell.selectionStyle = UITableViewCellSelectionStyle.Default //TODO tried to set sleection color to yellow
         cell.label.text = labels[indexPath.row]
@@ -190,26 +214,15 @@ class DetailTableVC: UIViewController {
             cell.resultsTextField.backgroundColor = apricot
             break;
 
-       
-            
-
         default:
             cell.resultsTextField.backgroundColor = UIColor.whiteColor()
             break;
         }
-        
-
-        
-        
-        
-        
+    
         //    resultType.backgroundColor = UIColor.yellowColor()
-
-
-
-        
+      
         return cell
-    }
+    }   // end func cellForRowAtIndexPath
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         print("p68 You selected cell #\(indexPath.row)!")
@@ -257,16 +270,11 @@ class DetailTableVC: UIViewController {
                     print("did complete: \(action.rawValue), \(controller.event)")
                     self.dismissViewControllerAnimated(true, completion: nil)
             }
-            
-            
-            
+     
         }   //end Start and Date edit VC.
         
-        
-        
-        
-    }
-
+   }   // end func didSelectRowAtIndexPath
+    
 // End TABLE funcs...
 //#### End my functions #################################
     
@@ -303,14 +311,11 @@ class DetailTableVC: UIViewController {
             alertString = "\(String(alert)) minutes"
         }
         
-     
-   
-       // labels = [labelInput, labelType, labelDay, labelTime, labelCell, labelStart, labelEnd, labelTitle, labelCal, labelAlert, labelRepeat]
- 
+        deleteRowCountArray = []
+        print("p345 deleteRowCountArray: \(deleteRowCountArray)")
         
         print("p111Main ===================================")
         print("p111Main results: \(results)")
-
         
         let outputNote  = defaults.stringForKey("outputNote")
         let duration    = defaults.objectForKey("eventDuration") as! Int ?? 10
@@ -480,10 +485,9 @@ class DetailTableVC: UIViewController {
         
         print("p604 processNow: \(processNow)")
         if (processNow == true) {
-      //      buttonCreate(nil)   //go to this class
-            
-            
+            buttonCreate(self)   //go to this class
         }
+        
         print("p555 labelCal: \(labelCal)")
         print("p555 labelTitle: \(labelTitle)")
 
@@ -497,17 +501,20 @@ class DetailTableVC: UIViewController {
         print("p555 labels: \(labels)")
         print("p555 results: \(results)")
         
+        print("p541 numberRowsToDelete: \(numberRowsToDelete)")
+
+        let rowsToShow = 11 - numberRowsToDelete    //11 is maximun fields same as results.count
         
-        tableViewHeightConstraint.constant = CGFloat(results.count * 35)
+        print("p542 rowsToShow: \(rowsToShow)")
+        
+        tableViewHeightConstraint.constant = CGFloat(rowsToShow * 35)    //anil added
         tableViewOutlet.reloadData()
         
-      //  defaults.setObject(results, forKey: "results")      //save items for results table
+        print("**** p546 tableViewHeightConstraint.constant: \(tableViewHeightConstraint.constant)")
+        
 
     }   //end viewWill Appear
     
-    
-
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -520,8 +527,18 @@ class DetailTableVC: UIViewController {
         
         tableV.tableFooterView = UIView(frame:CGRectZero)    //removes blank lines
         
-       
-    
+        print("p541 numberRowsToDelete: \(numberRowsToDelete)")
+        
+        let rowsToShow = 11 - numberRowsToDelete    //11 is maximun fields same as results.count
+        
+        print("p542 rowsToShow: \(rowsToShow)")
+        
+        tableViewHeightConstraint.constant = CGFloat(rowsToShow * 35)    //anil added
+        tableViewOutlet.reloadData()
+        
+        print("p546 tableViewHeightConstraint.constant: \(tableViewHeightConstraint.constant)")
+        
+
         
         //Added left and Right Swipe gestures. TODO Can add this to the General.swift Class? and call it?
         let leftSwipe = UISwipeGestureRecognizer(target: self, action: Selector("handleSwipes:"))
@@ -746,7 +763,7 @@ class DetailTableVC: UIViewController {
             self.tabBarController?.selectedIndex = 2
             
         }
-    }
+    }   //end ButtonCreate
     
     
     @IBAction func buttonCancel(sender: AnyObject) {
@@ -772,7 +789,7 @@ class DetailTableVC: UIViewController {
  */
         self.tabBarController?.selectedIndex = 2
         
-    }
+    }   //end buttonCancel
     
     
     

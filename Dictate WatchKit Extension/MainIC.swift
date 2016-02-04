@@ -694,9 +694,9 @@ class MainIC: WKInterfaceController {
             rawDataObject["device"] = "iPhone"               //TODO hardcoded get device from code?
             rawDataObject["userPhoneNumber"] = "608-242-7700"               //TODO hardcoded get device from code?
             
-            rawDataObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+        //    rawDataObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
                 print("p697 MainIC rawDataObject has been saved.")
-            }
+         //   }
             break;
             
      

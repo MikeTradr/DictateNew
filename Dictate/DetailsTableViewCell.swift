@@ -13,6 +13,16 @@ class DetailsTableViewCell: UITableViewCell {
     @IBOutlet weak var label: UILabel!
 
     @IBOutlet weak var resultsTextField: UITextField!
+    
+    func viewDidLoad() {
+        // Do any additional setup after loading the view, typically from a nib.
+        
+        var newFrame:CGRect = resultsTextField.frame
+        newFrame.size.height = 30
+        resultsTextField.frame = newFrame
+    }
 
+ 
+    
     
 }

@@ -5,7 +5,7 @@
 //  Created by Mike Derr on 6/14/15.
 //  Copyright (c) 2015 ThatSoft.com. All rights reserved.
 //
-
+/*
 import UIKit
 import EventKit
 import Parse
@@ -804,7 +804,7 @@ class vcTest1: UIViewController {
             fullDTEnd = ""
         }
         
-        General().saveToParse()
+        //General().saveToParse()
 
         
  /*
@@ -1034,4 +1034,4 @@ extension vcTest1 : UITextFieldDelegate {
         self.view.endEditing(true)
     }
 }
-
+*/

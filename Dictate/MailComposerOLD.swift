@@ -41,7 +41,7 @@ class MessageComposer: NSObject, MFMessageComposeViewControllerDelegate {
         print("p41 toPhone: \(toPhone)")
 
         
-        let newOutput = "\(output) - sent from Dictate™ App"
+        let newOutput = "\(output) - 💬 from Dictate™ App 😀"
         
         let messageBody = newOutput
 

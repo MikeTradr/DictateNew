@@ -376,11 +376,12 @@ class DictateCode: NSObject {
                         defaults.setObject(mainType, forKey: "mainType")            //sets mainType
                         
                         let reminderList = "Untitled List"
-                        
-                       // defaults.setObject(reminderTitle, forKey: "title")            //sets reminderTitle
+                        let reminderTitle = output
+
+                        defaults.setObject(reminderTitle, forKey: "reminderTitle")            //sets reminderTitle
                         defaults.setObject(reminderList, forKey: "reminderList")            //sets reminderList
                         defaults.setObject(reminderList, forKey: "calendarName")            //sets title to calendarName for ParseDB
-                        defaults.setObject(wordArrTrimmed, forKey: "wordArrTrimmed")            //sets reminderTitle
+                        defaults.setObject(wordArrTrimmed, forKey: "wordArrTrimmed")
                         
                         // EventManager.sharedInstance.creatNewReminderList(nextWord2, items: wordArrTrimmed)
                         // EventManager.sharedInstance.creatNewReminderList(nextWord, items: ["Butter","Milk","Cheese"])
@@ -531,13 +532,12 @@ class DictateCode: NSObject {
                     defaults.setObject(actionType, forKey: "actionType")        //sets actionType for processing
                     defaults.setObject(mainType, forKey: "mainType")            //sets mainType
                     defaults.setObject(output, forKey: "output")                //sets output
-                    defaults.setObject(listName, forKey: "reminderList")        //sets reminderList
+                    defaults.setObject(reminderList, forKey: "reminderList")    //sets reminderList
                     
-                    defaults.setObject(reminderList, forKey: "title")            //sets reminderTitle
+                    defaults.setObject(output, forKey: "reminderTitle")         //sets reminderTitle
 
-                    defaults.setObject(reminderList, forKey: "calendarName")            //sets title to calendarName for ParseDB
-                    defaults.setObject(wordArrTrimmed, forKey: "wordArrTrimmed")            //sets reminderTitle
-        
+                    defaults.setObject(reminderList, forKey: "calendarName")    //sets title to calendarName for ParseDB
+                    defaults.setObject(wordArrTrimmed, forKey: "wordArrTrimmed")
                 }
                 
 // ____ "text", "message", "im" word ____________________________________

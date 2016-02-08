@@ -12,8 +12,11 @@ class DetailsTableViewCell: UITableViewCell {
    
     @IBOutlet weak var label: UILabel!
 
-    @IBOutlet weak var resultsTextField: UITextField!
+    //@IBOutlet weak var resultsTextField: UITextField!
     
+    @IBOutlet weak var resultsTextField: UITextView!
+    
+ /*
     func viewDidLoad() {
         // Do any additional setup after loading the view, typically from a nib.
         
@@ -21,7 +24,7 @@ class DetailsTableViewCell: UITableViewCell {
         newFrame.size.height = 30
         resultsTextField.frame = newFrame
     }
-
+*/
  
     
     

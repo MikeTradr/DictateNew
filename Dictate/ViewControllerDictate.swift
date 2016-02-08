@@ -38,7 +38,7 @@ let str8:String = "new List, Shave and shower, call invisible fence, rental depo
 
 let str14:String = "appointment Test xCode today 2:10 pm work calendar 608-242-7722"
 
-let str15:String = "appointment today 2:10 am Show Apartment to John 6082427744 duration five minutes calendar work alert 5 minutes"      // Comma sperated phrases list test from siri
+let str15:String = "appointment today 2:10 am Show Apartment to John 6082427744 at 1132 Johnson street duration five minutes calendar work alert 5 minutes"      // Comma sperated phrases list test from siri
 
 let str16:String = "appointment next Sunday 12 pm Pilot Band Show at SunSet Grill duration four hours calendar Mike alert one day"
 
@@ -146,8 +146,8 @@ add to dictate str   “meeting with Bob every Wednesday at noon”  //handle wo
 */
 
 // ---- change strings here for testing, shows on the dictated field---
-//var str:String = str52
-var str:String = ""
+var str:String = str15
+//var str:String = ""
 
 //var strRaw:String = str
 

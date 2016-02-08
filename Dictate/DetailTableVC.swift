@@ -18,11 +18,12 @@ class DetailTableVC: UIViewController {
    // @IBOutlet weak var data: UILabel!
     
     @IBOutlet weak var tableViewOutlet: UITableView!
-    
-    @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
+   
     @IBOutlet weak var buttonCreateOutlet: UIButton!
     @IBOutlet weak var resultMessage: UITextView!
     
+     @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
+        
     var eventRepeat = ""
     var actionType = ""
     var strRaw = ""
@@ -57,6 +58,9 @@ class DetailTableVC: UIViewController {
     
     var deleteRowCountArray: [Int] = []
     var numberRowsToDelete = 0
+    var rowsToShow = 0
+    var titleFrameHeight = 0
+    var additionalRows = 0
 
 
 //#### my functions #################################
@@ -116,6 +120,27 @@ class DetailTableVC: UIViewController {
         }
     }
     
+    // below: http://stackoverflow.com/questions/27369777/self-sizing-cell-in-swift-how-do-i-make-constraints-programmatically
+    
+    func dynamicHeight(text:String, font:UIFont, width:CGFloat) -> CGFloat{
+        let label:UILabel = UILabel(frame: CGRectMake(0, 0, width, CGFloat.max))
+        label.numberOfLines = 0
+        label.lineBreakMode = NSLineBreakMode.ByWordWrapping
+        
+        label.font = font
+        label.text = text
+        
+        label.sizeToFit()
+        return label.frame.height
+        
+    }
+    
+    
+    
+    
+    
+    
+    
 // TABLE funcs...
     // MARK: - Table view data source
     
@@ -142,29 +167,45 @@ class DetailTableVC: UIViewController {
         //print("p154 results[indexPath.row]: \(results[indexPath.row])")
 
         if (results[indexPath.row] == "" || results[indexPath.row] == "0")  {
-            print("p148 we here hide rows: \(indexPath.row)")
+           // print("p148 we here hide rows: \(indexPath.row)")
             
             deleteRowCountArray.append(indexPath.row)
             
-            print("p152 deleteRowCountArray: \(deleteRowCountArray)")
+            //print("p152 deleteRowCountArray: \(deleteRowCountArray)")
             
             let uniqueRowArray = Array(Set(deleteRowCountArray))    //removes duplicates
             
-            print("p162 uniqueRowArray: \(uniqueRowArray)")
-            print("p173 uniqueRowArray.count: \(uniqueRowArray.count)")
+            //print("p162 uniqueRowArray: \(uniqueRowArray)")
+            //print("p173 uniqueRowArray.count: \(uniqueRowArray.count)")
             
             numberRowsToDelete = uniqueRowArray.count
             
-            print("p173 numberRowsToDelete: \(numberRowsToDelete)")
+            //print("p158 numberRowsToDelete: \(numberRowsToDelete)")
+            
+            rowsToShow = 11 - numberRowsToDelete    //11 is maximun fields same as results.count
       
             return 0
         
-        } else {
+        } else if (labels[indexPath.row] == "Title") {
+            
+            print("p170 we here: \(results[indexPath.row])")
+            // http://stackoverflow.com/questions/27369777/self-sizing-cell-in-swift-how-do-i-make-constraints-programmatically
+            
+            
+        //    dynamicHeight(results[indexPath.row], UIFont.systemFontSize(), 262)
+            
+           // titleFrameHeight = 70
+            
+            additionalRows = 1      // varr for additional rows to add to table height
         
-            return 35 //space heigh
+        
+            return 70
+
+    
+
         }
         
-        //return 35
+        return 35
     }   // end func heightForRowAtIndexPath
     
     
@@ -172,15 +213,20 @@ class DetailTableVC: UIViewController {
         
         let cell = tableView.dequeueReusableCellWithIdentifier( "BasicCell", forIndexPath: indexPath) as! DetailsTableViewCell
         
-        
         cell.selectionStyle = UITableViewCellSelectionStyle.Default //TODO tried to set sleection color to yellow
         cell.label.text = labels[indexPath.row]
         
         cell.resultsTextField.text = results[indexPath.row]
         cell.resultsTextField.layer.cornerRadius = 7
-        cell.resultsTextField.textColor = UIColor.blueColor()
+      //  cell.resultsTextField.textColor = UIColor.blueColor()
+       // cell.resultsTextField.textAlignment = .Center
+       // cell.resultsTextField. = .Center
+
+
         
-        if labels[indexPath.row] == "Input" || labels[indexPath.row] == "Start" || labels[indexPath.row] == "End" || labels[indexPath.row] == "Title" || labels[indexPath.row] == "Cal." || labels[indexPath.row] == "Alert"  {
+        
+        
+        if labels[indexPath.row] == "Input" || labels[indexPath.row] == "Start" || labels[indexPath.row] == "End" || labels[indexPath.row] == "Title" || labels[indexPath.row] == "Cal." || labels[indexPath.row] == "Alert" || labels[indexPath.row] == "List"  {
             
             cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
             
@@ -188,6 +234,42 @@ class DetailTableVC: UIViewController {
             
         } else {
             cell.accessoryType = .None
+        }
+        
+        if labels[indexPath.row] == "Title" {
+            
+          /*
+         //   let contentSize = cell.resultsTextField.sizeThatFits(cell.resultsTextField.bounds.size)
+            
+            var frame = cell.resultsTextField.frame
+            frame.size.height = contentSize.height
+            
+            print("p208 frame.size.height: \(frame.size.height)!")
+            print("p208 frame \(frame)!")
+
+            cell.resultsTextField.frame = frame
+            
+       */
+        /*
+            let contentSize = cell.resultsTextField.sizeThatFits(cell.resultsTextField.bounds.size)
+            var frame = cell.resultsTextField.frame
+            frame.size.height = contentSize.height
+            cell.resultsTextField.frame = frame
+            
+            let aspectRatioTextViewConstraint = NSLayoutConstraint(item: cell.resultsTextField, attribute: .Height, relatedBy: .Equal, toItem: cell.resultsTextField, attribute: .Width, multiplier: cell.resultsTextField.bounds.height/cell.resultsTextField.bounds.width, constant: 1)
+            cell.resultsTextField.addConstraint(aspectRatioTextViewConstraint)
+       */   
+            
+            print("p257 we here? \(labels[indexPath.row])")
+
+            
+            var frameRect:CGRect  = cell.resultsTextField.frame;
+            frameRect.size.height = 60 // <-- Specify the height you want here.
+            cell.resultsTextField.frame = frameRect
+            
+            
+            
+            
         }
 
     
@@ -238,8 +320,30 @@ class DetailTableVC: UIViewController {
         } else if labels[indexPath.row] == "Title" {               //selected Input row...
 
        
-            var alert = UIAlertController(title: "Enter your Title", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "Continue", style: UIAlertActionStyle.Default, handler: nil))
+            var alert = UIAlertController(title: "Enter your new Title", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Continue", style: .Default, handler: { (action) -> Void in
+                
+                self.output = alert.textFields![0].text!
+                self.defaults.setObject(self.output, forKey: "output")                //sets output
+
+                print("p251 alert.textFields![0].text!: \(alert.textFields![0].text!)")
+                print("p251 self.output: \(self.output)")
+               // let outputNew = self.defaults.stringForKey("output")                   //Title
+               // print("p271 outputNew: \(outputNew)")
+                
+                self.loadResultsArray()
+                
+                self.tableViewOutlet.reloadData()
+                
+            }))
+            
+            alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action) -> Void in
+                //selectedCell.contentView.backgroundColor = UIColor.blackColor()
+                self.tableViewOutlet.reloadData()   //TODO Anil Mike best way to remove the highlighted row?
+            }))
+
+
+            
             alert.addTextFieldWithConfigurationHandler({(textField: UITextField!) in
                 textField.placeholder = "Enter text:"
                 textField.secureTextEntry = false
@@ -247,6 +351,9 @@ class DetailTableVC: UIViewController {
                 print("p230 textField.text: \(textField.text)")
                 
                 self.output = textField.text!
+                
+         
+
     
             })
   
@@ -276,6 +383,33 @@ class DetailTableVC: UIViewController {
    }   // end func didSelectRowAtIndexPath
     
 // End TABLE funcs...
+    
+    func loadResultsArray() {
+        
+        var strRaw      = defaults.stringForKey("strRaw")                   //Input
+        var actionType  = defaults.stringForKey("actionType")!              //Type
+        var day         = defaults.stringForKey("day")                      //Day
+        let phone       = defaults.stringForKey("phone")                    //Cell#
+        let startDT     = defaults.objectForKey("startDT")! as! NSDate      //Start
+        let endDT       = defaults.objectForKey("endDT")! as! NSDate        //End
+        var output      = defaults.stringForKey("output")                   //Title
+        var calendarName = defaults.stringForKey("calendarName")            //Cal.
+        let alert       = defaults.objectForKey("eventAlert") as! Int ?? 10 //Alert
+        let eventRepeat = defaults.stringForKey("eventRepeat")              //Repeat
+        
+        var alertString = ""
+        
+        if (alert == 0){
+            alertString = ""
+        } else {
+            alertString = "\(String(alert)) minutes"
+        }
+ 
+        results = ["\"\(strRaw!)\"", actionType, day!, time, phone!, fullDT, fullDTEnd, output!, calendarName!, alertString, eventRepeat!]
+        print("p303 results: \(results)")
+    }
+    
+    
 //#### End my functions #################################
     
     override func viewWillAppear(animated: Bool) {
@@ -325,7 +459,7 @@ class DetailTableVC: UIViewController {
         //TODO Mike Anil commented to fix nil error
         // var reminderArray = defaults.objectForKey("reminderArray") as! [String] //array of the items
         
-        var reminderTitle   = defaults.stringForKey("title")
+        var reminderTitle   = defaults.stringForKey("reminderTitle")
         var reminderArray:[String] = []
         var reminderList   = defaults.stringForKey("reminderList")
         var reminderAlarm  = defaults.objectForKey("reminderAlarm")! as! NSDate
@@ -377,6 +511,8 @@ class DetailTableVC: UIViewController {
         switch (actionType){
         case "Reminder":
             print("p315 actionType: \(actionType)")
+            let reminderTitle  = defaults.stringForKey("reminderTitle") ?? ""
+
             
             buttonCreateOutlet.setTitle("Create Reminder", forState: UIControlState.Normal)
             buttonCreateOutlet.backgroundColor = UIColor.yellowColor()
@@ -386,11 +522,10 @@ class DetailTableVC: UIViewController {
                 fullDTEnd = ""
             }
            
-            output = reminderList!
-            calendarName = reminderTitle!
+            output = reminderTitle
+            calendarName = reminderList!
             
             labelCal   = "List"    // default Cal.
-            output = ""
             
             print("p337 output: \(output)")
             print("p337 calendarName: \(calendarName)")
@@ -500,17 +635,23 @@ class DetailTableVC: UIViewController {
         
         print("p555 labels: \(labels)")
         print("p555 results: \(results)")
-        
+    /*
         print("p541 numberRowsToDelete: \(numberRowsToDelete)")
 
         let rowsToShow = 11 - numberRowsToDelete    //11 is maximun fields same as results.count
         
         print("p542 rowsToShow: \(rowsToShow)")
+    
+     */
+        //rowsToShow = rowsToShow + 3
         
-        tableViewHeightConstraint.constant = CGFloat(rowsToShow * 35)    //anil added
+        tableViewHeightConstraint.constant = CGFloat((rowsToShow * 35) + (additionalRows * 35) )   //anil added
         tableViewOutlet.reloadData()
         
         print("**** p546 tableViewHeightConstraint.constant: \(tableViewHeightConstraint.constant)")
+        
+  //      tableResultFrameHeightConstraint.constant = CGFloat(titleFrameHeight)
+  //      print("p176  tableResultFrameHeightConstraint.constant: \( tableResultFrameHeightConstraint.constant)")
         
 
     }   //end viewWill Appear
@@ -527,18 +668,11 @@ class DetailTableVC: UIViewController {
         
         tableV.tableFooterView = UIView(frame:CGRectZero)    //removes blank lines
         
-        print("p541 numberRowsToDelete: \(numberRowsToDelete)")
-        
-        let rowsToShow = 11 - numberRowsToDelete    //11 is maximun fields same as results.count
-        
-        print("p542 rowsToShow: \(rowsToShow)")
-        
-        tableViewHeightConstraint.constant = CGFloat(rowsToShow * 35)    //anil added
-        tableViewOutlet.reloadData()
-        
-        print("p546 tableViewHeightConstraint.constant: \(tableViewHeightConstraint.constant)")
-        
+        self.tableViewOutlet.reloadData()
 
+
+      //  tableV.estimatedRowHeight = 150
+      //  tableV.rowHeight = UITableViewAutomaticDimension
         
         //Added left and Right Swipe gestures. TODO Can add this to the General.swift Class? and call it?
         let leftSwipe = UISwipeGestureRecognizer(target: self, action: Selector("handleSwipes:"))

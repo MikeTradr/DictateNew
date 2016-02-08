@@ -191,15 +191,19 @@ class DetailTableVC: UIViewController {
             print("p170 we here: \(results[indexPath.row])")
             // http://stackoverflow.com/questions/27369777/self-sizing-cell-in-swift-how-do-i-make-constraints-programmatically
             
+            //Instead of 180, we actually need to have the width of the result textView
+           let  height = dynamicHeight(results[indexPath.row], font: UIFont.boldSystemFontOfSize(21), width: 180)
             
-        //    dynamicHeight(results[indexPath.row], UIFont.systemFontSize(), 262)
+            tableViewHeightConstraint.constant = CGFloat((rowsToShow * 35) + (additionalRows * 35) )  +  (height-35) //anil added
+            view.updateConstraintsIfNeeded()
+
             
            // titleFrameHeight = 70
             
             additionalRows = 1      // varr for additional rows to add to table height
         
-        
-            return 70
+            print("Max height: \(height)")
+            return height
 
     
 

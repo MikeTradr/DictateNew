@@ -61,6 +61,8 @@ class DetailTableVC: UIViewController {
     var rowsToShow = 0
     var titleFrameHeight = 0
     var additionalRows = 0
+    
+    var titleRowHeight: CGFloat = 0.0
 
 
 //#### my functions #################################
@@ -132,14 +134,10 @@ class DetailTableVC: UIViewController {
         
         label.sizeToFit()
         return label.frame.height
-        
     }
     
     
-    
-    
-    
-    
+   
     
 // TABLE funcs...
     // MARK: - Table view data source
@@ -153,9 +151,7 @@ class DetailTableVC: UIViewController {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        
-        //return 11
-        // 11 fields (rows) total!
+        //return 11         // 11 fields (rows) total!
         return results.count
     }
 
@@ -192,22 +188,39 @@ class DetailTableVC: UIViewController {
             // http://stackoverflow.com/questions/27369777/self-sizing-cell-in-swift-how-do-i-make-constraints-programmatically
             
             //Instead of 180, we actually need to have the width of the result textView
-           let  height = dynamicHeight(results[indexPath.row], font: UIFont.boldSystemFontOfSize(21), width: 180)
+            var  height = dynamicHeight(results[indexPath.row], font: UIFont.boldSystemFontOfSize(21), width: 180)
             
-            tableViewHeightConstraint.constant = CGFloat((rowsToShow * 35) + (additionalRows * 35) )  +  (height-35) //anil added
+            print("**** p193 height: \(height)")
+            
+            if height < 40 {
+                height = 40     //row height can't be less then 35, for 1 line to show.
+                print("p197 height: \(height)")
+            }
+            
+            if height > 85 {    //set max row height to allow like 3 rows, then scale font to fill this height! :) neat!
+                height = 85
+            }
+            
+            titleRowHeight = height; print("p197 height: \(height)")
+            
+            let rowsToAdd = height/41; print("p200 rowsToAdd: \(rowsToAdd)")
+
+            additionalRows = Int(rowsToAdd)     // var for additional rows to add to table height
+            print("p204 additionalRows: \(additionalRows)")
+            
+            tableViewHeightConstraint.constant = CGFloat((rowsToShow * 35) + (additionalRows * 35)) //20 ) //anil added, mike changed
+            
+            print("p204 additionalRows: \(additionalRows)")
+            
             view.updateConstraintsIfNeeded()
-
             
-           // titleFrameHeight = 70
+            print("p205 tableViewHeightConstraint.constant: \(tableViewHeightConstraint.constant)")
             
-            additionalRows = 1      // varr for additional rows to add to table height
-        
-            print("Max height: \(height)")
+            print("p211 height: \(height)")
+            
+     
             return height
-
-    
-
-        }
+        }   //else if "Title"
         
         return 35
     }   // end func heightForRowAtIndexPath
@@ -217,7 +230,7 @@ class DetailTableVC: UIViewController {
         
         let cell = tableView.dequeueReusableCellWithIdentifier( "BasicCell", forIndexPath: indexPath) as! DetailsTableViewCell
         
-        cell.selectionStyle = UITableViewCellSelectionStyle.Default //TODO tried to set sleection color to yellow
+        cell.selectionStyle = UITableViewCellSelectionStyle.Default //TODO tried to set selection color to yellow
         cell.label.text = labels[indexPath.row]
         
         cell.resultsTextField.text = results[indexPath.row]
@@ -225,9 +238,16 @@ class DetailTableVC: UIViewController {
       //  cell.resultsTextField.textColor = UIColor.blueColor()
        // cell.resultsTextField.textAlignment = .Center
        // cell.resultsTextField. = .Center
-
-
         
+        cell.resultsTextField.font = UIFont.boldSystemFontOfSize(CGFloat(21))
+        cell.resultsTextField.contentSize.height = 21
+        
+        //these have no effect, tryign to get results CENTERED VERTICALLY
+        //TODO Anil...
+        cell.resultsTextField.frame.size.height = 40
+        cell.resultsTextField.frame.size.height = 30
+        cell.resultsTextField.frame.size.height = 20// NO EFFECT!
+
         
         
         if labels[indexPath.row] == "Input" || labels[indexPath.row] == "Start" || labels[indexPath.row] == "End" || labels[indexPath.row] == "Title" || labels[indexPath.row] == "Cal." || labels[indexPath.row] == "Alert" || labels[indexPath.row] == "List"  {
@@ -263,7 +283,7 @@ class DetailTableVC: UIViewController {
             let aspectRatioTextViewConstraint = NSLayoutConstraint(item: cell.resultsTextField, attribute: .Height, relatedBy: .Equal, toItem: cell.resultsTextField, attribute: .Width, multiplier: cell.resultsTextField.bounds.height/cell.resultsTextField.bounds.width, constant: 1)
             cell.resultsTextField.addConstraint(aspectRatioTextViewConstraint)
        */   
-            
+       /*
             print("p257 we here? \(labels[indexPath.row])")
 
             
@@ -271,15 +291,56 @@ class DetailTableVC: UIViewController {
             frameRect.size.height = 60 // <-- Specify the height you want here.
             cell.resultsTextField.frame = frameRect
             
-            
+        */
             
             
         }
-
-    
         
+        
+        if labels[indexPath.row] == "Start" || labels[indexPath.row] == "End" || labels[indexPath.row] == "Input" || labels[indexPath.row] == "Title" {
+            
+            //set to defaults to start with
+            cell.resultsTextField.text = results[indexPath.row]
+            cell.resultsTextField.font = UIFont.boldSystemFontOfSize(22)
+            cell.resultsTextField.frame.size.height = 40
+        
+            print("p300 titleRowHeight: \(titleRowHeight)")
+
+            if labels[indexPath.row] == "Title" {
+                cell.resultsTextField.frame.size.height = titleRowHeight
+                
+                if cell.resultsTextField.frame.size.height > 90 {   //try to have max rows at 3
+                    cell.resultsTextField.frame.size.height = 90
+                }
+                
+            }
+            print("p301 ========================================")
+            print("p301 row: \(labels[indexPath.row]): \(results[indexPath.row]) ")
+            print("p301 ========================================")
+            print("p301 cell.resultsTextField.font: \(cell.resultsTextField.font)")
+
+            
+            print("p304 cell.resultsTextField.contentSize.height: \(cell.resultsTextField.contentSize.height)")
+            print("p305 cell.resultsTextField.frame.size.height: \(cell.resultsTextField.frame.size.height)")
+            
+            //from: http://derekneely.com/2011/04/size-to-fit-text-in-uitextview-iphone/
+          
+            //setup text resizing check here
+            if (cell.resultsTextField.contentSize.height > cell.resultsTextField.frame.size.height) {
+                print("p312 we in If?: \(labels[indexPath.row])")
+                
+                var fontIncrement = 1
+                while (cell.resultsTextField.contentSize.height > cell.resultsTextField.frame.size.height) {
+                    cell.resultsTextField.font = UIFont.boldSystemFontOfSize(CGFloat(21-fontIncrement))
+                    fontIncrement++
+                }
+            }
+            print("p322 cell.resultsTextField.font? \(cell.resultsTextField.font)")
+        }
+
+
         if results[indexPath.row] == "Event" {
-            print("p144 we here: \(indexPath.row)!")
+            print("p337 we here: \(indexPath.row)!")
             cell.resultsTextField.backgroundColor = swiftColor
         }
         
@@ -306,9 +367,14 @@ class DetailTableVC: UIViewController {
         }
     
         //    resultType.backgroundColor = UIColor.yellowColor()
+        print("p364 end cell: \(labels[indexPath.row]) ------------------------")
+        print("--------------------------------------------")
+
+
       
         return cell
     }   // end func cellForRowAtIndexPath
+    
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         print("p68 You selected cell #\(indexPath.row)!")
@@ -418,6 +484,8 @@ class DetailTableVC: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated);
+
+       // tableV.reloadData()
         
         var alertSound3: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("se_tap", ofType: "m4a")!)
         //General.playSound(alertSound3!)
@@ -663,6 +731,9 @@ class DetailTableVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+       // tableV.reloadData()
+
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -906,6 +977,10 @@ class DetailTableVC: UIViewController {
     
     @IBAction func buttonCancel(sender: AnyObject) {
         print("p898 in buttonCancel")
+        
+        tableV.reloadData()
+        titleRowHeight = 40
+
         
         var alertSound124 = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("124-DeleteWhoosh", ofType: "mp3")!)
         //  General.playSound(alertSound3!)

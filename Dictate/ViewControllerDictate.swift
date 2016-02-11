@@ -117,6 +117,14 @@ let str52:String = "reminder shovel snow"
 
 let str53:String = "call mike"
 
+let str54:String = "8 am go see the doctor"
+
+let str55:String = "8 am go see the doctor go to the gym go to the bank go to the office"
+
+
+
+
+
 
 
 
@@ -146,7 +154,7 @@ add to dictate str   “meeting with Bob every Wednesday at noon”  //handle wo
 */
 
 // ---- change strings here for testing, shows on the dictated field---
-var str:String = str15
+var str:String = str55
 //var str:String = ""
 
 //var strRaw:String = str

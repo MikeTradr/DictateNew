@@ -666,7 +666,7 @@ class DetailTableVC: UIViewController {
         tableV.reloadData()
         
         print("**** p546 tableViewHeightConstraint.constant: \(tableViewHeightConstraint.constant)")
-        
+        tableV.layoutIfNeeded()
 
         
   //      tableResultFrameHeightConstraint.constant = CGFloat(titleFrameHeight)

@@ -20,6 +20,8 @@ class DetailTableVC: UIViewController {
     
     @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
         
+   // @IBOutlet weak var labelTrailingConstraint: NSLayoutConstraint!
+    
     var eventRepeat = ""
     var actionType = ""
     var strRaw = ""
@@ -242,12 +244,27 @@ class DetailTableVC: UIViewController {
         
         if labels[indexPath.row] == "Input" || labels[indexPath.row] == "Start" || labels[indexPath.row] == "End" || labels[indexPath.row] == "Title" || labels[indexPath.row] == "Cal." || labels[indexPath.row] == "Alert" || labels[indexPath.row] == "List"  {
             
-            cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+            //cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
             //cell.accessoryView = PZDisclosureIndicator(color: UIColor.yellowColor())
-        } else {
-            cell.accessoryType = .None
-        }
+           // cell.spaceView.hidden = true
+           // cell.spaceView.frame = CGrectMake(x: 0, y: 0, self.cell.spaceView.frame.width*0,50);
+            
+         //   UITextView(frame: CGRect(x: 0, y: 0, width: **view.bounds.size.width**, height: 123))
+            
+            //cell.labelTrailingConstraint.constant = CGFloat(0)
+            
 
+            cell.disclosureLabel.hidden = false
+
+
+        } else {
+            //cell.accessoryType = UITableViewCellAccessoryType.None
+            //cell.labelTrailingConstraint.constant = CGFloat(20)
+            cell.disclosureLabel.hidden = true
+
+           
+            
+        }
         if labels[indexPath.row] == "Input" || labels[indexPath.row] == "Title" {
         
             print("p300 titleRowHeight: \(titleRowHeight)")

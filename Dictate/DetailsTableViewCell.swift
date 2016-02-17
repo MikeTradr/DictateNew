@@ -17,6 +17,12 @@ class DetailsTableViewCell: UITableViewCell {
     @IBOutlet weak var resultsTextField: UITextView!
     
     @IBOutlet weak var resultsLabel: UILabel!
+    @IBOutlet weak var spaceView: UIView!
+    @IBOutlet weak var labelTrailingConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var disclosureLabel: UILabel!
+    
+    
  /*
     func viewDidLoad() {
         // Do any additional setup after loading the view, typically from a nib.

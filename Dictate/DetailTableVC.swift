@@ -11,7 +11,7 @@ import EventKit
 import AVFoundation
 import EventKitUI
 
-class DetailTableVC: UIViewController {
+class DetailTableVC: UIViewController,EKEventEditViewDelegate {
     
     @IBOutlet weak var tableV: UITableView!
     
@@ -409,18 +409,22 @@ class DetailTableVC: UIViewController {
             evc.eventStore = EKEventStore()
        //     evc.editViewDelegate = self
             evc.modalPresentationStyle = .Popover
+            evc.editViewDelegate = self
             self.presentViewController(evc, animated: true, completion: nil)
             
-//no idea here...
-            func eventEditViewController(controller: EKEventEditViewController,
-                didCompleteWithAction action: EKEventEditViewAction) {
-                    print("did complete: \(action.rawValue), \(controller.event)")
-                    self.dismissViewControllerAnimated(true, completion: nil)
-            }
      
         }   //end Start and Date edit VC.
         
    }   // end func didSelectRowAtIndexPath
+    
+    
+    //no idea here...
+    func eventEditViewController(controller: EKEventEditViewController,
+        didCompleteWithAction action: EKEventEditViewAction) {
+            print("did complete: \(action.rawValue), \(controller.event)")
+            self.dismissViewControllerAnimated(true, completion: nil)
+    }
+
     
 // End TABLE funcs...
     

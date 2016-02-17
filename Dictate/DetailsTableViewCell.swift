@@ -16,6 +16,7 @@ class DetailsTableViewCell: UITableViewCell {
     
     @IBOutlet weak var resultsTextField: UITextView!
     
+    @IBOutlet weak var resultsLabel: UILabel!
  /*
     func viewDidLoad() {
         // Do any additional setup after loading the view, typically from a nib.

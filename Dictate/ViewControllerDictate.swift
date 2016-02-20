@@ -62,9 +62,9 @@ let str25:String = "Message wife I will be home at 1:15 am"
 
 let str26:String = "Email my wife I am buying us a new truck and will need you to put $2000 into our bank account by 5 PM today. Thank you so much. I love you Tony"
 
-let str27:String = "new list groceries cheese milk carrots lettace eggs"
+let str27:String = "new list groceries cheese milk carrots lettace eggs"    // new list
 
-let str28:String = "new todo call mom, meeting at 10 AM, play tennis, pick up kids"
+let str28:String = "new todo, call mom, meeting at 10 AM, play tennis, pick up kids" //phrase list. "todo" is title
 
 let str29:String = "Reminder Wash the car tonight"
 
@@ -121,6 +121,11 @@ let str54:String = "8 am go see the doctor"
 
 let str55:String = "8 am go see the doctor go to the gym go to the bank go to the office"
 
+let str56:String = "list this that other thing"
+
+let str57:String = "list this that other thing adjective"
+
+
 
 
 
@@ -154,7 +159,7 @@ add to dictate str   “meeting with Bob every Wednesday at noon”  //handle wo
 */
 
 // ---- change strings here for testing, shows on the dictated field---
-var str:String = str55
+var str:String = str5
 //var str:String = ""
 
 //var strRaw:String = str

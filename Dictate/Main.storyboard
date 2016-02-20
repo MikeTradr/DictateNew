@@ -953,16 +953,16 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="label" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uro-0I-Eim">
-                                                    <rect key="frame" x="13" y="4" width="45" height="20"/>
+                                                    <rect key="frame" x="10" y="4" width="58" height="20.5"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="45" id="gbR-F5-Yig"/>
+                                                        <constraint firstAttribute="width" constant="58" id="gbR-F5-Yig"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="6CY-Qw-N5B">
-                                                    <rect key="frame" x="58" y="0.0" width="279" height="30"/>
+                                                    <rect key="frame" x="68" y="0.0" width="269" height="30"/>
                                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <accessibility key="accessibilityConfiguration">
                                                         <accessibilityTraits key="traits" selected="YES" staticText="YES"/>
@@ -982,7 +982,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="32" id="ic3-Ii-uQV"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="45"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="30"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -993,7 +993,7 @@
                                                 <constraint firstItem="Yx4-CQ-hrv" firstAttribute="trailing" secondItem="75q-Oc-XfX" secondAttribute="trailingMargin" constant="4" id="Muq-ns-IHH"/>
                                                 <constraint firstItem="6CY-Qw-N5B" firstAttribute="leading" secondItem="Uro-0I-Eim" secondAttribute="trailing" id="NRc-XS-WL9"/>
                                                 <constraint firstItem="6CY-Qw-N5B" firstAttribute="top" secondItem="75q-Oc-XfX" secondAttribute="topMargin" constant="-8" id="eIS-5d-xIV"/>
-                                                <constraint firstItem="Uro-0I-Eim" firstAttribute="leading" secondItem="75q-Oc-XfX" secondAttribute="leadingMargin" constant="5" id="id0-lF-lDq"/>
+                                                <constraint firstItem="Uro-0I-Eim" firstAttribute="leading" secondItem="75q-Oc-XfX" secondAttribute="leadingMargin" constant="2" id="id0-lF-lDq"/>
                                                 <constraint firstItem="Yx4-CQ-hrv" firstAttribute="top" secondItem="75q-Oc-XfX" secondAttribute="topMargin" constant="-10" id="of9-Dv-hpZ"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="Yx4-CQ-hrv" secondAttribute="bottom" constant="4" id="rab-Jx-Sn0"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="6CY-Qw-N5B" secondAttribute="bottom" id="utH-zy-KF5"/>

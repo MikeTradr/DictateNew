@@ -149,15 +149,15 @@ class MainIC: WKInterfaceController {
         let str1:String = "Reminder wash the car"
         let str2:String = str4
         
-        var suggestionArray:[String] = []
-       // suggestionArray = [str, str1, str2]       //TODO Comment out for non-testing
+        //var suggestionArray:[String] = []
+        let suggestionArray = [str, str1, str2]       //TODO Comment out for non-testing
         
         var phone       = defaults.stringForKey("phone")
         var alert       = defaults.objectForKey("defaultEventAlert") as? Double //added defualt 112715
         let duration    = defaults.stringForKey("defaultEventDuration")         //added defualt 112715
         let eventRepeat = defaults.stringForKey("eventRepeat")
         let strRaw      = defaults.stringForKey("strRaw")
-        var reminderTitle  = defaults.stringForKey("title") ?? ""
+        var reminderTitle   = defaults.stringForKey("title") ?? ""
         var wordArrTrimmed  = defaults.objectForKey("wordArrTrimmed") as? [String] ?? [] //array of the items
         
         //TODO Mike Anil commented to fix nil error
@@ -770,7 +770,8 @@ class MainIC: WKInterfaceController {
         let carrier = networkInfo.subscriberCellularProvider
         
         // Get carrier name
-        let carrierName: String = carrier!.carrierName!
+        // TODO Mike Anil crashes on watch!
+        //let carrierName: String = carrier!.carrierName!
         
         
         print("p822 uuid: \(uuid)")
@@ -778,7 +779,7 @@ class MainIC: WKInterfaceController {
         print("p822 systemVersion: \(systemVersion)")
         print("p822 modelName: \(modelName)")
         print("p822 memory: \(memory)")
-        print("p822 carrierName: \(carrierName)")
+   //     print("p822 carrierName: \(carrierName)")
         
         
        // let deviceComplete = "\(modelName) - \(memory) GB"    //was memory I desired capacity on phones.
@@ -789,19 +790,18 @@ class MainIC: WKInterfaceController {
         
         rawDataObject["device"] = deviceComplete
         rawDataObject["system"] = systemVersion
-        rawDataObject["carrier"] = carrierName
+        rawDataObject["carrier"] = "Watch" //carrierName
         
         
         rawDataObject["userPhoneNumber"] = "608-242-7700"               //TODO hardcoded get device from code?
         
         //TODO get this from login Screen, hard coded for now...
         
-        print("p796 PFUser.currentUser()!: \(PFUser.currentUser()!)")
         
         //TODO fix PFuser when is nil can be nil???
         
         if PFUser.currentUser() == nil {
-            rawDataObject["userName"] = "Mike Coded"
+            rawDataObject["userName"] = "Mike Watch Coded"
         } else {
             // rawDataObject["userName"] = "Mike Hard Coded"
             

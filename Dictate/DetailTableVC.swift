@@ -170,26 +170,26 @@ class DetailTableVC: UIViewController,EKEventEditViewDelegate {
       
             return 0
         
-        } else if (labels[indexPath.row] == "Title") {
+        } else if (labels[indexPath.row] == "Title" || labels[indexPath.row] == "Items") {
             
-            print("p170 we here: \(results[indexPath.row])")
+            print("p175 row: \(labels[indexPath.row]): \(results[indexPath.row])")
             // http://stackoverflow.com/questions/27369777/self-sizing-cell-in-swift-how-do-i-make-constraints-programmatically
   
             //Instead of 180, we actually need to have the width of the result textView
-            var  height = dynamicHeight(results[indexPath.row], font: UIFont.boldSystemFontOfSize(22), width: 180)
+            var  height = dynamicHeight(results[indexPath.row], font: UIFont.boldSystemFontOfSize(22), width: 150)  //was 180
             
-            print("**** p193 height: \(height)")
+            print("p181 height: \(height)")
             
             if height < 35 {
                 height = 35     //row height can't be less then 35, for 1 line to show.
-                print("p197 height: \(height)")
+                print("p185 height: \(height)")
             }
             
             if height > 90 {    //set max row height to allow like 3 rows, then scale font to fill this height! :) neat!
                 height = 90
             }
             
-            titleRowHeight = height; print("p197 height: \(height)")
+            titleRowHeight = height; print("p192 height: \(height)")
             
             let rowsToAdd = height/36; print("p200 rowsToAdd: \(rowsToAdd)")
 
@@ -219,77 +219,50 @@ class DetailTableVC: UIViewController,EKEventEditViewDelegate {
         
         cell.selectionStyle = UITableViewCellSelectionStyle.Default //TODO tried to set selection color to yellow
         cell.label.text = labels[indexPath.row]
-        
         cell.resultsLabel.text = results[indexPath.row]
         cell.resultsLabel.layer.cornerRadius = 7
-        
         cell.resultsLabel.font = UIFont.boldSystemFontOfSize(CGFloat(22))
-        //cell.resultsTextField.contentSize.height = 21
-        
-        //these have no effect, tryign to get results CENTERED VERTICALLY
-        //TODO Anil...
-       // cell.resultsTextField.frame.size.height = 35
-        //cell.resultsTextField.frame.size.height = 30
-        //cell.resultsTextField.frame.size.height = 20// NO EFFECT!
-        
         
         print("p250 ========================================")
         print("p250 row: \(labels[indexPath.row]): \(results[indexPath.row]) ")
         print("p250 ========================================")
-      //  print("p250 cell.resultsTextField.font: \(cell.resultsTextField.font)")
-     //   print("p250 cell.resultsTextField.contentSize.height: \(cell.resultsTextField.contentSize.height)")
-     //   print("p251 cell.resultsTextField.frame.size.height: \(cell.resultsTextField.frame.size.height)")
-
-        
         
         if labels[indexPath.row] == "Input" || labels[indexPath.row] == "Start" || labels[indexPath.row] == "End" || labels[indexPath.row] == "Title" || labels[indexPath.row] == "Cal." || labels[indexPath.row] == "Alert" || labels[indexPath.row] == "List"  {
-            
-            //cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
-            //cell.accessoryView = PZDisclosureIndicator(color: UIColor.yellowColor())
-           // cell.spaceView.hidden = true
-           // cell.spaceView.frame = CGrectMake(x: 0, y: 0, self.cell.spaceView.frame.width*0,50);
-            
-         //   UITextView(frame: CGRect(x: 0, y: 0, width: **view.bounds.size.width**, height: 123))
-            
-            //cell.labelTrailingConstraint.constant = CGFloat(0)
-            
-
             cell.disclosureLabel.hidden = false
-
-
+            cell.userInteractionEnabled = true     //allow cell to be highlighted!
         } else {
-            //cell.accessoryType = UITableViewCellAccessoryType.None
-            //cell.labelTrailingConstraint.constant = CGFloat(20)
             cell.disclosureLabel.hidden = true
-
-           
-            
+            cell.userInteractionEnabled = false     //does not allow cell to be highlighted!
         }
-        if labels[indexPath.row] == "Input" || labels[indexPath.row] == "Title" {
+        
+        if labels[indexPath.row] == "Input" || labels[indexPath.row] == "Title" || labels[indexPath.row] == "Items" {
         
             print("p300 titleRowHeight: \(titleRowHeight)")
 
-            if labels[indexPath.row] == "Title" {
+            if labels[indexPath.row] == "Title" || labels[indexPath.row] == "Items" {
                 cell.resultsLabel.frame.size.height = titleRowHeight
                 
                 if cell.resultsLabel.frame.size.height > 90 {   //try to have max rows at 3
                     cell.resultsLabel.frame.size.height = 90
                 }
-         
             }
+
+
+            
             print("p301 ========================================")
             print("p301 row: \(labels[indexPath.row]): \(results[indexPath.row]) ")
             print("p301 ========================================")
-            print("p301 cell.resultsTextField.font: \(cell.resultsLabel.font)")
-            print("p305 cell.resultsLabel.frame.size.height: \(cell.resultsLabel.font)")
-          //  print("p304 cell.resultsTextField.contentSize.height: \(cell.resultsLabel.contentSize.height)")
+            print("p301 cell.resultsLabel.font: \(cell.resultsLabel.font)")
             print("p305 cell.resultsLabel.frame.size.height: \(cell.resultsLabel.frame.size.height)")
             
             //from: http://derekneely.com/2011/04/size-to-fit-text-in-uitextview-iphone/
           
             //setup text resizing check here
             
-            var height = dynamicHeight(results[indexPath.row], font: UIFont.boldSystemFontOfSize(21), width: 180)
+            var height = dynamicHeight(results[indexPath.row], font: UIFont.boldSystemFontOfSize(22), width: 180)
+            
+           // var height = cell.resultsLabel.frame.size.height
+            
             print("p337 height: \(height)")
             
             if ( height > cell.resultsLabel.frame.size.height) {
@@ -303,10 +276,6 @@ class DetailTableVC: UIViewController,EKEventEditViewDelegate {
                 }
             }
             print("p322 cell.resultsLabel.font? \(cell.resultsLabel.font)")
-            
-            
-
-            
         }
 
 
@@ -346,6 +315,7 @@ class DetailTableVC: UIViewController,EKEventEditViewDelegate {
     }   // end func cellForRowAtIndexPath
     
     
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         print("p68 You selected cell #\(indexPath.row)!")
         
@@ -354,11 +324,15 @@ class DetailTableVC: UIViewController,EKEventEditViewDelegate {
         let saffron = UIColor(red: 244, green: 208, blue: 63)  // 244, 208, 63
         selectedCell.contentView.backgroundColor = saffron
         
+        if labels[indexPath.row] == "Type" || labels[indexPath.row] == "Day" {
+            // selectedCell.selectionStyle = UITableViewCellSelectionStyle.None
+            
+        }
+        
         if labels[indexPath.row] == "Input" {               //selected Input row...
             self.tabBarController?.selectedIndex = 2        //go to main dictate microphone screen
             
         } else if labels[indexPath.row] == "Title" {               //selected Input row...
-
        
             var alert = UIAlertController(title: "Enter your new Title", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Continue", style: .Default, handler: { (action) -> Void in
@@ -372,7 +346,6 @@ class DetailTableVC: UIViewController,EKEventEditViewDelegate {
                // print("p271 outputNew: \(outputNew)")
                 
                 self.loadResultsArray()
-                
                 self.tableV.reloadData()
                 
             }))
@@ -381,20 +354,13 @@ class DetailTableVC: UIViewController,EKEventEditViewDelegate {
                 //selectedCell.contentView.backgroundColor = UIColor.blackColor()
                 self.tableV.reloadData()   //TODO Anil Mike best way to remove the highlighted row?
             }))
-
-
-            
+ 
             alert.addTextFieldWithConfigurationHandler({(textField: UITextField!) in
                 textField.placeholder = "Enter text:"
                 textField.secureTextEntry = false
                 
                 print("p230 textField.text: \(textField.text)")
-                
                 self.output = textField.text!
-                
-         
-
-    
             })
   
             self.presentViewController(alert, animated: true, completion: nil)
@@ -403,7 +369,6 @@ class DetailTableVC: UIViewController,EKEventEditViewDelegate {
         } else if (labels[indexPath.row] == "Start" || labels[indexPath.row] == "End") {
             //load EKEventEditViewController
             // create Event ViewController
-          
             
             let evc = EKEventEditViewController()
             evc.eventStore = EKEventStore()
@@ -411,7 +376,6 @@ class DetailTableVC: UIViewController,EKEventEditViewDelegate {
             evc.modalPresentationStyle = .Popover
             evc.editViewDelegate = self
             self.presentViewController(evc, animated: true, completion: nil)
-            
      
         }   //end Start and Date edit VC.
         
@@ -478,7 +442,7 @@ class DetailTableVC: UIViewController,EKEventEditViewDelegate {
         var output      = defaults.stringForKey("output")                   //Title
         var calendarName = defaults.stringForKey("calendarName")            //Cal.
         let alert       = defaults.objectForKey("eventAlert") as! Int ?? 10 //Alert
-        let eventRepeat = defaults.stringForKey("eventRepeat")              //Repeat
+        var eventRepeat = defaults.stringForKey("eventRepeat")!              //Repeat
         
         var formatter3 = NSDateFormatter()
         formatter3.dateFormat = "M-dd-yyyy h:mm a"
@@ -555,6 +519,17 @@ class DetailTableVC: UIViewController,EKEventEditViewDelegate {
             day     = "\(fullDT), All-Day"
         }
         
+        switch (eventRepeat) {  // 1 = daily, 2 = weekly, 3 = yearly, 4 = hourly I made this to pass then change later in event method
+            case "1": eventRepeat   = "Daily";   break;
+            case "2": eventRepeat   = "Weekly";   break;
+            case "3": eventRepeat   = "Yearly";   break;
+            case "4": eventRepeat   = "Hourly";   break;
+                
+            default:   print("p923 no repeat word matched")
+            break;
+        }
+        
+        
 
         switch (actionType){
         case "Reminder":
@@ -562,7 +537,7 @@ class DetailTableVC: UIViewController,EKEventEditViewDelegate {
             let reminderTitle  = defaults.stringForKey("reminderTitle") ?? ""
 
             
-            buttonCreateOutlet.setTitle("Create Reminder", forState: UIControlState.Normal)
+            buttonCreateOutlet.setTitle("   Create Reminder", forState: UIControlState.Normal)
             buttonCreateOutlet.backgroundColor = UIColor.yellowColor()
      
             if ( fullDT == "12-12-2014 12:00 AM" ) {        // added 072315 no need to show if no date used
@@ -595,7 +570,7 @@ class DetailTableVC: UIViewController,EKEventEditViewDelegate {
             let reminderTitle  = defaults.stringForKey("reminderList") ?? ""
             
             buttonCreateOutlet.backgroundColor = moccasin
-            buttonCreateOutlet.setTitle("Create New List", forState: UIControlState.Normal)
+            buttonCreateOutlet.setTitle("   Create \r New List", forState: UIControlState.Normal)
 
             output = ""
             fullDT = ""
@@ -619,7 +594,7 @@ class DetailTableVC: UIViewController,EKEventEditViewDelegate {
             let reminderTitle:String    = defaults.stringForKey("reminderList")! //Sets Reminder Title
             
             buttonCreateOutlet.backgroundColor = moccasin
-            buttonCreateOutlet.setTitle("Create New List", forState: UIControlState.Normal)
+            buttonCreateOutlet.setTitle("  Create \r New List", forState: UIControlState.Normal)
             
             output = ""
             fullDT = ""
@@ -646,16 +621,22 @@ class DetailTableVC: UIViewController,EKEventEditViewDelegate {
             let reminderTitle:String    = defaults.stringForKey("reminderList")! //Sets Reminder Title
             
             buttonCreateOutlet.backgroundColor = apricot
-            buttonCreateOutlet.setTitle("Create Phrase List", forState: UIControlState.Normal)
+            buttonCreateOutlet.setTitle("      Create \r Phrase List", forState: UIControlState.Normal)
             output = reminderTitle
             
             let stringOutput = wordArrTrimmed.joinWithSeparator(", ")
             day = stringOutput
             
             labelDay       = "Title"   // default Day
-            labelTime      = "Items"   // default Time
+            labelTitle     = "Items"   // default Time
+            
+            output     = stringOutput
+            day        = reminderTitle
             
             alertString = ""
+            fullDT = ""
+            fullDTEnd = ""
+            calendarName = ""
 
             break;
             
@@ -679,7 +660,7 @@ class DetailTableVC: UIViewController,EKEventEditViewDelegate {
   
         labels = [labelInput, labelType, labelDay, labelTime, labelCell, labelStart, labelEnd, labelTitle, labelCal, labelAlert, labelRepeat]
         
-        results = ["\"\(strRaw!)\"", actionType, day!, time, phone!, fullDT, fullDTEnd, output!, calendarName!, alertString, eventRepeat!]
+        results = ["\"\(strRaw!)\"", actionType, day!, time, phone!, fullDT, fullDTEnd, output!, calendarName!, alertString, eventRepeat]
         
         print("p555 labels: \(labels)")
         print("p555 results: \(results)")

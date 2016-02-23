@@ -11,7 +11,7 @@ import EventKit
 import AVFoundation
 import EventKitUI
 
-class DetailTableVC: UIViewController,EKEventEditViewDelegate {
+class DetailTableVC: UIViewController,EKEventEditViewDelegate, UIPopoverPresentationControllerDelegate {
     
     @IBOutlet weak var tableV: UITableView!
     
@@ -61,6 +61,9 @@ class DetailTableVC: UIViewController,EKEventEditViewDelegate {
     var additionalRows = 0
     
     var titleRowHeight: CGFloat = 0.0
+    
+    var startDT = NSDate()
+    var datePickerHeight: CGFloat = 0.0
 
 
 //#### my functions #################################
@@ -133,6 +136,13 @@ class DetailTableVC: UIViewController,EKEventEditViewDelegate {
         label.sizeToFit()
         return label.frame.height
     }
+    
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+    
+        return UIModalPresentationStyle.None
+    }
+
+    
     
 // TABLE funcs...
     // MARK: - Table view data source
@@ -209,6 +219,14 @@ class DetailTableVC: UIViewController,EKEventEditViewDelegate {
             return height
         }   //else if "Title"
         
+   /*
+        if (labels[indexPath.row] == "Start") {
+            var height:CGFloat = datePicker.hidden ? 0.0 : 216.0
+            return height
+        }
+     */
+        
+   
         return 35
     }   // end func heightForRowAtIndexPath
     
@@ -222,6 +240,11 @@ class DetailTableVC: UIViewController,EKEventEditViewDelegate {
         cell.resultsLabel.text = results[indexPath.row]
         cell.resultsLabel.layer.cornerRadius = 7
         cell.resultsLabel.font = UIFont.boldSystemFontOfSize(CGFloat(22))
+        
+      //  cell.datePicker.date = startDT
+       // cell.datePicker.hidden = true
+        
+        
         
         print("p250 ========================================")
         print("p250 row: \(labels[indexPath.row]): \(results[indexPath.row]) ")
@@ -309,6 +332,22 @@ class DetailTableVC: UIViewController,EKEventEditViewDelegate {
         //    resultType.backgroundColor = UIColor.yellowColor()
         print("p364 end cell: \(labels[indexPath.row]) ------------------------")
         print("--------------------------------------------")
+   /*
+        if labels[indexPath.row] == "Start" {
+            print("p330 start row, datePickerHeight: \(datePickerHeight)")
+            
+            if datePickerHeight == 120 {
+                cell.datePicker.hidden = false
+            } else {
+                cell.datePicker.hidden = true
+            }
+            
+            
+        }
+        
+    */
+        
+        
 
       
         return cell
@@ -323,6 +362,15 @@ class DetailTableVC: UIViewController,EKEventEditViewDelegate {
         
         let saffron = UIColor(red: 244, green: 208, blue: 63)  // 244, 208, 63
         selectedCell.contentView.backgroundColor = saffron
+        
+      
+
+        
+        
+        
+       //popover = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("idDatePopover") as UIPopoverController
+        
+        
         
         if labels[indexPath.row] == "Type" || labels[indexPath.row] == "Day" {
             // selectedCell.selectionStyle = UITableViewCellSelectionStyle.None
@@ -364,9 +412,62 @@ class DetailTableVC: UIViewController,EKEventEditViewDelegate {
             })
   
             self.presentViewController(alert, animated: true, completion: nil)
-           
             
-        } else if (labels[indexPath.row] == "Start" || labels[indexPath.row] == "End") {
+     //   } else if (labels[indexPath.row] == "Start" || labels[indexPath.row] == "End") {
+
+            
+        } else if (labels[indexPath.row] == "Start") {
+            
+            // var popover  = UIPopoverController()
+            
+            var popoverContent = (self.storyboard?.instantiateViewControllerWithIdentifier("idDatePopover"))! as UIViewController
+            
+            var nav = UINavigationController(rootViewController: popoverContent)
+            nav.modalPresentationStyle = UIModalPresentationStyle.Popover
+            var popover = nav.popoverPresentationController
+            popoverContent.preferredContentSize = CGSizeMake(300,175)
+            popover!.delegate = self
+            popover!.sourceView = self.view
+            popover!.sourceRect = CGRectMake(175,100,50,75)
+            
+            self.presentViewController(nav, animated: true, completion: nil)
+            
+            
+      /*
+       
+           // self.datePickerVC.delegate = self
+           // self.datePickerVC.modalPresentationStyle = UIModalPresentationStyle.Popover
+           // self.datePickerVC.preferredContentSize = CGSizeMake(500,208)
+            self.popover = datePickerVC.popoverPresentationController
+            if let _popover = popover {
+                _popover.sourceView = self.textField
+                _popover.sourceRect = CGRectMake(self.offset,self.textField.bounds.size.height,0,0)
+                _popover.delegate = self // to force no adaptive
+                self.dataChanged = dataChanged // save the closure
+                inViewController.presentViewController(datePickerVC, animated: true, completion: nil)
+                presented = true
+            }
+      */      
+            
+            
+            
+ /*
+            datePickerHeight = 120  //set height for cell
+            print("p404 in start cell: \(datePickerHeight)")
+            print("p405 selectedCell.frame.height: \(selectedCell.frame.height)")
+
+            self.tableV.reloadData()
+
+            
+            UIView.animateWithDuration(0.3, animations: { () -> Void in
+                self.tableV.beginUpdates()
+                // apple bug fix - some TV lines hide after animation
+                self.tableV.deselectRowAtIndexPath(indexPath, animated: true)
+                self.tableV.endUpdates()
+            })
+*/
+ /*
+            
             //load EKEventEditViewController
             // create Event ViewController
             
@@ -376,7 +477,7 @@ class DetailTableVC: UIViewController,EKEventEditViewDelegate {
             evc.modalPresentationStyle = .Popover
             evc.editViewDelegate = self
             self.presentViewController(evc, animated: true, completion: nil)
-     
+  */
         }   //end Start and Date edit VC.
         
    }   // end func didSelectRowAtIndexPath

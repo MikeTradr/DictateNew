@@ -859,6 +859,62 @@
             </objects>
             <point key="canvasLocation" x="-1879" y="239"/>
         </scene>
+        <!--Date Popup View Controller-->
+        <scene sceneID="EqS-Ic-vBY">
+            <objects>
+                <viewController storyboardIdentifier="idDatePopover" id="b76-oy-Buy" customClass="DatePopupViewController" customModule="Dictate" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="mTv-PX-aly"/>
+                        <viewControllerLayoutGuide type="bottom" id="E8g-U9-msL"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="lTX-82-ia0">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Start Date:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mp2-HF-tlY">
+                                <rect key="frame" x="20" y="20" width="83" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TAj-WJ-scG">
+                                <rect key="frame" x="111" y="20" width="145" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bt5-cx-Utw">
+                                <rect key="frame" x="20" y="49" width="236" height="120"/>
+                                <date key="date" timeIntervalSinceReferenceDate="480368756.47786498">
+                                    <!--2016-03-22 19:45:56 +0000-->
+                                </date>
+                                <date key="minimumDate" timeIntervalSinceReferenceDate="-978267600">
+                                    <!--1970-01-01 11:00:00 +0000-->
+                                </date>
+                                <connections>
+                                    <action selector="dateChanged:" destination="b76-oy-Buy" eventType="valueChanged" id="olF-e7-LlJ"/>
+                                </connections>
+                            </datePicker>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="imf-CB-khG">
+                                <rect key="frame" x="145" y="177" width="30" height="30"/>
+                                <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                <state key="normal" title="Ok">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="dateLabel" destination="TAj-WJ-scG" id="mHH-mp-0VM"/>
+                        <outlet property="datePicker" destination="bt5-cx-Utw" id="9oV-bT-iHT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vzm-8j-1mb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1199" y="1118"/>
+        </scene>
         <!--Edit-->
         <scene sceneID="SRM-B2-GEM">
             <objects>
@@ -986,22 +1042,36 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <datePicker contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="S7X-Al-7j0">
+                                                    <rect key="frame" x="68" y="31" width="300" height="120"/>
+                                                    <date key="date" timeIntervalSinceReferenceDate="477851754.10918701">
+                                                        <!--2016-02-22 16:35:54 +0000-->
+                                                    </date>
+                                                    <connections>
+                                                        <action selector="dateChanged:" destination="4rN-Hk-7Te" eventType="valueChanged" id="apM-Dj-rWZ"/>
+                                                    </connections>
+                                                </datePicker>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="Uro-0I-Eim" firstAttribute="top" secondItem="75q-Oc-XfX" secondAttribute="topMargin" constant="-4" id="CPA-PS-jXs"/>
                                                 <constraint firstItem="Yx4-CQ-hrv" firstAttribute="leading" secondItem="6CY-Qw-N5B" secondAttribute="trailing" constant="2" id="EIy-X1-tUg"/>
                                                 <constraint firstItem="Yx4-CQ-hrv" firstAttribute="trailing" secondItem="75q-Oc-XfX" secondAttribute="trailingMargin" constant="4" id="Muq-ns-IHH"/>
                                                 <constraint firstItem="6CY-Qw-N5B" firstAttribute="leading" secondItem="Uro-0I-Eim" secondAttribute="trailing" id="NRc-XS-WL9"/>
+                                                <constraint firstItem="S7X-Al-7j0" firstAttribute="centerX" secondItem="75q-Oc-XfX" secondAttribute="centerX" id="dJF-QY-YR3"/>
                                                 <constraint firstItem="6CY-Qw-N5B" firstAttribute="top" secondItem="75q-Oc-XfX" secondAttribute="topMargin" constant="-8" id="eIS-5d-xIV"/>
                                                 <constraint firstItem="Uro-0I-Eim" firstAttribute="leading" secondItem="75q-Oc-XfX" secondAttribute="leadingMargin" constant="2" id="id0-lF-lDq"/>
+                                                <constraint firstItem="S7X-Al-7j0" firstAttribute="top" secondItem="6CY-Qw-N5B" secondAttribute="bottom" constant="1" id="jHZ-pr-94V"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="S7X-Al-7j0" secondAttribute="trailing" constant="-1" id="n51-xg-7dB"/>
                                                 <constraint firstItem="Yx4-CQ-hrv" firstAttribute="top" secondItem="75q-Oc-XfX" secondAttribute="topMargin" constant="-10" id="of9-Dv-hpZ"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="Yx4-CQ-hrv" secondAttribute="bottom" constant="4" id="rab-Jx-Sn0"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="6CY-Qw-N5B" secondAttribute="bottom" id="utH-zy-KF5"/>
+                                                <constraint firstItem="S7X-Al-7j0" firstAttribute="leading" secondItem="75q-Oc-XfX" secondAttribute="leadingMargin" constant="60" id="wcz-0t-0ah"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
+                                            <outlet property="datePicker" destination="S7X-Al-7j0" id="ZFY-5r-Ecs"/>
                                             <outlet property="disclosureLabel" destination="Yx4-CQ-hrv" id="atW-dM-5eC"/>
                                             <outlet property="label" destination="Uro-0I-Eim" id="gz6-Kn-djn"/>
                                             <outlet property="resultsLabel" destination="6CY-Qw-N5B" id="GPb-ko-VA0"/>

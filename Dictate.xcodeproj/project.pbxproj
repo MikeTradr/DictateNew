@@ -65,6 +65,7 @@
 		D35588BC1BA937D20052892F /* ReminderItemsIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35588BB1BA937D20052892F /* ReminderItemsIC.swift */; };
 		D35588BE1BA938A00052892F /* ReminderItemsTableRC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35588BD1BA938A00052892F /* ReminderItemsTableRC.swift */; };
 		D355D97C1BA7DD3F00DADD72 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D355D97B1BA7DD3F00DADD72 /* Main.storyboard */; };
+		D369819D1C7BB05400ED0AD8 /* DatePopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D369819C1C7BB05400ED0AD8 /* DatePopupViewController.swift */; };
 		D36DBDD51BD6DA870076A5C2 /* GlanceTodayEventsTableRC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36DBDD41BD6DA870076A5C2 /* GlanceTodayEventsTableRC.swift */; };
 		D3711F051BB04E0E00D19AE9 /* TestIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3711F041BB04E0E00D19AE9 /* TestIC.swift */; };
 		D3795E7A1B8DF927009D3DB5 /* SettingsEventTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3795E791B8DF927009D3DB5 /* SettingsEventTableViewController.swift */; };
@@ -262,6 +263,7 @@
 		D35588BB1BA937D20052892F /* ReminderItemsIC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderItemsIC.swift; sourceTree = "<group>"; };
 		D35588BD1BA938A00052892F /* ReminderItemsTableRC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderItemsTableRC.swift; sourceTree = "<group>"; };
 		D355D97B1BA7DD3F00DADD72 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		D369819C1C7BB05400ED0AD8 /* DatePopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePopupViewController.swift; sourceTree = "<group>"; };
 		D36DBDD41BD6DA870076A5C2 /* GlanceTodayEventsTableRC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlanceTodayEventsTableRC.swift; sourceTree = "<group>"; };
 		D3711F041BB04E0E00D19AE9 /* TestIC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestIC.swift; sourceTree = "<group>"; };
 		D3795E791B8DF927009D3DB5 /* SettingsEventTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsEventTableViewController.swift; path = Views/SettingsEventTableViewController.swift; sourceTree = "<group>"; };
@@ -497,6 +499,7 @@
 			children = (
 				D33C13C01B8C480500470F8F /* Settings */,
 				EC82CF641BAAE6EE00722611 /* Reminder */,
+				D369819C1C7BB05400ED0AD8 /* DatePopupViewController.swift */,
 				D3AD9B531C5D5439006387C4 /* DetailsTableVC_OLD.swift */,
 				D3AD9B591C5E5245006387C4 /* DetailTableVC.swift */,
 				D3AD9B571C5E3475006387C4 /* DetailsTableViewCell.swift */,
@@ -1208,6 +1211,7 @@
 				D3A0F9FC1B69F0BB00F1FEDA /* EventCode.swift in Sources */,
 				EC82CF631BAAE26F00722611 /* UILabel+WhiteUIDatePickerLabel.m in Sources */,
 				D3188A721B6E9AEF00323DC0 /* SendMessage_not used?.swift in Sources */,
+				D369819D1C7BB05400ED0AD8 /* DatePopupViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -22,6 +22,13 @@ class DetailsTableViewCell: UITableViewCell {
     
     @IBOutlet weak var disclosureLabel: UILabel!
     
+    @IBOutlet weak var datePicker: UIDatePicker!
+    
+    @IBAction func dateChanged(sender: AnyObject) {
+        // updates ur label in the cell above
+        resultsLabel.text = "\(datePicker.date)"
+    }
+    
     
  /*
     func viewDidLoad() {

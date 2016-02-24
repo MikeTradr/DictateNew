@@ -8,6 +8,10 @@
 
 import UIKit
 
+
+protocol DetailsTableViewCellDateSelectionDelegate{
+    func didSelectDate(date:NSDate, inCell cell:DetailsTableViewCell)
+}
 class DetailsTableViewCell: UITableViewCell {
    
     @IBOutlet weak var label: UILabel!
@@ -23,10 +27,16 @@ class DetailsTableViewCell: UITableViewCell {
     @IBOutlet weak var disclosureLabel: UILabel!
     
     @IBOutlet weak var datePicker: UIDatePicker!
+    var delegate:DetailsTableViewCellDateSelectionDelegate?
     
     @IBAction func dateChanged(sender: AnyObject) {
         // updates ur label in the cell above
-        resultsLabel.text = "\(datePicker.date)"
+        let dateFormatter =  NSDateFormatter()
+        dateFormatter.dateFormat = "M-dd-yyyy h:mm a"
+        let dateString = dateFormatter.stringFromDate(datePicker.date)
+        resultsLabel.text = dateString
+        
+        delegate?.didSelectDate(datePicker.date, inCell: self)
     }
     
     

@@ -28,7 +28,7 @@ let str9:String = "New appointment at 2 PM with Sandi next Wednesday"
 
 let str4:String = "Appointment at 1:30 PM to see efficiency with Tony 608-255-9876"
 
-let str5:String = "Appointment this Friday to see a two bedroom for John 608-255-0885 for a two bedroom for two people for the fall"
+let str5:String = "Appointment this Friday 2 pm to see a two bedroom for John 608-255-0885 for a two bedroom for two people for the fall"
 
 let str6:String = "Appointment for an efficiency with Mary next Monday at 2:30 414-308-1234"
 

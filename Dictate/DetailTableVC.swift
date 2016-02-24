@@ -11,7 +11,9 @@ import EventKit
 import AVFoundation
 import EventKitUI
 
-class DetailTableVC: UIViewController,EKEventEditViewDelegate, UIPopoverPresentationControllerDelegate {
+class DetailTableVC: UIViewController,EKEventEditViewDelegate, UIPopoverPresentationControllerDelegate,DetailsTableViewCellDateSelectionDelegate {
+    
+    var selectedIndexPath : NSIndexPath?
     
     @IBOutlet weak var tableV: UITableView!
     
@@ -141,6 +143,24 @@ class DetailTableVC: UIViewController,EKEventEditViewDelegate, UIPopoverPresenta
     
         return UIModalPresentationStyle.None
     }
+    
+    
+    func getPicker() -> UIDatePicker {          //from Srini
+        
+        let datePicker = UIDatePicker()
+        datePicker.datePickerMode = .DateAndTime
+        datePicker.tag = 999
+        return datePicker
+    }
+    
+    func removePickerFromCell(cell:UITableViewCell) {       //from Srini
+        
+        for viewComponent in cell.contentView.subviews {
+            if viewComponent.tag == 999 {
+                viewComponent.removeFromSuperview()
+            }
+        }
+    }
 
     
     
@@ -159,11 +179,44 @@ class DetailTableVC: UIViewController,EKEventEditViewDelegate, UIPopoverPresenta
         //return 11         // 11 fields (rows) total!
         return results.count
     }
-
+    
+    
+//===== heightForRowAtIndexPath ================================================
+    
+//see second answer. http://stackoverflow.com/questions/26217480/expand-cell-when-tapped-in-swift
+/*
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        let smallHeight: CGFloat = 35.0
+        let expandedHeight: CGFloat = 120.0
+        let ip = indexPath
+        if selectedIndexPath != nil {
+            if ip == selectedIndexPath! {
+                return expandedHeight
+            } else {
+                return smallHeight
+            }
+        } else {
+            return smallHeight
+        }
+    }
+    
+*/
+//  /*
+    
+    
 
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
         //print("p154 results[indexPath.row]: \(results[indexPath.row])")
+        
+//        if indexPath == selectedIndexPath {
+//            return DetailsTableViewCell.expandedHeight
+//        } else {
+//            return DetailsTableViewCell.defaultHeight
+//        }
+        
+        
+        var height:CGFloat = 35
 
         if (results[indexPath.row] == "" || results[indexPath.row] == "0")  {
            // print("p148 we here hide rows: \(indexPath.row)")
@@ -219,21 +272,39 @@ class DetailTableVC: UIViewController,EKEventEditViewDelegate, UIPopoverPresenta
             return height
         }   //else if "Title"
         
-   /*
-        if (labels[indexPath.row] == "Start") {
-            var height:CGFloat = datePicker.hidden ? 0.0 : 216.0
-            return height
-        }
-     */
-        
    
-        return 35
+       // if (labels[indexPath.row] == "Start") {
+        
+        print("p270 indexPath: \(indexPath)")
+        print("p271 selectedIndexPath: \(selectedIndexPath)")
+
+
+        if selectedIndexPath == indexPath  {
+                print("p230 here? indexPath: \(indexPath)")
+                height = 250
+            } else {
+                height = 40
+            }
+  
+        
+        return height
+
+       // return 35
     }   // end func heightForRowAtIndexPath
+// */
+//===== endheightForRowAtIndexPath ================================================
     
+//===== cellForRowAtIndexPath ================================================
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier( "BasicCell", forIndexPath: indexPath) as! DetailsTableViewCell
+        var identifier = "BasicCell"
+        
+        if labels[indexPath.row] == "Start" || labels[indexPath.row] == "End"{
+            identifier = "DateCell"
+        }
+        let cell = tableView.dequeueReusableCellWithIdentifier( identifier, forIndexPath: indexPath) as! DetailsTableViewCell
+        cell.delegate = self
         
         cell.selectionStyle = UITableViewCellSelectionStyle.Default //TODO tried to set selection color to yellow
         cell.label.text = labels[indexPath.row]
@@ -244,8 +315,46 @@ class DetailTableVC: UIViewController,EKEventEditViewDelegate, UIPopoverPresenta
       //  cell.datePicker.date = startDT
        // cell.datePicker.hidden = true
         
+//this for row height to expand... I thoguht.
+/*
+        let oldIndex = self.selectedIndex
+        self.selectedIndex = indexPath
+        
+        let indices:[NSIndexPath]
+        
+        if let previousIndex = oldIndex {
+            indices = [previousIndex, self.selectedIndex!]
+        } else {
+            indices = [self.selectedIndex!]
+        }
+        
+        //TODO: reload selected Index & old index.
+        tableView.beginUpdates()
+        tableView.reloadRowsAtIndexPaths(indices, withRowAnimation: UITableViewRowAnimation.Automatic)
+        tableView.endUpdates()
+*/
+   /*
         
         
+        if selectedIndex != nil && selectedIndex == indexPath {
+            selectedIndex = nil
+        } else {
+            selectedIndex = indexPath
+        }
+        
+        tableView.beginUpdates()
+        tableView.endUpdates()
+        
+        if selectedIndex != nil {
+            // This ensures, that the cell is fully visible once expanded
+            tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .None, animated: true)
+        }
+  */      
+        
+        
+ //until here!!!!
+        
+
         print("p250 ========================================")
         print("p250 row: \(labels[indexPath.row]): \(results[indexPath.row]) ")
         print("p250 ========================================")
@@ -269,9 +378,7 @@ class DetailTableVC: UIViewController,EKEventEditViewDelegate, UIPopoverPresenta
                     cell.resultsLabel.frame.size.height = 90
                 }
             }
-
-
-            
+         
             print("p301 ========================================")
             print("p301 row: \(labels[indexPath.row]): \(results[indexPath.row]) ")
             print("p301 ========================================")
@@ -341,33 +448,46 @@ class DetailTableVC: UIViewController,EKEventEditViewDelegate, UIPopoverPresenta
             } else {
                 cell.datePicker.hidden = true
             }
-            
-            
+   
         }
         
     */
-        
-        
-
-      
+     
         return cell
     }   // end func cellForRowAtIndexPath
     
+//===== end cellForRowAtIndexPath ================================================
     
+//===== didSelectRowAtIndexPath ================================================
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         print("p68 You selected cell #\(indexPath.row)!")
+    //expand cell code...
+        let previousIndexPath = selectedIndexPath
+        if indexPath == selectedIndexPath {
+            selectedIndexPath = nil
+        } else {
+            selectedIndexPath = indexPath
+        }
+        
+        var indexPaths : Array<NSIndexPath> = []
+        if let previous = previousIndexPath {
+            indexPaths += [previous]
+        }
+        if let current = selectedIndexPath {
+            indexPaths += [current]
+        }
+        if indexPaths.count > 0 {
+            tableView.reloadRowsAtIndexPaths(indexPaths, withRowAnimation: UITableViewRowAnimation.Automatic)
+        }
+     // to here.
         
         var selectedCell:UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
         
         let saffron = UIColor(red: 244, green: 208, blue: 63)  // 244, 208, 63
         selectedCell.contentView.backgroundColor = saffron
         
-      
-
-        
-        
-        
+    
        //popover = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("idDatePopover") as UIPopoverController
         
         
@@ -417,7 +537,7 @@ class DetailTableVC: UIViewController,EKEventEditViewDelegate, UIPopoverPresenta
 
             
         } else if (labels[indexPath.row] == "Start") {
-            
+         /*
             // var popover  = UIPopoverController()
             
             var popoverContent = (self.storyboard?.instantiateViewControllerWithIdentifier("idDatePopover"))! as UIViewController
@@ -431,7 +551,7 @@ class DetailTableVC: UIViewController,EKEventEditViewDelegate, UIPopoverPresenta
             popover!.sourceRect = CGRectMake(175,100,50,75)
             
             self.presentViewController(nav, animated: true, completion: nil)
-            
+       */
             
       /*
        
@@ -481,6 +601,41 @@ class DetailTableVC: UIViewController,EKEventEditViewDelegate, UIPopoverPresenta
         }   //end Start and Date edit VC.
         
    }   // end func didSelectRowAtIndexPath
+
+// */
+    
+//===== end didSelectRowAtIndexPath ================================================
+  
+//    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+////        (cell as! DetailsTableViewCell).watchFrameChanges()
+//    }
+//    
+//    func tableView(tableView: UITableView, didEndDisplayingCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+////        (cell as! DetailsTableViewCell).ignoreFrameChanges()
+//    }
+//    
+//    override func viewWillDisappear(animated: Bool) {
+//        super.viewWillDisappear(animated)
+//        for cell in tableV.visibleCells as! [DetailsTableViewCell] {
+////            cell.ignoreFrameChanges()
+//        }
+//    }
+
+    
+    //MARK: DetailsTableViewCellDateSelectionDelegate
+    
+    //TODO: Update startDT and endDt in results array
+    func didSelectDate(date:NSDate, inCell cell:DetailsTableViewCell){
+        
+        if labels[selectedIndexPath!.row] == "Start"{
+            // Start date selected
+            print("New start date: \(date)")
+        }else{
+            //End date selection
+            print("New end date: \(date)")
+        }
+    }
+
     
     
     //no idea here...
@@ -489,9 +644,9 @@ class DetailTableVC: UIViewController,EKEventEditViewDelegate, UIPopoverPresenta
             print("did complete: \(action.rawValue), \(controller.event)")
             self.dismissViewControllerAnimated(true, completion: nil)
     }
-
     
 // End TABLE funcs...
+//==================================================================================
     
     func loadResultsArray() {
         

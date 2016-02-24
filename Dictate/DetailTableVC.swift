@@ -634,6 +634,14 @@ class DetailTableVC: UIViewController,EKEventEditViewDelegate, UIPopoverPresenta
             //End date selection
             print("New end date: \(date)")
         }
+        
+        let dateFormatter =  NSDateFormatter()
+        dateFormatter.dateFormat = "M-dd-yyyy h:mm a"
+        let dateString = dateFormatter.stringFromDate(date)
+
+        results.removeAtIndex(selectedIndexPath!.row)
+        results.insert(dateString, atIndex: selectedIndexPath!.row)
+
     }
 
     

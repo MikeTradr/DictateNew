@@ -9,10 +9,14 @@
 import UIKit
 
 
-protocol DetailsTableViewCellDateSelectionDelegate{
+protocol DetailsTableViewCellDateSelectionDelegate{     //Anil added 022416
     func didSelectDate(date:NSDate, inCell cell:DetailsTableViewCell)
 }
+
 class DetailsTableViewCell: UITableViewCell {
+    
+    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+
    
     @IBOutlet weak var label: UILabel!
 
@@ -29,6 +33,8 @@ class DetailsTableViewCell: UITableViewCell {
     @IBOutlet weak var datePicker: UIDatePicker!
     var delegate:DetailsTableViewCellDateSelectionDelegate?
     
+    
+    
     @IBAction func dateChanged(sender: AnyObject) {
         // updates ur label in the cell above
         let dateFormatter =  NSDateFormatter()
@@ -37,18 +43,23 @@ class DetailsTableViewCell: UITableViewCell {
         resultsLabel.text = dateString
         
         delegate?.didSelectDate(datePicker.date, inCell: self)
-    }
-    
-    
- /*
-    func viewDidLoad() {
-        // Do any additional setup after loading the view, typically from a nib.
         
-        var newFrame:CGRect = resultsTextField.frame
-        newFrame.size.height = 30
-        resultsTextField.frame = newFrame
+        
+        if label == "Start" {                        // Start date selected
+            print("p46 datePicker.date \(datePicker.date)")
+            //save startDT to userdefaults for EventManager.createEvent processing
+            let newStartDate = datePicker.date
+            defaults.setObject(newStartDate, forKey: "startDT")
+            
+        } else {                                    //End date selection
+            print("p54 datePicker.date: \(datePicker.date)")
+            
+            let newEndDate = datePicker.date
+            defaults.setObject(newEndDate, forKey: "endDT")
+        }
+        
+        
     }
-*/
  
     
     

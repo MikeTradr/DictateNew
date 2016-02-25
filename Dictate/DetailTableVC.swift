@@ -11,7 +11,7 @@ import EventKit
 import AVFoundation
 import EventKitUI
 
-class DetailTableVC: UIViewController,EKEventEditViewDelegate, UIPopoverPresentationControllerDelegate,DetailsTableViewCellDateSelectionDelegate {
+class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate {
     
     var selectedIndexPath : NSIndexPath?
     
@@ -278,14 +278,14 @@ class DetailTableVC: UIViewController,EKEventEditViewDelegate, UIPopoverPresenta
         print("p270 indexPath: \(indexPath)")
         print("p271 selectedIndexPath: \(selectedIndexPath)")
 
-
-        if selectedIndexPath == indexPath  {
-                print("p230 here? indexPath: \(indexPath)")
-                height = 250
-            } else {
-                height = 40
-            }
-  
+        if (labels[indexPath.row] == "Start") || (labels[indexPath.row] == "End") {
+            if selectedIndexPath == indexPath  {
+                    print("p230 here? indexPath: \(indexPath)")
+                    height = 250
+                } else {
+                    height = 35
+                }
+        }
         
         return height
 
@@ -452,6 +452,8 @@ class DetailTableVC: UIViewController,EKEventEditViewDelegate, UIPopoverPresenta
         }
         
     */
+        tableView.beginUpdates()
+        tableView.endUpdates()
      
         return cell
     }   // end func cellForRowAtIndexPath
@@ -484,12 +486,8 @@ class DetailTableVC: UIViewController,EKEventEditViewDelegate, UIPopoverPresenta
         
         var selectedCell:UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
         
-        let saffron = UIColor(red: 244, green: 208, blue: 63)  // 244, 208, 63
-        selectedCell.contentView.backgroundColor = saffron
-        
-    
-       //popover = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("idDatePopover") as UIPopoverController
-        
+       // let saffron = UIColor(red: 244, green: 208, blue: 63)  // 244, 208, 63
+       // selectedCell.contentView.backgroundColor = saffron
         
         
         if labels[indexPath.row] == "Type" || labels[indexPath.row] == "Day" {
@@ -537,110 +535,49 @@ class DetailTableVC: UIViewController,EKEventEditViewDelegate, UIPopoverPresenta
 
             
         } else if (labels[indexPath.row] == "Start") {
-         /*
-            // var popover  = UIPopoverController()
-            
-            var popoverContent = (self.storyboard?.instantiateViewControllerWithIdentifier("idDatePopover"))! as UIViewController
-            
-            var nav = UINavigationController(rootViewController: popoverContent)
-            nav.modalPresentationStyle = UIModalPresentationStyle.Popover
-            var popover = nav.popoverPresentationController
-            popoverContent.preferredContentSize = CGSizeMake(300,175)
-            popover!.delegate = self
-            popover!.sourceView = self.view
-            popover!.sourceRect = CGRectMake(175,100,50,75)
-            
-            self.presentViewController(nav, animated: true, completion: nil)
-       */
-            
-      /*
-       
-           // self.datePickerVC.delegate = self
-           // self.datePickerVC.modalPresentationStyle = UIModalPresentationStyle.Popover
-           // self.datePickerVC.preferredContentSize = CGSizeMake(500,208)
-            self.popover = datePickerVC.popoverPresentationController
-            if let _popover = popover {
-                _popover.sourceView = self.textField
-                _popover.sourceRect = CGRectMake(self.offset,self.textField.bounds.size.height,0,0)
-                _popover.delegate = self // to force no adaptive
-                self.dataChanged = dataChanged // save the closure
-                inViewController.presentViewController(datePickerVC, animated: true, completion: nil)
-                presented = true
-            }
-      */      
-            
-            
-            
- /*
-            datePickerHeight = 120  //set height for cell
-            print("p404 in start cell: \(datePickerHeight)")
-            print("p405 selectedCell.frame.height: \(selectedCell.frame.height)")
+            //Anil how to add code here to set
+           // selectedIndexPath.datePicker.date = startDT
+        } else if (labels[indexPath.row] == "End") { //end Start and Date edit VC.
+            // selectedIndexPath.datePicker.date = endDT
 
-            self.tableV.reloadData()
-
-            
-            UIView.animateWithDuration(0.3, animations: { () -> Void in
-                self.tableV.beginUpdates()
-                // apple bug fix - some TV lines hide after animation
-                self.tableV.deselectRowAtIndexPath(indexPath, animated: true)
-                self.tableV.endUpdates()
-            })
-*/
- /*
-            
-            //load EKEventEditViewController
-            // create Event ViewController
-            
-            let evc = EKEventEditViewController()
-            evc.eventStore = EKEventStore()
-       //     evc.editViewDelegate = self
-            evc.modalPresentationStyle = .Popover
-            evc.editViewDelegate = self
-            self.presentViewController(evc, animated: true, completion: nil)
-  */
-        }   //end Start and Date edit VC.
+        }
+        
         
    }   // end func didSelectRowAtIndexPath
 
 // */
     
 //===== end didSelectRowAtIndexPath ================================================
-  
-//    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-////        (cell as! DetailsTableViewCell).watchFrameChanges()
-//    }
-//    
-//    func tableView(tableView: UITableView, didEndDisplayingCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-////        (cell as! DetailsTableViewCell).ignoreFrameChanges()
-//    }
-//    
-//    override func viewWillDisappear(animated: Bool) {
-//        super.viewWillDisappear(animated)
-//        for cell in tableV.visibleCells as! [DetailsTableViewCell] {
-////            cell.ignoreFrameChanges()
-//        }
-//    }
 
     
     //MARK: DetailsTableViewCellDateSelectionDelegate
     
     //TODO: Update startDT and endDt in results array
     func didSelectDate(date:NSDate, inCell cell:DetailsTableViewCell){
-        
+/*
         if labels[selectedIndexPath!.row] == "Start"{
             // Start date selected
-            print("New start date: \(date)")
+            print("p560 New start date: \(date)")
+            //save startDT to userdefaults for EventManager.createEvent processing
+            
+     //ANIL how? where?      let newStartDate = datePicker.date
+            defaults.setObject(newStartDate, forKey: "startDT")
+         
         }else{
             //End date selection
-            print("New end date: \(date)")
+            print("p568 New end date: \(date)")
+            
+     //ANIL how? where?      let newEndDate = datePicker.date
+            defaults.setObject(newEndDate, forKey: "startDT")
         }
-        
+    */
         let dateFormatter =  NSDateFormatter()
         dateFormatter.dateFormat = "M-dd-yyyy h:mm a"
         let dateString = dateFormatter.stringFromDate(date)
 
         results.removeAtIndex(selectedIndexPath!.row)
         results.insert(dateString, atIndex: selectedIndexPath!.row)
+        
 
     }
 

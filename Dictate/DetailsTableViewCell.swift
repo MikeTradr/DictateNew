@@ -44,23 +44,6 @@ class DetailsTableViewCell: UITableViewCell {
         
         delegate?.didSelectDate(datePicker.date, inCell: self)
         
-        
-        if label == "Start" {                        // Start date selected
-            print("p46 datePicker.date \(datePicker.date)")
-            //save startDT to userdefaults for EventManager.createEvent processing
-            let newStartDate = datePicker.date
-            defaults.setObject(newStartDate, forKey: "startDT")
-            
-        } else {                                    //End date selection
-            print("p54 datePicker.date: \(datePicker.date)")
-            
-            let newEndDate = datePicker.date
-            defaults.setObject(newEndDate, forKey: "endDT")
-        }
-        
-        
     }
- 
-    
     
 }

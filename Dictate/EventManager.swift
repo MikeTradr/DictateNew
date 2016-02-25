@@ -194,7 +194,7 @@ class EventManager: NSObject {
                         
                         
                         // Duration, set End Date Time
-                        let endDate = startDT.dateByAddingTimeInterval(eventDuration * 60)
+                        let endDate = startDT.dateByAddingTimeInterval(eventDuration * 60)    //was endDate mike 022516
                         
                         
                         // 4
@@ -344,11 +344,11 @@ class EventManager: NSObject {
                         print("p862 output: \(output)")
                         print("p863 startDT: \(startDT)")
                         print("p864 endDT: \(endDT)")
-                        print("p865 from func endDate: \(endDate)")
+                      //  print("p865 from func endDate: \(endDate)")
                         
                         event.title = output!
                         event.startDate = startDT
-                        event.endDate = endDate
+                        event.endDate = endDate       //was endDate mike changed 022516
                         event.notes = outputNote
                         
                         if allDayFlag {

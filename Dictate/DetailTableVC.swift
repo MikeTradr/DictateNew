@@ -145,25 +145,6 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
     }
     
     
-    func getPicker() -> UIDatePicker {          //from Srini
-        
-        let datePicker = UIDatePicker()
-        datePicker.datePickerMode = .DateAndTime
-        datePicker.tag = 999
-        return datePicker
-    }
-    
-    func removePickerFromCell(cell:UITableViewCell) {       //from Srini
-        
-        for viewComponent in cell.contentView.subviews {
-            if viewComponent.tag == 999 {
-                viewComponent.removeFromSuperview()
-            }
-        }
-    }
-
-    
-    
 // TABLE funcs...
     // MARK: - Table view data source
     
@@ -182,28 +163,6 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
     
     
 //===== heightForRowAtIndexPath ================================================
-    
-//see second answer. http://stackoverflow.com/questions/26217480/expand-cell-when-tapped-in-swift
-/*
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        let smallHeight: CGFloat = 35.0
-        let expandedHeight: CGFloat = 120.0
-        let ip = indexPath
-        if selectedIndexPath != nil {
-            if ip == selectedIndexPath! {
-                return expandedHeight
-            } else {
-                return smallHeight
-            }
-        } else {
-            return smallHeight
-        }
-    }
-    
-*/
-//  /*
-    
-    
 
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
@@ -214,7 +173,6 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
 //        } else {
 //            return DetailsTableViewCell.defaultHeight
 //        }
-        
         
         var height:CGFloat = 35
 
@@ -272,9 +230,6 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
             return height
         }   //else if "Title"
         
-   
-       // if (labels[indexPath.row] == "Start") {
-        
         print("p270 indexPath: \(indexPath)")
         print("p271 selectedIndexPath: \(selectedIndexPath)")
 
@@ -286,12 +241,9 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
                     height = 35
                 }
         }
-        
         return height
-
-       // return 35
     }   // end func heightForRowAtIndexPath
-// */
+
 //===== endheightForRowAtIndexPath ================================================
     
 //===== cellForRowAtIndexPath ================================================
@@ -301,7 +253,7 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         var identifier = "BasicCell"
         
         if labels[indexPath.row] == "Start" || labels[indexPath.row] == "End"{
-            identifier = "DateCell"
+            identifier = "DateCell"     //used for datePicker Anil added 022316
         }
         let cell = tableView.dequeueReusableCellWithIdentifier( identifier, forIndexPath: indexPath) as! DetailsTableViewCell
         cell.delegate = self
@@ -311,49 +263,6 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         cell.resultsLabel.text = results[indexPath.row]
         cell.resultsLabel.layer.cornerRadius = 7
         cell.resultsLabel.font = UIFont.boldSystemFontOfSize(CGFloat(22))
-        
-      //  cell.datePicker.date = startDT
-       // cell.datePicker.hidden = true
-        
-//this for row height to expand... I thoguht.
-/*
-        let oldIndex = self.selectedIndex
-        self.selectedIndex = indexPath
-        
-        let indices:[NSIndexPath]
-        
-        if let previousIndex = oldIndex {
-            indices = [previousIndex, self.selectedIndex!]
-        } else {
-            indices = [self.selectedIndex!]
-        }
-        
-        //TODO: reload selected Index & old index.
-        tableView.beginUpdates()
-        tableView.reloadRowsAtIndexPaths(indices, withRowAnimation: UITableViewRowAnimation.Automatic)
-        tableView.endUpdates()
-*/
-   /*
-        
-        
-        if selectedIndex != nil && selectedIndex == indexPath {
-            selectedIndex = nil
-        } else {
-            selectedIndex = indexPath
-        }
-        
-        tableView.beginUpdates()
-        tableView.endUpdates()
-        
-        if selectedIndex != nil {
-            // This ensures, that the cell is fully visible once expanded
-            tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .None, animated: true)
-        }
-  */      
-        
-        
- //until here!!!!
-        
 
         print("p250 ========================================")
         print("p250 row: \(labels[indexPath.row]): \(results[indexPath.row]) ")
@@ -386,12 +295,9 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
             print("p305 cell.resultsLabel.frame.size.height: \(cell.resultsLabel.frame.size.height)")
             
             //from: http://derekneely.com/2011/04/size-to-fit-text-in-uitextview-iphone/
-          
             //setup text resizing check here
             
             var height = dynamicHeight(results[indexPath.row], font: UIFont.boldSystemFontOfSize(22), width: 180)
-            
-           // var height = cell.resultsLabel.frame.size.height
             
             print("p337 height: \(height)")
             
@@ -407,11 +313,12 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
             }
             print("p322 cell.resultsLabel.font? \(cell.resultsLabel.font)")
         }
-
-
-        if results[indexPath.row] == "Event" {
-            print("p337 we here: \(indexPath.row)!")
-            cell.resultsLabel.backgroundColor = swiftColor
+        
+        
+        if labels[indexPath.row] == "Start" {       //set default date for picker!
+            cell.datePicker.date = defaults.objectForKey("startDT")! as! NSDate
+        } else if labels[indexPath.row] == "End" {
+            cell.datePicker.date = defaults.objectForKey("endDT")! as! NSDate
         }
         
         switch (results[indexPath.row]){
@@ -436,22 +343,9 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
             break;
         }
     
-        //    resultType.backgroundColor = UIColor.yellowColor()
         print("p364 end cell: \(labels[indexPath.row]) ------------------------")
         print("--------------------------------------------")
-   /*
-        if labels[indexPath.row] == "Start" {
-            print("p330 start row, datePickerHeight: \(datePickerHeight)")
-            
-            if datePickerHeight == 120 {
-                cell.datePicker.hidden = false
-            } else {
-                cell.datePicker.hidden = true
-            }
-   
-        }
-        
-    */
+
         tableView.beginUpdates()
         tableView.endUpdates()
      
@@ -537,8 +431,9 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         } else if (labels[indexPath.row] == "Start") {
             //Anil how to add code here to set
            // selectedIndexPath.datePicker.date = startDT
-        } else if (labels[indexPath.row] == "End") { //end Start and Date edit VC.
-            // selectedIndexPath.datePicker.date = endDT
+        } else if (labels[indexPath.row] == "End") {
+            
+            
 
         }
         
@@ -554,42 +449,42 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
     
     //TODO: Update startDT and endDt in results array
     func didSelectDate(date:NSDate, inCell cell:DetailsTableViewCell){
-/*
+
         if labels[selectedIndexPath!.row] == "Start"{
             // Start date selected
-            print("p560 New start date: \(date)")
-            //save startDT to userdefaults for EventManager.createEvent processing
-            
-     //ANIL how? where?      let newStartDate = datePicker.date
+            let newStartDate = date
+            print("p568 newStartDate: \(newStartDate)")
             defaults.setObject(newStartDate, forKey: "startDT")
          
-        }else{
-            //End date selection
-            print("p568 New end date: \(date)")
+        } else {      //End date selection
+            let newEndDate = date
+            print("p570 newEndDate: \(newEndDate)")
+            let newStartDate = defaults.objectForKey("startDT")! as! NSDate
+            var newDuration: Double = 0.0
             
-     //ANIL how? where?      let newEndDate = datePicker.date
-            defaults.setObject(newEndDate, forKey: "startDT")
+            let durationInt = NSCalendar.currentCalendar().components(.Minute, fromDate: newStartDate, toDate: newEndDate, options: []).minute
+
+            newDuration = Double(durationInt)
+            defaults.setObject(newDuration, forKey: "eventDuration")
         }
-    */
+    
         let dateFormatter =  NSDateFormatter()
         dateFormatter.dateFormat = "M-dd-yyyy h:mm a"
         let dateString = dateFormatter.stringFromDate(date)
 
         results.removeAtIndex(selectedIndexPath!.row)
         results.insert(dateString, atIndex: selectedIndexPath!.row)
-        
-
     }
 
     
-    
+    /*
     //no idea here...
     func eventEditViewController(controller: EKEventEditViewController,
         didCompleteWithAction action: EKEventEditViewAction) {
             print("did complete: \(action.rawValue), \(controller.event)")
             self.dismissViewControllerAnimated(true, completion: nil)
     }
-    
+   */ 
 // End TABLE funcs...
 //==================================================================================
     

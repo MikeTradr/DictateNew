@@ -1063,11 +1063,11 @@
                                             <outlet property="resultsLabel" destination="6CY-Qw-N5B" id="GPb-ko-VA0"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DateCell" focusStyle="custom" rowHeight="217" id="wYQ-1d-OEd" customClass="DetailsTableViewCell" customModule="Dictate" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="88" width="375" height="217"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DateCell" focusStyle="custom" rowHeight="166" id="wYQ-1d-OEd" customClass="DetailsTableViewCell" customModule="Dictate" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="88" width="375" height="166"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wYQ-1d-OEd" id="1TG-lc-x77">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="216.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="165.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="label" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="unL-CJ-0h8">
@@ -1089,7 +1089,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <datePicker contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="oFB-b1-E74">
-                                                    <rect key="frame" x="68" y="32" width="299" height="175"/>
+                                                    <rect key="frame" x="68" y="32" width="299" height="125"/>
                                                     <date key="date" timeIntervalSinceReferenceDate="478029999.25196302">
                                                         <!--2016-02-24 18:06:39 +0000-->
                                                     </date>

@@ -389,7 +389,10 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
             
         }
         
-        if labels[indexPath.row] == "Input" {               //selected Input row...
+//TODO Mike make a case statement here...
+        
+        switch (labels[indexPath.row]){
+        case "Input":                                       //selected Input row...
             self.tabBarController?.selectedIndex = 2        //go to main dictate microphone screen
             
         } else if labels[indexPath.row] == "Title" {               //selected Input row...
@@ -402,8 +405,6 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
 
                 print("p251 alert.textFields![0].text!: \(alert.textFields![0].text!)")
                 print("p251 self.output: \(self.output)")
-               // let outputNew = self.defaults.stringForKey("output")                   //Title
-               // print("p271 outputNew: \(outputNew)")
                 
                 self.loadResultsArray()
                 self.tableV.reloadData()
@@ -411,7 +412,6 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
             }))
             
             alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action) -> Void in
-                //selectedCell.contentView.backgroundColor = UIColor.blackColor()
                 self.tableV.reloadData()   //TODO Anil Mike best way to remove the highlighted row?
             }))
  
@@ -425,16 +425,49 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
   
             self.presentViewController(alert, animated: true, completion: nil)
             
-     //   } else if (labels[indexPath.row] == "Start" || labels[indexPath.row] == "End") {
-
-            
         } else if (labels[indexPath.row] == "Start") {
             //Anil how to add code here to set
            // selectedIndexPath.datePicker.date = startDT
+            
+            
         } else if (labels[indexPath.row] == "End") {
             
-            
 
+        }  else if labels[indexPath.row] == "Alert" {               //selected Input row...
+            
+            var alert = UIAlertController(title: "Enter new Alert (in minutes)", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Continue", style: .Default, handler: { (action) -> Void in
+                
+                self.output = alert.textFields![0].text!
+                print("p442 self.output: \(self.output)")
+                
+                if let newAlertInterger = Int(self.output) {    //make sure it is only number entered
+                    self.defaults.setObject(newAlertInterger, forKey:"eventAlert")    //sets eventAlert
+                }
+                
+                
+                print("p446 alert.textFields![0].text!: \(alert.textFields![0].text!)")
+                print("p447 self.output: \(self.output)")
+                
+                self.loadResultsArray()
+                self.tableV.reloadData()
+                
+            }))
+            
+            alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action) -> Void in
+                self.tableV.reloadData()
+            }))
+            
+            alert.addTextFieldWithConfigurationHandler({(textField: UITextField!) in
+                textField.placeholder = "Enter minutes:"
+                textField.secureTextEntry = false
+                
+                print("p230 textField.text: \(textField.text)")
+                self.output = textField.text!
+            })
+            
+            self.presentViewController(alert, animated: true, completion: nil)
+            
         }
         
         

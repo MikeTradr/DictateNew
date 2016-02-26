@@ -268,7 +268,7 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         print("p250 row: \(labels[indexPath.row]): \(results[indexPath.row]) ")
         print("p250 ========================================")
         
-        if labels[indexPath.row] == "Input" || labels[indexPath.row] == "Start" || labels[indexPath.row] == "End" || labels[indexPath.row] == "Title" || labels[indexPath.row] == "Cal." || labels[indexPath.row] == "Alert" || labels[indexPath.row] == "List"  {
+        if labels[indexPath.row] == "Input" || labels[indexPath.row] == "Start" || labels[indexPath.row] == "End" || labels[indexPath.row] == "Title" || labels[indexPath.row] == "Cal." || labels[indexPath.row] == "Alert" || labels[indexPath.row] == "List"  || labels[indexPath.row] == "Repeat"   {
             cell.disclosureLabel.hidden = false
             cell.userInteractionEnabled = true     //allow cell to be highlighted!
         } else {
@@ -315,7 +315,7 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         }
         
         
-        if labels[indexPath.row] == "Start" {       //set default date for picker!
+        if labels[indexPath.row] == "Start" {                                   //set default date for picker!
             cell.datePicker.date = defaults.objectForKey("startDT")! as! NSDate
         } else if labels[indexPath.row] == "End" {
             cell.datePicker.date = defaults.objectForKey("endDT")! as! NSDate
@@ -337,7 +337,6 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         case "Phrase List":
             cell.resultsLabel.backgroundColor = apricot
             break;
-
         default:
             cell.resultsLabel.backgroundColor = UIColor.whiteColor()
             break;
@@ -358,6 +357,7 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         print("p68 You selected cell #\(indexPath.row)!")
+    /*
     //expand cell code...
         let previousIndexPath = selectedIndexPath
         if indexPath == selectedIndexPath {
@@ -377,7 +377,7 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
             tableView.reloadRowsAtIndexPaths(indexPaths, withRowAnimation: UITableViewRowAnimation.Automatic)
         }
      // to here.
-        
+   */
         var selectedCell:UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
         
        // let saffron = UIColor(red: 244, green: 208, blue: 63)  // 244, 208, 63
@@ -389,86 +389,181 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
             
         }
         
-//TODO Mike make a case statement here...
-        
         switch (labels[indexPath.row]){
-        case "Input":                                       //selected Input row...
-            self.tabBarController?.selectedIndex = 2        //go to main dictate microphone screen
-            
-        } else if labels[indexPath.row] == "Title" {               //selected Input row...
-       
-            var alert = UIAlertController(title: "Enter your new Title", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "Continue", style: .Default, handler: { (action) -> Void in
+            case "Input":                                       //selected Input row...
+                self.tabBarController?.selectedIndex = 2        //go to main dictate microphone screen
+                break;
                 
-                self.output = alert.textFields![0].text!
-                self.defaults.setObject(self.output, forKey: "output")                //sets output
+            case "Title":
+                var alert = UIAlertController(title: "Enter your new Title", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Continue", style: .Default, handler: { (action) -> Void in
+                    
+                    self.output = alert.textFields![0].text!
+                    self.defaults.setObject(self.output, forKey: "output")                //sets output
 
-                print("p251 alert.textFields![0].text!: \(alert.textFields![0].text!)")
-                print("p251 self.output: \(self.output)")
-                
-                self.loadResultsArray()
-                self.tableV.reloadData()
-                
-            }))
+                    print("p251 alert.textFields![0].text!: \(alert.textFields![0].text!)")
+                    print("p251 self.output: \(self.output)")
+                    
+                    self.loadResultsArray()
+                    self.tableV.reloadData()                    
+                }))
             
-            alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action) -> Void in
-                self.tableV.reloadData()   //TODO Anil Mike best way to remove the highlighted row?
-            }))
- 
-            alert.addTextFieldWithConfigurationHandler({(textField: UITextField!) in
-                textField.placeholder = "Enter text:"
-                textField.secureTextEntry = false
-                
-                print("p230 textField.text: \(textField.text)")
-                self.output = textField.text!
-            })
+                alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action) -> Void in
+                    self.tableV.reloadData()   //TODO Anil Mike best way to remove the highlighted row?
+                }))
+     
+                alert.addTextFieldWithConfigurationHandler({(textField: UITextField!) in
+                    textField.placeholder = "Enter text:"
+                    textField.secureTextEntry = false
+                    
+                    print("p230 textField.text: \(textField.text)")
+                    self.output = textField.text!
+                })
   
-            self.presentViewController(alert, animated: true, completion: nil)
+                self.presentViewController(alert, animated: true, completion: nil)
+                break;
             
-        } else if (labels[indexPath.row] == "Start") {
-            //Anil how to add code here to set
-           // selectedIndexPath.datePicker.date = startDT
+            case "Start":
+                break;
             
-            
-        } else if (labels[indexPath.row] == "End") {
+            case "End":
+                break;
             
 
-        }  else if labels[indexPath.row] == "Alert" {               //selected Input row...
+            case "Alert":
+                
+                var alert = UIAlertController(title: "Enter new Alert (in minutes)", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Continue", style: .Default, handler: { (action) -> Void in
+                    
+                    self.output = alert.textFields![0].text!
+                    print("p442 self.output: \(self.output)")
+                    
+                    if let newAlertInterger = Int(self.output) {    //make sure it is only number entered
+                        self.defaults.setObject(newAlertInterger, forKey:"eventAlert")    //sets eventAlert
+                    }
+                    
+                    print("p446 alert.textFields![0].text!: \(alert.textFields![0].text!)")
+                    print("p447 self.output: \(self.output)")
+                    
+                    self.loadResultsArray()
+                    self.tableV.reloadData()
+                    
+                }))
+                
+                alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action) -> Void in
+                    self.tableV.reloadData()
+                }))
+                
+                alert.addTextFieldWithConfigurationHandler({(textField: UITextField!) in
+                    textField.placeholder = "Enter minutes:"
+                    textField.secureTextEntry = false
+                    
+                    print("p230 textField.text: \(textField.text)")
+                    self.output = textField.text!
+                })
+                
+                self.presentViewController(alert, animated: true, completion: nil)
+                break;
             
-            var alert = UIAlertController(title: "Enter new Alert (in minutes)", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "Continue", style: .Default, handler: { (action) -> Void in
+            case "Repeat":
+             
+                var alert = UIAlertView()
+                alert.delegate = self   //set the delegate of alertView
                 
-                self.output = alert.textFields![0].text!
-                print("p442 self.output: \(self.output)")
+                alert.message = "Select new Repeatability"
+                alert.addButtonWithTitle("Hourly")
+                alert.addButtonWithTitle("Daily")
+                alert.addButtonWithTitle("Weekly")
+                alert.addButtonWithTitle("Yearly")
+                alert.title = "Change Repeat to:"
+                alert.show()
+            
                 
-                if let newAlertInterger = Int(self.output) {    //make sure it is only number entered
-                    self.defaults.setObject(newAlertInterger, forKey:"eventAlert")    //sets eventAlert
+                var eventRepeatInterval = 0
+                var repeatText = ""
+            /*
+                let alert = UIAlertController(title: "Change Repeat to:", message: "Select new Repeatability", preferredStyle: .Alert) // 1
+
+                
+                let firstAction = UIAlertAction(title: "Daily", style: .Default) { (alert: UIAlertAction!) -> Void in
+                    print("p491 button 1: \([indexPath.row])")
+                    repeatText = "Daily"
+                    eventRepeatInterval = 1
                 }
                 
+                let secondAction = UIAlertAction(title: "Weekly", style: .Default) { (alert: UIAlertAction!) -> Void in
+                    print("p500 button 2: \([indexPath.row])")
+                    repeatText = "Weekly"
+                    eventRepeatInterval = 2
+                }
                 
-                print("p446 alert.textFields![0].text!: \(alert.textFields![0].text!)")
-                print("p447 self.output: \(self.output)")
+                let thirdAction = UIAlertAction(title: "Monthly", style: .Default) { (alert: UIAlertAction!) -> Void in
+                    print("p506 button 3: \([indexPath.row])")
+                    repeatText = "Monthly"
+                    eventRepeatInterval = 4
+                }
+                
+                let forthAction = UIAlertAction(title: "Yearly", style: .Default) { (alert: UIAlertAction!) -> Void in
+                    print("p512 button 4: \([indexPath.row])")
+                    repeatText = "Yearly"
+                    eventRepeatInterval = 3
+                }
+                
+            //    results.removeAtIndex(selectedIndexPath!.row)
+            //    results.insert(repeatText, atIndex: selectedIndexPath!.row)
+
+
+                
+                
+                alert.addAction(firstAction)
+                alert.addAction(secondAction)
+                alert.addAction(thirdAction)
+                alert.addAction(forthAction)
+                presentViewController(alert, animated: true, completion:nil) // 6
+     */
+                
+                
+                
+                func alertView(alertView: UIAlertView!, clickedButtonAtIndex buttonIndex: Int){
+                    print("p488 buttonIndex: \(buttonIndex)")
+                    
+                    switch buttonIndex{
+                    case 0:
+                        results[indexPath.row] = "Daily"
+                        eventRepeatInterval = 1
+                    case 1:
+                        results[indexPath.row] = "Weekly"
+                        eventRepeatInterval = 2
+                    case 2:
+                        results[indexPath.row] = "Monthly"
+                        eventRepeatInterval = 4
+                    case 3:
+                        results[indexPath.row] = "Yearly"
+                        eventRepeatInterval = 3
+                    default:
+                        results[indexPath.row] = "error"
+                    }
+                }
+                // */
+                print("p548 results[indexPath.row]: \(results[indexPath.row])")
+                
+                print("p550 eventRepeatInterval: \(eventRepeatInterval)")
+
+                
+                //save for processing
+                defaults.setObject(eventRepeatInterval, forKey: "eventRepeat")  //sets repeat interval for Events
                 
                 self.loadResultsArray()
                 self.tableV.reloadData()
                 
-            }))
-            
-            alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action) -> Void in
-                self.tableV.reloadData()
-            }))
-            
-            alert.addTextFieldWithConfigurationHandler({(textField: UITextField!) in
-                textField.placeholder = "Enter minutes:"
-                textField.secureTextEntry = false
                 
-                print("p230 textField.text: \(textField.text)")
-                self.output = textField.text!
-            })
+            break;
             
-            self.presentViewController(alert, animated: true, completion: nil)
+            default:   print("p471 end switch")
+            break;
+  
             
-        }
+        }   //end switch
         
         
    }   // end func didSelectRowAtIndexPath

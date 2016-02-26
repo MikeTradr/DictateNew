@@ -14,6 +14,7 @@ import EventKitUI
 class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate {
     
     var selectedIndexPath : NSIndexPath?
+    var repeatRow: Int!
     
     @IBOutlet weak var tableV: UITableView!
     
@@ -479,8 +480,8 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
                 alert.title = "Change Repeat to:"
                 alert.show()
             
+                repeatRow = indexPath.row
                 
-                var eventRepeatInterval = 0
                 var repeatText = ""
             /*
                 let alert = UIAlertController(title: "Change Repeat to:", message: "Select new Repeatability", preferredStyle: .Alert) // 1
@@ -523,39 +524,10 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
                 presentViewController(alert, animated: true, completion:nil) // 6
      */
                 
-                
-                
-                func alertView(alertView: UIAlertView!, clickedButtonAtIndex buttonIndex: Int){
-                    print("p488 buttonIndex: \(buttonIndex)")
-                    
-                    switch buttonIndex{
-                    case 0:
-                        results[indexPath.row] = "Daily"
-                        eventRepeatInterval = 1
-                    case 1:
-                        results[indexPath.row] = "Weekly"
-                        eventRepeatInterval = 2
-                    case 2:
-                        results[indexPath.row] = "Monthly"
-                        eventRepeatInterval = 4
-                    case 3:
-                        results[indexPath.row] = "Yearly"
-                        eventRepeatInterval = 3
-                    default:
-                        results[indexPath.row] = "error"
-                    }
-                }
                 // */
                 print("p548 results[indexPath.row]: \(results[indexPath.row])")
-                
-                print("p550 eventRepeatInterval: \(eventRepeatInterval)")
 
-                
-                //save for processing
-                defaults.setObject(eventRepeatInterval, forKey: "eventRepeat")  //sets repeat interval for Events
-                
-                self.loadResultsArray()
-                self.tableV.reloadData()
+        
                 
                 
             break;
@@ -569,6 +541,39 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         
    }   // end func didSelectRowAtIndexPath
 
+    func alertView(alertView: UIAlertView!, clickedButtonAtIndex buttonIndex: Int){
+        print("p488 buttonIndex: \(buttonIndex)")
+        
+        var eventRepeatInterval = 0
+
+        switch buttonIndex{
+        case 0:
+            results[repeatRow] = "Hourly"
+            eventRepeatInterval = 0
+        case 1:
+            results[repeatRow] = "Daily"
+            eventRepeatInterval = 1
+        case 2:
+            results[repeatRow] = "Weekly"
+            eventRepeatInterval = 2
+        case 3:
+            results[repeatRow] = "Monthly"
+            eventRepeatInterval = 4
+        case 4:
+            results[repeatRow] = "Yearly"
+            eventRepeatInterval = 3
+        default:
+            break
+        }
+        
+        
+        //save for processing
+        defaults.setObject(results[repeatRow], forKey: "eventRepeat")  //sets repeat interval for Events
+        
+        self.loadResultsArray()
+        self.tableV.reloadData()
+
+    }
 // */
     
 //===== end didSelectRowAtIndexPath ================================================

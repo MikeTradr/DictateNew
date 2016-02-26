@@ -257,8 +257,9 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         }
         let cell = tableView.dequeueReusableCellWithIdentifier( identifier, forIndexPath: indexPath) as! DetailsTableViewCell
         cell.delegate = self
+        cell.selectionStyle = .None
         
-        cell.selectionStyle = UITableViewCellSelectionStyle.Default //TODO tried to set selection color to yellow
+//        cell.selectionStyle = UITableViewCellSelectionStyle.Default //TODO tried to set selection color to yellow
         cell.label.text = labels[indexPath.row]
         cell.resultsLabel.text = results[indexPath.row]
         cell.resultsLabel.layer.cornerRadius = 7
@@ -344,9 +345,6 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
     
         print("p364 end cell: \(labels[indexPath.row]) ------------------------")
         print("--------------------------------------------")
-
-        tableView.beginUpdates()
-        tableView.endUpdates()
      
         return cell
     }   // end func cellForRowAtIndexPath
@@ -357,7 +355,7 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         print("p68 You selected cell #\(indexPath.row)!")
-    /*
+    
     //expand cell code...
         let previousIndexPath = selectedIndexPath
         if indexPath == selectedIndexPath {
@@ -366,18 +364,21 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
             selectedIndexPath = indexPath
         }
         
-        var indexPaths : Array<NSIndexPath> = []
-        if let previous = previousIndexPath {
-            indexPaths += [previous]
-        }
-        if let current = selectedIndexPath {
-            indexPaths += [current]
-        }
-        if indexPaths.count > 0 {
-            tableView.reloadRowsAtIndexPaths(indexPaths, withRowAnimation: UITableViewRowAnimation.Automatic)
-        }
+//        var indexPaths : Array<NSIndexPath> = []
+//        if let previous = previousIndexPath {
+//            indexPaths += [previous]
+//        }
+//        if let current = selectedIndexPath {
+//            indexPaths += [current]
+//        }
+//        if indexPaths.count > 0 {
+//            tableView.reloadRowsAtIndexPaths(indexPaths, withRowAnimation: UITableViewRowAnimation.Automatic)
+//        }
+        
      // to here.
-   */
+   
+        tableView.beginUpdates()
+        tableView.endUpdates()
         var selectedCell:UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
         
        // let saffron = UIColor(red: 244, green: 208, blue: 63)  // 244, 208, 63

@@ -1866,17 +1866,18 @@ class DictateCode: NSObject {
                         switch (nextWord){  // 1 = daily, 2 = weekly, 3 = yearly   I made this to pass then change later in event method
                             case "daily": returnValue   = 1;   break;
                             case "weekly": returnValue  = 2;   break;
-                            case "yearly", "annually": returnValue  = 3;   break;
-                            case "monthly": returnValue  = 4;   break;
+                            case "monthly": returnValue  = 3;   break;
+                            case "yearly", "annually": returnValue  = 4;   break;
                                 
                             default:   print("p923 no repeat word matched")
+                                returnValue  = 99  //= none no repeat
                             break;
                         }
                         
-                        var repeatInterval:Int = 1        //TODO for now 1 mean every week etc...
+                        //var repeatInterval:Int = 1        //TODO for now 1 mean every week etc...
                         
                         print("p931 returnValue: \(returnValue)")
-                        eventRepeatInterval = returnValue   // 1 = daily, 2 = weekly, 3 = yearly, 4 = monthly
+                        eventRepeatInterval = returnValue   // 1 = daily, 2 = weekly, 3 = monthly, 4 = yearly,  99 = none
                     }
                     
                 } else {

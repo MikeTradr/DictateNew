@@ -145,6 +145,38 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         return UIModalPresentationStyle.None
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "showCalPicker" {
+           // CalendarPickerViewController.selectedCalendar = usersCalendar
+
+            let controller = segue.destinationViewController as! CalendarPickerViewController
+            let usersCalendar:String = defaults.stringForKey("calendarName")!
+            print("p152 usersCalendar: \(usersCalendar)")
+            
+            controller.selectedCalendar = usersCalendar
+            self.performSegueWithIdentifier("showCalPicker", sender: self)
+        }
+        
+        
+        //Anil added
+        if segue.identifier == "PickReminder"{
+            //usually we the value in the next controller from here
+            // in our case its not really required, since we are setting it in user defaults, will be globaly available
+            //As a better approach iam doing here to show you
+            
+            let selectedCalendarIdentifier = defaults.objectForKey("defaultReminderList") as? String
+            
+            let reminderPickerController = segue.destinationViewController as! ReminderPickerTableViewController
+            reminderPickerController.selectedReminder = selectedCalendarIdentifier
+        }
+    }
+
+    
+
+    
+    
+    
     
 // TABLE funcs...
     // MARK: - Table view data source
@@ -233,7 +265,8 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         
         print("p270 indexPath: \(indexPath)")
         print("p271 selectedIndexPath: \(selectedIndexPath)")
-
+        
+        //add height for Date Picker
         if (labels[indexPath.row] == "Start") || (labels[indexPath.row] == "End") {
             if selectedIndexPath == indexPath  {
                     print("p230 here? indexPath: \(indexPath)")
@@ -241,6 +274,15 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
                 } else {
                     height = 35
                 }
+        }
+        //add height for Calendar and List picker
+        if (labels[indexPath.row] == "Cal.") || (labels[indexPath.row] == "List") {
+            if selectedIndexPath == indexPath  {
+                print("p230 here? indexPath: \(indexPath)")
+                height = 250
+            } else {
+                height = 35
+            }
         }
         return height
     }   // end func heightForRowAtIndexPath
@@ -256,6 +298,8 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         if labels[indexPath.row] == "Start" || labels[indexPath.row] == "End"{
             identifier = "DateCell"     //used for datePicker Anil added 022316
         }
+        
+        
         let cell = tableView.dequeueReusableCellWithIdentifier( identifier, forIndexPath: indexPath) as! DetailsTableViewCell
         cell.delegate = self
         cell.selectionStyle = .None
@@ -321,6 +365,13 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
             cell.datePicker.date = defaults.objectForKey("startDT")! as! NSDate
         } else if labels[indexPath.row] == "End" {
             cell.datePicker.date = defaults.objectForKey("endDT")! as! NSDate
+        }
+        
+        if labels[indexPath.row] == "Cal." {                                   //set default calendar for picker!
+     
+        }
+        
+        if labels[indexPath.row] == "List" {                                   //set
         }
         
         switch (results[indexPath.row]){
@@ -431,6 +482,16 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
             case "End":
                 break;
             
+            case "Cal.":
+                self.performSegueWithIdentifier("showCalPicker", sender: indexPath);
+  
+                
+                
+                break;
+            
+            case "List":    //Reminder
+                break;
+            
 
             case "Alert":
                 
@@ -472,64 +533,22 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
                 var alert = UIAlertView()
                 alert.delegate = self   //set the delegate of alertView
                 
+                //1 = daily, 2 = weekly, 3 = monthly, 4 = yearly, 99 = none
+                
                 alert.message = "Select new Repeatability"
-                alert.addButtonWithTitle("Hourly")
-                alert.addButtonWithTitle("Daily")
-                alert.addButtonWithTitle("Weekly")
-                alert.addButtonWithTitle("Yearly")
+                alert.addButtonWithTitle("None")
+                alert.addButtonWithTitle("Every Day")
+                alert.addButtonWithTitle("Every Week")
+                alert.addButtonWithTitle("Every Month")
+                alert.addButtonWithTitle("Every Year")
                 alert.title = "Change Repeat to:"
                 alert.show()
             
                 repeatRow = indexPath.row
                 
-                var repeatText = ""
-            /*
-                let alert = UIAlertController(title: "Change Repeat to:", message: "Select new Repeatability", preferredStyle: .Alert) // 1
-
-                
-                let firstAction = UIAlertAction(title: "Daily", style: .Default) { (alert: UIAlertAction!) -> Void in
-                    print("p491 button 1: \([indexPath.row])")
-                    repeatText = "Daily"
-                    eventRepeatInterval = 1
-                }
-                
-                let secondAction = UIAlertAction(title: "Weekly", style: .Default) { (alert: UIAlertAction!) -> Void in
-                    print("p500 button 2: \([indexPath.row])")
-                    repeatText = "Weekly"
-                    eventRepeatInterval = 2
-                }
-                
-                let thirdAction = UIAlertAction(title: "Monthly", style: .Default) { (alert: UIAlertAction!) -> Void in
-                    print("p506 button 3: \([indexPath.row])")
-                    repeatText = "Monthly"
-                    eventRepeatInterval = 4
-                }
-                
-                let forthAction = UIAlertAction(title: "Yearly", style: .Default) { (alert: UIAlertAction!) -> Void in
-                    print("p512 button 4: \([indexPath.row])")
-                    repeatText = "Yearly"
-                    eventRepeatInterval = 3
-                }
-                
-            //    results.removeAtIndex(selectedIndexPath!.row)
-            //    results.insert(repeatText, atIndex: selectedIndexPath!.row)
-
-
-                
-                
-                alert.addAction(firstAction)
-                alert.addAction(secondAction)
-                alert.addAction(thirdAction)
-                alert.addAction(forthAction)
-                presentViewController(alert, animated: true, completion:nil) // 6
-     */
-                
                 // */
                 print("p548 results[indexPath.row]: \(results[indexPath.row])")
-
-        
-                
-                
+      
             break;
             
             default:   print("p471 end switch")
@@ -548,40 +567,45 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
 
         switch buttonIndex{
         case 0:
-            results[repeatRow] = "Hourly"
-            eventRepeatInterval = 0
+            results[repeatRow] = "None"
+            eventRepeatInterval = 99
         case 1:
-            results[repeatRow] = "Daily"
+            results[repeatRow] = "Every Day"
             eventRepeatInterval = 1
         case 2:
-            results[repeatRow] = "Weekly"
+            results[repeatRow] = "Every Week"
             eventRepeatInterval = 2
         case 3:
-            results[repeatRow] = "Monthly"
-            eventRepeatInterval = 4
-        case 4:
-            results[repeatRow] = "Yearly"
+            results[repeatRow] = "Every Month"
             eventRepeatInterval = 3
+        case 4:
+            results[repeatRow] = "Every Year"
+            eventRepeatInterval = 4
         default:
             break
         }
         
+        //save for processing in event Manager if user hits create button
+       // defaults.setObject(results[repeatRow], forKey: "eventRepeat")  //sets repeat interval for Events  // Anil did
         
-        //save for processing
-        defaults.setObject(results[repeatRow], forKey: "eventRepeat")  //sets repeat interval for Events
+        defaults.setObject(eventRepeatInterval, forKey: "eventRepeat")  //sets repeat interval for Events
         
-        self.loadResultsArray()
+        print("p577 results: \(results)")
+       // results.removeAtIndex(repeatRow)
+        print("p578 results: \(results)")
+
+       // results.insert(results[repeatRow], atIndex: indexPath)
+        
+       // self.loadResultsArray()
         self.tableV.reloadData()
 
     }
-// */
     
 //===== end didSelectRowAtIndexPath ================================================
-
     
     //MARK: DetailsTableViewCellDateSelectionDelegate
     
-    //TODO: Update startDT and endDt in results array
+    //TODO: Update startDT and endDT in results array
     func didSelectDate(date:NSDate, inCell cell:DetailsTableViewCell){
 
         if labels[selectedIndexPath!.row] == "Start"{
@@ -672,7 +696,7 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         var output      = defaults.stringForKey("output")                   //Title
         var calendarName = defaults.stringForKey("calendarName")            //Cal.
         let alert       = defaults.objectForKey("eventAlert") as! Int ?? 10 //Alert
-        var eventRepeat = defaults.stringForKey("eventRepeat")!              //Repeat
+        var eventRepeat = defaults.stringForKey("eventRepeat")!             //Repeat
         
         var formatter3 = NSDateFormatter()
         formatter3.dateFormat = "M-dd-yyyy h:mm a"
@@ -749,13 +773,14 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
             day     = "\(fullDT), All-Day"
         }
         
-        switch (eventRepeat) {  // 1 = daily, 2 = weekly, 3 = yearly, 4 = hourly I made this to pass then change later in event method
-            case "1": eventRepeat   = "Daily";   break;
-            case "2": eventRepeat   = "Weekly";   break;
-            case "3": eventRepeat   = "Yearly";   break;
-            case "4": eventRepeat   = "Hourly";   break;
+        switch (eventRepeat) {  // 1 = daily, 2 = weekly, 3 = monthly, 4 = yearly, 99 = none I made this to pass then change later in event method
+            //lol changed from the numner to the word!
+            case "1": eventRepeat   = "Every Day";   break;
+            case "2": eventRepeat   = "Every Week";   break;
+            case "3": eventRepeat   = "Every Month";   break;
+            case "4": eventRepeat   = "Every Year";   break;
                 
-            default:   print("p923 no repeat word matched")
+            default:   print("p760 no repeat word matched")
             break;
         }
         
@@ -766,7 +791,6 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
             print("p315 actionType: \(actionType)")
             let reminderTitle  = defaults.stringForKey("reminderTitle") ?? ""
 
-            
             buttonCreateOutlet.setTitle("   Create Reminder", forState: UIControlState.Normal)
             buttonCreateOutlet.backgroundColor = UIColor.yellowColor()
      
@@ -900,8 +924,6 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         
         print("**** p546 tableViewHeightConstraint.constant: \(tableViewHeightConstraint.constant)")
         tableV.layoutIfNeeded()
-        
-    
         
   //      tableResultFrameHeightConstraint.constant = CGFloat(titleFrameHeight)
   //      print("p176  tableResultFrameHeightConstraint.constant: \( tableResultFrameHeightConstraint.constant)")
@@ -1145,7 +1167,7 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
             
             self.presentedViewController!.dismissViewControllerAnimated(true, completion: nil)      //close alert after the set delay of 3 seconds!
             
-            self.tabBarController?.selectedIndex = 2
+            self.tabBarController?.selectedIndex = 2        //go back to main Dictate start screen
             
         }
     }   //end ButtonCreate
@@ -1157,7 +1179,6 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         tableV.reloadData()
         titleRowHeight = 27.5
 
-        
         var alertSound124 = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("124-DeleteWhoosh", ofType: "mp3")!)
         //  General.playSound(alertSound3!)
         
@@ -1176,13 +1197,9 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         resultTitle.text = output
         resultCalendar.text = calendarName
  */
-        self.tabBarController?.selectedIndex = 2
+        self.tabBarController?.selectedIndex = 2            //go back to main Dictate start screen
         
     }   //end buttonCancel
-    
-    
-    
-    
     
   
     /*

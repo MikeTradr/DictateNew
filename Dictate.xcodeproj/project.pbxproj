@@ -62,6 +62,7 @@
 		D33FEBB21BD76A70003E6755 /* NuanceHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = D33FEBB11BD76A70003E6755 /* NuanceHeader.m */; };
 		D33FEBB31BD76A70003E6755 /* NuanceHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = D33FEBB11BD76A70003E6755 /* NuanceHeader.m */; };
 		D34395721BA32964002D98EA /* ReminderListPickerIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34395711BA32964002D98EA /* ReminderListPickerIC.swift */; };
+		D34451981C8505C5007F3DDD /* CalendarPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34451971C8505C5007F3DDD /* CalendarPickerViewController.swift */; };
 		D35588BC1BA937D20052892F /* ReminderItemsIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35588BB1BA937D20052892F /* ReminderItemsIC.swift */; };
 		D35588BE1BA938A00052892F /* ReminderItemsTableRC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35588BD1BA938A00052892F /* ReminderItemsTableRC.swift */; };
 		D355D97C1BA7DD3F00DADD72 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D355D97B1BA7DD3F00DADD72 /* Main.storyboard */; };
@@ -260,6 +261,7 @@
 		D33FEBAE1BD769EB003E6755 /* NuanceHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NuanceHeader.h; sourceTree = "<group>"; };
 		D33FEBB11BD76A70003E6755 /* NuanceHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NuanceHeader.m; sourceTree = "<group>"; };
 		D34395711BA32964002D98EA /* ReminderListPickerIC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderListPickerIC.swift; sourceTree = "<group>"; };
+		D34451971C8505C5007F3DDD /* CalendarPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarPickerViewController.swift; sourceTree = "<group>"; };
 		D35588BB1BA937D20052892F /* ReminderItemsIC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderItemsIC.swift; sourceTree = "<group>"; };
 		D35588BD1BA938A00052892F /* ReminderItemsTableRC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderItemsTableRC.swift; sourceTree = "<group>"; };
 		D355D97B1BA7DD3F00DADD72 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -502,6 +504,7 @@
 				D369819C1C7BB05400ED0AD8 /* DatePopupViewController.swift */,
 				D3AD9B531C5D5439006387C4 /* DetailsTableVC_OLD.swift */,
 				D3AD9B591C5E5245006387C4 /* DetailTableVC.swift */,
+				D34451971C8505C5007F3DDD /* CalendarPickerViewController.swift */,
 				D3AD9B571C5E3475006387C4 /* DetailsTableViewCell.swift */,
 				D3188A7C1B6E9B7700323DC0 /* ViewControllerDictate.swift */,
 				D3188A7E1B6E9B7F00323DC0 /* LoginViewController.swift */,
@@ -1187,6 +1190,7 @@
 				D3F8ACEB1B696FB00070C097 /* AppDelegate.swift in Sources */,
 				D32350621B69828900939F03 /* ReminderCode.swift in Sources */,
 				ECB862381B77DEBD00503C50 /* NSDate+CALAddition.m in Sources */,
+				D34451981C8505C5007F3DDD /* CalendarPickerViewController.swift in Sources */,
 				D3089C651BA2713B00C58D6D /* SettingsReminderListTableViewCell.swift in Sources */,
 				D3D98AF41BA54D5B00BA1901 /* FavoritesManager.swift in Sources */,
 				ECB8622F1B77DEBD00503C50 /* JTCalendarDelegateManager.m in Sources */,

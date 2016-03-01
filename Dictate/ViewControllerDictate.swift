@@ -125,6 +125,9 @@ let str56:String = "list this that other thing"
 
 let str57:String = "list this that other thing adjective"
 
+let str58:String = "8 am meeting"
+
+
 
 
 
@@ -159,7 +162,7 @@ add to dictate str   “meeting with Bob every Wednesday at noon”  //handle wo
 */
 
 // ---- change strings here for testing, shows on the dictated field---
-var str:String = str5
+var str:String = str58
 //var str:String = ""
 
 //var strRaw:String = str

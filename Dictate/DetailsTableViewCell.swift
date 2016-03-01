@@ -30,8 +30,11 @@ class DetailsTableViewCell: UITableViewCell {
     
     @IBOutlet weak var disclosureLabel: UILabel!
     
-    @IBOutlet weak var datePicker: UIDatePicker!
-    var delegate:DetailsTableViewCellDateSelectionDelegate?
+    @IBOutlet weak var datePicker: UIDatePicker!    //Anil added
+    var delegate:DetailsTableViewCellDateSelectionDelegate?    
+    
+    @IBOutlet weak var calendarPicker: UIPickerView!
+    var calDelegate: DetailsTableViewCellDateSelectionDelegate?
     
     
     

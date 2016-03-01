@@ -93,12 +93,15 @@ class EventManager: NSObject {
                 let outputNote  = defaults.stringForKey("outputNote")
                 let eventDuration    = defaults.objectForKey("eventDuration") as! Double
                 
+                let eventRepeat:Int = defaults.objectForKey("eventRepeat") as! Int
+
+                
                 let allDayFlag  = defaults.objectForKey("allDayFlag") as! Bool
                 
                 var calendarName    = defaults.stringForKey("calendarName")
                 
                 let alert       = defaults.objectForKey("eventAlert") as! Double
-                let `repeat`      = defaults.stringForKey("eventRepeat")
+         //       let `repeat`      = defaults.stringForKey("eventRepeat")
                 
                 let strRaw      = defaults.stringForKey("strRaw")
                 
@@ -109,6 +112,9 @@ class EventManager: NSObject {
                 print("p80 outputNote: \(outputNote)")
                 print("p81 output: \(output)")
                 print("p98 mainType: \(mainType)")
+                
+                print("p115 defaults.objectForKey(\"eventRepeat\") = \(defaults.objectForKey("eventRepeat"))")
+
                 
                 print("p114 calandarName: \(calendarName)")       //TODO WHY is "" ????
                 
@@ -240,9 +246,12 @@ class EventManager: NSObject {
                         
                         //   event.addRecurrenceRule(rule)
                         
-                        let eventRepeat:Int = defaults.objectForKey("eventRepeat") as! Int
+
                         
-                        print("p1456 eventRepeat = \(eventRepeat)")
+                        
+                      //  let eventRepeat:Int = defaults.objectForKey("eventRepeat") as! Int
+                        
+                        print("p253 eventRepeat = \(eventRepeat)")
                         
                         let everySunday = EKRecurrenceDayOfWeek()
                         let january = 1
@@ -259,17 +268,20 @@ class EventManager: NSObject {
                         let oneYearFromNow = startDT.dateByAddingTimeInterval(oneYear)
                         let fiveDaysFromNow = startDT.dateByAddingTimeInterval(fiveDays)
                         
-                        let recurringEnd = EKRecurrenceEnd(endDate:oneYearFromNow)
+                        let recurringEndYearFromNow = EKRecurrenceEnd(endDate:oneYearFromNow)
                         
                         let recurringFive = EKRecurrenceEnd(endDate: fiveDaysFromNow)
                         
                         
                         
-                        switch (eventRepeat){  // 1 = daily, 2 = weekly, 3 = yearly, 4 = monthly   I made this to pass then change later in event method
-                        case 1:
+                        switch (eventRepeat){  // 1 = daily, 2 = weekly, 3 = monthly, 4 = yearly, 99 = none  I made this to pass then change later in event method
+                        case 1:     //Daily
+                            
+                            //let endRecurrence: EKRecurrenceEnd = EKRecurrenceEnd(occurrenceCount: 362)
+
                             let recur = EKRecurrenceRule(
                                 recurrenceWithFrequency:EKRecurrenceFrequency.Daily,
-                                interval:3,                     // test 3 days
+                                interval:1,                     // 1 = every day
                                 //daysOfTheWeek:[everySunday],
                                 daysOfTheWeek:nil,
                                 daysOfTheMonth:nil,
@@ -278,46 +290,27 @@ class EventManager: NSObject {
                                 weeksOfTheYear:nil,
                                 daysOfTheYear:nil,
                                 setPositions: nil,
-                                //end: endRecurrence) // errors  TODO
-                                end: endRecurrence)
+                                end: recurringEndYearFromNow)
                             
                             event.addRecurrenceRule(recur)
                             
                             break;
-                            
-                            
-                            
-                        case 2:
+                         
+                        case 2:     //Weekly
                             print("p1491  in case 2? eventRepeat = \(eventRepeat)")
+                            
+                            let endRecurrence: EKRecurrenceEnd = EKRecurrenceEnd(occurrenceCount: 52)
                             
                             let recur = EKRecurrenceRule(
                                 recurrenceWithFrequency:EKRecurrenceFrequency.Weekly,
                                 interval:1,
-                                end: recurringEnd)
+                                end: recurringEndYearFromNow)
                             
                             event.addRecurrenceRule(recur)
                             
                             break;
                             
-                        case 3:
-                            let recur = EKRecurrenceRule(
-                                recurrenceWithFrequency:EKRecurrenceFrequency.Yearly,
-                                interval:1,
-                                //daysOfTheWeek:[everySunday],
-                                daysOfTheWeek:nil,
-                                daysOfTheMonth:nil,
-                                //monthsOfTheYear:[january],
-                                monthsOfTheYear:nil,
-                                weeksOfTheYear:nil,
-                                daysOfTheYear:nil,
-                                setPositions: nil,
-                                end:nil)
-                            
-                            event.addRecurrenceRule(recur)
-                            
-                            break;
-                            
-                        case 4:
+                        case 3:     //Monthly
                             let recur = EKRecurrenceRule(
                                 recurrenceWithFrequency:EKRecurrenceFrequency.Monthly,
                                 interval:1,
@@ -335,7 +328,45 @@ class EventManager: NSObject {
                             
                             break;
                             
-                        default:   print("p1511 no eventRepeat word matched")
+                        case 4:     //Yearly
+                            let recur = EKRecurrenceRule(
+                                recurrenceWithFrequency:EKRecurrenceFrequency.Yearly,
+                                interval:1,
+                                //daysOfTheWeek:[everySunday],
+                                daysOfTheWeek:nil,
+                                daysOfTheMonth:nil,
+                                //monthsOfTheYear:[january],
+                                monthsOfTheYear:nil,
+                                weeksOfTheYear:nil,
+                                daysOfTheYear:nil,
+                                setPositions: nil,
+                                end:nil)
+                            
+                            event.addRecurrenceRule(recur)
+                            
+                            break;
+                        //TODO Mike Anil to add this somehow :)
+                        case 5:     //Weekdays only Mon-Fri
+                            let recur = EKRecurrenceRule(
+                                recurrenceWithFrequency:EKRecurrenceFrequency.Daily,
+                                interval:1,                     // test 3 days
+                               // daysOfTheWeek:[EKRecurrenceRule.],
+                                daysOfTheWeek:nil,
+                                daysOfTheMonth:nil,
+                                //monthsOfTheYear:[january],
+                                monthsOfTheYear:nil,
+                                weeksOfTheYear:nil,
+                                daysOfTheYear:nil,
+                                setPositions: nil,
+                                end: recurringEndYearFromNow)
+                            
+                            event.addRecurrenceRule(recur)
+                            
+                            break;
+
+                        default:    //case 99
+                            print("p1511 no eventRepeat word matched")
+                            
                         break;
                         }
                         
@@ -348,7 +379,7 @@ class EventManager: NSObject {
                         
                         event.title = output!
                         event.startDate = startDT
-                        event.endDate = endDate       //was endDate mike changed 022516
+                        event.endDate = endDate       
                         event.notes = outputNote
                         
                         if allDayFlag {

@@ -1134,7 +1134,7 @@
                                             <outlet property="disclosureLabel" destination="au9-mT-MoK" id="ZRz-Df-Ll3"/>
                                             <outlet property="label" destination="unL-CJ-0h8" id="G30-YN-zzQ"/>
                                             <outlet property="resultsLabel" destination="FN4-kt-S5W" id="Yku-9Z-KBw"/>
-                                            <segue destination="5OV-Kl-VZ6" kind="push" identifier="showCalPicker" id="dKM-Gw-p8q"/>
+                                            <segue destination="5OV-Kl-VZ6" kind="modal" identifier="showCalPicker" id="dKM-Gw-p8q"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1185,17 +1185,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <pickerView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S1D-1U-n97">
-                                <rect key="frame" x="20" y="105" width="335" height="216"/>
-                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <pickerView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S1D-1U-n97">
+                                <rect key="frame" x="19" y="161" width="335" height="216"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="5OV-Kl-VZ6" id="Jqu-mq-Mmp"/>
                                     <outlet property="delegate" destination="5OV-Kl-VZ6" id="iqV-e2-E3w"/>
                                 </connections>
                             </pickerView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" restorationIdentifier="label" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z3Q-1m-eWK">
-                                <rect key="frame" x="20" y="61" width="58" height="21.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" restorationIdentifier="label" text="Cal." textAlignment="natural" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z3Q-1m-eWK">
+                                <rect key="frame" x="20" y="102" width="58" height="21.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="58" id="L12-dF-dLf"/>
                                 </constraints>
@@ -1203,8 +1203,8 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="lbd-Bl-J0v">
-                                <rect key="frame" x="86" y="54" width="269" height="35"/>
+                            <label opaque="NO" clipsSubviews="YES" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="lbd-Bl-J0v">
+                                <rect key="frame" x="86" y="96" width="269" height="35"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" selected="YES" staticText="YES"/>
@@ -1219,42 +1219,109 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToRounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </label>
-                            <button opaque="NO" contentMode="center" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="fge-Dw-Xky">
-                                <rect key="frame" x="108" y="358" width="159" height="60"/>
-                                <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <navigationBar contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vAV-RC-Zm1">
+                                <rect key="frame" x="5" y="20" width="375" height="44"/>
+                                <color key="barTintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="Set New Calendar" id="lba-kJ-y4m">
+                                        <barButtonItem key="backBarButtonItem" title="Event" id="AnD-TZ-dyO"/>
+                                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="awK-5M-67Q">
+                                            <connections>
+                                                <action selector="barButtonCancel:" destination="5OV-Kl-VZ6" id="Tgt-IZ-gpG"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Done" id="DrR-sa-ieH">
+                                            <connections>
+                                                <action selector="barButtonDone:" destination="5OV-Kl-VZ6" id="MXP-fr-nwt"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y8v-d3-ghK" userLabel="View Buttons">
+                                <rect key="frame" x="0.0" y="401" width="375" height="60"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="tPX-dD-Bhr">
+                                        <rect key="frame" x="20" y="0.0" width="155.5" height="60"/>
+                                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="18"/>
+                                        <state key="normal" title="Cancel">
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToRounds" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="buttonCancel:" destination="5OV-Kl-VZ6" eventType="touchUpInside" id="mQn-D4-7If"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="center" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="Sgt-6c-H6t">
+                                        <rect key="frame" x="199" y="0.0" width="155.5" height="60"/>
+                                        <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="Jyt-kq-ty6"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="18"/>
+                                        <inset key="contentEdgeInsets" minX="4" minY="0.0" maxX="4" maxY="0.0"/>
+                                        <state key="normal" title="Set New Calendar">
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToRounds" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="buttonCreate:" destination="JQz-OP-csq" eventType="touchUpInside" id="02v-lI-cAV"/>
+                                            <action selector="buttonCreate:" destination="HWg-SE-uiT" eventType="touchUpInside" id="d0V-28-dm1"/>
+                                            <action selector="buttonSetNew:" destination="5OV-Kl-VZ6" eventType="touchUpInside" id="9BA-3A-EeY"/>
+                                            <segue destination="HWg-SE-uiT" kind="modal" identifier="showEditVC" id="Yfe-9i-hzX"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="i0U-sK-Cxk"/>
+                                    <constraint firstItem="Sgt-6c-H6t" firstAttribute="width" secondItem="tPX-dD-Bhr" secondAttribute="width" id="0Cg-cJ-7az"/>
+                                    <constraint firstItem="Sgt-6c-H6t" firstAttribute="leading" secondItem="tPX-dD-Bhr" secondAttribute="trailing" constant="23.5" id="C1s-XO-G3e"/>
+                                    <constraint firstAttribute="trailing" secondItem="Sgt-6c-H6t" secondAttribute="trailing" constant="20.5" id="UWO-kR-5cX"/>
+                                    <constraint firstItem="Sgt-6c-H6t" firstAttribute="leading" secondItem="tPX-dD-Bhr" secondAttribute="trailing" constant="23.5" id="aW6-KJ-5gE"/>
+                                    <constraint firstItem="tPX-dD-Bhr" firstAttribute="leading" secondItem="y8v-d3-ghK" secondAttribute="leading" constant="20" id="c9l-RB-uzP"/>
+                                    <constraint firstAttribute="height" constant="60" id="cWz-gT-7Bk"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="18"/>
-                                <state key="normal" title="Set New Calendar">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="10"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToRounds" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="buttonCreate:" destination="JQz-OP-csq" eventType="touchUpInside" id="ArS-OF-l3B"/>
-                                    <action selector="buttonCreate:" destination="HWg-SE-uiT" eventType="touchUpInside" id="xqt-m8-pH2"/>
-                                </connections>
-                            </button>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="S1D-1U-n97" firstAttribute="top" secondItem="lbd-Bl-J0v" secondAttribute="bottom" constant="30" id="Bwt-Ru-Bso"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="vAV-RC-Zm1" secondAttribute="trailing" constant="-25" id="TEx-1g-P6q"/>
+                            <constraint firstItem="lbd-Bl-J0v" firstAttribute="trailing" secondItem="s6j-vI-sDd" secondAttribute="trailingMargin" id="VZg-Vg-C1Y"/>
+                            <constraint firstItem="S1D-1U-n97" firstAttribute="centerX" secondItem="s6j-vI-sDd" secondAttribute="centerX" id="YFi-wP-UJa"/>
+                            <constraint firstItem="y8v-d3-ghK" firstAttribute="centerX" secondItem="s6j-vI-sDd" secondAttribute="centerX" id="ZLH-Op-pUT"/>
+                            <constraint firstItem="lbd-Bl-J0v" firstAttribute="top" secondItem="vAV-RC-Zm1" secondAttribute="bottom" constant="32" id="equ-No-0pW"/>
+                            <constraint firstItem="vAV-RC-Zm1" firstAttribute="leading" secondItem="s6j-vI-sDd" secondAttribute="leadingMargin" constant="-15" id="gLQ-Ee-lOj"/>
+                            <constraint firstItem="vAV-RC-Zm1" firstAttribute="top" secondItem="T7r-DY-vIe" secondAttribute="bottom" id="kIF-IG-u42"/>
+                            <constraint firstItem="vAV-RC-Zm1" firstAttribute="centerX" secondItem="s6j-vI-sDd" secondAttribute="centerX" id="tJ7-Ra-qVM"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="y8v-d3-ghK" secondAttribute="trailing" constant="-20" id="uBu-4o-dL7"/>
                             <constraint firstItem="lbd-Bl-J0v" firstAttribute="leading" secondItem="z3Q-1m-eWK" secondAttribute="trailing" id="ybX-dD-rGU"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="noI-3E-qGf"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="buttonSetNew" destination="Sgt-6c-H6t" id="tKZ-ut-fTY"/>
                         <outlet property="pickerView" destination="S1D-1U-n97" id="irf-IK-Zx1"/>
+                        <outlet property="resultLabel" destination="lbd-Bl-J0v" id="Yxm-u9-2Ve"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eXi-u6-9J0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-332.5" y="1167.5"/>
+            <point key="canvasLocation" x="-353.5" y="1167.5"/>
         </scene>
         <!--eventDetails-->
         <scene sceneID="xVx-kI-Cgt">
@@ -2844,5 +2911,8 @@
         <image name="ios8-setting_icon" width="80" height="82"/>
         <image name="mic38px" width="38" height="38"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="Yfe-9i-hzX"/>
+    </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>

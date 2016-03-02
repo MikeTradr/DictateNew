@@ -580,9 +580,6 @@ class EventManager: NSObject {
                         print("p472 we here in match?")
                         calendarArray.append(calendarTitle)
                     }
-                    
-                    
-                    
                 }
                 print("p479 calendarArray: \(calendarArray)")
                 print("p480 calendarArray.count: \(calendarArray.count)")

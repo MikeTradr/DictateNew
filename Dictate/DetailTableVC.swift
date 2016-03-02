@@ -147,17 +147,29 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
+        if segue.identifier == "showCalPicker"
+        {
+            if let destinationVC = segue.destinationViewController as? CalendarPickerViewController{
+               // destinationVC.numberToDisplay = counter
+            }
+        }
+   /*
         if segue.identifier == "showCalPicker" {
            // CalendarPickerViewController.selectedCalendar = usersCalendar
+            
+            print("p153 we here?")
 
             let controller = segue.destinationViewController as! CalendarPickerViewController
-            let usersCalendar:String = defaults.stringForKey("calendarName")!
-            print("p152 usersCalendar: \(usersCalendar)")
+           // let usersCalendar:String = defaults.stringForKey("calendarName")!
+          //  print("p152 usersCalendar: \(usersCalendar)")
             
-            controller.selectedCalendar = usersCalendar
-            self.performSegueWithIdentifier("showCalPicker", sender: self)
+          //  controller.selectedCalendar = usersCalendar
+           // self.performSegueWithIdentifier("showCalPicker", sender: self)
+            
+            performSegueWithIdentifier("showCalPicker", sender: self)
+
         }
-        
+     */
         
         //Anil added
         if segue.identifier == "PickReminder"{
@@ -361,17 +373,17 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         }
         
         
-        if labels[indexPath.row] == "Start" {                                   //set default date for picker!
+        if labels[indexPath.row] == "Start" {   //set default date for picker!
             cell.datePicker.date = defaults.objectForKey("startDT")! as! NSDate
         } else if labels[indexPath.row] == "End" {
             cell.datePicker.date = defaults.objectForKey("endDT")! as! NSDate
         }
         
-        if labels[indexPath.row] == "Cal." {                                   //set default calendar for picker!
+        if labels[indexPath.row] == "Cal." {    //set default calendar for picker!
      
         }
         
-        if labels[indexPath.row] == "List" {                                   //set
+        if labels[indexPath.row] == "List" {    //set
         }
         
         switch (results[indexPath.row]){
@@ -483,7 +495,9 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
                 break;
             
             case "Cal.":
-                self.performSegueWithIdentifier("showCalPicker", sender: indexPath);
+                print("p486 in didselect Cal. segue next")
+
+                self.performSegueWithIdentifier("showCalPicker", sender: indexPath)
   
                 
                 

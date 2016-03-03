@@ -287,6 +287,7 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
                     height = 35
                 }
         }
+        /*
         //add height for Calendar and List picker
         if (labels[indexPath.row] == "Cal.") || (labels[indexPath.row] == "List") {
             if selectedIndexPath == indexPath  {
@@ -296,6 +297,7 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
                 height = 35
             }
         }
+        */
         return height
     }   // end func heightForRowAtIndexPath
 
@@ -326,7 +328,7 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         print("p250 row: \(labels[indexPath.row]): \(results[indexPath.row]) ")
         print("p250 ========================================")
         
-        if labels[indexPath.row] == "Input" || labels[indexPath.row] == "Start" || labels[indexPath.row] == "End" || labels[indexPath.row] == "Title" || labels[indexPath.row] == "Cal." || labels[indexPath.row] == "Alert" || labels[indexPath.row] == "List"  || labels[indexPath.row] == "Repeat"   {
+        if labels[indexPath.row] == "Input" || labels[indexPath.row] == "Start" || labels[indexPath.row] == "End" || labels[indexPath.row] == "Title" || labels[indexPath.row] == "Cal." || labels[indexPath.row] == "Alert" || labels[indexPath.row] == "List"  || labels[indexPath.row] == "Repeat" || labels[indexPath.row] == "Alarm"   {
             cell.disclosureLabel.hidden = false
             cell.userInteractionEnabled = true     //allow cell to be highlighted!
         } else {
@@ -380,7 +382,6 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         }
         
         if labels[indexPath.row] == "Cal." {    //set default calendar for picker!
-     
         }
         
         if labels[indexPath.row] == "List" {    //set
@@ -496,11 +497,7 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
             
             case "Cal.":
                 print("p486 in didselect Cal. segue next")
-
-                self.performSegueWithIdentifier("showCalPicker", sender: indexPath)
-  
-                
-                
+                self.performSegueWithIdentifier("showCalPicker", sender: indexPath);
                 break;
             
             case "List":    //Reminder

@@ -29,40 +29,23 @@ class CalendarPickerViewController: UIViewController, UIPickerViewDataSource, UI
    // var calendarName = defaults.stringForKey("calendarName")            //Cal.
     
     @IBAction func buttonSetNew(sender: AnyObject) {
-        self.performSegueWithIdentifier("showEditVC", sender: nil)
-        
+        self.performSegueWithIdentifier("returnFromModal", sender: self)
         defaults.setObject(newCalendarName, forKey: "calendarName")
- 
     }
     
     @IBAction func buttonCancel(sender: AnyObject) {
-        print("p39 in buttonCancel")
-        //TODO Anil does not switch
-        self.tabBarController?.selectedIndex = 1
+        self.performSegueWithIdentifier("returnFromModal", sender: self)
     }
     
     @IBAction func barButtonCancel(sender: AnyObject) {
-        print("p50 in barButtonCancel")
-        self.tabBarController?.selectedIndex = 1
+         self.performSegueWithIdentifier("returnFromModal", sender: self)
     }
     
     
     @IBAction func barButtonDone(sender: AnyObject) {
-        
+         defaults.setObject(newCalendarName, forKey: "calendarName")
+         self.performSegueWithIdentifier("returnFromModal", sender: self)
     }
-
-   
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-        if segue.identifier == "showEditVC"
-        {
-            if let destinationVC = segue.destinationViewController as? UITabBarController{
-            
-            }
-            
-        }
-    }
-    
         
     override func viewDidLoad() {
         
@@ -73,17 +56,28 @@ class CalendarPickerViewController: UIViewController, UIPickerViewDataSource, UI
         let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
         
         var calendarName = defaults.stringForKey("calendarName")
+        print("p59 calendarName: \(calendarName)")
+
+        
         resultLabel.text = calendarName
         
-        calendarArray = defaults.stringArrayForKey("calendarArray")!
+        //make Calendar's List Array
+        EventManager.sharedInstance.createCalendarArray()
         
-   /*   //below works, but guy in slackchat room suggested map routine!
+        calendarArray = defaults.objectForKey("calendarArray")! as! [String]
+        
+        print("p66 calendarArray: \(calendarArray)")
+
+        
+      //below works, but guy in slackchat room suggested map routine!
         var defaultRowIndex = calendarArray.indexOf(calendarName!)
         if(defaultRowIndex == nil) { defaultRowIndex = 0 }
-        pickerView.selectRow(defaultRowIndex!, inComponent: 0, animated: false)
-*/
+     //   pickerView.selectRow(defaultRowIndex!, inComponent: 0, animated: false)
+
+        //TODO this works in sim, bombs on phone!  above works!
+        //     let defaultRowIndex = calendarName.map { calendarArray.indexOf($0) } ?? 0
+        print("p69 defaultRowIndex!: \(defaultRowIndex!)")
         
-        let defaultRowIndex = calendarName.map { calendarArray.indexOf($0) } ?? 0
         pickerView.selectRow(defaultRowIndex!, inComponent: 0, animated: false)
         
     }
@@ -112,6 +106,8 @@ class CalendarPickerViewController: UIViewController, UIPickerViewDataSource, UI
     
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        print("p103 row: \(row)")
+
         resultLabel.text = calendarArray[row]
         newCalendarName = calendarArray[row]
 
@@ -157,24 +153,7 @@ class CalendarPickerViewController: UIViewController, UIPickerViewDataSource, UI
     
     
     
-/*
-    func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView!) -> UIView {
-        
-        var pickerLabel = view as? UILabel;
-        
-        if (pickerLabel == nil)
-        {
-            pickerLabel = UILabel()
-            
-            pickerLabel?.font = UIFont(name: "Montserrat", size: 16)
-            pickerLabel?.textAlignment = NSTextAlignment.Center
-        }
-        
-   //     pickerLabel?.text = fetchLabelForRowNumber(row)
-        
-        return pickerLabel!;
-    }
-*/
+
     
 }
 

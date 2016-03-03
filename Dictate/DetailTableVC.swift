@@ -1215,6 +1215,14 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         
     }   //end buttonCancel
     
+    @IBAction func backFromModal(segue: UIStoryboardSegue) {
+        print("p1219 and we are back to DetailTableVC")
+        // Switch to the second tab (tabs are numbered 0, 1, 2)
+        self.tabBarController?.selectedIndex = 1
+    }
+    
+    
+    
   
     /*
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

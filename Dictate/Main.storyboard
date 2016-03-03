@@ -227,6 +227,26 @@
                                             <segue destination="vey-2F-enW" kind="push" id="S38-pC-LAe"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="50" id="mPN-mb-TIs">
+                                        <rect key="frame" x="0.0" y="483" width="414" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mPN-mb-TIs" id="hs8-cZ-Uqq">
+                                            <rect key="frame" x="0.0" y="0.0" width="381" height="49.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="A" translatesAutoresizingMaskIntoConstraints="NO" id="EBd-sQ-PSx">
+                                                    <rect key="frame" x="12" y="5" width="39" height="39"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="About" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YTE-kQ-C3m">
+                                                    <rect key="frame" x="59" y="14" width="140" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -1317,9 +1337,11 @@
                         <outlet property="buttonSetNew" destination="Sgt-6c-H6t" id="tKZ-ut-fTY"/>
                         <outlet property="pickerView" destination="S1D-1U-n97" id="irf-IK-Zx1"/>
                         <outlet property="resultLabel" destination="lbd-Bl-J0v" id="Yxm-u9-2Ve"/>
+                        <segue destination="ldW-cx-GGB" kind="unwind" identifier="returnFromModal" unwindAction="backFromModal:" id="bus-mI-Y5C"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eXi-u6-9J0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="ldW-cx-GGB" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-353.5" y="1167.5"/>
         </scene>
@@ -2897,6 +2919,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="A" width="256" height="256"/>
         <image name="Calendar-icon" width="512" height="512"/>
         <image name="Cog38px" width="19" height="27"/>
         <image name="Contacts_iOS7-Icon" width="1024" height="1024"/>

@@ -178,228 +178,237 @@ class EventManager: NSObject {
                     
                     //calendar.calendar = eventStore.defaultCalendarForNewReminders()
                     
-                    //   if calendarName != "" {
-                    
-                    // TODO FIX
-                    
-                    print("p119 calendar.title.lowercaseString = \(calendar.title.lowercaseString)")
-                    print("p120 calendarName.lowercaseString = \(calendarName!.lowercaseString)")
-                    
-                    if calendar.title.lowercaseString == calendarName!.lowercaseString {     //need match here to create event on calendar!!!
+                    if calendarName != "" {
                         
-                        //if calendar.title.lowercaseString == calendarTitle.lowercaseString {     //need match here to create event on calendar!!!
+                        // TODO FIX
                         
+                        print("p119 calendar.title.lowercaseString = \(calendar.title.lowercaseString)")
                         
-                        print("p839 WE HERE?: \(calendarName)")
+                        //add IF here to check that calendarName is not nil and present dialog?
                         
-                        // 3
-                        //let startDate = NSDate()
-                        print("p638 *** startDT: \(startDT)")
-                        print("p639 endDT: \(endDT)")
-                        print("p833 calendarName = \(calendarName)")
+                        print("p120 calendarName.lowercaseString = \(calendarName!.lowercaseString)")
                         
-                        
-                        // Duration, set End Date Time
-                        let endDate = startDT.dateByAddingTimeInterval(eventDuration * 60)    //was endDate mike 022516
-                        
-                        
-                        // 4
-                        // Create Event
-                        
-                        var event = EKEvent(eventStore: eventStore)
-                        
-                        //TODO set to user set calendar tried here
-                        //event.calendar = calendar
-                        
-                        // event.calendar = event.defaultCalendarForNewEvents // Selects default calendar
-                        
-                        
-                        
-                        //WORKS to default
-                        //event.calendar = eventStore.defaultCalendarForNewEvents
-                        
-                        event.calendar = calendar
-                        
-                        
-                        // Create Alarm aka Alert...
-                        //let alertMinutes:Double = 10
-                        
-                        let eventAlert = defaults.objectForKey("eventAlert") as! Double
-                        print("p1185 eventAlert = \(eventAlert)")
-                        
-                        if (eventAlert != 0.0){
-                            let alertOffset:Double = -( eventAlert * 60 )            //60 minutes * 60 seconds = 1 hour
-                            let alert = EKAlarm(relativeOffset: alertOffset)        // at user Offset
-                            event.addAlarm(alert)
+                        if calendar.title.lowercaseString == calendarName!.lowercaseString {     //need match here to create event on calendar!!!
+                            
+                            //if calendar.title.lowercaseString == calendarTitle.lowercaseString {     //need match here to create event on calendar!!!
+                            
+                            
+                            print("p839 WE HERE?: \(calendarName)")
+                            
+                            // 3
+                            //let startDate = NSDate()
+                            print("p638 *** startDT: \(startDT)")
+                            print("p639 endDT: \(endDT)")
+                            print("p833 calendarName = \(calendarName)")
+                            
+                            
+                            // Duration, set End Date Time
+                            let endDate = startDT.dateByAddingTimeInterval(eventDuration * 60)    //was endDate mike 022516
+                            
+                            
+                            // 4
+                            // Create Event
+                            
+                            var event = EKEvent(eventStore: eventStore)
+                            
+                            //TODO set to user set calendar tried here
+                            //event.calendar = calendar
+                            
+                            // event.calendar = event.defaultCalendarForNewEvents // Selects default calendar
+                            
+                            
+                            
+                            //WORKS to default
+                            //event.calendar = eventStore.defaultCalendarForNewEvents
+                            
+                            event.calendar = calendar
+                            
+                            
+                            // Create Alarm aka Alert...
+                            //let alertMinutes:Double = 10
+                            
+                            let eventAlert = defaults.objectForKey("eventAlert") as! Double
+                            print("p1185 eventAlert = \(eventAlert)")
+                            
+                            if (eventAlert != 0.0){
+                                let alertOffset:Double = -( eventAlert * 60 )            //60 minutes * 60 seconds = 1 hour
+                                let alert = EKAlarm(relativeOffset: alertOffset)        // at user Offset
+                                event.addAlarm(alert)
+                            }
+                            
+                            let alertNow = EKAlarm(relativeOffset: 0.0)             // at time of event
+                            event.addAlarm(alertNow)
+                            
+                            
+                            // Create Reccurring Event...
+                            
+                            // TODO MIKE Clean this code? add more features... end date! make class to use in Reminders also
+                            
+                            /* Add the rule */
+                            // let rule = EKRecurrenceRule(recurrenceWithFrequency: EKRecurrenceFrequencyDaily, interval: 1, end: EKRecurrenceEnd.recurrenceEndWithEndDate(NSDate.distantFuture() as! NSDate) as! EKRecurrenceEnd)
+                            
+                            //   event.addRecurrenceRule(rule)
+                            
+
+                            
+                            
+                          //  let eventRepeat:Int = defaults.objectForKey("eventRepeat") as! Int
+                            
+                            print("p253 eventRepeat = \(eventRepeat)")
+                            
+                            let everySunday = EKRecurrenceDayOfWeek()
+                            let january = 1
+                            
+                            var returnValue: String = ""
+                            
+                            // TODO Fix why this below errors????
+                            let endRecurrence: EKRecurrenceEnd = EKRecurrenceEnd(occurrenceCount: 5)
+                            //let endRecurrence: Int = 5
+                            
+                            let oneYear:NSTimeInterval = 365 * 24 * 60 * 60
+                            let fiveDays:NSTimeInterval = 5 * 24 * 60 * 60
+                            
+                            let oneYearFromNow = startDT.dateByAddingTimeInterval(oneYear)
+                            let fiveDaysFromNow = startDT.dateByAddingTimeInterval(fiveDays)
+                            
+                            let recurringEndYearFromNow = EKRecurrenceEnd(endDate:oneYearFromNow)
+                            
+                            let recurringFive = EKRecurrenceEnd(endDate: fiveDaysFromNow)
+                            
+                            
+                            
+                            switch (eventRepeat){  // 1 = daily, 2 = weekly, 3 = monthly, 4 = yearly, 99 = none  I made this to pass then change later in event method
+                            case 1:     //Daily
+                                
+                                //let endRecurrence: EKRecurrenceEnd = EKRecurrenceEnd(occurrenceCount: 362)
+
+                                let recur = EKRecurrenceRule(
+                                    recurrenceWithFrequency:EKRecurrenceFrequency.Daily,
+                                    interval:1,                     // 1 = every day
+                                    //daysOfTheWeek:[everySunday],
+                                    daysOfTheWeek:nil,
+                                    daysOfTheMonth:nil,
+                                    //monthsOfTheYear:[january],
+                                    monthsOfTheYear:nil,
+                                    weeksOfTheYear:nil,
+                                    daysOfTheYear:nil,
+                                    setPositions: nil,
+                                    end: recurringEndYearFromNow)
+                                
+                                event.addRecurrenceRule(recur)
+                                
+                                break;
+                             
+                            case 2:     //Weekly
+                                print("p1491  in case 2? eventRepeat = \(eventRepeat)")
+                                
+                                let endRecurrence: EKRecurrenceEnd = EKRecurrenceEnd(occurrenceCount: 52)
+                                
+                                let recur = EKRecurrenceRule(
+                                    recurrenceWithFrequency:EKRecurrenceFrequency.Weekly,
+                                    interval:1,
+                                    end: recurringEndYearFromNow)
+                                
+                                event.addRecurrenceRule(recur)
+                                
+                                break;
+                                
+                            case 3:     //Monthly
+                                let recur = EKRecurrenceRule(
+                                    recurrenceWithFrequency:EKRecurrenceFrequency.Monthly,
+                                    interval:1,
+                                    //daysOfTheWeek:[everySunday],
+                                    daysOfTheWeek:nil,
+                                    daysOfTheMonth:nil,
+                                    //monthsOfTheYear:[january],
+                                    monthsOfTheYear:nil,
+                                    weeksOfTheYear:nil,
+                                    daysOfTheYear:nil,
+                                    setPositions: nil,
+                                    end:nil)
+                                
+                                event.addRecurrenceRule(recur)
+                                
+                                break;
+                                
+                            case 4:     //Yearly
+                                let recur = EKRecurrenceRule(
+                                    recurrenceWithFrequency:EKRecurrenceFrequency.Yearly,
+                                    interval:1,
+                                    //daysOfTheWeek:[everySunday],
+                                    daysOfTheWeek:nil,
+                                    daysOfTheMonth:nil,
+                                    //monthsOfTheYear:[january],
+                                    monthsOfTheYear:nil,
+                                    weeksOfTheYear:nil,
+                                    daysOfTheYear:nil,
+                                    setPositions: nil,
+                                    end:nil)
+                                
+                                event.addRecurrenceRule(recur)
+                                
+                                break;
+                            //TODO Mike Anil to add this somehow :)
+                            case 5:     //Weekdays only Mon-Fri
+                                let recur = EKRecurrenceRule(
+                                    recurrenceWithFrequency:EKRecurrenceFrequency.Daily,
+                                    interval:1,                     // test 3 days
+                                   // daysOfTheWeek:[EKRecurrenceRule.],
+                                    daysOfTheWeek:nil,
+                                    daysOfTheMonth:nil,
+                                    //monthsOfTheYear:[january],
+                                    monthsOfTheYear:nil,
+                                    weeksOfTheYear:nil,
+                                    daysOfTheYear:nil,
+                                    setPositions: nil,
+                                    end: recurringEndYearFromNow)
+                                
+                                event.addRecurrenceRule(recur)
+                                
+                                break;
+
+                            default:    //case 99
+                                print("p1511 no eventRepeat word matched")
+                                
+                            break;
+                            }
+                            
+                            
+                            
+                            print("p862 output: \(output)")
+                            print("p863 startDT: \(startDT)")
+                            print("p864 endDT: \(endDT)")
+                          //  print("p865 from func endDate: \(endDate)")
+                            
+                            event.title = output!
+                            event.startDate = startDT
+                            event.endDate = endDate       
+                            event.notes = outputNote
+                            
+                            if allDayFlag {
+                                event.allDay = true
+                            }
+                            
+                            // TODO ADD eventDuration field to screen
+                            
+                            let result: Bool
+                            do {
+                                try eventStore.saveEvent(event, span: EKSpan.ThisEvent)
+                                result = true
+                                print("p350 Successfully saved '\(event.title)' to '\(event.calendar.title)' calendar.")
+                            } catch  let error as NSError{
+                                result = false
+                                print("p353 Saving event to Calendar failed with error: \(error.description)")
+                            }  // Commits changes and allows saveEvent to change error from nil
+                            
                         }
                         
-                        let alertNow = EKAlarm(relativeOffset: 0.0)             // at time of event
-                        event.addAlarm(alertNow)
+                    } else { //if calendarName != ""
+                         //present alert dialog.
                         
                         
-                        // Create Reccurring Event...
-                        
-                        // TODO MIKE Clean this code? add more features... end date! make class to use in Reminders also
-                        
-                        /* Add the rule */
-                        // let rule = EKRecurrenceRule(recurrenceWithFrequency: EKRecurrenceFrequencyDaily, interval: 1, end: EKRecurrenceEnd.recurrenceEndWithEndDate(NSDate.distantFuture() as! NSDate) as! EKRecurrenceEnd)
-                        
-                        //   event.addRecurrenceRule(rule)
-                        
-
-                        
-                        
-                      //  let eventRepeat:Int = defaults.objectForKey("eventRepeat") as! Int
-                        
-                        print("p253 eventRepeat = \(eventRepeat)")
-                        
-                        let everySunday = EKRecurrenceDayOfWeek()
-                        let january = 1
-                        
-                        var returnValue: String = ""
-                        
-                        // TODO Fix why this below errors????
-                        let endRecurrence: EKRecurrenceEnd = EKRecurrenceEnd(occurrenceCount: 5)
-                        //let endRecurrence: Int = 5
-                        
-                        let oneYear:NSTimeInterval = 365 * 24 * 60 * 60
-                        let fiveDays:NSTimeInterval = 5 * 24 * 60 * 60
-                        
-                        let oneYearFromNow = startDT.dateByAddingTimeInterval(oneYear)
-                        let fiveDaysFromNow = startDT.dateByAddingTimeInterval(fiveDays)
-                        
-                        let recurringEndYearFromNow = EKRecurrenceEnd(endDate:oneYearFromNow)
-                        
-                        let recurringFive = EKRecurrenceEnd(endDate: fiveDaysFromNow)
-                        
-                        
-                        
-                        switch (eventRepeat){  // 1 = daily, 2 = weekly, 3 = monthly, 4 = yearly, 99 = none  I made this to pass then change later in event method
-                        case 1:     //Daily
-                            
-                            //let endRecurrence: EKRecurrenceEnd = EKRecurrenceEnd(occurrenceCount: 362)
-
-                            let recur = EKRecurrenceRule(
-                                recurrenceWithFrequency:EKRecurrenceFrequency.Daily,
-                                interval:1,                     // 1 = every day
-                                //daysOfTheWeek:[everySunday],
-                                daysOfTheWeek:nil,
-                                daysOfTheMonth:nil,
-                                //monthsOfTheYear:[january],
-                                monthsOfTheYear:nil,
-                                weeksOfTheYear:nil,
-                                daysOfTheYear:nil,
-                                setPositions: nil,
-                                end: recurringEndYearFromNow)
-                            
-                            event.addRecurrenceRule(recur)
-                            
-                            break;
-                         
-                        case 2:     //Weekly
-                            print("p1491  in case 2? eventRepeat = \(eventRepeat)")
-                            
-                            let endRecurrence: EKRecurrenceEnd = EKRecurrenceEnd(occurrenceCount: 52)
-                            
-                            let recur = EKRecurrenceRule(
-                                recurrenceWithFrequency:EKRecurrenceFrequency.Weekly,
-                                interval:1,
-                                end: recurringEndYearFromNow)
-                            
-                            event.addRecurrenceRule(recur)
-                            
-                            break;
-                            
-                        case 3:     //Monthly
-                            let recur = EKRecurrenceRule(
-                                recurrenceWithFrequency:EKRecurrenceFrequency.Monthly,
-                                interval:1,
-                                //daysOfTheWeek:[everySunday],
-                                daysOfTheWeek:nil,
-                                daysOfTheMonth:nil,
-                                //monthsOfTheYear:[january],
-                                monthsOfTheYear:nil,
-                                weeksOfTheYear:nil,
-                                daysOfTheYear:nil,
-                                setPositions: nil,
-                                end:nil)
-                            
-                            event.addRecurrenceRule(recur)
-                            
-                            break;
-                            
-                        case 4:     //Yearly
-                            let recur = EKRecurrenceRule(
-                                recurrenceWithFrequency:EKRecurrenceFrequency.Yearly,
-                                interval:1,
-                                //daysOfTheWeek:[everySunday],
-                                daysOfTheWeek:nil,
-                                daysOfTheMonth:nil,
-                                //monthsOfTheYear:[january],
-                                monthsOfTheYear:nil,
-                                weeksOfTheYear:nil,
-                                daysOfTheYear:nil,
-                                setPositions: nil,
-                                end:nil)
-                            
-                            event.addRecurrenceRule(recur)
-                            
-                            break;
-                        //TODO Mike Anil to add this somehow :)
-                        case 5:     //Weekdays only Mon-Fri
-                            let recur = EKRecurrenceRule(
-                                recurrenceWithFrequency:EKRecurrenceFrequency.Daily,
-                                interval:1,                     // test 3 days
-                               // daysOfTheWeek:[EKRecurrenceRule.],
-                                daysOfTheWeek:nil,
-                                daysOfTheMonth:nil,
-                                //monthsOfTheYear:[january],
-                                monthsOfTheYear:nil,
-                                weeksOfTheYear:nil,
-                                daysOfTheYear:nil,
-                                setPositions: nil,
-                                end: recurringEndYearFromNow)
-                            
-                            event.addRecurrenceRule(recur)
-                            
-                            break;
-
-                        default:    //case 99
-                            print("p1511 no eventRepeat word matched")
-                            
-                        break;
-                        }
-                        
-                        
-                        
-                        print("p862 output: \(output)")
-                        print("p863 startDT: \(startDT)")
-                        print("p864 endDT: \(endDT)")
-                      //  print("p865 from func endDate: \(endDate)")
-                        
-                        event.title = output!
-                        event.startDate = startDT
-                        event.endDate = endDate       
-                        event.notes = outputNote
-                        
-                        if allDayFlag {
-                            event.allDay = true
-                        }
-                        
-                        // TODO ADD eventDuration field to screen
-                        
-                        let result: Bool
-                        do {
-                            try eventStore.saveEvent(event, span: EKSpan.ThisEvent)
-                            result = true
-                            print("p350 Successfully saved '\(event.title)' to '\(event.calendar.title)' calendar.")
-                        } catch  let error as NSError{
-                            result = false
-                            print("p353 Saving event to Calendar failed with error: \(error.description)")
-                        }  // Commits changes and allows saveEvent to change error from nil
                         
                     }
-                    
                 }
                 
                 
@@ -552,6 +561,9 @@ class EventManager: NSObject {
                     
                     
                     let type = calendar.type
+                    
+                    print("p565 type: \(type)")
+                
                 //    print("pType calendar.type: \(EKSourceType.local)")
 
                     
@@ -575,14 +587,27 @@ class EventManager: NSObject {
               //          $0.sourceType == EKSourceType.Local
               //      }
                     
+                    
+                    print("p591 calendar.source.sourceType: \(calendar.source.sourceType)")
+                    print("p592 EKSourceType.Local: \(EKSourceType.Local)")
+
 
                     if calendar.source.sourceType == EKSourceType.Local {
-                        print("p472 we here in match?")
+                        print("p596 we here in match?")
                         calendarArray.append(calendarTitle)
                     }
+                    
+                    //TODO ANIL fix so only get local calendars in this Array
+                    
+                    // moved to here as never hit above in IF TODO Mike ANIL
+                    calendarArray.append(calendarTitle)
+
                 }
-                print("p479 calendarArray: \(calendarArray)")
-                print("p480 calendarArray.count: \(calendarArray.count)")
+                
+
+                
+                print("p601 calendarArray: \(calendarArray)")
+                print("p602 calendarArray.count: \(calendarArray.count)")
                 print("==============================================================")
 
                 

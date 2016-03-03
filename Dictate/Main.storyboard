@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="WgF-Na-eRh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="WgF-Na-eRh">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -1154,7 +1154,6 @@
                                             <outlet property="disclosureLabel" destination="au9-mT-MoK" id="ZRz-Df-Ll3"/>
                                             <outlet property="label" destination="unL-CJ-0h8" id="G30-YN-zzQ"/>
                                             <outlet property="resultsLabel" destination="FN4-kt-S5W" id="Yku-9Z-KBw"/>
-                                            <segue destination="5OV-Kl-VZ6" kind="modal" identifier="showCalPicker" id="dKM-Gw-p8q"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1187,11 +1186,12 @@
                         <outlet property="resultMessage" destination="4DG-H1-8Fl" id="rGI-DX-SnU"/>
                         <outlet property="tableV" destination="OXn-iT-MZO" id="spp-KM-UzE"/>
                         <outlet property="tableViewHeightConstraint" destination="wcw-0O-faH" id="yly-cK-ruM"/>
+                        <segue destination="5OV-Kl-VZ6" kind="modal" identifier="showCalPicker" id="Tkl-BV-Ui3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vVP-fP-3C2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-786.5" y="1167.5"/>
+            <point key="canvasLocation" x="-793.5" y="1250.5"/>
         </scene>
         <!--Calendar Picker View Controller-->
         <scene sceneID="fUa-nO-GhU">
@@ -1343,7 +1343,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eXi-u6-9J0" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="ldW-cx-GGB" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-353.5" y="1167.5"/>
+            <point key="canvasLocation" x="-270.5" y="868.5"/>
         </scene>
         <!--eventDetails-->
         <scene sceneID="xVx-kI-Cgt">

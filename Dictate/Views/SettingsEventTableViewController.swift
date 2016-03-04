@@ -57,8 +57,13 @@ class SettingsEventTableViewController: UITableViewController, UITextFieldDelega
         //Looks for single or multiple taps.
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
         view.addGestureRecognizer(tap)
+        
+        tableView.tableFooterView = UIView()    //hides blank cells
+
 
     }
+    
+    
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false

@@ -77,6 +77,9 @@ class SettingsTableViewController: UITableViewController{
             }
         }
         
+        tableView.tableFooterView = UIView()    //hides blank cells
+
+        
      //   let defaultReminderID = defaults.stringForKey("defaultReminderID")
 
         

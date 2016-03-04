@@ -292,7 +292,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="huo-QA-n4g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-551" y="263"/>
+            <point key="canvasLocation" x="-509" y="381"/>
         </scene>
         <!--Root View Controller-->
         <scene sceneID="FQr-Ro-cwe">
@@ -2150,7 +2150,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iUG-wZ-Fr3" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="xvB-f1-NQR" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="55" y="2981"/>
+            <point key="canvasLocation" x="53" y="3109"/>
         </scene>
         <!--Reminders-->
         <scene sceneID="lHm-fL-him">
@@ -2935,7 +2935,7 @@
         <image name="mic38px" width="38" height="38"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Yfe-9i-hzX"/>
+        <segue reference="rGj-jK-2SG"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>

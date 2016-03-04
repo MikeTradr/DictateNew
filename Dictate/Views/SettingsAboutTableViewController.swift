@@ -1,5 +1,5 @@
 //
-//  SettingsReminderTableViewController.swift
+//  SettingsAboutTableViewController.swift
 //  Dictate
 //
 //  Created by Mike Derr on 8/26/15.
@@ -7,24 +7,26 @@
 //
 
 import UIKit
+import Parse
 
-class SettingsReminderTableViewController: UITableViewController {
+class SettingsAboutTableViewController: UITableViewController{
     
-    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+    @IBAction func buttonLogout(sender: AnyObject) {
+        PFUser.logOut()
+        let currentUser = PFUser.currentUser() // this will now be nil
+        
+        print("p18 currentUser: \(currentUser)")
+        
+        self.performSegueWithIdentifier("Logout", sender: self)
+    }
+    
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //TODO Mike check is user has thia reminder list made or not????
-        var defaultReminderList = "Default"     //does user have this list made already? check???
-        
-        let defaultReminderListID = "0000"
-        
-         defaults.setObject(defaultReminderListID, forKey: "defaultReminderListID")    //sets defaultReminderList
-        
         tableView.tableFooterView = UIView()    //hides blank cells
 
-        
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false

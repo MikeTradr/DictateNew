@@ -10,6 +10,7 @@
 		D305C8121C614C4B00529926 /* PZDisclosureIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D305C8111C614C4B00529926 /* PZDisclosureIndicator.swift */; };
 		D306CDA81BB1315D00FD973F /* SetCalendarIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D306CDA71BB1315D00FD973F /* SetCalendarIC.swift */; };
 		D3089C651BA2713B00C58D6D /* SettingsReminderListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3089C641BA2713B00C58D6D /* SettingsReminderListTableViewCell.swift */; };
+		D30937151C88D9C600081899 /* SettingsAboutTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30937141C88D9C600081899 /* SettingsAboutTableViewController.swift */; };
 		D3188A6C1B6E9ADB00323DC0 /* MessageComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3188A6B1B6E9ADB00323DC0 /* MessageComposer.swift */; };
 		D3188A6D1B6E9ADB00323DC0 /* MessageComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3188A6B1B6E9ADB00323DC0 /* MessageComposer.swift */; };
 		D3188A6F1B6E9AE400323DC0 /* MessageCode_used?.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3188A6E1B6E9AE400323DC0 /* MessageCode_used?.swift */; };
@@ -231,6 +232,7 @@
 		D305C8111C614C4B00529926 /* PZDisclosureIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PZDisclosureIndicator.swift; sourceTree = "<group>"; };
 		D306CDA71BB1315D00FD973F /* SetCalendarIC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetCalendarIC.swift; sourceTree = "<group>"; };
 		D3089C641BA2713B00C58D6D /* SettingsReminderListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsReminderListTableViewCell.swift; path = ../SettingsReminderListTableViewCell.swift; sourceTree = "<group>"; };
+		D30937141C88D9C600081899 /* SettingsAboutTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsAboutTableViewController.swift; path = Views/SettingsAboutTableViewController.swift; sourceTree = "<group>"; };
 		D3188A6B1B6E9ADB00323DC0 /* MessageComposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageComposer.swift; sourceTree = "<group>"; };
 		D3188A6E1B6E9AE400323DC0 /* MessageCode_used?.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MessageCode_used?.swift"; sourceTree = "<group>"; };
 		D3188A711B6E9AEE00323DC0 /* SendMessage_not used?.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SendMessage_not used?.swift"; sourceTree = "<group>"; };
@@ -587,6 +589,7 @@
 				D392FAD51B9B1C7E00678B18 /* SettingsInstructionsTableViewController.swift */,
 				D392FAD71B9B1D3600678B18 /* SettingsKeywordsTableViewController.swift */,
 				D392FAD91B9B1DFD00678B18 /* SettingsGeneralTableViewController.swift */,
+				D30937141C88D9C600081899 /* SettingsAboutTableViewController.swift */,
 				D3089C641BA2713B00C58D6D /* SettingsReminderListTableViewCell.swift */,
 				D31CB4B11BA28A1800EC5418 /* SettingsCalendarListTableViewCell.swift */,
 			);
@@ -1153,6 +1156,7 @@
 				D392FAD61B9B1C7E00678B18 /* SettingsInstructionsTableViewController.swift in Sources */,
 				ECB8622E1B77DEBD00503C50 /* JTDateHelper.m in Sources */,
 				D3AD9B581C5E3475006387C4 /* DetailsTableViewCell.swift in Sources */,
+				D30937151C88D9C600081899 /* SettingsAboutTableViewController.swift in Sources */,
 				ECB8622D1B77DEBD00503C50 /* JTCalendarSettings.m in Sources */,
 				ECF818601B83B7E10087ECAD /* CheckBoxLayer.swift in Sources */,
 				D3B703801B935AC200FA1DF0 /* SettingsReminderTableViewController.swift in Sources */,

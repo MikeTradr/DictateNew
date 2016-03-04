@@ -100,6 +100,9 @@ class CalendarPickerTableViewController: UITableViewController {
             
 //            selectedReminderIndex = find(reminderList.title, defaultReminderList)!
         }
+        
+        tableView.tableFooterView = UIView()    //hides blank cells
+
     }
 
     override func didReceiveMemoryWarning() {

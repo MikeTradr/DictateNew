@@ -92,6 +92,7 @@ class MainIC: WKInterfaceController {
     @IBOutlet var buttonGrAlarm: WKInterfaceButton!
     @IBOutlet var buttonGrRepeat: WKInterfaceButton!
  
+    @IBOutlet var buttonCreateOutlet: WKInterfaceGroup!
 
     
     var actionType:String = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!.stringForKey("actionType") ?? "Event"
@@ -107,10 +108,10 @@ class MainIC: WKInterfaceController {
     var wordArrTrimmed  = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!.objectForKey("wordArrTrimmed") as? [String] ?? [] //array of the items
 
     
-    let lightPink = UIColor(red: 255, green: 204, blue: 255, alpha: 1)
-    let swiftColor = UIColor(red: 255, green: 165, blue: 0, alpha: 1)
-    let moccasin = UIColor(red: 255, green: 228, blue: 181, alpha: 1)     //light biege color, for Word List
-    let apricot = UIColor(red: 251, green: 206, blue: 177, alpha: 1)
+    let lightPink = UIColor(red: 255/255, green: 204/255, blue: 255/255, alpha: 1)
+    let swiftColor = UIColor(red: 255/255, green: 165/255, blue: 0/255, alpha: 1)
+    let moccasin = UIColor(red: 255/255, green: 228/255, blue: 181/255, alpha: 1)     //light biege color, for Word List
+    let apricot = UIColor(red: 251/255, green: 206/255, blue: 177/255, alpha: 1)
 
 
 //#### functions #################################
@@ -387,6 +388,7 @@ class MainIC: WKInterfaceController {
                     print("w224 in Reminder Switch")
                     self.resultType.setTextColor(UIColor.yellowColor())
                     self.labelButtonCreate.setText("Create Reminder")
+                    self.buttonCreateOutlet.setBackgroundColor(UIColor.yellowColor())
                     if day == "No Day Found" {
                         self.buttonGrDay.setHidden(true)
                     }
@@ -416,6 +418,7 @@ class MainIC: WKInterfaceController {
                     self.resultType.setTextColor(self.swiftColor)
                     //self.groupLabelTitle.setBackgroundColor(self.swiftColor)
                     self.labelButtonCreate.setText("Create Event")
+                    self.buttonCreateOutlet.setBackgroundColor(UIColor.greenColor())
                     self.resultCalendar.setText("Calendar: \(calendarName)")
                     self.resultTitle.setText("Title: \(output)")
                     break;
@@ -424,8 +427,9 @@ class MainIC: WKInterfaceController {
                     let wordArrTrimmed  = self.defaults.objectForKey("wordArrTrimmed") as? [String] ?? [] //array of the items
                     let stringOutput = wordArrTrimmed.joinWithSeparator(", ")
                     let reminderTitle = self.defaults.stringForKey("reminderList") ?? ""
-                    self.resultType.setTextColor(self.moccasin)
+                   // self.resultType.setTextColor(self.moccasin)
                     self.labelButtonCreate.setText("Create New List")
+                    self.buttonCreateOutlet.setBackgroundColor(self.moccasin)
                     self.resultCalendar.setText("List: \(reminderTitle)")
                     self.resultTitle.setText("Items: \(stringOutput)")
                     if ( fullDT == "" ) {
@@ -440,8 +444,10 @@ class MainIC: WKInterfaceController {
                     let wordArrTrimmed  = self.defaults.objectForKey("wordArrTrimmed") as? [String] ?? [] //array of the items
                     let stringOutput = wordArrTrimmed.joinWithSeparator(", ")
                     let reminderTitle = self.defaults.stringForKey("reminderList") ?? ""
-                    self.resultType.setTextColor(self.moccasin)
+                  //  self.resultType.setTextColor(self.moccasin)
                     self.labelButtonCreate.setText("Create New List")
+                    self.buttonCreateOutlet.setBackgroundColor(self.moccasin)
+
                     self.resultCalendar.setText("List: \(reminderTitle)")
                     self.resultTitle.setText("Items: \(stringOutput)")
                     //no alerts for lists so set to hidden
@@ -453,8 +459,10 @@ class MainIC: WKInterfaceController {
                     let wordArrTrimmed  = self.defaults.objectForKey("wordArrTrimmed") as? [String] ?? [] //array of the items
                     let stringOutput = wordArrTrimmed.joinWithSeparator(", ")
                     let reminderTitle  = self.defaults.stringForKey("reminderList") ?? ""
-                    self.resultType.setTextColor(self.apricot)
+                   // self.resultType.setTextColor(self.apricot)
                     self.labelButtonCreate.setText("Create Phrase List")
+                    self.buttonCreateOutlet.setBackgroundColor(self.apricot)
+
                     self.resultCalendar.setText("List: \(reminderTitle)")
                     self.resultTitle.setText("Items: \(stringOutput)")
                     if ( fullDT == "" ) {        // added 072315 no need to show if no date used

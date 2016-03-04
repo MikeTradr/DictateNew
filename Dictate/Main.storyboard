@@ -342,7 +342,7 @@
         <!--Dictate-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController storyboardIdentifier="Dictate" title="Dictate" id="vXZ-lx-hvc" customClass="ViewControllerDictate" customModule="Dictate" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Dictate" title="Dictate" id="vXZ-lx-hvc" customClass="DictateViewController" customModule="Dictate" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="4cn-ZX-g0a"/>
                         <viewControllerLayoutGuide type="bottom" id="Rk3-D0-BxM"/>

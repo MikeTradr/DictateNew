@@ -21,7 +21,7 @@
 		D3188A771B6E9B2600323DC0 /* TableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3188A761B6E9B2600323DC0 /* TableCell.swift */; };
 		D3188A791B6E9B4200323DC0 /* ToDoTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3188A781B6E9B4200323DC0 /* ToDoTableCell.swift */; };
 		D3188A7B1B6E9B4B00323DC0 /* ToDoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3188A7A1B6E9B4B00323DC0 /* ToDoTableViewCell.xib */; };
-		D3188A7D1B6E9B7700323DC0 /* ViewControllerDictate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3188A7C1B6E9B7700323DC0 /* ViewControllerDictate.swift */; };
+		D3188A7D1B6E9B7700323DC0 /* DictateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3188A7C1B6E9B7700323DC0 /* DictateViewController.swift */; };
 		D3188A7F1B6E9B7F00323DC0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3188A7E1B6E9B7F00323DC0 /* LoginViewController.swift */; };
 		D3188A811B6E9B9900323DC0 /* tabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3188A801B6E9B9900323DC0 /* tabBarController.swift */; };
 		D3188A871B6E9BF900323DC0 /* vcTest1_OLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3188A861B6E9BF900323DC0 /* vcTest1_OLD.swift */; };
@@ -240,7 +240,7 @@
 		D3188A761B6E9B2600323DC0 /* TableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableCell.swift; sourceTree = "<group>"; };
 		D3188A781B6E9B4200323DC0 /* ToDoTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoTableCell.swift; sourceTree = "<group>"; };
 		D3188A7A1B6E9B4B00323DC0 /* ToDoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ToDoTableViewCell.xib; sourceTree = "<group>"; };
-		D3188A7C1B6E9B7700323DC0 /* ViewControllerDictate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerDictate.swift; sourceTree = "<group>"; };
+		D3188A7C1B6E9B7700323DC0 /* DictateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictateViewController.swift; sourceTree = "<group>"; };
 		D3188A7E1B6E9B7F00323DC0 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		D3188A801B6E9B9900323DC0 /* tabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tabBarController.swift; sourceTree = "<group>"; };
 		D3188A861B6E9BF900323DC0 /* vcTest1_OLD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = vcTest1_OLD.swift; sourceTree = "<group>"; };
@@ -508,7 +508,7 @@
 				D3AD9B591C5E5245006387C4 /* DetailTableVC.swift */,
 				D34451971C8505C5007F3DDD /* CalendarPickerViewController.swift */,
 				D3AD9B571C5E3475006387C4 /* DetailsTableViewCell.swift */,
-				D3188A7C1B6E9B7700323DC0 /* ViewControllerDictate.swift */,
+				D3188A7C1B6E9B7700323DC0 /* DictateViewController.swift */,
 				D3188A7E1B6E9B7F00323DC0 /* LoginViewController.swift */,
 				D3F8ACEC1B696FB00070C097 /* ViewController.swift */,
 				D3188A801B6E9B9900323DC0 /* tabBarController.swift */,
@@ -1206,7 +1206,7 @@
 				D3B929C41C634E9A00C1C535 /* MailComposer.swift in Sources */,
 				ECB862321B77DEBD00503C50 /* JTCalendarMenuView.m in Sources */,
 				ECF818691B851B830087ECAD /* UIColor+BFPaperColors.m in Sources */,
-				D3188A7D1B6E9B7700323DC0 /* ViewControllerDictate.swift in Sources */,
+				D3188A7D1B6E9B7700323DC0 /* DictateViewController.swift in Sources */,
 				ECF818661B8519F80087ECAD /* BFPaperCheckbox.m in Sources */,
 				D3795E7A1B8DF927009D3DB5 /* SettingsEventTableViewController.swift in Sources */,
 				D33C13BD1B8C3CCB00470F8F /* SettingsTableViewController.swift in Sources */,

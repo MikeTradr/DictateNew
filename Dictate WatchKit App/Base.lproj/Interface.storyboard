@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ei9-cN-Wbe">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ei9-cN-Wbe">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="9515"/>
     </dependencies>
     <scenes>
@@ -235,6 +235,8 @@
                         </items>
                     </menu>
                     <connections>
+                        <outlet property="buttonCreate" destination="Kv9-FC-BDH" id="TTG-UJ-std"/>
+                        <outlet property="buttonCreateOutlet" destination="16Z-OF-i9e" id="jgj-j7-3vf"/>
                         <outlet property="buttonGrAlarm" destination="R2h-dY-NSQ" id="It2-QJ-xqQ"/>
                         <outlet property="buttonGrCalendar" destination="B42-1Z-IeF" id="wa6-rh-Wzq"/>
                         <outlet property="buttonGrDay" destination="vKp-xG-Fap" id="UE4-Es-pQv"/>

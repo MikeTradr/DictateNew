@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  DictateViewController.swift
 //  Dictate
 //
 //  Created by Mike Derr on 5/6/15.
@@ -213,7 +213,7 @@ var now = ""
 // ---- end set Global Varbiables ----
 
 
-class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailComposeViewControllerDelegate, SpeechKitDelegate, SKRecognizerDelegate, SKVocalizerDelegate {
+class DictateViewController: UIViewController, UITextFieldDelegate, MFMailComposeViewControllerDelegate, SpeechKitDelegate, SKRecognizerDelegate, SKVocalizerDelegate {
     
     var voiceSearch: SKRecognizer?
     
@@ -967,7 +967,7 @@ class ViewControllerDictate: UIViewController, UITextFieldDelegate, MFMailCompos
 }   // end ViewController
 
 
-extension ViewControllerDictate  {
+extension DictateViewController  {
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.view.endEditing(true)
     }

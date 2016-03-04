@@ -47,8 +47,17 @@ class DictateCode: NSObject {
     var listName:String         = ""
     var listToUse:String        = ""
     var allDayFlag:Bool         = false
-
     
+    //added these for pDictate print commands near end line 2000...
+    var duration:Int            = 0
+    var alert:Int               = 0
+    var reminderTitle:String    = ""
+    var reminderList:String     = ""
+    var reminderArray:[String]  = []
+    var defaultCalendarID:String = ""
+    var defaultReminderID:String = ""
+    var processNow:Bool         = false
+
     //var startDate:String        = ""
     
     var database                = EKEventStore()
@@ -2055,7 +2064,7 @@ class DictateCode: NSObject {
             
             let doubleTimeDuration:Double = Double(eventDuration * 60)  //convert Int to Double for next calc.
             
-            let endDT:NSDate = startDT.dateByAddingTimeInterval(doubleTimeDuration)
+            var endDT:NSDate = startDT.dateByAddingTimeInterval(doubleTimeDuration)
             
             var fullDTEnd = formatter3.stringFromDate(endDT)
             
@@ -2110,10 +2119,13 @@ class DictateCode: NSObject {
                 reminderAlarm = startDT
                 print("p2013 reminderAlarm: \(reminderAlarm)")
                 defaults.setObject(reminderAlarm, forKey: "reminderAlarm")  // set for Reminder Alarm
+                endDT = NSDate(dateString:"2014-12-12") // basically a blank date
             } else {
                 reminderAlarm = NSDate(dateString:"2014-12-12") // basically a blank date
                 print("p2018 reminderAlarm: \(reminderAlarm)")
                 defaults.setObject(reminderAlarm, forKey: "reminderAlarm")  // set for Reminder Alarm
+                //endDT = NSDate(dateString:"2014-12-12") // basically a blank date
+
                 }
                 
                 
@@ -2143,54 +2155,64 @@ class DictateCode: NSObject {
                     }
                 }
                 
-                
-                
-    
-                
-                
-                
+          
             //Save vales to NSUserDefaults...
-            
-            print("p1566 actionType: \(actionType)")
-            
-            defaults.setObject(startDT, forKey: "startDT")
 
-            print("p1270 MAIN startDT: \(startDT)")
-                
-            defaults.setObject(allDayFlag, forKey: "allDayFlag")
-                
-            defaults.setObject(mainType, forKey: "mainType")
             defaults.setObject(actionType, forKey: "actionType")
-            
-            defaults.setObject(phone, forKey: "phone")
-            
+            defaults.setObject(startDT, forKey: "startDT")
             defaults.setObject(endDT, forKey: "endDT")
+            defaults.setObject(allDayFlag, forKey: "allDayFlag")
+            defaults.setObject(mainType, forKey: "mainType")
+            defaults.setObject(phone, forKey: "phone")
             defaults.setObject(output, forKey: "output")
             defaults.setObject(outputNote, forKey: "outputNote")
-            
             defaults.setObject(day, forKey: "day")
             defaults.setObject(calendarName, forKey: "calendarName")
-            
             defaults.setObject(eventDuration, forKey: "eventDuration")
-            
             defaults.setObject(eventAlert, forKey: "eventAlert")
                 
-            defaults.synchronize() // from Rob course                
-            
             // TODO  not used yet we see!
             let eventRepeat = eventRepeatInterval
-            
-            print("p1291 eventRepeat: \(eventRepeat)")
-            
             defaults.setObject(eventRepeat, forKey: "eventRepeat")  //sets repeat interval for Events
-            
-            print("p1401 calendarName: \(calendarName)")
-            
-            print("p1599 actionType: \(actionType)")
                 
-            print("p2178 day: \(day)")
+            defaults.synchronize() // from Rob course
             
             // Not for extension saveToDatabase()    // save data to database call function
+                
+            print("pDictated ===================================")
+            print("pDictated day: \(day)")
+            print("pDictated phone: \(phone)")
+            print("pDictated startDT: \(startDT)")
+            print("pDictated endDT: \(endDT)")
+            print("pDictated output: \(output)")
+            print("pDictated outputNote: \(outputNote)")
+            print("pDictated duration: \(duration)")
+            print("pDictated calandarName: \(calendarName)")
+            print("pDictated alert: \(alert)")
+            print("pDictated eventRepeat: \(eventRepeat)")
+            print("pDictated strRaw: \(strRaw)")
+            
+            print("pDictated mainType: \(mainType)")
+            print("pDictated actionType: \(actionType)")
+            
+            print("pDictated reminderTitle: \(reminderTitle)")
+            print("pDictated wordArrTrimmed: \(wordArrTrimmed)")
+            print("pDictated reminderList: \(reminderList)")
+            print("pDictated reminderArray: \(reminderArray)")
+            print("pDictated reminderAlarm: \(reminderAlarm)")
+            
+            print("pDictated allDayFlag: \(allDayFlag)")
+            print("pDictated timeString: \(timeString)")
+            
+            print("pDictated defaultCalendarID: \(defaultCalendarID)")       //defaultCalendarID
+            print("pDictated defaultReminderID: \(defaultReminderID)")       //defaultReminderID
+            print("pDictated processNow: \(processNow)")                     //processNow Bool
+            
+            print("pDictated end =================================")
+                
+                
+                
+                
                 
                 
                 

@@ -221,7 +221,7 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         
         var height:CGFloat = 35
 
-        if (results[indexPath.row] == "" || results[indexPath.row] == "0")  {
+        if (results[indexPath.row] == "" || results[indexPath.row] == "0" || labels[indexPath.row] == "") {
            // print("p148 we here hide rows: \(indexPath.row)")
             
             deleteRowCountArray.append(indexPath.row)
@@ -809,6 +809,11 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
                 fullDT = ""
                 fullDTEnd = ""
             }
+            
+            if ( fullDTEnd == "12-12-2014 12:00 AM" ) {        // added 030416 no need to show EndDate for alarm case
+                fullDTEnd = ""
+            }
+            
            
             output = reminderTitle
             calendarName = reminderList!
@@ -818,8 +823,10 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
             print("p337 output: \(output)")
             print("p337 calendarName: \(calendarName)")
 
-            if fullDT != "12-12-2014 12:00 AM" {        // means a blank date
-                labelAlert = "Alarm"               // default Alert
+            if fullDT != "12-12-2014 12:00 AM" {       // means a Remminder Alarm
+                //labelAlert = "Alarm"                  // default Alert
+                labelAlert = ""                         // default Alert
+                labelStart = "Alarm"
                 alertString = fullDT
             }
     

@@ -349,6 +349,25 @@ class DictateViewController: UIViewController, UITextFieldDelegate, MFMailCompos
         self.presentViewController(vc, animated: true, completion: nil)
     }
     
+    // MARK: - MFMailComposeViewControllerDelegate
+    
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+        switch result.rawValue {
+        case MFMailComposeResultCancelled.rawValue:
+            print("Cancelled")
+        case MFMailComposeResultSaved.rawValue:
+            print("Saved")
+        case MFMailComposeResultSent.rawValue:
+            print("Sent")
+        case MFMailComposeResultFailed.rawValue:
+            print("Error: \(error?.localizedDescription)")
+        default:
+            break
+        }
+        controller.dismissViewControllerAnimated(true, completion: nil)
+    }
+
+    
     
     
     

@@ -34,34 +34,38 @@ class MailComposer: UIViewController, MFMailComposeViewControllerDelegate {
     }
     
     func configuredMailComposeViewController() -> MFMailComposeViewController {
-        let mailComposerVC = MFMailComposeViewController()
-        mailComposerVC.mailComposeDelegate = self // Extremely important to set the --mailComposeDelegate-- property, NOT the --delegate-- property
         
-        //TODO fix the forced downcast below
-        let mainType:String    = defaults.stringForKey("mainType")!
-        let output:String    = defaults.stringForKey("output")!
-        let toPhone:String    = defaults.stringForKey("toPhone")!
-        
-        var toRecipents:[String] = []
-        toRecipents.append(toPhone)
-        
-        newOutput = "\(output) \n\n\n Sent from Dictate™ App"
-        let messageBody = newOutput
-        
-        
-        //mailComposerVC.setToRecipients(["mike@derr.ws"])
-        
-        mailComposerVC.setToRecipients(toRecipents)
-        
-        mailComposerVC.setSubject("Dictate™ App e-mail...")
-        mailComposerVC.setMessageBody(newOutput, isHTML: false)
-        
-        // self.presentViewController(mailComposerVC, animated: true, completion: nil)
-        
-        return mailComposerVC
-        
-        
-    }
+        if MFMailComposeViewController.canSendMail() {
+            let mailComposerVC = MFMailComposeViewController()
+            mailComposerVC.mailComposeDelegate = self // Extremely important to set the --mailComposeDelegate-- property, NOT the --delegate-- property
+            
+            //TODO fix the forced downcast below
+            let mainType:String    = defaults.stringForKey("mainType")!
+            let output:String    = defaults.stringForKey("output")!
+            let toPhone:String    = defaults.stringForKey("toPhone")!
+            
+            var toRecipents:[String] = []
+            toRecipents.append(toPhone)
+            
+            newOutput = "\(output) \n\n\n Sent from Dictate™ App"
+            let messageBody = newOutput
+            
+            
+            mailComposerVC.setToRecipients(toRecipents)
+            mailComposerVC.setSubject("📩 Dictate App e-mail...")
+            mailComposerVC.setMessageBody(newOutput, isHTML: false)
+            
+            // self.presentViewController(mailComposerVC, animated: true, completion: nil)
+            
+            return mailComposerVC
+        } else {
+            // give feedback to the user
+            //TODO Anil Mike Add Error Alert Dialog?
+            
+            //add call Utility- alert dialog
+            print("p66 Error can not send mail now")
+            
+        }
     
     
     func mailList() -> MFMailComposeViewController {

@@ -29,14 +29,15 @@ class MailComposer: UIViewController, MFMailComposeViewControllerDelegate {
         if MFMailComposeViewController.canSendMail() {
             self.presentViewController(mailComposeViewController, animated: true, completion: nil)
         } else {
-            self.showSendMailErrorAlert()
+           // showSendMailErrorAlert()
         }
     }
     
     func configuredMailComposeViewController() -> MFMailComposeViewController {
-        
+        let mailComposerVC = MFMailComposeViewController()
+
         if MFMailComposeViewController.canSendMail() {
-            let mailComposerVC = MFMailComposeViewController()
+           // let mailComposerVC = MFMailComposeViewController()
             mailComposerVC.mailComposeDelegate = self // Extremely important to set the --mailComposeDelegate-- property, NOT the --delegate-- property
             
             //TODO fix the forced downcast below
@@ -56,16 +57,18 @@ class MailComposer: UIViewController, MFMailComposeViewControllerDelegate {
             mailComposerVC.setMessageBody(newOutput, isHTML: false)
             
             // self.presentViewController(mailComposerVC, animated: true, completion: nil)
-            
             return mailComposerVC
+
         } else {
             // give feedback to the user
             //TODO Anil Mike Add Error Alert Dialog?
             
             //add call Utility- alert dialog
             print("p66 Error can not send mail now")
-            
         }
+        
+        return mailComposerVC
+    }
     
     
     func mailList() -> MFMailComposeViewController {
@@ -318,8 +321,31 @@ class MailComposer: UIViewController, MFMailComposeViewControllerDelegate {
     }
     
     
+    // MARK: - MFMailComposeViewControllerDelegate
+    
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+        switch result.rawValue {
+        case MFMailComposeResultCancelled.rawValue:
+            print("Cancelled")
+        case MFMailComposeResultSaved.rawValue:
+            print("Saved")
+        case MFMailComposeResultSent.rawValue:
+            print("Sent")
+        case MFMailComposeResultFailed.rawValue:
+            print("Error: \(error?.localizedDescription)")
+        default:
+            break
+        }
+        controller.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+/*
     // MARK: MFMailComposeViewControllerDelegate Method
     func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
         controller.dismissViewControllerAnimated(true, completion: nil)
     }
+
+*/
+    
 }
+

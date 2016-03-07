@@ -48,7 +48,7 @@ let str18:String = "Reminder Mike Call Mom Today repeat daily for 3 days"
 
 let str19:String = "Text Mike Call Bob later today 608-123-4557"
 
-let str20:String = "Mail Mom subject comming home for holiday, I will come hone on June 6"
+let str20:String = "Mail Mom subject comming home for holiday, I will come home on June 6"
 
 let str21:String = "Text mom Tom Jon let's all meet for a meeting tonight at 8 PM"
 
@@ -129,6 +129,9 @@ let str58:String = "8 am meeting"
 
 let str59:String = "Reminder meeting 10 am alert 1 hour"
 
+let str60:String = "email mike this is a test message"
+
+
 
 
 
@@ -166,7 +169,7 @@ add to dictate str   “meeting with Bob every Wednesday at noon”  //handle wo
 */
 
 // ---- change strings here for testing, shows on the dictated field---
-var str:String = str59
+var str:String = str60
 //var str:String = ""
 
 //var strRaw:String = str
@@ -984,6 +987,25 @@ class DictateViewController: UIViewController, UITextFieldDelegate, MFMailCompos
     }
     
 }   // end ViewController
+
+// MARK: - MFMailComposeViewControllerDelegate
+
+
+func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+    switch result.rawValue {
+    case MFMailComposeResultCancelled.rawValue:
+        print("Cancelled")
+    case MFMailComposeResultSaved.rawValue:
+        print("Saved")
+    case MFMailComposeResultSent.rawValue:
+        print("Sent")
+    case MFMailComposeResultFailed.rawValue:
+        print("Error: \(error?.localizedDescription)")
+    default:
+        break
+    }
+    controller.dismissViewControllerAnimated(true, completion: nil)
+}
 
 
 extension DictateViewController  {

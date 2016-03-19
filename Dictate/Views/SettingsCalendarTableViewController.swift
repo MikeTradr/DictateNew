@@ -5,16 +5,27 @@
 //  Created by Mike Derr on 8/25/15.
 //  Copyright (c) 2015 ThatSoft.com. All rights reserved.
 //
+//  03/17/2016  Mike added code for checkmark and savign to Defaults.
+//
 
 import UIKit
 
 class SettingsCalendarTableViewController: UITableViewController{
+    
+    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+    var weekView:Bool = true
+    
+    @IBOutlet weak var weekCell: UITableViewCell!
+    @IBOutlet weak var monthCell: UITableViewCell!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.tableFooterView = UIView()    //hides blank cells
 
+        weekView = defaults.boolForKey("defaultWeekView")
+        print("p26 weekView: \(weekView)")
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -29,15 +40,72 @@ class SettingsCalendarTableViewController: UITableViewController{
     }
 
 
-    /*
+    override func tableView(tableView: UITableView,
+        didSelectRowAtIndexPath indexPath: NSIndexPath) {
+            let cell = tableView.cellForRowAtIndexPath(indexPath)
+            
+            if indexPath.row == 1 {
+                cell!.accessoryType = UITableViewCellAccessoryType.Checkmark
+                weekView = true
+                monthCell.accessoryType = .None
+            }
+            if indexPath.row == 2 {
+                cell!.accessoryType = UITableViewCellAccessoryType.Checkmark
+                weekView = false
+                weekCell.accessoryType = .None
+            }
+            
+            tableView.deselectRowAtIndexPath(indexPath, animated: true)
+            
+            print("p63 weekView: \(weekView)")
+            defaults.setObject(weekView, forKey: "defaultWeekView")     //save to defaults calendar display view, true = week view, false = month view
+    }
+    
+    
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        print("p73 weekView: \(weekView)")
+
+        if indexPath.row == 0 {     //weekView = true set check mark
+
+            if weekView {
+                weekCell.accessoryType = UITableViewCellAccessoryType.Checkmark
+            }
+            
+        } else {     //weekView = false set check mark
+            
+            if !weekView {
+                monthCell.accessoryType = UITableViewCellAccessoryType.Checkmark
+            }
+        }
+        
+    }
+
+    
+    
+    
+/*
+
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as! UITableViewCell
 
-        // Configure the cell...
+        if indexPath.row == 1 {     //weekView = true set check mark
+            if weekView {
+                cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+            }
+        }
+        
+        if indexPath.row == 2 {     //weekView = false set check mark
+            if !weekView {
+                cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+            }
+        }
+        
 
         return cell
     }
-    */
+*/
+    
 
     /*
     // Override to support conditional editing of the table view.

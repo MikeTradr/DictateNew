@@ -458,35 +458,29 @@ class EventManager: NSObject {
                 
                 print("p416 allCalendars: \(allCalendars)")
                 
-                let calender = EKCalendar(forEntityType: EKEntityType.Event, eventStore: self.eventStore)
-                print("p418 calender: \(calender)")
+                let calendar = EKCalendar(forEntityType: EKEntityType.Event, eventStore: self.eventStore)
+                print("p418 calendar: \(calendar)")
                 
-                
+       /*
                 
                 //TODO aboveline pints to:
                 //       p418 calender: EKCalendar <0x7f821b4e9350> {title = (null); type = Local; allowsModify = YES; color = (null);}
                 
                 // from https://www.andrewcbancroft.com/2015/06/17/creating-calendars-with-event-kit-and-swift/
                 
-                // Use Event Store to create a new calendar instance
-                // Configure its title
-                let newCalendar = EKCalendar(forEntityType: EKEntityType.Event, eventStore: self.eventStore)
-                newCalendar.title = "Some New Calendar Title"
-                
                 // Access list of available sources from the Event Store
-                let sourcesInEventStore = self.eventStore.sources as! [EKSource]
+                let sourcesInEventStore = self.eventStore.sources 
                 print("p434 sourcesInEventStore: \(sourcesInEventStore)")
                 
                 // Filter the available sources and select the "Local" source to assign to the new calendar's
                 // source property
                 
-                
-                newCalendar.source = sourcesInEventStore.filter{
+                calendar.source = sourcesInEventStore.filter{
                     (source: EKSource) -> Bool in
                     source.sourceType == EKSourceType.Local
-                    }.first!    //TODO CRASHES here NIL!!! iphone6 simulator
+                    }    //TODO CRASHES here NIL!!! iphone6 simulator
                 
-                
+         */
                 
                 
                 
@@ -503,7 +497,7 @@ class EventManager: NSObject {
    
                 
                 var error:NSError?
-                calender.source = self.eventStore.defaultCalendarForNewEvents.source
+                calendar.source = self.eventStore.defaultCalendarForNewEvents.source
                 print("p463 Error: \(error)")
                 
                 let calendars = self.eventStore.calendarsForEntityType(EKEntityType.Event)
@@ -534,6 +528,13 @@ class EventManager: NSObject {
                 for calendar in calendars {
                     var calendarTitle:String! = calendar.title
                     
+                    print("---------------------------------------------------------")
+                    print("p532 calendarTitle: \(calendarTitle)")
+                    print("p532 calendar.source.sourceType: \(calendar.source.sourceType)")
+                    print("p532 EKSourceType.Local: \(EKSourceType.Local)")
+                    print("p532 calendar.type: \(calendar.type)")
+                    print("---------------------------------------------------------")
+                    
                     
                    // print("p468 EKCalendar: \(EKCalendar)")
                     
@@ -549,15 +550,6 @@ class EventManager: NSObject {
                        
                         }
                     }
-
-                    print("p468 calendarTitle: \(calendarTitle)")
-                    print("p469 calendar.source.sourceType: \(calendar.source.sourceType)")
-                    print("p469 EKSourceType.Local: \(EKSourceType.Local)")
-                    print("p477 calendar.type: \(calendar.type)")
-
-    
-                    print("---------------------------------------------------------")
-
                     
                     
                     let type = calendar.type
@@ -600,7 +592,7 @@ class EventManager: NSObject {
                     //TODO ANIL fix so only get local calendars in this Array
                     
                     // moved to here as never hit above in IF TODO Mike ANIL
-                    calendarArray.append(calendarTitle)
+                  //  calendarArray.append(calendarTitle)
 
                 }
                 

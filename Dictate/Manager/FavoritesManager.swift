@@ -10,6 +10,9 @@ import UIKit
 
 class FavoritesManager: NSObject {
     
+    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+
+    
     class var sharedInstance : FavoritesManager {
         struct Static {
             static var onceToken : dispatch_once_t = 0
@@ -20,6 +23,24 @@ class FavoritesManager: NSObject {
         }
         return Static.instance!
     }
+    
+    struct Contact {
+        let name: String
+        let phone: String
+        let email: String
+    }
+    
+    let mike = Contact(name: "mike", phone: "608-242-7700", email: "mike@derr.ws")
+    let stephanie = Contact(name: "stephanie", phone: "608-692-6132", email: "steph@derr.ws")
+    let mom = Contact(name: "mom", phone: "608-963-8347", email: "germangirl1988@gmail.com")
+/*
+    func dictionaryFromContacts() -> NSDictionary
+    {
+        let dictionary: [String: String] = ["name": name, "Phone": phone, "email": email]
+        return dictionary
+    }
+*/
+
     
     
     

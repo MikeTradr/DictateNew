@@ -86,6 +86,9 @@ class DataManager: NSObject {
     var reminderArray:[String]          = []
     var reminderTitle: String           = ""
     
+    var weekView:Bool = true                //set defualt to week view true
+
+    
 
     let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
     
@@ -117,6 +120,7 @@ class DataManager: NSObject {
         defaults.setObject(reminderArray, forKey: "reminderArray")
         defaults.setObject(reminderTitle, forKey: "reminderTitle")
         
+        defaults.setObject(weekView, forKey: "defaultWeekView")     //calendar display view
 
         let test   = defaults.objectForKey("reminderArray") as! [String]
         print("119 test: \(test)")

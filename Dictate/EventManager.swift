@@ -1328,8 +1328,6 @@ class EventManager: NSObject {
             source.sourceType.value == EKSourceTypeLocal.value
             }.first
         
-        
-        
         var error:NSError?
         calender.source = eventStore.defaultCalendarForNewEvents.source
         println("p181 Error: \(error)")

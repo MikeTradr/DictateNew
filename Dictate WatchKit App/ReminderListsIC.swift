@@ -245,27 +245,27 @@ class ReminderListsIC: WKInterfaceController {
                 let row = table.rowControllerAtIndex(index) as! ReminderListsTableRC
                 let reminderList = allReminderLists[index]
                 print("w146 reminderList: \(reminderList)")
-  /*
+ // /*
                 //TODO Mike TODO Anil  this crashes watch used to work!!!!!!!
   
                 // get count or items in each reminder list and set the Text Label
                 ReminderManager.sharedInstance.fetchCalendarReminders(reminderList) { (reminders) -> Void in
-                    println("w148 reminders: \(reminders)")
+                    print("w148 reminders: \(reminders)")
                     self.allReminders = reminders as [EKReminder]
                     let numberOfItems = self.allReminders.count
                 
-                    println("w151 numberOfItems: \(numberOfItems)")
+                    print("w151 numberOfItems: \(numberOfItems)")
                     if numberOfItems != 0 {
-                        println("w156 reminder.title: \(reminderList.title)")
-                        println("w157 numberOfItems: \(numberOfItems)")
+                        print("w156 reminder.title: \(reminderList.title)")
+                        print("w157 numberOfItems: \(numberOfItems)")
 
                        row.tableRowLabel.setText("\(reminderList.title) (\(numberOfItems))")
                         
-                        println("w162 here? reminder: \(reminderList)")
+                        print("w162 here? reminder: \(reminderList)")
                     }
 
                 }   // end ReminderManager call
-   */
+ //  */
     
                 row.tableRowLabel.setText("\(reminderList.title)")
                 row.tableRowLabel.setTextColor(UIColor(CGColor: reminderList.CGColor))

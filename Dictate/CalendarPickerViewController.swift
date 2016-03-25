@@ -107,6 +107,7 @@ class CalendarPickerViewController: UIViewController, UIPickerViewDataSource, UI
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         print("p103 row: \(row)")
+        print("p110 calendarArray: \(calendarArray)")
 
         resultLabel.text = calendarArray[row]
         newCalendarName = calendarArray[row]

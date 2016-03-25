@@ -592,7 +592,9 @@ class EventManager: NSObject {
                     //TODO ANIL fix so only get local calendars in this Array
                     
                     // moved to here as never hit above in IF TODO Mike ANIL
-                  //  calendarArray.append(calendarTitle)
+                    
+                    //TODO ANIL need uncomment4ed to get array on iphone, works in simualtor commented!
+                    calendarArray.append(calendarTitle)
 
                 }
                 

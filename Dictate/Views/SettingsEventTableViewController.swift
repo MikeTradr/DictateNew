@@ -53,11 +53,6 @@ class SettingsEventTableViewController: UITableViewController, UITextFieldDelega
         labelDefaultDuration.text = "\(duration)"
         labelDefaultAlert.text = "\(alert)"
         
-        
-        //Looks for single or multiple taps.
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
-        view.addGestureRecognizer(tap)
-        
         tableView.tableFooterView = UIView()    //hides blank cells
 
 

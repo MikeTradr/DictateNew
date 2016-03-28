@@ -257,6 +257,7 @@ class CalendarPickerTableViewController: UITableViewController {
         //update the checkmark for the current row
         let cell = tableView.cellForRowAtIndexPath(indexPath)
         cell?.accessoryType = .Checkmark
+        self.tableView.reloadData()
         
      /*
         if !shouldShowSpecialItems{

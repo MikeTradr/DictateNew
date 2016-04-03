@@ -78,6 +78,8 @@
 		D392FAD61B9B1C7E00678B18 /* SettingsInstructionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D392FAD51B9B1C7E00678B18 /* SettingsInstructionsTableViewController.swift */; };
 		D392FAD81B9B1D3600678B18 /* SettingsKeywordsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D392FAD71B9B1D3600678B18 /* SettingsKeywordsTableViewController.swift */; };
 		D392FADA1B9B1DFD00678B18 /* SettingsGeneralTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D392FAD91B9B1DFD00678B18 /* SettingsGeneralTableViewController.swift */; };
+		D397FDA01CAAF9DB005DD51A /* TimeDiffViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D397FD9F1CAAF9DB005DD51A /* TimeDiffViewController.swift */; };
+		D397FDA21CAB1752005DD51A /* TimeManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D397FDA11CAB1752005DD51A /* TimeManger.swift */; };
 		D39AB89E1BA86D68001C7570 /* CalendarListPickerIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39AB89D1BA86D68001C7570 /* CalendarListPickerIC.swift */; };
 		D3A0F9FC1B69F0BB00F1FEDA /* EventCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A0F9FB1B69F0BB00F1FEDA /* EventCode.swift */; };
 		D3A0F9FD1B69F0BB00F1FEDA /* EventCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A0F9FB1B69F0BB00F1FEDA /* EventCode.swift */; };
@@ -276,6 +278,8 @@
 		D392FAD51B9B1C7E00678B18 /* SettingsInstructionsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsInstructionsTableViewController.swift; path = Views/SettingsInstructionsTableViewController.swift; sourceTree = "<group>"; };
 		D392FAD71B9B1D3600678B18 /* SettingsKeywordsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsKeywordsTableViewController.swift; path = Views/SettingsKeywordsTableViewController.swift; sourceTree = "<group>"; };
 		D392FAD91B9B1DFD00678B18 /* SettingsGeneralTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsGeneralTableViewController.swift; path = Views/SettingsGeneralTableViewController.swift; sourceTree = "<group>"; };
+		D397FD9F1CAAF9DB005DD51A /* TimeDiffViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeDiffViewController.swift; sourceTree = "<group>"; };
+		D397FDA11CAB1752005DD51A /* TimeManger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeManger.swift; sourceTree = "<group>"; };
 		D39AB89D1BA86D68001C7570 /* CalendarListPickerIC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarListPickerIC.swift; sourceTree = "<group>"; };
 		D3A0F9FB1B69F0BB00F1FEDA /* EventCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCode.swift; sourceTree = "<group>"; };
 		D3AD9B531C5D5439006387C4 /* DetailsTableVC_OLD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsTableVC_OLD.swift; sourceTree = "<group>"; };
@@ -516,6 +520,7 @@
 				D3188A861B6E9BF900323DC0 /* vcTest1_OLD.swift */,
 				D33C13BA1B8C1EC900470F8F /* ToDoMenuViewController.swift */,
 				D3188A8A1B6E9C1100323DC0 /* vcTodayTable.swift */,
+				D397FD9F1CAAF9DB005DD51A /* TimeDiffViewController.swift */,
 				ECB862001B77DD4100503C50 /* TodayViewController.h */,
 				ECB862011B77DD4100503C50 /* TodayViewController.m */,
 				ECF2404C1B9DFF7F002BFBAE /* CalendarSelectionViewController.swift */,
@@ -891,6 +896,7 @@
 				ECF818621B84FAB70087ECAD /* ReminderManager.swift */,
 				D3D98AF31BA54D5B00BA1901 /* FavoritesManager.swift */,
 				ECF2404E1BA13786002BFBAE /* DataManager.swift */,
+				D397FDA11CAB1752005DD51A /* TimeManger.swift */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -1152,6 +1158,7 @@
 				D38653F71BAA02F400B8CCBC /* EventManager.swift in Sources */,
 				ECB862021B77DD4100503C50 /* TodayViewController.m in Sources */,
 				ECF240461B9AFBF3002BFBAE /* ReminderEditorViewController.m in Sources */,
+				D397FDA21CAB1752005DD51A /* TimeManger.swift in Sources */,
 				D3BD1BDE1B9F3CF10052A312 /* ReminderPickerTableViewController.swift in Sources */,
 				D392FAD61B9B1C7E00678B18 /* SettingsInstructionsTableViewController.swift in Sources */,
 				ECB8622E1B77DEBD00503C50 /* JTDateHelper.m in Sources */,
@@ -1195,6 +1202,7 @@
 				D32350621B69828900939F03 /* ReminderCode.swift in Sources */,
 				ECB862381B77DEBD00503C50 /* NSDate+CALAddition.m in Sources */,
 				D34451981C8505C5007F3DDD /* CalendarPickerViewController.swift in Sources */,
+				D397FDA01CAAF9DB005DD51A /* TimeDiffViewController.swift in Sources */,
 				D3089C651BA2713B00C58D6D /* SettingsReminderListTableViewCell.swift in Sources */,
 				D3D98AF41BA54D5B00BA1901 /* FavoritesManager.swift in Sources */,
 				ECB8622F1B77DEBD00503C50 /* JTCalendarDelegateManager.m in Sources */,

@@ -145,6 +145,25 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         return UIModalPresentationStyle.None
     }
     
+    func resetToDefaults(){
+        labels = ["Input", "Type", "Day","Time", "Cell#", "Start", "End", "Title", "Cal.", "Alert", "Repeat"]
+        labelInput = "Input"
+        labelType = "Type"
+        labelDay = "Day"
+        labelTime = "Time"
+        labelCell = "Cell#"
+        labelStart = "Start"
+        labelEnd = "End"
+        labelTitle = "Title"
+        labelCal = "Cal."
+        labelAlert = "Alert"
+        labelRepeat = "Repeat"
+        
+        datePickerHeight = 0.0
+        
+    }
+    
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if segue.identifier == "showCalPicker"
@@ -1188,6 +1207,9 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
             self.tabBarController?.selectedIndex = 2        //go back to main Dictate start screen
             
         }
+        
+        resetToDefaults()   //reset labels and all to defaults
+        
     }   //end ButtonCreate
     
     
@@ -1216,6 +1238,8 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         resultCalendar.text = calendarName
  */
         self.tabBarController?.selectedIndex = 2            //go back to main Dictate start screen
+        
+        resetToDefaults()   //reset labels and all to defaults
         
     }   //end buttonCancel
     

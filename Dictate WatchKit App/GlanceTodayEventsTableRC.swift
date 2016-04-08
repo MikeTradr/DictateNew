@@ -18,6 +18,7 @@ class GlanceTodayEventsTableRC: NSObject {
     
     @IBOutlet weak var labelEndTime: WKInterfaceLabel!
     
+    @IBOutlet var labelTimeUntil: WKInterfaceLabel!
     @IBOutlet weak var labelEventLocation: WKInterfaceLabel!
     
     @IBOutlet var imageVertBar: WKInterfaceImage!

@@ -22,7 +22,6 @@ class GlanceController: WKInterfaceController {
     
     @IBOutlet var labelDate: WKInterfaceLabel!
     @IBOutlet var labelNow: WKInterfaceLabel!
-    @IBOutlet var labelinTime: WKInterfaceLabel!
     @IBOutlet var table: WKInterfaceTable!
     
     //---- funcs below here -----------------------------------------------------------
@@ -184,22 +183,13 @@ class GlanceController: WKInterfaceController {
             let timeUntil = TimeManger.sharedInstance.timeInterval(item.startDate)
             print("w185 timeUntil: \(timeUntil)")
             
-            if index == 0 {
-                let timeUntil = TimeManger.sharedInstance.timeInterval(item.startDate)
-                print("w186 timeUntil: \(timeUntil)")
-                labelinTime.setText(timeUntil)
-                if timeUntil == "" {    //none today so hide
-                    labelinTime.setHidden(true)
-                } else {
-                    labelinTime.setHidden(false)
-                }
-            }
-            
             
             row.labelEventTitle.setText(item.title)
             row.labelEventLocation.setText(item.location)
             row.labelStartTime.setText(startTime)
             row.labelEndTime.setText(endTimeDash)
+            row.labelTimeUntil.setText("\(timeUntil)  ")
+
             
             //row.labelEventTitle.setTextColor(UIColor(CGColor: item.calendar.CGColor))
             // row.labelStartTime.setTextColor(UIColor(CGColor: item.calendar.CGColor))

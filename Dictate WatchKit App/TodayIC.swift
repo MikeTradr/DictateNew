@@ -23,10 +23,10 @@ class TodayIC: WKInterfaceController {
     var today:NSDate          = NSDate()
     var todayPlusSeven:NSDate = NSDate()
     var allEvents: Array<EKEvent> = []
+    var timeUnitl:String = ""
   
     @IBOutlet weak var labelDate: WKInterfaceLabel!
     @IBOutlet weak var table: WKInterfaceTable!
-    
     
 //---- funcs below here -----------------------------------------------------------
     
@@ -136,10 +136,17 @@ class TodayIC: WKInterfaceController {
             let item = allEvents[index]
             
             let dateFormatter = NSDateFormatter()
-            dateFormatter.dateFormat = "E, MMM d"
             
-            let dateString = dateFormatter.stringFromDate(item.startDate)
-            self.labelDate.setText(dateString)
+            // TODO ANIL Mike make a sub section to tabel for EACH date!
+            if index == 0 {  //show date of first item.
+                let timeUntil = TimeManger.sharedInstance.timeInterval(item.startDate)
+                print("w186 timeUntil: \(timeUntil)")
+   
+                dateFormatter.dateFormat = "E, MMM d"
+                let dateString = dateFormatter.stringFromDate(item.startDate)
+                self.labelDate.setText(dateString)
+               // self.labelTimeUntil.setText(timeUntil)
+            }
             
             dateFormatter.dateFormat = "h:mm a"
             
@@ -152,12 +159,12 @@ class TodayIC: WKInterfaceController {
 
             var endTimeDash = "- \(endTime)"
             
+             let timeUntil = TimeManger.sharedInstance.timeInterval(item.startDate)
 
             
             if item.allDay {     // if allDay bool is true
                 startTime = ""
                 endTimeDash = "All Day"
-
             }
             
             //TODO Mike TODO Anil All day event spanning multiple days does not show up on multiple days
@@ -167,6 +174,7 @@ class TodayIC: WKInterfaceController {
             row.labelEventLocation.setText(item.location)
             row.labelStartTime.setText(startTime)
             row.labelEndTime.setText(endTimeDash)
+            row.labelTimeUntil.setText("\(timeUntil)  ")
 
             //row.labelEventTitle.setTextColor(UIColor(CGColor: item.calendar.CGColor))
            // row.labelStartTime.setTextColor(UIColor(CGColor: item.calendar.CGColor))

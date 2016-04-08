@@ -270,7 +270,7 @@
 		D35588BD1BA938A00052892F /* ReminderItemsTableRC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderItemsTableRC.swift; sourceTree = "<group>"; };
 		D355D97B1BA7DD3F00DADD72 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		D369819C1C7BB05400ED0AD8 /* DatePopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePopupViewController.swift; sourceTree = "<group>"; };
-		D36DBDD41BD6DA870076A5C2 /* GlanceTodayEventsTableRC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlanceTodayEventsTableRC.swift; sourceTree = "<group>"; };
+		D36DBDD41BD6DA870076A5C2 /* GlanceTodayEventsTableRC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GlanceTodayEventsTableRC.swift; path = "../Dictate WatchKit App/GlanceTodayEventsTableRC.swift"; sourceTree = "<group>"; };
 		D3711F041BB04E0E00D19AE9 /* TestIC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestIC.swift; sourceTree = "<group>"; };
 		D3795E791B8DF927009D3DB5 /* SettingsEventTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsEventTableViewController.swift; path = Views/SettingsEventTableViewController.swift; sourceTree = "<group>"; };
 		D37CFBF41BD95F130005320D /* NuanceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NuanceTest.swift; sourceTree = "<group>"; };
@@ -668,7 +668,6 @@
 				D35588BD1BA938A00052892F /* ReminderItemsTableRC.swift */,
 				D3E810831B70F4BC004AE5A9 /* TodayIC.swift */,
 				D3DA3ACD1BAE73F4002FDD21 /* TodayEventsTableRC.swift */,
-				D36DBDD41BD6DA870076A5C2 /* GlanceTodayEventsTableRC.swift */,
 				D31E1DB61BAEEA1700BC7B99 /* EventDetailsIC.swift */,
 				D31E1DB81BAEEA2A00BC7B99 /* EditEventDetailsIC.swift */,
 				D3BE2D2A1BB126EA00376686 /* EventEditNotesIC.swift */,
@@ -750,6 +749,7 @@
 				D3E810861B70F4D6004AE5A9 /* WKControllers */,
 				D3F8AD151B696FCD0070C097 /* NotificationController.swift */,
 				D3F8AD171B696FCD0070C097 /* GlanceController.swift */,
+				D36DBDD41BD6DA870076A5C2 /* GlanceTodayEventsTableRC.swift */,
 				D3F8AD191B696FCD0070C097 /* Images.xcassets */,
 				D3F8AD101B696FCD0070C097 /* Supporting Files */,
 			);

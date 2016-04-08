@@ -275,9 +275,13 @@
                     <items>
                         <group width="1" alignment="left" layout="vertical" id="H9N-BU-ybb" userLabel="DayGroup">
                             <items>
-                                <label alignment="left" text="Day" id="fKE-Cf-lN2" userLabel="Day">
-                                    <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                </label>
+                                <group width="1" alignment="left" id="nyg-1J-Jp9">
+                                    <items>
+                                        <label alignment="left" text="Day" id="fKE-Cf-lN2" userLabel="Day">
+                                            <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                    </items>
+                                </group>
                                 <group width="1" alignment="left" id="lbu-fN-cdR">
                                     <items>
                                         <table alignment="left" id="JlU-XV-yEV">
@@ -298,6 +302,10 @@
                                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                         <fontDescription key="font" type="boldSystem" pointSize="15"/>
                                                                     </label>
+                                                                    <label alignment="left" text="Location" numberOfLines="2" id="W8d-rr-8G3" userLabel="Location">
+                                                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                                        <fontDescription key="font" type="system" pointSize="12"/>
+                                                                    </label>
                                                                     <group width="1" alignment="left" id="lCH-Fz-Jam">
                                                                         <items>
                                                                             <label alignment="left" text="Label" id="syo-w7-1UG" userLabel="startTime">
@@ -308,12 +316,12 @@
                                                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                                                 <fontDescription key="font" type="system" pointSize="12"/>
                                                                             </label>
+                                                                            <label alignment="right" text="timeUntil" id="xEn-h1-yDb" userLabel="timeUntil">
+                                                                                <color key="textColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                                                <fontDescription key="font" type="system" pointSize="12"/>
+                                                                            </label>
                                                                         </items>
                                                                     </group>
-                                                                    <label alignment="left" text="Location" numberOfLines="2" id="W8d-rr-8G3" userLabel="Location">
-                                                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                                        <fontDescription key="font" type="system" pointSize="12"/>
-                                                                    </label>
                                                                 </items>
                                                             </group>
                                                         </items>
@@ -327,6 +335,7 @@
                                                         <outlet property="labelEventLocation" destination="W8d-rr-8G3" id="1iz-0X-0Xp"/>
                                                         <outlet property="labelEventTitle" destination="qqB-02-T53" id="8YA-eg-Ut8"/>
                                                         <outlet property="labelStartTime" destination="syo-w7-1UG" id="Xec-ZM-Rs0"/>
+                                                        <outlet property="labelTimeUntil" destination="xEn-h1-yDb" id="6AQ-lO-axC"/>
                                                         <outlet property="verticalBar" destination="5Xm-nW-kBb" id="Fqd-dE-WrF"/>
                                                         <segue destination="zTX-KH-Wk9" kind="modal" identifier="EventDetails" id="z4s-L4-uWl"/>
                                                     </connections>
@@ -378,7 +387,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="242" y="452"/>
+            <point key="canvasLocation" x="250" y="452"/>
         </scene>
         <!--EventDetails-->
         <scene sceneID="ZzI-hs-W5w">
@@ -604,7 +613,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="791" y="457"/>
+            <point key="canvasLocation" x="855" y="429.25"/>
         </scene>
         <!--TestIC-->
         <scene sceneID="IWj-wO-q9v">
@@ -1063,10 +1072,6 @@
                         </group>
                         <group alignment="left" layout="vertical" id="uCw-4Q-Ouw">
                             <items>
-                                <label alignment="left" text="timeUntil" id="U9O-iu-o5P">
-                                    <color key="textColor" red="0.50196081400000003" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <fontDescription key="font" type="system" pointSize="17"/>
-                                </label>
                                 <table alignment="left" id="E2V-zD-T4H">
                                     <items>
                                         <tableRow identifier="tableRow" id="GeV-U8-XbH" customClass="GlanceTodayEventsTableRC" customModule="Dictate_WatchKit_Extension">
@@ -1085,6 +1090,10 @@
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <fontDescription key="font" type="boldSystem" pointSize="15"/>
                                                             </label>
+                                                            <label alignment="left" text="Location" numberOfLines="2" id="BvB-N6-Cyw" userLabel="Location">
+                                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <fontDescription key="font" type="system" pointSize="12"/>
+                                                            </label>
                                                             <group width="1" alignment="left" id="g01-wr-CCo">
                                                                 <items>
                                                                     <label alignment="left" text="Label" id="Cfj-Wb-5oR" userLabel="startTime">
@@ -1095,12 +1104,12 @@
                                                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                                         <fontDescription key="font" type="system" pointSize="12"/>
                                                                     </label>
+                                                                    <label alignment="right" text="timeUntil" id="X9U-Ke-9v6" userLabel="timeUntil">
+                                                                        <color key="textColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                                        <fontDescription key="font" type="system" pointSize="12"/>
+                                                                    </label>
                                                                 </items>
                                                             </group>
-                                                            <label alignment="left" text="Location" numberOfLines="2" id="BvB-N6-Cyw" userLabel="Location">
-                                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                                <fontDescription key="font" type="system" pointSize="12"/>
-                                                            </label>
                                                         </items>
                                                     </group>
                                                 </items>
@@ -1114,6 +1123,7 @@
                                                 <outlet property="labelEventLocation" destination="BvB-N6-Cyw" id="gBT-jM-s5v"/>
                                                 <outlet property="labelEventTitle" destination="9Kl-UA-QXL" id="cdw-J0-xvC"/>
                                                 <outlet property="labelStartTime" destination="Cfj-Wb-5oR" id="MQL-oU-cRa"/>
+                                                <outlet property="labelTimeUntil" destination="X9U-Ke-9v6" id="WSv-Bd-MEw"/>
                                                 <outlet property="verticalBar" destination="hFA-ub-FUs" id="4cP-ou-3WY"/>
                                             </connections>
                                         </tableRow>
@@ -1126,7 +1136,6 @@
                     <connections>
                         <outlet property="labelDate" destination="uQR-4p-Zzg" id="JOR-8h-KfD"/>
                         <outlet property="labelNow" destination="zzb-hL-zmo" id="CzU-i3-DD5"/>
-                        <outlet property="labelinTime" destination="U9O-iu-o5P" id="XDp-T9-qx5"/>
                         <outlet property="table" destination="E2V-zD-T4H" id="A0A-Vl-pUR"/>
                     </connections>
                 </glanceController>
@@ -1774,7 +1783,7 @@
                     </items>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="1078" y="572"/>
+            <point key="canvasLocation" x="1123" y="652"/>
         </scene>
         <!--EditNotes-->
         <scene sceneID="0HS-Bf-AsL">
@@ -1887,7 +1896,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="904" y="845.5"/>
+            <point key="canvasLocation" x="850" y="952.75"/>
         </scene>
         <!--SetCalendar-->
         <scene sceneID="2L3-SE-iPx">
@@ -1971,7 +1980,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="1041" y="340"/>
+            <point key="canvasLocation" x="1123" y="338"/>
         </scene>
     </scenes>
     <color key="tintColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>

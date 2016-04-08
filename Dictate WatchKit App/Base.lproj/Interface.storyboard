@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ei9-cN-Wbe">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="9515"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="10032"/>
     </dependencies>
     <scenes>
         <!--Main-->
@@ -266,7 +266,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="188" y="477"/>
+            <point key="canvasLocation" x="-13" y="601.5"/>
         </scene>
         <!--Events-->
         <scene sceneID="sS8-Mf-H5Q">
@@ -374,10 +374,11 @@
                     <connections>
                         <outlet property="labelDate" destination="fKE-Cf-lN2" id="3oo-F6-XNZ"/>
                         <outlet property="table" destination="JlU-XV-yEV" id="jJR-AO-0Ge"/>
+                        <segue destination="ei9-cN-Wbe" kind="relationship" relationship="nextPage" id="wU0-zk-n4B"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="422" y="477"/>
+            <point key="canvasLocation" x="242" y="452"/>
         </scene>
         <!--EventDetails-->
         <scene sceneID="ZzI-hs-W5w">
@@ -818,7 +819,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="-267" y="477"/>
+            <point key="canvasLocation" x="-330" y="536"/>
         </scene>
         <!--Reminders-->
         <scene sceneID="peT-G5-wcJ">
@@ -1023,11 +1024,10 @@
                         <outlet property="table" destination="ZnV-Oh-HUO" id="CzF-Vk-fFJ"/>
                         <outlet property="table2" destination="hiz-6C-p1R" id="da6-iQ-1mS"/>
                         <outlet property="verticalBar2" destination="reg-45-brd" id="xkG-qN-S6M"/>
-                        <segue destination="AgC-eL-Hgc" kind="relationship" relationship="nextPage" id="XiM-8F-4nJ"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="-50" y="476.5"/>
+            <point key="canvasLocation" x="492" y="489.5"/>
         </scene>
         <!--Glance Interface Controller-->
         <scene sceneID="BOz-TT-tkC">
@@ -1059,13 +1059,13 @@
                                     </items>
                                 </group>
                             </items>
-                            <edgeInsets key="margins" left="4" right="0.0" top="0.0" bottom="0.0"/>
+                            <edgeInsets key="margins" left="4" right="0.0" top="0.0" bottom="4"/>
                         </group>
                         <group alignment="left" layout="vertical" id="uCw-4Q-Ouw">
                             <items>
-                                <label alignment="left" text="in 30 minutes" id="U9O-iu-o5P">
+                                <label alignment="left" text="timeUntil" id="U9O-iu-o5P">
                                     <color key="textColor" red="0.50196081400000003" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <fontDescription key="font" type="system" pointSize="20"/>
+                                    <fontDescription key="font" type="system" pointSize="17"/>
                                 </label>
                                 <table alignment="left" id="E2V-zD-T4H">
                                     <items>
@@ -1131,7 +1131,7 @@
                     </connections>
                 </glanceController>
             </objects>
-            <point key="canvasLocation" x="394" y="874"/>
+            <point key="canvasLocation" x="349" y="820"/>
         </scene>
         <!--Static Notification Interface Controller-->
         <scene sceneID="AEw-b0-oYE">
@@ -1147,14 +1147,14 @@
                     </connections>
                 </notificationController>
             </objects>
-            <point key="canvasLocation" x="235" y="1001"/>
+            <point key="canvasLocation" x="188" y="1085"/>
         </scene>
         <!--Notification Controller-->
         <scene sceneID="KIl-fV-djm">
             <objects>
                 <controller id="gdX-wl-uQE" customClass="NotificationController" customModule="Dictate_WatchKit_App" customModuleProvider="target"/>
             </objects>
-            <point key="canvasLocation" x="553" y="1001"/>
+            <point key="canvasLocation" x="513" y="1085"/>
         </scene>
         <!--CalendarPicker-->
         <scene sceneID="ZR1-jQ-hZ5">
@@ -1340,7 +1340,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="31" y="734"/>
+            <point key="canvasLocation" x="-267" y="852"/>
         </scene>
         <!--ShowCalendars-->
         <scene sceneID="kOf-kE-YIt">

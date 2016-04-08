@@ -134,7 +134,7 @@ class GlanceController: WKInterfaceController {
         loadTableData()
         
         let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "h:m a"
+        dateFormatter.dateFormat = "h:mm a"
         let now = dateFormatter.stringFromDate(today)   //set to today date for now
         self.labelNow.setText(now)
         
@@ -180,6 +180,20 @@ class GlanceController: WKInterfaceController {
             }
             
             //TODO Mike TODO Anil All day event spanning multiple days does not show up on multiple days
+            
+            let timeUntil = TimeManger.sharedInstance.timeInterval(item.startDate)
+            print("w185 timeUntil: \(timeUntil)")
+            
+            if index == 0 {
+                let timeUntil = TimeManger.sharedInstance.timeInterval(item.startDate)
+                print("w186 timeUntil: \(timeUntil)")
+                labelinTime.setText(timeUntil)
+                if timeUntil == "" {    //none today so hide
+                    labelinTime.setHidden(true)
+                } else {
+                    labelinTime.setHidden(false)
+                }
+            }
             
             
             row.labelEventTitle.setText(item.title)

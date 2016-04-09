@@ -334,6 +334,7 @@
                                                     </group>
                                                     <connections>
                                                         <outlet property="groupEvent" destination="p99-Tg-p2Y" id="HGP-YW-wyH"/>
+                                                        <outlet property="groupTime" destination="lCH-Fz-Jam" id="Yma-zZ-TPy"/>
                                                         <outlet property="imageVertBar" destination="6kb-fI-hQm" id="Qb4-XV-xoZ"/>
                                                         <outlet property="labelEndTime" destination="Lmg-j4-p9D" id="PeW-b3-BG6"/>
                                                         <outlet property="labelEventLocation" destination="W8d-rr-8G3" id="1iz-0X-0Xp"/>
@@ -1105,6 +1106,14 @@
                                                                         <color key="textColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <fontDescription key="font" type="system" weight="medium" pointSize="12"/>
                                                                     </label>
+                                                                    <label alignment="left" text="Label" id="lgG-bf-bC7">
+                                                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                                        <fontDescription key="font" type="system" pointSize="12"/>
+                                                                    </label>
+                                                                    <label alignment="right" text="timeUntil" id="AXP-tM-keN">
+                                                                        <color key="textColor" red="0.50196081400000003" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                                        <fontDescription key="font" type="system" pointSize="12"/>
+                                                                    </label>
                                                                 </items>
                                                             </group>
                                                         </items>
@@ -1115,10 +1124,13 @@
                                             </group>
                                             <connections>
                                                 <outlet property="groupEvent" destination="rN0-kI-qxT" id="0UW-w2-068"/>
+                                                <outlet property="groupTime" destination="g01-wr-CCo" id="7ER-1Z-OCB"/>
                                                 <outlet property="imageVertBar" destination="IpQ-5S-NdK" id="LHJ-qU-FFc"/>
+                                                <outlet property="labelEndTime" destination="lgG-bf-bC7" id="bJc-sB-Xot"/>
                                                 <outlet property="labelEventLocation" destination="BvB-N6-Cyw" id="gBT-jM-s5v"/>
                                                 <outlet property="labelEventTitle" destination="9Kl-UA-QXL" id="cdw-J0-xvC"/>
                                                 <outlet property="labelStartTime" destination="Cfj-Wb-5oR" id="MQL-oU-cRa"/>
+                                                <outlet property="labelTimeUntil" destination="AXP-tM-keN" id="ohY-Eo-F54"/>
                                                 <outlet property="verticalBar" destination="hFA-ub-FUs" id="4cP-ou-3WY"/>
                                             </connections>
                                         </tableRow>

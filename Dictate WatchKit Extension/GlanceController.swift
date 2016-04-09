@@ -13,16 +13,20 @@ class GlanceController: WKInterfaceController {
     
     let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
     
-    var showCalendarsView:Bool = true
-    var checked:Bool = false
-    var eventID:String = ""
-    var today:NSDate          = NSDate()
-    var todayPlusSeven:NSDate = NSDate()
+    var showCalendarsView:Bool  = true
+    var checked:Bool            = false
+    var eventID:String          = ""
+    var today:NSDate            = NSDate()      //current time
+    var now:NSDate              = NSDate()      //current time, same as today
+    var todayPlusSeven:NSDate   = NSDate()
     var allEvents: Array<EKEvent> = []
+    var timeUntil:String        = ""
     
     @IBOutlet var labelDate: WKInterfaceLabel!
     @IBOutlet var labelNow: WKInterfaceLabel!
     @IBOutlet var table: WKInterfaceTable!
+    
+    let dateFormatter = NSDateFormatter()
     
     //---- funcs below here -----------------------------------------------------------
     
@@ -152,28 +156,43 @@ class GlanceController: WKInterfaceController {
             let row = table.rowControllerAtIndex(index) as! GlanceTodayEventsTableRC
             let item = allEvents[index]
             
-            let dateFormatter = NSDateFormatter()
-            
             dateFormatter.dateFormat = "h:mm a"
             
             let startTimeA = dateFormatter.stringFromDate(item.startDate)
             var startTime = startTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
             NSLog("%@ w137", startTime)
             
+            dateFormatter.dateFormat = "h:mm"
+            
             let endTimeA = dateFormatter.stringFromDate(item.endDate)
             let endTime = endTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
             
             var endTimeDash = "- \(endTime)"
             
+            timeUntil = TimeManger.sharedInstance.timeInterval(item.startDate)
+            
             if item.allDay {     // if allDay bool is true
-                startTime = ""
-                endTimeDash = "All Day"
-                
+                row.groupTime.setHidden(true)
+            }
+            
+            let startTimeItem = item.startDate
+            let timeUntilStart = startTimeItem.timeIntervalSinceDate(now)
+            //print("w187 timeUntilStart: \(timeUntilStart)")
+            
+            let endTimeItem = item.endDate
+            let timeUntilEnd = endTimeItem.timeIntervalSinceDate(now)
+            //print("w192 timeUntilEnd: \(timeUntilEnd)")
+            
+            if ((timeUntilStart <= 0) && (timeUntilEnd >= 0)) {
+                timeUntil = "Now"
+                let neonRed = UIColor(red: 255, green: 51, blue: 0)
+                row.labelTimeUntil.setTextColor(neonRed)
+            } else {
+                row.labelTimeUntil.setTextColor(UIColor.greenColor())
             }
             
             //TODO Mike TODO Anil All day event spanning multiple days does not show up on multiple days
             
-            let timeUntil = TimeManger.sharedInstance.timeInterval(item.startDate)
             print("w185 timeUntil: \(timeUntil)")
             
             

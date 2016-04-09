@@ -26,7 +26,7 @@ class TodayIC: WKInterfaceController {
     var now:NSDate              = NSDate()      //current time, same as today
     var todayPlusSeven:NSDate   = NSDate()
     var allEvents: Array<EKEvent> = []
-    var timeUnitl:String        = ""
+    var timeUntil:String        = ""
   
     @IBOutlet weak var labelDate: WKInterfaceLabel!
     @IBOutlet var labelTime: WKInterfaceLabel!
@@ -181,8 +181,7 @@ class TodayIC: WKInterfaceController {
             var timeUntil = TimeManger.sharedInstance.timeInterval(item.startDate)
             
             if item.allDay {     // if allDay bool is true
-                startTime = ""
-                endTimeDash = "All Day"
+                row.groupTime.setHidden(true)
             }
             
             let startTimeItem = item.startDate

@@ -5,6 +5,8 @@
 //  Created by Mike Derr on 8/4/15.
 //  Copyright (c) 2015 ThatSoft.com. All rights reserved.
 //
+//  040816 Mike  added timeUntil to table rows
+//
 
 import WatchKit
 import Foundation
@@ -17,16 +19,21 @@ class TodayIC: WKInterfaceController {
     
     let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
     
-    var showCalendarsView:Bool = true
-    var checked:Bool = false
-    var eventID:String = ""
-    var today:NSDate          = NSDate()
-    var todayPlusSeven:NSDate = NSDate()
+    var showCalendarsView:Bool  = true
+    var checked:Bool            = false
+    var eventID:String          = ""
+    var today:NSDate            = NSDate()      //current time
+    var now:NSDate              = NSDate()      //current time, same as today
+    var todayPlusSeven:NSDate   = NSDate()
     var allEvents: Array<EKEvent> = []
-    var timeUnitl:String = ""
+    var timeUnitl:String        = ""
   
     @IBOutlet weak var labelDate: WKInterfaceLabel!
+    @IBOutlet var labelTime: WKInterfaceLabel!
     @IBOutlet weak var table: WKInterfaceTable!
+    
+    let dateFormatter = NSDateFormatter()
+
     
 //---- funcs below here -----------------------------------------------------------
     
@@ -60,7 +67,11 @@ class TodayIC: WKInterfaceController {
 //---- end Menu functions ----------------------------------------
     
 
-    
+  /*
+     override func didAppear() {
+        
+    }
+   */
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         // Configure interface objects here.
@@ -99,6 +110,12 @@ class TodayIC: WKInterfaceController {
         fetchEvents()
         
         self.loadTableData()
+        
+        dateFormatter.dateFormat = "HH:mm"
+        let nowString = dateFormatter.stringFromDate(today)
+        self.labelTime.setText(nowString)
+        
+        
     }
     
     override func willActivate() {
@@ -121,6 +138,8 @@ class TodayIC: WKInterfaceController {
         
         loadTableData()
         
+      
+       
     }
     
     func loadTableData () {
@@ -134,8 +153,6 @@ class TodayIC: WKInterfaceController {
             
             let row = table.rowControllerAtIndex(index) as! TodayEventsTableRC
             let item = allEvents[index]
-            
-            let dateFormatter = NSDateFormatter()
             
             // TODO ANIL Mike make a sub section to tabel for EACH date!
             if index == 0 {  //show date of first item.
@@ -153,19 +170,38 @@ class TodayIC: WKInterfaceController {
             let startTimeA = dateFormatter.stringFromDate(item.startDate)
             var startTime = startTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
             NSLog("%@ w137", startTime)
+            
+            dateFormatter.dateFormat = "h:mm"
 
             let endTimeA = dateFormatter.stringFromDate(item.endDate)
             let endTime = endTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
 
             var endTimeDash = "- \(endTime)"
             
-             let timeUntil = TimeManger.sharedInstance.timeInterval(item.startDate)
-
+            var timeUntil = TimeManger.sharedInstance.timeInterval(item.startDate)
             
             if item.allDay {     // if allDay bool is true
                 startTime = ""
                 endTimeDash = "All Day"
             }
+            
+            let startTimeItem = item.startDate
+            let timeUntilStart = startTimeItem.timeIntervalSinceDate(now)
+            //print("w187 timeUntilStart: \(timeUntilStart)")
+            
+            let endTimeItem = item.endDate
+            let timeUntilEnd = endTimeItem.timeIntervalSinceDate(now)
+            //print("w192 timeUntilEnd: \(timeUntilEnd)")
+
+            if ((timeUntilStart <= 0) && (timeUntilEnd >= 0)) {
+                timeUntil = "Now"
+                let neonRed = UIColor(red: 255, green: 51, blue: 0)
+                row.labelTimeUntil.setTextColor(neonRed)
+            } else {
+                row.labelTimeUntil.setTextColor(UIColor.greenColor())
+            }
+            
+            
             
             //TODO Mike TODO Anil All day event spanning multiple days does not show up on multiple days
             

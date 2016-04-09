@@ -45,7 +45,18 @@ class GlanceController: WKInterfaceController {
         
         
     }
-    
+ /*
+     func didAppear () {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "h:mm a"
+        let now = dateFormatter.stringFromDate(today)   //set to today date for now
+        
+        let watchBlue = UIColor(red: 102, green: 178, blue: 255, alpha: 1)
+        
+        self.labelNow.setTextColor(watchBlue)
+        self.labelNow.setText(now)
+    }
+ */   
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         
@@ -61,24 +72,6 @@ class GlanceController: WKInterfaceController {
         let dateString = dateFormatter.stringFromDate(today)   //set to today date for now
         self.labelDate.setText(dateString)
         self.labelDate.setTextColor(UIColor.yellowColor())
- /*
-        dateFormatter.dateFormat = "h:m a"
-        let now = dateFormatter.stringFromDate(today)   //set to today date for now
-        self.labelNow.setText(now)
-        
-        let watchBlue = UIColor(red: 102, green: 178, blue: 255, alpha: 1)
-
-        self.labelNow.setTextColor(watchBlue)
-
-  */
-        
-        
-        
-        
-        
-        //  var sceneTitle:String = (context as? String)!
-        //  self.setTitle("«\(sceneTitle)")
-        self.setTitle("Events")
         
         //get Access to Reminders
         NSLog("%@ w60 appDelegate", self)
@@ -99,26 +92,26 @@ class GlanceController: WKInterfaceController {
                 print("w75 Events granted: \(granted)")
             }
         })
-        
+     /*
         print("w65 context: \(context)")
         // showListsView = true
         self.setTitle("Events")
-        
+      */
         fetchEvents()
         
         self.loadTableData()
-        
+    
     }
     
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
-        NSLog("%@ w78 TodayIC will activate", self)
-        print("w79 TodayIC willActivate")
+        NSLog("%@ w78 GlanceController will activate", self)
+        print("w79 GlanceController willActivate")
         
         //  ReminderManager.sharedInstance.createNewReminderList("To Code Tomorrow", items: ["item 1","item 2", "This is item 3 hehe"])   //added to make reminder for testing.
         
-        print("w83 in ShowIC willActivate")
+        print("w83 in GlanceController willActivate")
         
         //self.reminderItemsGroup.setHidden(false)  //Hide lower table2
         
@@ -135,11 +128,11 @@ class GlanceController: WKInterfaceController {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "h:mm a"
         let now = dateFormatter.stringFromDate(today)   //set to today date for now
-        self.labelNow.setText(now)
         
         let watchBlue = UIColor(red: 102, green: 178, blue: 255, alpha: 1)
         
         self.labelNow.setTextColor(watchBlue)
+        self.labelNow.setText(now)
         
     }
     
@@ -216,7 +209,8 @@ class GlanceController: WKInterfaceController {
             
             
             
-        }
+        }   // for loop
+        
     }   //end loadTableData
     
     override func didDeactivate() {

@@ -111,10 +111,9 @@ class TodayIC: WKInterfaceController {
         
         self.loadTableData()
         
-        dateFormatter.dateFormat = "HH:mm"
+        dateFormatter.dateFormat = "h:mm"
         let nowString = dateFormatter.stringFromDate(today)
         self.labelTime.setText(nowString)
-        
         
     }
     

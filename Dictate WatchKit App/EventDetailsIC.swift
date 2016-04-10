@@ -21,12 +21,18 @@ class EventDetailsIC: WKInterfaceController {
 
     var event:EKEvent = EKEvent(eventStore: EKEventStore())
     var sendID:String = ""
-
-
     
+    var now:NSDate              = NSDate()      //current time, same as today
+    var timeUntil:String        = ""
+    
+    let dateFormatter = NSDateFormatter()
+ 
     @IBOutlet weak var labelEventTitle: WKInterfaceLabel!
     @IBOutlet weak var labelStartTime: WKInterfaceLabel!
     @IBOutlet weak var labelEndTime: WKInterfaceLabel!
+    
+    @IBOutlet var labelTimeUntil: WKInterfaceLabel!
+    
     @IBOutlet weak var verticalBar: WKInterfaceGroup!
     @IBOutlet weak var calendarName: WKInterfaceLabel!
     @IBOutlet weak var labelNotes: WKInterfaceLabel!
@@ -91,7 +97,6 @@ class EventDetailsIC: WKInterfaceController {
         
         print("w81 event: \(event)")
         
-        let dateFormatter = NSDateFormatter()
         let dateString = dateFormatter.stringFromDate(event.startDate)
         
         dateFormatter.dateFormat = "h:mm a"
@@ -99,16 +104,38 @@ class EventDetailsIC: WKInterfaceController {
         let startTimeA = dateFormatter.stringFromDate(event.startDate)
         var startTime = startTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
         
+        dateFormatter.dateFormat = "h:mm"
+        
         let endTimeA = dateFormatter.stringFromDate(event.endDate)
         let endTime = endTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
         
-        var endTimeDash = "- \(endTime)"
+        var endTimeDash = "-\(endTime)"
         
+        timeUntil = TimeManger.sharedInstance.timeInterval(event.startDate)
+        print("w115 timeUntil: \(timeUntil)")
         
         if event.allDay {   // if allDay bool is true
             startTime = ""
             endTimeDash = "All Day"
+            self.labelTimeUntil.setHidden(true)
         }
+        
+        let startTimeItem = event.startDate
+        let timeUntilStart = startTimeItem.timeIntervalSinceDate(now)
+        print("w187 timeUntilStart: \(timeUntilStart)")
+        
+        let endTimeItem = event.endDate
+        let timeUntilEnd = endTimeItem.timeIntervalSinceDate(now)
+        print("w192 timeUntilEnd: \(timeUntilEnd)")
+        
+        if ((timeUntilStart <= 0) && (timeUntilEnd >= 0)) {
+            timeUntil = "Now"
+            let neonRed = UIColor(red: 255, green: 51, blue: 0)
+            self.labelTimeUntil.setTextColor(neonRed)
+        } else {
+            self.labelTimeUntil.setTextColor(UIColor.greenColor())
+        }
+
         
         
         
@@ -116,6 +143,7 @@ class EventDetailsIC: WKInterfaceController {
         self.labelStartTime.setText(startTime)
         self.labelEndTime.setText(endTimeDash)
         self.labelLocation.setText(event.location)
+        self.labelTimeUntil.setText(timeUntil)
         
         self.labelStartTime.setTextColor(UIColor.whiteColor().colorWithAlphaComponent(0.8))
         

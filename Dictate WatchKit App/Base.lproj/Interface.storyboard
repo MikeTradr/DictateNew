@@ -1069,6 +1069,7 @@
                                                     <items>
                                                         <label alignment="left" text="     " id="mYi-bT-3dY"/>
                                                         <label alignment="left" text="now" id="zzb-hL-zmo">
+                                                            <color key="textColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                             <fontDescription key="font" type="system" pointSize="17"/>
                                                         </label>
                                                     </items>

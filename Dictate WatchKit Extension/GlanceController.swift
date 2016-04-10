@@ -22,11 +22,15 @@ class GlanceController: WKInterfaceController {
     var allEvents: Array<EKEvent> = []
     var timeUntil:String        = ""
     
+    var timer:NSTimer!
+    
     @IBOutlet var labelDate: WKInterfaceLabel!
     @IBOutlet var labelNow: WKInterfaceLabel!
     @IBOutlet var table: WKInterfaceTable!
     
     let dateFormatter = NSDateFormatter()
+    
+    
     
     //---- funcs below here -----------------------------------------------------------
     
@@ -45,10 +49,20 @@ class GlanceController: WKInterfaceController {
         })
         
         print("w56 self.allEvents: \(self.allEvents)")
-        
-        
-        
+ 
     }
+    
+    func updateScreen(){
+        dateFormatter.dateFormat = "h:mm a"
+        let nowString = dateFormatter.stringFromDate(today)   //set to today date for now
+        
+       // let watchBlue = UIColor(red: 102, green: 178, blue: 255, alpha: 1)
+        
+       // self.labelNow.setTextColor(watchBlue)
+        self.labelNow.setText(nowString)
+        self.loadTableData()
+    }
+    
  /*
      func didAppear () {
         let dateFormatter = NSDateFormatter()
@@ -65,6 +79,10 @@ class GlanceController: WKInterfaceController {
         super.awakeWithContext(context)
         
         // Configure interface objects here.
+        
+        // Create a timer to refresh the time every second
+        timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: Selector("updateScreen"), userInfo: nil, repeats: true)
+        timer.fire()
         
         NSLog("%@ w41 TodayIC awakeWithContext", self)
         
@@ -104,6 +122,14 @@ class GlanceController: WKInterfaceController {
         fetchEvents()
         
         self.loadTableData()
+        
+        dateFormatter.dateFormat = "h:mm a"
+        let nowString = dateFormatter.stringFromDate(today)   //set to today date for now
+        
+       // let watchBlue = UIColor(red: 102, green: 178, blue: 255, alpha: 1)
+        
+       // self.labelNow.setTextColor(watchBlue)
+        self.labelNow.setText(nowString)
     
     }
     
@@ -127,16 +153,16 @@ class GlanceController: WKInterfaceController {
             print("w165 showListsView False")
         }
         
+        fetchEvents()
         loadTableData()
         
-        let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "h:mm a"
-        let now = dateFormatter.stringFromDate(today)   //set to today date for now
+        let nowString = dateFormatter.stringFromDate(today)   //set to today date for now
         
-        let watchBlue = UIColor(red: 102, green: 178, blue: 255, alpha: 1)
+        //let watchBlue = UIColor(red: 102, green: 178, blue: 255, alpha: 1)
         
-        self.labelNow.setTextColor(watchBlue)
-        self.labelNow.setText(now)
+       // self.labelNow.setTextColor(watchBlue)
+        self.labelNow.setText(nowString)
         
     }
     
@@ -195,18 +221,15 @@ class GlanceController: WKInterfaceController {
             
             print("w185 timeUntil: \(timeUntil)")
             
-            
             row.labelEventTitle.setText(item.title)
             row.labelEventLocation.setText(item.location)
             row.labelStartTime.setText(startTime)
             row.labelEndTime.setText(endTimeDash)
             row.labelTimeUntil.setText("\(timeUntil)  ")
-
             
             //row.labelEventTitle.setTextColor(UIColor(CGColor: item.calendar.CGColor))
             // row.labelStartTime.setTextColor(UIColor(CGColor: item.calendar.CGColor))
             // row.labelEndTime.setTextColor(UIColor(CGColor: item.calendar.CGColor))
-            
             
             row.labelStartTime.setTextColor(UIColor.whiteColor().colorWithAlphaComponent(0.8))
             row.labelEndTime.setTextColor(UIColor.whiteColor().colorWithAlphaComponent(0.65))
@@ -219,15 +242,9 @@ class GlanceController: WKInterfaceController {
             
             // row.imageVertBar.image = [row.imageVertBar imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
             
-            
-            
             row.groupEvent.setBackgroundColor(UIColor(CGColor: item.calendar.CGColor).colorWithAlphaComponent(0.375))
             
-            
-            
-            
-            
-            
+    
         }   // for loop
         
     }   //end loadTableData

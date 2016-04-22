@@ -33,6 +33,7 @@ class TodayIC: WKInterfaceController {
     @IBOutlet weak var table: WKInterfaceTable!
     
     let dateFormatter = NSDateFormatter()
+    var timer:NSTimer!
 
     
 //---- funcs below here -----------------------------------------------------------
@@ -53,6 +54,14 @@ class TodayIC: WKInterfaceController {
         
         print("w56 self.allEvents: \(self.allEvents)")
         
+    }
+    
+    func updateScreen(){
+        dateFormatter.dateFormat = "h:mm"
+        let nowString = dateFormatter.stringFromDate(NSDate())   //set to today date for now
+        
+        self.labelTime.setText(nowString)
+        //self.loadTableData()
     }
     
     
@@ -78,6 +87,11 @@ class TodayIC: WKInterfaceController {
         
         NSLog("%@ w68 TodayIC awakeWithContext", self)
         print("w70 TodayIC awakeWithContext")
+        
+        // Create a timer to refresh the time every second
+        timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: Selector("updateScreen"), userInfo: nil, repeats: true)
+        timer.fire()
+
         
       //  var sceneTitle:String = (context as? String)!
       //  self.setTitle("«\(sceneTitle)")
@@ -107,12 +121,12 @@ class TodayIC: WKInterfaceController {
        // showListsView = true
         self.setTitle("Events")
         
-        fetchEvents()
+        //fetchEvents()
         
         self.loadTableData()
         
         dateFormatter.dateFormat = "h:mm"
-        let nowString = dateFormatter.stringFromDate(today)
+        let nowString = dateFormatter.stringFromDate(NSDate())
         self.labelTime.setText(nowString)
         
     }
@@ -135,13 +149,16 @@ class TodayIC: WKInterfaceController {
             print("w165 showListsView False")
         }
         
-        loadTableData()
+        fetchEvents()
         
-      
-       
+        loadTableData()
+  
     }
     
     func loadTableData () {
+        
+        //fetchEvents()
+        
         table.setNumberOfRows(allEvents.count, withRowType: "tableRow")
         print("w46 allEvents.count: \(allEvents.count)")
         
@@ -184,11 +201,11 @@ class TodayIC: WKInterfaceController {
             }
             
             let startTimeItem = item.startDate
-            let timeUntilStart = startTimeItem.timeIntervalSinceDate(now)
+            let timeUntilStart = startTimeItem.timeIntervalSinceDate(NSDate())
             //print("w187 timeUntilStart: \(timeUntilStart)")
             
             let endTimeItem = item.endDate
-            let timeUntilEnd = endTimeItem.timeIntervalSinceDate(now)
+            let timeUntilEnd = endTimeItem.timeIntervalSinceDate(NSDate())
             //print("w192 timeUntilEnd: \(timeUntilEnd)")
 
             if ((timeUntilStart <= 0) && (timeUntilEnd >= 0)) {

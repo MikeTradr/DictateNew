@@ -31,8 +31,9 @@ class EventDetailsIC: WKInterfaceController {
     @IBOutlet weak var labelStartTime: WKInterfaceLabel!
     @IBOutlet weak var labelEndTime: WKInterfaceLabel!
     
-    @IBOutlet var labelTimeUntil: WKInterfaceLabel!
+    //@IBOutlet var labelTimeUntil: WKInterfaceLabel!
     
+    @IBOutlet var labelTimeUntil: WKInterfaceLabel!
     @IBOutlet weak var verticalBar: WKInterfaceGroup!
     @IBOutlet weak var calendarName: WKInterfaceLabel!
     @IBOutlet weak var labelNotes: WKInterfaceLabel!
@@ -66,6 +67,9 @@ class EventDetailsIC: WKInterfaceController {
     
     @IBOutlet var imageVerticalBarRT: WKInterfaceImage!
     
+    @IBOutlet var labelTitleAlarms: WKInterfaceLabel!
+    
+    
 //---- funcs below here -----------------------------------------------------------
     
 //---- Menu functions -------------------------------------------
@@ -90,6 +94,7 @@ class EventDetailsIC: WKInterfaceController {
         print("w43 Today awakeWithContext")
         
         self.setTitle("«Events")
+        self.labelTimeUntil.setHidden(false)
         
         let eventID = context as! String
         
@@ -113,19 +118,21 @@ class EventDetailsIC: WKInterfaceController {
         
         timeUntil = TimeManger.sharedInstance.timeInterval(event.startDate)
         print("w115 timeUntil: \(timeUntil)")
-        
+ 
         if event.allDay {   // if allDay bool is true
             startTime = ""
             endTimeDash = "All Day"
             self.labelTimeUntil.setHidden(true)
+        } else {
+            self.labelTimeUntil.setHidden(false)
         }
-        
+ 
         let startTimeItem = event.startDate
-        let timeUntilStart = startTimeItem.timeIntervalSinceDate(now)
+        let timeUntilStart = startTimeItem.timeIntervalSinceDate(NSDate())
         print("w187 timeUntilStart: \(timeUntilStart)")
         
         let endTimeItem = event.endDate
-        let timeUntilEnd = endTimeItem.timeIntervalSinceDate(now)
+        let timeUntilEnd = endTimeItem.timeIntervalSinceDate(NSDate())
         print("w192 timeUntilEnd: \(timeUntilEnd)")
         
         if ((timeUntilStart <= 0) && (timeUntilEnd >= 0)) {
@@ -162,7 +169,16 @@ class EventDetailsIC: WKInterfaceController {
        // self.calendarName.setTextColor(UIColor(CGColor: event.calendar.CGColor))
         self.calendarName.setText(event.calendar.title)
         self.labelRepeats.setText(event.recurrenceRules as? String)
-        self.labelAlarms.setText(event.alarms as? String)
+        
+        
+        //TODO ANIL TODO MIKE fix alarms on watch if blanck shows label Alarm! why? solve! and downcasting always fails it warns!
+        let tempAlarm:EKAlarm = (event.alarms as? EKAlarm)!
+        
+        
+        self.labelAlarms.setText(tempAlarm as? String)
+        
+        
+        
         //TODO Mike TODO Anil why thse two URL cast error, travelTime not a member of eventkit it says!
      //   self.labelURL.setText(event.URL as? String)
         self.labelAttendees.setText(event.attendees as? String)
@@ -177,11 +193,19 @@ class EventDetailsIC: WKInterfaceController {
             self.groupRepeats.setHidden(true)
         }
         
+        if (tempAlarm as? String) == "" {
+            print("w196 we here")
+            self.groupAlarms.setHidden(true)
+            self.labelTitleAlarms.setHidden(true)   //TODO did not work on Watch
+        }
+        
         if event.hasAlarms {
             self.groupAlarms.setHidden(false)
+            
         } else {
             print("w139 we here")
             self.groupAlarms.setHidden(true)
+            self.labelTitleAlarms.setHidden(true)   //TODO did not work on Watch
         }
         
         if event.hasAttendees {

@@ -421,7 +421,7 @@
                             </items>
                             <edgeInsets key="margins" left="4" right="0.0" top="0.0" bottom="0.0"/>
                         </group>
-                        <group width="1" alignment="left" id="fgn-7b-IYz" userLabel="GroupTime">
+                        <group width="134" alignment="left" id="fgn-7b-IYz" userLabel="GroupTime">
                             <items>
                                 <label alignment="left" text="startTime" id="5zl-En-J93" userLabel="startTime">
                                     <color key="textColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -431,7 +431,7 @@
                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     <fontDescription key="font" type="system" pointSize="12"/>
                                 </label>
-                                <label alignment="right" text="timeUntil" id="u6A-Gp-aLg">
+                                <label alignment="right" text="timeUntil" minimumScaleFactor="0.5" id="u6A-Gp-aLg">
                                     <color key="textColor" red="0.50196081400000003" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <fontDescription key="font" type="system" pointSize="12"/>
                                 </label>
@@ -617,14 +617,15 @@
                         <outlet property="labelNotes" destination="EFH-73-LTc" id="AZx-Tx-7Cl"/>
                         <outlet property="labelRepeats" destination="AXW-jj-xSf" id="7TQ-JO-RuL"/>
                         <outlet property="labelStartTime" destination="5zl-En-J93" id="Lft-it-e91"/>
-                        <outlet property="labelTimeUntil" destination="u6A-Gp-aLg" id="Gi4-dw-kZE"/>
+                        <outlet property="labelTimeUntil" destination="u6A-Gp-aLg" id="UKw-Uc-paB"/>
+                        <outlet property="labelTitleAlarms" destination="e2b-E7-pko" id="2Wp-L1-TQs"/>
                         <outlet property="labelTravelTime" destination="8GM-m5-Zij" id="k2L-L2-wc4"/>
                         <outlet property="labelURL" destination="Tx7-IH-fQW" id="JNa-Bv-fG7"/>
                         <outlet property="verticalBar" destination="6Ke-ox-3Sm" id="oRs-z5-mb9"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="879" y="429.25"/>
+            <point key="canvasLocation" x="879" y="429"/>
         </scene>
         <!--TestIC-->
         <scene sceneID="IWj-wO-q9v">
@@ -1054,33 +1055,29 @@
             <objects>
                 <glanceController spacing="0.0" id="0uZ-2p-rRc" customClass="GlanceController" customModule="Dictate_WatchKit_App" customModuleProvider="target">
                     <items>
-                        <group alignment="left" id="t8f-Gd-c4y">
+                        <group alignment="left" contentMode="left" id="t8f-Gd-c4y">
                             <items>
-                                <imageView width="27" height="40" alignment="left" verticalAlignment="center" image="dicApp-2-no-back-180" id="cPC-Az-Izx"/>
-                                <group width="1" alignment="left" layout="vertical" id="c4R-aS-36j">
+                                <imageView width="27" height="40" alignment="left" verticalAlignment="center" image="dicApp-2-no-back-180" id="iBe-DB-CbP"/>
+                                <group width="1" alignment="left" layout="vertical" id="P1c-c9-fv7">
                                     <items>
-                                        <group width="1" alignment="left" layout="vertical" id="6eB-3c-sn6">
+                                        <label width="1" alignment="left" text="Day" minimumScaleFactor="0.80000000000000004" id="cTA-z6-QgJ" userLabel="Day">
+                                            <color key="textColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="font" type="system" weight="semibold" pointSize="22"/>
+                                        </label>
+                                        <group width="1" alignment="left" id="qQh-iH-AZv">
                                             <items>
-                                                <label alignment="left" text="Day" id="uQR-4p-Zzg" userLabel="Day">
-                                                    <color key="textColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <fontDescription key="font" type="system" weight="semibold" pointSize="22"/>
+                                                <label alignment="left" text="     " id="xwo-Ua-jrr"/>
+                                                <label alignment="left" text="now" id="fV0-j7-ZIn">
+                                                    <color key="textColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="font" type="system" weight="semibold" pointSize="19"/>
                                                 </label>
-                                                <group width="1" alignment="left" id="eZP-7p-Jc2">
-                                                    <items>
-                                                        <label alignment="left" text="     " id="mYi-bT-3dY"/>
-                                                        <label alignment="left" text="now" id="zzb-hL-zmo">
-                                                            <color key="textColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <fontDescription key="font" type="system" pointSize="17"/>
-                                                        </label>
-                                                    </items>
-                                                </group>
                                             </items>
-                                            <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
                                         </group>
                                     </items>
+                                    <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
                                 </group>
                             </items>
-                            <edgeInsets key="margins" left="4" right="0.0" top="0.0" bottom="4"/>
+                            <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
                         </group>
                         <group alignment="left" layout="vertical" id="uCw-4Q-Ouw">
                             <items>
@@ -1147,8 +1144,8 @@
                     </items>
                     <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="14"/>
                     <connections>
-                        <outlet property="labelDate" destination="uQR-4p-Zzg" id="JOR-8h-KfD"/>
-                        <outlet property="labelNow" destination="zzb-hL-zmo" id="CzU-i3-DD5"/>
+                        <outlet property="labelDate" destination="cTA-z6-QgJ" id="CiT-6A-YiI"/>
+                        <outlet property="labelNow" destination="fV0-j7-ZIn" id="Q2S-db-C88"/>
                         <outlet property="table" destination="E2V-zD-T4H" id="A0A-Vl-pUR"/>
                     </connections>
                 </glanceController>

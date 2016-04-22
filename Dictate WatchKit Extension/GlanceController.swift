@@ -24,8 +24,13 @@ class GlanceController: WKInterfaceController {
     
     var timer:NSTimer!
     
+   //@IBOutlet var labelDate: WKInterfaceLabel!
+   // @IBOutlet var labelNow: WKInterfaceLabel!
+    
     @IBOutlet var labelDate: WKInterfaceLabel!
     @IBOutlet var labelNow: WKInterfaceLabel!
+    
+    
     @IBOutlet var table: WKInterfaceTable!
     
     let dateFormatter = NSDateFormatter()
@@ -54,11 +59,8 @@ class GlanceController: WKInterfaceController {
     
     func updateScreen(){
         dateFormatter.dateFormat = "h:mm a"
-        let nowString = dateFormatter.stringFromDate(today)   //set to today date for now
-        
-       // let watchBlue = UIColor(red: 102, green: 178, blue: 255, alpha: 1)
-        
-       // self.labelNow.setTextColor(watchBlue)
+        let nowString = dateFormatter.stringFromDate(NSDate())   //set to today date for now
+  
         self.labelNow.setText(nowString)
         self.loadTableData()
     }
@@ -124,7 +126,7 @@ class GlanceController: WKInterfaceController {
         self.loadTableData()
         
         dateFormatter.dateFormat = "h:mm a"
-        let nowString = dateFormatter.stringFromDate(today)   //set to today date for now
+        let nowString = dateFormatter.stringFromDate(NSDate())   //set to today date for now
         
        // let watchBlue = UIColor(red: 102, green: 178, blue: 255, alpha: 1)
         
@@ -157,7 +159,7 @@ class GlanceController: WKInterfaceController {
         loadTableData()
         
         dateFormatter.dateFormat = "h:mm a"
-        let nowString = dateFormatter.stringFromDate(today)   //set to today date for now
+        let nowString = dateFormatter.stringFromDate(NSDate())   //set to today date for now
         
         //let watchBlue = UIColor(red: 102, green: 178, blue: 255, alpha: 1)
         
@@ -202,11 +204,11 @@ class GlanceController: WKInterfaceController {
             }
             
             let startTimeItem = item.startDate
-            let timeUntilStart = startTimeItem.timeIntervalSinceDate(now)
+            let timeUntilStart = startTimeItem.timeIntervalSinceDate(NSDate())
             //print("w187 timeUntilStart: \(timeUntilStart)")
             
             let endTimeItem = item.endDate
-            let timeUntilEnd = endTimeItem.timeIntervalSinceDate(now)
+            let timeUntilEnd = endTimeItem.timeIntervalSinceDate(NSDate())
             //print("w192 timeUntilEnd: \(timeUntilEnd)")
             
             if ((timeUntilStart <= 0) && (timeUntilEnd >= 0)) {

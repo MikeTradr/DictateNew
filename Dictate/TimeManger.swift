@@ -39,7 +39,7 @@ class TimeManger: NSObject {
         hourFormatter.unitsStyle = NSDateComponentsFormatterUnitsStyle.Short
         hourFormatter.allowedUnits = .Hour
         
-        let timeUntil = date.timeIntervalSinceDate(now)
+        let timeUntil = date.timeIntervalSinceDate(NSDate())
         dateComponentsFormatter.stringFromTimeInterval(timeUntil)
         
         print("p42 now:  \(now)")

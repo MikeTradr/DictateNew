@@ -1407,7 +1407,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eXi-u6-9J0" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="ldW-cx-GGB" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-270.5" y="868.5"/>
+            <point key="canvasLocation" x="-330.5" y="1265.5"/>
         </scene>
         <!--eventDetails-->
         <scene sceneID="xVx-kI-Cgt">
@@ -1856,7 +1856,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hze-L6-1q5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1721" y="600"/>
+            <point key="canvasLocation" x="1457" y="415"/>
         </scene>
         <!--Calendar Selection View Controller-->
         <scene sceneID="Pgw-ak-cQZ">
@@ -1903,7 +1903,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mpn-pG-G3e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1316" y="583"/>
+            <point key="canvasLocation" x="1060" y="415"/>
         </scene>
         <!--Settings-->
         <scene sceneID="dSz-HB-Jq2">
@@ -3144,7 +3144,7 @@ Kicstart - swift DeFliGra - web site</string>
         <image name="thatsoft2-White-200x86" width="200" height="86"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="rGj-jK-2SG"/>
+        <segue reference="Yfe-9i-hzX"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>

@@ -1063,13 +1063,19 @@
                                         <label width="1" alignment="left" text="Day" minimumScaleFactor="0.80000000000000004" id="cTA-z6-QgJ" userLabel="Day">
                                             <color key="textColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="font" type="system" weight="semibold" pointSize="21"/>
+                                            <variation key="device=watch38mm">
+                                                <fontDescription key="font" type="system" weight="semibold" pointSize="17"/>
+                                            </variation>
                                         </label>
                                         <group width="1" alignment="left" id="qQh-iH-AZv">
                                             <items>
                                                 <label alignment="left" text="     " id="xwo-Ua-jrr"/>
                                                 <label alignment="left" text="now" id="fV0-j7-ZIn">
                                                     <color key="textColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <fontDescription key="font" type="system" weight="semibold" pointSize="19"/>
+                                                    <fontDescription key="font" type="system" weight="semibold" pointSize="20"/>
+                                                    <variation key="device=watch38mm">
+                                                        <fontDescription key="font" type="system" weight="semibold" pointSize="19"/>
+                                                    </variation>
                                                 </label>
                                             </items>
                                         </group>

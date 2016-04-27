@@ -128,7 +128,6 @@
 		D3F8ACED1B696FB00070C097 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F8ACEC1B696FB00070C097 /* ViewController.swift */; };
 		D3F8ACF21B696FB00070C097 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3F8ACF11B696FB00070C097 /* Images.xcassets */; };
 		D3F8ACF51B696FB00070C097 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3F8ACF31B696FB00070C097 /* LaunchScreen.xib */; };
-		D3F8AD011B696FB00070C097 /* DictateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F8AD001B696FB00070C097 /* DictateTests.swift */; };
 		D3F8AD141B696FCD0070C097 /* MainIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F8AD131B696FCD0070C097 /* MainIC.swift */; };
 		D3F8AD161B696FCD0070C097 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F8AD151B696FCD0070C097 /* NotificationController.swift */; };
 		D3F8AD181B696FCD0070C097 /* GlanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F8AD171B696FCD0070C097 /* GlanceController.swift */; };
@@ -196,13 +195,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		D3F8ACFB1B696FB00070C097 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D3F8ACDD1B696FB00070C097 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D3F8ACE41B696FB00070C097;
-			remoteInfo = Dictate;
-		};
 		D3F8AD1F1B696FCD0070C097 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D3F8ACDD1B696FB00070C097 /* Project object */;
@@ -323,7 +315,6 @@
 		D3F8ACEC1B696FB00070C097 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		D3F8ACF11B696FB00070C097 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D3F8ACF41B696FB00070C097 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		D3F8ACFA1B696FB00070C097 /* DictateTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DictateTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3F8ACFF1B696FB00070C097 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D3F8AD001B696FB00070C097 /* DictateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictateTests.swift; sourceTree = "<group>"; };
 		D3F8AD0E1B696FCD0070C097 /* Dictate WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Dictate WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -438,13 +429,6 @@
 				EC0B48801B6FE9C700C0AD82 /* CFNetwork.framework in Frameworks */,
 				EC0B487E1B6FE9B800C0AD82 /* libsqlite3.0.dylib in Frameworks */,
 				D3B6E24E1BD977B200C7B822 /* Fabric.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D3F8ACF71B696FB00070C097 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -698,7 +682,6 @@
 			isa = PBXGroup;
 			children = (
 				D3F8ACE51B696FB00070C097 /* Dictate.app */,
-				D3F8ACFA1B696FB00070C097 /* DictateTests.xctest */,
 				D3F8AD0E1B696FCD0070C097 /* Dictate WatchKit Extension.appex */,
 				D3F8AD1D1B696FCD0070C097 /* Dictate WatchKit App.app */,
 			);
@@ -931,25 +914,6 @@
 			productReference = D3F8ACE51B696FB00070C097 /* Dictate.app */;
 			productType = "com.apple.product-type.application";
 		};
-		D3F8ACF91B696FB00070C097 /* DictateTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D3F8AD071B696FB00070C097 /* Build configuration list for PBXNativeTarget "DictateTests" */;
-			buildPhases = (
-				D3F8ACF61B696FB00070C097 /* Sources */,
-				D3F8ACF71B696FB00070C097 /* Frameworks */,
-				D3F8ACF81B696FB00070C097 /* Resources */,
-				D3B6E24B1BD9741D00C7B822 /* ShellScript */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				D3F8ACFC1B696FB00070C097 /* PBXTargetDependency */,
-			);
-			name = DictateTests;
-			productName = DictateTests;
-			productReference = D3F8ACFA1B696FB00070C097 /* DictateTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		D3F8AD0D1B696FCD0070C097 /* Dictate WatchKit Extension */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D3F8AD2F1B696FCE0070C097 /* Build configuration list for PBXNativeTarget "Dictate WatchKit Extension" */;
@@ -1009,10 +973,6 @@
 							};
 						};
 					};
-					D3F8ACF91B696FB00070C097 = {
-						CreatedOnToolsVersion = 6.4;
-						TestTargetID = D3F8ACE41B696FB00070C097;
-					};
 					D3F8AD0D1B696FCD0070C097 = {
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = A6V8M5Q68S;
@@ -1045,7 +1005,6 @@
 			projectRoot = "";
 			targets = (
 				D3F8ACE41B696FB00070C097 /* Dictate */,
-				D3F8ACF91B696FB00070C097 /* DictateTests */,
 				D3F8AD0D1B696FCD0070C097 /* Dictate WatchKit Extension */,
 				D3F8AD1C1B696FCD0070C097 /* Dictate WatchKit App */,
 			);
@@ -1079,13 +1038,6 @@
 				D355D97C1BA7DD3F00DADD72 /* Main.storyboard in Resources */,
 				D3CEC17D1BD77A76001A50F8 /* earcon_cancel.wav in Resources */,
 				D3F8ACF21B696FB00070C097 /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D3F8ACF81B696FB00070C097 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1130,19 +1082,6 @@
 
 /* Begin PBXShellScriptBuildPhase section */
 		D38C9C541B821D03009CFC7C /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run 76e4b5192632a88784fb617b0700bd9df0ee7574 13006cf4d877642c70fb2ec98889d5916ceb01b5c3e7240bbc3497f125ae386e";
-		};
-		D3B6E24B1BD9741D00C7B822 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1238,14 +1177,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D3F8ACF61B696FB00070C097 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D3F8AD011B696FB00070C097 /* DictateTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		D3F8AD0A1B696FCD0070C097 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1301,11 +1232,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		D3F8ACFC1B696FB00070C097 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = D3F8ACE41B696FB00070C097 /* Dictate */;
-			targetProxy = D3F8ACFB1B696FB00070C097 /* PBXContainerItemProxy */;
-		};
 		D3F8AD201B696FCD0070C097 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = D3F8AD1C1B696FCD0070C097 /* Dictate WatchKit App */;
@@ -1479,41 +1405,6 @@
 			};
 			name = Release;
 		};
-		D3F8AD081B696FB00070C097 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = DictateTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Dictate.app/Dictate";
-			};
-			name = Debug;
-		};
-		D3F8AD091B696FB00070C097 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = DictateTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Dictate.app/Dictate";
-			};
-			name = Release;
-		};
 		D3F8AD2D1B696FCE0070C097 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1634,15 +1525,6 @@
 			buildConfigurations = (
 				D3F8AD051B696FB00070C097 /* Debug */,
 				D3F8AD061B696FB00070C097 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		D3F8AD071B696FB00070C097 /* Build configuration list for PBXNativeTarget "DictateTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D3F8AD081B696FB00070C097 /* Debug */,
-				D3F8AD091B696FB00070C097 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

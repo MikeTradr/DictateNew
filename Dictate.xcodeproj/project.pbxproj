@@ -88,6 +88,8 @@
 		D3AD9B5A1C5E5245006387C4 /* DetailTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AD9B591C5E5245006387C4 /* DetailTableVC.swift */; };
 		D3B1800D1CB76F11003360C0 /* TimeManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D397FDA11CAB1752005DD51A /* TimeManger.swift */; };
 		D3B226201C8CAF51009C0DBA /* SettingsAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B2261F1C8CAF51009C0DBA /* SettingsAboutViewController.swift */; };
+		D3B323F01CD026AE00B29A96 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B323EF1CD026AE00B29A96 /* ExtensionDelegate.swift */; };
+		D3B323F21CD026B800B29A96 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B323F11CD026B800B29A96 /* ComplicationController.swift */; };
 		D3B6E24E1BD977B200C7B822 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3B6E24C1BD977B200C7B822 /* Fabric.framework */; };
 		D3B6E24F1BD977B200C7B822 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3B6E24C1BD977B200C7B822 /* Fabric.framework */; };
 		D3B6E2501BD977B200C7B822 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3B6E24D1BD977B200C7B822 /* Crashlytics.framework */; };
@@ -289,6 +291,8 @@
 		D3B07A231B731C8800B9C2A9 /* Dictate.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Dictate.entitlements; sourceTree = "<group>"; };
 		D3B07A241B731D2A00B9C2A9 /* Dictate WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Dictate WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 		D3B2261F1C8CAF51009C0DBA /* SettingsAboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsAboutViewController.swift; sourceTree = "<group>"; };
+		D3B323EF1CD026AE00B29A96 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
+		D3B323F11CD026B800B29A96 /* ComplicationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
 		D3B6E24C1BD977B200C7B822 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		D3B6E24D1BD977B200C7B822 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		D3B6F5F81BA60B7E0052B639 /* DictateManagerIC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictateManagerIC.swift; sourceTree = "<group>"; };
@@ -747,10 +751,13 @@
 				D3B07A241B731D2A00B9C2A9 /* Dictate WatchKit Extension.entitlements */,
 				D33CAD091B747F0900F59260 /* Resources */,
 				D3E810861B70F4D6004AE5A9 /* WKControllers */,
+				D3B323F11CD026B800B29A96 /* ComplicationController.swift */,
+				D3B323EF1CD026AE00B29A96 /* ExtensionDelegate.swift */,
 				D3F8AD151B696FCD0070C097 /* NotificationController.swift */,
 				D3F8AD171B696FCD0070C097 /* GlanceController.swift */,
 				D36DBDD41BD6DA870076A5C2 /* GlanceTodayEventsTableRC.swift */,
 				D3F8AD191B696FCD0070C097 /* Images.xcassets */,
+				D3F8AD111B696FCD0070C097 /* Info.plist */,
 				D3F8AD101B696FCD0070C097 /* Supporting Files */,
 			);
 			path = "Dictate WatchKit Extension";
@@ -759,7 +766,6 @@
 		D3F8AD101B696FCD0070C097 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				D3F8AD111B696FCD0070C097 /* Info.plist */,
 				D3F8AD121B696FCD0070C097 /* PushNotificationPayload.apns */,
 			);
 			name = "Supporting Files";
@@ -1264,6 +1270,7 @@
 				D3DA3ADB1BAE845C002FDD21 /* DefaultCalendarListTableRC.swift in Sources */,
 				D39AB89E1BA86D68001C7570 /* CalendarListPickerIC.swift in Sources */,
 				D323505F1B697B0200939F03 /* DictateCode.swift in Sources */,
+				D3B323F01CD026AE00B29A96 /* ExtensionDelegate.swift in Sources */,
 				D3D98AF51BA54D5B00BA1901 /* FavoritesManager.swift in Sources */,
 				D3FA08051BA7F6EB006A91C2 /* ReminderListsTableRC.swift in Sources */,
 				D3F8AD141B696FCD0070C097 /* MainIC.swift in Sources */,
@@ -1276,6 +1283,7 @@
 				D3DA3AD91BAE8379002FDD21 /* ShowRemindersTableRC.swift in Sources */,
 				D37CFBF51BD95F130005320D /* NuanceTest.swift in Sources */,
 				D3DA3AD51BAE8066002FDD21 /* ShowCalendarsTableRC.swift in Sources */,
+				D3B323F21CD026B800B29A96 /* ComplicationController.swift in Sources */,
 				D3DA3AD71BAE834B002FDD21 /* ShowRemindersIC.swift in Sources */,
 				D3DA3ADD1BAE84B2002FDD21 /* DefaultReminderListTableRC.swift in Sources */,
 				D31C6C411BB435BA00A04B58 /* SetCalendarTableRC.swift in Sources */,
@@ -1426,6 +1434,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Dictate",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Dictate/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
@@ -1454,6 +1463,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Dictate",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Dictate/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
@@ -1575,6 +1585,8 @@
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Dictate/Dictate-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = 2;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Debug;
 		};
@@ -1600,6 +1612,8 @@
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Dictate/Dictate-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = 2;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
 		};

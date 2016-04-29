@@ -64,7 +64,7 @@ class MainIC: WKInterfaceController {
     
     @IBOutlet var resultAlarm: WKInterfaceLabel!
     @IBOutlet var resultRepeat: WKInterfaceLabel!
-    
+    @IBOutlet var resultLocation: WKInterfaceLabel!
     
     @IBOutlet var labelCreated: WKInterfaceLabel!   //large Green label after create button
     
@@ -91,6 +91,7 @@ class MainIC: WKInterfaceController {
     
     @IBOutlet var buttonGrAlarm: WKInterfaceButton!
     @IBOutlet var buttonGrRepeat: WKInterfaceButton!
+    @IBOutlet var buttonGrLocation: WKInterfaceButton!
  
     @IBOutlet var buttonCreateOutlet: WKInterfaceGroup!
 
@@ -100,6 +101,8 @@ class MainIC: WKInterfaceController {
     var alert       = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!.objectForKey("defaultEventAlert") as? Double //added defualt 112715
 
     let eventRepeat      = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!.stringForKey("defaultEventRepeat") //added defualt 112715
+    
+    let eventLocation      = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!.stringForKey("evetnLocation")
     
     var output      = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!.stringForKey("output") ?? ""
     
@@ -161,6 +164,7 @@ class MainIC: WKInterfaceController {
         var reminderTitle   = defaults.stringForKey("title") ?? ""
         var wordArrTrimmed  = defaults.objectForKey("wordArrTrimmed") as? [String] ?? [] //array of the items
         
+        let eventLocation: String = defaults.stringForKey("eventLocation") ?? ""
         //TODO Mike Anil commented to fix nil error
         // var reminderArray = defaults.objectForKey("reminderArray") as! [String] //array of the items
         
@@ -178,6 +182,7 @@ class MainIC: WKInterfaceController {
         print("w111Defaults strRaw: \(strRaw)")
         print("w111Defaults reminderTitle: \(reminderTitle)")
         print("w111Defaults wordArrTrimmed: \(wordArrTrimmed)")
+        print("w111Defaults eventLocation: \(eventLocation)")
 
         print("w111Defaults reminderArray: \(reminderArray)")
         print("w111Defaults reminderList: \(reminderList)")
@@ -338,6 +343,16 @@ class MainIC: WKInterfaceController {
                 } else {
                     self.resultRepeat.setText("Repeat: \(self.eventRepeat)")
                     self.buttonGrRepeat.setHidden(false)
+                }
+                
+                let eventLocation: String = self.defaults.stringForKey("eventLocation") ?? ""
+            
+                if (self.eventLocation == "") {
+                    self.resultLocation.setText("")
+                    self.buttonGrLocation.setHidden(true)
+                } else {
+                    self.resultLocation.setText("Location: \(eventLocation)")
+                    self.buttonGrLocation.setHidden(false)
                 }
 
                 self.groupButtons.setHidden(false)

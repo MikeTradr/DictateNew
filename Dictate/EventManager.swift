@@ -93,6 +93,8 @@ class EventManager: NSObject {
                 let outputNote  = defaults.stringForKey("outputNote")
                 let eventDuration    = defaults.objectForKey("eventDuration") as! Double
                 
+                let eventLocation: String = defaults.stringForKey("eventLocation") ?? ""
+                
                 let eventRepeat:Int = defaults.objectForKey("eventRepeat") as! Int
 
                 
@@ -112,6 +114,7 @@ class EventManager: NSObject {
                 print("p80 outputNote: \(outputNote)")
                 print("p81 output: \(output)")
                 print("p98 mainType: \(mainType)")
+                print("p117 eventLocation: \(eventLocation)")
                 
                 print("p115 defaults.objectForKey(\"eventRepeat\") = \(defaults.objectForKey("eventRepeat"))")
 
@@ -384,6 +387,11 @@ class EventManager: NSObject {
                             event.startDate = startDT
                             event.endDate = endDate       
                             event.notes = outputNote
+                            
+                            if eventLocation != "" {
+                                event.location = eventLocation
+                            }
+                            
                             
                             if allDayFlag {
                                 event.allDay = true

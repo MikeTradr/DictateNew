@@ -57,6 +57,7 @@ class DictateCode: NSObject {
     var defaultCalendarID:String = ""
     var defaultReminderID:String = ""
     var processNow:Bool         = false
+    var eventLocation           = ""
 
     //var startDate:String        = ""
     
@@ -103,6 +104,7 @@ class DictateCode: NSObject {
     var date = ""
     var aptType = ""
     var outputRaw = ""
+    var myLocationString = ""
     
     //#### my functions #################################
     
@@ -1892,7 +1894,54 @@ class DictateCode: NSObject {
                 } else {
                     errorMsg = "No Repeat Found"
                 }
-     
+                
+        // ____ "Location" word ____________________________________
+                
+                let subStringLocation = (word as NSString).containsString("location")   // see duration or lenght then process
+           
+                
+                if (subStringLocation) {
+                    print("p1902 location: \(i)")
+                    
+                    wordArrTrimmed = wordArrTrimmed.filter() { $0 != wordArr[i]}         // trim "repeat"
+                    
+                    //TODO is there a better way to check words? text if word in array???
+                    
+                    if (i < arrayLength-1) {            // check to see is there is something after "location"
+                        nextWord = wordArr[i+1]
+                        print("p1910 repeat next word is: \(wordArr[i+1])")
+                    } else {
+                        nextWord = ""
+                    }
+         
+                    
+                    if (nextWord != "") {
+                        
+                        wordArrTrimmed = wordArrTrimmed.filter() { $0 != self.nextWord }
+                        
+                        print("p1920 word: \(word)")
+                        print("p1920 nextWord: \(nextWord)")
+                        
+                        let wordArrLastIndex: Int = wordArr.count-1
+                        let wordArrCurrentIndex: Int = i+1
+                        
+                        let myLocationArr: [String] = ["\(wordArr[wordArrCurrentIndex...wordArrLastIndex])"]
+                        
+                        let myLocationString = wordArr[wordArrCurrentIndex...wordArrLastIndex].joinWithSeparator(" ").capitalizedString
+
+                        print("p1930 myLocationString: \(myLocationString)")
+                        
+                        defaults.setObject(myLocationString, forKey: "eventLocation")
+                        
+                        eventLocation = defaults.stringForKey("eventLocation")!
+                        print("p1930 eventLocation: \(eventLocation)")
+                    }
+                    
+                } else {
+                    errorMsg = "No Location Found"
+                }
+
+                
                 
                 
         //---- Switch Rotine for Type's ----
@@ -2170,6 +2219,7 @@ class DictateCode: NSObject {
             defaults.setObject(calendarName, forKey: "calendarName")
             defaults.setObject(eventDuration, forKey: "eventDuration")
             defaults.setObject(eventAlert, forKey: "eventAlert")
+
                 
             // TODO  not used yet we see!
             let eventRepeat = eventRepeatInterval
@@ -2191,6 +2241,7 @@ class DictateCode: NSObject {
             print("pDictated alert: \(alert)")
             print("pDictated eventRepeat: \(eventRepeat)")
             print("pDictated strRaw: \(strRaw)")
+            print("pDictated eventLocation: \(eventLocation)")
             
             print("pDictated mainType: \(mainType)")
             print("pDictated actionType: \(actionType)")

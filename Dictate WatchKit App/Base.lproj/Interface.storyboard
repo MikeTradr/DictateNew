@@ -181,6 +181,16 @@
                                         </items>
                                     </group>
                                 </button>
+                                <button alignment="left" id="Ij9-pq-Duu" userLabel="ButtonLocation">
+                                    <group key="contentGroup" width="1" alignment="left" layout="vertical" id="7Tc-kF-dys">
+                                        <items>
+                                            <label alignment="left" text="location" id="hnm-ih-2Ee" userLabel="location">
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="font" type="italicSystem" pointSize="16"/>
+                                            </label>
+                                        </items>
+                                    </group>
+                                </button>
                             </items>
                         </group>
                         <group width="1" alignment="center" verticalAlignment="center" layout="vertical" id="L45-SR-M1E">
@@ -240,6 +250,7 @@
                         <outlet property="buttonGrAlarm" destination="R2h-dY-NSQ" id="It2-QJ-xqQ"/>
                         <outlet property="buttonGrCalendar" destination="B42-1Z-IeF" id="wa6-rh-Wzq"/>
                         <outlet property="buttonGrDay" destination="vKp-xG-Fap" id="UE4-Es-pQv"/>
+                        <outlet property="buttonGrLocation" destination="Ij9-pq-Duu" id="UEH-eV-Ai0"/>
                         <outlet property="buttonGrPhone" destination="mXZ-4n-ofZ" id="gxr-ap-fZf"/>
                         <outlet property="buttonGrRepeat" destination="EYc-NA-Uoa" id="QUk-dl-Tq0"/>
                         <outlet property="buttonGrStart" destination="fvS-9W-qCz" id="STp-Kt-5zF"/>
@@ -257,6 +268,7 @@
                         <outlet property="resultAlarm" destination="Hlx-4x-K5I" id="Gsv-su-gGI"/>
                         <outlet property="resultCalendar" destination="Cqu-yl-ZGP" id="XdI-O1-I6n"/>
                         <outlet property="resultDay" destination="Rd4-17-QaH" id="dKe-sq-jBJ"/>
+                        <outlet property="resultLocation" destination="hnm-ih-2Ee" id="gBo-vr-UDa"/>
                         <outlet property="resultPhone" destination="PMI-eH-MjR" id="X1n-Hr-4F0"/>
                         <outlet property="resultRepeat" destination="cSb-Hu-tob" id="DHW-RD-vBL"/>
                         <outlet property="resultStart" destination="EJB-4B-o93" id="bqq-Qb-J7p"/>
@@ -308,7 +320,7 @@
                                                                     </label>
                                                                     <label alignment="left" text="Location" numberOfLines="2" id="W8d-rr-8G3" userLabel="Location">
                                                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                                        <fontDescription key="font" type="system" pointSize="12"/>
+                                                                        <fontDescription key="font" type="italicSystem" pointSize="12"/>
                                                                     </label>
                                                                     <group width="1" alignment="left" id="lCH-Fz-Jam">
                                                                         <items>
@@ -1107,7 +1119,7 @@
                                                             </label>
                                                             <label alignment="left" text="Location" numberOfLines="2" id="BvB-N6-Cyw" userLabel="Location">
                                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                                <fontDescription key="font" type="system" pointSize="12"/>
+                                                                <fontDescription key="font" type="italicSystem" pointSize="12"/>
                                                             </label>
                                                             <group width="1" alignment="left" id="g01-wr-CCo">
                                                                 <items>

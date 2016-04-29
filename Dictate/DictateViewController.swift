@@ -131,6 +131,8 @@ let str59:String = "Reminder meeting 10 am alert 1 hour"
 
 let str60:String = "email mike this is a test message"
 
+let str61:String = "7 pm See Band location Capital Brewery"
+
 
 
 
@@ -169,8 +171,8 @@ add to dictate str   “meeting with Bob every Wednesday at noon”  //handle wo
 */
 
 // ---- change strings here for testing, shows on the dictated field---
-//var str:String = str60
-var str:String = ""
+var str:String = str61
+//var str:String = ""
 
 //var strRaw:String = str
 

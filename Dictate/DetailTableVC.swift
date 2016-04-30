@@ -5,6 +5,9 @@
 //  Created by Mike Derr on 1/31/16.
 //  Copyright © 2016 ThatSoft.com. All rights reserved.
 //
+//  Changes:
+//  -----------------------------------
+//  043016 Mike: added Location code...
 
 import UIKit
 import EventKit
@@ -31,9 +34,10 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
     var alertString = ""
     var output = ""
     var messageString = ""
+    var locationString = ""
  
-    var results = ["temp", "temp", "temp", "temp", "temp", "temp", "temp", "temp", "temp", "temp", "temp"]
-    var labels = ["Input", "Type", "Day","Time", "Cell#", "Start", "End", "Title", "Cal.", "Alert", "Repeat"]
+    var results = ["temp", "temp", "temp", "temp", "temp", "temp", "temp", "temp", "temp", "temp", "temp", "temp"]
+    var labels = ["Input", "Type", "Day", "Time", "Cell#", "Start", "End", "Title", "Cal.", "Alert", "Repeat", "Location"]
 
     var labelInput = "Input"
     var labelType = "Type"
@@ -46,6 +50,7 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
     var labelCal = "Cal."
     var labelAlert = "Alert"
     var labelRepeat = "Repeat"
+    var labelLocation = "Locat."
     
     let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
     var audioPlayer = AVAudioPlayer()
@@ -146,7 +151,7 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
     }
     
     func resetToDefaults(){
-        labels = ["Input", "Type", "Day","Time", "Cell#", "Start", "End", "Title", "Cal.", "Alert", "Repeat"]
+        labels = ["Input", "Type", "Day","Time", "Cell#", "Start", "End", "Title", "Cal.", "Alert", "Repeat", "Locat."]
         labelInput = "Input"
         labelType = "Type"
         labelDay = "Day"
@@ -158,9 +163,9 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         labelCal = "Cal."
         labelAlert = "Alert"
         labelRepeat = "Repeat"
+        labelLocation = "Locat."
         
         datePickerHeight = 0.0
-        
     }
     
     
@@ -251,7 +256,7 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
             numberRowsToDelete = uniqueRowArray.count
             //print("p158 numberRowsToDelete: \(numberRowsToDelete)")
             
-            rowsToShow = 11 - numberRowsToDelete    //11 is maximun fields same as results.count
+            rowsToShow = results.count - numberRowsToDelete    //11 is maximun fields same as results.count
       
             return 0
         
@@ -347,7 +352,7 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         print("p250 row: \(labels[indexPath.row]): \(results[indexPath.row]) ")
         print("p250 ========================================")
         
-        if labels[indexPath.row] == "Input" || labels[indexPath.row] == "Start" || labels[indexPath.row] == "End" || labels[indexPath.row] == "Title" || labels[indexPath.row] == "Cal." || labels[indexPath.row] == "Alert" || labels[indexPath.row] == "List"  || labels[indexPath.row] == "Repeat" || labels[indexPath.row] == "Alarm"   {
+        if labels[indexPath.row] == "Input" || labels[indexPath.row] == "Start" || labels[indexPath.row] == "End" || labels[indexPath.row] == "Title" || labels[indexPath.row] == "Cal." || labels[indexPath.row] == "Alert" || labels[indexPath.row] == "List"  || labels[indexPath.row] == "Repeat" || labels[indexPath.row] == "Alarm" || labels[indexPath.row] == "Locat."  {
             cell.disclosureLabel.hidden = false
             cell.userInteractionEnabled = true     //allow cell to be highlighted!
         } else {
@@ -519,7 +524,7 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
                 self.performSegueWithIdentifier("showCalPicker", sender: indexPath);
                 break;
             
-            case "List":    //Reminder
+            case "List":    //todo Add reminder Picker Mike //Reminder
                 break;
             
 
@@ -580,6 +585,37 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
                 print("p548 results[indexPath.row]: \(results[indexPath.row])")
       
             break;
+            
+            case "Locat.":
+                var alert = UIAlertController(title: "Enter your new Location", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Continue", style: .Default, handler: { (action) -> Void in
+                    
+                    self.locationString = alert.textFields![0].text!
+                    self.defaults.setObject(self.locationString, forKey: "eventLocation")                //sets eventLocation
+                    
+                    print("p251 alert.textFields![0].text!: \(alert.textFields![0].text!)")
+                    print("p251 self.locationString: \(self.locationString)")
+                    
+                    self.loadResultsArray()
+                    self.tableV.reloadData()
+                }))
+                
+                alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action) -> Void in
+                    self.tableV.reloadData()   //TODO Anil Mike best way to remove the highlighted row?
+                }))
+                
+                alert.addTextFieldWithConfigurationHandler({(textField: UITextField!) in
+                    textField.placeholder = "Enter Location:"
+                    textField.secureTextEntry = false
+                    
+                    print("p230 textField.text: \(textField.text)")
+                    self.locationString = textField.text!
+                })
+                
+                self.presentViewController(alert, animated: true, completion: nil)
+                break;
+
+            
             
             default:   print("p471 end switch")
             break;
@@ -688,6 +724,8 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         var calendarName = defaults.stringForKey("calendarName")            //Cal.
         let alert       = defaults.objectForKey("eventAlert") as! Int ?? 10 //Alert
         let eventRepeat = defaults.stringForKey("eventRepeat")              //Repeat
+        let eventLocation = defaults.stringForKey("eventLocation") ?? ""    //Location
+
         
         var alertString = ""
         
@@ -697,8 +735,8 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
             alertString = "\(String(alert)) minutes"
         }
  
-        results = ["\"\(strRaw!)\"", actionType, day!, time, phone!, fullDT, fullDTEnd, output!, calendarName!, alertString, eventRepeat!]
-        print("p303 results: \(results)")
+        results = ["\"\(strRaw!)\"", actionType, day!, time, phone!, fullDT, fullDTEnd, output!, calendarName!, alertString, eventRepeat!, eventLocation]
+        print("p705 results: \(results)")
     }
     
     
@@ -727,6 +765,8 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         var calendarName = defaults.stringForKey("calendarName")            //Cal.
         let alert       = defaults.objectForKey("eventAlert") as! Int ?? 10 //Alert
         var eventRepeat = defaults.stringForKey("eventRepeat")!             //Repeat
+        let eventLocation = defaults.stringForKey("eventLocation") ?? ""    //Location
+
         
         var formatter3 = NSDateFormatter()
         formatter3.dateFormat = "M-dd-yyyy h:mm a"
@@ -743,10 +783,7 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         
         deleteRowCountArray = []
         print("p345 deleteRowCountArray: \(deleteRowCountArray)")
-        
-        print("p111Main ===================================")
-        print("p111Main results: \(results)")
-        
+  
         let outputNote  = defaults.stringForKey("outputNote")
         let duration    = defaults.objectForKey("eventDuration") as! Int ?? 10
         
@@ -765,7 +802,8 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         let defaultReminderID = defaults.stringForKey("defaultReminderID")
         let processNow = defaults.objectForKey("ProcessNow") as! Bool
         
-        
+        print("p111Main ===================================")
+        print("p111Main results: \(results)")
         print("p111Main ===================================")
         print("p111Main day: \(day)")
         print("p111Main phone: \(phone)")
@@ -777,6 +815,7 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         print("p111Main calandarName: \(calendarName)")
         print("p111Main alert: \(alert)")
         print("p111Main eventRepeat: \(eventRepeat)")
+        print("p111Main eventLocation: \(eventLocation)")
         print("p111Main strRaw: \(strRaw)")
         
         print("p111Main mainType: \(mainType)")
@@ -949,9 +988,9 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         print("p555 labelInput: \(labelInput)")
         print("p555 labelType: \(labelType)")
   
-        labels = [labelInput, labelType, labelDay, labelTime, labelCell, labelStart, labelEnd, labelTitle, labelCal, labelAlert, labelRepeat]
+        labels = [labelInput, labelType, labelDay, labelTime, labelCell, labelStart, labelEnd, labelTitle, labelCal, labelAlert, labelRepeat, labelLocation]
         
-        results = ["\"\(strRaw!)\"", actionType, day!, time, phone!, fullDT, fullDTEnd, output!, calendarName!, alertString, eventRepeat]
+        results = ["\"\(strRaw!)\"", actionType, day!, time, phone!, fullDT, fullDTEnd, output!, calendarName!, alertString, eventRepeat, eventLocation]
         
         print("p555 labels: \(labels)")
         print("p555 results: \(results)")

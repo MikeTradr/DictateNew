@@ -129,6 +129,8 @@ class DictateCode: NSObject {
         mainType = ""
         calendarName = ""   // set to blank so can process...
         listName = ""
+        eventLocation = ""
+        
         
         
         //eventDuration = 10  // TODO get from defaults screen
@@ -141,6 +143,7 @@ class DictateCode: NSObject {
         defaults.setObject(mainType, forKey: "mainType")            //sets mainType
        // defaults.setObject(eventDuration, forKey: "eventDuration")
         defaults.setObject(wordArrTrimmed, forKey: "wordArrTrimmed")
+        defaults.setObject(eventLocation, forKey: "eventLocation")
 
         
         print("p116 eventDuration from NSDefaults: \(eventDuration)")              // see what NSDefaults has!

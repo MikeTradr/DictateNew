@@ -537,6 +537,7 @@ class MainIC: WKInterfaceController {
         
         self.groupButtons.setHidden(true)
         self.groupResults.setHidden(true)
+        self.buttonGrLocation.setHidden(true)
 
     }
     

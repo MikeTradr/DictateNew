@@ -214,7 +214,9 @@ class GlanceController: WKInterfaceController {
             if ((timeUntilStart <= 0) && (timeUntilEnd >= 0)) {
                 timeUntil = "Now"
                 let neonRed = UIColor(red: 255, green: 51, blue: 0)
-                row.labelTimeUntil.setTextColor(neonRed)
+                //row.labelTimeUntil.setTextColor(neonRed)
+                row.labelTimeUntil.setTextColor(UIColor.yellowColor())
+
             } else {
                 row.labelTimeUntil.setTextColor(UIColor.greenColor())
             }

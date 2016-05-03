@@ -211,7 +211,27 @@ class TodayIC: WKInterfaceController {
             if ((timeUntilStart <= 0) && (timeUntilEnd >= 0)) {
                 timeUntil = "Now"
                 let neonRed = UIColor(red: 255, green: 51, blue: 0)
-                row.labelTimeUntil.setTextColor(neonRed)
+                //row.labelTimeUntil.setTextColor(neonRed)
+                row.labelTimeUntil.setTextColor(UIColor.yellowColor())
+                
+                //TODO Mike TODOA Anil Attributed work on WKInterfacelabel???
+                
+            /*
+                let titleData = timeUntil
+                
+                let myTitle = NSAttributedString(
+                    string: titleData,
+                    attributes: [NSFontAttributeName:UIFont(
+                        name: "Helvetica-Bold",
+                        size: 16.0)!,
+                        ])
+                
+                //pickerLabel.attributedText = myTitle
+                // self.titleLabel.setAttributedText(attributeString)
+
+                row.labelTimeUntil.setAttributedText(myTitle)
+              */
+
             } else {
                 row.labelTimeUntil.setTextColor(UIColor.greenColor())
             }

@@ -6,7 +6,7 @@
 //  Copyright © 2016 Mike Derr. All rights reserved.
 //
 
-/*
+
 import ClockKit
 
 
@@ -62,5 +62,3 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     }
     
 }
- 
- */

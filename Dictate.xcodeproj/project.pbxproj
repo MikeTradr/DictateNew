@@ -36,11 +36,9 @@
 		D31BF31C1CDAB93700521A65 /* DictateWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = D31BF2FA1CDAB93700521A65 /* DictateWatch.app */; };
 		D31BF3251CDABD0100521A65 /* GlanceTodayEventsTableRC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36DBDD41BD6DA870076A5C2 /* GlanceTodayEventsTableRC.swift */; };
 		D31BF3261CDABE2500521A65 /* TimeManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D397FDA11CAB1752005DD51A /* TimeManger.swift */; };
-		D31BF3271CDABE3B00521A65 /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38653F61BAA02F400B8CCBC /* EventManager.swift */; };
 		D31BF3281CDABE4800521A65 /* ReminderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF818621B84FAB70087ECAD /* ReminderManager.swift */; };
 		D31BF3291CDABE6200521A65 /* JTDateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB8620D1B77DEBD00503C50 /* JTDateHelper.m */; };
 		D31BF32A1CDAC12500521A65 /* DictateManagerIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B6F5F81BA60B7E0052B639 /* DictateManagerIC.swift */; };
-		D31BF32B1CDAC12C00521A65 /* NuanceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37CFBF41BD95F130005320D /* NuanceTest.swift */; };
 		D31BF32C1CDAC13800521A65 /* MainIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F8AD131B696FCD0070C097 /* MainIC.swift */; };
 		D31BF32D1CDAC13C00521A65 /* ReminderListsIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E810891B710690004AE5A9 /* ReminderListsIC.swift */; };
 		D31BF32E1CDAC14100521A65 /* ReminderItemsIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35588BB1BA937D20052892F /* ReminderItemsIC.swift */; };
@@ -64,11 +62,10 @@
 		D31BF3401CDAC2DC00521A65 /* NuanceHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = D33FEBB11BD76A70003E6755 /* NuanceHeader.m */; };
 		D31BF3411CDAC2F700521A65 /* DictateCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D323505D1B697B0200939F03 /* DictateCode.swift */; };
 		D31BF3421CDAC2FC00521A65 /* ReminderCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32350611B69828900939F03 /* ReminderCode.swift */; };
-		D31BF3441CDAC30500521A65 /* MailComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B929C31C634E9A00C1C535 /* MailComposer.swift */; };
 		D31BF3461CDAC30B00521A65 /* MessageCode_used?.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3188A6E1B6E9AE400323DC0 /* MessageCode_used?.swift */; };
 		D31BF3481CDAC31600521A65 /* EventCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A0F9FB1B69F0BB00F1FEDA /* EventCode.swift */; };
 		D31BF3491CDAC31D00521A65 /* FavoritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D98AF31BA54D5B00BA1901 /* FavoritesManager.swift */; };
-		D31BF34A1CDAC33A00521A65 /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB861DD1B77DBB700503C50 /* General.swift */; };
+		D31BF34C1CDB604F00521A65 /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38653F61BAA02F400B8CCBC /* EventManager.swift */; };
 		D31CB4B01BA2897500EC5418 /* CalendarPickerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31CB4AF1BA2897500EC5418 /* CalendarPickerTableViewController.swift */; };
 		D31CB4B21BA28A1800EC5418 /* SettingsCalendarListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31CB4B11BA28A1800EC5418 /* SettingsCalendarListTableViewCell.swift */; };
 		D323505E1B697B0200939F03 /* DictateCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D323505D1B697B0200939F03 /* DictateCode.swift */; };
@@ -1281,6 +1278,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D31BF34C1CDB604F00521A65 /* EventManager.swift in Sources */,
 				D31BF3401CDAC2DC00521A65 /* NuanceHeader.m in Sources */,
 				D31BF3341CDAC15F00521A65 /* EditEventDetailsIC.swift in Sources */,
 				D31BF3421CDAC2FC00521A65 /* ReminderCode.swift in Sources */,
@@ -1289,7 +1287,6 @@
 				D31BF3101CDAB93700521A65 /* ExtensionDelegate.swift in Sources */,
 				D31BF3331CDAC15B00521A65 /* EventDetailsIC.swift in Sources */,
 				D31BF3311CDAC15100521A65 /* TodayIC.swift in Sources */,
-				D31BF3271CDABE3B00521A65 /* EventManager.swift in Sources */,
 				D31BF3481CDAC31600521A65 /* EventCode.swift in Sources */,
 				D31BF3491CDAC31D00521A65 /* FavoritesManager.swift in Sources */,
 				D31BF3411CDAC2F700521A65 /* DictateCode.swift in Sources */,
@@ -1298,20 +1295,17 @@
 				D31BF32D1CDAC13C00521A65 /* ReminderListsIC.swift in Sources */,
 				D31BF3161CDAB93700521A65 /* ComplicationController.swift in Sources */,
 				D31BF3321CDAC15600521A65 /* TodayEventsTableRC.swift in Sources */,
-				D31BF34A1CDAC33A00521A65 /* General.swift in Sources */,
 				D31BF32F1CDAC14600521A65 /* ReminderListsTableRC.swift in Sources */,
 				D31BF3381CDAC17400521A65 /* TestIC.swift in Sources */,
 				D31BF3461CDAC30B00521A65 /* MessageCode_used?.swift in Sources */,
 				D31BF32E1CDAC14100521A65 /* ReminderItemsIC.swift in Sources */,
 				D31BF3371CDAC16F00521A65 /* SetCalendarTableRC.swift in Sources */,
-				D31BF3441CDAC30500521A65 /* MailComposer.swift in Sources */,
 				D31BF3291CDABE6200521A65 /* JTDateHelper.m in Sources */,
 				D31BF3351CDAC16400521A65 /* EventEditNotesIC.swift in Sources */,
 				D31BF3261CDABE2500521A65 /* TimeManger.swift in Sources */,
 				D31BF3301CDAC14B00521A65 /* ReminderItemsTableRC.swift in Sources */,
 				D31BF32C1CDAC13800521A65 /* MainIC.swift in Sources */,
 				D31BF30E1CDAB93700521A65 /* InterfaceController.swift in Sources */,
-				D31BF32B1CDAC12C00521A65 /* NuanceTest.swift in Sources */,
 				D31BF3251CDABD0100521A65 /* GlanceTodayEventsTableRC.swift in Sources */,
 				D31BF3141CDAB93700521A65 /* GlanceController.swift in Sources */,
 			);

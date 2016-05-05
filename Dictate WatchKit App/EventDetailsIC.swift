@@ -137,7 +137,7 @@ class EventDetailsIC: WKInterfaceController {
         
         if ((timeUntilStart <= 0) && (timeUntilEnd >= 0)) {
             timeUntil = "Now"
-            let neonRed = UIColor(red: 255, green: 51, blue: 0)
+            let neonRed = UIColor(red: 255, green: 51, blue: 0, alpha: 1)
             self.labelTimeUntil.setTextColor(neonRed)
         } else {
             self.labelTimeUntil.setTextColor(UIColor.greenColor())

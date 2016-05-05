@@ -8,7 +8,7 @@
 
 import WatchKit
 import Foundation
-import AVFoundation
+// import AVFoundation //commented for new watchExtension 040516
 
 
 

@@ -10,8 +10,8 @@ import WatchKit
 import Foundation
 import EventKit
 import Parse
-import AVFoundation
-import CoreTelephony
+// import AVFoundation //commented for new watchExtension 040516
+// import CoreTelephony //commented for new watchExtension 040516
 //import MessageUI
 
 

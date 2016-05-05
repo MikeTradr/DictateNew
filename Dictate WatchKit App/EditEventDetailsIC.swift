@@ -40,6 +40,7 @@ class EditEventDetailsIC: WKInterfaceController {
     func fetchEvents(){
         
         let dateHelper = JTDateHelper()
+        //let dateHelper = JTDate
         let startDate =  NSDate()
         let endDate = dateHelper.addToDate(startDate, days: 7)
         

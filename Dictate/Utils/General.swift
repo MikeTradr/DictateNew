@@ -8,7 +8,7 @@
 
 import UIKit
 import MessageUI //commented for new watchExtension 040516
-// import AVFoundation  //commented for new watchExtension 040516
+import AVFoundation  //commented for new watchExtension 040516
 import Parse
 import CoreTelephony
 //import CoreTelephony

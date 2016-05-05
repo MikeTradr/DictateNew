@@ -44,9 +44,12 @@ class GlanceController: WKInterfaceController {
     func fetchEvents(){
         
         //let dateHelper = JTDateHelper()
-        let dateHelper = JTDateHelper()
+       // let dateHelper = JTDateHelper()
         let startDate =  NSDate()
-        let endDate = dateHelper.addToDate(startDate, days: 1)
+        //let endDate = dateHelper.addToDate(startDate, days: 1)
+        
+        let calendar = NSCalendar.currentCalendar()
+        let endDate: NSDate = calendar.dateByAddingUnit(NSCalendarUnit.Day, value: 1, toDate: startDate, options: [])!
         
         print("w46 startDate: \(startDate)")
         print("w46 endDate: \(endDate)")

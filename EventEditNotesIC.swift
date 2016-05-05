@@ -9,12 +9,12 @@
 import WatchKit
 import Foundation
 // import AVFoundation //commented for new watchExtension 040516
-
+import EventKit
 
 
 class EventEditNotesIC: WKInterfaceController {
     
-    var audioPlayer = AVAudioPlayer()
+  //  var audioPlayer = AVAudioPlayer()
     var notes:String = ""
     var eventID:String = ""
     
@@ -51,8 +51,7 @@ class EventEditNotesIC: WKInterfaceController {
         //General.playSound(alertSound3!)
         
         //Second, we currently can't control sounds or haptic feedback from our app's code.
-        self.playSound(alertSound1)
-        
+     //   self.playSound(alertSound1) ////commented for new watchExtension 040516        
         let labelNotes:String = grabvoiceNotes()
         
         print("w32 labelNotes: \(labelNotes)")
@@ -69,7 +68,7 @@ class EventEditNotesIC: WKInterfaceController {
         //General.playSound(alertSound3!)
         
         //Second, we currently can't control sounds or haptic feedback from our app's code.
-        self.playSound(alertSound1)
+       //  self.playSound(alertSound1) ////commented for new watchExtension 040516
         
         let labelNotes:String = grabvoiceNotes()
         
@@ -87,7 +86,7 @@ class EventEditNotesIC: WKInterfaceController {
         //TODO make a general func call
         var alertSound1: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("212-buttonclick52", ofType: "mp3")!)
        
-        self.playSound(alertSound1)
+      //  self.playSound(alertSound1) ////commented for new watchExtension 040516
         
        // self.labelSaveNote.setText("Note for message, \"\(event.title)\" , has been updated")
         
@@ -102,7 +101,7 @@ class EventEditNotesIC: WKInterfaceController {
         self.groupNotesText.setHidden(true)
         self.groupSaveMessage.setHidden(false)
         
-        General().delay(3.0) {          // do stuff
+        WatchGeneral().delay(3.0) {          // do stuff
             
             self.presentControllerWithName("EventDetails", context: self.eventID)
         }
@@ -154,7 +153,7 @@ class EventEditNotesIC: WKInterfaceController {
     }
     
     
-    
+/* //   //commented for new watchExtension 040516
     func playSound(sound: NSURL){
         var error:NSError?
         do {
@@ -167,7 +166,7 @@ class EventEditNotesIC: WKInterfaceController {
         //audioPlayer.delegate = self
         self.audioPlayer.play()
     }
-
+*/
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         // Configure interface objects here.

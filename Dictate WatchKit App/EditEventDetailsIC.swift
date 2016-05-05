@@ -39,16 +39,16 @@ class EditEventDetailsIC: WKInterfaceController {
     
     func fetchEvents(){
         
-        let dateHelper = JTDateHelper()
+       // let dateHelper = JTDateHelper()
         //let dateHelper = JTDate
         let startDate =  NSDate()
-        let endDate = dateHelper.addToDate(startDate, days: 7)
+        //let endDate = dateHelper.addToDate(startDate, days: 7)
+        
+        let calendar = NSCalendar.currentCalendar()
+        let endDate: NSDate = calendar.dateByAddingUnit(NSCalendarUnit.Day, value: 7, toDate: startDate, options: [])!
         
         print("w46 startDate: \(startDate)")
         print("w46 endDate: \(endDate)")
-
-
-        
         
         EventManager.sharedInstance.fetchEventsFrom(startDate, endDate: endDate, completion: { (events) -> Void in
             self.allEvents = events

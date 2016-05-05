@@ -695,9 +695,12 @@ class EventManager: NSObject {
     }
     
     func countEventsToday(days:Int) -> Int {
-        let dateHelper = JTDateHelper()
+       // let dateHelper = JTDateHelper()
         let startDate =  NSDate()
-        var endDate = dateHelper.addToDate(startDate, days: days)
+       // var endDate = dateHelper.addToDate(startDate, days: days)
+        
+        let calendar = NSCalendar.currentCalendar()
+        var endDate: NSDate = calendar.dateByAddingUnit(NSCalendarUnit.Day, value: days, toDate: startDate, options: [])!
         
         if days == 0 {
             let today = NSDate()

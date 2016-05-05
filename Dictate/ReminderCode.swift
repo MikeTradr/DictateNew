@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 ThatSoft.com. All rights reserved.
 //
 
+/*
 import UIKit
 import EventKit
 //import Foundation
@@ -245,3 +246,5 @@ class ReminderCode: NSObject {
     
     
 }   //class event code
+ 
+*/

@@ -9,7 +9,7 @@
 
 import UIKit
 import EventKit
-import MessageUI //commented for new watchExtension 040516
+//import MessageUI //commented for new watchExtension 040516
 
 // TODO Anil wanted to add: UIViewController
 // for this error in line 81              self.presentViewController(alert, animated: true, completion: nil)
@@ -27,9 +27,14 @@ class ReminderManager: NSObject {
         return Static.instance!
     }
     
+
+    
     let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
 
     let eventStore = EKEventStore()
+    
+    var calendarDatabase = EKEventStore()   // from EKTest code...
+
 
     func getAccessToEventStoreForType(type:EKEntityType, completion:(granted:Bool)->Void){
         
@@ -221,19 +226,23 @@ class ReminderManager: NSObject {
                 fatalError()
             }
             print("Error: \(error)")
+       
             
-            // Handle situation if the calendar could not be saved
-            if calendarWasSaved == false {
-                let alert = UIAlertController(title: "Calendar could not save", message: error?.localizedDescription, preferredStyle: .Alert)
-                let OKAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
-                alert.addAction(OKAction)
+            #if os(iOS) || os(tvOS)
+                // Handle situation if the calendar could not be saved
+                if calendarWasSaved == false {
+                    let alert = UIAlertController(title: "Calendar could not save", message: error?.localizedDescription, preferredStyle: .Alert)
+                    let OKAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                    alert.addAction(OKAction)
                 
-        //        self.presentViewController(alert, animated: true, completion: nil)
-            } else {
-                
-        //todo Anil erro line below here
-           //     NSUserDefaults.standardUserDefaults().setObject(newCalendar.calendarIdentifier, forKey: "EventTrackerPrimaryCalendar")
-            }
+                    
+                    // self.presentViewController(alert, animated: true, completion: nil)
+                } else {
+                    
+                    //todo Anil erro line below here
+               // NSUserDefaults.standardUserDefaults().setObject(newCalendar.calendarIdentifier, forKey: "EventTrackerPrimaryCalendar")
+                }
+            #endif
             
             for item in items{
                 let reminder = EKReminder(eventStore: self.eventStore)
@@ -388,6 +397,81 @@ class ReminderManager: NSObject {
             }
 
         }   // if dest...
+    }
+    
+    func createReminder() {
+        
+        let mainType    = defaults.stringForKey("mainType")
+        let actionType  = defaults.stringForKey("actionType")
+        
+        let day         = defaults.stringForKey("day")
+        let phone       = defaults.stringForKey("phone")
+        
+        let startDT     = defaults.objectForKey("startDT")! as! NSDate
+        let endDT       = defaults.objectForKey("endDT")! as! NSDate
+        let output      = defaults.stringForKey("output")
+        let outputNote  = defaults.stringForKey("outputNote")
+        let duration    = defaults.stringForKey("eventDuration")
+        let calendarName    = defaults.stringForKey("calendarName")
+        let alert       = defaults.objectForKey("eventAlert") as! Double
+        let `repeat`      = defaults.stringForKey("eventRepeat")
+        
+        let reminderTitle = output
+        
+        var calendarDatabase = EKEventStore()   // from EKTest code...
+
+        let reminder = EKReminder(eventStore: calendarDatabase)
+        
+        reminder.title = reminderTitle!
+        
+        //____ add Reminder Alarm ____________________
+        
+        print("p161 Reminder: startDT: \(startDT)")
+        
+        var alarm = EKAlarm()
+        
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss +0000 "
+        
+        let noDate = dateFormatter.dateFromString("2014-12-12 00:00:00 +0000")  //need this to match set no date from DictateCode
+        
+        print("p171 Reminder noDate: \(noDate)")
+        
+        if (startDT != noDate) {        // if Date != no date string, set alarm for Reminder
+            alarm = EKAlarm(absoluteDate: startDT)
+        }
+        
+        reminder.addAlarm(alarm)
+        
+        //____ end add Reminder Alarm ____________________
+        
+        
+        reminder.calendar = calendarDatabase.defaultCalendarForNewReminders()   // WORKS to Default
+        
+        //reminder.calendar = calendarDatabase.calendarWithIdentifier("0x1702ae400")
+        
+        //TODO Crashes... Error getting default calendar for new reminders: Error Domain=EKCADErrorDomain Code=1014 "(null)"
+        // (lldb) po reminder.calendar
+        // <uninitialized>
+        
+        print("p192 reminder.calendar: \(reminder.calendar)")
+        
+        //reminder.calendar = calendarDatabase.defaultCalendarForNewReminders()
+        
+        var error: NSError?
+        
+        if error != nil{
+            print("errors: \(error?.localizedDescription)")
+        }
+        
+        print("p192 reminder: \(reminder)")
+        print("p192 reminder.calendar: \(reminder.calendar)")
+        
+        do {
+            try calendarDatabase.saveReminder(reminder, commit: true)
+        } catch let error1 as NSError {
+            error = error1
+        }
     }
     
     

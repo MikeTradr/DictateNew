@@ -41,9 +41,16 @@ class TodayIC: WKInterfaceController {
     
     func fetchEvents(){
         
-        let dateHelper = JTDateHelper()
+      //  let dateHelper = JTDateHelper()
         let startDate =  NSDate()
-        let endDate = dateHelper.addToDate(startDate, days: 10)
+        
+       // let cal = NSCalendar(calendarIdentifier: NSGregorianCalendar)
+       // let next10Days = cal!.dateByAddingUnit(NSCalendarUnit.Day, value: 10, toDate: today, options: .Day)
+        
+        let calendar = NSCalendar.currentCalendar()
+        let endDate: NSDate = calendar.dateByAddingUnit(NSCalendarUnit.Day, value: 10, toDate: startDate, options: [])!
+        
+       // let endDate = dateHelper.addToDate(startDate, days: 10)
         
         print("w46 startDate: \(startDate)")
         print("w46 endDate: \(endDate)")

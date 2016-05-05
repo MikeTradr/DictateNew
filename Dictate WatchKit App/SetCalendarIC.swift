@@ -8,6 +8,7 @@
 
 import WatchKit
 import Foundation
+import EventKit
 
 
 class SetCalendarIC: WKInterfaceController {
@@ -15,7 +16,7 @@ class SetCalendarIC: WKInterfaceController {
     var selectedRow:Int! = nil
     let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
     
-    let eventStore = EKEventStore()
+    let eventStore = EKEventStore()    
     var checked:Bool = false
     var eventID:String = ""
     var event:EKEvent = EKEvent(eventStore: EKEventStore())

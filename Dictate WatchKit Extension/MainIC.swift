@@ -380,8 +380,7 @@ class MainIC: WKInterfaceController {
                     print("w431 in Call Switch")
                     
                     let toPhone:String    = self.defaults.stringForKey("toPhone")!
-                    General().makeCall(toPhone)
-                    
+                   // WatchGeneral().makeCall(toPhone) //commented for new watchExtension 040516
                     break;
                     
                 case "Mail":
@@ -587,7 +586,7 @@ class MainIC: WKInterfaceController {
         //General.playSound(alertSound3!)
         
         //Second, we currently can't control sounds or haptic feedback from our app's code.
-        self.playSound(alertSound1)
+     //   self.playSound(alertSound1)   ////commented for new watchExtension 040516
         
         let (startDT, endDT, output, outputNote, day, calendarName, actionType) = grabvoice()
         
@@ -623,7 +622,9 @@ class MainIC: WKInterfaceController {
             //let notes:String = outputNote
             
             //ReminderCode().createReminder(title, notes: notes, startDT: startDT)
-            ReminderCode().createReminder()
+            //ReminderCode().createReminder()
+            ReminderManager().createReminder() //new watchExtension 040516
+
             
             var reminderList    = defaults.stringForKey("reminderList") ?? ""
             
@@ -699,7 +700,7 @@ class MainIC: WKInterfaceController {
             
             let toPhone:String    = defaults.stringForKey("toPhone")!
             
-            General().makeCall(toPhone)
+         //   General().makeCall(toPhone)   ////commented for new watchExtension 040516
             
             //  enteredText2.text = ""      // set to blank for return
             //   resultMessage.text = ""     // set to blank for return
@@ -776,12 +777,12 @@ class MainIC: WKInterfaceController {
         //TODO get these two fields from code!
         //TODO see here:
         print("p478 Device and Phone munber in here: \(NSUserDefaults.standardUserDefaults().dictionaryRepresentation())")
-        
+     /* ////commented for new watchExtension 040516
         let uuid = UIDevice.currentDevice().identifierForVendor!.UUIDString
         let device = UIDevice.currentDevice().model
         
         let systemVersion = UIDevice.currentDevice().systemVersion
-        
+     */
         //let modelName = UIDevice.currentDevice().modelName
         let modelName = "Watch"
 
@@ -790,17 +791,17 @@ class MainIC: WKInterfaceController {
         // memory = memory/(1024 * 1024 * 1024)
         
         // Setup the Network Info and create a CTCarrier object
-        let networkInfo = CTTelephonyNetworkInfo()
-        let carrier = networkInfo.subscriberCellularProvider
+    //    let networkInfo = CTTelephonyNetworkInfo()    ////commented for new watchExtension 040516
+     //   let carrier = networkInfo.subscriberCellularProvider ////commented for new watchExtension 040516
         
         // Get carrier name
         // TODO Mike Anil crashes on watch!
         //let carrierName: String = carrier!.carrierName!
         
         
-        print("p822 uuid: \(uuid)")
-        print("p822 device: \(device)")
-        print("p822 systemVersion: \(systemVersion)")
+  //      print("p822 uuid: \(uuid)")
+  //      print("p822 device: \(device)")
+  //      print("p822 systemVersion: \(systemVersion)")
         print("p822 modelName: \(modelName)")
         print("p822 memory: \(memory)")
    //     print("p822 carrierName: \(carrierName)")
@@ -813,7 +814,7 @@ class MainIC: WKInterfaceController {
         
         
         rawDataObject["device"] = deviceComplete
-        rawDataObject["system"] = systemVersion
+        rawDataObject["system"] = "watchOS" //systemVersion
         rawDataObject["carrier"] = "Watch" //carrierName
         
         
@@ -922,7 +923,7 @@ class MainIC: WKInterfaceController {
         
         print("w593 we here?")
         
-        General().delay(3.0) {          // do stuff
+        WatchGeneral().delay(3.0) {          // do stuff
             self.myLabel.setTextColor(UIColor.yellowColor())
             self.myLabel.setText("Tap Mic to dictate or force touch")
             self.groupNavigation.setHidden(false)

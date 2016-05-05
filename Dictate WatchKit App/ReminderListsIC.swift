@@ -34,7 +34,7 @@ class ReminderListsIC: WKInterfaceController {
     var showListsView:Bool = true
     var checked:Bool = false
     
-    var audioPlayer = AVAudioPlayer()
+ //   var audioPlayer = AVAudioPlayer() //commented for new watchExtension 040516
     var reminderListColor:UIColor = UIColor.greenColor()
 
 
@@ -362,7 +362,7 @@ class ReminderListsIC: WKInterfaceController {
                 
                 var alertSound1: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("beep-08b", ofType: "mp3")!)
                 
-                self.playSound(alertSound1)
+ //               self.playSound(alertSound1) ////commented for new watchExtension 040516
             } else {                        // Turn checkmark on
                 row.imageCheckbox.setImageNamed("cbChecked40px")
                 row.tableRowLabel.setTextColor(veryDarkGray)
@@ -371,14 +371,14 @@ class ReminderListsIC: WKInterfaceController {
                 //TODO Mike TODO Anil fix sound call.
                 //DictateManagerIC.sharedInstance.playSound(alertSound1)
                 
-                self.playSound(alertSound1)
+ //               self.playSound(alertSound1) ////commented for new watchExtension 040516
                 //self.labelShowCompleted.setText("Item Completed")
                 //self.labelShowCompleted.setTextColor(UIColor.yellowColor())
                 
                 self.labelShowCompleted.setHidden(true)
                 self.labelCompleted.setHidden(false)
                 
-                General().delay(3.0) {          // do stuff
+                WatchGeneral().delay(3.0) {          // do stuff
                     self.labelShowCompleted.setHidden(false)
                     self.labelCompleted.setHidden(true)
                    // self.labelShowCompleted.setText("Show Completed")
@@ -417,7 +417,7 @@ class ReminderListsIC: WKInterfaceController {
         return nil
     }
 */
-    
+/*
     func playSound(sound: NSURL){
         do {
             self.audioPlayer = try AVAudioPlayer(contentsOfURL: sound)
@@ -428,7 +428,7 @@ class ReminderListsIC: WKInterfaceController {
         //audioPlayer.delegate = self
         self.audioPlayer.play()
     }
-    
+ */
 
     override func didDeactivate() {
         // This method is called when watch view controller is no longer visible

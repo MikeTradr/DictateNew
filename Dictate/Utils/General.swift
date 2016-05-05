@@ -7,10 +7,11 @@
 //
 
 import UIKit
-import MessageUI
-import AVFoundation
+import MessageUI //commented for new watchExtension 040516
+// import AVFoundation  //commented for new watchExtension 040516
 import Parse
 import CoreTelephony
+//import CoreTelephony
 
 class General: NSObject, UITextFieldDelegate, MFMailComposeViewControllerDelegate {
     
@@ -150,7 +151,7 @@ class General: NSObject, UITextFieldDelegate, MFMailComposeViewControllerDelegat
             
         }
         
-        //print("p\(__LINE__) uuid: \(uuid)")
+        //print("p\(#line) uuid: \(uuid)")
         print("p127 uuid: \(uuid)")
         print("p127 device: \(device)")
         print("p127 systemVersion: \(systemVersion)")
@@ -191,7 +192,7 @@ class General: NSObject, UITextFieldDelegate, MFMailComposeViewControllerDelegat
             rawDataObject["userName"] = PFUser.currentUser()!.username!
         }
         
-        print("p\(__LINE__) we here? ")
+        print("p\(#line) we here? ")
         print("p168 we here? ")
         
         //TODO works, hard coded name for now Anil help

@@ -9,7 +9,7 @@
 import WatchKit
 import Foundation
 import Parse
-import AVFoundation
+//import AVFoundation //commented for new watchExtension 040516
 
 
 var results = []

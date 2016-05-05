@@ -1,13 +1,12 @@
 //
 //  ComplicationController.swift
-//  WatchTest WatchKit Extension
+//  DictateWatch Extension
 //
-//  Created by Mike Derr on 4/26/16.
-//  Copyright © 2016 Mike Derr. All rights reserved.
+//  Created by Mike Derr on 5/4/16.
+//  Copyright © 2016 ThatSoft.com. All rights reserved.
 //
 
-/*
- import ClockKit
+import ClockKit
 
 
 class ComplicationController: NSObject, CLKComplicationDataSource {
@@ -62,4 +61,3 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     }
     
 }
- */

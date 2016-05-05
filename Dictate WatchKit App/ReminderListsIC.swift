@@ -10,7 +10,7 @@ import WatchKit
 import Foundation
 import EventKit
 //import Parse
-import AVFoundation
+//import AVFoundation  //commented for new watchExtension 040516
 
 
 

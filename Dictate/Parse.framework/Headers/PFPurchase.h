@@ -4,6 +4,8 @@
 //  Copyright 2011-present Parse Inc. All rights reserved.
 //
 
+/*!  //commented for new watchExtension 040516
+ 
 #import <Foundation/Foundation.h>
 #import <StoreKit/StoreKit.h>
 
@@ -16,7 +18,7 @@
 
  This class is currently for iOS only.
  */
-@interface PFPurchase : NSObject
+//@interface PFPurchase : NSObject
 
 /*!
  @abstract Add application logic block which is run when buying a product.
@@ -29,8 +31,8 @@
  @param productIdentifier the product identifier
  @param block The block to be run when buying a product.
  */
-+ (void)addObserverForProduct:(NSString *)productIdentifier
-                        block:(void(^)(SKPaymentTransaction *transaction))block;
+//+ (void)addObserverForProduct:(NSString *)productIdentifier
+//                        block:(void(^)(SKPaymentTransaction *transaction))block;
 
 /*!
  @abstract *Asynchronously* initiates the purchase for the product.
@@ -38,7 +40,7 @@
  @param productIdentifier the product identifier
  @param block the completion block.
  */
-+ (void)buyProduct:(NSString *)productIdentifier block:(void(^)(NSError *error))block;
+//+ (void)buyProduct:(NSString *)productIdentifier block:(void(^)(NSError *error))block;
 
 /*!
  @abstract *Asynchronously* download the purchased asset, which is stored on Parse's server.
@@ -48,8 +50,8 @@
  @param transaction the transaction, which contains the receipt.
  @param completion the completion block.
  */
-+ (void)downloadAssetForTransaction:(SKPaymentTransaction *)transaction
-                         completion:(void(^)(NSString *filePath, NSError *error))completion;
+//+ (void)downloadAssetForTransaction:(SKPaymentTransaction *)transaction
+//                         completion:(void(^)(NSString *filePath, NSError *error))completion;
 
 /*!
  @abstract *Asynchronously* download the purchased asset, which is stored on Parse's server.
@@ -60,9 +62,9 @@
  @param completion the completion block.
  @param progress the progress block, which is called multiple times to reveal progress of the download.
  */
-+ (void)downloadAssetForTransaction:(SKPaymentTransaction *)transaction
-                         completion:(void(^)(NSString *filePath, NSError *error))completion
-                           progress:(PFProgressBlock)progress;
+//+ (void)downloadAssetForTransaction:(SKPaymentTransaction *)transaction
+//                         completion:(void(^)(NSString *filePath, NSError *error))completion
+//                           progress:(PFProgressBlock)progress;
 
 /*!
  @abstract *Asynchronously* restore completed transactions for the current user.
@@ -73,7 +75,7 @@
  @warning This method is only important to developers who want to preserve purchase states across
  different installations of the same app.
  */
-+ (void)restore;
+//+ (void)restore;
 
 /*
  @abstract Returns a content path of the asset of a product, if it was purchased and downloaded.
@@ -82,6 +84,8 @@
 
  @warning This method will return `nil`, if the purchase wasn't verified or if the asset was not downloaded.
  */
-+ (NSString *)assetContentPathForProduct:(PFProduct *)product;
+//+ (NSString *)assetContentPathForProduct:(PFProduct *)product;
 
-@end
+//@end
+
+//*/

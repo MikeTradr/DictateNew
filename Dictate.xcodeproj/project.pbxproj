@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		D305C8121C614C4B00529926 /* PZDisclosureIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D305C8111C614C4B00529926 /* PZDisclosureIndicator.swift */; };
-		D306CDA81BB1315D00FD973F /* SetCalendarIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D306CDA71BB1315D00FD973F /* SetCalendarIC.swift */; };
 		D3089C651BA2713B00C58D6D /* SettingsReminderListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3089C641BA2713B00C58D6D /* SettingsReminderListTableViewCell.swift */; };
 		D3188A6C1B6E9ADB00323DC0 /* MessageComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3188A6B1B6E9ADB00323DC0 /* MessageComposer.swift */; };
 		D3188A6D1B6E9ADB00323DC0 /* MessageComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3188A6B1B6E9ADB00323DC0 /* MessageComposer.swift */; };
@@ -26,13 +25,53 @@
 		D3188A871B6E9BF900323DC0 /* vcTest1_OLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3188A861B6E9BF900323DC0 /* vcTest1_OLD.swift */; };
 		D3188A891B6E9C0800323DC0 /* ToDoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3188A881B6E9C0800323DC0 /* ToDoTableViewController.swift */; };
 		D3188A8B1B6E9C1100323DC0 /* vcTodayTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3188A8A1B6E9C1100323DC0 /* vcTodayTable.swift */; };
-		D31C6C411BB435BA00A04B58 /* SetCalendarTableRC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31C6C401BB435BA00A04B58 /* SetCalendarTableRC.swift */; };
+		D31BF3001CDAB93700521A65 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D31BF2FF1CDAB93700521A65 /* Assets.xcassets */; };
+		D31BF3071CDAB93700521A65 /* DictateWatch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D31BF3061CDAB93700521A65 /* DictateWatch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		D31BF30E1CDAB93700521A65 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31BF30D1CDAB93700521A65 /* InterfaceController.swift */; };
+		D31BF3101CDAB93700521A65 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31BF30F1CDAB93700521A65 /* ExtensionDelegate.swift */; };
+		D31BF3121CDAB93700521A65 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31BF3111CDAB93700521A65 /* NotificationController.swift */; };
+		D31BF3141CDAB93700521A65 /* GlanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31BF3131CDAB93700521A65 /* GlanceController.swift */; };
+		D31BF3161CDAB93700521A65 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31BF3151CDAB93700521A65 /* ComplicationController.swift */; };
+		D31BF3181CDAB93700521A65 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D31BF3171CDAB93700521A65 /* Assets.xcassets */; };
+		D31BF31C1CDAB93700521A65 /* DictateWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = D31BF2FA1CDAB93700521A65 /* DictateWatch.app */; };
+		D31BF3251CDABD0100521A65 /* GlanceTodayEventsTableRC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36DBDD41BD6DA870076A5C2 /* GlanceTodayEventsTableRC.swift */; };
+		D31BF3261CDABE2500521A65 /* TimeManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D397FDA11CAB1752005DD51A /* TimeManger.swift */; };
+		D31BF3271CDABE3B00521A65 /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38653F61BAA02F400B8CCBC /* EventManager.swift */; };
+		D31BF3281CDABE4800521A65 /* ReminderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF818621B84FAB70087ECAD /* ReminderManager.swift */; };
+		D31BF3291CDABE6200521A65 /* JTDateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB8620D1B77DEBD00503C50 /* JTDateHelper.m */; };
+		D31BF32A1CDAC12500521A65 /* DictateManagerIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B6F5F81BA60B7E0052B639 /* DictateManagerIC.swift */; };
+		D31BF32B1CDAC12C00521A65 /* NuanceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37CFBF41BD95F130005320D /* NuanceTest.swift */; };
+		D31BF32C1CDAC13800521A65 /* MainIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F8AD131B696FCD0070C097 /* MainIC.swift */; };
+		D31BF32D1CDAC13C00521A65 /* ReminderListsIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E810891B710690004AE5A9 /* ReminderListsIC.swift */; };
+		D31BF32E1CDAC14100521A65 /* ReminderItemsIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35588BB1BA937D20052892F /* ReminderItemsIC.swift */; };
+		D31BF32F1CDAC14600521A65 /* ReminderListsTableRC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FA08041BA7F6EB006A91C2 /* ReminderListsTableRC.swift */; };
+		D31BF3301CDAC14B00521A65 /* ReminderItemsTableRC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35588BD1BA938A00052892F /* ReminderItemsTableRC.swift */; };
+		D31BF3311CDAC15100521A65 /* TodayIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E810831B70F4BC004AE5A9 /* TodayIC.swift */; };
+		D31BF3321CDAC15600521A65 /* TodayEventsTableRC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA3ACD1BAE73F4002FDD21 /* TodayEventsTableRC.swift */; };
+		D31BF3331CDAC15B00521A65 /* EventDetailsIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31E1DB61BAEEA1700BC7B99 /* EventDetailsIC.swift */; };
+		D31BF3341CDAC15F00521A65 /* EditEventDetailsIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31E1DB81BAEEA2A00BC7B99 /* EditEventDetailsIC.swift */; };
+		D31BF3351CDAC16400521A65 /* EventEditNotesIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BE2D2A1BB126EA00376686 /* EventEditNotesIC.swift */; };
+		D31BF3361CDAC16900521A65 /* SetCalendarIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D306CDA71BB1315D00FD973F /* SetCalendarIC.swift */; };
+		D31BF3371CDAC16F00521A65 /* SetCalendarTableRC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31C6C401BB435BA00A04B58 /* SetCalendarTableRC.swift */; };
+		D31BF3381CDAC17400521A65 /* TestIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3711F041BB04E0E00D19AE9 /* TestIC.swift */; };
+		D31BF3391CDAC27100521A65 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC0B48921B6FEAC400C0AD82 /* Parse.framework */; };
+		D31BF33A1CDAC27A00521A65 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3B6E24C1BD977B200C7B822 /* Fabric.framework */; };
+		D31BF33B1CDAC28000521A65 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3B6E24D1BD977B200C7B822 /* Crashlytics.framework */; };
+		D31BF33C1CDAC28700521A65 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC0B48911B6FEAC400C0AD82 /* Bolts.framework */; };
+		D31BF33D1CDAC29100521A65 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC0B48891B6FE9FF00C0AD82 /* AudioToolbox.framework */; };
+		D31BF33E1CDAC29900521A65 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC0B48851B6FE9EB00C0AD82 /* SystemConfiguration.framework */; };
+		D31BF33F1CDAC2A100521A65 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC0B48811B6FE9D300C0AD82 /* Security.framework */; };
+		D31BF3401CDAC2DC00521A65 /* NuanceHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = D33FEBB11BD76A70003E6755 /* NuanceHeader.m */; };
+		D31BF3411CDAC2F700521A65 /* DictateCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D323505D1B697B0200939F03 /* DictateCode.swift */; };
+		D31BF3421CDAC2FC00521A65 /* ReminderCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32350611B69828900939F03 /* ReminderCode.swift */; };
+		D31BF3441CDAC30500521A65 /* MailComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B929C31C634E9A00C1C535 /* MailComposer.swift */; };
+		D31BF3461CDAC30B00521A65 /* MessageCode_used?.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3188A6E1B6E9AE400323DC0 /* MessageCode_used?.swift */; };
+		D31BF3481CDAC31600521A65 /* EventCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A0F9FB1B69F0BB00F1FEDA /* EventCode.swift */; };
+		D31BF3491CDAC31D00521A65 /* FavoritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D98AF31BA54D5B00BA1901 /* FavoritesManager.swift */; };
+		D31BF34A1CDAC33A00521A65 /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB861DD1B77DBB700503C50 /* General.swift */; };
 		D31CB4B01BA2897500EC5418 /* CalendarPickerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31CB4AF1BA2897500EC5418 /* CalendarPickerTableViewController.swift */; };
 		D31CB4B21BA28A1800EC5418 /* SettingsCalendarListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31CB4B11BA28A1800EC5418 /* SettingsCalendarListTableViewCell.swift */; };
-		D31E1DB71BAEEA1700BC7B99 /* EventDetailsIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31E1DB61BAEEA1700BC7B99 /* EventDetailsIC.swift */; };
-		D31E1DB91BAEEA2A00BC7B99 /* EditEventDetailsIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31E1DB81BAEEA2A00BC7B99 /* EditEventDetailsIC.swift */; };
 		D323505E1B697B0200939F03 /* DictateCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D323505D1B697B0200939F03 /* DictateCode.swift */; };
-		D323505F1B697B0200939F03 /* DictateCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D323505D1B697B0200939F03 /* DictateCode.swift */; };
 		D32350621B69828900939F03 /* ReminderCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32350611B69828900939F03 /* ReminderCode.swift */; };
 		D32350631B69828900939F03 /* ReminderCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32350611B69828900939F03 /* ReminderCode.swift */; };
 		D32AB8F41BB96DC800139112 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3F8ACF11B696FB00070C097 /* Images.xcassets */; };
@@ -60,20 +99,12 @@
 		D33FEBAF1BD769EB003E6755 /* NuanceHeader.h in Sources */ = {isa = PBXBuildFile; fileRef = D33FEBAE1BD769EB003E6755 /* NuanceHeader.h */; };
 		D33FEBB01BD769F6003E6755 /* NuanceHeader.h in Sources */ = {isa = PBXBuildFile; fileRef = D33FEBAE1BD769EB003E6755 /* NuanceHeader.h */; };
 		D33FEBB21BD76A70003E6755 /* NuanceHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = D33FEBB11BD76A70003E6755 /* NuanceHeader.m */; };
-		D33FEBB31BD76A70003E6755 /* NuanceHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = D33FEBB11BD76A70003E6755 /* NuanceHeader.m */; };
 		D34395721BA32964002D98EA /* ReminderListPickerIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34395711BA32964002D98EA /* ReminderListPickerIC.swift */; };
 		D34451981C8505C5007F3DDD /* CalendarPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34451971C8505C5007F3DDD /* CalendarPickerViewController.swift */; };
-		D35588BC1BA937D20052892F /* ReminderItemsIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35588BB1BA937D20052892F /* ReminderItemsIC.swift */; };
-		D35588BE1BA938A00052892F /* ReminderItemsTableRC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35588BD1BA938A00052892F /* ReminderItemsTableRC.swift */; };
 		D355D97C1BA7DD3F00DADD72 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D355D97B1BA7DD3F00DADD72 /* Main.storyboard */; };
 		D369819D1C7BB05400ED0AD8 /* DatePopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D369819C1C7BB05400ED0AD8 /* DatePopupViewController.swift */; };
-		D36DBDD51BD6DA870076A5C2 /* GlanceTodayEventsTableRC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36DBDD41BD6DA870076A5C2 /* GlanceTodayEventsTableRC.swift */; };
-		D3711F051BB04E0E00D19AE9 /* TestIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3711F041BB04E0E00D19AE9 /* TestIC.swift */; };
 		D3795E7A1B8DF927009D3DB5 /* SettingsEventTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3795E791B8DF927009D3DB5 /* SettingsEventTableViewController.swift */; };
-		D3795E7B1B8F654F009D3DB5 /* ReminderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF818621B84FAB70087ECAD /* ReminderManager.swift */; };
-		D37CFBF51BD95F130005320D /* NuanceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37CFBF41BD95F130005320D /* NuanceTest.swift */; };
 		D38653F71BAA02F400B8CCBC /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38653F61BAA02F400B8CCBC /* EventManager.swift */; };
-		D38653F81BAA02F400B8CCBC /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38653F61BAA02F400B8CCBC /* EventManager.swift */; };
 		D392FAD41B9B1BA800678B18 /* SettingsFriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D392FAD31B9B1BA800678B18 /* SettingsFriendsTableViewController.swift */; };
 		D392FAD61B9B1C7E00678B18 /* SettingsInstructionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D392FAD51B9B1C7E00678B18 /* SettingsInstructionsTableViewController.swift */; };
 		D392FAD81B9B1D3600678B18 /* SettingsKeywordsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D392FAD71B9B1D3600678B18 /* SettingsKeywordsTableViewController.swift */; };
@@ -86,20 +117,15 @@
 		D3AD9B541C5D5439006387C4 /* DetailsTableVC_OLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AD9B531C5D5439006387C4 /* DetailsTableVC_OLD.swift */; };
 		D3AD9B581C5E3475006387C4 /* DetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AD9B571C5E3475006387C4 /* DetailsTableViewCell.swift */; };
 		D3AD9B5A1C5E5245006387C4 /* DetailTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AD9B591C5E5245006387C4 /* DetailTableVC.swift */; };
-		D3B1800D1CB76F11003360C0 /* TimeManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D397FDA11CAB1752005DD51A /* TimeManger.swift */; };
 		D3B226201C8CAF51009C0DBA /* SettingsAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B2261F1C8CAF51009C0DBA /* SettingsAboutViewController.swift */; };
 		D3B323F01CD026AE00B29A96 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B323EF1CD026AE00B29A96 /* ExtensionDelegate.swift */; };
 		D3B323F21CD026B800B29A96 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B323F11CD026B800B29A96 /* ComplicationController.swift */; };
 		D3B6E24E1BD977B200C7B822 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3B6E24C1BD977B200C7B822 /* Fabric.framework */; };
-		D3B6E24F1BD977B200C7B822 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3B6E24C1BD977B200C7B822 /* Fabric.framework */; };
 		D3B6E2501BD977B200C7B822 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3B6E24D1BD977B200C7B822 /* Crashlytics.framework */; };
-		D3B6E2511BD977B200C7B822 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3B6E24D1BD977B200C7B822 /* Crashlytics.framework */; };
-		D3B6F5F91BA60B7E0052B639 /* DictateManagerIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B6F5F81BA60B7E0052B639 /* DictateManagerIC.swift */; };
 		D3B703801B935AC200FA1DF0 /* SettingsReminderTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B7037F1B935AC200FA1DF0 /* SettingsReminderTableViewController.swift */; };
 		D3B703821B94E90800FA1DF0 /* ReminderListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B703811B94E90800FA1DF0 /* ReminderListTableViewController.swift */; };
 		D3B929C41C634E9A00C1C535 /* MailComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B929C31C634E9A00C1C535 /* MailComposer.swift */; };
 		D3BD1BDE1B9F3CF10052A312 /* ReminderPickerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BD1BDD1B9F3CF10052A312 /* ReminderPickerTableViewController.swift */; };
-		D3BE2D2B1BB1287C00376686 /* EventEditNotesIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BE2D2A1BB126EA00376686 /* EventEditNotesIC.swift */; };
 		D3CEC17D1BD77A76001A50F8 /* earcon_cancel.wav in Resources */ = {isa = PBXBuildFile; fileRef = D3CEC17C1BD77A76001A50F8 /* earcon_cancel.wav */; };
 		D3CEC17E1BD77A76001A50F8 /* earcon_cancel.wav in Resources */ = {isa = PBXBuildFile; fileRef = D3CEC17C1BD77A76001A50F8 /* earcon_cancel.wav */; };
 		D3CEC1801BD77A7F001A50F8 /* earcon_done_listening.wav in Resources */ = {isa = PBXBuildFile; fileRef = D3CEC17F1BD77A7F001A50F8 /* earcon_done_listening.wav */; };
@@ -108,7 +134,6 @@
 		D3CEC1841BD77A88001A50F8 /* earcon_listening.wav in Resources */ = {isa = PBXBuildFile; fileRef = D3CEC1821BD77A88001A50F8 /* earcon_listening.wav */; };
 		D3D98AF41BA54D5B00BA1901 /* FavoritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D98AF31BA54D5B00BA1901 /* FavoritesManager.swift */; };
 		D3D98AF51BA54D5B00BA1901 /* FavoritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D98AF31BA54D5B00BA1901 /* FavoritesManager.swift */; };
-		D3DA3ACE1BAE73F4002FDD21 /* TodayEventsTableRC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA3ACD1BAE73F4002FDD21 /* TodayEventsTableRC.swift */; };
 		D3DA3AD31BAE8054002FDD21 /* ShowCalendarsIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA3AD21BAE8054002FDD21 /* ShowCalendarsIC.swift */; };
 		D3DA3AD51BAE8066002FDD21 /* ShowCalendarsTableRC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA3AD41BAE8066002FDD21 /* ShowCalendarsTableRC.swift */; };
 		D3DA3AD71BAE834B002FDD21 /* ShowRemindersIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA3AD61BAE834B002FDD21 /* ShowRemindersIC.swift */; };
@@ -117,26 +142,19 @@
 		D3DA3ADD1BAE84B2002FDD21 /* DefaultReminderListTableRC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA3ADC1BAE84B2002FDD21 /* DefaultReminderListTableRC.swift */; };
 		D3DA3ADF1BAE8513002FDD21 /* CalendarSettingsIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA3ADE1BAE8513002FDD21 /* CalendarSettingsIC.swift */; };
 		D3DA3AE11BAE8521002FDD21 /* ReminderSettingsIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA3AE01BAE8521002FDD21 /* ReminderSettingsIC.swift */; };
-		D3E810851B70F4BC004AE5A9 /* TodayIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E810831B70F4BC004AE5A9 /* TodayIC.swift */; };
 		D3E810881B70FEA0004AE5A9 /* SettingsIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E810871B70FEA0004AE5A9 /* SettingsIC.swift */; };
-		D3E8108A1B710690004AE5A9 /* ReminderListsIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E810891B710690004AE5A9 /* ReminderListsIC.swift */; };
-		D3E8FE8A1B73AB680050A37C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC0B48891B6FE9FF00C0AD82 /* AudioToolbox.framework */; };
 		D3E8FE8B1B73ABB00050A37C /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EC0B487D1B6FE9B800C0AD82 /* libsqlite3.0.dylib */; };
-		D3E8FE8C1B73ABDB0050A37C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC0B48851B6FE9EB00C0AD82 /* SystemConfiguration.framework */; };
-		D3E8FE8D1B73ABE50050A37C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC0B48811B6FE9D300C0AD82 /* Security.framework */; };
 		D3F8ACEB1B696FB00070C097 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F8ACEA1B696FB00070C097 /* AppDelegate.swift */; };
 		D3F8ACED1B696FB00070C097 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F8ACEC1B696FB00070C097 /* ViewController.swift */; };
 		D3F8ACF21B696FB00070C097 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3F8ACF11B696FB00070C097 /* Images.xcassets */; };
 		D3F8ACF51B696FB00070C097 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3F8ACF31B696FB00070C097 /* LaunchScreen.xib */; };
-		D3F8AD141B696FCD0070C097 /* MainIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F8AD131B696FCD0070C097 /* MainIC.swift */; };
 		D3F8AD161B696FCD0070C097 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F8AD151B696FCD0070C097 /* NotificationController.swift */; };
-		D3F8AD181B696FCD0070C097 /* GlanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F8AD171B696FCD0070C097 /* GlanceController.swift */; };
+		D3F8AD181B696FCD0070C097 /* GlanceControllerOLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F8AD171B696FCD0070C097 /* GlanceControllerOLD.swift */; };
 		D3F8AD1A1B696FCD0070C097 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3F8AD191B696FCD0070C097 /* Images.xcassets */; };
 		D3F8AD1E1B696FCD0070C097 /* Dictate WatchKit App.app in Resources */ = {isa = PBXBuildFile; fileRef = D3F8AD1D1B696FCD0070C097 /* Dictate WatchKit App.app */; };
 		D3F8AD261B696FCE0070C097 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3F8AD241B696FCD0070C097 /* Interface.storyboard */; };
 		D3F8AD281B696FCE0070C097 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3F8AD271B696FCE0070C097 /* Images.xcassets */; };
 		D3F8AD2B1B696FCE0070C097 /* Dictate WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D3F8AD0E1B696FCD0070C097 /* Dictate WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		D3FA08051BA7F6EB006A91C2 /* ReminderListsTableRC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FA08041BA7F6EB006A91C2 /* ReminderListsTableRC.swift */; };
 		EC0B487E1B6FE9B800C0AD82 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EC0B487D1B6FE9B800C0AD82 /* libsqlite3.0.dylib */; };
 		EC0B48801B6FE9C700C0AD82 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC0B487F1B6FE9C700C0AD82 /* CFNetwork.framework */; };
 		EC0B48821B6FE9D300C0AD82 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC0B48811B6FE9D300C0AD82 /* Security.framework */; };
@@ -147,11 +165,8 @@
 		EC0B488E1B6FEA1F00C0AD82 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC0B488D1B6FEA1F00C0AD82 /* CoreGraphics.framework */; };
 		EC0B48931B6FEAC400C0AD82 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC0B48911B6FEAC400C0AD82 /* Bolts.framework */; };
 		EC0B48941B6FEAC400C0AD82 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC0B48921B6FEAC400C0AD82 /* Parse.framework */; };
-		EC0B48951B6FEBA600C0AD82 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC0B48911B6FEAC400C0AD82 /* Bolts.framework */; };
-		EC0B48961B6FEBA600C0AD82 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC0B48921B6FEAC400C0AD82 /* Parse.framework */; };
 		EC3E611B1BD774030034E568 /* SpeechKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC3E611A1BD774030034E568 /* SpeechKit.framework */; };
 		EC82CF631BAAE26F00722611 /* UILabel+WhiteUIDatePickerLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = EC82CF621BAAE26F00722611 /* UILabel+WhiteUIDatePickerLabel.m */; };
-		ECB1DCC91BAEB7F100A67B6D /* JTDateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB8620D1B77DEBD00503C50 /* JTDateHelper.m */; };
 		ECB861E01B77DBB700503C50 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB861DC1B77DBB700503C50 /* Constants.swift */; };
 		ECB861E11B77DBB700503C50 /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB861DD1B77DBB700503C50 /* General.swift */; };
 		ECB861E21B77DBB700503C50 /* SwiftColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB861DE1B77DBB700503C50 /* SwiftColors.swift */; };
@@ -167,7 +182,6 @@
 		ECB861FB1B77DCB000503C50 /* button-14.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ECB861EF1B77DCB000503C50 /* button-14.mp3 */; };
 		ECB861FC1B77DCB000503C50 /* button-43.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ECB861F01B77DCB000503C50 /* button-43.mp3 */; };
 		ECB861FD1B77DCB000503C50 /* se_tap.m4a in Resources */ = {isa = PBXBuildFile; fileRef = ECB861F11B77DCB000503C50 /* se_tap.m4a */; };
-		ECB861FE1B77DCDC00503C50 /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB861DD1B77DBB700503C50 /* General.swift */; };
 		ECB862021B77DD4100503C50 /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB862011B77DD4100503C50 /* TodayViewController.m */; };
 		ECB8622B1B77DEBD00503C50 /* CALEventManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB862041B77DEBD00503C50 /* CALEventManager.m */; };
 		ECB8622C1B77DEBD00503C50 /* JTCalendarManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB862091B77DEBD00503C50 /* JTCalendarManager.m */; };
@@ -195,6 +209,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		D31BF3081CDAB93700521A65 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D3F8ACDD1B696FB00070C097 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D31BF3051CDAB93700521A65;
+			remoteInfo = "DictateWatch Extension";
+		};
+		D31BF31A1CDAB93700521A65 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D3F8ACDD1B696FB00070C097 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D31BF2F91CDAB93700521A65;
+			remoteInfo = DictateWatch;
+		};
 		D3F8AD1F1B696FCD0070C097 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D3F8ACDD1B696FB00070C097 /* Project object */;
@@ -212,6 +240,28 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		D31BF3221CDAB93700521A65 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				D31BF3071CDAB93700521A65 /* DictateWatch Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D31BF3241CDAB93700521A65 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				D31BF31C1CDAB93700521A65 /* DictateWatch.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D3F8AD321B696FCE0070C097 /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -242,6 +292,19 @@
 		D3188A861B6E9BF900323DC0 /* vcTest1_OLD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = vcTest1_OLD.swift; sourceTree = "<group>"; };
 		D3188A881B6E9C0800323DC0 /* ToDoTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoTableViewController.swift; sourceTree = "<group>"; };
 		D3188A8A1B6E9C1100323DC0 /* vcTodayTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = vcTodayTable.swift; sourceTree = "<group>"; };
+		D31BF2FA1CDAB93700521A65 /* DictateWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DictateWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D31BF2FF1CDAB93700521A65 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D31BF3011CDAB93700521A65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D31BF3061CDAB93700521A65 /* DictateWatch Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "DictateWatch Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D31BF30C1CDAB93700521A65 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+		D31BF30D1CDAB93700521A65 /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
+		D31BF30F1CDAB93700521A65 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
+		D31BF3111CDAB93700521A65 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
+		D31BF3131CDAB93700521A65 /* GlanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlanceController.swift; sourceTree = "<group>"; };
+		D31BF3151CDAB93700521A65 /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
+		D31BF3171CDAB93700521A65 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D31BF3191CDAB93700521A65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D31BF34B1CDAC7E000521A65 /* DictateWatch Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "DictateWatch Extension.entitlements"; path = "DictateWatch Extension/DictateWatch Extension.entitlements"; sourceTree = SOURCE_ROOT; };
 		D31C6C401BB435BA00A04B58 /* SetCalendarTableRC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetCalendarTableRC.swift; sourceTree = "<group>"; };
 		D31CB4AF1BA2897500EC5418 /* CalendarPickerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarPickerTableViewController.swift; sourceTree = "<group>"; };
 		D31CB4B11BA28A1800EC5418 /* SettingsCalendarListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsCalendarListTableViewCell.swift; sourceTree = SOURCE_ROOT; };
@@ -264,7 +327,7 @@
 		D35588BD1BA938A00052892F /* ReminderItemsTableRC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderItemsTableRC.swift; sourceTree = "<group>"; };
 		D355D97B1BA7DD3F00DADD72 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		D369819C1C7BB05400ED0AD8 /* DatePopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePopupViewController.swift; sourceTree = "<group>"; };
-		D36DBDD41BD6DA870076A5C2 /* GlanceTodayEventsTableRC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GlanceTodayEventsTableRC.swift; path = "../Dictate WatchKit App/GlanceTodayEventsTableRC.swift"; sourceTree = "<group>"; };
+		D36DBDD41BD6DA870076A5C2 /* GlanceTodayEventsTableRC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GlanceTodayEventsTableRC.swift; path = "/Volumes/MikeUsers/mikederr/Documents/ThatSoft/DictateNew/Dictate WatchKit App/GlanceTodayEventsTableRC.swift"; sourceTree = "<absolute>"; };
 		D3711F041BB04E0E00D19AE9 /* TestIC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestIC.swift; sourceTree = "<group>"; };
 		D3795E791B8DF927009D3DB5 /* SettingsEventTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsEventTableViewController.swift; path = Views/SettingsEventTableViewController.swift; sourceTree = "<group>"; };
 		D37CFBF41BD95F130005320D /* NuanceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NuanceTest.swift; sourceTree = "<group>"; };
@@ -322,12 +385,12 @@
 		D3F8AD121B696FCD0070C097 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
 		D3F8AD131B696FCD0070C097 /* MainIC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainIC.swift; path = "../Dictate WatchKit Extension/MainIC.swift"; sourceTree = "<group>"; };
 		D3F8AD151B696FCD0070C097 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
-		D3F8AD171B696FCD0070C097 /* GlanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlanceController.swift; sourceTree = "<group>"; };
+		D3F8AD171B696FCD0070C097 /* GlanceControllerOLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlanceControllerOLD.swift; sourceTree = "<group>"; };
 		D3F8AD191B696FCD0070C097 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D3F8AD1D1B696FCD0070C097 /* Dictate WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Dictate WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3F8AD231B696FCD0070C097 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D3F8AD251B696FCE0070C097 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
-		D3F8AD271B696FCE0070C097 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		D3F8AD271B696FCE0070C097 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "/Volumes/MikeUsers/mikederr/Documents/ThatSoft/DictateNew/Dictate WatchKit App/Images.xcassets"; sourceTree = "<absolute>"; };
 		D3FA08041BA7F6EB006A91C2 /* ReminderListsTableRC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderListsTableRC.swift; sourceTree = "<group>"; };
 		EC0B487D1B6FE9B800C0AD82 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		EC0B487F1B6FE9C700C0AD82 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -412,6 +475,20 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		D31BF3031CDAB93700521A65 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D31BF3391CDAC27100521A65 /* Parse.framework in Frameworks */,
+				D31BF33B1CDAC28000521A65 /* Crashlytics.framework in Frameworks */,
+				D31BF33D1CDAC29100521A65 /* AudioToolbox.framework in Frameworks */,
+				D31BF33A1CDAC27A00521A65 /* Fabric.framework in Frameworks */,
+				D31BF33F1CDAC2A100521A65 /* Security.framework in Frameworks */,
+				D31BF33E1CDAC29900521A65 /* SystemConfiguration.framework in Frameworks */,
+				D31BF33C1CDAC28700521A65 /* Bolts.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D3F8ACE21B696FB00070C097 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -436,20 +513,53 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D3B6E24F1BD977B200C7B822 /* Fabric.framework in Frameworks */,
-				D3E8FE8D1B73ABE50050A37C /* Security.framework in Frameworks */,
-				D3B6E2511BD977B200C7B822 /* Crashlytics.framework in Frameworks */,
-				D3E8FE8C1B73ABDB0050A37C /* SystemConfiguration.framework in Frameworks */,
 				D3E8FE8B1B73ABB00050A37C /* libsqlite3.0.dylib in Frameworks */,
-				D3E8FE8A1B73AB680050A37C /* AudioToolbox.framework in Frameworks */,
-				EC0B48951B6FEBA600C0AD82 /* Bolts.framework in Frameworks */,
-				EC0B48961B6FEBA600C0AD82 /* Parse.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D31BF2FB1CDAB93700521A65 /* DictateWatch */ = {
+			isa = PBXGroup;
+			children = (
+				D3F8AD241B696FCD0070C097 /* Interface.storyboard */,
+				D3F8AD271B696FCE0070C097 /* Images.xcassets */,
+				D31BF2FF1CDAB93700521A65 /* Assets.xcassets */,
+				D31BF3011CDAB93700521A65 /* Info.plist */,
+			);
+			name = DictateWatch;
+			path = /Users/mikederr/Documents/ThatSoft/DictateNew/DictateWatch;
+			sourceTree = "<absolute>";
+		};
+		D31BF30A1CDAB93700521A65 /* DictateWatch Extension */ = {
+			isa = PBXGroup;
+			children = (
+				D31BF34B1CDAC7E000521A65 /* DictateWatch Extension.entitlements */,
+				D33CAD091B747F0900F59260 /* Resources */,
+				D3E810861B70F4D6004AE5A9 /* WKControllers */,
+				D31BF30D1CDAB93700521A65 /* InterfaceController.swift */,
+				D31BF30F1CDAB93700521A65 /* ExtensionDelegate.swift */,
+				D31BF3111CDAB93700521A65 /* NotificationController.swift */,
+				D31BF3131CDAB93700521A65 /* GlanceController.swift */,
+				D36DBDD41BD6DA870076A5C2 /* GlanceTodayEventsTableRC.swift */,
+				D31BF3151CDAB93700521A65 /* ComplicationController.swift */,
+				D31BF3171CDAB93700521A65 /* Assets.xcassets */,
+				D31BF3191CDAB93700521A65 /* Info.plist */,
+				D31BF30B1CDAB93700521A65 /* Supporting Files */,
+			);
+			name = "DictateWatch Extension";
+			path = "/Users/mikederr/Documents/ThatSoft/DictateNew/DictateWatch Extension";
+			sourceTree = "<absolute>";
+		};
+		D31BF30B1CDAB93700521A65 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D31BF30C1CDAB93700521A65 /* PushNotificationPayload.apns */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		D32350571B6977F100939F03 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -596,7 +706,8 @@
 				D33CAD0A1B747F2900F59260 /* sounds */,
 			);
 			name = Resources;
-			sourceTree = "<group>";
+			path = "/Volumes/MikeUsers/mikederr/Documents/ThatSoft/DictateNew/Dictate WatchKit Extension";
+			sourceTree = "<absolute>";
 		};
 		D33CAD0A1B747F2900F59260 /* sounds */ = {
 			isa = PBXGroup;
@@ -664,8 +775,8 @@
 				D3711F041BB04E0E00D19AE9 /* TestIC.swift */,
 			);
 			name = WKControllers;
-			path = "../Dictate WatchKit App";
-			sourceTree = "<group>";
+			path = "/Volumes/MikeUsers/mikederr/Documents/ThatSoft/DictateNew/Dictate WatchKit App";
+			sourceTree = "<absolute>";
 		};
 		D3F8ACDC1B696FB00070C097 = {
 			isa = PBXGroup;
@@ -674,6 +785,8 @@
 				D3F8AD211B696FCD0070C097 /* Dictate WatchKit App */,
 				D3F8AD0F1B696FCD0070C097 /* Dictate WatchKit Extension */,
 				D3F8ACFD1B696FB00070C097 /* DictateTests */,
+				D31BF2FB1CDAB93700521A65 /* DictateWatch */,
+				D31BF30A1CDAB93700521A65 /* DictateWatch Extension */,
 				D3F8ACE61B696FB00070C097 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -684,6 +797,8 @@
 				D3F8ACE51B696FB00070C097 /* Dictate.app */,
 				D3F8AD0E1B696FCD0070C097 /* Dictate WatchKit Extension.appex */,
 				D3F8AD1D1B696FCD0070C097 /* Dictate WatchKit App.app */,
+				D31BF2FA1CDAB93700521A65 /* DictateWatch.app */,
+				D31BF3061CDAB93700521A65 /* DictateWatch Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -732,13 +847,10 @@
 			isa = PBXGroup;
 			children = (
 				D3B07A241B731D2A00B9C2A9 /* Dictate WatchKit Extension.entitlements */,
-				D33CAD091B747F0900F59260 /* Resources */,
-				D3E810861B70F4D6004AE5A9 /* WKControllers */,
 				D3B323F11CD026B800B29A96 /* ComplicationController.swift */,
 				D3B323EF1CD026AE00B29A96 /* ExtensionDelegate.swift */,
 				D3F8AD151B696FCD0070C097 /* NotificationController.swift */,
-				D3F8AD171B696FCD0070C097 /* GlanceController.swift */,
-				D36DBDD41BD6DA870076A5C2 /* GlanceTodayEventsTableRC.swift */,
+				D3F8AD171B696FCD0070C097 /* GlanceControllerOLD.swift */,
 				D3F8AD191B696FCD0070C097 /* Images.xcassets */,
 				D3F8AD111B696FCD0070C097 /* Info.plist */,
 				D3F8AD101B696FCD0070C097 /* Supporting Files */,
@@ -757,8 +869,6 @@
 		D3F8AD211B696FCD0070C097 /* Dictate WatchKit App */ = {
 			isa = PBXGroup;
 			children = (
-				D3F8AD241B696FCD0070C097 /* Interface.storyboard */,
-				D3F8AD271B696FCE0070C097 /* Images.xcassets */,
 				D3F8AD221B696FCD0070C097 /* Supporting Files */,
 			);
 			path = "Dictate WatchKit App";
@@ -894,6 +1004,40 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		D31BF2F91CDAB93700521A65 /* DictateWatch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D31BF3231CDAB93700521A65 /* Build configuration list for PBXNativeTarget "DictateWatch" */;
+			buildPhases = (
+				D31BF2F81CDAB93700521A65 /* Resources */,
+				D31BF3221CDAB93700521A65 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D31BF3091CDAB93700521A65 /* PBXTargetDependency */,
+			);
+			name = DictateWatch;
+			productName = DictateWatch;
+			productReference = D31BF2FA1CDAB93700521A65 /* DictateWatch.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		D31BF3051CDAB93700521A65 /* DictateWatch Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D31BF3211CDAB93700521A65 /* Build configuration list for PBXNativeTarget "DictateWatch Extension" */;
+			buildPhases = (
+				D31BF3021CDAB93700521A65 /* Sources */,
+				D31BF3031CDAB93700521A65 /* Frameworks */,
+				D31BF3041CDAB93700521A65 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "DictateWatch Extension";
+			productName = "DictateWatch Extension";
+			productReference = D31BF3061CDAB93700521A65 /* DictateWatch Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
+		};
 		D3F8ACE41B696FB00070C097 /* Dictate */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D3F8AD041B696FB00070C097 /* Build configuration list for PBXNativeTarget "Dictate" */;
@@ -903,11 +1047,13 @@
 				D3F8ACE31B696FB00070C097 /* Resources */,
 				D3F8AD321B696FCE0070C097 /* Embed App Extensions */,
 				D38C9C541B821D03009CFC7C /* ShellScript */,
+				D31BF3241CDAB93700521A65 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				D3F8AD2A1B696FCE0070C097 /* PBXTargetDependency */,
+				D31BF31B1CDAB93700521A65 /* PBXTargetDependency */,
 			);
 			name = Dictate;
 			productName = Dictate;
@@ -954,10 +1100,26 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftMigration = 0700;
-				LastSwiftUpdateCheck = 0700;
+				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = ThatSoft.com;
 				TargetAttributes = {
+					D31BF2F91CDAB93700521A65 = {
+						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = A6V8M5Q68S;
+					};
+					D31BF3051CDAB93700521A65 = {
+						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = A6V8M5Q68S;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
+					};
 					D3F8ACE41B696FB00070C097 = {
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = A6V8M5Q68S;
@@ -1007,11 +1169,29 @@
 				D3F8ACE41B696FB00070C097 /* Dictate */,
 				D3F8AD0D1B696FCD0070C097 /* Dictate WatchKit Extension */,
 				D3F8AD1C1B696FCD0070C097 /* Dictate WatchKit App */,
+				D31BF2F91CDAB93700521A65 /* DictateWatch */,
+				D31BF3051CDAB93700521A65 /* DictateWatch Extension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		D31BF2F81CDAB93700521A65 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D31BF3001CDAB93700521A65 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D31BF3041CDAB93700521A65 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D31BF3181CDAB93700521A65 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D3F8ACE31B696FB00070C097 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1097,6 +1277,46 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		D31BF3021CDAB93700521A65 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D31BF3401CDAC2DC00521A65 /* NuanceHeader.m in Sources */,
+				D31BF3341CDAC15F00521A65 /* EditEventDetailsIC.swift in Sources */,
+				D31BF3421CDAC2FC00521A65 /* ReminderCode.swift in Sources */,
+				D31BF3281CDABE4800521A65 /* ReminderManager.swift in Sources */,
+				D31BF3121CDAB93700521A65 /* NotificationController.swift in Sources */,
+				D31BF3101CDAB93700521A65 /* ExtensionDelegate.swift in Sources */,
+				D31BF3331CDAC15B00521A65 /* EventDetailsIC.swift in Sources */,
+				D31BF3311CDAC15100521A65 /* TodayIC.swift in Sources */,
+				D31BF3271CDABE3B00521A65 /* EventManager.swift in Sources */,
+				D31BF3481CDAC31600521A65 /* EventCode.swift in Sources */,
+				D31BF3491CDAC31D00521A65 /* FavoritesManager.swift in Sources */,
+				D31BF3411CDAC2F700521A65 /* DictateCode.swift in Sources */,
+				D31BF32A1CDAC12500521A65 /* DictateManagerIC.swift in Sources */,
+				D31BF3361CDAC16900521A65 /* SetCalendarIC.swift in Sources */,
+				D31BF32D1CDAC13C00521A65 /* ReminderListsIC.swift in Sources */,
+				D31BF3161CDAB93700521A65 /* ComplicationController.swift in Sources */,
+				D31BF3321CDAC15600521A65 /* TodayEventsTableRC.swift in Sources */,
+				D31BF34A1CDAC33A00521A65 /* General.swift in Sources */,
+				D31BF32F1CDAC14600521A65 /* ReminderListsTableRC.swift in Sources */,
+				D31BF3381CDAC17400521A65 /* TestIC.swift in Sources */,
+				D31BF3461CDAC30B00521A65 /* MessageCode_used?.swift in Sources */,
+				D31BF32E1CDAC14100521A65 /* ReminderItemsIC.swift in Sources */,
+				D31BF3371CDAC16F00521A65 /* SetCalendarTableRC.swift in Sources */,
+				D31BF3441CDAC30500521A65 /* MailComposer.swift in Sources */,
+				D31BF3291CDABE6200521A65 /* JTDateHelper.m in Sources */,
+				D31BF3351CDAC16400521A65 /* EventEditNotesIC.swift in Sources */,
+				D31BF3261CDABE2500521A65 /* TimeManger.swift in Sources */,
+				D31BF3301CDAC14B00521A65 /* ReminderItemsTableRC.swift in Sources */,
+				D31BF32C1CDAC13800521A65 /* MainIC.swift in Sources */,
+				D31BF30E1CDAB93700521A65 /* InterfaceController.swift in Sources */,
+				D31BF32B1CDAC12C00521A65 /* NuanceTest.swift in Sources */,
+				D31BF3251CDABD0100521A65 /* GlanceTodayEventsTableRC.swift in Sources */,
+				D31BF3141CDAB93700521A65 /* GlanceController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D3F8ACE11B696FB00070C097 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1181,57 +1401,44 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D3795E7B1B8F654F009D3DB5 /* ReminderManager.swift in Sources */,
 				D3F8AD161B696FCD0070C097 /* NotificationController.swift in Sources */,
-				D35588BE1BA938A00052892F /* ReminderItemsTableRC.swift in Sources */,
-				D3B1800D1CB76F11003360C0 /* TimeManger.swift in Sources */,
-				ECB1DCC91BAEB7F100A67B6D /* JTDateHelper.m in Sources */,
-				D3E8108A1B710690004AE5A9 /* ReminderListsIC.swift in Sources */,
 				D33FEBB01BD769F6003E6755 /* NuanceHeader.h in Sources */,
-				D38653F81BAA02F400B8CCBC /* EventManager.swift in Sources */,
 				D3188A6D1B6E9ADB00323DC0 /* MessageComposer.swift in Sources */,
-				D31E1DB71BAEEA1700BC7B99 /* EventDetailsIC.swift in Sources */,
 				D3188A701B6E9AE400323DC0 /* MessageCode_used?.swift in Sources */,
 				D3DA3AD31BAE8054002FDD21 /* ShowCalendarsIC.swift in Sources */,
-				D3B6F5F91BA60B7E0052B639 /* DictateManagerIC.swift in Sources */,
 				D3A0F9FD1B69F0BB00F1FEDA /* EventCode.swift in Sources */,
 				D3DA3ADF1BAE8513002FDD21 /* CalendarSettingsIC.swift in Sources */,
-				D3DA3ACE1BAE73F4002FDD21 /* TodayEventsTableRC.swift in Sources */,
-				D31E1DB91BAEEA2A00BC7B99 /* EditEventDetailsIC.swift in Sources */,
 				D3DA3ADB1BAE845C002FDD21 /* DefaultCalendarListTableRC.swift in Sources */,
 				D39AB89E1BA86D68001C7570 /* CalendarListPickerIC.swift in Sources */,
-				D323505F1B697B0200939F03 /* DictateCode.swift in Sources */,
 				D3B323F01CD026AE00B29A96 /* ExtensionDelegate.swift in Sources */,
 				D3D98AF51BA54D5B00BA1901 /* FavoritesManager.swift in Sources */,
-				D3FA08051BA7F6EB006A91C2 /* ReminderListsTableRC.swift in Sources */,
-				D3F8AD141B696FCD0070C097 /* MainIC.swift in Sources */,
 				D3E810881B70FEA0004AE5A9 /* SettingsIC.swift in Sources */,
-				D35588BC1BA937D20052892F /* ReminderItemsIC.swift in Sources */,
-				D3711F051BB04E0E00D19AE9 /* TestIC.swift in Sources */,
 				D32350631B69828900939F03 /* ReminderCode.swift in Sources */,
-				D3E810851B70F4BC004AE5A9 /* TodayIC.swift in Sources */,
 				D34395721BA32964002D98EA /* ReminderListPickerIC.swift in Sources */,
 				D3DA3AD91BAE8379002FDD21 /* ShowRemindersTableRC.swift in Sources */,
-				D37CFBF51BD95F130005320D /* NuanceTest.swift in Sources */,
 				D3DA3AD51BAE8066002FDD21 /* ShowCalendarsTableRC.swift in Sources */,
 				D3B323F21CD026B800B29A96 /* ComplicationController.swift in Sources */,
 				D3DA3AD71BAE834B002FDD21 /* ShowRemindersIC.swift in Sources */,
 				D3DA3ADD1BAE84B2002FDD21 /* DefaultReminderListTableRC.swift in Sources */,
-				D31C6C411BB435BA00A04B58 /* SetCalendarTableRC.swift in Sources */,
-				D33FEBB31BD76A70003E6755 /* NuanceHeader.m in Sources */,
-				D306CDA81BB1315D00FD973F /* SetCalendarIC.swift in Sources */,
-				D3F8AD181B696FCD0070C097 /* GlanceController.swift in Sources */,
+				D3F8AD181B696FCD0070C097 /* GlanceControllerOLD.swift in Sources */,
 				D3DA3AE11BAE8521002FDD21 /* ReminderSettingsIC.swift in Sources */,
-				ECB861FE1B77DCDC00503C50 /* General.swift in Sources */,
-				D3BE2D2B1BB1287C00376686 /* EventEditNotesIC.swift in Sources */,
 				D3188A731B6E9AEF00323DC0 /* SendMessage_not used?.swift in Sources */,
-				D36DBDD51BD6DA870076A5C2 /* GlanceTodayEventsTableRC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		D31BF3091CDAB93700521A65 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D31BF3051CDAB93700521A65 /* DictateWatch Extension */;
+			targetProxy = D31BF3081CDAB93700521A65 /* PBXContainerItemProxy */;
+		};
+		D31BF31B1CDAB93700521A65 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D31BF2F91CDAB93700521A65 /* DictateWatch */;
+			targetProxy = D31BF31A1CDAB93700521A65 /* PBXContainerItemProxy */;
+		};
 		D3F8AD201B696FCD0070C097 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = D3F8AD1C1B696FCD0070C097 /* Dictate WatchKit App */;
@@ -1259,11 +1466,99 @@
 				D3F8AD251B696FCE0070C097 /* Base */,
 			);
 			name = Interface.storyboard;
-			sourceTree = "<group>";
+			path = "/Volumes/MikeUsers/mikederr/Documents/ThatSoft/DictateNew/Dictate WatchKit App";
+			sourceTree = "<absolute>";
 		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		D31BF31D1CDAB93700521A65 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				ENABLE_TESTABILITY = YES;
+				IBSC_MODULE = DictateWatch_Extension;
+				INFOPLIST_FILE = DictateWatch/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thatsoft.dictateApp.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+			};
+			name = Debug;
+		};
+		D31BF31E1CDAB93700521A65 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				IBSC_MODULE = DictateWatch_Extension;
+				INFOPLIST_FILE = DictateWatch/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thatsoft.dictateApp.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+			};
+			name = Release;
+		};
+		D31BF31F1CDAB93700521A65 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CLANG_ANALYZER_NONNULL = YES;
+				CODE_SIGN_ENTITLEMENTS = "DictateWatch Extension/DictateWatch Extension.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Dictate",
+				);
+				INFOPLIST_FILE = "DictateWatch Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.thatsoft.dictateApp.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+			};
+			name = Debug;
+		};
+		D31BF3201CDAB93700521A65 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CLANG_ANALYZER_NONNULL = YES;
+				CODE_SIGN_ENTITLEMENTS = "DictateWatch Extension/DictateWatch Extension.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Dictate",
+				);
+				INFOPLIST_FILE = "DictateWatch Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.thatsoft.dictateApp.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+			};
+			name = Release;
+		};
 		D3F8AD021B696FB00070C097 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1511,6 +1806,22 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		D31BF3211CDAB93700521A65 /* Build configuration list for PBXNativeTarget "DictateWatch Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D31BF31F1CDAB93700521A65 /* Debug */,
+				D31BF3201CDAB93700521A65 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		D31BF3231CDAB93700521A65 /* Build configuration list for PBXNativeTarget "DictateWatch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D31BF31D1CDAB93700521A65 /* Debug */,
+				D31BF31E1CDAB93700521A65 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		D3F8ACE01B696FB00070C097 /* Build configuration list for PBXProject "Dictate" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

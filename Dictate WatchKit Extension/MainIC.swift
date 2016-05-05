@@ -21,7 +21,7 @@ class MainIC: WKInterfaceController {
     var defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
 
     
-    var audioPlayer = AVAudioPlayer()
+  //  var audioPlayer = AVAudioPlayer() //commented for new watchExtension 040516
     
 // TODO watchOS2 var player: WKAudioFilePlayer!
     
@@ -549,7 +549,7 @@ class MainIC: WKInterfaceController {
             ),
             dispatch_get_main_queue(), closure)
     }
-    
+ /*
     func playSound(sound: NSURL){
         var error:NSError?
         do {
@@ -562,13 +562,13 @@ class MainIC: WKInterfaceController {
         //audioPlayer.delegate = self
         self.audioPlayer.play()
     }
-   
+ 
     func playSoundNew(sound: NSURL) {
         let filePath = NSBundle.mainBundle().pathForResource("se_tap", ofType: "m4a")!
         let fileUrl = NSURL.fileURLWithPath(filePath)
 
     }
-    
+  */  
 //---- End my General functions ----------------------------------------
     
 //---- Menu functions -------------------------------------------

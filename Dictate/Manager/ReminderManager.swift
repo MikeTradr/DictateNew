@@ -9,7 +9,7 @@
 
 import UIKit
 import EventKit
-//import MessageUI
+import MessageUI //commented for new watchExtension 040516
 
 // TODO Anil wanted to add: UIViewController
 // for this error in line 81              self.presentViewController(alert, animated: true, completion: nil)

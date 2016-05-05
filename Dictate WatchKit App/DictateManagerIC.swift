@@ -89,7 +89,7 @@ class DictateManagerIC: WKInterfaceController {
     var startDT:NSDate          = NSDate(dateString:"2014-12-12")
     var endDT:NSDate            = NSDate(dateString:"2014-12-12")
     var actionType:String   = ""        //event, reminder, singleWordList, commaList, rawList, note?, text, email
-    var audioPlayer = AVAudioPlayer()
+   // var audioPlayer = AVAudioPlayer()
 
     
     func grabVoice() -> (NSDate, NSDate, String, String, String, String, String)  {  //startDT, endDT, output, outputNote, day, calendarName, actionType
@@ -159,7 +159,7 @@ class DictateManagerIC: WKInterfaceController {
         return (startDT, endDT, output, outputNote, day, calendarName, actionType)
         
     }   //end func grabvoice
-    
+/*
     func playSound(sound: NSURL){
         do {
             self.audioPlayer = try AVAudioPlayer(contentsOfURL: sound)
@@ -171,7 +171,7 @@ class DictateManagerIC: WKInterfaceController {
         //audioPlayer.delegate = self
         self.audioPlayer.play()
     }
-    
+*/    
     func delay(delay:Double, closure:()->()) {
         dispatch_after(
             dispatch_time(

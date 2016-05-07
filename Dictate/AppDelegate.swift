@@ -11,12 +11,25 @@ import Parse
 import Bolts
 import Fabric
 import Crashlytics
+import WatchConnectivity
 
+
+@available(iOS 9.0, *)
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-
+/* used other code at end of didFinishLaunching...
+    var session: WCSession? {
+        didSet {
+            if let session = session {
+                session.delegate = self
+                session.activateSession()
+            }
+        }
+    }
+*/
+    
     //Anill's
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -227,9 +240,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let count:Int = EventManager.sharedInstance.countEventsToday(0)
         application.applicationIconBadgeNumber = count
         
-        return true
+        if (WCSession.isSupported()) {
+            let session = WCSession.defaultSession()
+            session.delegate = self
+            session.activateSession()
+        }
         
-    }
+        return true
+    }       // end didFinishLaunchingWithOptions
+    
     
     func logUser() {
         //TODO Mike TODO Anil add user informatione here...
@@ -264,6 +283,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
 
+    
+}
+
+
+@available(iOS 9.0, *)
+extension AppDelegate: WCSessionDelegate {
+    
+    func session(session: WCSession, didReceiveMessage message: [String : AnyObject], replyHandler: ([String : AnyObject]) -> Void) {
+   //     if let reference = message["reference"] as? String, boardingPass = QRCode(reference) {
+   //         replyHandler(["boardingPassData": boardingPass.PNGData])
+    //    }
+    }
     
 }
 

@@ -62,7 +62,7 @@ class EventManager: NSObject {
             }
         }
     }
-
+/*
     func createEvent() {
         
         getAccessToEventStoreForType(EKEntityType.Event, completion: { (granted) -> Void in
@@ -428,7 +428,7 @@ class EventManager: NSObject {
         })
         
     }
-    
+ */
     
     
     func fetchEventsFrom(startDate:NSDate,endDate:NSDate,completion:([EKEvent])->Void) {
@@ -659,7 +659,7 @@ class EventManager: NSObject {
     }
     
 
-
+/*  MOVED TO EMSave
     func saveEvent(event:EKEvent) {
     
         print("p72 event: \(event)")
@@ -675,7 +675,7 @@ class EventManager: NSObject {
         
     
     }   // end func saveEvent
-    
+*/
     
     func getLocalEventCalendars(days:Int) -> [AnyObject] {
         var allCalendars: Array<EKCalendar> = EKEventStore().calendarsForEntityType(EKEntityType.Event) 

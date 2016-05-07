@@ -8,7 +8,7 @@
 
 import WatchKit
 import Foundation
-
+/*
 class GlanceController: WKInterfaceController {
     
     let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
@@ -49,7 +49,7 @@ class GlanceController: WKInterfaceController {
         print("w46 startDate: \(startDate)")
         print("w46 endDate: \(endDate)")
         
-        EventManager.sharedInstance.fetchEventsFrom(startDate, endDate: endDate, completion: { (events) -> Void in
+ //FIXWC        EventManager.sharedInstance.fetchEventsFrom(startDate, endDate: endDate, completion: { (events) -> Void in
             self.allEvents = events
         })
         
@@ -259,3 +259,4 @@ class GlanceController: WKInterfaceController {
     }
     
 }
+ */

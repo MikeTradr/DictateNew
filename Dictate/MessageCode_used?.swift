@@ -47,7 +47,7 @@ class MessageCode: NSObject {
         let reminder = EKReminder(eventStore: self.eventStore)
         
         
-        print("p44 output: \(output)")
+ //       print("p44 output: \(output)")
         print("p45 startDT: \(startDT)")
         print("p46 endDT: \(endDT)")
         //println("p865 from func endDate: \(endDate)")

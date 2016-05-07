@@ -105,7 +105,8 @@ class ReminderManager: NSObject {
             }
         })
     }
-    
+/* moved to RMSave
+     
     func saveReminder(reminderItem:EKReminder) {
         
         print("p74 reminderItem: \(reminderItem)")
@@ -138,7 +139,7 @@ class ReminderManager: NSObject {
             }
         })
     }
-    
+*/
     
     
     
@@ -207,6 +208,8 @@ class ReminderManager: NSObject {
         }
     }
     
+/* moved to RMSave
+    
     func createNewReminderList(name:String, items:[String]){    //forgor e in create -added Mike 082915
         getAccessToEventStoreForType(EKEntityType.Reminder, completion: { (granted) -> Void in
             
@@ -259,8 +262,14 @@ class ReminderManager: NSObject {
                 }
         })
     }
+*/
+    
+    
     
 // ____ addReminder func ____________________________________
+
+/* moved to RMSave
+    
     func addReminder(name:String, items:[String]){
         print("p90 in addReminder name: \(name)")
         
@@ -399,6 +408,10 @@ class ReminderManager: NSObject {
         }   // if dest...
     }
     
+*/
+ 
+/* moved to RMSave
+     
     func createReminder() {
         
         let mainType    = defaults.stringForKey("mainType")
@@ -473,9 +486,11 @@ class ReminderManager: NSObject {
             error = error1
         }
     }
+   
+*/
     
-    
-    
+/* moved to RMSave
+     
 //Add item to Reminder List - Mike 082915
     func addReminderMike(name:String, items:[String]){
         let calender = EKCalendar(forEntityType: EKEntityType.Reminder , eventStore: self.eventStore)
@@ -528,6 +543,8 @@ class ReminderManager: NSObject {
 
         }
     }
+*/
+    
     
     
     func getCalendar(id:String) -> EKCalendar? {            //returns EKCalendar from CalendarID

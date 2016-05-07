@@ -14,6 +14,8 @@ import Parse
 // import CoreTelephony //commented for new watchExtension 040516
 //import MessageUI
 
+import WatchConnectivity
+
 
 class MainIC: WKInterfaceController {
     
@@ -115,6 +117,18 @@ class MainIC: WKInterfaceController {
     let swiftColor = UIColor(red: 255/255, green: 165/255, blue: 0/255, alpha: 1)
     let moccasin = UIColor(red: 255/255, green: 228/255, blue: 181/255, alpha: 1)     //light biege color, for Word List
     let apricot = UIColor(red: 251/255, green: 206/255, blue: 177/255, alpha: 1)
+    
+    /// Default WatchConnectivity session for communicating with the phone.
+    //let session = WCSession.defaultSession()
+    
+    var session: WCSession? {
+        didSet {
+            if let session = session {
+                session.delegate = self
+                session.activateSession()
+            }
+        }
+    }
 
 
 //#### functions #################################
@@ -623,7 +637,17 @@ class MainIC: WKInterfaceController {
             
             //ReminderCode().createReminder(title, notes: notes, startDT: startDT)
             //ReminderCode().createReminder()
-            ReminderManager().createReminder() //new watchExtension 040516
+            //FIXWC            ReminderManager().createReminder() //new watchExtension 040516
+            
+            let message = [
+                "m": "😀Watch)"
+            ]
+            session!.sendMessage(message, replyHandler: { replyDict in
+                }, errorHandler: { error in
+            })
+            
+            
+            
 
             
             var reminderList    = defaults.stringForKey("reminderList") ?? ""
@@ -636,7 +660,7 @@ class MainIC: WKInterfaceController {
         case "Event":
             print("w568 in Event Switch")
             
-            EventManager().createEvent()
+ //FIXWC            EventManager().createEvent()
             
             self.labelCreated.setText("Event created on your \(calendarName.capitalizedString) calendar!")
 
@@ -646,7 +670,7 @@ class MainIC: WKInterfaceController {
             
             let reminderTitle  = defaults.stringForKey("reminderList") ?? ""
             
-            ReminderManager.sharedInstance.createNewReminderList(reminderList, items: wordArrTrimmed)
+ //FIXWC            ReminderManager.sharedInstance.createNewReminderList(reminderList, items: wordArrTrimmed)
             
             self.labelCreated.setText("New List, \(reminderTitle), has been created")
             
@@ -659,7 +683,7 @@ class MainIC: WKInterfaceController {
             output      = defaults.stringForKey("output") ?? ""
             let outputArray:[String] = Array(arrayLiteral: output)
             
-            ReminderManager.sharedInstance.createNewReminderList(reminderList, items: outputArray)
+ //FIXWC            ReminderManager.sharedInstance.createNewReminderList(reminderList, items: outputArray)
             
             self.labelCreated.setText("New List, \(reminderTitle), has been created")
             
@@ -671,7 +695,7 @@ class MainIC: WKInterfaceController {
             
             let reminderTitle  = defaults.stringForKey("reminderList") ?? ""
             
-            ReminderManager.sharedInstance.createNewReminderList(reminderList, items: wordArrTrimmed)
+ //FIXWC            ReminderManager.sharedInstance.createNewReminderList(reminderList, items: wordArrTrimmed)
             
             self.labelCreated.setText("New Phrase List, \(reminderTitle), has been created")
 
@@ -728,7 +752,7 @@ class MainIC: WKInterfaceController {
         default:
             print("p155 in default switch so assume Event")
             
-            EventManager().createEvent()
+ //FIXWC            EventManager().createEvent()
             
             // resultMessage.text = "Event created on your \(calendarName.capitalizedString) calendar!"
             break;
@@ -1038,6 +1062,10 @@ class MainIC: WKInterfaceController {
     //---- End Override functions ----------------------------------------
     
 }   // end InterfaceController
+
+extension MainIC: WCSessionDelegate {
+    
+}
 
 
 

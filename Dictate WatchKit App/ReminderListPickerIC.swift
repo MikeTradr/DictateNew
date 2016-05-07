@@ -9,16 +9,26 @@
 import WatchKit
 import Foundation
 import EventKit
+import WatchConnectivity
 
 
-class ReminderListPickerIC: WKInterfaceController {
+class ReminderListPickerIC: WKInterfaceController, WCSessionDelegate {
     
     var selectedRow:Int! = nil
     let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
     let eventStore = EKEventStore()
     var checked:Bool = false
     var allReminders:[EKReminder] = []
-    var allReminderLists: Array<EKCalendar> = EKEventStore().calendarsForEntityType(EKEntityType.Reminder) 
+    var allReminderLists: Array<EKCalendar> = EKEventStore().calendarsForEntityType(EKEntityType.Reminder)
+    
+    private let session : WCSession? = WCSession.isSupported() ? WCSession.defaultSession() : nil
+    
+    override init() {
+        super.init()
+        
+        session?.delegate = self
+        session?.activateSession()
+    }
     
     @IBOutlet weak var table: WKInterfaceTable!
 
@@ -125,6 +135,27 @@ class ReminderListPickerIC: WKInterfaceController {
            // defaults.setObject(defaultReminderListID, forKey: "defaultReminderListID")    //sets defaultReminderListID String   //removed had old key. 121215
             
             defaults.setObject(defaultReminderID, forKey: "defaultReminderID")    //sets defaultReminderListID String
+            
+            //send to Phone App
+            let key = ["defaultReminderID" : defaultReminderID]
+            print("w141 key: \(key)")
+            
+            // The paired iPhone has to be connected via Bluetooth.
+            if let session = session where session.reachable {
+                session.sendMessage(key,
+                                    replyHandler: { replyData in
+                                        // handle reply from iPhone app here
+                                        print(replyData)
+                    }, errorHandler: { error in
+                        // catch any errors here
+                        print(error.description)
+                })
+            } else {
+                // when the iPhone is not connected via Bluetooth
+            }
+            
+            
+            
             
             self.checked = true
         }

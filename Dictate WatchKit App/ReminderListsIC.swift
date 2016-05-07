@@ -392,7 +392,7 @@ class ReminderListsIC: WKInterfaceController {
                 
                 reminderItem.completed = true
           
-                ReminderManager.sharedInstance.saveReminder(reminderItem)
+               //FIXWC ReminderManager.sharedInstance.saveReminder(reminderItem)
                 
                 print("w325 reminderItem.completed: \(reminderItem.completed)")
                 

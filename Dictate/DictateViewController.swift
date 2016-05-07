@@ -980,7 +980,7 @@ class DictateViewController: UIViewController, UITextFieldDelegate, MFMailCompos
     
     
     @IBAction func buttonEdit(sender: AnyObject) {
-        EventManager().createEvent()
+        EventManagerSave().createEvent()
         switchScreen("Event")
     }
     

@@ -81,7 +81,7 @@ class EventEditNotesIC: WKInterfaceController {
     @IBAction func buttonSaveNote() {
         event.notes = self.dictateResult
         print("w64: self.dictateResult \(self.dictateResult)")
-        EventManager.sharedInstance.saveEvent(event)
+//FIXWC EventManager.sharedInstance.saveEvent(event)
         
         //TODO make a general func call
         var alertSound1: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("212-buttonclick52", ofType: "mp3")!)

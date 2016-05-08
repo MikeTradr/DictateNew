@@ -214,7 +214,11 @@ class ReminderPickerTableViewController: UITableViewController {
         
         defaults.setObject(selectedReminder.calendarIdentifier, forKey: "defaultReminderID") //sets Default Selected Reminder CalendarIdentifier
         
-        ConnectivityPhoneManager.sharedInstance.sendKey("defaultReminderID")
+        if #available(iOS 9.0, *) {
+            ConnectivityPhoneManager.sharedInstance.sendKey("defaultReminderID")
+        } else {
+            // Fallback on earlier versions
+        }
         
         //update the checkmark for the current row
         let cell = tableView.cellForRowAtIndexPath(indexPath)

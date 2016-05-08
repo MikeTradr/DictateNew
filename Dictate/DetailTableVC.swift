@@ -107,7 +107,11 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         
         //try getting alues in the func ReminderCode().createReminder(title, notes: notes, startDT: startDT)
         
-        ReminderCode().createReminder()
+        if #available(iOS 9.0, *) {
+            ReminderManagerSave().createReminder()  //fixed check FIXWC
+        } else {
+            // Fallback on earlier versions
+        }
     }
     
     
@@ -1074,7 +1078,11 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
                 print("p550 calendarName: \(calendarName)")
                 print("p551 outputArray: \(outputArray)")
                 
-                ReminderManager.sharedInstance.addReminder(calendarName, items: outputArray)
+                if #available(iOS 9.0, *) {
+                    ReminderManagerSave.sharedInstance.addReminder(calendarName, items: outputArray)
+                } else {
+                    // Fallback on earlier versions
+                }    //fixed check FIXWC
             }
             
             
@@ -1101,7 +1109,11 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
                     print("p550 calendarName: \(calendarName)")
                     print("p551 outputArray: \(outputArray)")
                     
-                    ReminderManager.sharedInstance.addReminder(calendarName, items: outputArray)
+                    if #available(iOS 9.0, *) {
+                        ReminderManagerSave.sharedInstance.addReminder(calendarName, items: outputArray)    //fixed check FIXWC
+                    } else {
+                        // Fallback on earlier versions
+                    }
                     
                     self.messageString = "☑️ Reminder created on your: \"\(calendarName.capitalizedString)\" list"
                     
@@ -1118,7 +1130,11 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
                 output      = defaults.stringForKey("output")!
                 var outputArray:[String] = Array(arrayLiteral: output)
                 
-                ReminderManager.sharedInstance.createNewReminderList(calendarName, items: outputArray)
+                if #available(iOS 9.0, *) {
+                    ReminderManagerSave.sharedInstance.createNewReminderList(calendarName, items: outputArray)
+                } else {
+                    // Fallback on earlier versions
+                }  //fixed check FIXWC
                 
                 self.messageString = "☑️Reminder created on your New: \"\(calendarName.capitalizedString)\" list!"
             }
@@ -1129,7 +1145,7 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         case "Event":
             print("p255 in Event Switch")
             
-            EventManager().createEvent()
+            EventManagerSave().createEvent()    //fixed check FIXWC
             calendarName = defaults.stringForKey("calendarName")!            //Cal.
             self.messageString = "📅 Event created on your: \"\(calendarName.capitalizedString)\" calendar!"
             break;
@@ -1138,7 +1154,11 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         case "New List", "List" :
             print("p530 in list Switch")
             
-            ReminderManager.sharedInstance.createNewReminderList(calendarName, items: wordArrTrimmed)
+            if #available(iOS 9.0, *) {
+                ReminderManagerSave.sharedInstance.createNewReminderList(calendarName, items: wordArrTrimmed)
+            } else {
+                // Fallback on earlier versions
+            }   //fixed check FIXWC
             var reminderList = defaults.stringForKey("reminderList")
             self.messageString = "📝 New List: \(reminderList!), created!"
             break;
@@ -1152,7 +1172,11 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
             output      = defaults.stringForKey("output")!
             var outputArray:[String] = Array(arrayLiteral: output)
             
-            ReminderManager.sharedInstance.createNewReminderList(calendarName!, items: outputArray)
+            if #available(iOS 9.0, *) {
+                ReminderManagerSave.sharedInstance.createNewReminderList(calendarName!, items: outputArray)
+            } else {
+                // Fallback on earlier versions
+            } //fixed check FIXWC
             self.messageString = "📝 New List: \"\(calendarName!)\", created!"
             break;
             
@@ -1163,7 +1187,11 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
             var calendarName    = defaults.stringForKey("calendarName") //Sets Reminder Title
             var wordArrTrimmed  = defaults.objectForKey("wordArrTrimmed") as! [String] //array of the items
             
-            ReminderManager.sharedInstance.createNewReminderList(calendarName!, items: wordArrTrimmed)
+            if #available(iOS 9.0, *) {
+                ReminderManagerSave.sharedInstance.createNewReminderList(calendarName!, items: wordArrTrimmed)
+            } else {
+                // Fallback on earlier versions
+            }  //fixed check FIXWC
             self.messageString = "📝 New Phrase List: \"\(calendarName!)\", created!"
             break;
             
@@ -1174,7 +1202,7 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         default:
             print("p155 in default switch so assume Event")
             
-            EventManager().createEvent()
+            EventManagerSave().createEvent()    //fixed check FIXWC
             self.messageString = "📅 Event created on your: \"\(calendarName.capitalizedString)\" calendar!"
             break;
         }

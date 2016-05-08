@@ -9,7 +9,7 @@
 
 import UIKit
 import EventKit
-//import MessageUI //commented for new watchExtension 040516
+import MessageUI //commented for new watchExtension 040516
 
 import WatchConnectivity
 
@@ -25,13 +25,13 @@ class ReminderManagerSave: NSObject, WCSessionDelegate {
     let session = WCSession.defaultSession()
     
     
-    class var sharedInstance : ReminderManager {
+    class var sharedInstance : ReminderManagerSave {
         struct Static {
             static var onceToken : dispatch_once_t = 0
-            static var instance : ReminderManager? = nil
+            static var instance : ReminderManagerSave? = nil
         }
         dispatch_once(&Static.onceToken) {
-            Static.instance = ReminderManager()
+            Static.instance = ReminderManagerSave()
         }
         return Static.instance!
     }

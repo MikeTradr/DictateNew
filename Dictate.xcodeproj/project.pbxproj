@@ -273,6 +273,8 @@
 		D369819C1C7BB05400ED0AD8 /* DatePopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePopupViewController.swift; sourceTree = "<group>"; };
 		D36DBDD41BD6DA870076A5C2 /* GlanceTodayEventsTableRC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GlanceTodayEventsTableRC.swift; path = "/Volumes/MikeUsers/mikederr/Documents/ThatSoft/DictateNew/Dictate WatchKit App/GlanceTodayEventsTableRC.swift"; sourceTree = "<absolute>"; };
 		D3711F041BB04E0E00D19AE9 /* TestIC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestIC.swift; sourceTree = "<group>"; };
+		D372C3B81CDEC3FF00F9B68A /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = "../../../../../../Volumes/MikeUsers/mikederr/Downloads/Parse-watchOS/Parse.framework"; sourceTree = "<group>"; };
+		D372C3B91CDEC3FF00F9B68A /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "../../../../../../Volumes/MikeUsers/mikederr/Downloads/Parse-watchOS/Bolts.framework"; sourceTree = "<group>"; };
 		D3795E791B8DF927009D3DB5 /* SettingsEventTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsEventTableViewController.swift; path = Views/SettingsEventTableViewController.swift; sourceTree = "<group>"; };
 		D37CFBF41BD95F130005320D /* NuanceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NuanceTest.swift; sourceTree = "<group>"; };
 		D38653F61BAA02F400B8CCBC /* EventManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventManager.swift; sourceTree = "<group>"; };
@@ -464,6 +466,8 @@
 		D31BF2FB1CDAB93700521A65 /* DictateWatch */ = {
 			isa = PBXGroup;
 			children = (
+				D372C3B81CDEC3FF00F9B68A /* Parse.framework */,
+				D372C3B91CDEC3FF00F9B68A /* Bolts.framework */,
 				D3F8AD241B696FCD0070C097 /* Interface.storyboard */,
 				D3F8AD271B696FCE0070C097 /* Images.xcassets */,
 				D31BF2FF1CDAB93700521A65 /* Assets.xcassets */,

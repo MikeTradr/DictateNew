@@ -9,7 +9,9 @@
 import UIKit
 //import MessageUI //commented for new watchExtension 040516
 //import AVFoundation  //commented for new watchExtension 040516
-import Parse
+//FIXWC import Parse
+
+
 //import CoreTelephony
 //import CoreTelephony
 
@@ -109,7 +111,8 @@ class WatchGeneral: NSObject {
         print("p99 calendarName: \(calendarName)")
 
 
-        
+//FIXWC
+        /*
         let rawDataObject = PFObject(className: "UserData")
         rawDataObject["rawString"] = strRaw                 //TODO why this black others blue??
         rawDataObject["output"] = output
@@ -117,7 +120,7 @@ class WatchGeneral: NSObject {
         rawDataObject["fullDTEnd"] = fullDTEnd
         rawDataObject["actionType"] = actionType            //TODO why this black others blue??
         rawDataObject["calendarName"] = calendarName
-        
+*/
         //TODO get these two fields from code!
         //TODO see here:
         print("109 Device and Phone munber in here: \(NSUserDefaults.standardUserDefaults().dictionaryRepresentation())")
@@ -179,6 +182,8 @@ class WatchGeneral: NSObject {
         
         //TODO fix PFuser when is nil can be nil???
  */
+ //FIXWC
+/*
         if PFUser.currentUser() == nil {
             rawDataObject["userName"] = "Mike Coded"
         } else {
@@ -191,7 +196,7 @@ class WatchGeneral: NSObject {
             //rawDataObject["userName"] = PFUser.currentUser()!.username
             rawDataObject["userName"] = PFUser.currentUser()!.username!
         }
-        
+ */
         print("p\(#line) we here? ")
         print("p168 we here? ")
         
@@ -200,12 +205,13 @@ class WatchGeneral: NSObject {
         
         // TODO used to have this alone:  rawDataObject["userName"] = PFUser.currentUser()?.username
         
-        let query = PFQuery(className:"UserData")
+//FIXWC        let query = PFQuery(className:"UserData")
         //TODO somehow get and save email to parse database
         // query.whereKey(“username”, equalTo: PFUser.currentUser()?.username)
         
-        print("p174 query: \(query)")
-        
+//FIXWC        print("p174 query: \(query)")
+ //FIXWC
+/*
         if PFUser.currentUser()?.email != nil {
             print("p176 PFUser.currentUser()?.email: \(PFUser.currentUser()?.email!)")
             rawDataObject["userEmail"] = PFUser.currentUser()?.email!
@@ -214,7 +220,7 @@ class WatchGeneral: NSObject {
         rawDataObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
             print("p214 General rawDataObject has been saved.")
         }
-        
+*/        
         // ____ End Save to Parse Database ____________________________________
         
         

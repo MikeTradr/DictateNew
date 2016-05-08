@@ -9,7 +9,7 @@
 import WatchKit
 import Foundation
 import EventKit
-import Parse
+//FIXWC import Parse
 // import AVFoundation //commented for new watchExtension 040516
 // import CoreTelephony //commented for new watchExtension 040516
 //import MessageUI
@@ -733,7 +733,8 @@ class MainIC: WKInterfaceController {
             let mainType = ""
             defaults.setObject(actionType, forKey: "actionType")        //saves actionType
             defaults.setObject(actionType, forKey: "mainType")        //saves actionType
-            
+//FIXWC
+/*
             let rawDataObject = PFObject(className: "UserData")
             rawDataObject["actionType"] = actionType
             rawDataObject["rawString"] = outputNote
@@ -747,7 +748,7 @@ class MainIC: WKInterfaceController {
                 print("p697 MainIC rawDataObject has been saved.")
          //   }
             break;
-            
+*/
      
         default:
             print("p155 in default switch so assume Event")
@@ -785,7 +786,8 @@ class MainIC: WKInterfaceController {
         }
         
 // ____ Save to Parse Database ____________________________________
-        
+//FIXWC
+/*
         // Setup Parse
         Parse.setApplicationId("1wwwPAQ0Of2Fp6flotUw4YzN64HFDmy3ijAlQZKE",
             clientKey: "EHeeek4uXhJQi0vXPBba945A4h0LQ4QddEGW8gSs")
@@ -797,7 +799,7 @@ class MainIC: WKInterfaceController {
         rawDataObject["fullDTEnd"] = fullDTEnd
         rawDataObject["actionType"] = actionType
         rawDataObject["calendarName"] = calendarName
-        
+*/
         //TODO get these two fields from code!
         //TODO see here:
         print("p478 Device and Phone munber in here: \(NSUserDefaults.standardUserDefaults().dictionaryRepresentation())")
@@ -836,14 +838,14 @@ class MainIC: WKInterfaceController {
         
         print("p822 deviceComplete: \(deviceComplete)")
         
-        
+//FIXWC
+/*
         rawDataObject["device"] = deviceComplete
         rawDataObject["system"] = "watchOS" //systemVersion
         rawDataObject["carrier"] = "Watch" //carrierName
         
-        
         rawDataObject["userPhoneNumber"] = "608-242-7700"               //TODO hardcoded get device from code?
-        
+
         //TODO get this from login Screen, hard coded for now...
         
         
@@ -882,7 +884,7 @@ class MainIC: WKInterfaceController {
         rawDataObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
             print("p831 MainIC rawDataObject has been saved.")
         }
-        
+ */
 // ____ End Save to Parse Database ____________________________________
         
         

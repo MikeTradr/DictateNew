@@ -8,7 +8,7 @@
 
 import WatchKit
 import Foundation
-import Parse
+//FIXWC import Parse
 //import AVFoundation //commented for new watchExtension 040516
 
 
@@ -194,7 +194,8 @@ class DictateManagerIC: WKInterfaceController {
         presentAlertControllerWithTitle("Voila", message: "", preferredStyle: .ActionSheet, actions: [action1, action2,action3])  
     }
  */
-    
+//FIXWC
+/*
     func initalizeParse() {
         
         print("w107 in DictateManagerIC: initalizeParse")
@@ -210,7 +211,7 @@ class DictateManagerIC: WKInterfaceController {
         PFUser.enableAutomaticUser()
         
     }
-    
+*/    
     
     
 

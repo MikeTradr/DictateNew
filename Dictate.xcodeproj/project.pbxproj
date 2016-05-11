@@ -106,6 +106,7 @@
 		D3CEC1801BD77A7F001A50F8 /* earcon_done_listening.wav in Resources */ = {isa = PBXBuildFile; fileRef = D3CEC17F1BD77A7F001A50F8 /* earcon_done_listening.wav */; };
 		D3CEC1831BD77A88001A50F8 /* earcon_listening.wav in Resources */ = {isa = PBXBuildFile; fileRef = D3CEC1821BD77A88001A50F8 /* earcon_listening.wav */; };
 		D3D98AF41BA54D5B00BA1901 /* FavoritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D98AF31BA54D5B00BA1901 /* FavoritesManager.swift */; };
+		D3D9DE2E1CE3CF21003DC35F /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3F8AD241B696FCD0070C097 /* Interface.storyboard */; };
 		D3F8ACEB1B696FB00070C097 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F8ACEA1B696FB00070C097 /* AppDelegate.swift */; };
 		D3F8ACED1B696FB00070C097 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F8ACEC1B696FB00070C097 /* ViewController.swift */; };
 		D3F8ACF21B696FB00070C097 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3F8ACF11B696FB00070C097 /* Images.xcassets */; };
@@ -298,10 +299,7 @@
 		D3AD9B571C5E3475006387C4 /* DetailsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsTableViewCell.swift; sourceTree = "<group>"; };
 		D3AD9B591C5E5245006387C4 /* DetailTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailTableVC.swift; sourceTree = "<group>"; };
 		D3B07A231B731C8800B9C2A9 /* Dictate.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Dictate.entitlements; sourceTree = "<group>"; };
-		D3B07A241B731D2A00B9C2A9 /* Dictate WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Dictate WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 		D3B2261F1C8CAF51009C0DBA /* SettingsAboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsAboutViewController.swift; sourceTree = "<group>"; };
-		D3B323EF1CD026AE00B29A96 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
-		D3B323F11CD026B800B29A96 /* ComplicationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
 		D3B6E24C1BD977B200C7B822 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		D3B6E24D1BD977B200C7B822 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		D3B6F5F81BA60B7E0052B639 /* DictateManagerIC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictateManagerIC.swift; sourceTree = "<group>"; };
@@ -334,12 +332,7 @@
 		D3F8ACF41B696FB00070C097 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		D3F8ACFF1B696FB00070C097 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D3F8AD001B696FB00070C097 /* DictateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictateTests.swift; sourceTree = "<group>"; };
-		D3F8AD111B696FCD0070C097 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D3F8AD121B696FCD0070C097 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
 		D3F8AD131B696FCD0070C097 /* MainIC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainIC.swift; sourceTree = "<group>"; };
-		D3F8AD151B696FCD0070C097 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
-		D3F8AD171B696FCD0070C097 /* GlanceControllerOLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlanceControllerOLD.swift; sourceTree = "<group>"; };
-		D3F8AD191B696FCD0070C097 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D3F8AD251B696FCE0070C097 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		D3F8AD271B696FCE0070C097 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D3FA08041BA7F6EB006A91C2 /* ReminderListsTableRC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderListsTableRC.swift; sourceTree = "<group>"; };
@@ -730,7 +723,6 @@
 			isa = PBXGroup;
 			children = (
 				D3F8ACE71B696FB00070C097 /* Dictate */,
-				D3F8AD0F1B696FCD0070C097 /* Dictate WatchKit Extension */,
 				D3F8ACFD1B696FB00070C097 /* DictateTests */,
 				D31BF2FB1CDAB93700521A65 /* DictateWatch */,
 				D31BF30A1CDAB93700521A65 /* DictateWatch Extension */,
@@ -789,29 +781,6 @@
 			isa = PBXGroup;
 			children = (
 				D3F8ACFF1B696FB00070C097 /* Info.plist */,
-			);
-			path = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		D3F8AD0F1B696FCD0070C097 /* Dictate WatchKit Extension */ = {
-			isa = PBXGroup;
-			children = (
-				D3F8AD101B696FCD0070C097 /* Supporting Files */,
-				D3B323F11CD026B800B29A96 /* ComplicationController.swift */,
-				D3B07A241B731D2A00B9C2A9 /* Dictate WatchKit Extension.entitlements */,
-				D3B323EF1CD026AE00B29A96 /* ExtensionDelegate.swift */,
-				D3F8AD171B696FCD0070C097 /* GlanceControllerOLD.swift */,
-				D3F8AD191B696FCD0070C097 /* Images.xcassets */,
-				D3F8AD111B696FCD0070C097 /* Info.plist */,
-				D3F8AD151B696FCD0070C097 /* NotificationController.swift */,
-			);
-			path = "Dictate WatchKit Extension";
-			sourceTree = "<group>";
-		};
-		D3F8AD101B696FCD0070C097 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				D3F8AD121B696FCD0070C097 /* PushNotificationPayload.apns */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -1070,6 +1039,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3D9DE2E1CE3CF21003DC35F /* Interface.storyboard in Resources */,
 				D31BF3181CDAB93700521A65 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

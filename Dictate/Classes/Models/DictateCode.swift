@@ -1309,7 +1309,7 @@ class DictateCode: NSObject {
                     if (actionType != "Reminder") {
                         startDate = dateFormatter.stringFromDate(NSDate())      // no day found so assume today
                         print("p638 startDate: \(startDate)")
-                        day = "Today"       // moved into this if so Reminders do njot get day set! was below here 2 lines 10/04/15 Mike
+                        day = "Today"       // moved into this if so Reminders do not get day set! was below here 2 lines 10/04/15 Mike
                     }
                     
                    

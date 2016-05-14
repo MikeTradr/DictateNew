@@ -49,10 +49,6 @@
 		D31BF3361CDAC16900521A65 /* SetCalendarIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D306CDA71BB1315D00FD973F /* SetCalendarIC.swift */; };
 		D31BF3371CDAC16F00521A65 /* SetCalendarTableRC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31C6C401BB435BA00A04B58 /* SetCalendarTableRC.swift */; };
 		D31BF3381CDAC17400521A65 /* TestIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3711F041BB04E0E00D19AE9 /* TestIC.swift */; };
-		D31BF33A1CDAC27A00521A65 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3B6E24C1BD977B200C7B822 /* Fabric.framework */; };
-		D31BF33B1CDAC28000521A65 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3B6E24D1BD977B200C7B822 /* Crashlytics.framework */; };
-		D31BF33D1CDAC29100521A65 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC0B48891B6FE9FF00C0AD82 /* AudioToolbox.framework */; };
-		D31BF33E1CDAC29900521A65 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC0B48851B6FE9EB00C0AD82 /* SystemConfiguration.framework */; };
 		D31BF33F1CDAC2A100521A65 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC0B48811B6FE9D300C0AD82 /* Security.framework */; };
 		D31BF3401CDAC2DC00521A65 /* NuanceHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = D33FEBB11BD76A70003E6755 /* NuanceHeader.m */; };
 		D31BF3411CDAC2F700521A65 /* DictateCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D323505D1B697B0200939F03 /* DictateCode.swift */; };
@@ -87,11 +83,10 @@
 		D392FADA1B9B1DFD00678B18 /* SettingsGeneralTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D392FAD91B9B1DFD00678B18 /* SettingsGeneralTableViewController.swift */; };
 		D397FDA01CAAF9DB005DD51A /* TimeDiffViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D397FD9F1CAAF9DB005DD51A /* TimeDiffViewController.swift */; };
 		D397FDA21CAB1752005DD51A /* TimeManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D397FDA11CAB1752005DD51A /* TimeManger.swift */; };
+		D39AF83C1CE7A56B0020206A /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D39AF83A1CE7A56B0020206A /* Parse.framework */; };
+		D39AF83D1CE7A56B0020206A /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D39AF83B1CE7A56B0020206A /* Bolts.framework */; };
 		D39EDDC91CDE861300D8DD6B /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D30912761CDE832E005EFE17 /* libsqlite3.0.tbd */; };
 		D39EDDCD1CDEBB2D00D8DD6B /* Frameworks in Resources */ = {isa = PBXBuildFile; fileRef = D39EDDCC1CDEBB2D00D8DD6B /* Frameworks */; };
-		D39EDDD01CDEBC7700D8DD6B /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D39EDDCE1CDEBC7700D8DD6B /* Parse.framework */; };
-		D39EDDD11CDEBC7700D8DD6B /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D39EDDCF1CDEBC7700D8DD6B /* Bolts.framework */; };
-		D39EDDD41CDEBC9700D8DD6B /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D39EDDD21CDEBC9700D8DD6B /* Parse.framework */; };
 		D3AD9B541C5D5439006387C4 /* DetailsTableVC_OLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AD9B531C5D5439006387C4 /* DetailsTableVC_OLD.swift */; };
 		D3AD9B581C5E3475006387C4 /* DetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AD9B571C5E3475006387C4 /* DetailsTableViewCell.swift */; };
 		D3AD9B5A1C5E5245006387C4 /* DetailTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AD9B591C5E5245006387C4 /* DetailTableVC.swift */; };
@@ -108,6 +103,7 @@
 		D3D98AF41BA54D5B00BA1901 /* FavoritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D98AF31BA54D5B00BA1901 /* FavoritesManager.swift */; };
 		D3D9DE2E1CE3CF21003DC35F /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3F8AD241B696FCD0070C097 /* Interface.storyboard */; };
 		D3D9DE2F1CE3E76F003DC35F /* DictateWatch Extension.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = D31BF34B1CDAC7E000521A65 /* DictateWatch Extension.entitlements */; };
+		D3F823881CE7C40800614EFD /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3F823871CE7C40800614EFD /* Parse.framework */; };
 		D3F8ACEB1B696FB00070C097 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F8ACEA1B696FB00070C097 /* AppDelegate.swift */; };
 		D3F8ACED1B696FB00070C097 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F8ACEC1B696FB00070C097 /* ViewController.swift */; };
 		D3F8ACF21B696FB00070C097 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3F8ACF11B696FB00070C097 /* Images.xcassets */; };
@@ -122,7 +118,6 @@
 		EC0B488E1B6FEA1F00C0AD82 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC0B488D1B6FEA1F00C0AD82 /* CoreGraphics.framework */; };
 		EC0B48931B6FEAC400C0AD82 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC0B48911B6FEAC400C0AD82 /* Bolts.framework */; };
 		EC3E611B1BD774030034E568 /* SpeechKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC3E611A1BD774030034E568 /* SpeechKit.framework */; };
-		EC42507E1CE39D3D004546B6 /* SpeechKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC3E611A1BD774030034E568 /* SpeechKit.framework */; };
 		EC82CF631BAAE26F00722611 /* UILabel+WhiteUIDatePickerLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = EC82CF621BAAE26F00722611 /* UILabel+WhiteUIDatePickerLabel.m */; };
 		ECB861E01B77DBB700503C50 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB861DC1B77DBB700503C50 /* Constants.swift */; };
 		ECB861E11B77DBB700503C50 /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB861DD1B77DBB700503C50 /* General.swift */; };
@@ -276,8 +271,6 @@
 		D369819C1C7BB05400ED0AD8 /* DatePopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePopupViewController.swift; sourceTree = "<group>"; };
 		D36DBDD41BD6DA870076A5C2 /* GlanceTodayEventsTableRC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlanceTodayEventsTableRC.swift; sourceTree = "<group>"; };
 		D3711F041BB04E0E00D19AE9 /* TestIC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestIC.swift; sourceTree = "<group>"; };
-		D372C3B81CDEC3FF00F9B68A /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = "../../../../Downloads/Parse-watchOS/Parse.framework"; sourceTree = "<group>"; };
-		D372C3B91CDEC3FF00F9B68A /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "../../../../Downloads/Parse-watchOS/Bolts.framework"; sourceTree = "<group>"; };
 		D3795E791B8DF927009D3DB5 /* SettingsEventTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsEventTableViewController.swift; sourceTree = "<group>"; };
 		D37CFBF41BD95F130005320D /* NuanceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NuanceTest.swift; sourceTree = "<group>"; };
 		D38653F61BAA02F400B8CCBC /* EventManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventManager.swift; sourceTree = "<group>"; };
@@ -288,13 +281,10 @@
 		D397FD9F1CAAF9DB005DD51A /* TimeDiffViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeDiffViewController.swift; sourceTree = "<group>"; };
 		D397FDA11CAB1752005DD51A /* TimeManger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeManger.swift; sourceTree = "<group>"; };
 		D39AB89D1BA86D68001C7570 /* CalendarListPickerIC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarListPickerIC.swift; sourceTree = "<group>"; };
+		D39AF83A1CE7A56B0020206A /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = Frameworks/watchOS/Parse.framework; sourceTree = "<group>"; };
+		D39AF83B1CE7A56B0020206A /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = Frameworks/watchOS/Bolts.framework; sourceTree = "<group>"; };
 		D39EDDC31CDE858B00D8DD6B /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = "../../../../../Downloads/parse-library-1.12.0/Parse.framework"; sourceTree = "<group>"; };
-		D39EDDC51CDE85C100D8DD6B /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "../../../../../Downloads/parse-library-1.12.0/Bolts.framework"; sourceTree = "<group>"; };
 		D39EDDCC1CDEBB2D00D8DD6B /* Frameworks */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Frameworks; sourceTree = "<group>"; };
-		D39EDDCE1CDEBC7700D8DD6B /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = Frameworks/watchOS/Parse.framework; sourceTree = "<group>"; };
-		D39EDDCF1CDEBC7700D8DD6B /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = Frameworks/watchOS/Bolts.framework; sourceTree = "<group>"; };
-		D39EDDD21CDEBC9700D8DD6B /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = Frameworks/iOS/Parse.framework; sourceTree = "<group>"; };
-		D39EDDD31CDEBC9700D8DD6B /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = Frameworks/iOS/Bolts.framework; sourceTree = "<group>"; };
 		D3A0F9FB1B69F0BB00F1FEDA /* EventCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCode.swift; sourceTree = "<group>"; };
 		D3AD9B531C5D5439006387C4 /* DetailsTableVC_OLD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsTableVC_OLD.swift; sourceTree = "<group>"; };
 		D3AD9B571C5E3475006387C4 /* DetailsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsTableViewCell.swift; sourceTree = "<group>"; };
@@ -325,6 +315,7 @@
 		D3E810831B70F4BC004AE5A9 /* TodayIC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayIC.swift; sourceTree = "<group>"; };
 		D3E810871B70FEA0004AE5A9 /* SettingsIC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsIC.swift; sourceTree = "<group>"; };
 		D3E810891B710690004AE5A9 /* ReminderListsIC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderListsIC.swift; sourceTree = "<group>"; };
+		D3F823871CE7C40800614EFD /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = Frameworks/iOS/Parse.framework; sourceTree = "<group>"; };
 		D3F8ACE51B696FB00070C097 /* Dictate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dictate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3F8ACE91B696FB00070C097 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D3F8ACEA1B696FB00070C097 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -424,15 +415,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EC42507E1CE39D3D004546B6 /* SpeechKit.framework in Frameworks */,
 				D30912771CDE832E005EFE17 /* libsqlite3.0.tbd in Frameworks */,
-				D31BF33B1CDAC28000521A65 /* Crashlytics.framework in Frameworks */,
-				D31BF33D1CDAC29100521A65 /* AudioToolbox.framework in Frameworks */,
-				D31BF33A1CDAC27A00521A65 /* Fabric.framework in Frameworks */,
 				D31BF33F1CDAC2A100521A65 /* Security.framework in Frameworks */,
-				D31BF33E1CDAC29900521A65 /* SystemConfiguration.framework in Frameworks */,
-				D39EDDD01CDEBC7700D8DD6B /* Parse.framework in Frameworks */,
-				D39EDDD11CDEBC7700D8DD6B /* Bolts.framework in Frameworks */,
+				D39AF83C1CE7A56B0020206A /* Parse.framework in Frameworks */,
+				D39AF83D1CE7A56B0020206A /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,6 +426,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3F823881CE7C40800614EFD /* Parse.framework in Frameworks */,
 				EC3E611B1BD774030034E568 /* SpeechKit.framework in Frameworks */,
 				EC0B488A1B6FE9FF00C0AD82 /* AudioToolbox.framework in Frameworks */,
 				D3B6E2501BD977B200C7B822 /* Crashlytics.framework in Frameworks */,
@@ -452,7 +439,6 @@
 				EC0B48801B6FE9C700C0AD82 /* CFNetwork.framework in Frameworks */,
 				EC0B487E1B6FE9B800C0AD82 /* libsqlite3.0.dylib in Frameworks */,
 				D3B6E24E1BD977B200C7B822 /* Fabric.framework in Frameworks */,
-				D39EDDD41CDEBC9700D8DD6B /* Parse.framework in Frameworks */,
 				EC0B48931B6FEAC400C0AD82 /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -464,11 +450,9 @@
 			isa = PBXGroup;
 			children = (
 				D31BF2FF1CDAB93700521A65 /* Assets.xcassets */,
-				D372C3B91CDEC3FF00F9B68A /* Bolts.framework */,
 				D3F8AD271B696FCE0070C097 /* Images.xcassets */,
 				D31BF3011CDAB93700521A65 /* Info.plist */,
 				D3F8AD241B696FCD0070C097 /* Interface.storyboard */,
-				D372C3B81CDEC3FF00F9B68A /* Parse.framework */,
 			);
 			path = DictateWatch;
 			sourceTree = "<group>";
@@ -605,7 +589,6 @@
 			isa = PBXGroup;
 			children = (
 				EC0B48891B6FE9FF00C0AD82 /* AudioToolbox.framework */,
-				D39EDDC51CDE85C100D8DD6B /* Bolts.framework */,
 				EC0B48911B6FEAC400C0AD82 /* Bolts.framework */,
 				EC0B487F1B6FE9C700C0AD82 /* CFNetwork.framework */,
 				EC0B488D1B6FEA1F00C0AD82 /* CoreGraphics.framework */,
@@ -723,16 +706,15 @@
 		D3F8ACDC1B696FB00070C097 = {
 			isa = PBXGroup;
 			children = (
+				D3F823871CE7C40800614EFD /* Parse.framework */,
+				D39AF83A1CE7A56B0020206A /* Parse.framework */,
+				D39AF83B1CE7A56B0020206A /* Bolts.framework */,
 				D3F8ACE71B696FB00070C097 /* Dictate */,
 				D3F8ACFD1B696FB00070C097 /* DictateTests */,
 				D31BF2FB1CDAB93700521A65 /* DictateWatch */,
 				D31BF30A1CDAB93700521A65 /* DictateWatch Extension */,
 				D3F8ACE61B696FB00070C097 /* Products */,
-				D39EDDCF1CDEBC7700D8DD6B /* Bolts.framework */,
-				D39EDDD31CDEBC9700D8DD6B /* Bolts.framework */,
 				D39EDDCC1CDEBB2D00D8DD6B /* Frameworks */,
-				D39EDDCE1CDEBC7700D8DD6B /* Parse.framework */,
-				D39EDDD21CDEBC9700D8DD6B /* Parse.framework */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1279,7 +1261,7 @@
 				);
 				IBSC_MODULE = DictateWatch_Extension;
 				INFOPLIST_FILE = DictateWatch/Info.plist;
-				PRODUCT_BUNDLE_IDENTIFIER = com.thatsoft.dictateApp.DictateWatch;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thatsoft.dictateApp.watchKitApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -1305,7 +1287,7 @@
 				);
 				IBSC_MODULE = DictateWatch_Extension;
 				INFOPLIST_FILE = DictateWatch/Info.plist;
-				PRODUCT_BUNDLE_IDENTIFIER = com.thatsoft.dictateApp.DictateWatch;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thatsoft.dictateApp.watchKitApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -1337,7 +1319,7 @@
 				INFOPLIST_FILE = "DictateWatch Extension/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.thatsoft.dictateApp.DictateWatchExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thatsoft.dictateApp.watchKitApp.Ext;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -1368,7 +1350,7 @@
 				INFOPLIST_FILE = "DictateWatch Extension/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.thatsoft.dictateApp.DictateWatchExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thatsoft.dictateApp.watchKitApp.Ext;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;

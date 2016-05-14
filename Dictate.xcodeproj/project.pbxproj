@@ -107,6 +107,7 @@
 		D3CEC1831BD77A88001A50F8 /* earcon_listening.wav in Resources */ = {isa = PBXBuildFile; fileRef = D3CEC1821BD77A88001A50F8 /* earcon_listening.wav */; };
 		D3D98AF41BA54D5B00BA1901 /* FavoritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D98AF31BA54D5B00BA1901 /* FavoritesManager.swift */; };
 		D3D9DE2E1CE3CF21003DC35F /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3F8AD241B696FCD0070C097 /* Interface.storyboard */; };
+		D3D9DE2F1CE3E76F003DC35F /* DictateWatch Extension.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = D31BF34B1CDAC7E000521A65 /* DictateWatch Extension.entitlements */; };
 		D3F8ACEB1B696FB00070C097 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F8ACEA1B696FB00070C097 /* AppDelegate.swift */; };
 		D3F8ACED1B696FB00070C097 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F8ACEC1B696FB00070C097 /* ViewController.swift */; };
 		D3F8ACF21B696FB00070C097 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3F8ACF11B696FB00070C097 /* Images.xcassets */; };
@@ -1039,6 +1040,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3D9DE2F1CE3E76F003DC35F /* DictateWatch Extension.entitlements in Resources */,
 				D3D9DE2E1CE3CF21003DC35F /* Interface.storyboard in Resources */,
 				D31BF3181CDAB93700521A65 /* Assets.xcassets in Resources */,
 			);
@@ -1277,7 +1279,7 @@
 				);
 				IBSC_MODULE = DictateWatch_Extension;
 				INFOPLIST_FILE = DictateWatch/Info.plist;
-				PRODUCT_BUNDLE_IDENTIFIER = com.thatsoft.dictateApp.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thatsoft.dictateApp.DictateWatch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -1303,7 +1305,7 @@
 				);
 				IBSC_MODULE = DictateWatch_Extension;
 				INFOPLIST_FILE = DictateWatch/Info.plist;
-				PRODUCT_BUNDLE_IDENTIFIER = com.thatsoft.dictateApp.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thatsoft.dictateApp.DictateWatch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -1335,7 +1337,7 @@
 				INFOPLIST_FILE = "DictateWatch Extension/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.thatsoft.dictateApp.watchkitapp.watchkitextension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thatsoft.dictateApp.DictateWatchExtension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -1366,7 +1368,7 @@
 				INFOPLIST_FILE = "DictateWatch Extension/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.thatsoft.dictateApp.watchkitapp.watchkitextension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thatsoft.dictateApp.DictateWatchExtension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;

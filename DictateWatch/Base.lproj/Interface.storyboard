@@ -1065,7 +1065,7 @@
         <!--Glance Interface Controller-->
         <scene sceneID="BOz-TT-tkC">
             <objects>
-                <glanceController spacing="0.0" id="0uZ-2p-rRc" customClass="GlanceController" customModule="Dictate_WatchKit_App" customModuleProvider="target">
+                <glanceController spacing="0.0" id="0uZ-2p-rRc" customClass="GlanceController" customModule="DictateWatch_Extension" customModuleProvider="target">
                     <items>
                         <group alignment="left" contentMode="left" id="t8f-Gd-c4y">
                             <items>
@@ -1189,7 +1189,7 @@
         <!--Notification Controller-->
         <scene sceneID="KIl-fV-djm">
             <objects>
-                <controller id="gdX-wl-uQE" customClass="NotificationController" customModule="Dictate_WatchKit_App" customModuleProvider="target"/>
+                <controller id="gdX-wl-uQE" customClass="NotificationController" customModule="DictateWatch_Extension" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="513" y="1085"/>
         </scene>

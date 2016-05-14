@@ -17,7 +17,7 @@ import EventKit
 import WatchConnectivity
 
 
-class MainIC: WKInterfaceController {
+class MainIC: WKInterfaceController, WCSessionDelegate {
     
     //let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
     var defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
@@ -1064,10 +1064,6 @@ class MainIC: WKInterfaceController {
     //---- End Override functions ----------------------------------------
     
 }   // end InterfaceController
-
-extension MainIC: WCSessionDelegate {
-    
-}
 
 
 

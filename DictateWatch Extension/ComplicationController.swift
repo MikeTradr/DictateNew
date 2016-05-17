@@ -7,9 +7,11 @@
 //
 
 import ClockKit
-
+import WatchKit
 
 class ComplicationController: NSObject, CLKComplicationDataSource {
+    
+    var image = UIImage()
     
     // MARK: - Timeline Configuration
     
@@ -55,9 +57,65 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     
     // MARK: - Placeholder Templates
     
-    func getPlaceholderTemplateForComplication(complication: CLKComplication, withHandler handler: (CLKComplicationTemplate?) -> Void) {
-        // This method will be called once per supported complication, and the results will be cached
-        handler(nil)
+    //---multipliers to convert to seconds---
+    let HOUR: NSTimeInterval = 60 * 60
+    let MINUTE: NSTimeInterval = 60
+    
+    func getPlaceholderTemplateForComplication(
+        complication: CLKComplication,
+        withHandler handler: (CLKComplicationTemplate?) -> Void) {
+        // This method will be called once per supported complication, and
+        // the results will be cached       
+        
+        //Set images for both watch sizes :)
+        let thisDevice = WKInterfaceDevice.currentDevice()
+        let rect:CGRect =  thisDevice.screenBounds
+        if (rect.size.height == 195.0) {
+            // Apple Watch 42mm
+            image = UIImage(named: "dicAppIcon58")!
+        } else if (rect.size.height == 170.0){
+            // Apple Watch 38mm
+            image = UIImage(named: "dicAppIcon52")!
+        }
+        
+        // handler(nil)
+        var template: CLKComplicationTemplate?
+        switch complication.family {
+        case .ModularSmall:
+            //let modularSmallTemplate =  CLKComplicationTemplateModularSmallRingText()
+            let modularSmallTemplate =  CLKComplicationTemplateModularSmallSimpleImage()
+            let imager = CLKImageProvider(onePieceImage: image)
+            
+         //   modularSmallTemplate.textProvider = CLKSimpleTextProvider(text: "R")
+          //  modularSmallTemplate.fillFraction = 0.75
+          //  modularSmallTemplate.ringStyle = CLKComplicationRingStyle.Closed
+            
+            template = modularSmallTemplate
+            
+        case .ModularLarge:
+            let modularLargeTemplate =
+                CLKComplicationTemplateModularLargeStandardBody()
+            modularLargeTemplate.headerTextProvider =
+                CLKTimeIntervalTextProvider(startDate: NSDate(),
+                                            endDate: NSDate(timeIntervalSinceNow: 1.5 * HOUR))
+            modularLargeTemplate.body1TextProvider =
+                CLKSimpleTextProvider(text: "Movie Name",
+                                      shortText: "Movie")
+            modularLargeTemplate.body2TextProvider =
+                CLKSimpleTextProvider(text: "Running Time",
+                                      shortText: "Time")
+            template = modularLargeTemplate
+        case .UtilitarianSmall:
+            template = nil
+        case .UtilitarianLarge:
+            template = nil
+        case .CircularSmall:
+            template = nil
+        }
+        handler(template)
     }
+    
+    
+    
     
 }

@@ -56,7 +56,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     }
     
     // MARK: - Placeholder Templates
-    
+
     //---multipliers to convert to seconds---
     let HOUR: NSTimeInterval = 60 * 60
     let MINUTE: NSTimeInterval = 60
@@ -67,30 +67,38 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         // This method will be called once per supported complication, and
         // the results will be cached       
         
-        //Set images for both watch sizes :)
-        let thisDevice = WKInterfaceDevice.currentDevice()
-        let rect:CGRect =  thisDevice.screenBounds
-        if (rect.size.height == 195.0) {
-            // Apple Watch 42mm
-            image = UIImage(named: "dicAppIcon58")!
-        } else if (rect.size.height == 170.0){
-            // Apple Watch 38mm
-            image = UIImage(named: "dicAppIcon52")!
-        }
         
         // handler(nil)
         var template: CLKComplicationTemplate?
         switch complication.family {
+            
+            /*
         case .ModularSmall:
             //let modularSmallTemplate =  CLKComplicationTemplateModularSmallRingText()
             let modularSmallTemplate =  CLKComplicationTemplateModularSmallSimpleImage()
-            let imager = CLKImageProvider(onePieceImage: image)
+            
+            //Set images for both watch sizes :)
+            let thisDevice = WKInterfaceDevice.currentDevice()
+            let rect:CGRect =  thisDevice.screenBounds
+            if (rect.size.height == 195.0) {
+                // Apple Watch 42mm
+                image = UIImage(named: "dicAppIcon58")!.imageWithRenderingMode(.AlwaysTemplate)
+               // let theImage = UIImage(named: "testImage")!.imageWithRenderingMode(.AlwaysTemplate)
+
+            } else if (rect.size.height == 170.0){
+                // Apple Watch 38mm
+                image = UIImage(named: "dicAppIcon52")!
+            }
+            
+          //  let imager = CLKImageProvider(onePieceImage: image)
             
          //   modularSmallTemplate.textProvider = CLKSimpleTextProvider(text: "R")
           //  modularSmallTemplate.fillFraction = 0.75
           //  modularSmallTemplate.ringStyle = CLKComplicationRingStyle.Closed
             
             template = modularSmallTemplate
+ 
+ */
             
         case .ModularLarge:
             let modularLargeTemplate =
@@ -111,11 +119,17 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
             template = nil
         case .CircularSmall:
             template = nil
+        default:
+             template = nil
+           
+            
         }
+ 
+ 
         handler(template)
     }
+
     
-    
-    
+ 
     
 }

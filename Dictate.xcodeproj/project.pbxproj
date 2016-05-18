@@ -72,6 +72,8 @@
 		D33FEBAF1BD769EB003E6755 /* NuanceHeader.h in Sources */ = {isa = PBXBuildFile; fileRef = D33FEBAE1BD769EB003E6755 /* NuanceHeader.h */; };
 		D33FEBB21BD76A70003E6755 /* NuanceHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = D33FEBB11BD76A70003E6755 /* NuanceHeader.m */; };
 		D34451981C8505C5007F3DDD /* CalendarPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34451971C8505C5007F3DDD /* CalendarPickerViewController.swift */; };
+		D353291A1CED1C1E006CCC80 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3F8AD271B696FCE0070C097 /* Images.xcassets */; };
+		D353291B1CED1C1F006CCC80 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3F8AD271B696FCE0070C097 /* Images.xcassets */; };
 		D355D97C1BA7DD3F00DADD72 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D355D97B1BA7DD3F00DADD72 /* Main.storyboard */; };
 		D369819D1C7BB05400ED0AD8 /* DatePopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D369819C1C7BB05400ED0AD8 /* DatePopupViewController.swift */; };
 		D3795E7A1B8DF927009D3DB5 /* SettingsEventTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3795E791B8DF927009D3DB5 /* SettingsEventTableViewController.swift */; };
@@ -1009,6 +1011,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D31BF3001CDAB93700521A65 /* Assets.xcassets in Resources */,
+				D353291B1CED1C1F006CCC80 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1017,6 +1020,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D3D9DE2F1CE3E76F003DC35F /* DictateWatch Extension.entitlements in Resources */,
+				D353291A1CED1C1E006CCC80 /* Images.xcassets in Resources */,
 				D3D9DE2E1CE3CF21003DC35F /* Interface.storyboard in Resources */,
 				D31BF3181CDAB93700521A65 /* Assets.xcassets in Resources */,
 			);

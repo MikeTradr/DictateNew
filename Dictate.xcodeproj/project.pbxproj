@@ -49,7 +49,6 @@
 		D31BF3361CDAC16900521A65 /* SetCalendarIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D306CDA71BB1315D00FD973F /* SetCalendarIC.swift */; };
 		D31BF3371CDAC16F00521A65 /* SetCalendarTableRC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31C6C401BB435BA00A04B58 /* SetCalendarTableRC.swift */; };
 		D31BF3381CDAC17400521A65 /* TestIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3711F041BB04E0E00D19AE9 /* TestIC.swift */; };
-		D31BF33F1CDAC2A100521A65 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC0B48811B6FE9D300C0AD82 /* Security.framework */; };
 		D31BF3401CDAC2DC00521A65 /* NuanceHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = D33FEBB11BD76A70003E6755 /* NuanceHeader.m */; };
 		D31BF3411CDAC2F700521A65 /* DictateCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D323505D1B697B0200939F03 /* DictateCode.swift */; };
 		D31BF3421CDAC2FC00521A65 /* ReminderCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32350611B69828900939F03 /* ReminderCode.swift */; };
@@ -83,8 +82,6 @@
 		D392FADA1B9B1DFD00678B18 /* SettingsGeneralTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D392FAD91B9B1DFD00678B18 /* SettingsGeneralTableViewController.swift */; };
 		D397FDA01CAAF9DB005DD51A /* TimeDiffViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D397FD9F1CAAF9DB005DD51A /* TimeDiffViewController.swift */; };
 		D397FDA21CAB1752005DD51A /* TimeManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D397FDA11CAB1752005DD51A /* TimeManger.swift */; };
-		D39AF83C1CE7A56B0020206A /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D39AF83A1CE7A56B0020206A /* Parse.framework */; };
-		D39AF83D1CE7A56B0020206A /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D39AF83B1CE7A56B0020206A /* Bolts.framework */; };
 		D39EDDC91CDE861300D8DD6B /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D30912761CDE832E005EFE17 /* libsqlite3.0.tbd */; };
 		D39EDDCD1CDEBB2D00D8DD6B /* Frameworks in Resources */ = {isa = PBXBuildFile; fileRef = D39EDDCC1CDEBB2D00D8DD6B /* Frameworks */; };
 		D3AD9B541C5D5439006387C4 /* DetailsTableVC_OLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AD9B531C5D5439006387C4 /* DetailsTableVC_OLD.swift */; };
@@ -416,9 +413,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D30912771CDE832E005EFE17 /* libsqlite3.0.tbd in Frameworks */,
-				D31BF33F1CDAC2A100521A65 /* Security.framework in Frameworks */,
-				D39AF83C1CE7A56B0020206A /* Parse.framework in Frameworks */,
-				D39AF83D1CE7A56B0020206A /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

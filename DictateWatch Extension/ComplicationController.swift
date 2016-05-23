@@ -61,6 +61,9 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     let HOUR: NSTimeInterval = 60 * 60
     let MINUTE: NSTimeInterval = 60
     
+    
+
+    
     func getPlaceholderTemplateForComplication(
         complication: CLKComplication,
         withHandler handler: (CLKComplicationTemplate?) -> Void) {
@@ -71,8 +74,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         // handler(nil)
         var template: CLKComplicationTemplate?
         switch complication.family {
-            
-            /*
+ /*
         case .ModularSmall:
             //let modularSmallTemplate =  CLKComplicationTemplateModularSmallRingText()
             let modularSmallTemplate =  CLKComplicationTemplateModularSmallSimpleImage()
@@ -82,7 +84,9 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
             let rect:CGRect =  thisDevice.screenBounds
             if (rect.size.height == 195.0) {
                 // Apple Watch 42mm
-                image = UIImage(named: "dicAppIcon58")!.imageWithRenderingMode(.AlwaysTemplate)
+               // image = UIImage(named: "dicAppIcon58")!.imageWithRenderingMode(.AlwaysTemplate)
+              //   image = UIImage(named: "dicAppIcon58")!
+
                // let theImage = UIImage(named: "testImage")!.imageWithRenderingMode(.AlwaysTemplate)
 
             } else if (rect.size.height == 170.0){
@@ -97,8 +101,8 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
           //  modularSmallTemplate.ringStyle = CLKComplicationRingStyle.Closed
             
             template = modularSmallTemplate
- 
  */
+
             
         case .ModularLarge:
             let modularLargeTemplate =
@@ -129,7 +133,6 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         handler(template)
     }
 
-    
  
     
 }

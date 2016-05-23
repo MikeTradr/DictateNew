@@ -30,13 +30,9 @@ class GlanceController: WKInterfaceController {
     
     @IBOutlet var labelDate: WKInterfaceLabel!
     @IBOutlet var labelNow: WKInterfaceLabel!
-    
-    
     @IBOutlet var table: WKInterfaceTable!
     
     let dateFormatter = NSDateFormatter()
-    
-    
     
     //---- funcs below here -----------------------------------------------------------
     
@@ -98,7 +94,7 @@ class GlanceController: WKInterfaceController {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "E, MMM d"
         
-        let dateString = dateFormatter.stringFromDate(today)   //set to today date for now
+        let dateString = dateFormatter.stringFromDate(NSDate())   //set to today date for now
         self.labelDate.setText(dateString)
         self.labelDate.setTextColor(UIColor.yellowColor())
         

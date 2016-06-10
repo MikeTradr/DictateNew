@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="10032"/>
@@ -8,7 +8,7 @@
         <!--Main-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller identifier="Main" id="AgC-eL-Hgc" customClass="MainIC" customModule="Dictate_WatchKit_Extension">
+                <controller identifier="Main" id="AgC-eL-Hgc" customClass="MainIC" customModule="DictateWatch_Extension">
                     <items>
                         <group width="1" alignment="center" id="BII-2S-Kpq">
                             <items>
@@ -283,7 +283,7 @@
         <!--Events-->
         <scene sceneID="sS8-Mf-H5Q">
             <objects>
-                <controller identifier="Events" id="Iem-D3-4JW" customClass="TodayIC" customModule="Dictate_WatchKit_Extension">
+                <controller identifier="Events" id="Iem-D3-4JW" customClass="TodayIC" customModule="DictateWatch_Extension">
                     <items>
                         <group width="1" alignment="left" layout="vertical" id="H9N-BU-ybb" userLabel="DayGroup">
                             <items>
@@ -410,7 +410,7 @@
         <!--EventDetails-->
         <scene sceneID="ZzI-hs-W5w">
             <objects>
-                <controller identifier="EventDetails" id="zTX-KH-Wk9" customClass="EventDetailsIC" customModule="Dictate_WatchKit_Extension">
+                <controller identifier="EventDetails" id="zTX-KH-Wk9" customClass="EventDetailsIC" customModule="DictateWatch_Extension">
                     <items>
                         <group width="1" alignment="left" layout="vertical" id="00f-mj-gAa" userLabel="GroupTitle&amp;Location">
                             <items>
@@ -857,7 +857,7 @@
         <!--Reminders-->
         <scene sceneID="peT-G5-wcJ">
             <objects>
-                <controller identifier="Reminders" id="ei9-cN-Wbe" customClass="ReminderListsIC" customModule="Dictate_WatchKit_Extension">
+                <controller identifier="Reminders" id="ei9-cN-Wbe" customClass="ReminderListsIC" customModule="DictateWatch_Extension">
                     <items>
                         <group width="1" alignment="left" layout="vertical" id="03p-aw-ynO" userLabel="ReminderListsGroup">
                             <items>
@@ -1065,7 +1065,7 @@
         <!--Glance Interface Controller-->
         <scene sceneID="BOz-TT-tkC">
             <objects>
-                <glanceController spacing="0.0" id="0uZ-2p-rRc" customClass="GlanceController" customModule="DictateWatch_Extension" customModuleProvider="target">
+                <glanceController spacing="0.0" id="0uZ-2p-rRc" customClass="GlanceController" customModule="DictateWatch" customModuleProvider="target">
                     <items>
                         <group alignment="left" contentMode="left" id="t8f-Gd-c4y">
                             <items>
@@ -1189,7 +1189,7 @@
         <!--Notification Controller-->
         <scene sceneID="KIl-fV-djm">
             <objects>
-                <controller id="gdX-wl-uQE" customClass="NotificationController" customModule="DictateWatch_Extension" customModuleProvider="target"/>
+                <controller id="gdX-wl-uQE" customClass="NotificationController" customModule="DictateWatch" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="513" y="1085"/>
         </scene>
@@ -1816,7 +1816,7 @@
         <!--EditNotes-->
         <scene sceneID="0HS-Bf-AsL">
             <objects>
-                <controller identifier="EditNotes" id="eEf-3w-Rhd" customClass="EventEditNotesIC" customModule="Dictate_WatchKit_Extension">
+                <controller identifier="EditNotes" id="eEf-3w-Rhd" customClass="EventEditNotesIC" customModule="DictateWatch_Extension">
                     <items>
                         <group width="1" alignment="left" layout="vertical" id="xF2-Fo-Knz" userLabel="NotesGroup">
                             <items>
@@ -1929,7 +1929,7 @@
         <!--SetCalendar-->
         <scene sceneID="2L3-SE-iPx">
             <objects>
-                <controller identifier="SetCalendar" animationDuration="1" id="27t-QR-fE5" customClass="SetCalendarIC" customModule="Dictate_WatchKit_Extension">
+                <controller identifier="SetCalendar" animationDuration="1" id="27t-QR-fE5" customClass="SetCalendarIC" customModule="DictateWatch_Extension">
                     <items>
                         <group width="1" alignment="left" id="gKJ-Gq-veA" userLabel="Header Group">
                             <items>

@@ -36,7 +36,6 @@
 		D31BF3261CDABE2500521A65 /* TimeManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D397FDA11CAB1752005DD51A /* TimeManger.swift */; };
 		D31BF3291CDABE6200521A65 /* JTDateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB8620D1B77DEBD00503C50 /* JTDateHelper.m */; };
 		D31BF32A1CDAC12500521A65 /* DictateManagerIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B6F5F81BA60B7E0052B639 /* DictateManagerIC.swift */; };
-		D31BF32C1CDAC13800521A65 /* MainIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F8AD131B696FCD0070C097 /* MainIC.swift */; };
 		D31BF32D1CDAC13C00521A65 /* ReminderListsIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E810891B710690004AE5A9 /* ReminderListsIC.swift */; };
 		D31BF32E1CDAC14100521A65 /* ReminderItemsIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35588BB1BA937D20052892F /* ReminderItemsIC.swift */; };
 		D31BF32F1CDAC14600521A65 /* ReminderListsTableRC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FA08041BA7F6EB006A91C2 /* ReminderListsTableRC.swift */; };
@@ -100,13 +99,14 @@
 		D3CEC1801BD77A7F001A50F8 /* earcon_done_listening.wav in Resources */ = {isa = PBXBuildFile; fileRef = D3CEC17F1BD77A7F001A50F8 /* earcon_done_listening.wav */; };
 		D3CEC1831BD77A88001A50F8 /* earcon_listening.wav in Resources */ = {isa = PBXBuildFile; fileRef = D3CEC1821BD77A88001A50F8 /* earcon_listening.wav */; };
 		D3D98AF41BA54D5B00BA1901 /* FavoritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D98AF31BA54D5B00BA1901 /* FavoritesManager.swift */; };
-		D3D9DE2E1CE3CF21003DC35F /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3F8AD241B696FCD0070C097 /* Interface.storyboard */; };
 		D3D9DE2F1CE3E76F003DC35F /* DictateWatch Extension.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = D31BF34B1CDAC7E000521A65 /* DictateWatch Extension.entitlements */; };
 		D3F823881CE7C40800614EFD /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3F823871CE7C40800614EFD /* Parse.framework */; };
 		D3F8ACEB1B696FB00070C097 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F8ACEA1B696FB00070C097 /* AppDelegate.swift */; };
 		D3F8ACED1B696FB00070C097 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F8ACEC1B696FB00070C097 /* ViewController.swift */; };
 		D3F8ACF21B696FB00070C097 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3F8ACF11B696FB00070C097 /* Images.xcassets */; };
 		D3F8ACF51B696FB00070C097 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3F8ACF31B696FB00070C097 /* LaunchScreen.xib */; };
+		D3F8F9731D0B3CD200094101 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3F8AD241B696FCD0070C097 /* Interface.storyboard */; };
+		D3F8F9741D0B3DC600094101 /* MainIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F8AD131B696FCD0070C097 /* MainIC.swift */; };
 		EC0B487E1B6FE9B800C0AD82 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EC0B487D1B6FE9B800C0AD82 /* libsqlite3.0.dylib */; };
 		EC0B48801B6FE9C700C0AD82 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC0B487F1B6FE9C700C0AD82 /* CFNetwork.framework */; };
 		EC0B48821B6FE9D300C0AD82 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC0B48811B6FE9D300C0AD82 /* Security.framework */; };
@@ -1011,6 +1011,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D31BF3001CDAB93700521A65 /* Assets.xcassets in Resources */,
+				D3F8F9731D0B3CD200094101 /* Interface.storyboard in Resources */,
 				D353291B1CED1C1F006CCC80 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1021,7 +1022,6 @@
 			files = (
 				D3D9DE2F1CE3E76F003DC35F /* DictateWatch Extension.entitlements in Resources */,
 				D353291A1CED1C1E006CCC80 /* Images.xcassets in Resources */,
-				D3D9DE2E1CE3CF21003DC35F /* Interface.storyboard in Resources */,
 				D31BF3181CDAB93700521A65 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1081,6 +1081,7 @@
 			files = (
 				D31BF3401CDAC2DC00521A65 /* NuanceHeader.m in Sources */,
 				D31BF3341CDAC15F00521A65 /* EditEventDetailsIC.swift in Sources */,
+				D3F8F9741D0B3DC600094101 /* MainIC.swift in Sources */,
 				D31BF3421CDAC2FC00521A65 /* ReminderCode.swift in Sources */,
 				D31BF35A1CDBF66100521A65 /* EventManager.swift in Sources */,
 				D31BF3551CDBAA8900521A65 /* WatchGeneral.swift in Sources */,
@@ -1104,7 +1105,6 @@
 				D31BF3351CDAC16400521A65 /* EventEditNotesIC.swift in Sources */,
 				D31BF3261CDABE2500521A65 /* TimeManger.swift in Sources */,
 				D31BF3301CDAC14B00521A65 /* ReminderItemsTableRC.swift in Sources */,
-				D31BF32C1CDAC13800521A65 /* MainIC.swift in Sources */,
 				D31BF30E1CDAB93700521A65 /* InterfaceController.swift in Sources */,
 				D31BF3251CDABD0100521A65 /* GlanceTodayEventsTableRC.swift in Sources */,
 				D31BF3141CDAB93700521A65 /* GlanceController.swift in Sources */,

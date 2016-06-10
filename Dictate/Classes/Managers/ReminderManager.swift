@@ -724,12 +724,13 @@ class ReminderManager: NSObject {
         
     //TODO Anil can we filter for local calndars only. I get in Arry Mike Derr twice!
        //TODO Anil help we need to file ter calendars of type = calDAV
-        
-        newCalendar.source = sourcesInEventStore.filter{
-            (source: EKSource) -> Bool in
-            source.sourceType == EKSourceType.Local
-            }.first!
-        
+                
+        if sourcesInEventStore != [] {
+            newCalendar.source = sourcesInEventStore.filter{
+                (source: EKSource) -> Bool in
+                source.sourceType == EKSourceType.Local
+                }.first!
+        }
         
         
         var error:NSError?

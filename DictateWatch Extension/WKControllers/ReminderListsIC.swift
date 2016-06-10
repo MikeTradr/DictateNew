@@ -1,6 +1,6 @@
 //
 //  ReminderListsIC.swift
-//  Dictate
+//  DictateWatch
 //
 //  Created by Mike Derr on 8/4/15.
 //  Copyright (c) 2015 ThatSoft.com. All rights reserved.

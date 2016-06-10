@@ -1,6 +1,6 @@
 //
 //  TodayViewController
-//  WatchInput
+//  Dictate
 //
 //  Created by Anil on 5/8/15.
 //  Copyright (c) 2015 ThatSoft.com. All rights reserved.
@@ -269,6 +269,41 @@
         cell.startTimeLabel.text = @"all-day";
         cell.endTimeLabel.text = @"";
     }
+/* HELP BRO here I treid... my C is not ...
+ 
+ 
+    //added by Mike attempt to get timeUntil here... 060416
+    NSString *timeUntil = @"";
+    
+    timeUntil = TimeManger.sharedInstance.timeInterval(event.startDate);
+    NSLog(@"p277 timeUntil: %@", timeUntil);
+    
+    NSDate *startTimeItem = event.startDate;
+    NSTimeInterval *timeUntilStart = startTimeItem.timeIntervalSinceDate([NSDate date]);
+    
+    NSDate *endTimeItem = event.endDate;
+    NSTimeInterval *timeUntilEnd = endTimeItem.timeIntervalSinceDate(NSDate());
+    
+    if ((timeUntilStart <= 0) && (timeUntilEnd >= 0)) {
+        timeUntil = @"Now   ";
+        cell.labelTimeUntil.textColor = [UIColor COLOR_YELLOW];
+        
+        UIFont *headlineFont = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline);
+        
+        let fontAttribute = [NSFontAttributeName : headlineFont];
+        
+        let attributedString = NSAttributedString(string: "Now  ",
+                                                  attributes: fontAttribute);
+        
+        cell.labelTimeUntil.setAttributedText(attributedString);
+    } else {
+        cell.labelTimeUntil.textColor = [UIColor COLOR_GREEN];
+        cell.labelTimeUntil.text("\(timeUntil) ");
+    }
+    
+ */
+    
+    
     return cell;
 }
 

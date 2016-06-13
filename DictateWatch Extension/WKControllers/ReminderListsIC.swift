@@ -240,41 +240,44 @@ class ReminderListsIC: WKInterfaceController {
         if allReminderLists != [] {
             for (index, title) in allReminderLists.enumerate() {
                 print("---------------------------------------------------")
-                print("w40 index, title: \(index), \(title)")
+                print("w243 index, title: \(index), \(title)")
+                print("w244 table.rowControllerAtIndex(index): \(table.rowControllerAtIndex(index))")
                 
-                let row = table.rowControllerAtIndex(index) as! ReminderListsTableRC
-                let reminderList = allReminderLists[index]
-                print("w146 reminderList: \(reminderList)")
- // /*
-                //TODO Mike TODO Anil  this crashes watch used to work!!!!!!!
-  
-                // get count or items in each reminder list and set the Text Label
-                ReminderManager.sharedInstance.fetchCalendarReminders(reminderList) { (reminders) -> Void in
-                    print("w148 reminders: \(reminders)")
-                    self.allReminders = reminders as [EKReminder]
-                    let numberOfItems = self.allReminders.count
+                if table.rowControllerAtIndex(index) != nil {
+                    let row = table.rowControllerAtIndex(index) as! ReminderListsTableRC
                 
-                    print("w151 numberOfItems: \(numberOfItems)")
-                    if numberOfItems != 0 {
-                        print("w156 reminder.title: \(reminderList.title)")
-                        print("w157 numberOfItems: \(numberOfItems)")
+                    let reminderList = allReminderLists[index]
+                    print("w146 reminderList: \(reminderList)")
+     // /*
+                    //TODO Mike TODO Anil  this crashes watch used to work!!!!!!!
+      
+                    // get count or items in each reminder list and set the Text Label
+                    ReminderManager.sharedInstance.fetchCalendarReminders(reminderList) { (reminders) -> Void in
+                        print("w148 reminders: \(reminders)")
+                        self.allReminders = reminders as [EKReminder]
+                        let numberOfItems = self.allReminders.count
+                    
+                        print("w151 numberOfItems: \(numberOfItems)")
+                        if numberOfItems != 0 {
+                            print("w156 reminder.title: \(reminderList.title)")
+                            print("w157 numberOfItems: \(numberOfItems)")
 
-                       row.tableRowLabel.setText("\(reminderList.title) (\(numberOfItems))")
-                        
-                        print("w162 here? reminder: \(reminderList)")
-                    }
+                           row.tableRowLabel.setText("\(reminderList.title) (\(numberOfItems))")
+                            
+                            print("w162 here? reminder: \(reminderList)")
+                        }
 
-                }   // end ReminderManager call
- //  */
-    
-                row.tableRowLabel.setText("\(reminderList.title)")
-                row.tableRowLabel.setTextColor(UIColor(CGColor: reminderList.CGColor))
-                row.verticalBar.setBackgroundColor(UIColor(CGColor: reminderList.CGColor))
-                
-                row.imageVerticalBar.setTintColor(UIColor(CGColor: reminderList.CGColor))
-                
-                row.imageVerticalBarRT.setTintColor(UIColor(CGColor: reminderList.CGColor))
-
+                    }   // end ReminderManager call
+     //  */
+        
+                    row.tableRowLabel.setText("\(reminderList.title)")
+                    row.tableRowLabel.setTextColor(UIColor(CGColor: reminderList.CGColor))
+                    row.verticalBar.setBackgroundColor(UIColor(CGColor: reminderList.CGColor))
+                    
+                    row.imageVerticalBar.setTintColor(UIColor(CGColor: reminderList.CGColor))
+                    
+                    row.imageVerticalBarRT.setTintColor(UIColor(CGColor: reminderList.CGColor))
+                }
             }
         }
     }   // end loadTableData func

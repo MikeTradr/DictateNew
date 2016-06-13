@@ -60,6 +60,7 @@
 		D31BF35F1CDE792000521A65 /* ReminderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF818621B84FAB70087ECAD /* ReminderManager.swift */; };
 		D31CB4B01BA2897500EC5418 /* CalendarPickerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31CB4AF1BA2897500EC5418 /* CalendarPickerTableViewController.swift */; };
 		D31CB4B21BA28A1800EC5418 /* SettingsCalendarListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31CB4B11BA28A1800EC5418 /* SettingsCalendarListTableViewCell.swift */; };
+		D31F336B1D0E7BD3003D726E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D31F336A1D0E7BD3003D726E /* Images.xcassets */; };
 		D323505E1B697B0200939F03 /* DictateCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D323505D1B697B0200939F03 /* DictateCode.swift */; };
 		D32350621B69828900939F03 /* ReminderCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32350611B69828900939F03 /* ReminderCode.swift */; };
 		D3348D111BAE4D3C0056792D /* 124-DeleteWhoosh.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D3348D101BAE4D3C0056792D /* 124-DeleteWhoosh.mp3 */; };
@@ -71,8 +72,6 @@
 		D33FEBAF1BD769EB003E6755 /* NuanceHeader.h in Sources */ = {isa = PBXBuildFile; fileRef = D33FEBAE1BD769EB003E6755 /* NuanceHeader.h */; };
 		D33FEBB21BD76A70003E6755 /* NuanceHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = D33FEBB11BD76A70003E6755 /* NuanceHeader.m */; };
 		D34451981C8505C5007F3DDD /* CalendarPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34451971C8505C5007F3DDD /* CalendarPickerViewController.swift */; };
-		D353291A1CED1C1E006CCC80 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3F8AD271B696FCE0070C097 /* Images.xcassets */; };
-		D353291B1CED1C1F006CCC80 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3F8AD271B696FCE0070C097 /* Images.xcassets */; };
 		D355D97C1BA7DD3F00DADD72 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D355D97B1BA7DD3F00DADD72 /* Main.storyboard */; };
 		D369819D1C7BB05400ED0AD8 /* DatePopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D369819C1C7BB05400ED0AD8 /* DatePopupViewController.swift */; };
 		D3795E7A1B8DF927009D3DB5 /* SettingsEventTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3795E791B8DF927009D3DB5 /* SettingsEventTableViewController.swift */; };
@@ -251,6 +250,7 @@
 		D31CB4B11BA28A1800EC5418 /* SettingsCalendarListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsCalendarListTableViewCell.swift; sourceTree = "<group>"; };
 		D31E1DB61BAEEA1700BC7B99 /* EventDetailsIC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailsIC.swift; sourceTree = "<group>"; };
 		D31E1DB81BAEEA2A00BC7B99 /* EditEventDetailsIC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditEventDetailsIC.swift; sourceTree = "<group>"; };
+		D31F336A1D0E7BD3003D726E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D323505D1B697B0200939F03 /* DictateCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictateCode.swift; sourceTree = "<group>"; };
 		D32350611B69828900939F03 /* ReminderCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderCode.swift; sourceTree = "<group>"; };
 		D3348D031BAE4CFD0056792D /* 124-DeleteWhoosh.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "124-DeleteWhoosh.mp3"; sourceTree = "<group>"; };
@@ -325,7 +325,6 @@
 		D3F8AD001B696FB00070C097 /* DictateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictateTests.swift; sourceTree = "<group>"; };
 		D3F8AD131B696FCD0070C097 /* MainIC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainIC.swift; sourceTree = "<group>"; };
 		D3F8AD251B696FCE0070C097 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
-		D3F8AD271B696FCE0070C097 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D3FA08041BA7F6EB006A91C2 /* ReminderListsTableRC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderListsTableRC.swift; sourceTree = "<group>"; };
 		EC0B487D1B6FE9B800C0AD82 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		EC0B487F1B6FE9C700C0AD82 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -446,9 +445,9 @@
 			isa = PBXGroup;
 			children = (
 				D31BF2FF1CDAB93700521A65 /* Assets.xcassets */,
-				D3F8AD271B696FCE0070C097 /* Images.xcassets */,
 				D31BF3011CDAB93700521A65 /* Info.plist */,
 				D3F8AD241B696FCD0070C097 /* Interface.storyboard */,
+				D31F336A1D0E7BD3003D726E /* Images.xcassets */,
 			);
 			path = DictateWatch;
 			sourceTree = "<group>";
@@ -1010,9 +1009,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D31F336B1D0E7BD3003D726E /* Images.xcassets in Resources */,
 				D31BF3001CDAB93700521A65 /* Assets.xcassets in Resources */,
 				D3F8F9731D0B3CD200094101 /* Interface.storyboard in Resources */,
-				D353291B1CED1C1F006CCC80 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1021,7 +1020,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D3D9DE2F1CE3E76F003DC35F /* DictateWatch Extension.entitlements in Resources */,
-				D353291A1CED1C1E006CCC80 /* Images.xcassets in Resources */,
 				D31BF3181CDAB93700521A65 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

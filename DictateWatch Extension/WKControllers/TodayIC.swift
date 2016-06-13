@@ -164,7 +164,7 @@ class TodayIC: WKInterfaceController {
     
     func loadTableData () {
         
-        //fetchEvents()
+        fetchEvents()
         
         table.setNumberOfRows(allEvents.count, withRowType: "tableRow")
         print("w46 allEvents.count: \(allEvents.count)")
@@ -172,109 +172,114 @@ class TodayIC: WKInterfaceController {
         for (index, title) in allEvents.enumerate() {
         
             print("---------------------------------------------------")
-            print("w40 index, title: \(index), \(title)")
+            print("w175 index, title: \(index), \(title)")
+            print("w176 index: \(index)")
+            print("w177 table.rowControllerAtIndex(index): \(table.rowControllerAtIndex(index))")
             
-            let row = table.rowControllerAtIndex(index) as! TodayEventsTableRC
-            let item = allEvents[index]
-            
-            // TODO ANIL Mike make a sub section to tabel for EACH date!
-            if index == 0 {  //show date of first item.
-                let timeUntil = TimeManger.sharedInstance.timeInterval(item.startDate)
-                print("w186 timeUntil: \(timeUntil)")
-   
-                dateFormatter.dateFormat = "E, MMM d"
-                let dateString = dateFormatter.stringFromDate(item.startDate)
-                self.labelDate.setText(dateString)
-               // self.labelTimeUntil.setText(timeUntil)
-            }
-            
-            dateFormatter.dateFormat = "h:mm a"
-            
-            let startTimeA = dateFormatter.stringFromDate(item.startDate)
-            var startTime = startTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
-            NSLog("%@ w137", startTime)
-            
-            dateFormatter.dateFormat = "h:mm"
+            if table.rowControllerAtIndex(index) != nil {
+                print("w178 we in here?: \(index)")
 
-            let endTimeA = dateFormatter.stringFromDate(item.endDate)
-            let endTime = endTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
-
-            var endTimeDash = "- \(endTime)"
-            
-            var timeUntil = TimeManger.sharedInstance.timeInterval(item.startDate)
-            
-            if item.allDay {     // if allDay bool is true
-                row.groupTime.setHidden(true)
-            }
-            
-            let startTimeItem = item.startDate
-            let timeUntilStart = startTimeItem.timeIntervalSinceDate(NSDate())
-            //print("w187 timeUntilStart: \(timeUntilStart)")
-            
-            let endTimeItem = item.endDate
-            let timeUntilEnd = endTimeItem.timeIntervalSinceDate(NSDate())
-            //print("w192 timeUntilEnd: \(timeUntilEnd)")
-
-            if ((timeUntilStart <= 0) && (timeUntilEnd >= 0)) {
-                timeUntil = "Now"
-                let neonRed = UIColor(red: 255, green: 51, blue: 0, alpha: 1)
-                //row.labelTimeUntil.setTextColor(neonRed)
-                row.labelTimeUntil.setTextColor(UIColor.yellowColor())
+                let row = table.rowControllerAtIndex(index) as! TodayEventsTableRC
+                let item = allEvents[index]
                 
-                //TODO Mike TODOA Anil Attributed work on WKInterfacelabel???
+                // TODO ANIL Mike make a sub section to tabel for EACH date!
+                if index == 0 {  //show date of first item.
+                    let timeUntil = TimeManger.sharedInstance.timeInterval(item.startDate)
+                    print("w186 timeUntil: \(timeUntil)")
+       
+                    dateFormatter.dateFormat = "E, MMM d"
+                    let dateString = dateFormatter.stringFromDate(item.startDate)
+                    self.labelDate.setText(dateString)
+                   // self.labelTimeUntil.setText(timeUntil)
+                }
                 
-            /*
-                let titleData = timeUntil
+                dateFormatter.dateFormat = "h:mm a"
                 
-                let myTitle = NSAttributedString(
-                    string: titleData,
-                    attributes: [NSFontAttributeName:UIFont(
-                        name: "Helvetica-Bold",
-                        size: 16.0)!,
-                        ])
+                let startTimeA = dateFormatter.stringFromDate(item.startDate)
+                var startTime = startTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
+                NSLog("%@ w137", startTime)
                 
-                //pickerLabel.attributedText = myTitle
-                // self.titleLabel.setAttributedText(attributeString)
+                dateFormatter.dateFormat = "h:mm"
 
-                row.labelTimeUntil.setAttributedText(myTitle)
-              */
+                let endTimeA = dateFormatter.stringFromDate(item.endDate)
+                let endTime = endTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
 
-            } else {
-                row.labelTimeUntil.setTextColor(UIColor.greenColor())
-            }
-            
-            
-            
-            //TODO Mike TODO Anil All day event spanning multiple days does not show up on multiple days
-            
-            
-            row.labelEventTitle.setText(item.title)
-            row.labelEventLocation.setText(item.location)
-            row.labelStartTime.setText(startTime)
-            row.labelEndTime.setText(endTimeDash)
-            row.labelTimeUntil.setText("\(timeUntil)  ")
-
-            //row.labelEventTitle.setTextColor(UIColor(CGColor: item.calendar.CGColor))
-           // row.labelStartTime.setTextColor(UIColor(CGColor: item.calendar.CGColor))
-           // row.labelEndTime.setTextColor(UIColor(CGColor: item.calendar.CGColor))
-            
-            row.labelStartTime.setTextColor(UIColor.whiteColor().colorWithAlphaComponent(0.8))
-            row.labelEndTime.setTextColor(UIColor.whiteColor().colorWithAlphaComponent(0.65))
-
-            row.labelEventLocation.setTextColor(UIColor(CGColor: item.calendar.CGColor))
-     
-            row.verticalBar.setBackgroundColor(UIColor(CGColor: item.calendar.CGColor))
-            
-            row.imageVertBar.setTintColor(UIColor(CGColor: item.calendar.CGColor))
+                var endTimeDash = "- \(endTime)"
                 
-           // row.imageVertBar.image = [row.imageVertBar imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
-            
-            
-            
-            row.groupEvent.setBackgroundColor(UIColor(CGColor: item.calendar.CGColor).colorWithAlphaComponent(0.375))
+                var timeUntil = TimeManger.sharedInstance.timeInterval(item.startDate)
+                
+                if item.allDay {     // if allDay bool is true
+                    row.groupTime.setHidden(true)
+                }
+                
+                let startTimeItem = item.startDate
+                let timeUntilStart = startTimeItem.timeIntervalSinceDate(NSDate())
+                //print("w187 timeUntilStart: \(timeUntilStart)")
+                
+                let endTimeItem = item.endDate
+                let timeUntilEnd = endTimeItem.timeIntervalSinceDate(NSDate())
+                //print("w192 timeUntilEnd: \(timeUntilEnd)")
+
+                if ((timeUntilStart <= 0) && (timeUntilEnd >= 0)) {
+                    timeUntil = "Now"
+                    let neonRed = UIColor(red: 255, green: 51, blue: 0, alpha: 1)
+                    //row.labelTimeUntil.setTextColor(neonRed)
+                    row.labelTimeUntil.setTextColor(UIColor.yellowColor())
+                    
+                    //TODO Mike TODOA Anil Attributed work on WKInterfacelabel???
+                    
+                /*
+                    let titleData = timeUntil
+                    
+                    let myTitle = NSAttributedString(
+                        string: titleData,
+                        attributes: [NSFontAttributeName:UIFont(
+                            name: "Helvetica-Bold",
+                            size: 16.0)!,
+                            ])
+                    
+                    //pickerLabel.attributedText = myTitle
+                    // self.titleLabel.setAttributedText(attributeString)
+
+                    row.labelTimeUntil.setAttributedText(myTitle)
+                  */
+
+                } else {
+                    row.labelTimeUntil.setTextColor(UIColor.greenColor())
+                }
+                
+                
+                
+                //TODO Mike TODO Anil All day event spanning multiple days does not show up on multiple days
+                
+                
+                row.labelEventTitle.setText(item.title)
+                row.labelEventLocation.setText(item.location)
+                row.labelStartTime.setText(startTime)
+                row.labelEndTime.setText(endTimeDash)
+                row.labelTimeUntil.setText("\(timeUntil)  ")
+
+                //row.labelEventTitle.setTextColor(UIColor(CGColor: item.calendar.CGColor))
+               // row.labelStartTime.setTextColor(UIColor(CGColor: item.calendar.CGColor))
+               // row.labelEndTime.setTextColor(UIColor(CGColor: item.calendar.CGColor))
+                
+                row.labelStartTime.setTextColor(UIColor.whiteColor().colorWithAlphaComponent(0.8))
+                row.labelEndTime.setTextColor(UIColor.whiteColor().colorWithAlphaComponent(0.65))
+
+                row.labelEventLocation.setTextColor(UIColor(CGColor: item.calendar.CGColor))
+         
+                row.verticalBar.setBackgroundColor(UIColor(CGColor: item.calendar.CGColor))
+                
+                row.imageVertBar.setTintColor(UIColor(CGColor: item.calendar.CGColor))
+                    
+               // row.imageVertBar.image = [row.imageVertBar imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
+                
+                
+                
+                row.groupEvent.setBackgroundColor(UIColor(CGColor: item.calendar.CGColor).colorWithAlphaComponent(0.375))
         
             
-            
+           }
             
             
         

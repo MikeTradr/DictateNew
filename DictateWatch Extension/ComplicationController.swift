@@ -62,8 +62,30 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     let MINUTE: NSTimeInterval = 60
     
     
-
+ /*
+    func getPlaceholderTemplateForComplication(complication: CLKComplication, withHandler handler: (CLKComplicationTemplate?) -> Void) {
+        var template: CLKComplicationTemplate?
+        
+        switch complication.family {
+        case .CircularSmall:
+            template = CLKComplicationTemplateCircularSmallRingImage()
+            template.imageProvider = CLKImageProvider(onePieceImage: UIImage(named: "app_icon")!)
+        case .UtilitarianSmall:
+            template = CLKComplicationTemplateUtilitarianSmallRingImage()
+            template.imageProvider = CLKImageProvider(onePieceImage: UIImage(named: "app_icon")!)
+        case .ModularSmall:
+            template = CLKComplicationTemplateModularSmallRingImage()
+            template.imageProvider = CLKImageProvider(onePieceImage: UIImage(named: "app_icon")!)
+        case .ModularLarge:
+            template = nil
+        case .UtilitarianLarge:
+            template = nil
+        }
+        
+        handler(template)
+    }
     
+*/
     func getPlaceholderTemplateForComplication(
         complication: CLKComplication,
         withHandler handler: (CLKComplicationTemplate?) -> Void) {
@@ -74,9 +96,25 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         // handler(nil)
         var template: CLKComplicationTemplate?
         switch complication.family {
- /*
+    /*
+            
         case .ModularSmall:
-            //let modularSmallTemplate =  CLKComplicationTemplateModularSmallRingText()
+            
+            let fgImage = UIImage(named: "app_icon")
+            //Initialize imageProvider from Apple
+            let imageProvider = CLKImageProvider(backgroundImage: bgImage,
+                                                 backgroundColor: aColor,
+                                                 foregroundImage: fgImage,
+                                                 foregroundColor: CLKImageProviderForegroundColor.White)
+
+            
+            template = CLKComplicationTemplateModularSmallRingImage()
+            template.imageProvider = CLKImageProvider(onePieceImage: UIImage(named: "app_icon")!)
+*/
+        case .ModularSmall:
+          //  let modularSmallTemplate =  CLKComplicationTemplateModularSmallRingText()
+          //  modularSmallTemplate.textProvider = CLKSimpleTextProvider(text: "D_%")
+
             let modularSmallTemplate =  CLKComplicationTemplateModularSmallSimpleImage()
             
             //Set images for both watch sizes :)
@@ -84,24 +122,27 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
             let rect:CGRect =  thisDevice.screenBounds
             if (rect.size.height == 195.0) {
                 // Apple Watch 42mm
-               // image = UIImage(named: "dicAppIcon58")!.imageWithRenderingMode(.AlwaysTemplate)
-              //   image = UIImage(named: "dicAppIcon58")!
-
-               // let theImage = UIImage(named: "testImage")!.imageWithRenderingMode(.AlwaysTemplate)
-
+               // image = UIImage(named: "micAlpha3-58px")!.imageWithRenderingMode(.AlwaysTemplate)
+                image = UIImage(named: "micWithAlphaD-58px")!
             } else if (rect.size.height == 170.0){
                 // Apple Watch 38mm
-                image = UIImage(named: "dicAppIcon52")!
+                image = UIImage(named: "micWithAlphaD-52px")!.imageWithRenderingMode(.AlwaysTemplate)
             }
             
-          //  let imager = CLKImageProvider(onePieceImage: image)
+            //     modularSmallTemplate.imageProvider = CLKImageProvide(onePieceImage: UIImage(named: "app_icon")!)
+            //    modularSmallTemplate.imageProvider = CLKImageProvider(onePieceImage: UIImage(named: "micWithAlphaD-58px")!)
             
-         //   modularSmallTemplate.textProvider = CLKSimpleTextProvider(text: "R")
-          //  modularSmallTemplate.fillFraction = 0.75
-          //  modularSmallTemplate.ringStyle = CLKComplicationRingStyle.Closed
+            modularSmallTemplate.imageProvider = CLKImageProvider(onePieceImage: image)
+
+            
+          //  let imager = CLKImageProvider(onePieceImage: image)
+
+        //    modularSmallTemplate.textProvider = CLKSimpleTextProvider(text: "R")
+        //    modularSmallTemplate.fillFraction = 0.75
+         //   modularSmallTemplate.ringStyle = CLKComplicationRingStyle.Closed
             
             template = modularSmallTemplate
- */
+
 
             
         case .ModularLarge:
@@ -118,13 +159,26 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
                                       shortText: "Time")
             template = modularLargeTemplate
         case .UtilitarianSmall:
+            /*
+                let percentage = WatchEntryHelper.sharedHelper.percentage() ?? 0
+
+           
+                let smallFlat = CLKComplicationTemplateUtilitarianSmallFlat()
+                smallFlat.textProvider = CLKSimpleTextProvider(text: "\(percentage)%")
+                smallFlat.imageProvider = CLKImageProvider(onePieceImage: UIImage(named: "complication")!)
+                smallFlat.tintColor = .mainColor()
+                handler(CLKComplicationTimelineEntry(date: NSDate(), complicationTemplate: smallFlat))
+        
+            */
+            
+            
             template = nil
         case .UtilitarianLarge:
             template = nil
         case .CircularSmall:
             template = nil
-        default:
-             template = nil
+       // default:
+        //     template = nil
            
             
         }
@@ -133,6 +187,6 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         handler(template)
     }
 
- 
+
     
 }

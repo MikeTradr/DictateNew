@@ -596,7 +596,7 @@ class MainIC: WKInterfaceController, WCSessionDelegate {
     
     
     @IBAction func buttonGroupMic() {
-        var alertSound1: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("button-14", ofType: "mp3")!)
+        //TODO FIX SOUND var alertSound1: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("button-14", ofType: "mp3")!)
         //General.playSound(alertSound3!)
         
         //Second, we currently can't control sounds or haptic feedback from our app's code.

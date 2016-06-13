@@ -182,76 +182,76 @@ class GlanceController: WKInterfaceController {
             print("---------------------------------------------------")
             print("w40 index, title: \(index), \(title)")
             
-            let row = table.rowControllerAtIndex(index) as! GlanceTodayEventsTableRC
-            let item = allEvents[index]
-            
-            dateFormatter.dateFormat = "h:mm a"
-            
-            let startTimeA = dateFormatter.stringFromDate(item.startDate)
-            var startTime = startTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
-            NSLog("%@ w137", startTime)
-            
-            dateFormatter.dateFormat = "h:mm"
-            
-            let endTimeA = dateFormatter.stringFromDate(item.endDate)
-            let endTime = endTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
-            
-            var endTimeDash = "- \(endTime)"
-            
-            timeUntil = TimeManger.sharedInstance.timeInterval(item.startDate)
-            
-            if item.allDay {     // if allDay bool is true
-                row.groupTime.setHidden(true)
-            }
-            
-            let startTimeItem = item.startDate
-            let timeUntilStart = startTimeItem.timeIntervalSinceDate(NSDate())
-            //print("w187 timeUntilStart: \(timeUntilStart)")
-            
-            let endTimeItem = item.endDate
-            let timeUntilEnd = endTimeItem.timeIntervalSinceDate(NSDate())
-            //print("w192 timeUntilEnd: \(timeUntilEnd)")
-            
-            if ((timeUntilStart <= 0) && (timeUntilEnd >= 0)) {
-                timeUntil = "Now"
-                let neonRed = UIColor(red: 255, green: 51, blue: 0, alpha: 1)
-                let brightYellow = UIColor(red: 255, green: 255, blue: 0, alpha: 1)
+            if let row = table.rowControllerAtIndex(index) as? GlanceTodayEventsTableRC {
+                let item = allEvents[index]
                 
-               //let swiftColor = UIColor(red: 1, green: 165/255, blue: 0, alpha: 1)
-                row.labelTimeUntil.setTextColor(brightYellow)
-                //row.labelTimeUntil.setTextColor(UIColor.yellowColor())
+                dateFormatter.dateFormat = "h:mm a"
                 
-            } else {
-                row.labelTimeUntil.setTextColor(UIColor.greenColor())
-            }
-            
-            //TODO Mike TODO Anil All day event spanning multiple days does not show up on multiple days
-            
-            print("w185 timeUntil: \(timeUntil)")
-            
-            row.labelEventTitle.setText(item.title)
-            row.labelEventLocation.setText(item.location)
-            row.labelStartTime.setText(startTime)
-            row.labelEndTime.setText(endTimeDash)
-            row.labelTimeUntil.setText("\(timeUntil)  ")
-            
-            //row.labelEventTitle.setTextColor(UIColor(CGColor: item.calendar.CGColor))
-            // row.labelStartTime.setTextColor(UIColor(CGColor: item.calendar.CGColor))
-            // row.labelEndTime.setTextColor(UIColor(CGColor: item.calendar.CGColor))
-            
-            row.labelStartTime.setTextColor(UIColor.whiteColor().colorWithAlphaComponent(0.8))
-            row.labelEndTime.setTextColor(UIColor.whiteColor().colorWithAlphaComponent(0.65))
-            
-            row.labelEventLocation.setTextColor(UIColor(CGColor: item.calendar.CGColor))
-            
-            row.verticalBar.setBackgroundColor(UIColor(CGColor: item.calendar.CGColor))
-            
-            row.imageVertBar.setTintColor(UIColor(CGColor: item.calendar.CGColor))
-            
-            // row.imageVertBar.image = [row.imageVertBar imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
-            
-            row.groupEvent.setBackgroundColor(UIColor(CGColor: item.calendar.CGColor).colorWithAlphaComponent(0.375))
-            
+                let startTimeA = dateFormatter.stringFromDate(item.startDate)
+                var startTime = startTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
+                NSLog("%@ w137", startTime)
+                
+                dateFormatter.dateFormat = "h:mm"
+                
+                let endTimeA = dateFormatter.stringFromDate(item.endDate)
+                let endTime = endTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
+                
+                var endTimeDash = "- \(endTime)"
+                
+                timeUntil = TimeManger.sharedInstance.timeInterval(item.startDate)
+                
+                if item.allDay {     // if allDay bool is true
+                    row.groupTime.setHidden(true)
+                }
+                
+                let startTimeItem = item.startDate
+                let timeUntilStart = startTimeItem.timeIntervalSinceDate(NSDate())
+                //print("w187 timeUntilStart: \(timeUntilStart)")
+                
+                let endTimeItem = item.endDate
+                let timeUntilEnd = endTimeItem.timeIntervalSinceDate(NSDate())
+                //print("w192 timeUntilEnd: \(timeUntilEnd)")
+                
+                if ((timeUntilStart <= 0) && (timeUntilEnd >= 0)) {
+                    timeUntil = "Now"
+                    let neonRed = UIColor(red: 255, green: 51, blue: 0, alpha: 1)
+                    let brightYellow = UIColor(red: 255, green: 255, blue: 0, alpha: 1)
+                    
+                   //let swiftColor = UIColor(red: 1, green: 165/255, blue: 0, alpha: 1)
+                    row.labelTimeUntil.setTextColor(brightYellow)
+                    //row.labelTimeUntil.setTextColor(UIColor.yellowColor())
+                    
+                } else {
+                    row.labelTimeUntil.setTextColor(UIColor.greenColor())
+                }
+                
+                //TODO Mike TODO Anil All day event spanning multiple days does not show up on multiple days
+                
+                print("w185 timeUntil: \(timeUntil)")
+                
+                row.labelEventTitle.setText(item.title)
+                row.labelEventLocation.setText(item.location)
+                row.labelStartTime.setText(startTime)
+                row.labelEndTime.setText(endTimeDash)
+                row.labelTimeUntil.setText("\(timeUntil)  ")
+                
+                //row.labelEventTitle.setTextColor(UIColor(CGColor: item.calendar.CGColor))
+                // row.labelStartTime.setTextColor(UIColor(CGColor: item.calendar.CGColor))
+                // row.labelEndTime.setTextColor(UIColor(CGColor: item.calendar.CGColor))
+                
+                row.labelStartTime.setTextColor(UIColor.whiteColor().colorWithAlphaComponent(0.8))
+                row.labelEndTime.setTextColor(UIColor.whiteColor().colorWithAlphaComponent(0.65))
+                
+                row.labelEventLocation.setTextColor(UIColor(CGColor: item.calendar.CGColor))
+                
+                row.verticalBar.setBackgroundColor(UIColor(CGColor: item.calendar.CGColor))
+                
+                row.imageVertBar.setTintColor(UIColor(CGColor: item.calendar.CGColor))
+                
+                // row.imageVertBar.image = [row.imageVertBar imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
+                
+                row.groupEvent.setBackgroundColor(UIColor(CGColor: item.calendar.CGColor).colorWithAlphaComponent(0.375))
+            } // end if let row...
             
         }   // for loop
         

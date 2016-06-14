@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="10032"/>
@@ -302,7 +302,7 @@
                                     <items>
                                         <table alignment="left" id="JlU-XV-yEV">
                                             <items>
-                                                <tableRow identifier="tableRow" id="Cyt-0g-7c7" customClass="TodayEventsTableRC" customModule="Dictate_WatchKit_Extension">
+                                                <tableRow identifier="tableRow" id="Cyt-0g-7c7" customClass="TodayEventsTableRC" customModule="DictateWatch_Extension">
                                                     <group key="rootItem" width="1" height="0.0" alignment="left" id="p99-Tg-p2Y">
                                                         <items>
                                                             <imageView width="3" height="1" alignment="left" verticalAlignment="center" image="watchbar" id="6kb-fI-hQm">

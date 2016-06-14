@@ -11,6 +11,7 @@ import WatchKit
 
 class TodayEventsTableRC: NSObject {
     
+    @IBOutlet var labelX: WKInterfaceLabel!
     @IBOutlet weak var labelEventTitle: WKInterfaceLabel!
  
     @IBOutlet weak var labelStartTime: WKInterfaceLabel!

@@ -12,13 +12,15 @@ import WatchKit
 
 class GlanceTodayEventsTableRC: NSObject {
     
-    @IBOutlet weak var labelEventTitle: WKInterfaceLabel!
+    //@IBOutlet weak var labelEventTitle: WKInterfaceLabel!
+    @IBOutlet var labelEventTitle: WKInterfaceLabel!
+    @IBOutlet var labelTimeUntil: WKInterfaceLabel!
     
     @IBOutlet weak var labelStartTime: WKInterfaceLabel!
     
     @IBOutlet var labelEndTime: WKInterfaceLabel!
     
-    @IBOutlet var labelTimeUntil: WKInterfaceLabel!
+    //@IBOutlet var labelTimeUntil: WKInterfaceLabel!
     
     @IBOutlet var groupTime: WKInterfaceGroup!
     @IBOutlet weak var labelEventLocation: WKInterfaceLabel!

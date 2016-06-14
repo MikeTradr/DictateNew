@@ -48,7 +48,9 @@ class TodayIC: WKInterfaceController {
        // let next10Days = cal!.dateByAddingUnit(NSCalendarUnit.Day, value: 10, toDate: today, options: .Day)
         
         let calendar = NSCalendar.currentCalendar()
-        let endDate: NSDate = calendar.dateByAddingUnit(NSCalendarUnit.Day, value: 10, toDate: startDate, options: [])!
+        let endDate: NSDate = calendar.dateByAddingUnit(NSCalendarUnit.Day, value: 4, toDate: startDate, options: [])!
+        
+        // value above was 10 Mke 061316
         
        // let endDate = dateHelper.addToDate(startDate, days: 10)
         
@@ -57,6 +59,7 @@ class TodayIC: WKInterfaceController {
         
         EventManager.sharedInstance.fetchEventsFrom(startDate, endDate: endDate, completion: { (events) -> Void in
             self.allEvents = events
+            //self.loadTableData()
         })
         
         print("w56 self.allEvents: \(self.allEvents)")
@@ -166,32 +169,23 @@ class TodayIC: WKInterfaceController {
         
         fetchEvents()
         
+        print("w173 allEvents.count: \(allEvents.count)")
+        
         table.setNumberOfRows(allEvents.count, withRowType: "tableRow")
-        print("w46 allEvents.count: \(allEvents.count)")
         
         for (index, title) in allEvents.enumerate() {
         
             print("---------------------------------------------------")
             print("w175 index, title: \(index), \(title)")
             print("w176 index: \(index)")
-            print("w177 table.rowControllerAtIndex(index): \(table.rowControllerAtIndex(index))")
+            print("w177 table: \(table)")
+            print("w178 table.rowControllerAtIndex(index): \(table.rowControllerAtIndex(index))")
+           
             
-            if table.rowControllerAtIndex(index) != nil {
-                print("w178 we in here?: \(index)")
-
-                let row = table.rowControllerAtIndex(index) as! TodayEventsTableRC
-                let item = allEvents[index]
+            if let row = table.rowControllerAtIndex(index) as? TodayEventsTableRC {
+                print("w183 WE HERE????")
                 
-                // TODO ANIL Mike make a sub section to tabel for EACH date!
-                if index == 0 {  //show date of first item.
-                    let timeUntil = TimeManger.sharedInstance.timeInterval(item.startDate)
-                    print("w186 timeUntil: \(timeUntil)")
-       
-                    dateFormatter.dateFormat = "E, MMM d"
-                    let dateString = dateFormatter.stringFromDate(item.startDate)
-                    self.labelDate.setText(dateString)
-                   // self.labelTimeUntil.setText(timeUntil)
-                }
+                let item = allEvents[index]
                 
                 dateFormatter.dateFormat = "h:mm a"
                 
@@ -200,13 +194,13 @@ class TodayIC: WKInterfaceController {
                 NSLog("%@ w137", startTime)
                 
                 dateFormatter.dateFormat = "h:mm"
-
+                
                 let endTimeA = dateFormatter.stringFromDate(item.endDate)
                 let endTime = endTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
-
+                
                 var endTimeDash = "- \(endTime)"
                 
-                var timeUntil = TimeManger.sharedInstance.timeInterval(item.startDate)
+                timeUntil = TimeManger.sharedInstance.timeInterval(item.startDate)
                 
                 if item.allDay {     // if allDay bool is true
                     row.groupTime.setHidden(true)
@@ -219,67 +213,47 @@ class TodayIC: WKInterfaceController {
                 let endTimeItem = item.endDate
                 let timeUntilEnd = endTimeItem.timeIntervalSinceDate(NSDate())
                 //print("w192 timeUntilEnd: \(timeUntilEnd)")
-
+                
                 if ((timeUntilStart <= 0) && (timeUntilEnd >= 0)) {
                     timeUntil = "Now"
                     let neonRed = UIColor(red: 255, green: 51, blue: 0, alpha: 1)
-                    //row.labelTimeUntil.setTextColor(neonRed)
-                    row.labelTimeUntil.setTextColor(UIColor.yellowColor())
+                    let brightYellow = UIColor(red: 255, green: 255, blue: 0, alpha: 1)
                     
-                    //TODO Mike TODOA Anil Attributed work on WKInterfacelabel???
+                    //let swiftColor = UIColor(red: 1, green: 165/255, blue: 0, alpha: 1)
+                    row.labelTimeUntil.setTextColor(brightYellow)
+                    //row.labelTimeUntil.setTextColor(UIColor.yellowColor())
                     
-                /*
-                    let titleData = timeUntil
-                    
-                    let myTitle = NSAttributedString(
-                        string: titleData,
-                        attributes: [NSFontAttributeName:UIFont(
-                            name: "Helvetica-Bold",
-                            size: 16.0)!,
-                            ])
-                    
-                    //pickerLabel.attributedText = myTitle
-                    // self.titleLabel.setAttributedText(attributeString)
-
-                    row.labelTimeUntil.setAttributedText(myTitle)
-                  */
-
                 } else {
                     row.labelTimeUntil.setTextColor(UIColor.greenColor())
                 }
                 
-                
-                
                 //TODO Mike TODO Anil All day event spanning multiple days does not show up on multiple days
                 
+                print("w185 timeUntil: \(timeUntil)")
                 
                 row.labelEventTitle.setText(item.title)
                 row.labelEventLocation.setText(item.location)
                 row.labelStartTime.setText(startTime)
                 row.labelEndTime.setText(endTimeDash)
                 row.labelTimeUntil.setText("\(timeUntil)  ")
-
+                
                 //row.labelEventTitle.setTextColor(UIColor(CGColor: item.calendar.CGColor))
-               // row.labelStartTime.setTextColor(UIColor(CGColor: item.calendar.CGColor))
-               // row.labelEndTime.setTextColor(UIColor(CGColor: item.calendar.CGColor))
+                // row.labelStartTime.setTextColor(UIColor(CGColor: item.calendar.CGColor))
+                // row.labelEndTime.setTextColor(UIColor(CGColor: item.calendar.CGColor))
                 
                 row.labelStartTime.setTextColor(UIColor.whiteColor().colorWithAlphaComponent(0.8))
                 row.labelEndTime.setTextColor(UIColor.whiteColor().colorWithAlphaComponent(0.65))
-
+                
                 row.labelEventLocation.setTextColor(UIColor(CGColor: item.calendar.CGColor))
-         
+                
                 row.verticalBar.setBackgroundColor(UIColor(CGColor: item.calendar.CGColor))
                 
                 row.imageVertBar.setTintColor(UIColor(CGColor: item.calendar.CGColor))
-                    
-               // row.imageVertBar.image = [row.imageVertBar imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
                 
-                
+                // row.imageVertBar.image = [row.imageVertBar imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
                 
                 row.groupEvent.setBackgroundColor(UIColor(CGColor: item.calendar.CGColor).colorWithAlphaComponent(0.375))
-        
-            
-           }
+            } // end if let row...
             
             
         

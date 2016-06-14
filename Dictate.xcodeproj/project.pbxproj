@@ -41,7 +41,6 @@
 		D31BF32F1CDAC14600521A65 /* ReminderListsTableRC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FA08041BA7F6EB006A91C2 /* ReminderListsTableRC.swift */; };
 		D31BF3301CDAC14B00521A65 /* ReminderItemsTableRC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35588BD1BA938A00052892F /* ReminderItemsTableRC.swift */; };
 		D31BF3311CDAC15100521A65 /* TodayIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E810831B70F4BC004AE5A9 /* TodayIC.swift */; };
-		D31BF3321CDAC15600521A65 /* TodayEventsTableRC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA3ACD1BAE73F4002FDD21 /* TodayEventsTableRC.swift */; };
 		D31BF3331CDAC15B00521A65 /* EventDetailsIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31E1DB61BAEEA1700BC7B99 /* EventDetailsIC.swift */; };
 		D31BF3341CDAC15F00521A65 /* EditEventDetailsIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31E1DB81BAEEA2A00BC7B99 /* EditEventDetailsIC.swift */; };
 		D31BF3351CDAC16400521A65 /* EventEditNotesIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BE2D2A1BB126EA00376686 /* EventEditNotesIC.swift */; };
@@ -72,6 +71,8 @@
 		D33FEBAF1BD769EB003E6755 /* NuanceHeader.h in Sources */ = {isa = PBXBuildFile; fileRef = D33FEBAE1BD769EB003E6755 /* NuanceHeader.h */; };
 		D33FEBB21BD76A70003E6755 /* NuanceHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = D33FEBB11BD76A70003E6755 /* NuanceHeader.m */; };
 		D34451981C8505C5007F3DDD /* CalendarPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34451971C8505C5007F3DDD /* CalendarPickerViewController.swift */; };
+		D34FEF5F1D0F4AAF00915A80 /* TodayEventsTableRC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA3ACD1BAE73F4002FDD21 /* TodayEventsTableRC.swift */; };
+		D34FEF621D0F528000915A80 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3F8AD241B696FCD0070C097 /* Interface.storyboard */; };
 		D355D97C1BA7DD3F00DADD72 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D355D97B1BA7DD3F00DADD72 /* Main.storyboard */; };
 		D369819D1C7BB05400ED0AD8 /* DatePopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D369819C1C7BB05400ED0AD8 /* DatePopupViewController.swift */; };
 		D3795E7A1B8DF927009D3DB5 /* SettingsEventTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3795E791B8DF927009D3DB5 /* SettingsEventTableViewController.swift */; };
@@ -104,7 +105,6 @@
 		D3F8ACED1B696FB00070C097 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F8ACEC1B696FB00070C097 /* ViewController.swift */; };
 		D3F8ACF21B696FB00070C097 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3F8ACF11B696FB00070C097 /* Images.xcassets */; };
 		D3F8ACF51B696FB00070C097 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3F8ACF31B696FB00070C097 /* LaunchScreen.xib */; };
-		D3F8F9731D0B3CD200094101 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3F8AD241B696FCD0070C097 /* Interface.storyboard */; };
 		D3F8F9741D0B3DC600094101 /* MainIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F8AD131B696FCD0070C097 /* MainIC.swift */; };
 		EC0B487E1B6FE9B800C0AD82 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EC0B487D1B6FE9B800C0AD82 /* libsqlite3.0.dylib */; };
 		EC0B48801B6FE9C700C0AD82 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC0B487F1B6FE9C700C0AD82 /* CFNetwork.framework */; };
@@ -1010,8 +1010,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D31F336B1D0E7BD3003D726E /* Images.xcassets in Resources */,
+				D34FEF621D0F528000915A80 /* Interface.storyboard in Resources */,
 				D31BF3001CDAB93700521A65 /* Assets.xcassets in Resources */,
-				D3F8F9731D0B3CD200094101 /* Interface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1093,7 +1093,6 @@
 				D31BF3361CDAC16900521A65 /* SetCalendarIC.swift in Sources */,
 				D31BF32D1CDAC13C00521A65 /* ReminderListsIC.swift in Sources */,
 				D31BF3161CDAB93700521A65 /* ComplicationController.swift in Sources */,
-				D31BF3321CDAC15600521A65 /* TodayEventsTableRC.swift in Sources */,
 				D31BF32F1CDAC14600521A65 /* ReminderListsTableRC.swift in Sources */,
 				D31BF3381CDAC17400521A65 /* TestIC.swift in Sources */,
 				D31BF35F1CDE792000521A65 /* ReminderManager.swift in Sources */,
@@ -1104,6 +1103,7 @@
 				D31BF3261CDABE2500521A65 /* TimeManger.swift in Sources */,
 				D31BF3301CDAC14B00521A65 /* ReminderItemsTableRC.swift in Sources */,
 				D31BF30E1CDAB93700521A65 /* InterfaceController.swift in Sources */,
+				D34FEF5F1D0F4AAF00915A80 /* TodayEventsTableRC.swift in Sources */,
 				D31BF3251CDABD0100521A65 /* GlanceTodayEventsTableRC.swift in Sources */,
 				D31BF3141CDAB93700521A65 /* GlanceController.swift in Sources */,
 			);

@@ -332,6 +332,7 @@
                                                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                                                 <fontDescription key="font" type="system" pointSize="12"/>
                                                                             </label>
+                                                                            <label alignment="left" text="X" id="mxB-NJ-xQ6"/>
                                                                             <label alignment="right" text="timeUntil" id="xEn-h1-yDb" userLabel="timeUntil">
                                                                                 <color key="textColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                                 <fontDescription key="font" type="system" pointSize="12"/>
@@ -353,6 +354,7 @@
                                                         <outlet property="labelEventTitle" destination="qqB-02-T53" id="8YA-eg-Ut8"/>
                                                         <outlet property="labelStartTime" destination="syo-w7-1UG" id="Xec-ZM-Rs0"/>
                                                         <outlet property="labelTimeUntil" destination="xEn-h1-yDb" id="6AQ-lO-axC"/>
+                                                        <outlet property="labelX" destination="mxB-NJ-xQ6" id="5gd-cZ-IiR"/>
                                                         <outlet property="verticalBar" destination="5Xm-nW-kBb" id="Fqd-dE-WrF"/>
                                                         <segue destination="zTX-KH-Wk9" kind="modal" identifier="EventDetails" id="z4s-L4-uWl"/>
                                                     </connections>
@@ -1131,7 +1133,7 @@
                                                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                                         <fontDescription key="font" type="system" pointSize="12"/>
                                                                     </label>
-                                                                    <label alignment="right" text="timeUntil" id="AXP-tM-keN">
+                                                                    <label height="14.5" alignment="right" text="timeUntil" id="AXP-tM-keN">
                                                                         <color key="textColor" red="0.50196081400000003" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <fontDescription key="font" type="system" pointSize="12"/>
                                                                     </label>
@@ -1149,9 +1151,9 @@
                                                 <outlet property="imageVertBar" destination="IpQ-5S-NdK" id="LHJ-qU-FFc"/>
                                                 <outlet property="labelEndTime" destination="lgG-bf-bC7" id="bJc-sB-Xot"/>
                                                 <outlet property="labelEventLocation" destination="BvB-N6-Cyw" id="gBT-jM-s5v"/>
-                                                <outlet property="labelEventTitle" destination="9Kl-UA-QXL" id="cdw-J0-xvC"/>
+                                                <outlet property="labelEventTitle" destination="9Kl-UA-QXL" id="9WG-vS-gLS"/>
                                                 <outlet property="labelStartTime" destination="Cfj-Wb-5oR" id="MQL-oU-cRa"/>
-                                                <outlet property="labelTimeUntil" destination="AXP-tM-keN" id="ohY-Eo-F54"/>
+                                                <outlet property="labelTimeUntil" destination="AXP-tM-keN" id="Rkh-O9-GpI"/>
                                                 <outlet property="verticalBar" destination="hFA-ub-FUs" id="4cP-ou-3WY"/>
                                             </connections>
                                         </tableRow>
@@ -1168,7 +1170,7 @@
                     </connections>
                 </glanceController>
             </objects>
-            <point key="canvasLocation" x="349" y="820"/>
+            <point key="canvasLocation" x="188" y="801"/>
         </scene>
         <!--Static Notification Interface Controller-->
         <scene sceneID="AEw-b0-oYE">

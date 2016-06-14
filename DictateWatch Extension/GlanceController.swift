@@ -36,7 +36,7 @@ class GlanceController: WKInterfaceController {
     
     //---- funcs below here -----------------------------------------------------------
     
-    
+ /*
     func fetchEvents(){
         
         //let dateHelper = JTDateHelper()
@@ -52,6 +52,28 @@ class GlanceController: WKInterfaceController {
         
         EventManager.sharedInstance.fetchEventsFrom(startDate, endDate: endDate, completion: { (events) -> Void in
             self.allEvents = events
+        })
+        
+        print("w56 self.allEvents: \(self.allEvents)")
+        
+    }
+*/
+    func fetchEvents(){
+        
+        //let dateHelper = JTDateHelper()
+        // let dateHelper = JTDateHelper()
+        let startDate =  NSDate()
+        //let endDate = dateHelper.addToDate(startDate, days: 1)
+        
+        let calendar = NSCalendar.currentCalendar()
+        let endDate: NSDate = calendar.dateByAddingUnit(NSCalendarUnit.Day, value: 1, toDate: startDate, options: [])!
+        
+        print("w46 startDate: \(startDate)")
+        print("w46 endDate: \(endDate)")
+        
+        EventManager.sharedInstance.fetchEventsFrom(startDate, endDate: endDate, completion: { (events) -> Void in
+            self.allEvents = events
+            //self.loadTableData()
         })
         
         print("w56 self.allEvents: \(self.allEvents)")
@@ -183,6 +205,8 @@ class GlanceController: WKInterfaceController {
             print("w40 index, title: \(index), \(title)")
             
             if let row = table.rowControllerAtIndex(index) as? GlanceTodayEventsTableRC {
+                print("w208 WE HERE????")
+                
                 let item = allEvents[index]
                 
                 dateFormatter.dateFormat = "h:mm a"

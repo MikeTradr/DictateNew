@@ -8,11 +8,11 @@
 
 import WatchKit
 import Foundation
-import AVFoundation
+//import AVFoundation
 
 class ReminderSettingsIC: WKInterfaceController {
     
-    var audioPlayer = AVAudioPlayer()
+ //   var audioPlayer = AVAudioPlayer()
    // var player: WKAudioFilePlayer!
     
     
@@ -60,7 +60,7 @@ class ReminderSettingsIC: WKInterfaceController {
         
         
         //Second, we currently can't control sounds or haptic feedback from our app's code.
-        self.playSound(alertSound1)
+    //    self.playSound(alertSound1)
         
 //TODO TOFIX        let (startDT, endDT, output, outputNote, day, calendarName, actionType) = DictateManagerIC.sharedInstance.grabVoice()
         
@@ -76,7 +76,7 @@ class ReminderSettingsIC: WKInterfaceController {
     }
     
 //----- Navigation Buttons ---------------------------------
-
+/*
     func playSound(sound: NSURL){
         var error:NSError?
         do {
@@ -89,7 +89,7 @@ class ReminderSettingsIC: WKInterfaceController {
         //audioPlayer.delegate = self
         self.audioPlayer.play()
     }
-
+*/
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         

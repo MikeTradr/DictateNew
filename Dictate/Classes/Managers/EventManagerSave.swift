@@ -1343,7 +1343,7 @@ class EventManagerSave: NSObject {
         
         var error:NSError?
         calender.source = eventStore.defaultCalendarForNewEvents.source
-        println("p181 Error: \(error)")
+        println("p1346 Error: \(error)")
         
         let calendars = self.eventStore.calendarsForEntityType(EKEntityTypeEvent)
         

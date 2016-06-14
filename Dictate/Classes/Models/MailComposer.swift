@@ -213,7 +213,7 @@ class MailComposer: UIViewController, MFMailComposeViewControllerDelegate {
         
         EventManager.sharedInstance.fetchEventsFrom(startDate, endDate: endDate, completion: { (events) -> Void in
             self.allEvents = events
-            print("p181 self.allEvents.count: \(self.allEvents.count)")
+            print("p216 self.allEvents.count: \(self.allEvents.count)")
             
             var displayDate:String = ""
             

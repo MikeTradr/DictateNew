@@ -272,7 +272,7 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
             //Instead of 180, we actually need to have the width of the result textView
             var  height = dynamicHeight(results[indexPath.row], font: UIFont.boldSystemFontOfSize(22), width: 150)  //was 180
             
-            print("p181 height: \(height)")
+            print("p275 height: \(height)")
             
             if height < 35 {
                 height = 35     //row height can't be less then 35, for 1 line to show.

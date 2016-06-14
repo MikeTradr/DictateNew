@@ -8,12 +8,12 @@
 
 import WatchKit
 import Foundation
-import AVFoundation
+//import AVFoundation
 
 
 class CalendarSettingsIC: WKInterfaceController {
     
-    var audioPlayer = AVAudioPlayer()
+   // var audioPlayer = AVAudioPlayer()
     
     
     @IBAction func buttonDefaults() {
@@ -38,7 +38,7 @@ class CalendarSettingsIC: WKInterfaceController {
         //General.playSound(alertSound3!)
         
         //Second, we currently can't control sounds or haptic feedback from our app's code.
-        self.playSound(alertSound1)
+   //     self.playSound(alertSound1)
         
 //TODO TOFIX        let (startDT, endDT, output, outputNote, day, calendarName, actionType) = DictateManagerIC.sharedInstance.grabVoice()
         
@@ -54,7 +54,7 @@ class CalendarSettingsIC: WKInterfaceController {
     }
     
 //----- Navigation Buttons ---------------------------------
-
+/*
     func playSound(sound: NSURL){
         var error:NSError?
         do {
@@ -67,7 +67,7 @@ class CalendarSettingsIC: WKInterfaceController {
         //audioPlayer.delegate = self
         self.audioPlayer.play()
     }
-
+*/
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         

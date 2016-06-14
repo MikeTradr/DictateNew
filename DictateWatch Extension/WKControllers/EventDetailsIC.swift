@@ -26,6 +26,8 @@ class EventDetailsIC: WKInterfaceController {
     var timeUntil:String        = ""
     
     let dateFormatter = NSDateFormatter()
+    
+    let tempAlarm = EKAlarm()
  
     @IBOutlet weak var labelEventTitle: WKInterfaceLabel!
     @IBOutlet weak var labelStartTime: WKInterfaceLabel!
@@ -138,23 +140,36 @@ class EventDetailsIC: WKInterfaceController {
         if ((timeUntilStart <= 0) && (timeUntilEnd >= 0)) {
             timeUntil = "Now"
             let neonRed = UIColor(red: 255, green: 51, blue: 0, alpha: 1)
-            self.labelTimeUntil.setTextColor(neonRed)
+            let brightYellow = UIColor(red: 255, green: 255, blue: 0, alpha: 1)
+            self.labelTimeUntil.setTextColor(brightYellow)
+            
+            // works
+            let headlineFont =
+                UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
+            
+            let fontAttribute = [NSFontAttributeName: headlineFont]
+            
+            let attributedString = NSAttributedString(string: "Now  ",
+                                                      attributes: fontAttribute)
+            
+            self.labelTimeUntil.setAttributedText(attributedString)
+            
         } else {
             self.labelTimeUntil.setTextColor(UIColor.greenColor())
+            self.labelTimeUntil.setText(timeUntil)
         }
 
-        
-        
-        
         self.labelEventTitle.setText(event.title)
         self.labelStartTime.setText(startTime)
         self.labelEndTime.setText(endTimeDash)
         self.labelLocation.setText(event.location)
-        self.labelTimeUntil.setText(timeUntil)
+        //self.labelTimeUntil.setText(timeUntil)
         
         self.labelStartTime.setTextColor(UIColor.whiteColor().colorWithAlphaComponent(0.8))
         
         self.labelEndTime.setTextColor(UIColor.whiteColor().colorWithAlphaComponent(0.65))
+        
+        self.labelLocation.setTextColor(UIColor(CGColor: event.calendar.CGColor))
         
         self.verticalBar.setBackgroundColor(UIColor(CGColor: event.calendar.CGColor))
         
@@ -170,14 +185,14 @@ class EventDetailsIC: WKInterfaceController {
         self.calendarName.setText(event.calendar.title)
         self.labelRepeats.setText(event.recurrenceRules as? String)
         
+        print("w173 event.alarms: \(event.alarms)")
         
         //TODO ANIL TODO MIKE fix alarms on watch if blanck shows label Alarm! why? solve! and downcasting always fails it warns!
-        let tempAlarm:EKAlarm = (event.alarms as? EKAlarm)!
-        
-        
-        self.labelAlarms.setText(tempAlarm as? String)
-        
-        
+        if event.alarms != nil {
+            let tempAlarm:EKAlarm = (event.alarms as? EKAlarm)!
+            
+            self.labelAlarms.setText(tempAlarm as? String)
+        }
         
         //TODO Mike TODO Anil why thse two URL cast error, travelTime not a member of eventkit it says!
      //   self.labelURL.setText(event.URL as? String)
@@ -186,10 +201,13 @@ class EventDetailsIC: WKInterfaceController {
 
         self.labelNotes.setText(event.notes)
         
+        print("w191 event.hasRecurrenceRules: \(event.hasRecurrenceRules)")
+        
         if event.hasRecurrenceRules {
+            print("w192 we here")
             self.groupRepeats.setHidden(false)
         } else {
-            print("w132 we here")
+            print("w195 we here")
             self.groupRepeats.setHidden(true)
         }
         

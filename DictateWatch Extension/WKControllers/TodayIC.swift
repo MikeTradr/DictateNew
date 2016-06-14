@@ -223,8 +223,21 @@ class TodayIC: WKInterfaceController {
                     row.labelTimeUntil.setTextColor(brightYellow)
                     //row.labelTimeUntil.setTextColor(UIColor.yellowColor())
                     
+                    // works
+                    let headlineFont =
+                        UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
+                    
+                    let fontAttribute = [NSFontAttributeName: headlineFont]
+                    
+                    let attributedString = NSAttributedString(string: "Now  ",
+                                                              attributes: fontAttribute)
+                    
+                    row.labelTimeUntil.setAttributedText(attributedString)
+
+                    
                 } else {
                     row.labelTimeUntil.setTextColor(UIColor.greenColor())
+                    row.labelTimeUntil.setText("\(timeUntil)  ")                   
                 }
                 
                 //TODO Mike TODO Anil All day event spanning multiple days does not show up on multiple days
@@ -235,7 +248,7 @@ class TodayIC: WKInterfaceController {
                 row.labelEventLocation.setText(item.location)
                 row.labelStartTime.setText(startTime)
                 row.labelEndTime.setText(endTimeDash)
-                row.labelTimeUntil.setText("\(timeUntil)  ")
+                //row.labelTimeUntil.setText("\(timeUntil)  ")
                 
                 //row.labelEventTitle.setTextColor(UIColor(CGColor: item.calendar.CGColor))
                 // row.labelStartTime.setTextColor(UIColor(CGColor: item.calendar.CGColor))

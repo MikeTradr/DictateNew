@@ -332,7 +332,6 @@
                                                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                                                 <fontDescription key="font" type="system" pointSize="12"/>
                                                                             </label>
-                                                                            <label alignment="left" text="X" id="mxB-NJ-xQ6"/>
                                                                             <label alignment="right" text="timeUntil" id="xEn-h1-yDb" userLabel="timeUntil">
                                                                                 <color key="textColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                                 <fontDescription key="font" type="system" pointSize="12"/>
@@ -354,7 +353,6 @@
                                                         <outlet property="labelEventTitle" destination="qqB-02-T53" id="8YA-eg-Ut8"/>
                                                         <outlet property="labelStartTime" destination="syo-w7-1UG" id="Xec-ZM-Rs0"/>
                                                         <outlet property="labelTimeUntil" destination="xEn-h1-yDb" id="6AQ-lO-axC"/>
-                                                        <outlet property="labelX" destination="mxB-NJ-xQ6" id="5gd-cZ-IiR"/>
                                                         <outlet property="verticalBar" destination="5Xm-nW-kBb" id="Fqd-dE-WrF"/>
                                                         <segue destination="zTX-KH-Wk9" kind="modal" identifier="EventDetails" id="z4s-L4-uWl"/>
                                                     </connections>
@@ -424,8 +422,8 @@
                                     <group key="contentGroup" width="1" alignment="left" id="Pig-6q-fQc">
                                         <items>
                                             <label alignment="left" verticalAlignment="center" text="Location" numberOfLines="4" id="r1N-1D-aKE">
-                                                <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
-                                                <fontDescription key="font" type="system" pointSize="14"/>
+                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="font" type="italicSystem" pointSize="12"/>
                                             </label>
                                         </items>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -435,7 +433,7 @@
                             </items>
                             <edgeInsets key="margins" left="4" right="0.0" top="0.0" bottom="0.0"/>
                         </group>
-                        <group width="134" alignment="left" id="fgn-7b-IYz" userLabel="GroupTime">
+                        <group width="1" alignment="left" id="fgn-7b-IYz" userLabel="GroupTime">
                             <items>
                                 <label alignment="left" text="startTime" id="5zl-En-J93" userLabel="startTime">
                                     <color key="textColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -644,7 +642,7 @@
         <!--TestIC-->
         <scene sceneID="IWj-wO-q9v">
             <objects>
-                <controller identifier="TestIC" id="IDp-7V-lkE" customClass="TestIC" customModule="Dictate_WatchKit_Extension">
+                <controller identifier="TestIC" id="IDp-7V-lkE" customClass="TestIC" customModule="DictateWatch_Extension">
                     <items>
                         <label alignment="left" text="test of go back title" id="UtS-Pv-8qS"/>
                         <imageView alignment="left" image="babymonkey166x200" id="7kE-b5-9O7">
@@ -658,7 +656,7 @@
         <!--Settings-->
         <scene sceneID="ggb-XE-VMe">
             <objects>
-                <controller identifier="Settings" id="gYc-zu-iHZ" customClass="SettingsIC" customModule="Dictate_WatchKit_Extension">
+                <controller identifier="Settings" id="gYc-zu-iHZ" customClass="SettingsIC" customModule="DictateWatch_Extension">
                     <items>
                         <group width="1" alignment="center" id="rPJ-fB-smP" userLabel="Header Group">
                             <items>
@@ -750,7 +748,7 @@
         <!--ReminderPicker-->
         <scene sceneID="x3Y-Pz-eh8">
             <objects>
-                <controller identifier="ReminderPicker" animationDuration="1" id="chX-xC-sh2" customClass="ReminderListPickerIC" customModule="Dictate_WatchKit_Extension">
+                <controller identifier="ReminderPicker" animationDuration="1" id="chX-xC-sh2" customClass="ReminderListPickerIC" customModule="DictateWatch_Extension">
                     <items>
                         <group width="1" alignment="left" id="1hz-oC-LH0" userLabel="Header Group">
                             <items>
@@ -777,7 +775,7 @@
                         </group>
                         <table alignment="left" id="5ba-AY-44P">
                             <items>
-                                <tableRow identifier="tableRow" id="Bhy-Jg-cyg" customClass="DefaultReminderListTableRC" customModule="Dictate_WatchKit_Extension">
+                                <tableRow identifier="tableRow" id="Bhy-Jg-cyg" customClass="DefaultReminderListTableRC" customModule="DictateWatch_Extension">
                                     <group key="rootItem" width="1" height="0.0" alignment="left" id="alO-dK-V8k">
                                         <items>
                                             <imageView width="22" height="22" alignment="left" verticalAlignment="center" image="cbBlank40px" id="N8i-0g-3YZ"/>
@@ -834,7 +832,7 @@
         <!--Nuance Test-->
         <scene sceneID="a9a-NO-Obb">
             <objects>
-                <controller id="HTP-it-9hh" customClass="NuanceTest" customModule="Dictate_WatchKit_Extension">
+                <controller id="HTP-it-9hh" customClass="NuanceTest" customModule="DictateWatch_Extension">
                     <items>
                         <group width="1" alignment="left" id="bjD-qA-Pgs">
                             <items>
@@ -1198,7 +1196,7 @@
         <!--CalendarPicker-->
         <scene sceneID="ZR1-jQ-hZ5">
             <objects>
-                <controller identifier="CalendarPicker" animationDuration="1" id="EK8-kp-F82" customClass="CalendarListPickerIC" customModule="Dictate_WatchKit_Extension">
+                <controller identifier="CalendarPicker" animationDuration="1" id="EK8-kp-F82" customClass="CalendarListPickerIC" customModule="DictateWatch_Extension">
                     <items>
                         <group width="1" alignment="left" id="7QS-OF-hpC" userLabel="Header Group">
                             <items>
@@ -1225,7 +1223,7 @@
                         </group>
                         <table alignment="left" id="fAb-J1-wcn">
                             <items>
-                                <tableRow identifier="tableRow" id="uDU-dj-iAS" customClass="DefaultCalendarListTableRC" customModule="Dictate_WatchKit_Extension">
+                                <tableRow identifier="tableRow" id="uDU-dj-iAS" customClass="DefaultCalendarListTableRC" customModule="DictateWatch_Extension">
                                     <group key="rootItem" width="1" height="0.0" alignment="left" id="fOx-Iq-OXT">
                                         <items>
                                             <imageView width="22" height="22" alignment="left" verticalAlignment="center" image="cbBlank40px" id="pap-gf-KnW"/>
@@ -1282,7 +1280,7 @@
         <!--ReminderItems-->
         <scene sceneID="sQq-zh-Lhr">
             <objects>
-                <controller identifier="ReminderItems" animationDuration="1" id="KhT-Na-Zkk" customClass="ReminderItemsIC" customModule="Dictate_WatchKit_Extension">
+                <controller identifier="ReminderItems" animationDuration="1" id="KhT-Na-Zkk" customClass="ReminderItemsIC" customModule="DictateWatch_Extension">
                     <items>
                         <group width="1" alignment="left" id="Tkz-Qg-oD2" userLabel="HeaderGroup">
                             <items>
@@ -1313,7 +1311,7 @@
                         </group>
                         <table alignment="left" id="efV-EY-vrF">
                             <items>
-                                <tableRow identifier="tableRow" id="ybA-21-ZNj" customClass="ReminderItemsTableRC" customModule="Dictate_WatchKit_Extension">
+                                <tableRow identifier="tableRow" id="ybA-21-ZNj" customClass="ReminderItemsTableRC" customModule="DictateWatch_Extension">
                                     <group key="rootItem" width="1" height="0.0" alignment="left" id="1O5-zS-Al1">
                                         <items>
                                             <imageView width="22" height="22" alignment="left" verticalAlignment="center" image="cbBlank40px" id="6yw-JJ-rvV"/>
@@ -1384,7 +1382,7 @@
         <!--ShowCalendars-->
         <scene sceneID="kOf-kE-YIt">
             <objects>
-                <controller identifier="ShowCalendars" animationDuration="1" id="kUv-Yz-AbO" customClass="ShowCalendarsIC" customModule="Dictate_WatchKit_Extension">
+                <controller identifier="ShowCalendars" animationDuration="1" id="kUv-Yz-AbO" customClass="ShowCalendarsIC" customModule="DictateWatch_Extension">
                     <items>
                         <group width="1" alignment="left" id="z2l-uO-FcZ" userLabel="Header Group">
                             <items>
@@ -1411,7 +1409,7 @@
                         </group>
                         <table alignment="left" id="8xB-kF-jym">
                             <items>
-                                <tableRow identifier="tableRow" id="V6e-sO-EMw" customClass="ShowCalendarsTableRC" customModule="Dictate_WatchKit_Extension">
+                                <tableRow identifier="tableRow" id="V6e-sO-EMw" customClass="ShowCalendarsTableRC" customModule="DictateWatch_Extension">
                                     <group key="rootItem" width="1" height="0.0" alignment="left" id="pZl-bt-ABr">
                                         <items>
                                             <imageView width="22" height="22" alignment="left" verticalAlignment="center" image="cbBlank40px" id="pLP-eT-dOu"/>
@@ -1468,7 +1466,7 @@
         <!--CalendarSettings-->
         <scene sceneID="b6Z-Mv-Z2b">
             <objects>
-                <controller identifier="CalendarSettings" id="RwQ-qV-CJ3" customClass="CalendarSettingsIC" customModule="Dictate_WatchKit_Extension">
+                <controller identifier="CalendarSettings" id="RwQ-qV-CJ3" customClass="CalendarSettingsIC" customModule="DictateWatch_Extension">
                     <items>
                         <group width="1" alignment="center" id="UVB-XQ-79g" userLabel="Header Group">
                             <items>
@@ -1559,7 +1557,7 @@
         <!--ShowReminders-->
         <scene sceneID="gnF-1t-TmE">
             <objects>
-                <controller identifier="ShowReminders" animationDuration="1" id="tiX-bl-Egq" customClass="ShowRemindersIC" customModule="Dictate_WatchKit_Extension">
+                <controller identifier="ShowReminders" animationDuration="1" id="tiX-bl-Egq" customClass="ShowRemindersIC" customModule="DictateWatch_Extension">
                     <items>
                         <group width="1" alignment="left" id="hee-n1-Yfy" userLabel="Header Group">
                             <items>
@@ -1586,7 +1584,7 @@
                         </group>
                         <table alignment="left" id="B1w-P6-lDD">
                             <items>
-                                <tableRow identifier="tableRow" id="a2u-qY-GiB" customClass="ShowRemindersTableRC" customModule="Dictate_WatchKit_Extension">
+                                <tableRow identifier="tableRow" id="a2u-qY-GiB" customClass="ShowRemindersTableRC" customModule="DictateWatch_Extension">
                                     <group key="rootItem" width="1" height="0.0" alignment="left" id="V7B-mj-Hwt">
                                         <items>
                                             <imageView width="22" height="22" alignment="left" verticalAlignment="center" image="cbBlank40px" id="tAf-Xv-2Hy"/>
@@ -1643,7 +1641,7 @@
         <!--ReminderSettings-->
         <scene sceneID="ihP-EF-mbR">
             <objects>
-                <controller identifier="ReminderSettings" id="dLF-pS-Q8g" customClass="ReminderSettingsIC" customModule="Dictate_WatchKit_Extension">
+                <controller identifier="ReminderSettings" id="dLF-pS-Q8g" customClass="ReminderSettingsIC" customModule="DictateWatch_Extension">
                     <items>
                         <group width="1" alignment="center" id="mFO-TY-cpB" userLabel="Header Group">
                             <items>
@@ -1734,7 +1732,7 @@
         <!--EditEventDetails-->
         <scene sceneID="1sN-ef-xy6">
             <objects>
-                <controller identifier="EditEventDetails" id="ldi-4B-bpc" customClass="EditEventDetailsIC" customModule="Dictate_WatchKit_Extension">
+                <controller identifier="EditEventDetails" id="ldi-4B-bpc" customClass="EditEventDetailsIC" customModule="DictateWatch_Extension">
                     <items>
                         <group width="130" alignment="left" id="IHl-iF-qqE" userLabel="HeaderGroup">
                             <items>
@@ -1958,7 +1956,7 @@
                         </group>
                         <table alignment="left" id="cxk-Di-4aM">
                             <items>
-                                <tableRow identifier="tableRow" id="9Oo-vb-8q3" customClass="SetCalendarTableRC" customModule="Dictate_WatchKit_Extension">
+                                <tableRow identifier="tableRow" id="9Oo-vb-8q3" customClass="SetCalendarTableRC" customModule="DictateWatch_Extension">
                                     <group key="rootItem" width="1" height="0.0" alignment="left" id="DcH-31-sSp">
                                         <items>
                                             <imageView width="22" height="22" alignment="left" verticalAlignment="center" image="cbBlank40px" id="c7E-Dn-ZQz"/>

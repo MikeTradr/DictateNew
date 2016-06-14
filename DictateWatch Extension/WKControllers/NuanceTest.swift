@@ -8,13 +8,13 @@
 
 import UIKit
 import EventKit
-import MessageUI
+//import MessageUI
 
 import WatchKit
 import Foundation
-import AVFoundation
-import AudioToolbox         //needed for Nuance? or no?
-import SystemConfiguration   //needed for Nuance? or no?
+//import AVFoundation
+//import AudioToolbox         //needed for Nuance? or no?
+//import SystemConfiguration   //needed for Nuance? or no?
 /*
 class NuanceTest: WKInterfaceController, SpeechKitDelegate, SKRecognizerDelegate, SKVocalizerDelegate {
     

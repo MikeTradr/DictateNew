@@ -437,6 +437,12 @@ class DictateViewController: UIViewController, UITextFieldDelegate, MFMailCompos
        // enteredText2.text = ""      // set to blank for return
         }
     }
+    
+    func Process(str: String) {
+        let (startDT, endDT, output, outputNote, day, calendarName, actionType) = DictateCode().parse(str)
+        self.tabBarController?.selectedIndex = 1
+        self.enteredText2.text = ""      // set to blank for return
+    }
 
     
 //---- From Nuance funcs ----------------------------------------------------------
@@ -559,6 +565,12 @@ class DictateViewController: UIViewController, UITextFieldDelegate, MFMailCompos
         }
 
         voiceSearch = nil
+        
+        //go to edit Event screen... added 052016 to automatically go to next screen, avoid hittign "process" button
+        str = results.firstResult()
+        print("p572 str: \(str)")
+        Process(str)
+    
     }
 
     func recognizer(recognizer: SKRecognizer!, didFinishWithError error: NSError!, suggestion: String!) {

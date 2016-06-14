@@ -726,7 +726,7 @@ class ReminderManagerSave: NSObject, WCSessionDelegate {
         
         var error:NSError?
         calender.source = self.eventStore.defaultCalendarForNewEvents.source
-        print("p181 Error: \(error)")
+        print("w729 Error: \(error)")
         
         let calendars = self.eventStore.calendarsForEntityType(EKEntityType.Event)
         
@@ -734,12 +734,12 @@ class ReminderManagerSave: NSObject, WCSessionDelegate {
         
         for calendar in calendars {
             var calendarTitle:String! = calendar.title
-            print("p189 calendarTitle: \(calendarTitle)")
+            print("w737 calendarTitle: \(calendarTitle)")
             
             calendarArray.append(calendarTitle)
         }
-        print("p193 calendarArray: \(calendarArray)")
-        print("p193 calendarArray.count: \(calendarArray.count)")
+        print("w741 calendarArray: \(calendarArray)")
+        print("w742 calendarArray.count: \(calendarArray.count)")
         
         self.defaults.setObject(calendarArray, forKey: "calendarArray")            //sets calendarArray of String the names
         self.defaults.synchronize()

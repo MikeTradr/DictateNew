@@ -66,8 +66,6 @@
 		D33C13BB1B8C1EC900470F8F /* ToDoMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33C13BA1B8C1EC900470F8F /* ToDoMenuViewController.swift */; };
 		D33C13BD1B8C3CCB00470F8F /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33C13BC1B8C3CCB00470F8F /* SettingsTableViewController.swift */; };
 		D33C13BF1B8C47E800470F8F /* SettingsCalendarTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33C13BE1B8C47E800470F8F /* SettingsCalendarTableViewController.swift */; };
-		D33CAD041B74773500F59260 /* button-14.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D33CAD031B74773500F59260 /* button-14.mp3 */; };
-		D33CAD071B747EBE00F59260 /* se_tap.m4a in Resources */ = {isa = PBXBuildFile; fileRef = D33CAD061B747EBE00F59260 /* se_tap.m4a */; };
 		D33FEBAF1BD769EB003E6755 /* NuanceHeader.h in Sources */ = {isa = PBXBuildFile; fileRef = D33FEBAE1BD769EB003E6755 /* NuanceHeader.h */; };
 		D33FEBB21BD76A70003E6755 /* NuanceHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = D33FEBB11BD76A70003E6755 /* NuanceHeader.m */; };
 		D34451981C8505C5007F3DDD /* CalendarPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34451971C8505C5007F3DDD /* CalendarPickerViewController.swift */; };
@@ -75,6 +73,25 @@
 		D34FEF621D0F528000915A80 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3F8AD241B696FCD0070C097 /* Interface.storyboard */; };
 		D355D97C1BA7DD3F00DADD72 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D355D97B1BA7DD3F00DADD72 /* Main.storyboard */; };
 		D369819D1C7BB05400ED0AD8 /* DatePopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D369819C1C7BB05400ED0AD8 /* DatePopupViewController.swift */; };
+		D36BCA141D107C9F005DF193 /* ReminderSettingsIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA3AE01BAE8521002FDD21 /* ReminderSettingsIC.swift */; };
+		D36BCA151D107CA4005DF193 /* ReminderListPickerIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34395711BA32964002D98EA /* ReminderListPickerIC.swift */; };
+		D36BCA161D107CA9005DF193 /* CalendarListPickerIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39AB89D1BA86D68001C7570 /* CalendarListPickerIC.swift */; };
+		D36BCA171D107CAC005DF193 /* CalendarSettingsIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA3ADE1BAE8513002FDD21 /* CalendarSettingsIC.swift */; };
+		D36BCA181D107CAF005DF193 /* DefaultCalendarListTableRC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA3ADA1BAE845C002FDD21 /* DefaultCalendarListTableRC.swift */; };
+		D36BCA191D107CB3005DF193 /* DefaultReminderListTableRC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA3ADC1BAE84B2002FDD21 /* DefaultReminderListTableRC.swift */; };
+		D36BCA1A1D107CB9005DF193 /* SettingsIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E810871B70FEA0004AE5A9 /* SettingsIC.swift */; };
+		D36BCA1B1D107CBD005DF193 /* ShowCalendarsIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA3AD21BAE8054002FDD21 /* ShowCalendarsIC.swift */; };
+		D36BCA1C1D107CC0005DF193 /* ShowCalendarsTableRC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA3AD41BAE8066002FDD21 /* ShowCalendarsTableRC.swift */; };
+		D36BCA1D1D107CC3005DF193 /* ShowRemindersIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA3AD61BAE834B002FDD21 /* ShowRemindersIC.swift */; };
+		D36BCA1E1D107CC6005DF193 /* ShowRemindersTableRC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA3AD81BAE8379002FDD21 /* ShowRemindersTableRC.swift */; };
+		D36BCA1F1D107CCF005DF193 /* NuanceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37CFBF41BD95F130005320D /* NuanceTest.swift */; };
+		D36BCA211D107D07005DF193 /* PushNotificationPayload.apns in Resources */ = {isa = PBXBuildFile; fileRef = D31BF30C1CDAB93700521A65 /* PushNotificationPayload.apns */; };
+		D36BCA221D107D14005DF193 /* 124-DeleteWhoosh.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D3348D031BAE4CFD0056792D /* 124-DeleteWhoosh.mp3 */; };
+		D36BCA231D107D17005DF193 /* button-14.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D33CAD031B74773500F59260 /* button-14.mp3 */; };
+		D36BCA241D107D1C005DF193 /* se_tap.m4a in Resources */ = {isa = PBXBuildFile; fileRef = D33CAD061B747EBE00F59260 /* se_tap.m4a */; };
+		D36BCA251D107D1E005DF193 /* se_tap.m4a in Resources */ = {isa = PBXBuildFile; fileRef = D33CAD061B747EBE00F59260 /* se_tap.m4a */; };
+		D36BCA261D107D21005DF193 /* button-14.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D33CAD031B74773500F59260 /* button-14.mp3 */; };
+		D36BCA271D107D25005DF193 /* 124-DeleteWhoosh.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D3348D031BAE4CFD0056792D /* 124-DeleteWhoosh.mp3 */; };
 		D3795E7A1B8DF927009D3DB5 /* SettingsEventTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3795E791B8DF927009D3DB5 /* SettingsEventTableViewController.swift */; };
 		D38653F71BAA02F400B8CCBC /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38653F61BAA02F400B8CCBC /* EventManager.swift */; };
 		D392FAD41B9B1BA800678B18 /* SettingsFriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D392FAD31B9B1BA800678B18 /* SettingsFriendsTableViewController.swift */; };
@@ -95,6 +112,7 @@
 		D3B703821B94E90800FA1DF0 /* ReminderListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B703811B94E90800FA1DF0 /* ReminderListTableViewController.swift */; };
 		D3B929C41C634E9A00C1C535 /* MailComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B929C31C634E9A00C1C535 /* MailComposer.swift */; };
 		D3BD1BDE1B9F3CF10052A312 /* ReminderPickerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BD1BDD1B9F3CF10052A312 /* ReminderPickerTableViewController.swift */; };
+		D3BEF89A1D10973E003FFC6E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D31F336A1D0E7BD3003D726E /* Images.xcassets */; };
 		D3CEC17D1BD77A76001A50F8 /* earcon_cancel.wav in Resources */ = {isa = PBXBuildFile; fileRef = D3CEC17C1BD77A76001A50F8 /* earcon_cancel.wav */; };
 		D3CEC1801BD77A7F001A50F8 /* earcon_done_listening.wav in Resources */ = {isa = PBXBuildFile; fileRef = D3CEC17F1BD77A7F001A50F8 /* earcon_done_listening.wav */; };
 		D3CEC1831BD77A88001A50F8 /* earcon_listening.wav in Resources */ = {isa = PBXBuildFile; fileRef = D3CEC1821BD77A88001A50F8 /* earcon_listening.wav */; };
@@ -1010,7 +1028,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				D31F336B1D0E7BD3003D726E /* Images.xcassets in Resources */,
+				D36BCA271D107D25005DF193 /* 124-DeleteWhoosh.mp3 in Resources */,
 				D34FEF621D0F528000915A80 /* Interface.storyboard in Resources */,
+				D36BCA251D107D1E005DF193 /* se_tap.m4a in Resources */,
+				D36BCA261D107D21005DF193 /* button-14.mp3 in Resources */,
 				D31BF3001CDAB93700521A65 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1020,6 +1041,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				D3D9DE2F1CE3E76F003DC35F /* DictateWatch Extension.entitlements in Resources */,
+				D36BCA241D107D1C005DF193 /* se_tap.m4a in Resources */,
+				D3BEF89A1D10973E003FFC6E /* Images.xcassets in Resources */,
+				D36BCA231D107D17005DF193 /* button-14.mp3 in Resources */,
+				D36BCA221D107D14005DF193 /* 124-DeleteWhoosh.mp3 in Resources */,
+				D36BCA211D107D07005DF193 /* PushNotificationPayload.apns in Resources */,
 				D31BF3181CDAB93700521A65 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1037,8 +1063,6 @@
 				ECB861FC1B77DCB000503C50 /* button-43.mp3 in Resources */,
 				ECB861F91B77DCB000503C50 /* beep-08b.mp3 in Resources */,
 				ECB861F71B77DCB000503C50 /* 262-buttonclick57.mp3 in Resources */,
-				D33CAD041B74773500F59260 /* button-14.mp3 in Resources */,
-				D33CAD071B747EBE00F59260 /* se_tap.m4a in Resources */,
 				D39EDDCD1CDEBB2D00D8DD6B /* Frameworks in Resources */,
 				ECB861F61B77DCB000503C50 /* 218-buttonclick54.mp3 in Resources */,
 				ECB861F21B77DCB000503C50 /* 122-whoosh03.mp3 in Resources */,
@@ -1079,32 +1103,44 @@
 			files = (
 				D31BF3401CDAC2DC00521A65 /* NuanceHeader.m in Sources */,
 				D31BF3341CDAC15F00521A65 /* EditEventDetailsIC.swift in Sources */,
+				D36BCA171D107CAC005DF193 /* CalendarSettingsIC.swift in Sources */,
 				D3F8F9741D0B3DC600094101 /* MainIC.swift in Sources */,
+				D36BCA1E1D107CC6005DF193 /* ShowRemindersTableRC.swift in Sources */,
+				D36BCA181D107CAF005DF193 /* DefaultCalendarListTableRC.swift in Sources */,
 				D31BF3421CDAC2FC00521A65 /* ReminderCode.swift in Sources */,
 				D31BF35A1CDBF66100521A65 /* EventManager.swift in Sources */,
 				D31BF3551CDBAA8900521A65 /* WatchGeneral.swift in Sources */,
 				D31BF3121CDAB93700521A65 /* NotificationController.swift in Sources */,
+				D36BCA151D107CA4005DF193 /* ReminderListPickerIC.swift in Sources */,
 				D31BF3101CDAB93700521A65 /* ExtensionDelegate.swift in Sources */,
 				D31BF3331CDAC15B00521A65 /* EventDetailsIC.swift in Sources */,
 				D31BF3311CDAC15100521A65 /* TodayIC.swift in Sources */,
 				D31BF3491CDAC31D00521A65 /* FavoritesManager.swift in Sources */,
 				D31BF3411CDAC2F700521A65 /* DictateCode.swift in Sources */,
+				D36BCA141D107C9F005DF193 /* ReminderSettingsIC.swift in Sources */,
 				D31BF32A1CDAC12500521A65 /* DictateManagerIC.swift in Sources */,
 				D31BF3361CDAC16900521A65 /* SetCalendarIC.swift in Sources */,
 				D31BF32D1CDAC13C00521A65 /* ReminderListsIC.swift in Sources */,
 				D31BF3161CDAB93700521A65 /* ComplicationController.swift in Sources */,
 				D31BF32F1CDAC14600521A65 /* ReminderListsTableRC.swift in Sources */,
 				D31BF3381CDAC17400521A65 /* TestIC.swift in Sources */,
+				D36BCA1C1D107CC0005DF193 /* ShowCalendarsTableRC.swift in Sources */,
 				D31BF35F1CDE792000521A65 /* ReminderManager.swift in Sources */,
+				D36BCA1B1D107CBD005DF193 /* ShowCalendarsIC.swift in Sources */,
+				D36BCA161D107CA9005DF193 /* CalendarListPickerIC.swift in Sources */,
 				D31BF32E1CDAC14100521A65 /* ReminderItemsIC.swift in Sources */,
 				D31BF3371CDAC16F00521A65 /* SetCalendarTableRC.swift in Sources */,
 				D31BF3291CDABE6200521A65 /* JTDateHelper.m in Sources */,
 				D31BF3351CDAC16400521A65 /* EventEditNotesIC.swift in Sources */,
+				D36BCA1A1D107CB9005DF193 /* SettingsIC.swift in Sources */,
 				D31BF3261CDABE2500521A65 /* TimeManger.swift in Sources */,
 				D31BF3301CDAC14B00521A65 /* ReminderItemsTableRC.swift in Sources */,
+				D36BCA191D107CB3005DF193 /* DefaultReminderListTableRC.swift in Sources */,
 				D31BF30E1CDAB93700521A65 /* InterfaceController.swift in Sources */,
+				D36BCA1D1D107CC3005DF193 /* ShowRemindersIC.swift in Sources */,
 				D34FEF5F1D0F4AAF00915A80 /* TodayEventsTableRC.swift in Sources */,
 				D31BF3251CDABD0100521A65 /* GlanceTodayEventsTableRC.swift in Sources */,
+				D36BCA1F1D107CCF005DF193 /* NuanceTest.swift in Sources */,
 				D31BF3141CDAB93700521A65 /* GlanceController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

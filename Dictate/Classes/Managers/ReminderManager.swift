@@ -735,7 +735,7 @@ class ReminderManager: NSObject {
         
         var error:NSError?
         calender.source = self.eventStore.defaultCalendarForNewEvents.source
-        print("p181 Error: \(error)")
+        print("p738 Error: \(error)")
         
         let calendars = self.eventStore.calendarsForEntityType(EKEntityType.Event)
         
@@ -743,12 +743,12 @@ class ReminderManager: NSObject {
         
         for calendar in calendars {
             var calendarTitle:String! = calendar.title
-            print("p189 calendarTitle: \(calendarTitle)")
+            print("p746 calendarTitle: \(calendarTitle)")
             
             calendarArray.append(calendarTitle)
         }
-        print("p193 calendarArray: \(calendarArray)")
-        print("p193 calendarArray.count: \(calendarArray.count)")
+        print("p750 calendarArray: \(calendarArray)")
+        print("p751 calendarArray.count: \(calendarArray.count)")
         
         self.defaults.setObject(calendarArray, forKey: "calendarArray")            //sets calendarArray of String the names
         self.defaults.synchronize()

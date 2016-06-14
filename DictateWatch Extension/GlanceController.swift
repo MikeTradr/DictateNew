@@ -147,7 +147,7 @@ class GlanceController: WKInterfaceController {
         fetchEvents()
         
         self.loadTableData()
-        
+   /*
         dateFormatter.dateFormat = "h:mm a"
         let nowString = dateFormatter.stringFromDate(NSDate())   //set to today date for now
         
@@ -155,7 +155,7 @@ class GlanceController: WKInterfaceController {
         
         // self.labelNow.setTextColor(watchBlue)
         self.labelNow.setText(nowString)
-        
+   */
     }
     
     override func willActivate() {
@@ -180,7 +180,7 @@ class GlanceController: WKInterfaceController {
         
         fetchEvents()
         loadTableData()
-        
+    /*
         dateFormatter.dateFormat = "h:mm a"
         let nowString = dateFormatter.stringFromDate(NSDate())   //set to today date for now
         
@@ -188,7 +188,7 @@ class GlanceController: WKInterfaceController {
         
         // self.labelNow.setTextColor(watchBlue)
         self.labelNow.setText(nowString)
-        
+    */
     }
     
     func loadTableData () {
@@ -245,8 +245,24 @@ class GlanceController: WKInterfaceController {
                     row.labelTimeUntil.setTextColor(brightYellow)
                     //row.labelTimeUntil.setTextColor(UIColor.yellowColor())
                     
+                    // works
+                    let headlineFont =
+                        UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
+                    
+                    let fontAttribute = [NSFontAttributeName: headlineFont]
+                    
+                    let attributedString = NSAttributedString(string: "Now  ",
+                                                              attributes: fontAttribute)
+                    
+                    row.labelTimeUntil.setAttributedText(attributedString)
+                    
+                    
+                    
+                    
+                    
                 } else {
                     row.labelTimeUntil.setTextColor(UIColor.greenColor())
+                    row.labelTimeUntil.setText("\(timeUntil)  ")
                 }
                 
                 //TODO Mike TODO Anil All day event spanning multiple days does not show up on multiple days
@@ -257,7 +273,7 @@ class GlanceController: WKInterfaceController {
                 row.labelEventLocation.setText(item.location)
                 row.labelStartTime.setText(startTime)
                 row.labelEndTime.setText(endTimeDash)
-                row.labelTimeUntil.setText("\(timeUntil)  ")
+               // row.labelTimeUntil.setText("\(timeUntil)  ")
                 
                 //row.labelEventTitle.setTextColor(UIColor(CGColor: item.calendar.CGColor))
                 // row.labelStartTime.setTextColor(UIColor(CGColor: item.calendar.CGColor))

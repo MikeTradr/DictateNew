@@ -8,7 +8,7 @@
 
 
 import ClockKit
-
+/*
 struct Show {
     var name: String
     var shortName: String?
@@ -114,6 +114,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 
 
 
+*/
 
 
 
@@ -122,8 +123,6 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 
 
 
-
-/*
 
 import ClockKit
 import WatchKit
@@ -173,7 +172,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     
     
     // MARK: - Timeline Population
-    
+ /*
     func getCurrentTimelineEntryForComplication(complication: CLKComplication, withHandler handler: ((CLKComplicationTimelineEntry?) -> Void)) {
         // Call the handler with the current timeline entry
         
@@ -187,11 +186,11 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         let entry = CLKComplicationTimelineEntry(date: NSDate(timeInterval: hour * -0.25, sinceDate: show.startDate), complicationTemplate: template)
         handler(entry)
     }
-    
- //   func getCurrentTimelineEntryForComplication(complication: CLKComplication, withHandler handler: ((CLKComplicationTimelineEntry?) -> Void)) {
+*/
+    func getCurrentTimelineEntryForComplication(complication: CLKComplication, withHandler handler: ((CLKComplicationTimelineEntry?) -> Void)) {
         // Call the handler with the current timeline entry
-  //      handler(nil)
-  //  }
+        handler(nil)
+    }
     
     func getTimelineEntriesForComplication(complication: CLKComplication, beforeDate date: NSDate, limit: Int, withHandler handler: (([CLKComplicationTimelineEntry]?) -> Void)) {
         // Call the handler with the timeline entries prior to the given date
@@ -235,7 +234,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     
     // MARK: - Placeholder Templates
     
-    
+ /*
     func getPlaceholderTemplateForComplication(complication: CLKComplication, withHandler handler: (CLKComplicationTemplate?) -> Void) {
         // This method will be called once per supported complication, and the results will be cached
         let template = CLKComplicationTemplateModularLargeStandardBody()
@@ -247,7 +246,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         handler(template)
     }
     
-    
+*/
 
     //---multipliers to convert to seconds---
     let HOUR: NSTimeInterval = 60 * 60
@@ -279,7 +278,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     
 */
     
-    /*
+    
     func getPlaceholderTemplateForComplication(
         complication: CLKComplication,
         withHandler handler: (CLKComplicationTemplate?) -> Void) {
@@ -308,10 +307,10 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
             template.imageProvider = CLKImageProvider(onePieceImage: UIImage(named: "app_icon")!)
 */
         case .ModularSmall:
-            let modularSmallTemplate =  CLKComplicationTemplateModularSmallRingText()
+           // let modularSmallTemplate =  CLKComplicationTemplateModularSmallRingText()
           //  modularSmallTemplate.textProvider = CLKSimpleTextProvider(text: "D_%")
 
-          //  let modularSmallTemplate =  CLKComplicationTemplateModularSmallSimpleImage()
+         //   let modularSmallTemplate =  CLKComplicationTemplateModularSmallSimpleImage()
             
             //Set images for both watch sizes :)
             let thisDevice = WKInterfaceDevice.currentDevice()
@@ -329,13 +328,14 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
             //     modularSmallTemplate.imageProvider = CLKImageProvide(onePieceImage: UIImage(named: "app_icon")!)
             //    modularSmallTemplate.imageProvider = CLKImageProvider(onePieceImage: UIImage(named: "micWithAlphaD-58px")!)
             
-   //         modularSmallTemplate.imageProvider = CLKImageProvider(onePieceImage: image)
+     //      modularSmallTemplate.imageProvider = CLKImageProvider(onePieceImage: image)
 
             
           //  let imager = CLKImageProvider(onePieceImage: image)
 
+           let modularSmallTemplate =  CLKComplicationTemplateModularSmallRingText()
             modularSmallTemplate.textProvider = CLKSimpleTextProvider(text: "R")
-            modularSmallTemplate.fillFraction = 0.75
+           modularSmallTemplate.fillFraction = 0.50
             modularSmallTemplate.ringStyle = CLKComplicationRingStyle.Closed
             
             template = modularSmallTemplate
@@ -384,8 +384,8 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         handler(template)
     }
 
-*/
+
     
 }
 
-*/
+

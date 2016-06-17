@@ -89,8 +89,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //from LittleApp
         
-        PFUser.currentUser()!.incrementKey("RunCount")
-        PFUser.currentUser()!.saveInBackground()
+        PFUser.currentUser()?.incrementKey("RunCount")
+        PFUser.currentUser()?.saveInBackground()
         PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
         
         

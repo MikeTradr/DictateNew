@@ -8,11 +8,14 @@
 
 
 import ClockKit
+
+
+
 /*
 struct Show {
     var name: String
     var shortName: String?
-    var genre: String
+    var genre: Strin
     
     var startDate: NSDate
     var length: NSTimeInterval
@@ -288,6 +291,10 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         
         // handler(nil)
         var template: CLKComplicationTemplate?
+        
+        print("w292 we here complication.family: \(complication.family)")
+
+        
         switch complication.family {
             
             
@@ -310,15 +317,17 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
            // let modularSmallTemplate =  CLKComplicationTemplateModularSmallRingText()
           //  modularSmallTemplate.textProvider = CLKSimpleTextProvider(text: "D_%")
 
-         //   let modularSmallTemplate =  CLKComplicationTemplateModularSmallSimpleImage()
+            let modularSmallTemplate =  CLKComplicationTemplateModularSmallSimpleImage()
             
             //Set images for both watch sizes :)
             let thisDevice = WKInterfaceDevice.currentDevice()
             let rect:CGRect =  thisDevice.screenBounds
             if (rect.size.height == 195.0) {
-                print("w124 we here rect.size.height: \(rect.size.height)")
+                print("w323 we here rect.size.height: \(rect.size.height)")
                 // Apple Watch 42mm
-                image = UIImage(named: "micWithAlphaD-58px")!.imageWithRenderingMode(.AlwaysTemplate)
+               // image = UIImage(named: "micWithAlphaD-58px")!.imageWithRenderingMode(.AlwaysTemplate)
+                image = UIImage(named: "u0iNw")!//.imageWithRenderingMode(.AlwaysTemplate)
+                
                // image = UIImage(named: "micWithAlphaD-58px")!
             } else if (rect.size.height == 170.0){
                 // Apple Watch 38mm
@@ -328,18 +337,21 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
             //     modularSmallTemplate.imageProvider = CLKImageProvide(onePieceImage: UIImage(named: "app_icon")!)
             //    modularSmallTemplate.imageProvider = CLKImageProvider(onePieceImage: UIImage(named: "micWithAlphaD-58px")!)
             
-     //      modularSmallTemplate.imageProvider = CLKImageProvider(onePieceImage: image)
+            modularSmallTemplate.imageProvider = CLKImageProvider(onePieceImage: image)
+            template = modularSmallTemplate
 
             
           //  let imager = CLKImageProvider(onePieceImage: image)
 
-           let modularSmallTemplate =  CLKComplicationTemplateModularSmallRingText()
+            print("w340 we here rect.size.height: \(rect.size.height)")
+/*
+            let modularSmallTemplate =  CLKComplicationTemplateModularSmallRingText()
             modularSmallTemplate.textProvider = CLKSimpleTextProvider(text: "R")
-           modularSmallTemplate.fillFraction = 0.50
+            modularSmallTemplate.fillFraction = 0.50
             modularSmallTemplate.ringStyle = CLKComplicationRingStyle.Closed
             
             template = modularSmallTemplate
-
+*/
 
             
         case .ModularLarge:

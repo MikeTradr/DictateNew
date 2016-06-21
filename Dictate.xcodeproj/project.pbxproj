@@ -118,6 +118,7 @@
 		D3CEC1831BD77A88001A50F8 /* earcon_listening.wav in Resources */ = {isa = PBXBuildFile; fileRef = D3CEC1821BD77A88001A50F8 /* earcon_listening.wav */; };
 		D3D98AF41BA54D5B00BA1901 /* FavoritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D98AF31BA54D5B00BA1901 /* FavoritesManager.swift */; };
 		D3D9DE2F1CE3E76F003DC35F /* DictateWatch Extension.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = D31BF34B1CDAC7E000521A65 /* DictateWatch Extension.entitlements */; };
+		D3DEF1151D1877D500A63191 /* ComplicationControllerORG.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DEF1141D1877D500A63191 /* ComplicationControllerORG.swift */; };
 		D3F823881CE7C40800614EFD /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3F823871CE7C40800614EFD /* Parse.framework */; };
 		D3F8ACEB1B696FB00070C097 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F8ACEA1B696FB00070C097 /* AppDelegate.swift */; };
 		D3F8ACED1B696FB00070C097 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F8ACEC1B696FB00070C097 /* ViewController.swift */; };
@@ -329,6 +330,7 @@
 		D3DA3ADC1BAE84B2002FDD21 /* DefaultReminderListTableRC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultReminderListTableRC.swift; sourceTree = "<group>"; };
 		D3DA3ADE1BAE8513002FDD21 /* CalendarSettingsIC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarSettingsIC.swift; sourceTree = "<group>"; };
 		D3DA3AE01BAE8521002FDD21 /* ReminderSettingsIC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderSettingsIC.swift; sourceTree = "<group>"; };
+		D3DEF1141D1877D500A63191 /* ComplicationControllerORG.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComplicationControllerORG.swift; sourceTree = "<group>"; };
 		D3E810831B70F4BC004AE5A9 /* TodayIC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayIC.swift; sourceTree = "<group>"; };
 		D3E810871B70FEA0004AE5A9 /* SettingsIC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsIC.swift; sourceTree = "<group>"; };
 		D3E810891B710690004AE5A9 /* ReminderListsIC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderListsIC.swift; sourceTree = "<group>"; };
@@ -480,6 +482,7 @@
 				D3E810861B70F4D6004AE5A9 /* WKControllers */,
 				D31BF3171CDAB93700521A65 /* Assets.xcassets */,
 				D31BF3151CDAB93700521A65 /* ComplicationController.swift */,
+				D3DEF1141D1877D500A63191 /* ComplicationControllerORG.swift */,
 				D31BF34B1CDAC7E000521A65 /* DictateWatch Extension.entitlements */,
 				D31BF30F1CDAB93700521A65 /* ExtensionDelegate.swift */,
 				D31BF3131CDAB93700521A65 /* GlanceController.swift */,
@@ -1130,6 +1133,7 @@
 				D31BF32D1CDAC13C00521A65 /* ReminderListsIC.swift in Sources */,
 				D31BF3161CDAB93700521A65 /* ComplicationController.swift in Sources */,
 				D31BF32F1CDAC14600521A65 /* ReminderListsTableRC.swift in Sources */,
+				D3DEF1151D1877D500A63191 /* ComplicationControllerORG.swift in Sources */,
 				D31BF3381CDAC17400521A65 /* TestIC.swift in Sources */,
 				D36BCA1C1D107CC0005DF193 /* ShowCalendarsTableRC.swift in Sources */,
 				D31BF35F1CDE792000521A65 /* ReminderManager.swift in Sources */,

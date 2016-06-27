@@ -175,7 +175,6 @@ class General: NSObject, UITextFieldDelegate, MFMailComposeViewControllerDelegat
         
         //TODO get this from login Screen, hard coded for now...
         
-        print("p146 PFUser.currentUser(): \(PFUser.currentUser()!)")
         
         //TODO fix PFuser when is nil can be nil???
         

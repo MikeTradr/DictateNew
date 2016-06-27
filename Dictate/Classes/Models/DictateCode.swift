@@ -89,7 +89,7 @@ class DictateCode: NSObject {
     
     // defaults.setObject(eventDuration, forKey: "eventDuration")
 
-    
+    //CRASHES watchOS@, need to solve! and below. and ALL UserDefaults
     var eventDuration    = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!.objectForKey("defaultEventDuration") as! Int
     
     // TODO above crashes if not run phone app first??? 121215

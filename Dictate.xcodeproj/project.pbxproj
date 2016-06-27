@@ -116,6 +116,8 @@
 		D3CEC17D1BD77A76001A50F8 /* earcon_cancel.wav in Resources */ = {isa = PBXBuildFile; fileRef = D3CEC17C1BD77A76001A50F8 /* earcon_cancel.wav */; };
 		D3CEC1801BD77A7F001A50F8 /* earcon_done_listening.wav in Resources */ = {isa = PBXBuildFile; fileRef = D3CEC17F1BD77A7F001A50F8 /* earcon_done_listening.wav */; };
 		D3CEC1831BD77A88001A50F8 /* earcon_listening.wav in Resources */ = {isa = PBXBuildFile; fileRef = D3CEC1821BD77A88001A50F8 /* earcon_listening.wav */; };
+		D3D44C721D20910D0047D72F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3F8ACF11B696FB00070C097 /* Images.xcassets */; };
+		D3D44C731D20910E0047D72F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3F8ACF11B696FB00070C097 /* Images.xcassets */; };
 		D3D98AF41BA54D5B00BA1901 /* FavoritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D98AF31BA54D5B00BA1901 /* FavoritesManager.swift */; };
 		D3D9DE2F1CE3E76F003DC35F /* DictateWatch Extension.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = D31BF34B1CDAC7E000521A65 /* DictateWatch Extension.entitlements */; };
 		D3DEF1151D1877D500A63191 /* ComplicationControllerORG.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DEF1141D1877D500A63191 /* ComplicationControllerORG.swift */; };
@@ -1039,6 +1041,7 @@
 			files = (
 				D31F336B1D0E7BD3003D726E /* Images.xcassets in Resources */,
 				D36BCA271D107D25005DF193 /* 124-DeleteWhoosh.mp3 in Resources */,
+				D3D44C731D20910E0047D72F /* Images.xcassets in Resources */,
 				D34FEF621D0F528000915A80 /* Interface.storyboard in Resources */,
 				D36BCA251D107D1E005DF193 /* se_tap.m4a in Resources */,
 				D36BCA261D107D21005DF193 /* button-14.mp3 in Resources */,
@@ -1051,6 +1054,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D3D9DE2F1CE3E76F003DC35F /* DictateWatch Extension.entitlements in Resources */,
+				D3D44C721D20910D0047D72F /* Images.xcassets in Resources */,
 				D36BCA241D107D1C005DF193 /* se_tap.m4a in Resources */,
 				D3BEF89A1D10973E003FFC6E /* Images.xcassets in Resources */,
 				D36BCA231D107D17005DF193 /* button-14.mp3 in Resources */,

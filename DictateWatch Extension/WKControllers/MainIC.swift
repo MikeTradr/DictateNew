@@ -167,8 +167,8 @@ class MainIC: WKInterfaceController, WCSessionDelegate {
         let str1:String = "Reminder wash the car"
         let str2:String = str4
         
-        var suggestionArray:[String] = []
-        //let suggestionArray = [str, str1, str2]       //TODO Comment out for non-testing
+        //var suggestionArray:[String] = []
+        let suggestionArray = [str, str1, str2]       //TODO Comment out for non-testing
         
         var phone       = defaults.stringForKey("phone")
         var alert       = defaults.objectForKey("defaultEventAlert") as? Double //added defualt 112715

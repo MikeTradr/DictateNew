@@ -3,6 +3,7 @@
     {
       "size" : "24x24",
       "idiom" : "watch",
+      "filename" : "dicAppD-v2-24px.png",
       "scale" : "2x",
       "role" : "notificationCenter",
       "subtype" : "38mm"
@@ -10,6 +11,7 @@
     {
       "size" : "27.5x27.5",
       "idiom" : "watch",
+      "filename" : "dicAppD-v2-28px.png",
       "scale" : "2x",
       "role" : "notificationCenter",
       "subtype" : "42mm"
@@ -17,19 +19,21 @@
     {
       "size" : "29x29",
       "idiom" : "watch",
+      "filename" : "dicAppD-v2-29px-1.png",
       "role" : "companionSettings",
       "scale" : "2x"
     },
     {
       "size" : "29x29",
       "idiom" : "watch",
+      "filename" : "dicAppD-v2-29px.png",
       "role" : "companionSettings",
       "scale" : "3x"
     },
     {
       "size" : "40x40",
       "idiom" : "watch",
-      "filename" : "dicApp-v2BLK80.png",
+      "filename" : "dicApp-v2-80px.png",
       "scale" : "2x",
       "role" : "appLauncher",
       "subtype" : "38mm"
@@ -37,6 +41,7 @@
     {
       "size" : "86x86",
       "idiom" : "watch",
+      "filename" : "dicAppD-v2-86px.png",
       "scale" : "2x",
       "role" : "quickLook",
       "subtype" : "38mm"
@@ -44,6 +49,7 @@
     {
       "size" : "98x98",
       "idiom" : "watch",
+      "filename" : "dicAppD-v2-98px.png",
       "scale" : "2x",
       "role" : "quickLook",
       "subtype" : "42mm"

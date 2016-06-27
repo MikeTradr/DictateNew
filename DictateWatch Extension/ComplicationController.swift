@@ -76,21 +76,31 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 
             let modularLargeTemplate = CLKComplicationTemplateModularLargeStandardBody()
             let headerTextTime = "3 PM-4:15"
-            let timeUntil = "Now"
-            let headerText = headerTextTime + " " + timeUntil
-            let body1Text = "Tennis Drills w/Ken Weekly"
-            let body2Text = "Ahuska Park"
+           // let timeUntil = "in 15 min"
+            let timeUntil = "in 1hr, 36 min"
+            let headerText = headerTextTime  //+ "  " + timeUntil
+            let body1Text = "Meeting with Clients"
+            //let body2Text = "Ahuska Park"
+            let body2Text =  "             " + timeUntil
+
  
            // modularLargeTemplate.headerImageProvider = CLKImageProvider(onePieceImage: defaultSticker)
             modularLargeTemplate.headerTextProvider = CLKSimpleTextProvider(text: headerText)
             modularLargeTemplate.body1TextProvider = CLKSimpleTextProvider(text: body1Text)
             modularLargeTemplate.body2TextProvider = CLKSimpleTextProvider(text: body2Text)
-           // modularLargeTemplate.body2TextProvider = CLKTextProvider
-           //     .textProviderWithFormat
             
-            print("w91 wheaderText: \(headerText)")
+            let brightYellow = UIColor(red: 255, green: 255, blue: 0, alpha: 1)
+            
+         //   modularLargeTemplate.body2TextProvider = CLKTextProvider.text
+
+            modularLargeTemplate.body2TextProvider?.tintColor = UIColor.yellowColor()
+            
+            print("w91 headerText: \(headerText)")
+            print("w92 body1Text: \(body1Text)")
+            print("w93 body2Text: \(body2Text)")
 
             template = modularLargeTemplate
+            handler(modularLargeTemplate)
             
         case .ModularSmall:
             let modularSmallTemplate =  CLKComplicationTemplateModularSmallSimpleImage()
@@ -100,7 +110,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
             modularSmallTemplate.imageProvider = CLKImageProvider(onePieceImage: imageName)
             template = modularSmallTemplate
             
-            handler(template)
+            handler(modularSmallTemplate)
 
          /*
             

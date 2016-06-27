@@ -15,7 +15,7 @@
                                 <button alignment="center" id="l5e-dx-S9F" userLabel="SubInfo">
                                     <group key="contentGroup" width="1" alignment="left" layout="vertical" id="bcs-HZ-YGV">
                                         <items>
-                                            <imageView width="40" height="68" alignment="center" image="dicApp-2-no-back-180" contentMode="scaleAspectFill" id="i8E-Et-b3r">
+                                            <imageView width="40" height="68" alignment="center" image="dicApp-2-no-back-180wD" contentMode="scaleAspectFill" id="i8E-Et-b3r">
                                                 <variation key="device=watch38mm" height="54.399999999999999" width="32"/>
                                             </imageView>
                                             <group width="1" alignment="left" id="AQd-Xh-XwC">
@@ -375,7 +375,7 @@
                                 <button width="10" alignment="center" enabled="NO" id="Hdc-gQ-ojn">
                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </button>
-                                <button width="27" height="40" alignment="left" backgroundImage="dicApp-2-no-back-180" id="NXn-HE-V7o">
+                                <button width="27" height="40" alignment="left" backgroundImage="dicApp-2-no-back-180wD" id="NXn-HE-V7o">
                                     <connections>
                                         <action selector="buttonMainIC" destination="Iem-D3-4JW" id="i5s-D7-gUY"/>
                                     </connections>
@@ -695,7 +695,7 @@
                                 <button width="10" alignment="left" enabled="NO" id="vz3-6q-yX7">
                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </button>
-                                <button width="27" height="40" alignment="center" backgroundImage="dicApp-2-no-back-180" id="ns4-Fk-KhA">
+                                <button width="27" height="40" alignment="center" backgroundImage="dicApp-2-no-back-180wD" id="ns4-Fk-KhA">
                                     <connections>
                                         <action selector="buttonMic" destination="gYc-zu-iHZ" id="2Hu-Jr-wIa"/>
                                     </connections>
@@ -1022,7 +1022,7 @@
                                 <button width="10" alignment="left" enabled="NO" id="9Fe-kV-x7C">
                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </button>
-                                <button width="27" height="40" alignment="center" backgroundImage="dicApp-2-no-back-180" id="FgP-jg-Rkw">
+                                <button width="27" height="40" alignment="center" backgroundImage="dicApp-2-no-back-180wD" id="FgP-jg-Rkw">
                                     <color key="titleColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <connections>
                                         <action selector="buttonMain" destination="ei9-cN-Wbe" id="q10-IO-Gm7"/>
@@ -1069,7 +1069,7 @@
                     <items>
                         <group alignment="left" contentMode="left" id="t8f-Gd-c4y">
                             <items>
-                                <imageView width="27" height="40" alignment="left" verticalAlignment="center" image="dicApp-2-no-back-180" id="iBe-DB-CbP"/>
+                                <imageView width="27" height="40" alignment="left" verticalAlignment="center" image="dicApp-2-no-back-180wD" id="iBe-DB-CbP"/>
                                 <group width="1" alignment="left" layout="vertical" id="P1c-c9-fv7">
                                     <items>
                                         <label width="1" alignment="left" text="Day" minimumScaleFactor="0.80000000000000004" id="cTA-z6-QgJ" userLabel="Day">
@@ -1505,7 +1505,7 @@
                                 <button width="10" alignment="left" enabled="NO" id="sKA-ew-2eo">
                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </button>
-                                <button width="27" height="40" alignment="center" backgroundImage="dicApp-2-no-back-180" id="1ll-jc-GTB">
+                                <button width="27" height="40" alignment="center" backgroundImage="dicApp-2-no-back-180wD" id="1ll-jc-GTB">
                                     <connections>
                                         <action selector="buttonMic" destination="RwQ-qV-CJ3" id="Tss-BW-toL"/>
                                     </connections>
@@ -1680,7 +1680,7 @@
                                 <button width="10" alignment="left" enabled="NO" id="U32-s9-wIl">
                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </button>
-                                <button width="27" height="40" alignment="center" backgroundImage="dicApp-2-no-back-180" id="i2N-zE-eNi">
+                                <button width="27" height="40" alignment="center" backgroundImage="dicApp-2-no-back-180wD" id="i2N-zE-eNi">
                                     <connections>
                                         <action selector="buttonMic" destination="dLF-pS-Q8g" id="CCG-YU-yKE"/>
                                     </connections>
@@ -1850,7 +1850,7 @@
                                 <button alignment="left" id="AcP-Ok-6IJ" userLabel="SubInfo">
                                     <group key="contentGroup" width="1" alignment="left" id="bNg-uN-g6b">
                                         <items>
-                                            <imageView width="26.666640000000001" height="45.332880000000003" alignment="left" verticalAlignment="center" image="dicApp-2-no-back-180" contentMode="scaleAspectFill" id="49g-bP-bq0"/>
+                                            <imageView width="26.666640000000001" height="45.332880000000003" alignment="left" verticalAlignment="center" image="dicApp-2-no-back-180wD" contentMode="scaleAspectFill" id="49g-bP-bq0"/>
                                             <group width="100" alignment="left" id="LX3-7U-jWF">
                                                 <items>
                                                     <label width="100" alignment="center" text="Click Note, or here, to Dictate a new Note" textAlignment="left" numberOfLines="10" id="dnZ-Yx-TMf">

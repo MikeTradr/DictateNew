@@ -93,7 +93,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
             
          //   modularLargeTemplate.body2TextProvider = CLKTextProvider.text
 
-            modularLargeTemplate.body2TextProvider?.tintColor = UIColor.yellowColor()
+            modularLargeTemplate.tintColor = UIColor.yellowColor()
             
             print("w91 headerText: \(headerText)")
             print("w92 body1Text: \(body1Text)")

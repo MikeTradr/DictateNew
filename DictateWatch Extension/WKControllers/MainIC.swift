@@ -17,7 +17,9 @@ import EventKit
 import WatchConnectivity
 
 
-class MainIC: WKInterfaceController, WCSessionDelegate {
+//class MainIC: WKInterfaceController, WCSessionDelegate {
+class MainIC: WKInterfaceController, DataSourceChangedDelegate {
+
     
     //let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
     var defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
@@ -168,7 +170,7 @@ class MainIC: WKInterfaceController, WCSessionDelegate {
         let str2:String = str4
         
         //var suggestionArray:[String] = []
-        let suggestionArray = [str, str1, str2]       //TODO Comment out for non-testing
+        let suggestionArray = [str4, str1, str2]       //TODO Comment out for non-testing
         
         var phone       = defaults.stringForKey("phone")
         var alert       = defaults.objectForKey("defaultEventAlert") as? Double //added defualt 112715
@@ -1033,6 +1035,8 @@ class MainIC: WKInterfaceController, WCSessionDelegate {
         // This method is called when watch view controller is about to be visible to user
         NSLog("%@ w671 MainIC willActivate", self)
         print("w672 in MainIC willActivate")
+        
+        WatchSessionManager.sharedManager.addDataSourceChangedDelegate(self)
         
         //make Calendar's List Array
         ReminderManager.sharedInstance.createCalendarArray()

@@ -62,7 +62,7 @@ class EventManager: NSObject {
             }
         }
     }
-/*
+
     func createEvent() {
         
         getAccessToEventStoreForType(EKEntityType.Event, completion: { (granted) -> Void in
@@ -72,9 +72,9 @@ class EventManager: NSObject {
                 
                 print("p18 WE HERE func createEvent")
                 
-                var store : EKEventStore = EKEventStore()               // this old delete?  TODO
+                var store: EKEventStore = EKEventStore()               // this old delete?  TODO
                 
-                var eventStore : EKEventStore = EKEventStore()
+                var eventStore: EKEventStore = EKEventStore()
                 
                 let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
 
@@ -401,12 +401,25 @@ class EventManager: NSObject {
                             
                             let result: Bool
                             do {
-                                try eventStore.saveEvent(event, span: EKSpan.ThisEvent)
+                                
+                                try eventStore.saveEvent(event, span: .ThisEvent, commit: true)
+                                
+                              //  try eventStore.saveEvent(event, span: EKSpan.ThisEvent)
                                 result = true
                                 print("p350 Successfully saved '\(event.title)' to '\(event.calendar.title)' calendar.")
                             } catch  let error as NSError{
                                 result = false
                                 print("p353 Saving event to Calendar failed with error: \(error.description)")
+                                
+                                let alert = UIAlertController(title: "Event could not save", message: (error as NSError).localizedDescription, preferredStyle: .Alert)
+                                let OKAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                                alert.addAction(OKAction)
+                                
+                                
+                            //TODO fix this present VC to teh VC class calling
+                           //     self.presentViewController(alert, animated: true, completion: nil)
+                                
+                                
                             }  // Commits changes and allows saveEvent to change error from nil
                             
                         }
@@ -428,7 +441,7 @@ class EventManager: NSObject {
         })
         
     }
- */
+
     
     
     func fetchEventsFrom(startDate:NSDate,endDate:NSDate,completion:([EKEvent])->Void) {

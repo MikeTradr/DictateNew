@@ -122,7 +122,7 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
     
     /// Default WatchConnectivity session for communicating with the phone.
     //let session = WCSession.defaultSession()
-    
+/*
     var session: WCSession? {
         didSet {
             if let session = session {
@@ -131,7 +131,7 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
             }
         }
     }
-
+*/
 
 //#### functions #################################
     
@@ -644,9 +644,10 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
             let message = [
                 "m": "😀Watch)"
             ]
-            session!.sendMessage(message, replyHandler: { replyDict in
-                }, errorHandler: { error in
-            })
+            
+ //           session!.sendMessage(message, replyHandler: { replyDict in
+ //               }, errorHandler: { error in
+ //           })
             
             
             
@@ -662,7 +663,8 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
         case "Event":
             print("w568 in Event Switch")
             
- //FIXWC            EventManager().createEvent()
+ //FIXWC
+            EventManager().createEvent()
             
             self.labelCreated.setText("Event created on your \(calendarName.capitalizedString) calendar!")
 
@@ -1060,8 +1062,10 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
     
     override func didDeactivate() {
         // This method is called when watch view controller is no longer visible
-        super.didDeactivate()
         
+        WatchSessionManager.sharedManager.removeDataSourceChangedDelegate(self)
+
+        super.didDeactivate()
         
     }
     

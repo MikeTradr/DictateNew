@@ -53,7 +53,6 @@
 		D31BF3491CDAC31D00521A65 /* FavoritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D98AF31BA54D5B00BA1901 /* FavoritesManager.swift */; };
 		D31BF3551CDBAA8900521A65 /* WatchGeneral.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31BF3531CDBAA8500521A65 /* WatchGeneral.swift */; };
 		D31BF3591CDBE70400521A65 /* EventManagerSave.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31BF3581CDBE70400521A65 /* EventManagerSave.swift */; };
-		D31BF35A1CDBF66100521A65 /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38653F61BAA02F400B8CCBC /* EventManager.swift */; };
 		D31BF35C1CDBF71F00521A65 /* ReminderManagerSave.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31BF35B1CDBF71F00521A65 /* ReminderManagerSave.swift */; };
 		D31BF35E1CDE1BFE00521A65 /* ConnectivityPhoneManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31BF35D1CDE1BFE00521A65 /* ConnectivityPhoneManager.swift */; };
 		D31BF35F1CDE792000521A65 /* ReminderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF818621B84FAB70087ECAD /* ReminderManager.swift */; };
@@ -1132,7 +1131,6 @@
 				D36BCA1E1D107CC6005DF193 /* ShowRemindersTableRC.swift in Sources */,
 				D36BCA181D107CAF005DF193 /* DefaultCalendarListTableRC.swift in Sources */,
 				D31BF3421CDAC2FC00521A65 /* ReminderCode.swift in Sources */,
-				D31BF35A1CDBF66100521A65 /* EventManager.swift in Sources */,
 				D31BF3551CDBAA8900521A65 /* WatchGeneral.swift in Sources */,
 				D31BF3121CDAB93700521A65 /* NotificationController.swift in Sources */,
 				D36BCA151D107CA4005DF193 /* ReminderListPickerIC.swift in Sources */,

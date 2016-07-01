@@ -74,7 +74,8 @@ class SetCalendarIC: WKInterfaceController {
         print("-----------------------------------------")
         
         eventID = context as! String
-        event = EventManager.sharedInstance.eventStore.eventWithIdentifier(eventID)!
+        //FIXME:7
+//        event = EventManager.sharedInstance.eventStore.eventWithIdentifier(eventID)!
         print("w168: event \(event)")
         
         //TODO Anil TODO Mike needed? or willActivate instead?

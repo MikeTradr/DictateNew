@@ -2065,9 +2065,10 @@ class DictateCode: NSObject {
                 if defaults.stringForKey("defaultCalendarID") != "" {
                     if let defaultCalendarID  = defaults.stringForKey("defaultCalendarID") {
                         
-                        if let calendar:EKCalendar = EventManager.sharedInstance.getCalendar(defaultCalendarID) {
-                            calendarName = calendar.title
-                        }
+                        //FIXME:2
+//                        if let calendar:EKCalendar = EventManager.sharedInstance.getCalendar(defaultCalendarID) {
+//                            calendarName = calendar.title
+//                        }
                     }
                 }
 

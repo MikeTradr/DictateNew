@@ -57,10 +57,11 @@ class TodayIC: WKInterfaceController {
         print("w46 startDate: \(startDate)")
         print("w46 endDate: \(endDate)")
         
-        EventManager.sharedInstance.fetchEventsFrom(startDate, endDate: endDate, completion: { (events) -> Void in
-            self.allEvents = events
-            //self.loadTableData()
-        })
+        //FIXME:4
+//        EventManager.sharedInstance.fetchEventsFrom(startDate, endDate: endDate, completion: { (events) -> Void in
+//            self.allEvents = events
+//            //self.loadTableData()
+//        })
         
         print("w56 self.allEvents: \(self.allEvents)")
         
@@ -120,12 +121,13 @@ class TodayIC: WKInterfaceController {
         //get Access to Events
         NSLog("%@ w70 appDelegate", self)
         print("w71 call getAccessToEventStoreForType")
-        EventManager.sharedInstance.getAccessToEventStoreForType(EKEntityType.Event, completion: { (granted) -> Void in
-            
-            if granted{
-                print("w75 Events granted: \(granted)")
-            }
-        })
+        //FIXME:9
+//        EventManager.sharedInstance.getAccessToEventStoreForType(EKEntityType.Event, completion: { (granted) -> Void in
+//            
+//            if granted{
+//                print("w75 Events granted: \(granted)")
+//            }
+//        })
         
         print("w95 context: \(context)")
        // showListsView = true

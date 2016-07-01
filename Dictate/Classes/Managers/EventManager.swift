@@ -402,7 +402,7 @@ class EventManager: NSObject {
                             let result: Bool
                             do {
                                 
-                                try eventStore.saveEvent(event, span: .ThisEvent, commit: true)
+                                try eventStore.saveEvent(event, span: .ThisEvent)
                                 
                               //  try eventStore.saveEvent(event, span: EKSpan.ThisEvent)
                                 result = true

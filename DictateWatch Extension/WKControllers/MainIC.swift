@@ -664,7 +664,8 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
             print("w568 in Event Switch")
             
  //FIXWC
-            EventManager().createEvent()
+            //FIXME:10
+//            EventManager().createEvent()
             
             self.labelCreated.setText("Event created on your \(calendarName.capitalizedString) calendar!")
 
@@ -1066,6 +1067,10 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
         WatchSessionManager.sharedManager.removeDataSourceChangedDelegate(self)
 
         super.didDeactivate()
+        
+    }
+    
+    func dataSourceDidUpdate(dataSource: DataSource){
         
     }
     

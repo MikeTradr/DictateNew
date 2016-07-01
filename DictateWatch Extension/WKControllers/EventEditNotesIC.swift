@@ -179,7 +179,8 @@ class EventEditNotesIC: WKInterfaceController {
 
         
         eventID = context as! String
-        event = EventManager.sharedInstance.eventStore.eventWithIdentifier(eventID)!
+        //FIXME:6
+//        event = EventManager.sharedInstance.eventStore.eventWithIdentifier(eventID)!
         print("w168: event \(event)")
         
         self.labelNotes.setText(event.notes)

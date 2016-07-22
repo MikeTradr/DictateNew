@@ -183,12 +183,12 @@ class ReminderListsIC: WKInterfaceController {
         NSLog("%@ w70 appDelegate", self)
         print("w71 call getAccessToEventStoreForType")
         //FIXME:6
-//        EventManager.sharedInstance.getAccessToEventStoreForType(EKEntityType.Event, completion: { (granted) -> Void in
-//            
-//            if granted{
-//                print("w75 Events granted: \(granted)")
-//            }
-//        })
+        EventManager.sharedInstance.getAccessToEventStoreForType(EKEntityType.Event, completion: { (granted) -> Void in
+            
+            if granted{
+                print("w75 Events granted: \(granted)")
+            }
+        })
         
         print("w65 context: \(context)")
         showListsView = true

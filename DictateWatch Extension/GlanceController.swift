@@ -72,10 +72,10 @@ class GlanceController: WKInterfaceController {
         print("w46 endDate: \(endDate)")
         
         //FIXME:1
-//        EventManager.sharedInstance.fetchEventsFrom(startDate, endDate: endDate, completion: { (events) -> Void in
-//            self.allEvents = events
-//            //self.loadTableData()
-//        })
+        EventManager.sharedInstance.fetchEventsFrom(startDate, endDate: endDate, completion: { (events) -> Void in
+            self.allEvents = events
+            //self.loadTableData()
+        })
         
         print("w56 self.allEvents: \(self.allEvents)")
         
@@ -135,12 +135,12 @@ class GlanceController: WKInterfaceController {
         NSLog("%@ w70 appDelegate", self)
         print("w71 call getAccessToEventStoreForType")
         //FIXME:8
-//        EventManager.sharedInstance.getAccessToEventStoreForType(EKEntityType.Event, completion: { (granted) -> Void in
-//            
-//            if granted{
-//                print("w75 Events granted: \(granted)")
-//            }
-//        })
+        EventManager.sharedInstance.getAccessToEventStoreForType(EKEntityType.Event, completion: { (granted) -> Void in
+            
+            if granted{
+                print("w75 Events granted: \(granted)")
+            }
+        })
         /*
          print("w65 context: \(context)")
          // showListsView = true

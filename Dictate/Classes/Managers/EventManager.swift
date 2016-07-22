@@ -62,7 +62,8 @@ class EventManager: NSObject {
             }
         }
     }
-
+/*  // moved to EventManagerSave as can't on Watch
+     
     func createEvent() {
         
         getAccessToEventStoreForType(EKEntityType.Event, completion: { (granted) -> Void in
@@ -442,7 +443,7 @@ class EventManager: NSObject {
         
     }
 
-    
+*/
     
     func fetchEventsFrom(startDate:NSDate,endDate:NSDate,completion:([EKEvent])->Void) {
         

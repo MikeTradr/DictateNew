@@ -94,6 +94,7 @@
 		D37374671D2547E1003F8D5C /* WatchSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37374661D2547E1003F8D5C /* WatchSessionManager.swift */; };
 		D37374691D254D71003F8D5C /* WatchSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37374681D254D71003F8D5C /* WatchSessionManager.swift */; };
 		D373746B1D254F1A003F8D5C /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D373746A1D254F1A003F8D5C /* DataSource.swift */; };
+		D373746C1D26B635003F8D5C /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38653F61BAA02F400B8CCBC /* EventManager.swift */; };
 		D3795E7A1B8DF927009D3DB5 /* SettingsEventTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3795E791B8DF927009D3DB5 /* SettingsEventTableViewController.swift */; };
 		D38653F71BAA02F400B8CCBC /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38653F61BAA02F400B8CCBC /* EventManager.swift */; };
 		D392FAD41B9B1BA800678B18 /* SettingsFriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D392FAD31B9B1BA800678B18 /* SettingsFriendsTableViewController.swift */; };
@@ -1126,6 +1127,7 @@
 			files = (
 				D31BF3401CDAC2DC00521A65 /* NuanceHeader.m in Sources */,
 				D31BF3341CDAC15F00521A65 /* EditEventDetailsIC.swift in Sources */,
+				D373746C1D26B635003F8D5C /* EventManager.swift in Sources */,
 				D36BCA171D107CAC005DF193 /* CalendarSettingsIC.swift in Sources */,
 				D3F8F9741D0B3DC600094101 /* MainIC.swift in Sources */,
 				D36BCA1E1D107CC6005DF193 /* ShowRemindersTableRC.swift in Sources */,

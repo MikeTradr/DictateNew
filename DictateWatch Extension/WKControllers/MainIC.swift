@@ -676,6 +676,10 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
             //FIXME:10
 //            EventManager().createEvent()
             
+            //FIXME TODO
+        //    EventManagerSave().createEvent()
+
+            
             self.labelCreated.setText("Event created on your \(calendarName.capitalizedString) calendar!")
 
             break;

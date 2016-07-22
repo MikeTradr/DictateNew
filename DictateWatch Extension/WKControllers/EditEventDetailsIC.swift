@@ -51,9 +51,9 @@ class EditEventDetailsIC: WKInterfaceController {
         print("w46 endDate: \(endDate)")
         
         //FIXME:3
-//        EventManager.sharedInstance.fetchEventsFrom(startDate, endDate: endDate, completion: { (events) -> Void in
-//            self.allEvents = events
-//        })
+        EventManager.sharedInstance.fetchEventsFrom(startDate, endDate: endDate, completion: { (events) -> Void in
+            self.allEvents = events
+        })
         
         print("w56 self.allEvents: \(self.allEvents)")
 
@@ -100,12 +100,12 @@ class EditEventDetailsIC: WKInterfaceController {
         NSLog("%@ w70 appDelegate", self)
         print("w71 call getAccessToEventStoreForType")
         //FIXME:5
-//        EventManager.sharedInstance.getAccessToEventStoreForType(EKEntityType.Event, completion: { (granted) -> Void in
-//            
-//            if granted{
-//                print("w75 Events granted: \(granted)")
-//            }
-//        })
+        EventManager.sharedInstance.getAccessToEventStoreForType(EKEntityType.Event, completion: { (granted) -> Void in
+            
+            if granted{
+                print("w75 Events granted: \(granted)")
+            }
+        })
         
         print("w65 context: \(context)")
        // showListsView = true

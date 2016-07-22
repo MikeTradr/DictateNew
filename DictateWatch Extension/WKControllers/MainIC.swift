@@ -20,6 +20,15 @@ import WatchConnectivity
 //class MainIC: WKInterfaceController, WCSessionDelegate {
 class MainIC: WKInterfaceController, DataSourceChangedDelegate {
 
+    var session: WCSession? {
+        didSet {
+            if let session = session {
+                session.delegate = self
+                session.activateSession()
+            }
+        }
+    }
+
     
     //let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
     var defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
@@ -1061,6 +1070,20 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
         
     }
     
+    override func didAppear() {
+        super.didAppear()
+        session = WCSession.defaultSession()
+        let messageDict = ["name" : "Anil","score":1]
+        session?.sendMessage(messageDict, replyHandler: { (response) in
+            
+            print("Message sent status: \(response["status"])")
+            
+            }, errorHandler: { (error) in
+                //handle error
+                print("error : \(error.localizedDescription)")
+        })
+    }
+
     override func didDeactivate() {
         // This method is called when watch view controller is no longer visible
         
@@ -1077,6 +1100,10 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
     //---- End Override functions ----------------------------------------
     
 }   // end InterfaceController
+
+extension MainIC: WCSessionDelegate {
+    
+}
 
 
 

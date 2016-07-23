@@ -695,7 +695,7 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
 
             session?.sendMessage(messageDict, replyHandler: { (response) in
                 
-                print("w1083 Message sent status: \(response["status"])")
+                print("w698 Message sent status: \(response["status"])")
                 
                 }, errorHandler: { (error) in
                     //handle error
@@ -796,7 +796,7 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
 */
      
         default:
-            print("p155 in default switch so assume Event")
+            print("w799 in default switch so assume Event")
             
  //FIXWC            EventManager().createEvent()
             
@@ -817,13 +817,13 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
         calendarName    = defaults.stringForKey("calendarName")!
         
         
-        print("p485 strRaw: \(strRaw)")
-        print("p485 output: \(output)")
-        print("p485 outputNote: \(outputNote)")
-        print("p485 fullDT: \(fullDT)")
-        print("p485 fullDTEnd: \(fullDTEnd)")
-        print("p485 calendarName: \(calendarName)")
-        print("p485 actionType: \(actionType)")
+        print("w820 strRaw: \(strRaw)")
+        print("w820 output: \(output)")
+        print("w820 outputNote: \(outputNote)")
+        print("w820 fullDT: \(fullDT)")
+        print("w820 fullDTEnd: \(fullDTEnd)")
+        print("w820 calendarName: \(calendarName)")
+        print("w820 actionType: \(actionType)")
         
         if (fullDT == "12-12-2014 12:00 AM") {      // set to "" for database
             fullDT = ""
@@ -847,7 +847,7 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
 */
         //TODO get these two fields from code!
         //TODO see here:
-        print("p478 Device and Phone munber in here: \(NSUserDefaults.standardUserDefaults().dictionaryRepresentation())")
+      //  print("p478 Device and Phone munber in here: \(NSUserDefaults.standardUserDefaults().dictionaryRepresentation())")
      /* ////commented for new watchExtension 040516
         let uuid = UIDevice.currentDevice().identifierForVendor!.UUIDString
         let device = UIDevice.currentDevice().model
@@ -873,15 +873,15 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
   //      print("p822 uuid: \(uuid)")
   //      print("p822 device: \(device)")
   //      print("p822 systemVersion: \(systemVersion)")
-        print("p822 modelName: \(modelName)")
-        print("p822 memory: \(memory)")
+        print("w876 modelName: \(modelName)")
+        print("w876 memory: \(memory)")
    //     print("p822 carrierName: \(carrierName)")
         
         
        // let deviceComplete = "\(modelName) - \(memory) GB"    //was memory I desired capacity on phones.
         let deviceComplete = "\(modelName)"
         
-        print("p822 deviceComplete: \(deviceComplete)")
+        print("w884 deviceComplete: \(deviceComplete)")
         
 //FIXWC
 /*
@@ -992,7 +992,7 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
 */
         cleardata()
         
-        print("w593 we here?")
+        print("w995 we here?")
         
         WatchGeneral().delay(3.0) {          // do stuff
             self.myLabel.setTextColor(UIColor.yellowColor())
@@ -1058,8 +1058,8 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         // Configure interface objects here.
-        NSLog("%@ w657 MainIC awakeWithContext", self)
-        print("w658 in MainIC awakeWithContext")
+        NSLog("%@ w1061 MainIC awakeWithContext", self)
+        print("w1062 in MainIC awakeWithContext")
      
         self.setTitle("Dictate™")
         self.myLabel.setTextColor(UIColor.yellowColor())
@@ -1076,8 +1076,8 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
 //===== willActivate ==================================================
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
-        NSLog("%@ w671 MainIC willActivate", self)
-        print("w672 in MainIC willActivate")
+        NSLog("%@ w1079 MainIC willActivate", self)
+        print("w1080 in MainIC willActivate")
         
         WatchSessionManager.sharedManager.addDataSourceChangedDelegate(self)
         
@@ -1106,12 +1106,9 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
         session = WCSession.defaultSession()
         let messageDict = ["name" : "Anil","score":1]
         
-        
-        
-        
         session?.sendMessage(messageDict, replyHandler: { (response) in
             
-            print("w1083 Message sent status: \(response["status"])")
+            print("w1114 Message sent status: \(response["status"])")
             
             }, errorHandler: { (error) in
                 //handle error

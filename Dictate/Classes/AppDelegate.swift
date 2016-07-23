@@ -288,8 +288,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     
-
-    
+ 
 }
 
 
@@ -298,17 +297,17 @@ extension AppDelegate: WCSessionDelegate {
     
     func session(session: WCSession, didReceiveMessage message: [String : AnyObject], replyHandler: ([String : AnyObject]) -> Void) {
         if let name = message["name"] as? String {
-            
             print("p302 Received data: \(name)")
         }
-        
+     
         if let action = message["action"] as? String {
-            
             print("p307 Received data: \(action)")
             
-            EventManagerSave()
+            if action == "CreateEvent" {
+                 EventManagerSave()
+            }
+           
         }
-        
         
         replyHandler(["status":"Success"])
     }

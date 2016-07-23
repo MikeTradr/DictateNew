@@ -62,8 +62,8 @@ class EventManager: NSObject {
             }
         }
     }
-/*  // moved to EventManagerSave as can't on Watch
-     
+  // moved to EventManagerSave as can't on Watch
+ /*
     func createEvent() {
         
         getAccessToEventStoreForType(EKEntityType.Event, completion: { (granted) -> Void in

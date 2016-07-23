@@ -2227,8 +2227,6 @@ class DictateCode: NSObject {
             defaults.setObject(calendarName, forKey: "calendarName")
             defaults.setObject(eventDuration, forKey: "eventDuration")
             defaults.setObject(eventAlert, forKey: "eventAlert")
-
-                
             // TODO  not used yet we see!
             let eventRepeat = eventRepeatInterval
             defaults.setObject(eventRepeat, forKey: "eventRepeat")  //sets repeat interval for Events

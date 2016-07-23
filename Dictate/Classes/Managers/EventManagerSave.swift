@@ -12,13 +12,13 @@ import EventKit
 
 
 class EventManagerSave: NSObject {
-    class var sharedInstance : EventManager {
+    class var sharedInstance : EventManagerSave {
         struct Static {
             static var onceToken : dispatch_once_t = 0
-            static var instance : EventManager? = nil
+            static var instance : EventManagerSave? = nil
         }
         dispatch_once(&Static.onceToken) {
-            Static.instance = EventManager()
+            Static.instance = EventManagerSave()
         }
         return Static.instance!
     }

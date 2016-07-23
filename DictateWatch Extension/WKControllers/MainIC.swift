@@ -678,6 +678,33 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
             
             //FIXME TODO
         //    EventManagerSave().createEvent()
+            
+            
+            session = WCSession.defaultSession()
+            
+            // to make event: (startDT, endDT, output, outputNote, day, calendarName, actionType)
+            // TODO? what about duration? repeat? Location? 
+            // [“title”:”asnjfd”, ”time”:”7am” ]
+            
+            //let messageDict = ["name":"Anil", "startDT":startDT, "endDT":endDT, "output":output, "calendarName":calendarName, "actionType":actionType]
+            
+            let messageDict = ["action":"CreateEvent"]
+        
+            
+            print("w693 messageDict: \(messageDict)")
+
+            session?.sendMessage(messageDict, replyHandler: { (response) in
+                
+                print("w1083 Message sent status: \(response["status"])")
+                
+                }, errorHandler: { (error) in
+                    //handle error
+                    print("error : \(error.localizedDescription)")
+            })
+            
+            
+            
+            
 
             
             self.labelCreated.setText("Event created on your \(calendarName.capitalizedString) calendar!")
@@ -1078,9 +1105,13 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
         super.didAppear()
         session = WCSession.defaultSession()
         let messageDict = ["name" : "Anil","score":1]
+        
+        
+        
+        
         session?.sendMessage(messageDict, replyHandler: { (response) in
             
-            print("Message sent status: \(response["status"])")
+            print("w1083 Message sent status: \(response["status"])")
             
             }, errorHandler: { (error) in
                 //handle error

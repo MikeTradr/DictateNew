@@ -54,6 +54,11 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
     var outputNote:String       = ""
     var day:String              = ""
     
+    var eventLocation:String    = ""
+   // var eventRepeat:String      = ""
+    var eventRepeat:Int         = 0
+
+    
    // var labelCreated:String     = ""
     
     //var player: WKAudioFilePlayer!
@@ -113,9 +118,9 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
 
     var alert       = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!.objectForKey("defaultEventAlert") as? Double //added defualt 112715
 
-    let eventRepeat      = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!.stringForKey("defaultEventRepeat") //added defualt 112715
+//    let eventRepeat      = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!.stringForKey("defaultEventRepeat") //added defualt 112715
     
-    let eventLocation      = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!.stringForKey("evetnLocation")
+ //   let eventLocation      = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!.stringForKey("evetnLocation")
     
     var output      = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!.stringForKey("output") ?? ""
     
@@ -184,7 +189,7 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
         var phone       = defaults.stringForKey("phone")
         var alert       = defaults.objectForKey("defaultEventAlert") as? Double //added defualt 112715
         let duration    = defaults.stringForKey("defaultEventDuration")         //added defualt 112715
-        let eventRepeat = defaults.stringForKey("eventRepeat")
+    //    let eventRepeat = defaults.stringForKey("eventRepeat")
         let strRaw      = defaults.stringForKey("strRaw")
         var reminderTitle   = defaults.stringForKey("title") ?? ""
         var wordArrTrimmed  = defaults.objectForKey("wordArrTrimmed") as? [String] ?? [] //array of the items
@@ -245,7 +250,7 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
             
             if results != nil {
                 
-                let (startDT, endDT, output, outputNote, day, calendarName, actionType) = DictateCode().parse(self.str)
+                let (startDT, endDT, output, outputNote, day, calendarName, actionType, duration, alert, eventLocation, eventRepeat) = DictateCode().parse(self.str)
                 
                 print("w200Main ==================================")
                 print("w200Main startDT: \(startDT)")
@@ -260,6 +265,7 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
                 print("w200Main phone: \(phone)")
                 print("w200Main duration: \(duration)")
                 print("w200Main alert: \(alert)")
+                print("w200Main alert: \(eventLocation)")
                 print("w200Main eventRepeat: \(eventRepeat)")
                 print("w200Main strRaw: \(strRaw)")
                 print("w200Main mainType: \(mainType)")
@@ -295,7 +301,10 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
                 self.startDT    = startDT
                 self.endDT      = endDT
                 self.output     = output
-                self.outputNote = outputNote
+               // self.outputNote = outputNote
+                //bombed simulator nil
+                self.outputNote = output
+                
                 self.day        = day
                 self.calendarName = calendarName
                 
@@ -362,7 +371,7 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
                     self.buttonGrAlarm.setHidden(false)
                 }
                 
-                if (self.eventRepeat == "0" || self.eventRepeat == nil) {
+                if (self.eventRepeat == 0) {
                     self.resultRepeat.setText("")
                     self.buttonGrRepeat.setHidden(true)
                 } else {
@@ -370,7 +379,7 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
                     self.buttonGrRepeat.setHidden(false)
                 }
                 
-                let eventLocation: String = self.defaults.stringForKey("eventLocation") ?? ""
+        //        let eventLocation: String = self.defaults.stringForKey("eventLocation") ?? ""
             
                 if (self.eventLocation == "") {
                     self.resultLocation.setText("")
@@ -690,7 +699,6 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
             
             let messageDict = ["action":"CreateEvent"]
         
-            
             print("w693 messageDict: \(messageDict)")
 
             session?.sendMessage(messageDict, replyHandler: { (response) in

@@ -70,6 +70,8 @@ class DictateCode: NSObject {
     var userAlert:Int = 0
     //var eventAlert:Double       = 0
     var eventRepeatInterval:Int = 0
+    var eventRepeat:Int         = 0
+   // var duration:Int            = 0
     
     var numberWordArray:[String] = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"]
     
@@ -122,10 +124,10 @@ class DictateCode: NSObject {
         return wordArr
     }
 
-
+//  startDT, endDT, output, outputNote, day, calendarName, actionType, duration, alert, eventLocation, eventRepeat
     
-    func parse (str: String) -> (NSDate, NSDate, String, String, String, String, String) {
-        //returning startDT, endDT, output, outputNote, day, calendarName, eventDuration, actionType
+    func parse (str: String) -> (NSDate, NSDate, String, String, String, String, String, Int, Int, String, Int) {
+        //returning startDT, endDT, output, outputNote, day, calendarName, eventDuration, actionType, duration, alert, eventLocation, eventRepeat
         
         var wordArr:[String]        = []
         
@@ -145,7 +147,7 @@ class DictateCode: NSObject {
         
         defaults.setObject(actionType, forKey: "actionType")        //sets actionType for processing
         defaults.setObject(mainType, forKey: "mainType")            //sets mainType
-       // defaults.setObject(eventDuration, forKey: "eventDuration")
+        defaults.setObject(eventDuration, forKey: "eventDuration")
         defaults.setObject(wordArrTrimmed, forKey: "wordArrTrimmed")
         defaults.setObject(eventLocation, forKey: "eventLocation")
 
@@ -224,8 +226,10 @@ class DictateCode: NSObject {
                 defaults.setObject(reminderTitle, forKey: "calendarName")   //sets title to calendarName for ParseDB
                 
                 defaults.setObject(wordArrTrimmed, forKey: "wordArrTrimmed")            //sets reminderItems
-
-                return (startDT, endDT, output, outputNote, day, calendarName, actionType)
+                
+                return (startDT, endDT, output, outputNote, day, calendarName, actionType, duration, alert, eventLocation, eventRepeat)
+                
+                
                 
 // ____ end IF comma in string ____________________________________
                 
@@ -1896,6 +1900,7 @@ class DictateCode: NSObject {
                         
                         print("p931 returnValue: \(returnValue)")
                         eventRepeatInterval = returnValue   // 1 = daily, 2 = weekly, 3 = monthly, 4 = yearly,  99 = none
+
                     }
                     
                 } else {
@@ -2213,67 +2218,66 @@ class DictateCode: NSObject {
                 }
                 
           
-            //Save vales to NSUserDefaults...
+                //Save vales to NSUserDefaults...
 
-            defaults.setObject(actionType, forKey: "actionType")
-            defaults.setObject(startDT, forKey: "startDT")
-            defaults.setObject(endDT, forKey: "endDT")
-            defaults.setObject(allDayFlag, forKey: "allDayFlag")
-            defaults.setObject(mainType, forKey: "mainType")
-            defaults.setObject(phone, forKey: "phone")
-            defaults.setObject(output, forKey: "output")
-            defaults.setObject(outputNote, forKey: "outputNote")
-            defaults.setObject(day, forKey: "day")
-            defaults.setObject(calendarName, forKey: "calendarName")
-            defaults.setObject(eventDuration, forKey: "eventDuration")
-            defaults.setObject(eventAlert, forKey: "eventAlert")
-            // TODO  not used yet we see!
-            let eventRepeat = eventRepeatInterval
-            defaults.setObject(eventRepeat, forKey: "eventRepeat")  //sets repeat interval for Events
+                defaults.setObject(actionType, forKey: "actionType")
+                defaults.setObject(startDT, forKey: "startDT")
+                defaults.setObject(endDT, forKey: "endDT")
+                defaults.setObject(allDayFlag, forKey: "allDayFlag")
+                defaults.setObject(mainType, forKey: "mainType")
+                defaults.setObject(phone, forKey: "phone")
+                defaults.setObject(output, forKey: "output")
+                defaults.setObject(outputNote, forKey: "outputNote")
+                defaults.setObject(day, forKey: "day")
+                defaults.setObject(calendarName, forKey: "calendarName")
+                defaults.setObject(eventDuration, forKey: "eventDuration")
+                defaults.setObject(eventAlert, forKey: "eventAlert")
+                // TODO  not used yet we see!
+                eventRepeat = eventRepeatInterval
+                defaults.setObject(eventRepeat, forKey: "eventRepeat")          //sets repeat interval for Events
+                defaults.setObject(eventLocation, forKey: "eventLocation")      //sets Location for Events
+                defaults.setObject(allDayFlag, forKey: "allDayFlag")            //sets allDayFlag for Events
+                    
+                defaults.synchronize() // from Rob course
                 
-            defaults.synchronize() // from Rob course
-            
-            // Not for extension saveToDatabase()    // save data to database call function
+                // Not for extension saveToDatabase()    // save data to database call function
+                    
+                print("pDictated ===================================")
+                print("pDictated day: \(day)")
+                print("pDictated phone: \(phone)")
+                print("pDictated startDT: \(startDT)")
+                print("pDictated endDT: \(endDT)")
+                print("pDictated output: \(output)")
+                print("pDictated outputNote: \(outputNote)")
+                print("pDictated duration: \(duration)")
+                print("pDictated calandarName: \(calendarName)")
+                print("pDictated alert: \(alert)")
+                print("pDictated eventAlert: \(eventAlert)")
+                print("pDictated eventRepeat: \(eventRepeat)")
+                print("pDictated strRaw: \(strRaw)")
+                print("pDictated eventLocation: \(eventLocation)")
                 
-            print("pDictated ===================================")
-            print("pDictated day: \(day)")
-            print("pDictated phone: \(phone)")
-            print("pDictated startDT: \(startDT)")
-            print("pDictated endDT: \(endDT)")
-            print("pDictated output: \(output)")
-            print("pDictated outputNote: \(outputNote)")
-            print("pDictated duration: \(duration)")
-            print("pDictated calandarName: \(calendarName)")
-            print("pDictated alert: \(alert)")
-            print("pDictated eventRepeat: \(eventRepeat)")
-            print("pDictated strRaw: \(strRaw)")
-            print("pDictated eventLocation: \(eventLocation)")
-            
-            print("pDictated mainType: \(mainType)")
-            print("pDictated actionType: \(actionType)")
-            
-            print("pDictated reminderTitle: \(reminderTitle)")
-            print("pDictated wordArrTrimmed: \(wordArrTrimmed)")
-            print("pDictated reminderList: \(reminderList)")
-            print("pDictated reminderArray: \(reminderArray)")
-            print("pDictated reminderAlarm: \(reminderAlarm)")
-            
-            print("pDictated allDayFlag: \(allDayFlag)")
-            print("pDictated timeString: \(timeString)")
-            
-            print("pDictated defaultCalendarID: \(defaultCalendarID)")       //defaultCalendarID
-            print("pDictated defaultReminderID: \(defaultReminderID)")       //defaultReminderID
-            print("pDictated processNow: \(processNow)")                     //processNow Bool
-            
-            print("pDictated end =================================")
+                print("pDictated mainType: \(mainType)")
+                print("pDictated actionType: \(actionType)")
                 
+                print("pDictated reminderTitle: \(reminderTitle)")
+                print("pDictated wordArrTrimmed: \(wordArrTrimmed)")
+                print("pDictated reminderList: \(reminderList)")
+                print("pDictated reminderArray: \(reminderArray)")
+                print("pDictated reminderAlarm: \(reminderAlarm)")
                 
+                print("pDictated allDayFlag: \(allDayFlag)")
+                print("pDictated timeString: \(timeString)")
                 
+                print("pDictated defaultCalendarID: \(defaultCalendarID)")       //defaultCalendarID
+                print("pDictated defaultReminderID: \(defaultReminderID)")       //defaultReminderID
+                print("pDictated processNow: \(processNow)")                     //processNow Bool
                 
-                
+                print("pDictated end =================================")
                 
                 
-            return (startDT, endDT, output, outputNote, day, calendarName, actionType)
+                return (startDT, endDT, output, outputNote, day, calendarName, actionType, duration, alert, eventLocation, eventRepeat)
+
            
             }  // end else space deliminated string
             
@@ -2286,18 +2290,7 @@ class DictateCode: NSObject {
         }       //end func str != 0
         
    
-        
-        
-        
-        
-        
-        
 
-        
-        
-        
-        
-        
         
         
         if (str == "") {                                                       // if str != ""
@@ -2305,14 +2298,16 @@ class DictateCode: NSObject {
             //cleardata()
             
             if (startDT != NSDate(dateString:"2014-12-12") ) {
-                return (startDT, endDT, output, outputNote, day, calendarName, actionType)
+                return (startDT, endDT, output, outputNote, day, calendarName, actionType, duration, alert, eventLocation, eventRepeat)
             } else {
-                return (NSDate(dateString:"2014-12-12"), NSDate(dateString:"2014-12-12"), output, outputNote, day, calendarName, actionType)
+                return (NSDate(dateString:"2014-12-12"), NSDate(dateString:"2014-12-12"), output, outputNote, day, calendarName, actionType, duration, alert, eventLocation, eventRepeat)
+
                 
             }
         }
         
-        return (NSDate(dateString:"2014-12-12"), NSDate(dateString:"2014-12-12"), output, outputNote, day, calendarName, actionType)
+        return (NSDate(dateString:"2014-12-12"), NSDate(dateString:"2014-12-12"), output, outputNote, day, calendarName, actionType, duration, alert, eventLocation, eventRepeat)
+
         
     } // end func parse
     

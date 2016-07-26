@@ -110,7 +110,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
             modularSmallTemplate.imageProvider = CLKImageProvider(onePieceImage: imageName)
             template = modularSmallTemplate
             
-            handler(modularSmallTemplate)
+            handler(template)
 
          /*
             
@@ -137,9 +137,8 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         
         default:
             template = nil
-        
-        handler (template)
         }
+        handler (template)
     }
     
     // MARK: - Auxiliary methods: Composing templates for timeline entries

@@ -318,10 +318,10 @@ class EventCode: NSObject {
                 
 
  
-                print("p862 output: \(output)")
-                print("p863 startDT: \(startDT)")
-                print("p864 endDT: \(endDT)")
-                print("p865 from func endDate: \(endDate)")
+                print("p321 output: \(output)")
+                print("p322 startDT: \(startDT)")
+                print("p323 endDT: \(endDT)")
+                print("p324 from func endDate: \(endDate)")
                 
                 event.title = output!
                 event.startDate = startDT

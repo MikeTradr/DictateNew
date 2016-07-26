@@ -189,6 +189,8 @@ class EventManagerSave: NSObject {
                         
                         //add IF here to check that calendarName is not nil and present dialog?
                         
+                        print("p119 calendarName = \(calendarName)")
+
                         print("p120 calendarName.lowercaseString = \(calendarName!.lowercaseString)")
                         
                         if calendar.title.lowercaseString == calendarName!.lowercaseString {     //need match here to create event on calendar!!!
@@ -378,9 +380,9 @@ class EventManagerSave: NSObject {
                             
                             
                             
-                            print("p862 output: \(output)")
-                            print("p863 startDT: \(startDT)")
-                            print("p864 endDT: \(endDT)")
+                            print("p381 output: \(output)")
+                            print("p382 startDT: \(startDT)")
+                            print("p383 endDT: \(endDT)")
                           //  print("p865 from func endDate: \(endDate)")
                             
                             event.title = output!

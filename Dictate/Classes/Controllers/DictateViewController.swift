@@ -134,25 +134,6 @@ let str60:String = "email mike this is a test message"
 let str61:String = "7 pm See Band location Capital Brewery"
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //BOMBS test n fix Mike TODO MIKE, from Siri
 
 let str100:String = "Thursday 12 PM meet lunch with Rob calendar Mike duration one hour alert one hour"
@@ -439,7 +420,8 @@ class DictateViewController: UIViewController, UITextFieldDelegate, MFMailCompos
     }
     
     func Process(str: String) {
-        let (startDT, endDT, output, outputNote, day, calendarName, actionType) = DictateCode().parse(str)
+        let (startDT, endDT, output, outputNote, day, calendarName, actionType, duration, alert, eventLocation, eventRepeat)
+ = DictateCode().parse(str)
         self.tabBarController?.selectedIndex = 1
         self.enteredText2.text = ""      // set to blank for return
     }
@@ -507,7 +489,7 @@ class DictateViewController: UIViewController, UITextFieldDelegate, MFMailCompos
             
             print("p432 we here???? lastElement: \(lastElement)")
 
-            let (startDT, endDT, output, outputNote, day, calendarName, actionType) = DictateCode().parse(str)
+            let (startDT, endDT, output, outputNote, day, calendarName, actionType, duration, alert, eventLocation, eventRepeat) = DictateCode().parse(str)
             
             print("p449 we here????: \(lastElement)")
             
@@ -529,7 +511,7 @@ class DictateViewController: UIViewController, UITextFieldDelegate, MFMailCompos
         switch (firstElement) {
             case "call", "phone":
                 self.actionType = "Call"
-                let (startDT, endDT, output, outputNote, day, calendarName, actionType) = DictateCode().parse(str)
+                let (startDT, endDT, output, outputNote, day, calendarName, actionType, duration, alert, eventLocation, eventRepeat) = DictateCode().parse(str)
                 General().delay(1.5) {  // delay to show text in dialog
                     self.buttonProcess(self)
                 }
@@ -537,7 +519,7 @@ class DictateViewController: UIViewController, UITextFieldDelegate, MFMailCompos
             
             case "text", "message":
                 self.actionType = "Text"
-                let (startDT, endDT, output, outputNote, day, calendarName, actionType) = DictateCode().parse(str)
+                let (startDT, endDT, output, outputNote, day, calendarName, actionType, duration, alert, eventLocation, eventRepeat) = DictateCode().parse(str)
                 General().delay(1.5) {  // delay to show text in dialog
                     self.buttonProcess(self)
                 }
@@ -545,7 +527,7 @@ class DictateViewController: UIViewController, UITextFieldDelegate, MFMailCompos
             
             case "mail", "email":
                 self.actionType = "Mail"
-                let (startDT, endDT, output, outputNote, day, calendarName, actionType) = DictateCode().parse(str)
+                let (startDT, endDT, output, outputNote, day, calendarName, actionType, duration, alert, eventLocation, eventRepeat) = DictateCode().parse(str)
                 General().delay(1.5) {  // delay to show text in dialog
                     self.buttonProcess(self)
                 }
@@ -841,7 +823,7 @@ class DictateViewController: UIViewController, UITextFieldDelegate, MFMailCompos
         
         // CALL main parsing of string...  Only call this here once! Check TODO Mike...
         
-        let (startDT, endDT, output, outputNote, day, calendarName, actionType) = DictateCode().parse(str)
+        let (startDT, endDT, output, outputNote, day, calendarName, actionType, duration, alert, eventLocation, eventRepeat) = DictateCode().parse(str)
         
         removeKeyboard()
 

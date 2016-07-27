@@ -706,11 +706,11 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
             
             let messageDict = ["action":"CreateEvent"]
         
-            print("w693 messageDict: \(messageDict)")
+            print("w709 messageDict: \(messageDict)")
 
             session?.sendMessage(messageDict, replyHandler: { (response) in
                 
-                print("w698 Message sent status: \(response["status"])")
+                print("w713 Message sent status: \(response["status"])")
                 
                 }, errorHandler: { (error) in
                     //handle error

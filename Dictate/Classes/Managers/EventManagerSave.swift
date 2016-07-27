@@ -70,7 +70,7 @@ class EventManagerSave: NSObject {
             if granted{
                 let calendars = self.eventStore.calendarsForEntityType(EKEntityType.Event)
                 
-                print("p18 WE HERE func createEvent")
+                print("p73 WE HERE func createEvent")
                 
                 var store : EKEventStore = EKEventStore()               // this old delete?  TODO
                 
@@ -81,8 +81,8 @@ class EventManagerSave: NSObject {
                 let mainType:String    = defaults.stringForKey("mainType")!
                 let actionType:String    = defaults.stringForKey("actionType")!
                 
-                print("p75 mainType: \(mainType)")
-                print("p26 actionType: \(actionType)")
+                print("p84 mainType: \(mainType)")
+                print("p85 actionType: \(actionType)")
                 
                 let day         = defaults.stringForKey("day")
                 let phone       = defaults.stringForKey("phone")
@@ -109,35 +109,35 @@ class EventManagerSave: NSObject {
                 
                 
                 
-                print("p71 phone: \(phone)")
-                print("p79 eventDuration: \(eventDuration)")
-                print("p80 outputNote: \(outputNote)")
-                print("p81 output: \(output)")
-                print("p98 mainType: \(mainType)")
-                print("p117 eventLocation: \(eventLocation)")
+                print("p112 phone: \(phone)")
+                print("p112 eventDuration: \(eventDuration)")
+                print("p112 outputNote: \(outputNote)")
+                print("p112 output: \(output)")
+                print("p112 mainType: \(mainType)")
+                print("p112 eventLocation: \(eventLocation)")
                 
-                print("p115 defaults.objectForKey(\"eventRepeat\") = \(defaults.objectForKey("eventRepeat"))")
+                print("p112 defaults.objectForKey(\"eventRepeat\") = \(defaults.objectForKey("eventRepeat"))")
 
                 
-                print("p114 calandarName: \(calendarName)")       //TODO WHY is "" ????
+                print("p112 calandarName: \(calendarName)")       //TODO WHY is "" ????
                 
                 if (calendarName == "") {                       // calendarName not set in parse so pill it from prefDefault
                     calendarName = defaults.stringForKey("prefsDefaultCalendarName")
                 }
                 
-                print("628 *** startDT: \(startDT)")
-                print("629 endDT: \(endDT)")
+                print("p628 *** startDT: \(startDT)")
+                print("p629 endDT: \(endDT)")
                 print("######## p804 calendarName: \(calendarName)")
                 
                 if (calendarName == "") {
-                    print("p68 we here: \(calendarName)")
+                    print("p133 we here: \(calendarName)")
                     var calendarName:String = "dictate events"
                 }
                 
                 //calendarName = "dictate events"
                 
                 
-                print("p71 calendarName: \(calendarName)")
+                print("p140 calendarName: \(calendarName)")
                 
                 
                 // 1
@@ -165,13 +165,13 @@ class EventManagerSave: NSObject {
                 var event:EKEvent = EKEvent(eventStore: eventStore)
                 
                 event.calendar = eventStore.defaultCalendarForNewEvents
-                print("p97 event.calendar = \(event.calendar)")
+                print("p168 event.calendar = \(event.calendar)")
                 
                 var calendarTitle = event.calendar.title
-                print("p100 calendarTitle = \(calendarTitle)")
+                print("p171 calendarTitle = \(calendarTitle)")
                 
                 var calendarColor = event.calendar.CGColor
-                print("p103 calendarColor = \(calendarColor)")
+                print("p174 calendarColor = \(calendarColor)")
                 
                 
                 

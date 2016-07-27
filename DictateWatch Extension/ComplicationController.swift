@@ -93,7 +93,9 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
             
          //   modularLargeTemplate.body2TextProvider = CLKTextProvider.text
 
-            modularLargeTemplate.tintColor = UIColor.yellowColor()
+           // modularLargeTemplate.tintColor = UIColor.yellowColor()
+            
+            modularLargeTemplate.body2TextProvider!.tintColor = UIColor.yellowColor()
             
             print("w91 headerText: \(headerText)")
             print("w92 body1Text: \(body1Text)")
@@ -104,7 +106,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
             
         case .ModularSmall:
             let modularSmallTemplate =  CLKComplicationTemplateModularSmallSimpleImage()
-            let imageName = UIImage(named: "micWithAlphaD")!
+            let imageName = UIImage(named: "micWithAlphaD-58px")!
             //let imageName = UIImage(named: "u0iNw")!
             
             modularSmallTemplate.imageProvider = CLKImageProvider(onePieceImage: imageName)

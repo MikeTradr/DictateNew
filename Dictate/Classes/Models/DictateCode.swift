@@ -2242,7 +2242,7 @@ class DictateCode: NSObject {
                 
                 // Not for extension saveToDatabase()    // save data to database call function
                     
-                print("pDictated ===================================")
+                print("p2245 pDictated == DictateCode.swift ============")
                 print("pDictated day: \(day)")
                 print("pDictated phone: \(phone)")
                 print("pDictated startDT: \(startDT)")

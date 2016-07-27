@@ -57,6 +57,9 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
     var eventLocation:String    = ""
    // var eventRepeat:String      = ""
     var eventRepeat:Int         = 0
+    
+    var duration:Int            = 0
+    var alert:Int               = 0
 
     
    // var labelCreated:String     = ""
@@ -116,7 +119,7 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
     
     var actionType:String = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!.stringForKey("actionType") ?? "Event"
 
-    var alert       = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!.objectForKey("defaultEventAlert") as? Double //added defualt 112715
+   // var alert       = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!.objectForKey("defaultEventAlert") as? Double //added defualt 112715
 
 //    let eventRepeat      = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!.stringForKey("defaultEventRepeat") //added defualt 112715
     
@@ -149,7 +152,9 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
 
 //#### functions #################################
     
-    internal func grabvoice() -> (NSDate, NSDate, String, String, String, String, String)  {  //startDT, endDT, output, outputNote, day, calendarName, actionType
+    // return (startDT, endDT, output, outputNote, day, calendarName, actionType, duration, alert, eventLocation, eventRepeat)
+    
+    internal func grabvoice() -> (NSDate, NSDate, String, String, String, String, String, Int, Int, String, Int)  {  //startDT, endDT, output, outputNote, day, calendarName, actionType
         //added actionType above
         
         self.buttonMicGr.setHidden(true)
@@ -187,8 +192,8 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
         let suggestionArray = [str4, str1, str2]       //TODO Comment out for non-testing
         
         var phone       = defaults.stringForKey("phone")
-        var alert       = defaults.objectForKey("defaultEventAlert") as? Double //added defualt 112715
-        let duration    = defaults.stringForKey("defaultEventDuration")         //added defualt 112715
+       // var alert       = defaults.objectForKey("defaultEventAlert") as? Double //added defualt 112715
+        //let duration    = defaults.stringForKey("defaultEventDuration")         //added defualt 112715
     //    let eventRepeat = defaults.stringForKey("eventRepeat")
         let strRaw      = defaults.stringForKey("strRaw")
         var reminderTitle   = defaults.stringForKey("title") ?? ""
@@ -359,11 +364,11 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
                 self.resultTitle.setText("\"\(output)\"")
                 
                 var alertAsInt = 0
-                if self.alert != nil {
-                    alertAsInt = Int(self.alert!)               // to format 10.0  to 10  for minutes result
+                if self.alert != 0 {
+                    alertAsInt = Int(self.alert)               // to format 10.0  to 10  for minutes result
                 }
                 
-                if (self.alert == 0.0 || self.alert == nil){
+                if (self.alert == 0){
                     self.resultAlarm.setText("")
                     self.buttonGrAlarm.setHidden(true)
                 } else {
@@ -544,7 +549,8 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
         
         
         //return self.str
-        return (startDT, endDT, output, outputNote, day, calendarName, actionType)
+       // return (startDT, endDT, output, outputNote, day, calendarName, actionType)
+         return (startDT, endDT, output, outputNote, day, calendarName, actionType, duration, alert, eventLocation, eventRepeat)
         
     }
     
@@ -622,7 +628,8 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
         //Second, we currently can't control sounds or haptic feedback from our app's code.
      //   self.playSound(alertSound1)   ////commented for new watchExtension 040516
         
-        let (startDT, endDT, output, outputNote, day, calendarName, actionType) = grabvoice()
+       // let (startDT, endDT, output, outputNote, day, calendarName, actionType) = grabvoice()
+        let (startDT, endDT, output, outputNote, day, calendarName, actionType, duration, alert, eventLocation, eventRepeat) = grabvoice()
         
         print("p268 startDT: \(startDT)")
         print("p269 endDT: \(endDT)")
@@ -707,7 +714,7 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
                 
                 }, errorHandler: { (error) in
                     //handle error
-                    print("error : \(error.localizedDescription)")
+                    print("w717 error : \(error.localizedDescription)")
             })
             
             
@@ -1108,7 +1115,7 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
         super.willActivate()
         
     }
-    
+ /*
     override func didAppear() {
         super.didAppear()
         session = WCSession.defaultSession()
@@ -1123,7 +1130,7 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
                 print("error : \(error.localizedDescription)")
         })
     }
-
+*/
     override func didDeactivate() {
         // This method is called when watch view controller is no longer visible
         

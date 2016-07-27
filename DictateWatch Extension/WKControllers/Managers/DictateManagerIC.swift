@@ -127,7 +127,7 @@ class DictateManagerIC: WKInterfaceController {
             
             if results != nil {
                 
-                let (startDT, endDT, output, outputNote, day, calendarName, _) = DictateCode().parse(self.str)
+                let (startDT, endDT, output, outputNote, day, calendarName, actionType, duration, alert, eventLocation, eventRepeat) = DictateCode().parse(self.str)
                 
                 let formatter3 = NSDateFormatter()
                 formatter3.dateFormat = "M-dd-yyyy h:mm a"
@@ -157,6 +157,7 @@ class DictateManagerIC: WKInterfaceController {
         // println("p207 actionType: \(actionType)")
 
         return (startDT, endDT, output, outputNote, day, calendarName, actionType)
+        
         
     }   //end func grabvoice
 /*

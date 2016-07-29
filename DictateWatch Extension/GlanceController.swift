@@ -59,12 +59,7 @@ class GlanceController: WKInterfaceController {
     }
 */
     func fetchEvents(){
-        
-        //let dateHelper = JTDateHelper()
-        // let dateHelper = JTDateHelper()
         let startDate =  NSDate()
-        //let endDate = dateHelper.addToDate(startDate, days: 1)
-        
         let calendar = NSCalendar.currentCalendar()
         let endDate: NSDate = calendar.dateByAddingUnit(NSCalendarUnit.Day, value: 1, toDate: startDate, options: [])!
         
@@ -78,7 +73,6 @@ class GlanceController: WKInterfaceController {
         })
         
         print("w56 self.allEvents: \(self.allEvents)")
-        
     }
     
     func updateScreen(){

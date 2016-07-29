@@ -21,6 +21,10 @@ var allEvents: [EKEvent]    = []
 var eventID:String          = ""
 var timeUntil:String        = ""
 let imageDMic = UIImage(named: "micWithAlphaD-58px")!
+let imageMicSmall = UIImage(named: "mic38px")!
+
+
+
 
 let dateFormatter = NSDateFormatter()
 
@@ -406,7 +410,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         
         let template = CLKComplicationTemplateModularLargeStandardBody()
         let myImage = imageDMic
-        template.headerImageProvider = CLKImageProvider(onePieceImage: myImage)
+        template.headerImageProvider = CLKImageProvider(onePieceImage: imageMicSmall)
         template.headerTextProvider = CLKSimpleTextProvider(text: headerText)
         template.body1TextProvider = CLKSimpleTextProvider(text: bodyText)
         template.body1TextProvider.tintColor = UIColor.yellowColor()
@@ -425,7 +429,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         
         let timeUntilCentered = "       \(body2Text)"
         
-        template.headerImageProvider = CLKImageProvider(onePieceImage: myImage)
+        template.headerImageProvider = CLKImageProvider(onePieceImage: imageMicSmall)
         template.headerTextProvider = CLKSimpleTextProvider(text: headerText)
         template.body1TextProvider = CLKSimpleTextProvider(text: body1Text)
         template.body2TextProvider = CLKSimpleTextProvider(text: timeUntilCentered)

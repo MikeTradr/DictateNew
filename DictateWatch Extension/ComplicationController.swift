@@ -103,12 +103,18 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     func getTimelineEndDateForComplication(complication: CLKComplication, withHandler handler: (NSDate?) -> Void) {
         handler(nil)
         
-       // let currentDate = NSDate()
+        let currentDate = NSDate()
       //  let endDate =
         //    currentDate.dateByAddingTimeInterval(NSTimeInterval(4 * 60 * 60))           //4 hours from now for 4 entries
         
         let calendar = NSCalendar.currentCalendar()
-        endDate = calendar.dateByAddingUnit(NSCalendarUnit.Day, value: 2, toDate: startDate, options: [])!
+            
+        let endDate = calendar.dateByAddingUnit(
+                .Day,
+                value: 2,
+                toDate: NSDate(),
+                options: []
+        )
         
         handler(endDate)
     }
@@ -180,35 +186,15 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
                 
                 if ((timeUntilStart <= 0) && (timeUntilEnd >= 0)) {
                     timeUntil = "•NOW•"
-                    let neonRed = UIColor(red: 255, green: 51, blue: 0, alpha: 1)
-                    let brightYellow = UIColor(red: 255, green: 255, blue: 0, alpha: 1)
-                    
-                    //let swiftColor = UIColor(red: 1, green: 165/255, blue: 0, alpha: 1)
-                    //      row.labelTimeUntil.setTextColor(brightYellow)
-                    //row.labelTimeUntil.setTextColor(UIColor.yellowColor())
-                    
-                    // works
-                    let headlineFont =
-                        UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
-                    
-                    let fontAttribute = [NSFontAttributeName: headlineFont]
-                    
-                    let attributedString = NSAttributedString(string: "Now  ",
-                                                              attributes: fontAttribute)
-                    
-                    //  row.labelTimeUntil.setAttributedText(attributedString)
-                    
                 } else {   //end timeUntilstart <== 0
                     timeUntil = ""
-
                 }
-                
                 
                 timeString = "\(startTime) \(endTimeDash) \(timeUntil)"
                 
-                
                 let title = allEvents[0].title
                 startDate = allEvents[0].startDate
+                startDate = NSDate()    //now, current time, to load first event.
                 
                 //call func, createTimeLineEntry, to display data...
                 //  let entry = createTimeLineEntry(timeString, bodyText: timeLineText[0], date: NSDate())
@@ -219,9 +205,6 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
                 handler(entry)
                 
             } //if item.count > 0
-   
-           // let entry = createTimeLineEntry2(timeString, body1Text: allEvents[0], body2Text: timeUntilArray[0], date: NSDate())
-
             
           //  handler(entry)
         } else {
@@ -235,7 +218,6 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         // Call the handler with the timeline entries prior to the given date
         
         var timeLineEntryArray = [CLKComplicationTimelineEntry]()
-        
         
         if allEvents.count > 0 {
             
@@ -270,24 +252,6 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
                 
                 if ((timeUntilStart <= 0) && (timeUntilEnd >= 0)) {
                     timeUntil = "Now"
-                    let neonRed = UIColor(red: 255, green: 51, blue: 0, alpha: 1)
-                    let brightYellow = UIColor(red: 255, green: 255, blue: 0, alpha: 1)
-                    
-                    //let swiftColor = UIColor(red: 1, green: 165/255, blue: 0, alpha: 1)
-                    //      row.labelTimeUntil.setTextColor(brightYellow)
-                    //row.labelTimeUntil.setTextColor(UIColor.yellowColor())
-                    
-                    // works
-                    let headlineFont =
-                        UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
-                    
-                    let fontAttribute = [NSFontAttributeName: headlineFont]
-                    
-                    let attributedString = NSAttributedString(string: "Now  ",
-                                                              attributes: fontAttribute)
-                    
-                    //  row.labelTimeUntil.setAttributedText(attributedString)
-                    
                 }   //end timeUntilstart <== 0
                 
                 timeString = "\(startTime) \(endTimeDash)"
@@ -328,14 +292,14 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         handler(timeLineEntryArray)
     }
 
-// ===== beforeDate =======================================
+// ===== afterDate =======================================
     
     func getTimelineEntriesForComplication(complication: CLKComplication, afterDate date: NSDate, limit: Int, withHandler handler: (([CLKComplicationTimelineEntry]?) -> Void)) {
         // Call the handler with the timeline entries after to the given date
         
         var timeLineEntryArray = [CLKComplicationTimelineEntry]()
         //var nextDate = NSDate(timeIntervalSinceNow: 1 * 60 * 60)    //every hour
-        var nextDate = NSDate(timeIntervalSinceNow: 10 * 60)    //every 10 minutes
+       // var nextDate = NSDate(timeIntervalSinceNow: 10 * 60)    //every 10 minutes
         
         if allEvents.count > 0 {
             
@@ -369,25 +333,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
                 //print("w192 timeUntilEnd: \(timeUntilEnd)")
                 
                 if ((timeUntilStart <= 0) && (timeUntilEnd >= 0)) {
-                    timeUntil = "Now"
-                    let neonRed = UIColor(red: 255, green: 51, blue: 0, alpha: 1)
-                    let brightYellow = UIColor(red: 255, green: 255, blue: 0, alpha: 1)
-                    
-                    //let swiftColor = UIColor(red: 1, green: 165/255, blue: 0, alpha: 1)
-                    //      row.labelTimeUntil.setTextColor(brightYellow)
-                    //row.labelTimeUntil.setTextColor(UIColor.yellowColor())
-                    
-                    // works
-                    let headlineFont =
-                        UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
-                    
-                    let fontAttribute = [NSFontAttributeName: headlineFont]
-                    
-                    let attributedString = NSAttributedString(string: "Now  ",
-                                                              attributes: fontAttribute)
-                    
-                    //  row.labelTimeUntil.setAttributedText(attributedString)
-                    
+                    timeUntil = "•NOW•"
                 }   //end timeUntilstart <== 0
                 
                 timeString = "\(startTime) \(endTimeDash)"
@@ -398,7 +344,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
                 print("w314 priorIndex: \(priorIndex)")
                 
                 print("w317 startDate: \(startDate)")
-                startDate = allEvents[priorIndex].endDate
+                startDate = allEvents[priorIndex].endDate   //trying to get endDate of prior event for timeline
                 
                 print("w319 startDate: \(startDate)")
                 startDate = startDate.dateByAddingTimeInterval(1.0 * 60.0)  //add 1 minute

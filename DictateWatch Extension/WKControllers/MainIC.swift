@@ -15,10 +15,11 @@ import EventKit
 //import MessageUI
 
 import WatchConnectivity
+//import ClockKit
 
 
 //class MainIC: WKInterfaceController, WCSessionDelegate {
-class MainIC: WKInterfaceController, DataSourceChangedDelegate, CLKComplicationDataSource {
+class MainIC: WKInterfaceController, DataSourceChangedDelegate {
 
     var session: WCSession? {
         didSet {

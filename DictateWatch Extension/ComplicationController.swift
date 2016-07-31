@@ -14,8 +14,8 @@ import ClockKit
 import EventKit
 
 //---multipliers to convert to seconds---
-let HOUR: NSTimeInterval = 60 * 60
-let MINUTE: NSTimeInterval = 60
+//let HOUR: NSTimeInterval = 60 * 60
+//let MINUTE: NSTimeInterval = 60
 
 var allEvents: [EKEvent]    = []
 var eventID:String          = ""
@@ -23,36 +23,49 @@ var timeUntil:String        = ""
 let imageDMic = UIImage(named: "micWithAlphaD-58px")!
 let imageMicSmall = UIImage(named: "mic38px")!
 
-
-
+var startDate =  NSDate()
+var endDate =  NSDate()
 
 let dateFormatter = NSDateFormatter()
 
-
-let timeTable = [7, 18, 29, 32, 38, 49, 59]
-
-
+//let timeTable = [7, 18, 29, 32, 38, 49, 59]
 
 
 class ComplicationController: NSObject, CLKComplicationDataSource {
     
-    let timeLineText = ["Show Apartment", "Meeting with Paul", "Pale Ale at Booth 232", "English Bitter at Booth 327", "Dinner", "Go to the Gym"]
+    class var sharedInstance : ComplicationController {
+        struct Static {
+            static var onceToken : dispatch_once_t = 0
+            static var instance : ComplicationController? = nil
+        }
+        dispatch_once(&Static.onceToken) {
+            Static.instance = ComplicationController()
+        }
+        return Static.instance!
+    }
+    
+  //  let timeLineText = ["Show Apartment", "Meeting with Paul", "Pale Ale at Booth 232", "English Bitter at Booth 327", "Dinner", "Go to the Gym"]
     
    // let timeLineText2 = ["     NOW", "     in 9 min", "     in 21 min", "     in 1hr 11m"]
     
    // let timeUntil = ["* NOW *", "in 9m", "in 21m", "in 1hr 11m"]
-    var timeUntilArray = ["  ** NOW **", "   in 9 min", "   in 21 mim", "in 1hr 11 min", "   in 2 hrs", "in 3hr 5 min"]
+ //   var timeUntilArray = ["  ** NOW **", "   in 9 min", "   in 21 mim", "in 1hr 11 min", "   in 2 hrs", "in 3hr 5 min"]
     
+    func requestedUpdateDidBegin() {
+        let server = CLKComplicationServer.sharedInstance()
+        server.activeComplications!.forEach { server.reloadTimelineForComplication($0) }
+    }
     
     func fetchEvents() {
-        let startDate =  NSDate()
+        var startDate =  NSDate()
         let calendar = NSCalendar.currentCalendar()
-        let endDate: NSDate = calendar.dateByAddingUnit(NSCalendarUnit.Day, value: 2, toDate: startDate, options: [])!
+        let endDate: NSDate = calendar.dateByAddingUnit(NSCalendarUnit.Day, value: 2, toDate: startDate, options: [])! //get events for 2 days for timeline
         
+        startDate = calendar.dateByAddingUnit(NSCalendarUnit.Day, value: -1, toDate: startDate, options: [])!   //get events back 1 day for timeline ok?
+
         print("w46 startDate: \(startDate)")
         print("w46 endDate: \(endDate)")
         
-        //THIS NEEDED?? TODO FIX
         EventManager.sharedInstance.getAccessToEventStoreForType(EKEntityType.Event, completion: { (granted) -> Void in
             
             if granted{
@@ -60,10 +73,11 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
             }
         })
         
-        //FIXME:1
         EventManager.sharedInstance.fetchEventsFrom(startDate, endDate: endDate, completion: { (events) -> Void in
             allEvents = events
         })
+        
+        print("w56 allEvents.count: \(allEvents.count)")
         print("w56 allEvents: \(allEvents)")
     }
 
@@ -80,16 +94,21 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     func getTimelineStartDateForComplication(complication: CLKComplication, withHandler handler: (NSDate?) -> Void) {
         handler(nil)
         
-            let currentDate = NSDate()
-            handler(currentDate)
+        let calendar = NSCalendar.currentCalendar()
+        let date = calendar.dateByAddingUnit(NSCalendarUnit.Day, value: -2, toDate: startDate, options: [])!
+        
+        handler(date)
     }
     
     func getTimelineEndDateForComplication(complication: CLKComplication, withHandler handler: (NSDate?) -> Void) {
         handler(nil)
         
-        let currentDate = NSDate()
-        let endDate =
-            currentDate.dateByAddingTimeInterval(NSTimeInterval(4 * 60 * 60))           //4 hours from now for 4 entries
+       // let currentDate = NSDate()
+      //  let endDate =
+        //    currentDate.dateByAddingTimeInterval(NSTimeInterval(4 * 60 * 60))           //4 hours from now for 4 entries
+        
+        let calendar = NSCalendar.currentCalendar()
+        endDate = calendar.dateByAddingUnit(NSCalendarUnit.Day, value: 2, toDate: startDate, options: [])!
         
         handler(endDate)
     }
@@ -98,7 +117,8 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         handler(.ShowOnLockScreen)
     }
     
-    // MARK: - Timeline Population
+// MARK: - Timeline Population
+// ===== Current Entry =======================================
     
     func getCurrentTimelineEntryForComplication(complication: CLKComplication, withHandler handler: ((CLKComplicationTimelineEntry?) -> Void)) {
         // Call the handler with the current timeline entry
@@ -106,7 +126,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         if complication.family == .ModularLarge {
             
             fetchEvents()
-            
+       /*
             let dateFormatterA = NSDateFormatter()
             dateFormatterA.dateFormat = "h:mm a"
             
@@ -127,41 +147,188 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 
             //timeString = "\(timeString) \(timeUntil[0])"
             timeString = "\(timeString) \(endTimeDash)"
-            
+         */
             //call func, createTimeLineEntry, to display data...
           //  let entry = createTimeLineEntry(timeString, bodyText: timeLineText[0], date: NSDate())
-            let entry = createTimeLineEntry2(timeString, body1Text: timeLineText[0], body2Text: timeUntilArray[0], date: NSDate())
+            
+            if allEvents.count > 0 {
+                let item = allEvents[0]
+                
+                
+                dateFormatter.dateFormat = "h:mm a"
+                
+                let startTimeA = dateFormatter.stringFromDate(item.startDate)
+                var startTime = startTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
+                NSLog("%@ w137", startTime)
+                
+                dateFormatter.dateFormat = "h:mm"
+                
+                let endTimeA = dateFormatter.stringFromDate(item.endDate)
+                let endTime = endTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
+                
+                var endTimeDash = "- \(endTime)"
+                
+                timeUntil = TimeManger.sharedInstance.timeInterval(item.startDate)
+                
+                let startTimeItem = item.startDate
+                let timeUntilStart = startTimeItem.timeIntervalSinceDate(NSDate())
+                //print("w187 timeUntilStart: \(timeUntilStart)")
+                
+                let endTimeItem = item.endDate
+                let timeUntilEnd = endTimeItem.timeIntervalSinceDate(NSDate())
+                //print("w192 timeUntilEnd: \(timeUntilEnd)")
+                
+                if ((timeUntilStart <= 0) && (timeUntilEnd >= 0)) {
+                    timeUntil = "•NOW•"
+                    let neonRed = UIColor(red: 255, green: 51, blue: 0, alpha: 1)
+                    let brightYellow = UIColor(red: 255, green: 255, blue: 0, alpha: 1)
+                    
+                    //let swiftColor = UIColor(red: 1, green: 165/255, blue: 0, alpha: 1)
+                    //      row.labelTimeUntil.setTextColor(brightYellow)
+                    //row.labelTimeUntil.setTextColor(UIColor.yellowColor())
+                    
+                    // works
+                    let headlineFont =
+                        UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
+                    
+                    let fontAttribute = [NSFontAttributeName: headlineFont]
+                    
+                    let attributedString = NSAttributedString(string: "Now  ",
+                                                              attributes: fontAttribute)
+                    
+                    //  row.labelTimeUntil.setAttributedText(attributedString)
+                    
+                } else {   //end timeUntilstart <== 0
+                    timeUntil = ""
+
+                }
+                
+                
+                timeString = "\(startTime) \(endTimeDash) \(timeUntil)"
+                
+                
+                let title = allEvents[0].title
+                startDate = allEvents[0].startDate
+                
+                //call func, createTimeLineEntry, to display data...
+                //  let entry = createTimeLineEntry(timeString, bodyText: timeLineText[0], date: NSDate())
+                // let entry = createTimeLineEntry2(timeString, body1Text: timeLineText[0], body2Text: timeUntilArray[0], date: NSDate())
+                
+                let entry = createTimeLineEntry2(timeString, body1Text: title, body2Text: timeUntil, date: startDate)
+                
+                handler(entry)
+                
+            } //if item.count > 0
+   
+           // let entry = createTimeLineEntry2(timeString, body1Text: allEvents[0], body2Text: timeUntilArray[0], date: NSDate())
 
             
-            handler(entry)
+          //  handler(entry)
         } else {
             handler(nil)
         }
     }
     
+// ===== beforeDate =======================================
+
     func getTimelineEntriesForComplication(complication: CLKComplication, beforeDate date: NSDate, limit: Int, withHandler handler: (([CLKComplicationTimelineEntry]?) -> Void)) {
         // Call the handler with the timeline entries prior to the given date
         
         var timeLineEntryArray = [CLKComplicationTimelineEntry]()
         
-        let headerTextTime = "12 PM-12:45"
-        // let timeUntil = "in 15 min"
-        timeUntil = "in 1hr, 36 min"
-        let headerText = headerTextTime  //+ "  " + timeUntil
-        let body1Text = "Lunch Meting"
-        //let body2Text = "Ahuska Park"
-        let body2Text =  "             " + timeUntil
         
-        let priorDate = NSDate().dateByAddingTimeInterval(-10 * 60)
-        print("w112 NSDate(): \(NSDate())")
-        print("w112 priorDate: \(priorDate)")
+        if allEvents.count > 0 {
+            
+            for (index, title) in allEvents.enumerate() {
+                print("---------------------------------------------------")
+                print("w40 index, title: \(index), \(title)")
+                
+                let item = allEvents[index]
+                
+                dateFormatter.dateFormat = "h:mm a"
+                
+                let startTimeA = dateFormatter.stringFromDate(item.startDate)
+                var startTime = startTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
+                NSLog("%@ w137", startTime)
+                
+                dateFormatter.dateFormat = "h:mm"
+                
+                let endTimeA = dateFormatter.stringFromDate(item.endDate)
+                let endTime = endTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
+                
+                var endTimeDash = "- \(endTime)"
+                
+                timeUntil = TimeManger.sharedInstance.timeInterval(item.startDate)
+                
+                let startTimeItem = item.startDate
+                let timeUntilStart = startTimeItem.timeIntervalSinceDate(NSDate())
+                //print("w187 timeUntilStart: \(timeUntilStart)")
+                
+                let endTimeItem = item.endDate
+                let timeUntilEnd = endTimeItem.timeIntervalSinceDate(NSDate())
+                //print("w192 timeUntilEnd: \(timeUntilEnd)")
+                
+                if ((timeUntilStart <= 0) && (timeUntilEnd >= 0)) {
+                    timeUntil = "Now"
+                    let neonRed = UIColor(red: 255, green: 51, blue: 0, alpha: 1)
+                    let brightYellow = UIColor(red: 255, green: 255, blue: 0, alpha: 1)
+                    
+                    //let swiftColor = UIColor(red: 1, green: 165/255, blue: 0, alpha: 1)
+                    //      row.labelTimeUntil.setTextColor(brightYellow)
+                    //row.labelTimeUntil.setTextColor(UIColor.yellowColor())
+                    
+                    // works
+                    let headlineFont =
+                        UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
+                    
+                    let fontAttribute = [NSFontAttributeName: headlineFont]
+                    
+                    let attributedString = NSAttributedString(string: "Now  ",
+                                                              attributes: fontAttribute)
+                    
+                    //  row.labelTimeUntil.setAttributedText(attributedString)
+                    
+                }   //end timeUntilstart <== 0
+                
+                timeString = "\(startTime) \(endTimeDash)"
+                
+                let title = item.title
+                let priorIndex = index-1
+                print("w314 index: \(index)")
+                print("w314 priorIndex: \(priorIndex)")
+                
+                print("w317 startDate: \(startDate)")
+                startDate = allEvents[priorIndex].endDate
+                
+                print("w319 startDate: \(startDate)")
+                startDate = startDate.dateByAddingTimeInterval(1.0 * 60.0)  //add 1 minute
+                
+                print("w321 startDate: \(startDate)")
+                
+                //let entry = createTimeLineEntry2(timeString, body1Text: timeLineText[index], body2Text: timeUntilArray[index], date: nextDate)
+                
+                let entry = createTimeLineEntry2(timeString, body1Text: title, body2Text: timeUntil, date: startDate)
+                
+                print("w106 entry: \(entry)")
+                
+                timeLineEntryArray.append(entry)
+                print("w109 timeLineEntryArray: \(timeLineEntryArray)")
+                
+                // let nextIndex = index+1
+                
+                //startDate = allEvents[nextIndex].startDate
+                
+                //nextDate = nextDate.dateByAddingTimeInterval(10 * 60)   //every 10 minutes hard coded
+                
+                
+            } //end for loop...
+            
+        } //end If allEvents.count > 0 we Have events
 
-        let entry = createTimeLineEntry2(headerText, body1Text: body1Text, body2Text: body2Text, date: priorDate)
-        
-        timeLineEntryArray.append(entry)
-        
-        handler(nil)
+        handler(timeLineEntryArray)
     }
+
+// ===== beforeDate =======================================
     
     func getTimelineEntriesForComplication(complication: CLKComplication, afterDate date: NSDate, limit: Int, withHandler handler: (([CLKComplicationTimelineEntry]?) -> Void)) {
         // Call the handler with the timeline entries after to the given date
@@ -170,73 +337,101 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         //var nextDate = NSDate(timeIntervalSinceNow: 1 * 60 * 60)    //every hour
         var nextDate = NSDate(timeIntervalSinceNow: 10 * 60)    //every 10 minutes
         
-         for (index, title) in allEvents.enumerate() {
-            print("---------------------------------------------------")
-            print("w40 index, title: \(index), \(title)")
+        if allEvents.count > 0 {
             
-            let item = allEvents[index]
-            
-            dateFormatter.dateFormat = "h:mm a"
-            
-            let startTimeA = dateFormatter.stringFromDate(item.startDate)
-            var startTime = startTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
-            NSLog("%@ w137", startTime)
-            
-            dateFormatter.dateFormat = "h:mm"
-            
-            let endTimeA = dateFormatter.stringFromDate(item.endDate)
-            let endTime = endTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
-            
-            var endTimeDash = "- \(endTime)"
-            
-            timeUntil = TimeManger.sharedInstance.timeInterval(item.startDate)
-            
-            let startTimeItem = item.startDate
-            let timeUntilStart = startTimeItem.timeIntervalSinceDate(NSDate())
-            //print("w187 timeUntilStart: \(timeUntilStart)")
-            
-            let endTimeItem = item.endDate
-            let timeUntilEnd = endTimeItem.timeIntervalSinceDate(NSDate())
-            //print("w192 timeUntilEnd: \(timeUntilEnd)")
-            
-            if ((timeUntilStart <= 0) && (timeUntilEnd >= 0)) {
-                timeUntil = "Now"
-                let neonRed = UIColor(red: 255, green: 51, blue: 0, alpha: 1)
-                let brightYellow = UIColor(red: 255, green: 255, blue: 0, alpha: 1)
+            for (index, title) in allEvents.enumerate() {
+                print("---------------------------------------------------")
+                print("w40 index, title: \(index), \(title)")
                 
-                //let swiftColor = UIColor(red: 1, green: 165/255, blue: 0, alpha: 1)
-          //      row.labelTimeUntil.setTextColor(brightYellow)
-                //row.labelTimeUntil.setTextColor(UIColor.yellowColor())
+                let item = allEvents[index]
                 
-                // works
-                let headlineFont =
-                    UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
+                dateFormatter.dateFormat = "h:mm a"
                 
-                let fontAttribute = [NSFontAttributeName: headlineFont]
+                let startTimeA = dateFormatter.stringFromDate(item.startDate)
+                var startTime = startTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
+                NSLog("%@ w137", startTime)
                 
-                let attributedString = NSAttributedString(string: "Now  ",
-                                                          attributes: fontAttribute)
+                dateFormatter.dateFormat = "h:mm"
                 
-              //  row.labelTimeUntil.setAttributedText(attributedString)
-   
-            }   //end timeUntilstart <== 0
+                let endTimeA = dateFormatter.stringFromDate(item.endDate)
+                let endTime = endTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
+                
+                var endTimeDash = "- \(endTime)"
+                
+                timeUntil = TimeManger.sharedInstance.timeInterval(item.startDate)
+                
+                let startTimeItem = item.startDate
+                let timeUntilStart = startTimeItem.timeIntervalSinceDate(NSDate())
+                //print("w187 timeUntilStart: \(timeUntilStart)")
+                
+                let endTimeItem = item.endDate
+                let timeUntilEnd = endTimeItem.timeIntervalSinceDate(NSDate())
+                //print("w192 timeUntilEnd: \(timeUntilEnd)")
+                
+                if ((timeUntilStart <= 0) && (timeUntilEnd >= 0)) {
+                    timeUntil = "Now"
+                    let neonRed = UIColor(red: 255, green: 51, blue: 0, alpha: 1)
+                    let brightYellow = UIColor(red: 255, green: 255, blue: 0, alpha: 1)
+                    
+                    //let swiftColor = UIColor(red: 1, green: 165/255, blue: 0, alpha: 1)
+                    //      row.labelTimeUntil.setTextColor(brightYellow)
+                    //row.labelTimeUntil.setTextColor(UIColor.yellowColor())
+                    
+                    // works
+                    let headlineFont =
+                        UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
+                    
+                    let fontAttribute = [NSFontAttributeName: headlineFont]
+                    
+                    let attributedString = NSAttributedString(string: "Now  ",
+                                                              attributes: fontAttribute)
+                    
+                    //  row.labelTimeUntil.setAttributedText(attributedString)
+                    
+                }   //end timeUntilstart <== 0
+                
+                timeString = "\(startTime) \(endTimeDash)"
+                
+                let title = item.title
+                let priorIndex = index-1
+                print("w314 index: \(index)")
+                print("w314 priorIndex: \(priorIndex)")
+                
+                print("w317 startDate: \(startDate)")
+                startDate = allEvents[priorIndex].endDate
+                
+                print("w319 startDate: \(startDate)")
+                startDate = startDate.dateByAddingTimeInterval(1.0 * 60.0)  //add 1 minute
+                
+                print("w321 startDate: \(startDate)")
+                
+                //let entry = createTimeLineEntry2(timeString, body1Text: timeLineText[index], body2Text: timeUntilArray[index], date: nextDate)
+                
+                let entry = createTimeLineEntry2(timeString, body1Text: title, body2Text: timeUntil, date: startDate)
+                
+                print("w106 entry: \(entry)")
+                
+                timeLineEntryArray.append(entry)
+                print("w109 timeLineEntryArray: \(timeLineEntryArray)")
+                
+                // let nextIndex = index+1
+                
+                //startDate = allEvents[nextIndex].startDate
+                
+                //nextDate = nextDate.dateByAddingTimeInterval(10 * 60)   //every 10 minutes hard coded
+                
+                
+            } //end for loop...
             
-            
-            let entry = createTimeLineEntry2(timeString, body1Text: timeLineText[index], body2Text: timeUntilArray[index], date: nextDate)
-            
-            print("w106 entry: \(entry)")
-            
-            timeLineEntryArray.append(entry)
-            print("w109 timeLineEntryArray: \(timeLineEntryArray)")
-            
-            nextDate = nextDate.dateByAddingTimeInterval(10 * 60)   //every 10 minutes hard coded
-            
-            
-        } //end for loop...
+        } //end If allEvents.count > 0 we Have events
+
         
         
         
         
+        
+        
+/*
         
 
         for index in 1..<timeLineText.count {
@@ -281,7 +476,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
             
             nextDate = nextDate.dateByAddingTimeInterval(10 * 60)   //every 10 minutes hard coded
         }
-        
+  */
         handler(timeLineEntryArray)
         
         //handler(nil)
@@ -291,107 +486,18 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     
     func getNextRequestedUpdateDateWithHandler(handler: (NSDate?) -> Void) {
         // Call the handler with the date when you would next like to be given the opportunity to update your complication content
-        handler(nil);
-    }
-    
-    // MARK: - Placeholder Templates
-    
-    func getPlaceholderTemplateForComplication(complication: CLKComplication, withHandler handler: (CLKComplicationTemplate?) -> Void) {
-        // This method will be called once per supported complication, and the results will be cached
         
-        var template: CLKComplicationTemplate?
-        
-        print("w63 we here complication.family: \(complication.family)")
-    /*
-        let headerTextTime = "3 PM-4:15"
-        let timeUntil = "Now"
-        let headerText = headerTextTime + " " + timeUntil
-        let body1Text = "Tennis Drills w/Ken Weekly"
-        let body2Text = "Ahuska Park"
-     */
-        switch complication.family {
+            let nextUpdateDate:NSDate = NSDate()
             
+            let oneHour:NSTimeInterval = 3600
             
-            case .ModularLarge:
-                
-                print("w75 we here .ModularLarge")
+            nextUpdateDate.addTimeInterval(oneHour)
 
-                let modularLargeTemplate = CLKComplicationTemplateModularLargeStandardBody()
-                let headerTextTime = "3 PM-4:15"
-               // let timeUntil = "in 15 min"
-                let timeUntil = "in 1hr, 36 min"
-                let headerText = headerTextTime  //+ "  " + timeUntil
-                let body1Text = "Show Apartment"
-                //let body2Text = "Ahuska Park"
-                let body2Text =  "             " + timeUntil
-                
-                //let textProvider = CLKSimpleTextProvider(text: "your string here", shortText: "string")
-
-               // modularLargeTemplate.headerImageProvider = CLKImageProvider(onePieceImage: defaultSticker)
-                modularLargeTemplate.headerTextProvider = CLKSimpleTextProvider(text: headerText)
-                modularLargeTemplate.body1TextProvider = CLKSimpleTextProvider(text: body1Text)
-                modularLargeTemplate.body2TextProvider = CLKSimpleTextProvider(text: body2Text)
-                
-                //modularLargeTemplate.body2TextProvider = CLKTimeIntervalTextProvider(startDate: NSDate(), endDate:.distantFuture())
-
-               
-               // let textProvider = CLKTimeTextProvider(date: NSDate())
-               // let textProvider = CLKDateTextProvider(date: NSDate(), units: .Day)
-               // let textProvider = CLKRelativeDateTextProvider(date: NSDate(), style: .Timer, units: .Hour)
-               // let textProvider = CLKTimeIntervalTextProvider(startDate: NSDate(), endDate: .distantFuture())
-
-                
-                let brightYellow = UIColor(red: 255, green: 255, blue: 0, alpha: 1)
-                
-             //   modularLargeTemplate.body2TextProvider = CLKTextProvider.text
-
-               // modularLargeTemplate.tintColor = UIColor.yellowColor()
-                
-                modularLargeTemplate.body2TextProvider!.tintColor = UIColor.yellowColor()
-                
-                print("w91 headerText: \(headerText)")
-                print("w92 body1Text: \(body1Text)")
-                print("w93 body2Text: \(body2Text)")
-
-                template = modularLargeTemplate
-                handler(modularLargeTemplate)
-                
-            case .ModularSmall:
-                let modularSmallTemplate =  CLKComplicationTemplateModularSmallSimpleImage()
-                
-                modularSmallTemplate.imageProvider = CLKImageProvider(onePieceImage: imageDMic)
-                template = modularSmallTemplate
-                
-                handler(template)
-
-          
-                
-            case .CircularSmall:
-                let circularSmallTemplate = CLKComplicationTemplateCircularSmallRingImage()
-                circularSmallTemplate.imageProvider = CLKImageProvider(onePieceImage: UIImage(named: "micWithAlphaD-58px")!)
-                template = circularSmallTemplate
-                           
-            case .UtilitarianSmall:
-                let utilitarianSmallTemplate = CLKComplicationTemplateUtilitarianSmallRingImage()
-                utilitarianSmallTemplate.imageProvider = CLKImageProvider(onePieceImage: UIImage(named: "micWithAlphaD-58px")!)
-                template = utilitarianSmallTemplate
-     
-            case .UtilitarianLarge:
-                let headerTextTime = "3 PM-4:15"
-                let timeUntil = "Now"
-                let headerText = headerTextTime + " " + timeUntil
-                
-                let utilitarianLargeTemplate = CLKComplicationTemplateUtilitarianLargeFlat()
-                utilitarianLargeTemplate.imageProvider = CLKImageProvider(onePieceImage: UIImage(named: "micWithAlphaD-58px")!)
-                utilitarianLargeTemplate.textProvider = CLKSimpleTextProvider(text: headerText)
-                template = utilitarianLargeTemplate
-      
-            
-            default:
-                template = nil
+            handler(nextUpdateDate);  
         }
-        handler (template)
-    }
+    
+    
+
     
     // MARK: - Auxiliary methods: Composing templates for timeline entries
     /*
@@ -405,7 +511,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
      return modularSmallTemplate
      }
      */
-    
+ /*
     func createTimeLineEntry(headerText: String, bodyText: String, date: NSDate) -> CLKComplicationTimelineEntry {
         
         let template = CLKComplicationTemplateModularLargeStandardBody()
@@ -421,18 +527,29 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         
         return(entry)
     }
-    
+*/
     func createTimeLineEntry2(headerText: String, body1Text: String, body2Text: String, date: NSDate) -> CLKComplicationTimelineEntry {
         
         let template = CLKComplicationTemplateModularLargeStandardBody()
-        let myImage = imageDMic
-        
-        let timeUntilCentered = "       \(body2Text)"
+    
+       // let timeUntilCentered = "       \(body2Text)"
         
         template.headerImageProvider = CLKImageProvider(onePieceImage: imageMicSmall)
         template.headerTextProvider = CLKSimpleTextProvider(text: headerText)
         template.body1TextProvider = CLKSimpleTextProvider(text: body1Text)
-        template.body2TextProvider = CLKSimpleTextProvider(text: timeUntilCentered)
+        //template.body2TextProvider = CLKSimpleTextProvider(text: timeUntilCentered)
+        
+        let units : NSCalendarUnit = [.Hour, .Minute]
+        let style : CLKRelativeDateStyle = .Offset                     //styles: .Natural .Offset  .Timer
+        let textProvider = CLKRelativeDateTextProvider(date: date,
+                                                       style: style,
+                                                       units: units) //NSCalendarUnit.Hour.union(.Minute))
+        template.body2TextProvider = textProvider
+        
+       // template.body2TextProvider = CLKRelativeDateTextProvider(date: date,
+       //                                                          style: .Offset,
+       //                                                          units: NSCalendarUnit.Hour.union(.Minute))
+        
         template.body2TextProvider!.tintColor = UIColor.yellowColor()
         
       /*
@@ -443,10 +560,11 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         
         let entry = CLKComplicationTimelineEntry(date: date,
                                                  complicationTemplate: template)
-        
         return(entry)
     }
     
+    
+/*
     func getNextBusArrivalDate(fromDate date: NSDate) -> NSDate {
         let calendar = NSCalendar.currentCalendar()
         let components = calendar.components([.Minute, .Hour], fromDate: date)
@@ -469,6 +587,8 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
             return date.dateByAddingTimeInterval(NSTimeInterval(-3600))
         } 
     }
+ 
+ */
     
  /*
     func getTimelineEntriesForComplication(complication: CLKComplication, beforeDate date: NSDate, limit: Int, withHandler handler: (([CLKComplicationTimelineEntry]?) -> Void)) {
@@ -494,5 +614,99 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     }
 */
     
+    // MARK: - Placeholder Templates
+    
+    // ===== Placeholder =======================================
+    
+ func getPlaceholderTemplateForComplication(complication: CLKComplication, withHandler handler: (CLKComplicationTemplate?) -> Void) {
+        // This method will be called once per supported complication, and the results will be cached
+        
+        let image:UIImage = imageDMic
+        
+        print("w63 we here complication.family: \(complication.family)")
+        
+        let imageProvider = CLKImageProvider(onePieceImage: image)
+
+        var template: CLKComplicationTemplate?
+
+        switch complication.family {
+        case .ModularLarge:
+            
+            print("w75 we here .ModularLarge")
+            
+            let template = CLKComplicationTemplateModularLargeStandardBody()
+            let headerTextTime = "3 PM-4:15"
+            // let timeUntil = "in 15 min"
+            let timeUntil = "in 1hr, 36 min"
+            let headerText = headerTextTime  //+ "  " + timeUntil
+            let body1Text = "Dictate Event"
+            //let body2Text = "Ahuska Park"
+            //let body2Text =  "             " + timeUntil
+            let body2Text =  "   timeUntil Event"
+            
+            //let textProvider = CLKSimpleTextProvider(text: "your string here", shortText: "string")
+            
+            // modularLargeTemplate.headerImageProvider = CLKImageProvider(onePieceImage: defaultSticker)
+            template.headerImageProvider = CLKImageProvider(onePieceImage: imageMicSmall)
+            template.headerTextProvider = CLKSimpleTextProvider(text: headerText)
+            template.body1TextProvider = CLKSimpleTextProvider(text: body1Text)
+            template.body2TextProvider = CLKSimpleTextProvider(text: body2Text)
+            
+            //modularLargeTemplate.body2TextProvider = CLKTimeIntervalTextProvider(startDate: NSDate(), endDate:.distantFuture())
+            
+            // let textProvider = CLKTimeTextProvider(date: NSDate())
+            // let textProvider = CLKDateTextProvider(date: NSDate(), units: .Day)
+            // let textProvider = CLKRelativeDateTextProvider(date: NSDate(), style: .Timer, units: .Hour)
+            // let textProvider = CLKTimeIntervalTextProvider(startDate: NSDate(), endDate: .distantFuture())
+            
+            
+            let brightYellow = UIColor(red: 255, green: 255, blue: 0, alpha: 1)
+            
+            //   modularLargeTemplate.body2TextProvider = CLKTextProvider.text
+            
+            // modularLargeTemplate.tintColor = UIColor.yellowColor()
+            
+            template.body2TextProvider!.tintColor = UIColor.yellowColor()
+            
+            handler(template)
+            
+        case .ModularSmall:
+            template = CLKComplicationTemplateModularSmallSimpleImage()
+            if let template = template as? CLKComplicationTemplateModularSmallSimpleImage {
+                template.imageProvider = imageProvider
+            }
+            
+    /*
+        case .ModularSmall:
+            let template =  CLKComplicationTemplateModularSmallSimpleImage()
+            let imageProvider = CLKImageProvider(onePieceImage: image)
+            template.imageProvider = CLKImageProvider(onePieceImage: imageDMic)
+            
+            handler(template)
+     */
+            
+        case .CircularSmall:
+            let template = CLKComplicationTemplateCircularSmallRingImage()
+            template.imageProvider = CLKImageProvider(onePieceImage: UIImage(named: "micWithAlphaD-58px")!)
+            
+        case .UtilitarianSmall:
+            let template = CLKComplicationTemplateUtilitarianSmallRingImage()
+            template.imageProvider = CLKImageProvider(onePieceImage: UIImage(named: "micWithAlphaD-58px")!)
+            
+        case .UtilitarianLarge:
+            let headerTextTime = "3 PM-4:15"
+            let timeUntil = "Now"
+            let headerText = headerTextTime + " " + timeUntil
+            
+            let template = CLKComplicationTemplateUtilitarianLargeFlat()
+            template.imageProvider = CLKImageProvider(onePieceImage: UIImage(named: "micWithAlphaD-58px")!)
+            template.textProvider = CLKSimpleTextProvider(text: headerText)
+            
+        default:
+            template = nil
+        }
+        handler (template)
+        //return template;
+    }
     
 }

@@ -18,7 +18,7 @@ import WatchConnectivity
 
 
 //class MainIC: WKInterfaceController, WCSessionDelegate {
-class MainIC: WKInterfaceController, DataSourceChangedDelegate {
+class MainIC: WKInterfaceController, DataSourceChangedDelegate, CLKComplicationDataSource {
 
     var session: WCSession? {
         didSet {
@@ -723,6 +723,8 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
 
             
             self.labelCreated.setText("Event created on your \(calendarName.capitalizedString) calendar!")
+            
+            ComplicationController.sharedInstance.requestedUpdateDidBegin() //update complication!
 
             break;
             

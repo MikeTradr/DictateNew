@@ -95,8 +95,8 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         handler(nil)
         
         let calendar = NSCalendar.currentCalendar()
-        let date = calendar.dateByAddingUnit(NSCalendarUnit.Day, value: -2, toDate: startDate, options: [])!
-        
+        //let date = calendar.dateByAddingUnit(NSCalendarUnit.Day, value: -2, toDate: startDate, options: [])!  //showed events today from prior day for some reason
+        let date = NSDate()
         handler(date)
     }
     
@@ -128,6 +128,17 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     
     func getCurrentTimelineEntryForComplication(complication: CLKComplication, withHandler handler: ((CLKComplicationTimelineEntry?) -> Void)) {
         // Call the handler with the current timeline entry
+        
+        let image:UIImage = imageDMic
+        let imageProvider = CLKImageProvider(onePieceImage: image)
+        
+        if complication.family == .ModularSmall {
+            let template = CLKComplicationTemplateModularSmallSimpleImage()
+            if let template = template as? CLKComplicationTemplateModularSmallSimpleImage {
+                template.imageProvider = imageProvider
+            }
+        }
+        
         
         if complication.family == .ModularLarge {
             

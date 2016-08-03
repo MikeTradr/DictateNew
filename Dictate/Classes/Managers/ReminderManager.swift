@@ -690,7 +690,7 @@ class ReminderManager: NSObject {
             
             if granted{
                 
-        NSLog("%@ p462 createCalendarArray", self)
+        //NSLog("%@ p462 createCalendarArray", self)
         print("p413 we here? createCalendarArray")
         
         var allCalendars: Array<EKCalendar>= self.eventStore.calendarsForEntityType(EKEntityType.Event) as!  Array<EKCalendar>

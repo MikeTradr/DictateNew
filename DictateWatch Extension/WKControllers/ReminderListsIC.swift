@@ -16,12 +16,12 @@ import EventKit
 
 class ReminderListsIC: WKInterfaceController {
     
-    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
-    let eventStore = EKEventStore()
+    let defaults    = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+    let eventStore  = EKEventStore()
     
-    var reminders:[EKReminder] = []
-    var allReminders:[EKReminder] = []
-    var allReminderLists:[EKCalendar] = []
+    var reminders:[EKReminder]          = []
+    var allReminders:[EKReminder]       = []
+    var allReminderLists:[EKCalendar]   = []
 
     var numberOfItems:Int       = 0
     var startDT:NSDate          = NSDate()
@@ -31,8 +31,8 @@ class ReminderListsIC: WKInterfaceController {
     
     var reminderListID:String   = ""
     
-    var showListsView:Bool = true
-    var checked:Bool = false
+    var showListsView:Bool      = true
+    var checked:Bool            = false
     
  //   var audioPlayer = AVAudioPlayer() //commented for new watchExtension 040516
     var reminderListColor:UIColor = UIColor.greenColor()
@@ -75,9 +75,6 @@ class ReminderListsIC: WKInterfaceController {
         self.setTitle("Reminders")
         
     }
-    
-    
-    
     
     @IBAction func buttonBackToReminders() {
         reminderListsGroup.setHidden(false)     //show lists
@@ -150,7 +147,7 @@ class ReminderListsIC: WKInterfaceController {
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         // Configure interface objects here.
-        NSLog("%@ w193 awakeWithContext", self)
+        //NSLog("%@ w193 awakeWithContext", self)
         print("w105 RemindersIC awakeWithContext")
 
    /*
@@ -170,7 +167,7 @@ class ReminderListsIC: WKInterfaceController {
         PFUser.enableAutomaticUser()
    */
         //get Access to Reminders
-        NSLog("%@ w60 appDelegate", self)
+        //NSLog("%@ w60 appDelegate", self)
         print("w61 call getAccessToEventStoreForType")
         ReminderManager.sharedInstance.getAccessToEventStoreForType(EKEntityType.Reminder, completion: { (granted) -> Void in
             
@@ -180,7 +177,7 @@ class ReminderListsIC: WKInterfaceController {
         })
         
         //get Access to Events
-        NSLog("%@ w70 appDelegate", self)
+        //NSLog("%@ w70 appDelegate", self)
         print("w71 call getAccessToEventStoreForType")
         //FIXME:6
         EventManager.sharedInstance.getAccessToEventStoreForType(EKEntityType.Event, completion: { (granted) -> Void in
@@ -190,7 +187,7 @@ class ReminderListsIC: WKInterfaceController {
             }
         })
         
-        print("w65 context: \(context)")
+        print("w190 context: \(context)")
         showListsView = true
         self.setTitle("Reminders")
         self.loadTableData()
@@ -199,7 +196,7 @@ class ReminderListsIC: WKInterfaceController {
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
-        NSLog("%@ w78 will activate", self)
+        //NSLog("%@ w78 will activate", self)
         print("w79 in ReminderListsIC willActivate")
         
       //  ReminderManager.sharedInstance.createNewReminderList("To Code Tomorrow", items: ["item 1","item 2", "This is item 3 hehe"])   //added to make reminder for testing.
@@ -222,21 +219,21 @@ class ReminderListsIC: WKInterfaceController {
  
     
     func loadTableData () {
-        NSLog("%@ w102 loadTableData", self)
+        //NSLog("%@ w102 loadTableData", self)
         showListsView = true
         
         reminderListsGroup.setHidden(false)     //show lists
         reminderItemsGroup.setHidden(true)      //Hide lower table2
         navBarGroup.setHidden(false)            //show  navBar
-        backToReminders.setHidden(true)      //Hide lower table2
+        backToReminders.setHidden(true)         //Hide lower table2
 
 
         self.allReminderLists = ReminderManager.sharedInstance.eventStore.calendarsForEntityType(EKEntityType.Reminder) 
         
         table.setNumberOfRows(allReminderLists.count, withRowType: "tableRow")
         
-        //println("w38 allReminderLists: \(allReminderLists)")
-        print("w137 allReminderLists.count: \(allReminderLists.count)")
+        print("w235 allReminderLists: \(allReminderLists)")
+        print("w236 allReminderLists.count: \(allReminderLists.count)")
   
         if allReminderLists != [] {
             for (index, title) in allReminderLists.enumerate() {
@@ -319,8 +316,8 @@ class ReminderListsIC: WKInterfaceController {
                 self.table2.setNumberOfRows(self.allReminders.count, withRowType: "tableRow2")
             }
             
-            print("w45 allCalendarLists: \(self.allReminders)")
-            print("w46 allCalendarLists.count: \(self.allReminders.count)")
+            print("w45 allReminders: \(self.allReminders)")
+            print("w46 allReminders.count: \(self.allReminders.count)")
             
             for (index, title) in self.allReminders.enumerate() {
                 print("---------------------------------------------------")

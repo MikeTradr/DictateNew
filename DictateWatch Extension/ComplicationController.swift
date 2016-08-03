@@ -14,22 +14,27 @@ import ClockKit
 import EventKit
 
 //---multipliers to convert to seconds---
-//let HOUR: NSTimeInterval = 60 * 60
-//let MINUTE: NSTimeInterval = 60
+let HOUR: NSTimeInterval    = 60 * 60
+let MINUTE: NSTimeInterval  = 60
 
-var allEvents: [EKEvent]    = []
-var eventID:String          = ""
-var timeUntil:String        = ""
-let imageDMic = UIImage(named: "micWithAlphaD-58px")!
-let imageMicSmall = UIImage(named: "mic38px")!
+var allEvents :[EKEvent]    = []
+var eventID :String         = ""
+var timeUntil :String       = ""
+//let imageDMic :UIImage      = UIImage(named: "micWithAlphaD-58px")!
+let imageDMic :UIImage      = UIImage(named: "dicMicD58px")!
 
-var startDate =  NSDate()
-var endDate =  NSDate()
+let imageMicSmall           = UIImage(named: "mic38px")!
 
-let dateFormatter = NSDateFormatter()
+var startDate       = NSDate()
+var endDate         = NSDate()
+var startDateTL     = NSDate()
+
+let dateFormatter   = NSDateFormatter()
+
+var timeLineEntryArray = [CLKComplicationTimelineEntry]()
+
 
 //let timeTable = [7, 18, 29, 32, 38, 49, 59]
-
 
 class ComplicationController: NSObject, CLKComplicationDataSource {
     
@@ -59,7 +64,11 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     func fetchEvents() {
         var startDate =  NSDate()
         let calendar = NSCalendar.currentCalendar()
-        let endDate: NSDate = calendar.dateByAddingUnit(NSCalendarUnit.Day, value: 2, toDate: startDate, options: [])! //get events for 2 days for timeline
+      //  let endDate: NSDate = calendar.dateByAddingUnit(NSCalendarUnit.Day, value: 1, toDate: startDate, options: [])! //get events for 2 days for timeline
+        
+        let tomorrow :NSDate = calendar.dateByAddingUnit(NSCalendarUnit.Day, value: 1, toDate: NSDate(), options: [])!
+        
+        let endDate = NSCalendar.currentCalendar().startOfDayForDate(tomorrow)        
         
         startDate = calendar.dateByAddingUnit(NSCalendarUnit.Day, value: -1, toDate: startDate, options: [])!   //get events back 1 day for timeline ok?
 
@@ -95,8 +104,8 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         handler(nil)
         
         let calendar = NSCalendar.currentCalendar()
-        //let date = calendar.dateByAddingUnit(NSCalendarUnit.Day, value: -2, toDate: startDate, options: [])!  //showed events today from prior day for some reason
-        let date = NSDate()
+        let date = calendar.dateByAddingUnit(NSCalendarUnit.Day, value: -2, toDate: startDate, options: [])!  //showed events today from prior day for some reason
+       // let date = NSDate()
         handler(date)
     }
     
@@ -104,9 +113,6 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         handler(nil)
         
         let currentDate = NSDate()
-      //  let endDate =
-        //    currentDate.dateByAddingTimeInterval(NSTimeInterval(4 * 60 * 60))           //4 hours from now for 4 entries
-        
         let calendar = NSCalendar.currentCalendar()
             
         let endDate = calendar.dateByAddingUnit(
@@ -142,41 +148,133 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         
         if complication.family == .ModularLarge {
             
+            //var timeLineEntryArray = [CLKComplicationTimelineEntry]()
+            
             fetchEvents()
-       /*
-            let dateFormatterA = NSDateFormatter()
-            dateFormatterA.dateFormat = "h:mm a"
             
-           //let endTimeA = dateFormatter.stringFromDate(item.endDate)
-           // let endTime = endTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
-            
-            let endDate1 = NSDate()
-            let endDate = endDate1.dateByAddingTimeInterval(10.0 * 60.0)    //add 10 minutes to test
-            
-            let dateFormatter = NSDateFormatter()
-            dateFormatter.dateFormat = "h:mm"
-            let endTime = dateFormatter.stringFromDate(endDate)
-            
-            var endTimeDash = "- \(endTime)"
-            
-            var timeString = dateFormatterA.stringFromDate(NSDate())
-            timeString = timeString.stringByReplacingOccurrencesOfString(":00", withString: "")
+            print("w165 we here in CurrentTimeLine Entry")
 
-            //timeString = "\(timeString) \(timeUntil[0])"
-            timeString = "\(timeString) \(endTimeDash)"
-         */
-            //call func, createTimeLineEntry, to display data...
-          //  let entry = createTimeLineEntry(timeString, bodyText: timeLineText[0], date: NSDate())
-            
             if allEvents.count > 0 {
-                let item = allEvents[0]
                 
+                for (index, title) in allEvents.enumerate() {
+                    print("---------------------------------------------------")
+                    print("w159 index, title: \(index), \(title)")
+                    
+                    let item = allEvents[index]
+                    var priorIndex = 0
+                    
+                    startDate = item.startDate
+                    endDate = item.endDate
+                    
+                    dateFormatter.dateFormat = "h:mm a"
+                    
+                    let startTimeA = dateFormatter.stringFromDate(item.startDate)
+                    var startTime = startTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
+                    // NSLog("%@ w137", startTime)
+                    
+                    dateFormatter.dateFormat = "h:mm"
+                    
+                    let endTimeA = dateFormatter.stringFromDate(item.endDate)
+                    let endTime = endTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
+                    
+                    var endTimeDash = "- \(endTime)"
+                    
+                    timeUntil = TimeManger.sharedInstance.timeInterval(item.startDate)
+                    
+                    let startTimeItem = item.startDate
+                    let timeUntilStart = startTimeItem.timeIntervalSinceDate(NSDate())
+                    //print("w187 timeUntilStart: \(timeUntilStart)")
+                    
+                    let endTimeItem = item.endDate
+                    let timeUntilEnd = endTimeItem.timeIntervalSinceDate(NSDate())
+                    //print("w192 timeUntilEnd: \(timeUntilEnd)")
+                    
+                    if ((timeUntilStart <= 0) && (timeUntilEnd >= 0)) {
+                        timeUntil = "•NOW•"
+                    }   //end timeUntilstart <== 0
+                    
+                    timeString = "\(startTime) \(endTimeDash)"
+                    
+                    let title = item.title
+                    print("w197 item.title: \(item.title)")
+                    
+                    if index >= 1 {
+                        priorIndex = index-1
+                        
+                        print("w202 index: \(index)")
+                        print("w202 priorIndex: \(priorIndex)")
+                        
+                        print("w202 startDate: \(startDate)")
+                        print("w202 endDate: \(endDate)")
+                        
+                        let endDatePrior = allEvents[priorIndex].endDate
+                        
+                        print("w202 endDatePrior: \(endDatePrior)")
+                        
+                        startDateTL = allEvents[priorIndex].endDate   //trying to get endDate of prior event for timeline
+                        
+                        print("w202 startDateTL: \(startDateTL)")
+                        
+                        startDateTL = startDateTL.dateByAddingTimeInterval(1 * MINUTE)  //add 1 minute
+                        
+                        print("w218 startDateTL: \(startDateTL)")
+                        
+                    } else {
+                        startDateTL = startDate
+                    }
+                    
+                        //let entry = createTimeLineEntry2(timeString, body1Text: timeLineText[index], body2Text: timeUntilArray[index], date: nextDate)
+      
+                        let entry = createTimeLineEntry2(timeString, body1Text: title, body2Text: timeUntil, date: startDateTL, startDate: startDate)
+                    
+                        print("w228 entry: \(entry)")
+                    
+                        handler(entry)
+     
+                    } //end for loop...
+            
+            } else if allEvents.count == 0 { //end If allEvents.count > 0 we Have events
+                
+                print("w238 we here entry =: \(allEvents.count)")
+                timeString = "Dictate™ 😀"
+                let title = "No events today"
+                
+                let entry = createTimeLineEntryEnd(timeString, body1Text: title, body2Text: timeUntil, date: startDateTL, startDate: startDate)
+            
+                handler(entry)
+
+            } else {
+                handler(nil)
+            }
+            
+        }   //if modular.large
+        
+    }
+    
+// ===== beforeDate =======================================
+
+    func getTimelineEntriesForComplication(complication: CLKComplication, beforeDate date: NSDate, limit: Int, withHandler handler: (([CLKComplicationTimelineEntry]?) -> Void)) {
+        // Call the handler with the timeline entries prior to the given date
+        
+        var timeLineEntryArray = [CLKComplicationTimelineEntry]()
+        
+        if allEvents.count > 0 {
+            
+            for (index, title) in allEvents.enumerate() {
+                print("---------------------------------------------------")
+                print("w238 index, title: \(index), \(title)")
+                
+                let item = allEvents[index]
+                var priorIndex = 0
+                
+                startDate = item.startDate
+                endDate = item.endDate
                 
                 dateFormatter.dateFormat = "h:mm a"
                 
                 let startTimeA = dateFormatter.stringFromDate(item.startDate)
                 var startTime = startTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
-                NSLog("%@ w137", startTime)
+                // NSLog("%@ w137", startTime)
                 
                 dateFormatter.dateFormat = "h:mm"
                 
@@ -197,97 +295,46 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
                 
                 if ((timeUntilStart <= 0) && (timeUntilEnd >= 0)) {
                     timeUntil = "•NOW•"
-                } else {   //end timeUntilstart <== 0
-                    timeUntil = ""
-                }
-                
-                timeString = "\(startTime) \(endTimeDash) \(timeUntil)"
-                
-                let title = allEvents[0].title
-                startDate = allEvents[0].startDate
-                startDate = NSDate()    //now, current time, to load first event.
-                
-                //call func, createTimeLineEntry, to display data...
-                //  let entry = createTimeLineEntry(timeString, bodyText: timeLineText[0], date: NSDate())
-                // let entry = createTimeLineEntry2(timeString, body1Text: timeLineText[0], body2Text: timeUntilArray[0], date: NSDate())
-                
-                let entry = createTimeLineEntry2(timeString, body1Text: title, body2Text: timeUntil, date: startDate)
-                
-                handler(entry)
-                
-            } //if item.count > 0
-            
-          //  handler(entry)
-        } else {
-            handler(nil)
-        }
-    }
-    
-// ===== beforeDate =======================================
-
-    func getTimelineEntriesForComplication(complication: CLKComplication, beforeDate date: NSDate, limit: Int, withHandler handler: (([CLKComplicationTimelineEntry]?) -> Void)) {
-        // Call the handler with the timeline entries prior to the given date
-        
-        var timeLineEntryArray = [CLKComplicationTimelineEntry]()
-        
-        if allEvents.count > 0 {
-            
-            for (index, title) in allEvents.enumerate() {
-                print("---------------------------------------------------")
-                print("w40 index, title: \(index), \(title)")
-                
-                let item = allEvents[index]
-                
-                dateFormatter.dateFormat = "h:mm a"
-                
-                let startTimeA = dateFormatter.stringFromDate(item.startDate)
-                var startTime = startTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
-                NSLog("%@ w137", startTime)
-                
-                dateFormatter.dateFormat = "h:mm"
-                
-                let endTimeA = dateFormatter.stringFromDate(item.endDate)
-                let endTime = endTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
-                
-                var endTimeDash = "- \(endTime)"
-                
-                timeUntil = TimeManger.sharedInstance.timeInterval(item.startDate)
-                
-                let startTimeItem = item.startDate
-                let timeUntilStart = startTimeItem.timeIntervalSinceDate(NSDate())
-                //print("w187 timeUntilStart: \(timeUntilStart)")
-                
-                let endTimeItem = item.endDate
-                let timeUntilEnd = endTimeItem.timeIntervalSinceDate(NSDate())
-                //print("w192 timeUntilEnd: \(timeUntilEnd)")
-                
-                if ((timeUntilStart <= 0) && (timeUntilEnd >= 0)) {
-                    timeUntil = "Now"
                 }   //end timeUntilstart <== 0
                 
                 timeString = "\(startTime) \(endTimeDash)"
                 
                 let title = item.title
-                let priorIndex = index-1
-                print("w314 index: \(index)")
-                print("w314 priorIndex: \(priorIndex)")
+                print("w276 item.title: \(item.title)")
                 
-                print("w317 startDate: \(startDate)")
-                startDate = allEvents[priorIndex].endDate
-                
-                print("w319 startDate: \(startDate)")
-                startDate = startDate.dateByAddingTimeInterval(1.0 * 60.0)  //add 1 minute
-                
-                print("w321 startDate: \(startDate)")
+                if index >= 1 {
+                    priorIndex = index-1
+                    
+                    print("w276 index: \(index)")
+                    print("w276 priorIndex: \(priorIndex)")
+                    
+                    print("w276 startDate: \(startDate)")
+                    print("w276 endDate: \(endDate)")
+                    
+                    let endDatePrior = allEvents[priorIndex].endDate
+                    
+                    print("w276 endDatePrior: \(endDatePrior)")
+                    
+                    startDateTL = allEvents[priorIndex].endDate   //trying to get endDate of prior event for timeline
+                    
+                    print("w276 startDateTL: \(startDateTL)")
+                    
+                    startDateTL = startDateTL.dateByAddingTimeInterval(1 * MINUTE)  //add 1 minute
+                    
+                    print("w297 startDateTL: \(startDateTL)")
+                    
+                } else {
+                    startDateTL = startDate
+                }
                 
                 //let entry = createTimeLineEntry2(timeString, body1Text: timeLineText[index], body2Text: timeUntilArray[index], date: nextDate)
                 
-                let entry = createTimeLineEntry2(timeString, body1Text: title, body2Text: timeUntil, date: startDate)
+                let entry = createTimeLineEntry2(timeString, body1Text: title, body2Text: timeUntil, date: startDateTL, startDate: startDate)
                 
-                print("w106 entry: \(entry)")
+                print("w307 entry: \(entry)")
                 
                 timeLineEntryArray.append(entry)
-                print("w109 timeLineEntryArray: \(timeLineEntryArray)")
+                print("w310 timeLineEntryArray: \(timeLineEntryArray)")
                 
                 // let nextIndex = index+1
                 
@@ -295,12 +342,32 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
                 
                 //nextDate = nextDate.dateByAddingTimeInterval(10 * 60)   //every 10 minutes hard coded
                 
+                if index == allEvents.count-1 {
+                    print("w344 we here entry")
+                    
+                    timeString = "Dictate™ 😀"
+                    let title = "No events today HE HE"
+                    
+                    startDateTL = allEvents[index].endDate
+                    startDateTL = startDateTL.dateByAddingTimeInterval(1 * MINUTE)  //add 1 minute
+                    
+                    print("w351 startDateTL \(startDateTL)")
+                    
+                    let entry = createTimeLineEntryEnd(timeString, body1Text: title, body2Text: timeUntil, date: startDateTL, startDate: startDate)
+                    
+                    timeLineEntryArray.append(entry)
+                }
                 
             } //end for loop...
-            
-        } //end If allEvents.count > 0 we Have events
 
-        handler(timeLineEntryArray)
+            
+            handler(timeLineEntryArray)
+            
+        } else { //end If allEvents.count > 0 we Have events
+            
+            handler(nil)
+          //handler(timeLineEntryArray)
+        }
     }
 
 // ===== afterDate =======================================
@@ -316,15 +383,19 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
             
             for (index, title) in allEvents.enumerate() {
                 print("---------------------------------------------------")
-                print("w40 index, title: \(index), \(title)")
+                print("w324 index, title: \(index), \(title)")
                 
                 let item = allEvents[index]
+                var priorIndex = 0
+                
+                startDate = item.startDate
+                endDate = item.endDate
                 
                 dateFormatter.dateFormat = "h:mm a"
                 
                 let startTimeA = dateFormatter.stringFromDate(item.startDate)
                 var startTime = startTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
-                NSLog("%@ w137", startTime)
+               // NSLog("%@ w137", startTime)
                 
                 dateFormatter.dateFormat = "h:mm"
                 
@@ -350,26 +421,43 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
                 timeString = "\(startTime) \(endTimeDash)"
                 
                 let title = item.title
-                let priorIndex = index-1
-                print("w314 index: \(index)")
-                print("w314 priorIndex: \(priorIndex)")
+                print("w362 item.title: \(item.title)")
                 
-                print("w317 startDate: \(startDate)")
-                startDate = allEvents[priorIndex].endDate   //trying to get endDate of prior event for timeline
-                
-                print("w319 startDate: \(startDate)")
-                startDate = startDate.dateByAddingTimeInterval(1.0 * 60.0)  //add 1 minute
-                
-                print("w321 startDate: \(startDate)")
+                if index >= 1 {
+                    priorIndex = index-1
+               
+                    print("w367 afterDate =================================")
+                    print("w367 index: \(index)")
+                    print("w367 priorIndex: \(priorIndex)")
+                    
+                    print("w367 startDate: \(startDate)")
+                    print("w367 endDate: \(endDate)")
+
+                    let endDatePrior = allEvents[priorIndex].endDate
+                    
+                    print("w367 endDatePrior: \(endDatePrior)")
+
+                    startDateTL = allEvents[priorIndex].endDate   //trying to get endDate of prior event for timeline
+
+                    print("w367 startDateTL: \(startDateTL)")
+                    
+                    startDateTL = startDateTL.dateByAddingTimeInterval(1 * MINUTE)  //add 1 minute
+                    
+                    print("w383 startDateTL: \(startDateTL)")
+                    print("w383 afterDate =================================")
+                    
+                } else {
+                    startDateTL = startDate
+                }
                 
                 //let entry = createTimeLineEntry2(timeString, body1Text: timeLineText[index], body2Text: timeUntilArray[index], date: nextDate)
+                let entry = createTimeLineEntry2(timeString, body1Text: title, body2Text: timeUntil, date: startDateTL, startDate: startDate)
+                //let entry = createTimeLineEntry2(timeString, body1Text: title, body2Text: timeUntil, date: startDate)
                 
-                let entry = createTimeLineEntry2(timeString, body1Text: title, body2Text: timeUntil, date: startDate)
-                
-                print("w106 entry: \(entry)")
+                print("w389 entry: \(entry)")
                 
                 timeLineEntryArray.append(entry)
-                print("w109 timeLineEntryArray: \(timeLineEntryArray)")
+                print("w392 timeLineEntryArray: \(timeLineEntryArray)")
                 
                 // let nextIndex = index+1
                 
@@ -377,17 +465,34 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
                 
                 //nextDate = nextDate.dateByAddingTimeInterval(10 * 60)   //every 10 minutes hard coded
                 
+                print("w430 allEvents.last \(allEvents.last)")
+                print("w430 index \(index)")
+                print("w430 allEvents.count \(allEvents.count)")
+
+                if index == allEvents.count-1 {
+                    print("w435 we here entry")
+                    
+                    timeString = "Dictate™ 😀"
+                    let title = "No more events today"
+
+                    startDateTL = allEvents[index].endDate
+                    startDateTL = startDateTL.dateByAddingTimeInterval(1 * MINUTE)  //add 1 minute
+                    
+                    print("w441 startDateTL \(startDateTL)")
+                    
+                    let entry = createTimeLineEntryEnd(timeString, body1Text: title, body2Text: timeUntil, date: startDateTL, startDate: startDate)
+                    
+                    timeLineEntryArray.append(entry)
+                }
                 
             } //end for loop...
             
-        } //end If allEvents.count > 0 we Have events
+              handler(timeLineEntryArray)
+            
+        } else { //end If allEvents.count > 0 we Have events
 
-        
-        
-        
-        
-        
-        
+            handler(nil)
+        }
 /*
         
 
@@ -434,7 +539,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
             nextDate = nextDate.dateByAddingTimeInterval(10 * 60)   //every 10 minutes hard coded
         }
   */
-        handler(timeLineEntryArray)
+        //handler(timeLineEntryArray)
         
         //handler(nil)
     }
@@ -445,7 +550,6 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         // Call the handler with the date when you would next like to be given the opportunity to update your complication content
         
             let nextUpdateDate:NSDate = NSDate()
-            
             let oneHour:NSTimeInterval = 3600
             
             nextUpdateDate.addTimeInterval(oneHour)
@@ -485,10 +589,15 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         return(entry)
     }
 */
-    func createTimeLineEntry2(headerText: String, body1Text: String, body2Text: String, date: NSDate) -> CLKComplicationTimelineEntry {
+    func createTimeLineEntry2(headerText: String, body1Text: String, body2Text: String, date: NSDate, startDate: NSDate) -> CLKComplicationTimelineEntry {
         
         let template = CLKComplicationTemplateModularLargeStandardBody()
-    
+        
+        print("w512 date: \(date)")
+        print("w512 headerText: \(headerText)")
+        print("w512 body1Text: \(body1Text)")
+        print("w512 body2Text: \(body2Text)")
+        
        // let timeUntilCentered = "       \(body2Text)"
         
         template.headerImageProvider = CLKImageProvider(onePieceImage: imageMicSmall)
@@ -497,15 +606,20 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         //template.body2TextProvider = CLKSimpleTextProvider(text: timeUntilCentered)
         
         let units : NSCalendarUnit = [.Hour, .Minute]
-        let style : CLKRelativeDateStyle = .Offset                     //styles: .Natural .Offset  .Timer
-        let textProvider = CLKRelativeDateTextProvider(date: date,
+        let style : CLKRelativeDateStyle = .Natural     //styles: .Natural .Offset  .Timer
+        let textProvider = CLKRelativeDateTextProvider(date: startDate,
                                                        style: style,
                                                        units: units) //NSCalendarUnit.Hour.union(.Minute))
+ 
+     //   let textProvider = CLKRelativeDateTextProvider(date: startDate, style: .Natural, units: NSCalendarUnit.Hour.union(.Minute))
+
         template.body2TextProvider = textProvider
         
-       // template.body2TextProvider = CLKRelativeDateTextProvider(date: date,
-       //                                                          style: .Offset,
-       //                                                          units: NSCalendarUnit.Hour.union(.Minute))
+        //print("w532 textProvider: \(textProvider)")
+
+        //template.body2TextProvider = CLKRelativeDateTextProvider(date: date,
+        //                                                         style: .Offset,
+         //                                                        units: NSCalendarUnit.Hour.union(.Minute))
         
         template.body2TextProvider!.tintColor = UIColor.yellowColor()
         
@@ -514,6 +628,50 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         print("w269 body1Text: \(template.body1TextProvider)")
         print("w269 body2Text: \(template.body2TextProvider)")
        */
+        
+        let entry = CLKComplicationTimelineEntry(date: date,
+                                                 complicationTemplate: template)
+        return(entry)
+    }
+    
+    
+    func createTimeLineEntryEnd(headerText: String, body1Text: String, body2Text: String, date: NSDate, startDate: NSDate) -> CLKComplicationTimelineEntry {
+        
+        let template = CLKComplicationTemplateModularLargeStandardBody()
+        
+        print("w512 date: \(date)")
+        print("w512 headerText: \(headerText)")
+        print("w512 body1Text: \(body1Text)")
+        print("w512 body2Text: \(body2Text)")
+        
+        
+        // let timeUntilCentered = "       \(body2Text)"
+        
+        template.headerImageProvider = CLKImageProvider(onePieceImage: imageMicSmall)
+        template.headerTextProvider = CLKSimpleTextProvider(text: headerText)
+        template.body1TextProvider = CLKSimpleTextProvider(text: body1Text)
+        //template.body2TextProvider = CLKSimpleTextProvider(text: timeUntilCentered)
+        
+        let units : NSCalendarUnit = [.Hour, .Minute]
+        let style : CLKRelativeDateStyle = .Offset                     //styles: .Natural .Offset  .Timer
+        let textProvider = CLKRelativeDateTextProvider(date: startDate,
+                                                       style: style,
+                                                       units: units) //NSCalendarUnit.Hour.union(.Minute))
+       // template.body2TextProvider = textProvider
+        
+        print("w532 textProvider: \(textProvider)")
+        
+        // template.body2TextProvider = CLKRelativeDateTextProvider(date: date,
+        //                                                          style: .Offset,
+        //                                                          units: NSCalendarUnit.Hour.union(.Minute))
+        
+      //  template.body2TextProvider!.tintColor = UIColor.yellowColor()
+        
+        /*
+         print("w269 headerText: \(template.headerTextProvider)")
+         print("w269 body1Text: \(template.body1TextProvider)")
+         print("w269 body2Text: \(template.body2TextProvider)")
+         */
         
         let entry = CLKComplicationTimelineEntry(date: date,
                                                  complicationTemplate: template)
@@ -595,11 +753,11 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
             let headerTextTime = "3 PM-4:15"
             // let timeUntil = "in 15 min"
             let timeUntil = "in 1hr, 36 min"
-            let headerText = headerTextTime  //+ "  " + timeUntil
-            let body1Text = "Dictate Event"
+            let headerText = "Dictate™ 😀"  //+ "  " + timeUntil
+            let body1Text = "Getting Events..."
             //let body2Text = "Ahuska Park"
             //let body2Text =  "             " + timeUntil
-            let body2Text =  "   timeUntil Event"
+            let body2Text =  ""
             
             //let textProvider = CLKSimpleTextProvider(text: "your string here", shortText: "string")
             

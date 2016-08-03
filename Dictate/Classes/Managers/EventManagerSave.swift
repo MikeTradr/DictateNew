@@ -191,7 +191,7 @@ class EventManagerSave: NSObject {
                         
                         print("p119 calendarName = \(calendarName)")
 
-                        print("p120 calendarName.lowercaseString = \(calendarName!.lowercaseString)")
+                        //print("p120 calendarName.lowercaseString = \(calendarName!.lowercaseString)")
                         
                         if calendar.title.lowercaseString == calendarName!.lowercaseString {     //need match here to create event on calendar!!!
                             

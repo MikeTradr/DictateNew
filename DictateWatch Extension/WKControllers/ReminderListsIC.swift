@@ -361,7 +361,7 @@ class ReminderListsIC: WKInterfaceController {
                 reminderItem.completed == false
                 self.checked = false
                 
-                var alertSound1: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("beep-08b", ofType: "mp3")!)
+//                var alertSound1: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("beep-08b", ofType: "mp3")!)
                 
  //               self.playSound(alertSound1) ////commented for new watchExtension 040516
             } else {                        // Turn checkmark on

@@ -304,6 +304,7 @@ extension AppDelegate: WCSessionDelegate {
             print("p307 Received data: \(action)")
             
             if action == "CreateEvent" {
+                setDefaultsWithMessage(message)
                 EventManagerSave.sharedInstance.createEvent()
             }
            
@@ -312,6 +313,17 @@ extension AppDelegate: WCSessionDelegate {
         replyHandler(["status":"Success"])
     }
     
+    func setDefaultsWithMessage(message:[String : AnyObject]){
+        let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+        defaults.setObject(message["startDT"], forKey: "startDT")
+        defaults.setObject(message["endDT"], forKey: "endDT")
+        defaults.setObject(message["output"], forKey: "output")
+        defaults.setObject(message["outputNote"], forKey: "outputNote")
+        defaults.setObject(message["eventDuration"], forKey: "eventDuration")
+        defaults.setObject(message["eventLocation"], forKey: "eventLocation")
+        defaults.setObject(message["eventRepeat"], forKey: "eventRepeat")
+        defaults.setObject(message["actionType"], forKey: "actionType")
+    }
 }
 
 

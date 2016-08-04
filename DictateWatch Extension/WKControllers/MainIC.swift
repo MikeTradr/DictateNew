@@ -644,12 +644,29 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
     
     @IBAction func buttonCreate() {
         
+        session = WCSession.defaultSession()
+        var actionType:String    = defaults.stringForKey("actionType")!
+        let messageDict = ["action":"CreateEvent", "startDT":startDT, "endDT": endDT,"output" : output, "outputNote":outputNote, "eventDuration":eventDuration, "eventLocation":eventLocation,"eventRepeat":eventRepeat, "actionType":actionType]
+        print("w709 messageDict: \(messageDict)")
+        
+        
+        session?.sendMessage(messageDict, replyHandler: { (response) in
+            
+            print("w713 Message sent status: \(response["status"])")
+            
+            }, errorHandler: { (error) in
+                //handle error
+                print("w717 error : \(error.localizedDescription)")
+        })
+        
+
+        
+        
         self.buttonMicGr.setHidden(true)  //hide mircophone
         
         print("w581 eventStart: \(startDT)")
         print("w582 calendarName: \(calendarName)")
         
-        var actionType:String    = defaults.stringForKey("actionType")!
         
         print("w586 mainIC, actionType: \(actionType)")
         
@@ -697,28 +714,12 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
         //    EventManagerSave().createEvent()
             
             
-            session = WCSession.defaultSession()
             
             // to make event: (startDT, endDT, output, outputNote, day, calendarName, actionType)
             // TODO? what about duration? repeat? Location? 
             // [“title”:”asnjfd”, ”time”:”7am” ]
             
             //let messageDict = ["name":"Anil", "startDT":startDT, "endDT":endDT, "output":output, "calendarName":calendarName, "actionType":actionType]
-            
-            let messageDict = ["action":"CreateEvent"]
-        
-            print("w709 messageDict: \(messageDict)")
-
-            session?.sendMessage(messageDict, replyHandler: { (response) in
-                
-                print("w713 Message sent status: \(response["status"])")
-                
-                }, errorHandler: { (error) in
-                    //handle error
-                    print("w717 error : \(error.localizedDescription)")
-            })
-            
-            
             
             
 

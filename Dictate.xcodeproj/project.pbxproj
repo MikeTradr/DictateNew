@@ -105,6 +105,8 @@
 		D397FDA21CAB1752005DD51A /* TimeManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D397FDA11CAB1752005DD51A /* TimeManger.swift */; };
 		D39EDDC91CDE861300D8DD6B /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D30912761CDE832E005EFE17 /* libsqlite3.0.tbd */; };
 		D39EDDCD1CDEBB2D00D8DD6B /* Frameworks in Resources */ = {isa = PBXBuildFile; fileRef = D39EDDCC1CDEBB2D00D8DD6B /* Frameworks */; };
+		D3AA1B151D58C1A1000BDAD6 /* GeneralWatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AA1B141D58C1A1000BDAD6 /* GeneralWatch.swift */; };
+		D3AA1B171D58C6CB000BDAD6 /* beep-08b.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D3AA1B161D58C6CB000BDAD6 /* beep-08b.mp3 */; };
 		D3AD9B541C5D5439006387C4 /* DetailsTableVC_OLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AD9B531C5D5439006387C4 /* DetailsTableVC_OLD.swift */; };
 		D3AD9B581C5E3475006387C4 /* DetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AD9B571C5E3475006387C4 /* DetailsTableViewCell.swift */; };
 		D3AD9B5A1C5E5245006387C4 /* DetailTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AD9B591C5E5245006387C4 /* DetailTableVC.swift */; };
@@ -312,6 +314,8 @@
 		D39EDDC31CDE858B00D8DD6B /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = "../../../../../Downloads/parse-library-1.12.0/Parse.framework"; sourceTree = "<group>"; };
 		D39EDDCC1CDEBB2D00D8DD6B /* Frameworks */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Frameworks; sourceTree = "<group>"; };
 		D3A0F9FB1B69F0BB00F1FEDA /* EventCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCode.swift; sourceTree = "<group>"; };
+		D3AA1B141D58C1A1000BDAD6 /* GeneralWatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralWatch.swift; sourceTree = "<group>"; };
+		D3AA1B161D58C6CB000BDAD6 /* beep-08b.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "beep-08b.mp3"; sourceTree = "<group>"; };
 		D3AD9B531C5D5439006387C4 /* DetailsTableVC_OLD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsTableVC_OLD.swift; sourceTree = "<group>"; };
 		D3AD9B571C5E3475006387C4 /* DetailsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsTableViewCell.swift; sourceTree = "<group>"; };
 		D3AD9B591C5E5245006387C4 /* DetailTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailTableVC.swift; sourceTree = "<group>"; };
@@ -666,6 +670,7 @@
 			isa = PBXGroup;
 			children = (
 				D3348D031BAE4CFD0056792D /* 124-DeleteWhoosh.mp3 */,
+				D3AA1B161D58C6CB000BDAD6 /* beep-08b.mp3 */,
 				D33CAD031B74773500F59260 /* button-14.mp3 */,
 				D33CAD061B747EBE00F59260 /* se_tap.m4a */,
 			);
@@ -702,9 +707,10 @@
 		D3B6F5F71BA607830052B639 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				D37374681D254D71003F8D5C /* WatchSessionManager.swift */,
 				D373746A1D254F1A003F8D5C /* DataSource.swift */,
 				D3B6F5F81BA60B7E0052B639 /* DictateManagerIC.swift */,
+				D3AA1B141D58C1A1000BDAD6 /* GeneralWatch.swift */,
+				D37374681D254D71003F8D5C /* WatchSessionManager.swift */,
 			);
 			name = Managers;
 			path = WKControllers/Managers;
@@ -1068,6 +1074,7 @@
 				D36BCA241D107D1C005DF193 /* se_tap.m4a in Resources */,
 				D3BEF89A1D10973E003FFC6E /* Images.xcassets in Resources */,
 				D36BCA231D107D17005DF193 /* button-14.mp3 in Resources */,
+				D3AA1B171D58C6CB000BDAD6 /* beep-08b.mp3 in Resources */,
 				D36BCA221D107D14005DF193 /* 124-DeleteWhoosh.mp3 in Resources */,
 				D36BCA211D107D07005DF193 /* PushNotificationPayload.apns in Resources */,
 				D31BF3181CDAB93700521A65 /* Assets.xcassets in Resources */,
@@ -1152,6 +1159,7 @@
 				D31BF3381CDAC17400521A65 /* TestIC.swift in Sources */,
 				D36BCA1C1D107CC0005DF193 /* ShowCalendarsTableRC.swift in Sources */,
 				D31BF35F1CDE792000521A65 /* ReminderManager.swift in Sources */,
+				D3AA1B151D58C1A1000BDAD6 /* GeneralWatch.swift in Sources */,
 				D36BCA1B1D107CBD005DF193 /* ShowCalendarsIC.swift in Sources */,
 				D36BCA161D107CA9005DF193 /* CalendarListPickerIC.swift in Sources */,
 				D31BF32E1CDAC14100521A65 /* ReminderItemsIC.swift in Sources */,

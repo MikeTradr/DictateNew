@@ -1,6 +1,6 @@
 //
 //  ReminderCode.swift
-//  WatchInput
+//  Dictate
 //
 //  Created by Mike Derr on 6/29/15.
 //  Copyright (c) 2015 ThatSoft.com. All rights reserved.

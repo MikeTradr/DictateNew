@@ -36,6 +36,8 @@ class ReminderListsIC: WKInterfaceController {
     
  //   var audioPlayer = AVAudioPlayer() //commented for new watchExtension 040516
     var reminderListColor:UIColor = UIColor.greenColor()
+    
+    var player: WKAudioFilePlayer!
 
 
 
@@ -191,6 +193,22 @@ class ReminderListsIC: WKInterfaceController {
         showListsView = true
         self.setTitle("Reminders")
         self.loadTableData()
+     
+        let filePath = NSBundle.mainBundle().pathForResource("beep-08b", ofType: "mp3")!
+        let fileUrl = NSURL.fileURLWithPath (filePath)
+        let asset = WKAudioFileAsset (URL: fileUrl)
+        let playerItem = WKAudioFilePlayerItem (asset: asset)
+        player = WKAudioFilePlayer (playerItem: playerItem)
+        
+        //self.player.play()
+ 
+        //let alertSound1: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("beep-08b", ofType: "mp3")!)
+        
+        //TODO Mike Anil replace above with call to Manager!
+        //GeneralWatch.sharedInstance.playSound(alertSound1)
+    
+        
+        
     }
 
     override func willActivate() {
@@ -358,7 +376,7 @@ class ReminderListsIC: WKInterfaceController {
             if self.checked {               // Turn checkmark off
                 row.imageCheckbox.setImageNamed("cbBlank40px")
                 row.tableRowLabel.setTextColor(UIColor.whiteColor())
-                reminderItem.completed == false
+                reminderItem.completed = false
                 self.checked = false
                 
 //                var alertSound1: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("beep-08b", ofType: "mp3")!)
@@ -378,26 +396,27 @@ class ReminderListsIC: WKInterfaceController {
                 
                 self.labelShowCompleted.setHidden(true)
                 self.labelCompleted.setHidden(false)
-                
-                WatchGeneral().delay(3.0) {          // do stuff
-                    self.labelShowCompleted.setHidden(false)
-                    self.labelCompleted.setHidden(true)
-                   // self.labelShowCompleted.setText("Show Completed")
-                    //self.labelShowCompleted.setTextColor(self.reminderListColor)
-                    //TODO good to do this???
-                    self.loadTableData2()    //refresh table2 after item completed
-                }
-                
+
                 print("w305 reminderItem: \(reminderItem)")
                 print("w306 reminderItem.completed: \(reminderItem.completed)")
                 
                 reminderItem.completed = true
           
-               //FIXWC ReminderManager.sharedInstance.saveReminder(reminderItem)
+                //TODO WCFIX ReminderManager.sharedInstance.saveReminder(reminderItem)
+                //TODO Anil Mike add code to updated/save reminder as it is completed!!! broke in watchOS2
                 
                 print("w325 reminderItem.completed: \(reminderItem.completed)")
                 
                 self.checked = true
+                
+                WatchGeneral().delay(3.0) {          // do stuff
+                    self.labelShowCompleted.setHidden(false)
+                    self.labelCompleted.setHidden(true)
+                    // self.labelShowCompleted.setText("Show Completed")
+                    //self.labelShowCompleted.setTextColor(self.reminderListColor)
+                    //TODO good to do this???
+                    self.loadTableData2()    //refresh table2 after item completed
+                }
             }
         }   //end else if table
     }

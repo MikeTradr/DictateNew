@@ -1,6 +1,6 @@
 //
 //  TodayViewController
-//  WatchInput
+//  Dictate
 //
 //  Created by Anil on 5/8/15.
 //  Copyright (c) 2015 ThatSoft.com. All rights reserved.

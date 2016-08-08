@@ -1,6 +1,6 @@
 //
 //  vcTodayTable.swift
-//  WatchInput
+//  Dictate
 //
 //  Created by Mike Derr on 6/19/15.
 //  Copyright (c) 2015 ThatSoft.com. All rights reserved.

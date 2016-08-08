@@ -304,7 +304,7 @@ extension AppDelegate: WCSessionDelegate {
             print("p307 Received data: \(action)")
             
             if action == "CreateEvent" {
-                setDefaultsWithMessage(message)
+               //try without and see if event saved Bro??? setDefaultsWithMessage(message)
                 EventManagerSave.sharedInstance.createEvent()
             }
            

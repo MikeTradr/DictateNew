@@ -183,14 +183,17 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
         let str27a:String = "new list groceries cheese milk carrots lettace eggs"
         
         let str4:String = "Appointment at 1:30 PM to see efficiency with Tony 608-255-9876"
+        
+        let str5:String = "3pm Today Mow the grass duration 1 hour"
 
-   
         var str:String = str27a
         let str1:String = "Reminder wash the car"
         let str2:String = str4
         
         //var suggestionArray:[String] = []
-        let suggestionArray = [str4, str1, str2]       //TODO Comment out for non-testing
+       // let suggestionArray = [str4, str1, str2]       //TODO Comment out for non-testing
+        let suggestionArray = [str4, str5, str3, str1]       //TODO Comment out for non-testing
+
         
         var phone       = defaults.stringForKey("phone")
        // var alert       = defaults.objectForKey("defaultEventAlert") as? Double //added defualt 112715

@@ -136,6 +136,7 @@ class DictateCode: NSObject {
         calendarName = ""   // set to blank so can process...
         listName = ""
         eventLocation = ""
+        phone = ""
         
         
         
@@ -150,6 +151,8 @@ class DictateCode: NSObject {
         defaults.setObject(eventDuration, forKey: "eventDuration")
         defaults.setObject(wordArrTrimmed, forKey: "wordArrTrimmed")
         defaults.setObject(eventLocation, forKey: "eventLocation")
+        defaults.setObject(phone, forKey: "toPhone")                // to use for texting to
+
 
         
         print("p116 eventDuration from NSDefaults: \(eventDuration)")              // see what NSDefaults has!

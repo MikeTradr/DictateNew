@@ -184,10 +184,12 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
         
         let str4:String = "Appointment at 1:30 PM to see efficiency with Tony 608-255-9876"
         
-        let str5:String = "3pm Today Mow the grass duration 1 hour"
+        let str5:String = "3 pm Today Mow the grass duration 1 hour"
 
         var str:String = str27a
-        let str1:String = "Reminder wash the car"
+       // let str1:String = "Reminder wash the car list Today"
+        let str1:String = "Reminder show apartment"
+
         let str2:String = str4
         
         //var suggestionArray:[String] = []
@@ -616,7 +618,14 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
     
 //---- Menu functions -------------------------------------------
     @IBAction func menuDictate() {
-        let (startDT, endDT, output, outputNote, day, calendarName, actionType) = DictateManagerIC.sharedInstance.grabVoice()
+        
+        grabvoice()
+        
+        //let (startDT, endDT, output, outputNote, day, calendarName, actionType, duration, alert, eventLocation, eventRepeat) = DictateManagerIC.sharedInstance.grabVoice()
+        
+        
+        //  let (startDT, endDT, output, outputNote, day, calendarName, actionType, duration, alert, eventLocation, eventRepeat) = DictateCode().parse(self.str)
+        
     }
     
     @IBAction func menuSettings() {
@@ -647,9 +656,13 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
     
     @IBAction func buttonCreate() {
         
-        session = WCSession.defaultSession()
         var actionType:String    = defaults.stringForKey("actionType")!
-        let messageDict = ["action":"CreateEvent", "startDT":startDT, "endDT": endDT,"output" : output, "outputNote":outputNote, "eventDuration":eventDuration, "eventLocation":eventLocation,"eventRepeat":eventRepeat, "actionType":actionType]
+        
+        print("w659 calendarName: \(calendarName)")
+
+      
+        session = WCSession.defaultSession()
+        let messageDict = ["action":actionType, "startDT":startDT, "endDT": endDT,"output" : output, "outputNote":outputNote, "eventDuration":eventDuration, "eventLocation":eventLocation,"eventRepeat":eventRepeat, "calendarName":calendarName]
         print("w709 messageDict: \(messageDict)")
         
         
@@ -661,7 +674,7 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
                 //handle error
                 print("w717 error : \(error.localizedDescription)")
         })
-        
+ 
 
         
         
@@ -724,9 +737,21 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
             
             //let messageDict = ["name":"Anil", "startDT":startDT, "endDT":endDT, "output":output, "calendarName":calendarName, "actionType":actionType]
             
+          /*
+            session = WCSession.defaultSession()
+            let messageDict = ["action":"CreateEvent", "startDT":startDT, "endDT": endDT,"output" : output, "outputNote":outputNote, "eventDuration":eventDuration, "eventLocation":eventLocation,"eventRepeat":eventRepeat, "actionType":actionType]
+            print("w709 messageDict: \(messageDict)")
             
-
             
+            session?.sendMessage(messageDict, replyHandler: { (response) in
+                
+                print("w713 Message sent status: \(response["status"])")
+                
+                }, errorHandler: { (error) in
+                    //handle error
+                    print("w717 error : \(error.localizedDescription)")
+            })
+        */
             self.labelCreated.setText("Event created on your \(calendarName.capitalizedString) calendar!")
             
             ComplicationController.sharedInstance.requestedUpdateDidBegin() //update complication!

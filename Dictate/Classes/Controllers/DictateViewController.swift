@@ -133,6 +133,9 @@ let str60:String = "email mike this is a test message"
 
 let str61:String = "7 pm See Band location Capital Brewery"
 
+let str62:String = "Reminder wash the car list mike"
+let str63:String = "Reminder feed the dog"
+
 
 //BOMBS test n fix Mike TODO MIKE, from Siri
 
@@ -152,7 +155,7 @@ add to dictate str   “meeting with Bob every Wednesday at noon”  //handle wo
 */
 
 // ---- change strings here for testing, shows on the dictated field---
-//var str:String = str61
+//var str:String = str63
 var str:String = ""
 
 //var strRaw:String = str

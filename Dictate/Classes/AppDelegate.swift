@@ -301,11 +301,22 @@ extension AppDelegate: WCSessionDelegate {
         }
      */
         if let action = message["action"] as? String {
-            print("p307 Received data: \(action)")
+            print("p307 action: \(action)")
             
-            if action == "CreateEvent" {
-               //try without and see if event saved Bro??? setDefaultsWithMessage(message)
+            setDefaultsWithMessage(message)
+            
+            if action == "Event" {
                 EventManagerSave.sharedInstance.createEvent()
+            }
+            
+            if action == "Reminder" {
+                let output = (message["output"] as? String)!
+                let outputArray:[String] = Array(arrayLiteral: output)  //make output into Array for func call below
+                let calendarName:String = (message["calendarName"] as? String)!
+                print("p315 outputArray: \(outputArray)")
+                print("p315 calendarName: \(calendarName)")
+                
+                ReminderManagerSave.sharedInstance.addReminder(calendarName, items: outputArray)
             }
            
         }
@@ -322,7 +333,9 @@ extension AppDelegate: WCSessionDelegate {
         defaults.setObject(message["eventDuration"], forKey: "eventDuration")
         defaults.setObject(message["eventLocation"], forKey: "eventLocation")
         defaults.setObject(message["eventRepeat"], forKey: "eventRepeat")
-        defaults.setObject(message["actionType"], forKey: "actionType")
+        defaults.setObject(message["action"], forKey: "actionType")
+        defaults.setObject(message["calendarName"], forKey: "calendarName")
+
     }
 }
 

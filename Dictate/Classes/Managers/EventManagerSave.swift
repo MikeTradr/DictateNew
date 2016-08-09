@@ -10,7 +10,6 @@ import UIKit
 import EventKit
 
 
-
 class EventManagerSave: NSObject {
     class var sharedInstance : EventManagerSave {
         struct Static {
@@ -96,11 +95,13 @@ class EventManagerSave: NSObject {
                 let eventLocation: String = defaults.stringForKey("eventLocation") ?? ""
                 
                 let eventRepeat:Int = defaults.objectForKey("eventRepeat") as! Int
+                
+                // print("p100 allDayFlag: \(allDayFlag)")
 
+                //changed added  ?? false
+                let allDayFlag  = defaults.objectForKey("allDayFlag") as? Bool ?? false
                 
-                let allDayFlag  = defaults.objectForKey("allDayFlag") as! Bool
-                
-                var calendarName    = defaults.stringForKey("calendarName")
+                var calendarName = defaults.stringForKey("calendarName") ?? ""
                 
                 let alert       = defaults.objectForKey("eventAlert") as! Double
          //       let `repeat`      = defaults.stringForKey("eventRepeat")
@@ -120,20 +121,20 @@ class EventManagerSave: NSObject {
 
                 
                 print("p112 calandarName: \(calendarName)")       //TODO WHY is "" ????
-                
+           /*
                 if (calendarName == "") {                       // calendarName not set in parse so pill it from prefDefault
-                    calendarName = defaults.stringForKey("prefsDefaultCalendarName")
+                    calendarName = defaults.stringForKey("prefsDefaultCalendarName")!
                 }
-                
-                print("p628 *** startDT: \(startDT)")
-                print("p629 endDT: \(endDT)")
-                print("######## p804 calendarName: \(calendarName)")
-                
+             */
+                print("p129 *** startDT: \(startDT)")
+                print("p130 endDT: \(endDT)")
+                print("######## p131 calendarName: \(calendarName)")
+             /*
                 if (calendarName == "") {
-                    print("p133 we here: \(calendarName)")
+                    print("p134 we here: \(calendarName)")
                     var calendarName:String = "dictate events"
                 }
-                
+             */
                 //calendarName = "dictate events"
                 
                 
@@ -173,13 +174,19 @@ class EventManagerSave: NSObject {
                 var calendarColor = event.calendar.CGColor
                 print("p174 calendarColor = \(calendarColor)")
                 
-                
+                if calendarName == "" {                            //no calendar set so use default calendar!
+                    calendarName = event.calendar.title
+                    event.calendar = eventStore.defaultCalendarForNewEvents
+                    print("p181 calendarName = \(calendarName)")
+                }
                 
                 
                 for calendar in calendars {
                     // 2
                     
                     //calendar.calendar = eventStore.defaultCalendarForNewReminders()
+                    
+                    print("p186 calendarName = \(calendarName)")
                     
                     if calendarName != "" {
                         
@@ -193,7 +200,7 @@ class EventManagerSave: NSObject {
 
                         //print("p120 calendarName.lowercaseString = \(calendarName!.lowercaseString)")
                         
-                        if calendar.title.lowercaseString == calendarName!.lowercaseString {     //need match here to create event on calendar!!!
+                        if calendar.title.lowercaseString == calendarName.lowercaseString {     //need match here to create event on calendar!!!
                             
                             //if calendar.title.lowercaseString == calendarTitle.lowercaseString {     //need match here to create event on calendar!!!
                             

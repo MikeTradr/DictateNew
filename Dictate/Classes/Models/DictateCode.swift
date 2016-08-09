@@ -137,6 +137,7 @@ class DictateCode: NSObject {
         listName = ""
         eventLocation = ""
         phone = ""
+        reminderList = ""
         
         
         
@@ -485,6 +486,7 @@ class DictateCode: NSObject {
                     
                     print("p1394 listName: \(listName)")
                     defaults.setObject(listName, forKey: "reminderList")    //sets actionType
+                    defaults.setObject(listName, forKey: "calendarName")    //sets for what Reminder list to save item to.
                     
                     break;
                     
@@ -529,27 +531,41 @@ class DictateCode: NSObject {
                     //TODO Mike Anil get from settings user set default reminder list!
                     
                     //listName = defaults.stringForKey("reminderList")!
-              
-                    if defaults.stringForKey("defaultReminderID") != "" {
-                        if let defaultReminderID  = defaults.stringForKey("defaultReminderID") {
-                            print("p425 defaultReminderID: \(defaultReminderID)")
-                            if let reminder:EKCalendar = ReminderManager.sharedInstance.getCalendar(defaultReminderID) {
-                                print("p427 reminder: \(reminder)")
-                                listName = reminder.title
+                    
+                    print("p535 listName: \(listName)")
+
+                    if listName == "" {
+                        if defaults.stringForKey("defaultReminderID") != "" {
+                            if let defaultReminderID  = defaults.stringForKey("defaultReminderID") {
+                                print("p425 defaultReminderID: \(defaultReminderID)")
+                                if let reminder:EKCalendar = ReminderManager.sharedInstance.getCalendar(defaultReminderID) {
+                                    print("p427 reminder: \(reminder)")
+                                    listName = reminder.title
+                                    defaults.setObject(listName, forKey: "reminderList")
+                                }
                             }
                         }
                     }
                
-                    var reminderList = listName
-                   // listName = "Default"                            //save reminder to default Reminder List
+                    reminderList = defaults.stringForKey("reminderList")!
+
+                   // listName = "Default"      //save reminder to default Reminder List
+                    print("p551 reminderList: \(reminderList)")
+                    print("p551 calendarName: \(calendarName)")
+                    calendarName = reminderList
+                    print("p553 calendarName: \(calendarName)")
+
+                    if calendarName == "" {
+                        calendarName = listName
+                    }
                     
-                    print("p424 actionType: \(actionType)")
-                    print("p424: mainType: \(mainType)")
-                    print("p424: startDT: \(startDT)")
-                    print("p424: eventAlert: \(eventAlert)")
-                    print("p424: calendarName: \(calendarName)")
-                    print("p424: output: \(output)")
-                    print("p441: listName: \(listName)")
+                    print("p549 actionType: \(actionType)")
+                    print("p549: mainType: \(mainType)")
+                    print("p549: startDT: \(startDT)")
+                    print("p549: eventAlert: \(eventAlert)")
+                    print("p549: calendarName: \(calendarName)")
+                    print("p549: output: \(output)")
+                    print("p549: listName: \(listName)")
                     
                     defaults.setObject(startDT, forKey: "startDT")
                     defaults.setObject(calendarName, forKey: "calendarName")    //sets calendarName

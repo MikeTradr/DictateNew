@@ -429,7 +429,7 @@ class ReminderManagerSave: NSObject, WCSessionDelegate {
         
         var calendarDatabase = EKEventStore()   // from EKTest code...
 
-        let reminder = EKReminder(eventStore: calendarDatabase)
+        var reminder = EKReminder(eventStore: calendarDatabase)
         
         reminder.title = reminderTitle!
         
@@ -455,7 +455,17 @@ class ReminderManagerSave: NSObject, WCSessionDelegate {
         //____ end add Reminder Alarm ____________________
         
         
-        reminder.calendar = calendarDatabase.defaultCalendarForNewReminders()   // WORKS to Default
+        
+        
+        if calendarName == "" {
+            reminder.calendar = calendarDatabase.defaultCalendarForNewReminders()   // WORKS to Default
+        } else {
+            let calendarID = ReminderManager.sharedInstance.getCalendar(calendarName!)
+            print("p464 calendarID: \(calendarID)")
+            reminder.calendar = calendarID!
+      
+        }
+        
         
         //reminder.calendar = calendarDatabase.calendarWithIdentifier("0x1702ae400")
         

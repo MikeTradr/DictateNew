@@ -547,11 +547,19 @@ class ReminderManager: NSObject {
     
     
     
-    func getCalendar(id:String) -> EKCalendar? {            //returns EKCalendar from CalendarID
+   // func getCalendar(id:String) -> EKCalendar? {            //returns EKCalendar from CalendarID
+        func getCalendar(id:String) -> EKCalendar? {            //returns EKCalendar from CalendarID
+
             print("p447 we here? id: \(id)")
-            let temp:EKCalendar = (self.eventStore.calendarWithIdentifier(id))!
-            print("p449 temp: \(temp)")
-            return self.eventStore.calendarWithIdentifier(id)
+           // let temp:EKCalendar = (self.eventStore.calendarWithIdentifier(id))!
+          //  let temp:EKCalendar = (self.eventStore.calendarWithIdentifier(id))!
+            let m = self.eventStore.calendarWithIdentifier(id)
+            
+
+          //  print("p557 temp: \(temp)")
+            print("p557 m: \(m)")
+            return m
+
         }
     
     

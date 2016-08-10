@@ -140,12 +140,24 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         let imageProvider = CLKImageProvider(onePieceImage: image)
         
         if complication.family == .ModularSmall {
+            
+            let template = CLKComplicationTemplateModularSmallSimpleImage()
+            if let template = template as? CLKComplicationTemplateModularSmallSimpleImage {
+                //template.imageProvider = imageProvider
+                template.imageProvider = CLKImageProvider(onePieceImage:  UIImage(named: "u0iNw")!)
+                
+                //u0iNw   dicMicD58px
+                
+                template.imageProvider.tintColor = UIColor.yellowColor()
+            }
+        }
+        /*
             let template = CLKComplicationTemplateModularSmallSimpleImage()
             if let template = template as? CLKComplicationTemplateModularSmallSimpleImage {
                 template.imageProvider = imageProvider
             }
         }
-        
+        */
         
         if complication.family == .ModularLarge {
             
@@ -750,7 +762,11 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         case .ModularSmall:
             template = CLKComplicationTemplateModularSmallSimpleImage()
             if let template = template as? CLKComplicationTemplateModularSmallSimpleImage {
-                template.imageProvider = imageProvider
+                //template.imageProvider = imageProvider
+                template.imageProvider = CLKImageProvider(onePieceImage:  UIImage(named: "u0iNw")!)
+                
+                //u0iNw   dicMicD58px
+                
                 template.imageProvider.tintColor = UIColor.yellowColor()
             }
             

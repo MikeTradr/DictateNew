@@ -11,10 +11,21 @@ import Foundation
 import EventKit
 //import Parse
 //import AVFoundation  //commented for new watchExtension 040516
+import WatchConnectivity
 
 
 
-class ReminderListsIC: WKInterfaceController {
+class ReminderListsIC: WKInterfaceController, DataSourceChangedDelegate {
+    
+    var session: WCSession? {
+        didSet {
+            if let session = session {
+                session.delegate = self
+                session.activateSession()
+            }
+        }
+    }
+
     
     let defaults    = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
     let eventStore  = EKEventStore()
@@ -404,6 +415,25 @@ class ReminderListsIC: WKInterfaceController {
           
                 //TODO WCFIX ReminderManager.sharedInstance.saveReminder(reminderItem)
                 //TODO Anil Mike add code to updated/save reminder as it is completed!!! broke in watchOS2
+                let actionType = "saveReminder"
+                
+                session = WCSession.defaultSession()
+                let messageDict = ["action":actionType, "reminderItem":reminderItem]
+                
+                print("w423 messageDict: \(messageDict)")
+                
+                session?.sendMessage(messageDict, replyHandler: { (response) in
+                    
+                    print("w427 Message sent status: \(response["status"])")
+                    
+                    }, errorHandler: { (error) in
+                        //handle error
+                        print("w717 error : \(error.localizedDescription)")
+                })
+                
+                
+                
+                
                 
                 print("w325 reminderItem.completed: \(reminderItem.completed)")
                 
@@ -462,5 +492,13 @@ class ReminderListsIC: WKInterfaceController {
     @IBAction func buttonMain() {
         presentControllerWithName("Main", context: "Reminders")
     }
+    
+    func dataSourceDidUpdate(dataSource: DataSource){
+        
+    }
 
+}
+
+extension ReminderListsIC: WCSessionDelegate {
+    
 }

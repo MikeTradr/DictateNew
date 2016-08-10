@@ -318,6 +318,17 @@ extension AppDelegate: WCSessionDelegate {
                 
                 ReminderManagerSave.sharedInstance.addReminder(calendarName, items: outputArray)
             }
+            
+            if action == "saveReminder" {
+                let reminderItem = (message["reminderItem"] as? EKReminder)!
+               
+                print("p325 reminderItem: \(reminderItem)")
+                
+                ReminderManagerSave.sharedInstance.saveReminder(reminderItem)
+            }
+            
+            
+            
            
         }
         

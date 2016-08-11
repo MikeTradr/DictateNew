@@ -341,7 +341,7 @@ extension AppDelegate: WCSessionDelegate {
         defaults.setObject(message["endDT"], forKey: "endDT")
         defaults.setObject(message["output"], forKey: "output")
         defaults.setObject(message["outputNote"], forKey: "outputNote")
-        defaults.setObject(message["eventDuration"], forKey: "eventDuration")
+       // defaults.setObject(message["eventDuration"], forKey: "eventDuration")
         defaults.setObject(message["eventLocation"], forKey: "eventLocation")
         defaults.setObject(message["eventRepeat"], forKey: "eventRepeat")
         defaults.setObject(message["action"], forKey: "actionType")

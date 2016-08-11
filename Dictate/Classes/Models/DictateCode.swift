@@ -127,7 +127,7 @@ class DictateCode: NSObject {
 //  startDT, endDT, output, outputNote, day, calendarName, actionType, duration, alert, eventLocation, eventRepeat
     
     func parse (str: String) -> (NSDate, NSDate, String, String, String, String, String, Int, Int, String, Int) {
-        //returning startDT, endDT, output, outputNote, day, calendarName, eventDuration, actionType, duration, alert, eventLocation, eventRepeat
+        //returning startDT, endDT, output, outputNote, day, calendarName, actionType, duration, alert, eventLocation, eventRepeat
         
         var wordArr:[String]        = []
         

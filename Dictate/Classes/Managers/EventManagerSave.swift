@@ -214,7 +214,8 @@ class EventManagerSave: NSObject {
                             print("p833 calendarName = \(calendarName)")
                             
                             // Duration, set End Date Time
-                            let endDate = startDT.dateByAddingTimeInterval(eventDuration * 60)    //was endDate mike 022516
+                           // let endDate = startDT.dateByAddingTimeInterval(eventDuration * 60)    //was endDate mike 022516
+                            let endDate = endDT
                             
                             
                             // 4

@@ -76,7 +76,7 @@ class EventDetailsIC: WKInterfaceController {
     
 //---- Menu functions -------------------------------------------
     @IBAction func menuDictate() {
-        let (startDT, endDT, output, outputNote, day, calendarName, actionType) = DictateManagerIC.sharedInstance.grabVoice()
+       let (startDT, endDT, output, outputNote, day, calendarName, actionType, duration, alert, eventLocation, eventRepeat) = DictateManagerIC.sharedInstance.grabVoice()
     }
     
     @IBAction func menuSettings() {

@@ -33,6 +33,8 @@ class ReminderListsIC: WKInterfaceController, DataSourceChangedDelegate {
     var reminders:[EKReminder]          = []
     var allReminders:[EKReminder]       = []
     var allReminderLists:[EKCalendar]   = []
+    
+    var calendars:[EKCalendar]          = []
 
     var numberOfItems:Int       = 0
     var startDT:NSDate          = NSDate()
@@ -49,6 +51,11 @@ class ReminderListsIC: WKInterfaceController, DataSourceChangedDelegate {
     var reminderListColor:UIColor = UIColor.greenColor()
     
     var player: WKAudioFilePlayer!
+    
+    var showCompleted = false
+    
+
+
 
 
 
@@ -116,7 +123,7 @@ class ReminderListsIC: WKInterfaceController, DataSourceChangedDelegate {
     
 //---- Menu functions -------------------------------------------
     @IBAction func menuDictate() {
-        let (startDT, endDT, output, outputNote, day, calendarName, actionType) = DictateManagerIC.sharedInstance.grabVoice()
+        let (startDT, endDT, output, outputNote, day, calendarName, actionType, duration, alert, eventLocation, eventRepeat) = DictateManagerIC.sharedInstance.grabVoice()
     }
     
     
@@ -193,13 +200,14 @@ class ReminderListsIC: WKInterfaceController, DataSourceChangedDelegate {
         //NSLog("%@ w70 appDelegate", self)
         print("w71 call getAccessToEventStoreForType")
         //FIXME:6
-        EventManager.sharedInstance.getAccessToEventStoreForType(EKEntityType.Event, completion: { (granted) -> Void in
+        //TODO this needed events????
+   /*     EventManager.sharedInstance.getAccessToEventStoreForType(EKEntityType.Event, completion: { (granted) -> Void in
             
             if granted{
                 print("w75 Events granted: \(granted)")
             }
         })
-        
+   */
         print("w190 context: \(context)")
         showListsView = true
         self.setTitle("Reminders")
@@ -217,8 +225,13 @@ class ReminderListsIC: WKInterfaceController, DataSourceChangedDelegate {
         
         //TODO Mike Anil replace above with call to Manager!
         //GeneralWatch.sharedInstance.playSound(alertSound1)
-    
         
+        calendars = ReminderManager.sharedInstance.eventStore.calendarsForEntityType(EKEntityType.Reminder)
+        print("w230 calendars: \(calendars)")
+        print("w230 calendars.count: \(calendars.count)")
+
+
+        //fetchReminders()
         
     }
 
@@ -234,9 +247,9 @@ class ReminderListsIC: WKInterfaceController, DataSourceChangedDelegate {
 
         self.reminderItemsGroup.setHidden(false)  //Hide lower table2
   
-        if showListsView {
-            self.loadTableData()
+        if showListsView {                  //true case
             print("w165 showListsView True")
+            self.loadTableData()
         } else {
             self.loadTableData2()
             print("w165 showListsView False")
@@ -244,6 +257,21 @@ class ReminderListsIC: WKInterfaceController, DataSourceChangedDelegate {
   
         //DictateManagerIC.sharedInstance.initalizeParse()
         
+    }
+    
+    func fetchReminders(){
+       
+        fetchRemindersFromCalendars(showComplted:showCompleted)
+        
+    }
+    
+    func fetchRemindersFromCalendars(calendars:[EKCalendar]? = nil, showComplted:Bool=false){
+        
+        ReminderManager.sharedInstance.fetchRemindersFromCalendars(calendars,includeCompleted:showComplted ) { (reminders) -> Void in
+            
+            print("w270 self.reminders: \(self.reminders)")
+            print("w271 self.reminders.count: \(self.reminders.count)")
+        }
     }
  
     
@@ -261,37 +289,40 @@ class ReminderListsIC: WKInterfaceController, DataSourceChangedDelegate {
         
         table.setNumberOfRows(allReminderLists.count, withRowType: "tableRow")
         
-        print("w235 allReminderLists: \(allReminderLists)")
-        print("w236 allReminderLists.count: \(allReminderLists.count)")
+        print("w292 allReminderLists: \(allReminderLists)")
+        print("w293 allReminderLists.count: \(allReminderLists.count)")
   
         if allReminderLists != [] {
             for (index, title) in allReminderLists.enumerate() {
                 print("---------------------------------------------------")
-                print("w243 index, title: \(index), \(title)")
-                print("w244 table.rowControllerAtIndex(index): \(table.rowControllerAtIndex(index))")
+                print("w298 title: \(title.title)")
+                print("---------------------------------------------------")
+
+                print("w301 index, title: \(index), \(title)")
+                print("w302 table.rowControllerAtIndex(index): \(table.rowControllerAtIndex(index))")
                 
                 if table.rowControllerAtIndex(index) != nil {
                     let row = table.rowControllerAtIndex(index) as! ReminderListsTableRC
                 
                     let reminderList = allReminderLists[index]
-                    print("w146 reminderList: \(reminderList)")
+                    print("w308 reminderList: \(reminderList)")
      // /*
                     //TODO Mike TODO Anil  this crashes watch used to work!!!!!!!
       
                     // get count or items in each reminder list and set the Text Label
                     ReminderManager.sharedInstance.fetchCalendarReminders(reminderList) { (reminders) -> Void in
-                        print("w148 reminders: \(reminders)")
+                        print("w314 reminders: \(reminders)")
                         self.allReminders = reminders as [EKReminder]
                         let numberOfItems = self.allReminders.count
                     
-                        print("w151 numberOfItems: \(numberOfItems)")
+                        print("w318 numberOfItems: \(numberOfItems)")
                         if numberOfItems != 0 {
-                            print("w156 reminder.title: \(reminderList.title)")
-                            print("w157 numberOfItems: \(numberOfItems)")
+                            print("w320 reminder.title: \(reminderList.title)")
+                            print("w321 numberOfItems: \(numberOfItems)")
 
                            row.tableRowLabel.setText("\(reminderList.title) (\(numberOfItems))")
                             
-                            print("w162 here? reminder: \(reminderList)")
+                            //print("w162 here? reminder: \(reminderList)")
                         }
 
                     }   // end ReminderManager call
@@ -309,7 +340,7 @@ class ReminderListsIC: WKInterfaceController, DataSourceChangedDelegate {
         }
     }   // end loadTableData func
     
-    func loadTableData2 () {
+    func loadTableData2 () {    //loads reminders for one list.
         
         self.setTitle("")
 
@@ -319,7 +350,7 @@ class ReminderListsIC: WKInterfaceController, DataSourceChangedDelegate {
         navBarGroup.setHidden(false)            //show  navBar
 
         let calendarId = reminderListID
-        print("w113 reminderListID: \(reminderListID)")
+        print("w353 reminderListID: \(reminderListID)")
         let calendar = ReminderManager.sharedInstance.eventStore.calendarWithIdentifier(calendarId)
         
         labelReminderListID.setTextColor(UIColor(CGColor: calendar!.CGColor))
@@ -345,12 +376,12 @@ class ReminderListsIC: WKInterfaceController, DataSourceChangedDelegate {
                 self.table2.setNumberOfRows(self.allReminders.count, withRowType: "tableRow2")
             }
             
-            print("w45 allReminders: \(self.allReminders)")
-            print("w46 allReminders.count: \(self.allReminders.count)")
+            print("w379 allReminders: \(self.allReminders)")
+            print("w380 allReminders.count: \(self.allReminders.count)")
             
             for (index, title) in self.allReminders.enumerate() {
                 print("---------------------------------------------------")
-                print("w40 index, title: \(index), \(title)")
+                print("w384 index, title: \(index), \(title)")
                 
                 let row = self.table2.rowControllerAtIndex(index) as! ReminderItemsTableRC
                 let item = self.allReminders[index]
@@ -358,7 +389,7 @@ class ReminderListsIC: WKInterfaceController, DataSourceChangedDelegate {
                 row.tableRowLabel.setText(item.title)
                //TODO MIKE why here?  Anil row.reminder = item
             }
-            //self.loadTableData()
+            //self.loadTableData()    //populate teh reminders with there items!
         }
     }       // end loadTableData2 func
     

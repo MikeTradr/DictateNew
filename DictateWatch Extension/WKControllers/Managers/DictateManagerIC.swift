@@ -50,7 +50,7 @@ var resultCalendar:String   = ""
 
 var calendarName            = ""
 
-var eventDuration:Double    = 10
+//var eventDuration:Double    = 10
 
 //var startDate = ""
 
@@ -60,6 +60,11 @@ var outputNote:String       = strRaw
 
 var fullDT:String       = ""
 var fullDTEnd:String    = ""
+
+var eventLocation:String    = ""
+var eventRepeat:Int         = 0
+var duration:Int            = 0
+var alert:Int               = 0
 
 
 
@@ -90,9 +95,12 @@ class DictateManagerIC: WKInterfaceController {
     var endDT:NSDate            = NSDate(dateString:"2014-12-12")
     var actionType:String   = ""        //event, reminder, singleWordList, commaList, rawList, note?, text, email
    // var audioPlayer = AVAudioPlayer()
-
     
-    func grabVoice() -> (NSDate, NSDate, String, String, String, String, String)  {  //startDT, endDT, output, outputNote, day, calendarName, actionType
+    
+    // return (startDT, endDT, output, outputNote, day, calendarName, actionType, duration, alert, eventLocation, eventRepeat)
+    
+    func grabVoice() -> (NSDate, NSDate, String, String, String, String, String, Int, Int, String, Int)  {  //startDT, endDT, output, outputNote, day, calendarName, actionType, duration, alert, eventLocation, eventRepeat)
+
         //added actionType above
         
        // initalizeParse()
@@ -156,7 +164,8 @@ class DictateManagerIC: WKInterfaceController {
         // println("### 115 output: \(output)")
         // println("p207 actionType: \(actionType)")
 
-        return (startDT, endDT, output, outputNote, day, calendarName, actionType)
+        //return (startDT, endDT, output, outputNote, day, calendarName, actionType)
+          return (startDT, endDT, output, outputNote, day, calendarName, actionType, duration, alert, eventLocation, eventRepeat)
         
         
     }   //end func grabvoice

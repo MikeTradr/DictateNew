@@ -56,11 +56,10 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
     var day:String              = ""
     
     var eventLocation:String    = ""
-   // var eventRepeat:String      = ""
     var eventRepeat:Int         = 0
-    
-    var duration:Int            = 0
+    var eventDuration:Int       = 0
     var alert:Int               = 0
+    
 
     
    // var labelCreated:String     = ""
@@ -153,7 +152,7 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
 
 //#### functions #################################
     
-    // return (startDT, endDT, output, outputNote, day, calendarName, actionType, duration, alert, eventLocation, eventRepeat)
+    // return (startDT, endDT, output, outputNote, day, calendarName, actionType, eventDuration, alert, eventLocation, eventRepeat)
     
     internal func grabvoice() -> (NSDate, NSDate, String, String, String, String, String, Int, Int, String, Int)  {  //startDT, endDT, output, outputNote, day, calendarName, actionType
         //added actionType above
@@ -218,7 +217,7 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
         print("w111Defaults ==================================")
         print("w111Defaults phone: \(phone)")
         print("w111Defaults alert: \(alert)")
-        print("w111Defaults duration: \(duration)")
+        print("w111Defaults eventDuration: \(eventDuration)")
         print("w111Defaults eventRepeat: \(eventRepeat)")
         print("w111Defaults strRaw: \(strRaw)")
         print("w111Defaults reminderTitle: \(reminderTitle)")
@@ -261,7 +260,7 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
             
             if results != nil {
                 
-                let (startDT, endDT, output, outputNote, day, calendarName, actionType, duration, alert, eventLocation, eventRepeat) = DictateCode().parse(self.str)
+                let (startDT, endDT, output, outputNote, day, calendarName, actionType, eventDuration, alert, eventLocation, eventRepeat) = DictateCode().parse(self.str)
                 
                 print("w200Main ==================================")
                 print("w200Main startDT: \(startDT)")
@@ -274,7 +273,7 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
                 print("w200Main dictate ==================================")
 
                 print("w200Main phone: \(phone)")
-                print("w200Main duration: \(duration)")
+                print("w200Main eventDuration: \(eventDuration)")
                 print("w200Main alert: \(alert)")
                 print("w200Main alert: \(eventLocation)")
                 print("w200Main eventRepeat: \(eventRepeat)")
@@ -556,7 +555,7 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
         
         //return self.str
        // return (startDT, endDT, output, outputNote, day, calendarName, actionType)
-         return (startDT, endDT, output, outputNote, day, calendarName, actionType, duration, alert, eventLocation, eventRepeat)
+         return (startDT, endDT, output, outputNote, day, calendarName, actionType, eventDuration, alert, eventLocation, eventRepeat)
         
     }
     
@@ -621,11 +620,6 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
         
         grabvoice()
         
-        //let (startDT, endDT, output, outputNote, day, calendarName, actionType, duration, alert, eventLocation, eventRepeat) = DictateManagerIC.sharedInstance.grabVoice()
-        
-        
-        //  let (startDT, endDT, output, outputNote, day, calendarName, actionType, duration, alert, eventLocation, eventRepeat) = DictateCode().parse(self.str)
-        
     }
     
     @IBAction func menuSettings() {
@@ -642,15 +636,14 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
      //   self.playSound(alertSound1)   ////commented for new watchExtension 040516
         
        // let (startDT, endDT, output, outputNote, day, calendarName, actionType) = grabvoice()
-        let (startDT, endDT, output, outputNote, day, calendarName, actionType, duration, alert, eventLocation, eventRepeat) = grabvoice()
+      //  let (startDT, endDT, output, outputNote, day, calendarName, actionType, duration, alert, eventLocation, eventRepeat) = grabvoice()
         
-        print("p268 startDT: \(startDT)")
-        print("p269 endDT: \(endDT)")
-        print("p270 actionType: \(actionType)")
-        print("p271 calendarName: \(calendarName)")
+        grabvoice()
         
-
-        
+      //  print("p268 startDT: \(startDT)")
+       // print("p269 endDT: \(endDT)")
+       // print("p270 actionType: \(actionType)")
+       // print("p271 calendarName: \(calendarName)")  
     }
     
     
@@ -658,7 +651,9 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
         
         var actionType:String    = defaults.stringForKey("actionType")!
         
-        print("w659 calendarName: \(calendarName)")
+        print("w654 calendarName: \(calendarName)")
+        
+        print("w657 eventDuration: \(eventDuration)")
 
       
         session = WCSession.defaultSession()

@@ -450,6 +450,9 @@ class EventManager: NSObject {
         getAccessToEventStoreForType(EKEntityType.Event, completion: { (granted) -> Void in
             
             if granted{
+                
+                print("p454 granted: \(granted)")
+                
                 let calendars = self.eventStore.calendarsForEntityType(EKEntityType.Event)
                 
                 let predicate = self.eventStore.predicateForEventsWithStartDate(startDate, endDate: endDate, calendars: calendars)
@@ -459,7 +462,7 @@ class EventManager: NSObject {
                 } else {
                 completion([])
                 }
-               // print("p396 events: \(events)")
+                print("p465 events: \(events)")
             }else{
                 completion([])
             }

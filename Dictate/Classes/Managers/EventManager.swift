@@ -455,14 +455,21 @@ class EventManager: NSObject {
                 
                 let calendars = self.eventStore.calendarsForEntityType(EKEntityType.Event)
                 
+                print("p462 calendars: \(calendars)")
+                print("p462 startDate: \(startDate)")
+                print("p462 endDate: \(endDate)")
+                
                 let predicate = self.eventStore.predicateForEventsWithStartDate(startDate, endDate: endDate, calendars: calendars)
                 let events = self.eventStore.eventsMatchingPredicate(predicate) as? [EKEvent]
+                
+                print("p465 events: \(events)")
+                
                 if let _events = events{
                     completion(events!)
                 } else {
-                completion([])
+                    completion([])
                 }
-                print("p465 events: \(events)")
+                print("p472 events: \(events)")
             }else{
                 completion([])
             }

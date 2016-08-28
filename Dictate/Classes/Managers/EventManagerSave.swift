@@ -27,6 +27,9 @@ class EventManagerSave: NSObject {
     var allEvents: Array<EKEvent> = []
     var numberEventsToday:Int = 0
     
+    let dateFormatter = NSDateFormatter()
+
+    
     func getAccessToEventStoreForType(type:EKEntityType, completion:(granted:Bool)->Void){
         
         let status = EKEventStore.authorizationStatusForEntityType(type)
@@ -420,6 +423,33 @@ class EventManagerSave: NSObject {
                             
                         }
                         
+                        self.dateFormatter.dateFormat = "h:mm"
+                        
+                        let endTimeA = self.dateFormatter.stringFromDate(event.endDate)
+                        
+                        
+                        // from:
+                        // http://jamesonquave.com/blog/local-notifications-in-ios-8-with-swift-part-1/
+                        
+                        // create a corresponding local notification
+                        let notification = UILocalNotification()
+                        notification.alertBody = event.title // text that will be displayed in the notification
+                        notification.alertAction = "open" // text that is displayed after "slide to..." on the lock screen - defaults to "slide to view"
+                        notification.fireDate = event.startDate // todo item due date (when notification will be fired)
+                        
+                        //TODO used category to store endTime there a better way Anil? TODO?
+                        notification.category = endTimeA
+                        notification.soundName = UILocalNotificationDefaultSoundName // play default sound
+                       // notification.userInfo = ["title": event.title, "UUID": event.UUID] // assign a unique identifier to the notification so that we can retrieve it later
+                        
+                        notification.category = "TODO_CATEGORY"
+                        
+                        UIApplication.sharedApplication().scheduleLocalNotification(notification)
+                        
+                        
+                        
+                        
+                        
                     } else { //if calendarName != ""
                          //present alert dialog.
                         
@@ -436,6 +466,7 @@ class EventManagerSave: NSObject {
 
         })
         
+
     }
     
     

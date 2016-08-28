@@ -545,7 +545,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         template.body1TextProvider = CLKSimpleTextProvider(text: body1Text)
         
         let units : NSCalendarUnit = [.Hour, .Minute]
-        let style : CLKRelativeDateStyle = .Offset     //styles: .Natural .Offset  .Timer
+        let style : CLKRelativeDateStyle = .Natural     //styles: .Natural .Offset  .Timer
         let textProvider = CLKRelativeDateTextProvider(date: startDate,
                                                        style: style,
                                                        units: units) //NSCalendarUnit.Hour.union(.Minute))

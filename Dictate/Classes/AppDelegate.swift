@@ -162,7 +162,50 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             //initialize defaults first time app launched...
             DataManager.sharedInstance.createDefaults()
+            
+            //for sending notifications I think? Mike 082516
+            //TODO best place for this code???
+            let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
+            UIApplication.sharedApplication().registerUserNotificationSettings(settings)
+            UIApplication.sharedApplication().registerForRemoteNotifications()
+            
         }
+        
+        // need this??? TODO
+        // types are UIUserNotificationType values
+        application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil))
+        
+        
+        //Notification code... Mike 082516
+        // from
+        // http://jamesonquave.com/blog/local-notifications-in-ios-8-with-swift-part-2/
+        
+        let completeAction = UIMutableUserNotificationAction()
+        completeAction.identifier = "COMPLETE_TODO" // the unique identifier for this action
+        completeAction.title = "Complete" // title for the action button
+        completeAction.activationMode = .Background // UIUserNotificationActivationMode.Background - don't bring app to foreground
+        completeAction.authenticationRequired = false // don't require unlocking before performing action
+        completeAction.destructive = true // display action in red
+        
+        let remindAction = UIMutableUserNotificationAction()
+        remindAction.identifier = "REMIND"
+        remindAction.title = "Remind in 30 minutes"
+        remindAction.activationMode = .Background
+        remindAction.destructive = false
+        
+        let todoCategory = UIMutableUserNotificationCategory() // notification categories allow us to create groups of actions that we can associate with a notification
+        todoCategory.identifier = "TODO_CATEGORY"
+        todoCategory.setActions([remindAction, completeAction], forContext: .Default) // UIUserNotificationActionContext.Default (4 actions max)
+        todoCategory.setActions([completeAction, remindAction], forContext: .Minimal) // UIUserNotificationActionContext.Minimal - for when space is limited (2 actions max)
+        
+        // we're now providing a set containing our category as an argument
+        application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: Set([todoCategory])))
+        return true
+        
+        
+        
+        
+        
     
         
         //get Access to Reminders
@@ -289,6 +332,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
  
+}
+
+
+// from:
+// http://jamesonquave.com/blog/local-notifications-in-ios-8-with-swift-part-2/
+
+func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forLocalNotification notification: UILocalNotification, completionHandler: () -> Void) {
+   // let item = TodoItem(deadline: notification.fireDate!, title: notification.userInfo!["title"] as String, UUID: notification.userInfo!["UUID"] as String!)
+    switch (identifier!) {
+//    case "COMPLETE_TODO":
+  //      TodoList.sharedInstance.removeItem(item)
+ //   case "REMIND":
+//        TodoList.sharedInstance.scheduleReminderforItem(item)
+    default: // switch statements must be exhaustive - this condition should never be met
+        print("Error: unexpected notification action identifier!")
+    }
+    completionHandler() // per developer documentation, app will terminate if we fail to call this
 }
 
 

@@ -136,6 +136,29 @@ let str61:String = "7 pm See Band location Capital Brewery"
 let str62:String = "Reminder wash the car list mike"
 let str63:String = "Reminder feed the dog"
 
+//TODO MIKE FIX ADD add parsing these 082216 Mike :)
+let str64:String = "10 am feed Dale's cat repeat three days"
+let str65:String = "10 am feed Dale's cat repeat for 14 days"
+let str66:String = "9 am call mom repeat every five days"
+let str67:String = "2 pm in three days call Apple"
+let str68:String = "4 pm in 30 days haircut appointment"
+let str69:String = "8 am 120 days from today haircut appointment"
+let str70:String = "4 am meeting one week from today"
+let str71:String = "Tomorrow Rock USA all day duration five days"
+let str72:String = "Tomorrow Rock USA all day for five days"
+let str73:String = "next Monday Country USA all day for five days"
+let str74:String = "nexy Monday Country USA all day for all week"
+
+
+
+
+
+
+
+
+
+
+
 
 //BOMBS test n fix Mike TODO MIKE, from Siri
 

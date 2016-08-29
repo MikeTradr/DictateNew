@@ -67,6 +67,8 @@
 		D33C13BF1B8C47E800470F8F /* SettingsCalendarTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33C13BE1B8C47E800470F8F /* SettingsCalendarTableViewController.swift */; };
 		D33FEBAF1BD769EB003E6755 /* NuanceHeader.h in Sources */ = {isa = PBXBuildFile; fileRef = D33FEBAE1BD769EB003E6755 /* NuanceHeader.h */; };
 		D33FEBB21BD76A70003E6755 /* NuanceHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = D33FEBB11BD76A70003E6755 /* NuanceHeader.m */; };
+		D340A2221D74B5F600B48A3D /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38653F61BAA02F400B8CCBC /* EventManager.swift */; };
+		D340A2231D74B85E00B48A3D /* TimeManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D397FDA11CAB1752005DD51A /* TimeManger.swift */; };
 		D34451981C8505C5007F3DDD /* CalendarPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34451971C8505C5007F3DDD /* CalendarPickerViewController.swift */; };
 		D34FEF5F1D0F4AAF00915A80 /* TodayEventsTableRC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA3ACD1BAE73F4002FDD21 /* TodayEventsTableRC.swift */; };
 		D34FEF621D0F528000915A80 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3F8AD241B696FCD0070C097 /* Interface.storyboard */; };
@@ -132,6 +134,10 @@
 		D3F8ACF21B696FB00070C097 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3F8ACF11B696FB00070C097 /* Images.xcassets */; };
 		D3F8ACF51B696FB00070C097 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3F8ACF31B696FB00070C097 /* LaunchScreen.xib */; };
 		D3F8F9741D0B3DC600094101 /* MainIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F8AD131B696FCD0070C097 /* MainIC.swift */; };
+		D3FEBD791D74A77000B7355F /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3FCC89F1D74A54800621B07 /* NotificationCenter.framework */; };
+		D3FEBD7C1D74A77000B7355F /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FEBD7B1D74A77000B7355F /* TodayViewController.swift */; };
+		D3FEBD7F1D74A77000B7355F /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3FEBD7D1D74A77000B7355F /* MainInterface.storyboard */; };
+		D3FEBD831D74A77000B7355F /* todayDictateWidget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D3FEBD781D74A77000B7355F /* todayDictateWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		EC0B487E1B6FE9B800C0AD82 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EC0B487D1B6FE9B800C0AD82 /* libsqlite3.0.dylib */; };
 		EC0B48801B6FE9C700C0AD82 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC0B487F1B6FE9C700C0AD82 /* CFNetwork.framework */; };
 		EC0B48821B6FE9D300C0AD82 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC0B48811B6FE9D300C0AD82 /* Security.framework */; };
@@ -199,6 +205,13 @@
 			remoteGlobalIDString = D31BF2F91CDAB93700521A65;
 			remoteInfo = DictateWatch;
 		};
+		D3FEBD811D74A77000B7355F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D3F8ACDD1B696FB00070C097 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D3FEBD771D74A77000B7355F;
+			remoteInfo = todayDictateWidget;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -230,6 +243,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				D3FEBD831D74A77000B7355F /* todayDictateWidget.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -358,6 +372,11 @@
 		D3F8AD131B696FCD0070C097 /* MainIC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainIC.swift; sourceTree = "<group>"; };
 		D3F8AD251B696FCE0070C097 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		D3FA08041BA7F6EB006A91C2 /* ReminderListsTableRC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderListsTableRC.swift; sourceTree = "<group>"; };
+		D3FCC89F1D74A54800621B07 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		D3FEBD781D74A77000B7355F /* todayDictateWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = todayDictateWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		D3FEBD7B1D74A77000B7355F /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
+		D3FEBD7E1D74A77000B7355F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		D3FEBD801D74A77000B7355F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EC0B487D1B6FE9B800C0AD82 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		EC0B487F1B6FE9C700C0AD82 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		EC0B48811B6FE9D300C0AD82 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -468,6 +487,14 @@
 				EC0B487E1B6FE9B800C0AD82 /* libsqlite3.0.dylib in Frameworks */,
 				D3B6E24E1BD977B200C7B822 /* Fabric.framework in Frameworks */,
 				EC0B48931B6FEAC400C0AD82 /* Bolts.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D3FEBD751D74A77000B7355F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D3FEBD791D74A77000B7355F /* NotificationCenter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -748,6 +775,8 @@
 				D3F8ACFD1B696FB00070C097 /* DictateTests */,
 				D31BF2FB1CDAB93700521A65 /* DictateWatch */,
 				D31BF30A1CDAB93700521A65 /* DictateWatch Extension */,
+				D3FEBD7A1D74A77000B7355F /* todayDictateWidget */,
+				D3FCC89E1D74A54800621B07 /* Frameworks */,
 				D3F8ACE61B696FB00070C097 /* Products */,
 				D39EDDCC1CDEBB2D00D8DD6B /* Frameworks */,
 			);
@@ -759,6 +788,7 @@
 				D3F8ACE51B696FB00070C097 /* Dictate.app */,
 				D31BF2FA1CDAB93700521A65 /* DictateWatch.app */,
 				D31BF3061CDAB93700521A65 /* DictateWatch Extension.appex */,
+				D3FEBD781D74A77000B7355F /* todayDictateWidget.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -802,6 +832,25 @@
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
+		};
+		D3FCC89E1D74A54800621B07 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D3FCC89F1D74A54800621B07 /* NotificationCenter.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D3FEBD7A1D74A77000B7355F /* todayDictateWidget */ = {
+			isa = PBXGroup;
+			children = (
+				D3FEBD7B1D74A77000B7355F /* TodayViewController.swift */,
+				D3FEBD7D1D74A77000B7355F /* MainInterface.storyboard */,
+				D3FEBD801D74A77000B7355F /* Info.plist */,
+			);
+			name = todayDictateWidget;
+			path = /Users/mikederr/Documents/ThatSoft/DictateNew/todayDictateWidget;
+			sourceTree = "<absolute>";
 		};
 		EC82CF641BAAE6EE00722611 /* Reminder */ = {
 			isa = PBXGroup;
@@ -975,11 +1024,29 @@
 			);
 			dependencies = (
 				D31BF31B1CDAB93700521A65 /* PBXTargetDependency */,
+				D3FEBD821D74A77000B7355F /* PBXTargetDependency */,
 			);
 			name = Dictate;
 			productName = Dictate;
 			productReference = D3F8ACE51B696FB00070C097 /* Dictate.app */;
 			productType = "com.apple.product-type.application";
+		};
+		D3FEBD771D74A77000B7355F /* todayDictateWidget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D3FEBD841D74A77100B7355F /* Build configuration list for PBXNativeTarget "todayDictateWidget" */;
+			buildPhases = (
+				D3FEBD741D74A77000B7355F /* Sources */,
+				D3FEBD751D74A77000B7355F /* Frameworks */,
+				D3FEBD761D74A77000B7355F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = todayDictateWidget;
+			productName = todayDictateWidget;
+			productReference = D3FEBD781D74A77000B7355F /* todayDictateWidget.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -1028,6 +1095,10 @@
 							};
 						};
 					};
+					D3FEBD771D74A77000B7355F = {
+						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = A6V8M5Q68S;
+					};
 				};
 			};
 			buildConfigurationList = D3F8ACE01B696FB00070C097 /* Build configuration list for PBXProject "Dictate" */;
@@ -1046,6 +1117,7 @@
 				D3F8ACE41B696FB00070C097 /* Dictate */,
 				D31BF2F91CDAB93700521A65 /* DictateWatch */,
 				D31BF3051CDAB93700521A65 /* DictateWatch Extension */,
+				D3FEBD771D74A77000B7355F /* todayDictateWidget */,
 			);
 		};
 /* End PBXProject section */
@@ -1106,6 +1178,14 @@
 				D355D97C1BA7DD3F00DADD72 /* Main.storyboard in Resources */,
 				D3CEC17D1BD77A76001A50F8 /* earcon_cancel.wav in Resources */,
 				D3F8ACF21B696FB00070C097 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D3FEBD761D74A77000B7355F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D3FEBD7F1D74A77000B7355F /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1263,6 +1343,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D3FEBD741D74A77000B7355F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D340A2221D74B5F600B48A3D /* EventManager.swift in Sources */,
+				D340A2231D74B85E00B48A3D /* TimeManger.swift in Sources */,
+				D3FEBD7C1D74A77000B7355F /* TodayViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1275,6 +1365,11 @@
 			isa = PBXTargetDependency;
 			target = D31BF2F91CDAB93700521A65 /* DictateWatch */;
 			targetProxy = D31BF31A1CDAB93700521A65 /* PBXContainerItemProxy */;
+		};
+		D3FEBD821D74A77000B7355F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D3FEBD771D74A77000B7355F /* todayDictateWidget */;
+			targetProxy = D3FEBD811D74A77000B7355F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1295,6 +1390,14 @@
 			);
 			name = Interface.storyboard;
 			path = .;
+			sourceTree = "<group>";
+		};
+		D3FEBD7D1D74A77000B7355F /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D3FEBD7E1D74A77000B7355F /* Base */,
+			);
+			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -1522,6 +1625,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1557,6 +1661,7 @@
 				CODE_SIGN_ENTITLEMENTS = Dictate/Dictate.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1580,6 +1685,39 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Dictate/Classes/Controllers/Dictate-Bridging-Header.h";
+			};
+			name = Release;
+		};
+		D3FEBD851D74A77100B7355F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_TESTABILITY = YES;
+				INFOPLIST_FILE = todayDictateWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.thatsoft.dictateApp.todayDictateWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		D3FEBD861D74A77100B7355F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = todayDictateWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.thatsoft.dictateApp.todayDictateWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
@@ -1618,6 +1756,15 @@
 			buildConfigurations = (
 				D3F8AD051B696FB00070C097 /* Debug */,
 				D3F8AD061B696FB00070C097 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D3FEBD841D74A77100B7355F /* Build configuration list for PBXNativeTarget "todayDictateWidget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D3FEBD851D74A77100B7355F /* Debug */,
+				D3FEBD861D74A77100B7355F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

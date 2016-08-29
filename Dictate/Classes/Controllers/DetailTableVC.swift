@@ -767,8 +767,8 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         let endDT       = defaults.objectForKey("endDT")! as! NSDate        //End
         var output      = defaults.stringForKey("output")                   //Title
         var calendarName = defaults.stringForKey("calendarName")            //Cal.
-        let alert       = defaults.objectForKey("eventAlert") as! Int ?? 10 //Alert
-        var eventRepeat = defaults.stringForKey("eventRepeat")!             //Repeat
+        let alert       = defaults.objectForKey("eventAlert") as? Int ?? 10 //Alert
+        var eventRepeat = defaults.stringForKey("eventRepeat") ?? ""            //Repeat
         let eventLocation = defaults.stringForKey("eventLocation") ?? ""    //Location
 
         

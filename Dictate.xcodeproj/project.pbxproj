@@ -107,6 +107,7 @@
 		D397FDA21CAB1752005DD51A /* TimeManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D397FDA11CAB1752005DD51A /* TimeManger.swift */; };
 		D39EDDC91CDE861300D8DD6B /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D30912761CDE832E005EFE17 /* libsqlite3.0.tbd */; };
 		D39EDDCD1CDEBB2D00D8DD6B /* Frameworks in Resources */ = {isa = PBXBuildFile; fileRef = D39EDDCC1CDEBB2D00D8DD6B /* Frameworks */; };
+		D3A6EE161D75DC8B00C4AD2D /* TodayViewControllerORG.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A6EE151D75DC8B00C4AD2D /* TodayViewControllerORG.swift */; };
 		D3AA1B151D58C1A1000BDAD6 /* GeneralWatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AA1B141D58C1A1000BDAD6 /* GeneralWatch.swift */; };
 		D3AA1B171D58C6CB000BDAD6 /* beep-08b.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D3AA1B161D58C6CB000BDAD6 /* beep-08b.mp3 */; };
 		D3AD9B541C5D5439006387C4 /* DetailsTableVC_OLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AD9B531C5D5439006387C4 /* DetailsTableVC_OLD.swift */; };
@@ -328,6 +329,7 @@
 		D39EDDC31CDE858B00D8DD6B /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = "../../../../../Downloads/parse-library-1.12.0/Parse.framework"; sourceTree = "<group>"; };
 		D39EDDCC1CDEBB2D00D8DD6B /* Frameworks */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Frameworks; sourceTree = "<group>"; };
 		D3A0F9FB1B69F0BB00F1FEDA /* EventCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCode.swift; sourceTree = "<group>"; };
+		D3A6EE151D75DC8B00C4AD2D /* TodayViewControllerORG.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TodayViewControllerORG.swift; path = todayDictateWidget/TodayViewControllerORG.swift; sourceTree = SOURCE_ROOT; };
 		D3AA1B141D58C1A1000BDAD6 /* GeneralWatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralWatch.swift; sourceTree = "<group>"; };
 		D3AA1B161D58C6CB000BDAD6 /* beep-08b.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "beep-08b.mp3"; sourceTree = "<group>"; };
 		D3AD9B531C5D5439006387C4 /* DetailsTableVC_OLD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsTableVC_OLD.swift; sourceTree = "<group>"; };
@@ -845,6 +847,7 @@
 			isa = PBXGroup;
 			children = (
 				D3FEBD7B1D74A77000B7355F /* TodayViewController.swift */,
+				D3A6EE151D75DC8B00C4AD2D /* TodayViewControllerORG.swift */,
 				D3FEBD7D1D74A77000B7355F /* MainInterface.storyboard */,
 				D3FEBD801D74A77000B7355F /* Info.plist */,
 			);
@@ -1350,6 +1353,7 @@
 				D340A2221D74B5F600B48A3D /* EventManager.swift in Sources */,
 				D340A2231D74B85E00B48A3D /* TimeManger.swift in Sources */,
 				D3FEBD7C1D74A77000B7355F /* TodayViewController.swift in Sources */,
+				D3A6EE161D75DC8B00C4AD2D /* TodayViewControllerORG.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

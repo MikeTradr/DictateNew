@@ -103,6 +103,8 @@
 		D392FADA1B9B1DFD00678B18 /* SettingsGeneralTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D392FAD91B9B1DFD00678B18 /* SettingsGeneralTableViewController.swift */; };
 		D397FDA01CAAF9DB005DD51A /* TimeDiffViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D397FD9F1CAAF9DB005DD51A /* TimeDiffViewController.swift */; };
 		D397FDA21CAB1752005DD51A /* TimeManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D397FDA11CAB1752005DD51A /* TimeManger.swift */; };
+		D39AE3A41D77532900930611 /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38653F61BAA02F400B8CCBC /* EventManager.swift */; };
+		D39AE3A51D7758B500930611 /* TimeManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D397FDA11CAB1752005DD51A /* TimeManger.swift */; };
 		D39EDDC91CDE861300D8DD6B /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D30912761CDE832E005EFE17 /* libsqlite3.0.tbd */; };
 		D39EDDCD1CDEBB2D00D8DD6B /* Frameworks in Resources */ = {isa = PBXBuildFile; fileRef = D39EDDCC1CDEBB2D00D8DD6B /* Frameworks */; };
 		D3AA1B151D58C1A1000BDAD6 /* GeneralWatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AA1B141D58C1A1000BDAD6 /* GeneralWatch.swift */; };
@@ -1352,6 +1354,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D39AE3A51D7758B500930611 /* TimeManger.swift in Sources */,
+				D39AE3A41D77532900930611 /* EventManager.swift in Sources */,
 				D3FDDE7F1D76D99900050301 /* TodayViewController.swift in Sources */,
 				D3FDDE911D77496400050301 /* TodayTableViewCell.swift in Sources */,
 			);

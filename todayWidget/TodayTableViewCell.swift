@@ -10,7 +10,16 @@ import UIKit
 
 class TodayTableViewCell: UITableViewCell {
 
-    @IBOutlet var labelTitle: UILabel!
+    @IBOutlet var labelOutput: UILabel!
+
+    @IBOutlet var labelStartTime: UILabel!
+    @IBOutlet var labelEndTime: UILabel!
+    @IBOutlet var labelTimeUntil: UILabel!
+    
+    @IBOutlet var labelSecondLine: UILabel!
+    
+    @IBOutlet var verticalBarView: UIView!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()

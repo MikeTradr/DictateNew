@@ -134,8 +134,10 @@
 		D3F8F9741D0B3DC600094101 /* MainIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F8AD131B696FCD0070C097 /* MainIC.swift */; };
 		D3FDDE7C1D76D99900050301 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3FCC89F1D74A54800621B07 /* NotificationCenter.framework */; };
 		D3FDDE7F1D76D99900050301 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FDDE7E1D76D99900050301 /* TodayViewController.swift */; };
-		D3FDDE821D76D99900050301 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3FDDE801D76D99900050301 /* MainInterface.storyboard */; };
 		D3FDDE861D76D99900050301 /* todayWidget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D3FDDE7B1D76D99900050301 /* todayWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		D3FDDE8D1D7740A600050301 /* Data.plist in Resources */ = {isa = PBXBuildFile; fileRef = D3FDDE8C1D7740A600050301 /* Data.plist */; };
+		D3FDDE8F1D77412400050301 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3FDDE8E1D77412400050301 /* MainInterface.storyboard */; };
+		D3FDDE911D77496400050301 /* TodayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FDDE901D77496400050301 /* TodayTableViewCell.swift */; };
 		EC0B487E1B6FE9B800C0AD82 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EC0B487D1B6FE9B800C0AD82 /* libsqlite3.0.dylib */; };
 		EC0B48801B6FE9C700C0AD82 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC0B487F1B6FE9C700C0AD82 /* CFNetwork.framework */; };
 		EC0B48821B6FE9D300C0AD82 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC0B48811B6FE9D300C0AD82 /* Security.framework */; };
@@ -373,8 +375,10 @@
 		D3FCC89F1D74A54800621B07 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		D3FDDE7B1D76D99900050301 /* todayWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = todayWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3FDDE7E1D76D99900050301 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
-		D3FDDE811D76D99900050301 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		D3FDDE831D76D99900050301 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D3FDDE8C1D7740A600050301 /* Data.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Data.plist; sourceTree = "<group>"; };
+		D3FDDE8E1D77412400050301 /* MainInterface.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
+		D3FDDE901D77496400050301 /* TodayTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TodayTableViewCell.swift; path = todayWidget/TodayTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		EC0B487D1B6FE9B800C0AD82 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		EC0B487F1B6FE9C700C0AD82 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		EC0B48811B6FE9D300C0AD82 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -843,8 +847,10 @@
 			isa = PBXGroup;
 			children = (
 				D3FDDE7E1D76D99900050301 /* TodayViewController.swift */,
-				D3FDDE801D76D99900050301 /* MainInterface.storyboard */,
+				D3FDDE901D77496400050301 /* TodayTableViewCell.swift */,
+				D3FDDE8E1D77412400050301 /* MainInterface.storyboard */,
 				D3FDDE831D76D99900050301 /* Info.plist */,
+				D3FDDE8C1D7740A600050301 /* Data.plist */,
 			);
 			name = todayWidget;
 			path = /Users/mikederr/Documents/ThatSoft/DictateNew/todayWidget;
@@ -1183,7 +1189,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D3FDDE821D76D99900050301 /* MainInterface.storyboard in Resources */,
+				D3FDDE8D1D7740A600050301 /* Data.plist in Resources */,
+				D3FDDE8F1D77412400050301 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1346,6 +1353,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D3FDDE7F1D76D99900050301 /* TodayViewController.swift in Sources */,
+				D3FDDE911D77496400050301 /* TodayTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1386,14 +1394,6 @@
 			);
 			name = Interface.storyboard;
 			path = .;
-			sourceTree = "<group>";
-		};
-		D3FDDE801D76D99900050301 /* MainInterface.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D3FDDE811D76D99900050301 /* Base */,
-			);
-			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -1697,7 +1697,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.thatsoft.dictateApp.todayWidget;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = todayWidget;
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -1712,7 +1712,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.thatsoft.dictateApp.todayWidget;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = todayWidget;
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -1763,6 +1763,7 @@
 				D3FDDE881D76D99900050301 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

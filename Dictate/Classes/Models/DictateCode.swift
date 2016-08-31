@@ -73,9 +73,9 @@ class DictateCode: NSObject {
     var eventRepeat:Int         = 0
    // var duration:Int            = 0
     
-    var numberWordArray:[String] = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"]
+    var numberWordArray:[String] = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"]
     
-    enum NumberWord:Int { case one=1, two=2, three=3, four=4, five=5, six=6, seven=7, eight=8, nine=9, ten=10 }
+    enum NumberWord:Int { case zero=0, one=1, two=2, three=3, four=4, five=5, six=6, seven=7, eight=8, nine=9, ten=10 }
     
     var userDuration:Int = 0
     
@@ -1596,6 +1596,7 @@ class DictateCode: NSObject {
                         var returnValue:Int = 0
                         
                         switch (nextWord){
+                        case "zero": returnValue    = 0;   break;
                         case "one": returnValue     = 1;   break;
                         case "two": returnValue     = 2;   break;
                         case "three": returnValue   = 3;   break;
@@ -1735,6 +1736,7 @@ class DictateCode: NSObject {
                         var returnValue:Int = 0
                         
                         switch (nextWord){
+                        case "zero": returnValue    = 0;   break;
                         case "one": returnValue     = 1;   break;
                         case "two": returnValue     = 2;   break;
                         case "three": returnValue   = 3;   break;

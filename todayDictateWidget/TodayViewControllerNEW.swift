@@ -1,5 +1,5 @@
 //
-//  TodayViewController.swift
+//  TodayViewControllerNEW.swift
 //  todayDictateWidget
 //
 //  Created by Mike Derr on 8/29/16.
@@ -14,8 +14,8 @@ import NotificationCenter
 import Foundation
 import EventKit
 
-class TodayViewController: UIViewController, NCWidgetProviding {
-    
+class TodayViewControllerNEW: UITableViewController, NCWidgetProviding {
+ /*
     var output:String           = ""
     var allEvents: Array<EKEvent> = []
     let dateFormatter = NSDateFormatter()
@@ -26,10 +26,9 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 
 
 
-    @IBOutlet var labelStartTime: UILabel!
-    
-    @IBOutlet var labelWidgetTitle: UILabel!
-    @IBOutlet var labelTimeUntil: UILabel!
+   // @IBOutlet var labelStartTime: UILabel!
+   // @IBOutlet var labelWidgetTitle: UILabel!
+   // @IBOutlet var labelTimeUntil: UILabel!
     
     
     func fetchEvents(){
@@ -192,5 +191,55 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 
         completionHandler(NCUpdateResult.NewData)
     }
+    
+    
+    
+    // MARK: Table view data source
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if let items = items {
+            return min(items.count, expanded ? maxNumberOfRows : defaultNumRows)
+        }
+        return 0
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("RSSItem", forIndexPath: indexPath) as! RSSItemTableViewCell
+        
+        if let item = items?[indexPath.row] {
+            cell.titleLabel.text = item.title
+            cell.authorLabel.text = item.author
+            cell.dateLabel.text = dateFormatter.stringFromDate(item.pubDate)
+        }
+        
+        return cell
+    }
+    
+    override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return expandButton
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if let item = items?[indexPath.row] {
+            if let context = extensionContext {
+                context.openURL(item.link, completionHandler: nil)
+            }
+        }
+    }
+    
+    // MARK: expand
+    
+    func updateExpandButtonTitle() {
+        expandButton.setTitle(expanded ? "Show less" : "Show more", forState: .Normal)
+    }
+    
+    func toggleExpand() {
+        expanded = !expanded
+        updateExpandButtonTitle()
+        updatePreferredContentSize()
+        tableView.reloadData()
+    }
+    
+ */   
     
 }

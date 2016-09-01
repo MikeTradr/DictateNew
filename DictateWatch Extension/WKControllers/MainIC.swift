@@ -342,7 +342,7 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
                     fullDT = formatter3.stringFromDate(startDT)
                     
                     startTime = ""
-                    time = "\(fullDT), All Day"
+                    time = "\(fullDT), all-day"
                 }
                 
         

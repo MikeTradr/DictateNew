@@ -123,7 +123,7 @@ class EventDetailsIC: WKInterfaceController {
  
         if event.allDay {   // if allDay bool is true
             startTime = ""
-            endTimeDash = "All Day"
+            endTimeDash = "all-day"
             self.labelTimeUntil.setHidden(true)
         } else {
             self.labelTimeUntil.setHidden(false)

@@ -27,6 +27,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     let brightYellow = UIColor(red: 255, green: 255, blue: 0, alpha: 1)
 
+    @IBOutlet var labelNoEvents: UILabel!
     
     @IBOutlet var table: UITableView!
     
@@ -79,7 +80,17 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
         fetchEvents()
         
-        self.preferredContentSize.height = 170
+        self.preferredContentSize.height = 180
+        
+        if allEvents.count == 0 {        //no events for day
+            self.preferredContentSize.height = 25
+            self.labelNoEvents.text = "Dictate™ 😀 No More Events Today"
+            self.labelNoEvents.hidden = false
+        } else {
+            self.labelNoEvents.hidden = true
+        }
+        
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -98,6 +109,14 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
        // let item = allEvents[0]  
         
+        if allEvents.count == 0 {        //no events for day
+            self.preferredContentSize.height = 25
+            self.labelNoEvents.text = "Dictate™ 😀 No More Events Today"
+            self.labelNoEvents.hidden = false
+        } else {
+            self.labelNoEvents.hidden = true
+        }
+        
         completionHandler(NCUpdateResult.NewData)
     }
 /*
@@ -105,6 +124,15 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         return UIEdgeInsetsZero
     }
  */
+    
+    func widgetMarginInsetsForProposedMarginInsets(var defaultMarginInsets: UIEdgeInsets) -> UIEdgeInsets {
+        
+       // var defaultLeftInset: CGFloat = 0
+       // defaultLeftInset = defaultMarginInsets.left
+        
+        defaultMarginInsets.left = 45
+        return defaultMarginInsets
+    }
 
 
     // MARK: - TableView Data Source
@@ -122,7 +150,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     func tableView(table: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        var identifier = "tableViewCellIdentifier"
+        let identifier = "tableViewCellIdentifier"
         
         let cell = table.dequeueReusableCellWithIdentifier( identifier, forIndexPath: indexPath) as! TodayTableViewCell
     
@@ -161,9 +189,12 @@ class TodayViewController: UIViewController, NCWidgetProviding {
                 
                 timeUntil = TimeManger.sharedInstance.timeInterval(item.startDate)
                 
-         //       if item.allDay {     // if allDay bool is true
-         //           row.groupTime.setHidden(true)
-          //      }
+                if item.allDay {     // if allDay bool is true
+                    //row.groupTime.setHidden(true)
+                    startTime = "all-day"
+                    endTimeDash = ""
+                    timeUntil = "all-Day"
+                }
                 
                 let startTimeItem = item.startDate
                 let timeUntilStart = startTimeItem.timeIntervalSinceDate(NSDate())
@@ -175,28 +206,19 @@ class TodayViewController: UIViewController, NCWidgetProviding {
                 
                 if ((timeUntilStart <= 0) && (timeUntilEnd >= 0)) {
                     timeUntil = "Now"
-                    let neonRed = UIColor(red: 255, green: 51, blue: 0, alpha: 1)
-                    let brightYellow = UIColor(red: 255, green: 255, blue: 0, alpha: 1)
-                    
-                    //let swiftColor = UIColor(red: 1, green: 165/255, blue: 0, alpha: 1)
-                    cell.labelTimeUntil.textColor = brightYellow
-                    //row.labelTimeUntil.setTextColor(UIColor.yellowColor())
+                    cell.labelTimeUntil.textColor = UIColor.yellowColor()
                     
                     // works
                     let headlineFont =
                         UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
-                    
                     let fontAttribute = [NSFontAttributeName: headlineFont]
                     
-                    let attributedString = NSAttributedString(string: "Now  ",
+                    let attributedString = NSAttributedString(string: "Now    ",
                                                               attributes: fontAttribute)
                     
                     cell.labelTimeUntil.attributedText = attributedString
                     
-                    
                 } else {
-                 
-                    cell.labelTimeUntil.textColor = brightYellow
                     cell.labelTimeUntil.text = timeUntil
                 }
                 
@@ -211,16 +233,16 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             
                 //row.labelTimeUntil.setText("\(timeUntil)  ")
                 
-                cell.labelOutput.textColor = (UIColor(CGColor: item.calendar.CGColor))
+                //cell.labelOutput.textColor = UIColor(CGColor: item.calendar.CGColor)
+                cell.labelOutput.textColor = UIColor.whiteColor()
+            
                 // row.labelStartTime.setTextColor(UIColor(CGColor: item.calendar.CGColor))
                 // row.labelEndTime.setTextColor(UIColor(CGColor: item.calendar.CGColor))
                 
-                cell.labelStartTime.textColor = (UIColor.whiteColor().colorWithAlphaComponent(1.0))
-                cell.labelEndTime.textColor = (UIColor.whiteColor().colorWithAlphaComponent(0.65))
-                
+                cell.labelStartTime.textColor = UIColor.whiteColor().colorWithAlphaComponent(1.0)
+                cell.labelEndTime.textColor = UIColor.whiteColor().colorWithAlphaComponent(0.5)
             
                 cell.verticalBarView.backgroundColor = UIColor(CGColor: item.calendar.CGColor)
-            
             
                 let location = item.location
             
@@ -229,20 +251,27 @@ class TodayViewController: UIViewController, NCWidgetProviding {
                 let string = location
                // let myAttribute = [ NSForegroundColorAttributeName: UIColor.blueColor() ]
                 
-                let myAttribute = [ NSUnderlineStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue ]
+               // let myAttribute = [ NSUnderlineStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue ]
+                
+               // let myAttribute = [ NSUnderlineStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue ]
 
-                let myAttrString = NSAttributedString(string: string!, attributes: myAttribute)
-                
+              //  let myAttrString = NSAttributedString(string: string!, attributes: myAttribute)
         
+              //  cell.labelSecondLine.attributedText = myAttrString
                 
-                cell.labelSecondLine.attributedText = myAttrString
-                
+                cell.labelSecondLine.text = location
         
             }   else {
                 cell.labelSecondLine.text = item.calendar.title
+                //cell.labelSecondLine.textColor = UIColor(CGColor: item.calendar.CGColor)
+                //cell.labelSecondLine.textColor = UIColor.blueColor()
+            
             }
             
+            
             cell.labelSecondLine.textColor = UIColor(CGColor: item.calendar.CGColor)
+
+           // cell.labelSecondLine.textColor = UIColor.whiteColor().colorWithAlphaComponent(0.5)
 
             
             

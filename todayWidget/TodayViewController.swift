@@ -80,7 +80,9 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
         fetchEvents()
         
-        self.preferredContentSize.height = 180
+        let numberOfRows = allEvents.count
+        
+        self.preferredContentSize.height = CGFloat(numberOfRows * 50)
         
         if allEvents.count == 0 {        //no events for day
             self.preferredContentSize.height = 25
@@ -190,7 +192,6 @@ class TodayViewController: UIViewController, NCWidgetProviding {
                 timeUntil = TimeManger.sharedInstance.timeInterval(item.startDate)
                 
                 if item.allDay {     // if allDay bool is true
-                    //row.groupTime.setHidden(true)
                     startTime = "all-day"
                     endTimeDash = ""
                     timeUntil = "all-Day"
@@ -198,12 +199,10 @@ class TodayViewController: UIViewController, NCWidgetProviding {
                 
                 let startTimeItem = item.startDate
                 let timeUntilStart = startTimeItem.timeIntervalSinceDate(NSDate())
-                //print("w187 timeUntilStart: \(timeUntilStart)")
-                
+            
                 let endTimeItem = item.endDate
                 let timeUntilEnd = endTimeItem.timeIntervalSinceDate(NSDate())
-                //print("w192 timeUntilEnd: \(timeUntilEnd)")
-                
+            
                 if ((timeUntilStart <= 0) && (timeUntilEnd >= 0)) {
                     timeUntil = "Now"
                     cell.labelTimeUntil.textColor = UIColor.yellowColor()
@@ -224,20 +223,14 @@ class TodayViewController: UIViewController, NCWidgetProviding {
                 
                 //TODO Mike TODO Anil All day event spanning multiple days does not show up on multiple days
                 
-                print("w185 timeUntil: \(timeUntil)")
+                print("p227 timeUntil: \(timeUntil)")
                 
                 cell.labelOutput.text = item.title
-                //row.labelEventLocation.setText(item.location)
                 cell.labelStartTime.text = startTime
                 cell.labelEndTime.text = endTimeDash
             
-                //row.labelTimeUntil.setText("\(timeUntil)  ")
-                
                 //cell.labelOutput.textColor = UIColor(CGColor: item.calendar.CGColor)
                 cell.labelOutput.textColor = UIColor.whiteColor()
-            
-                // row.labelStartTime.setTextColor(UIColor(CGColor: item.calendar.CGColor))
-                // row.labelEndTime.setTextColor(UIColor(CGColor: item.calendar.CGColor))
                 
                 cell.labelStartTime.textColor = UIColor.whiteColor().colorWithAlphaComponent(1.0)
                 cell.labelEndTime.textColor = UIColor.whiteColor().colorWithAlphaComponent(0.5)
@@ -248,6 +241,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             
             if location != "" {
                 
+                // TODO Mike Anil try to set location to be Italics.
                 let string = location
                // let myAttribute = [ NSForegroundColorAttributeName: UIColor.blueColor() ]
                 
@@ -260,51 +254,18 @@ class TodayViewController: UIViewController, NCWidgetProviding {
               //  cell.labelSecondLine.attributedText = myAttrString
                 
                 cell.labelSecondLine.text = location
+                cell.labelSecondLine.textColor = UIColor.whiteColor().colorWithAlphaComponent(0.80)
         
-            }   else {
+            } else {
                 cell.labelSecondLine.text = item.calendar.title
-                //cell.labelSecondLine.textColor = UIColor(CGColor: item.calendar.CGColor)
-                //cell.labelSecondLine.textColor = UIColor.blueColor()
-            
+                cell.labelSecondLine.textColor = UIColor(CGColor: item.calendar.CGColor)
             }
-            
-            
-            cell.labelSecondLine.textColor = UIColor(CGColor: item.calendar.CGColor)
-
-           // cell.labelSecondLine.textColor = UIColor.whiteColor().colorWithAlphaComponent(0.5)
-
-            
-            
-            
-            
-            
-                
-              //  cell.verticalBarView.setBackgroundColor = (UIColor(CGColor: item.calendar.CGColor))
-                
-              //  cell.verticalBarView.setTintColor = (UIColor(CGColor: item.calendar.CGColor))
-                
-                // row.imageVertBar.image = [row.imageVertBar imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
-                
-               // row.groupEvent.setBackgroundColor(UIColor(CGColor: item.calendar.CGColor).colorWithAlphaComponent(0.375))
-         
-            
-          //  cell.labelOutput.text = item.title
-           // cell.labelStartTime.text = item.title
             
             return cell
             
-        }
+        }                   // for (index, title)
 
-        
-       // cell.labelOutput.text = item.title
-       // cell.labelStartTime.text = item.title
-
-       // cell.textLabel?.text = item["title"] as? String
-        //cell.textLabel?.textColor = UIColor.whiteColor()
         return cell
-    }
-    
-    
-    
-    
+    }                       // func tableView
+ 
 }

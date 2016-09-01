@@ -139,7 +139,11 @@ class EditEventDetailsIC: WKInterfaceController {
             let startTime = dateFormatter.stringFromDate(item.startDate)
             let endTime = dateFormatter.stringFromDate(item.endDate)
 
-            let endTimeDash = "- \(endTime)"
+            var endTimeDash = "- \(endTime)"
+            
+            if item.startDate == item.endDate {     //for same start & end time event
+                endTimeDash = ""
+            }
             
             row.labelEventTitle.setText(item.title)
             row.labelEventLocation.setText(item.location)

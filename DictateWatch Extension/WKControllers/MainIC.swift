@@ -333,6 +333,10 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
                 
                 var endTimeDash = "-\(endTime)"
                 
+                if startDate == endDate {     //for same start & end time event
+                    endTimeDash = ""
+                }
+                
                 var time = "\(startTime)\(endTimeDash)"
                 
                 //var allDayFlag = self.defaults.objectForKey("allDayFlag") as? Bool ?? false

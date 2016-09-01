@@ -5,7 +5,10 @@
 //  Created by Mike Derr on 8/31/16.
 //  Copyright © 2016 ThatSoft.com. All rights reserved.
 //
-/// https://github.com/maximbilan/iOS-Today-Extension-Simple-Tutorial
+//  https://github.com/maximbilan/iOS-Today-Extension-Simple-Tutorial
+//
+//  passing to app via url from here...
+//  http://iosdevelopertips.com/cocoa/launching-your-own-application-via-a-custom-url-scheme.html
 //
 
 import UIKit
@@ -27,6 +30,10 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     var numberOfRows:Int        = 0
     var rowsToDelete:Int        = 0
+    
+    var deleteRowCountArray: [Int] = []
+    var numberRowsToDelete = 0
+    var rowsToShow = 0
     
     @IBOutlet var labelNoEvents: UILabel!
     @IBOutlet var table: UITableView!
@@ -66,7 +73,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
         print("p67 rowsToDelete: \(rowsToDelete)")
         
-        self.preferredContentSize.height = CGFloat((numberOfRows-rowsToDelete) * 50)
+        self.preferredContentSize.height = CGFloat(rowsToShow * 50)
         
         if allEvents.count == 0 {        //no events for day
             self.preferredContentSize.height = 25
@@ -137,39 +144,18 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         return allEvents.count
     }
 
+//===== cellForRowAtIndexPath ================================================
     
     func tableView(table: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let identifier = "tableViewCellIdentifier"
-        
         let cell = table.dequeueReusableCellWithIdentifier( identifier, forIndexPath: indexPath) as! TodayTableViewCell
-    
-      //  let row = indexPath.row
-        
-        print("p133 allEvents.count: \(allEvents.count)")
         
        let item = allEvents[indexPath.row]
-
-       //table.setNumberOfRows(allEvents.count, withRowType: "tableRow")
-        
-       // for (index, title) in allEvents.enumerate() {
-            
-        print("---------------------------------------------------")
-        print("w175 index, title: \(index), \(title)")
-        print("w176 index: \(index)")
-        print("w177 table: \(table)")
-      //  print("w178 table.rowControllerAtIndex(index): \(table.rowControllerAtIndex(index))")
-        
-        print("w183 WE HERE????")
-        
-       // let item = allEvents[index]
-        
-       // date1.timeIntervalSince1970 < date2.timeIntervalSince1970
         
         if item.endDate.timeIntervalSince1970 <= NSDate().timeIntervalSince1970 {
             cell.hidden = true
           //  cell.rowHeight = 0
-            
             return cell
         }
         
@@ -177,7 +163,6 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
         let startTimeA = dateFormatter.stringFromDate(item.startDate)
         var startTime = startTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
-        NSLog("%@ w137", startTime)
         
         dateFormatter.dateFormat = "h:mm"
         
@@ -185,6 +170,10 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         let endTime = endTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
         
         var endTimeDash = "- \(endTime)"
+        
+        if item.startDate == item.endDate {     //for same start & end time event
+            endTimeDash = ""
+        }
         
         timeUntil = TimeManger.sharedInstance.timeInterval(item.startDate)
         
@@ -194,94 +183,112 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             timeUntil = "all-Day"
         }
 
-        if item.startDate == item.endDate {
-             endTimeDash = ""
-        }
-
-
         let startTimeItem = item.startDate
         let timeUntilStart = startTimeItem.timeIntervalSinceDate(NSDate())
     
         let endTimeItem = item.endDate
         let timeUntilEnd = endTimeItem.timeIntervalSinceDate(NSDate())
     
-        if ((timeUntilStart <= 0) && (timeUntilEnd >= 0)) {
-
+        if ((timeUntilStart <= 0) && (timeUntilEnd >= 0)) {     //Time is Now
             // works
             let headlineFont =
                 UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
             let fontAttribute = [NSFontAttributeName: headlineFont]
-            
             let attributedString = NSAttributedString(string: "Now" + " 😀",
                                                       attributes: fontAttribute)
-            
             cell.labelTimeUntil.attributedText = attributedString
             cell.labelTimeUntil.textColor = UIColor.yellowColor()
-            
             
             if item.allDay {     // if allDay bool is true
                 print("p205 we here item.allDay: \(item.allDay)")
                 cell.labelTimeUntil.text = ""
             }
-
             
         } else {
             cell.labelTimeUntil.text = timeUntil
         }
         
-        //TODO Mike TODO Anil All day event spanning multiple days does not show up on multiple days
-        
         print("p227 timeUntil: \(timeUntil)")
         
-        cell.labelOutput.text = item.title
-        cell.labelStartTime.text = startTime
-        cell.labelEndTime.text = endTimeDash
-    
-        //cell.labelOutput.textColor = UIColor(CGColor: item.calendar.CGColor)
-        cell.labelOutput.textColor = UIColor.whiteColor()
-        
-        cell.labelStartTime.textColor = UIColor.whiteColor().colorWithAlphaComponent(1.0)
-        cell.labelEndTime.textColor = UIColor.whiteColor().colorWithAlphaComponent(0.5)
-    
+        cell.labelOutput.text           = item.title
+        cell.labelStartTime.text        = startTime
+        cell.labelEndTime.text          = endTimeDash
+        //cell.labelOutput.textColor    = UIColor(CGColor: item.calendar.CGColor)
+        cell.labelOutput.textColor      = UIColor.whiteColor()
+        cell.labelStartTime.textColor   = UIColor.whiteColor().colorWithAlphaComponent(1.0)
+        cell.labelEndTime.textColor     = UIColor.whiteColor().colorWithAlphaComponent(0.5)
         cell.verticalBarView.backgroundColor = UIColor(CGColor: item.calendar.CGColor)
     
         let location = item.location
         
-        if location != "" {
-            
+        if location != "" {     //Show location if there, esle show calendar name :)
             cell.labelSecondLine.font = UIFont.italicSystemFontOfSize(cell.labelSecondLine.font.pointSize)
             cell.labelSecondLine.text = location
-            cell.labelSecondLine.textColor = UIColor.whiteColor().colorWithAlphaComponent(0.65)
-    
+            cell.labelSecondLine.textColor = UIColor.whiteColor().colorWithAlphaComponent(0.5)
         } else {
             cell.labelSecondLine.text = item.calendar.title
             cell.labelSecondLine.textColor = UIColor(CGColor: item.calendar.CGColor)
         }
-        
-       // return cell
-            
-       // }                   // for (index, title)
 
         return cell
-    }                       // func tableView
+    }                   // end func cellForRowAtIndexPath
     
+//===== end cellForRowAtIndexPath ================================================
+    
+//===== heightForRowAtIndexPath ================================================
     
     func tableView(table: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
         let item = allEvents[indexPath.row]
         
         if item.endDate.timeIntervalSince1970 <= NSDate().timeIntervalSince1970 {
+            
+            print("p239 we here? have row to hide/delete")
+            
+            deleteRowCountArray.append(indexPath.row)
+            
+            let uniqueRowArray = Array(Set(deleteRowCountArray))    //removes duplicates
+            
+            numberRowsToDelete = uniqueRowArray.count
+            print("p244 numberRowsToDelete: \(numberRowsToDelete)")
+            
+            rowsToShow = allEvents.count - numberRowsToDelete
+            print("p247 rowsToShow: \(rowsToShow)")
 
             //self.preferredContentSize.height = self.preferredContentSize.height - 50
             
-            rowsToDelete = rowsToDelete + 1
-
             return 0.0
-
         } else {
-
-        return 50.0;//Choose your custom row height
+            return 50.0     //Choose your custom row height
         }
     }
+//===== endheightForRowAtIndexPath ================================================
+    
+//===== didSelectRowAtIndexPath ================================================
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        print("p267 You selected row/event #\(indexPath.row)!")
+        
+       // var selectedCell:UITableViewCell = table.cellForRowAtIndexPath(indexPath)!
+        
+        let item = allEvents[indexPath.row]
+        let eventID = item.eventIdentifier
+        
+        // from here:
+        // http://iosdevelopertips.com/cocoa/launching-your-own-application-via-a-custom-url-scheme.html
+       // let myAppUrl = NSURL(string: "Dictate://some-context")!
+        let myAppUrl = NSURL(string: "Dictate://?eventID=\(eventID)")!
+        
+       // myapp://name=BrunoMars&gender=Male&age=26&occupation=Singer
+        
+        extensionContext?.openURL(myAppUrl, completionHandler: { (success) in
+            if (!success) {
+                // let the user know it failed
+            }
+        })
+        
+    }
+
+
  
 }

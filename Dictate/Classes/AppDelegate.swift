@@ -28,6 +28,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
+    
+    var scheme: String!
+    var path: String!
+    var query: String!
+    var calledBy: String!
+    var fullUrl: String!
+    
     //Anill's
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -289,6 +296,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }       // end didFinishLaunchingWithOptions
+    
+    
+    
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+        
+        calledBy = sourceApplication
+        fullUrl = url.absoluteString
+        scheme = url.scheme
+        query = url.query
+        
+        return true //?? mike guessed here lol
+    }
+    
+    
     
     
     func logUser() {

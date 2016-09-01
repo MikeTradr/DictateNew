@@ -188,7 +188,7 @@ class TodayIC: WKInterfaceController {
                 print("w183 WE HERE????")
                 
                 let item = allEvents[index]
-                
+                                
                 dateFormatter.dateFormat = "h:mm a"
                 
                 let startTimeA = dateFormatter.stringFromDate(item.startDate)
@@ -201,6 +201,10 @@ class TodayIC: WKInterfaceController {
                 let endTime = endTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
                 
                 var endTimeDash = "- \(endTime)"
+                
+                if item.startDate == item.endDate {     //for same start & end time event
+                    endTimeDash = ""
+                }
                 
                 timeUntil = TimeManger.sharedInstance.timeInterval(item.startDate)
                 

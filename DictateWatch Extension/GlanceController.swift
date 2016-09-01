@@ -218,6 +218,10 @@ class GlanceController: WKInterfaceController {
                 
                 var endTimeDash = "- \(endTime)"
                 
+                if item.startDate == item.endDate {     //for same start & end time event 
+                    endTimeDash = ""
+                }
+                
                 timeUntil = TimeManger.sharedInstance.timeInterval(item.startDate)
                 
                 if item.allDay {     // if allDay bool is true

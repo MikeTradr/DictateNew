@@ -118,6 +118,10 @@ class EventDetailsIC: WKInterfaceController {
         
         var endTimeDash = "-\(endTime)"
         
+        if event.startDate == event.endDate {     //for same start & end time event
+            endTimeDash = ""
+        }
+        
         timeUntil = TimeManger.sharedInstance.timeInterval(event.startDate)
         print("w115 timeUntil: \(timeUntil)")
  

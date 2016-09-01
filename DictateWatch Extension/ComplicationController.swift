@@ -172,7 +172,11 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
                     let endTimeA = dateFormatter.stringFromDate(item.endDate)
                     let endTime = endTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
                     
-                    let endTimeDash = "- \(endTime)"
+                    var endTimeDash = "- \(endTime)"
+                    
+                    if item.startDate == item.endDate {     //for same start & end time event
+                        endTimeDash = ""
+                    }
                     
                     timeUntil = TimeManger.sharedInstance.timeInterval(item.startDate)
                     
@@ -276,7 +280,11 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
                     let endTimeA = dateFormatter.stringFromDate(item.endDate)
                     let endTime = endTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
                     
-                    let endTimeDash = "- \(endTime)"
+                    var endTimeDash = "- \(endTime)"
+                    
+                    if item.startDate == item.endDate {     //for same start & end time event
+                        endTimeDash = ""
+                    }
                     
                     timeUntil = TimeManger.sharedInstance.timeInterval(item.startDate)
                     
@@ -393,7 +401,11 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
                     
                     let endTimeA = dateFormatter.stringFromDate(item.endDate)
                     let endTime = endTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
-                    let endTimeDash = "- \(endTime)"
+                    var endTimeDash = "- \(endTime)"
+                    
+                    if item.startDate == item.endDate {     //for same start & end time event
+                        endTimeDash = ""
+                    }
                     
                     timeUntil = TimeManger.sharedInstance.timeInterval(item.startDate)
                     

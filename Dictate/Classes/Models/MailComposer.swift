@@ -245,6 +245,11 @@ class MailComposer: UIViewController, MFMailComposeViewControllerDelegate {
                     let endTime = endTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
                     
                     var endTimeDash = "- \(endTime)"
+                    
+                    if item.startDate == item.endDate {     //for same start & end time event
+                        endTimeDash = ""
+                    }
+                    
                     let title = item.title
                     let location:String = item.location!
                     let time = "\(startTime) \(endTimeDash)"

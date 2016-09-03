@@ -156,20 +156,29 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
     
     func resetToDefaults(){
         labels = ["Input", "Type", "Day","Time", "Cell#", "Start", "End", "Title", "Cal.", "Alert", "Repeat", "Locat."]
-        labelInput = "Input"
-        labelType = "Type"
-        labelDay = "Day"
-        labelTime = "Time"
-        labelCell = "Cell#"
-        labelStart = "Start"
-        labelEnd = "End"
-        labelTitle = "Title"
-        labelCal = "Cal."
-        labelAlert = "Alert"
-        labelRepeat = "Repeat"
-        labelLocation = "Locat."
+        labelInput      = "Input"
+        labelType       = "Type"
+        labelDay        = "Day"
+        labelTime       = "Time"
+        labelCell       = "Cell#"
+        labelStart      = "Start"
+        labelEnd        = "End"
+        labelTitle      = "Title"
+        labelCal        = "Cal."
+        labelAlert      = "Alert"
+        labelRepeat     = "Repeat"
+        labelLocation   = "Locat."
         
         datePickerHeight = 0.0
+    }
+    
+    
+    func toggleDatepicker() {
+        
+        datePickerHidden = !datePickerHidden
+        
+        tableV.beginUpdates()
+        tableV.endUpdates()
     }
     
     
@@ -237,6 +246,8 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
     
 //===== heightForRowAtIndexPath ================================================
 
+    var datePickerHidden = false
+    
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
         //print("p154 results[indexPath.row]: \(results[indexPath.row])")
@@ -246,6 +257,20 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
 //        } else {
 //            return DetailsTableViewCell.defaultHeight
 //        }
+    
+        //ANIL HELP HERE???
+        
+   /*
+        if datePickerHidden && indexPath.section == 0 && indexPath.row == 1 {
+            return 0
+        }
+        else {
+            //return tableView(tableView, heightForRowAtIndexPath: indexPath)
+            return 35
+        }
+   */
+        
+        
         
         var height:CGFloat = 35
 
@@ -396,16 +421,24 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
                 while (height > cell.resultsLabel.frame.size.height) {
                     cell.resultsLabel.font = UIFont.boldSystemFontOfSize(CGFloat(21-fontIncrement))
                     height = dynamicHeight(results[indexPath.row], font: UIFont.boldSystemFontOfSize(CGFloat(21-fontIncrement)), width: 180)
-                    fontIncrement++
+                    fontIncrement += 1
                 }
             }
             print("p322 cell.resultsLabel.font? \(cell.resultsLabel.font)")
         }
         
+       
+  
+        
+        
         
         if labels[indexPath.row] == "Start" {   //set default date for picker!
+            toggleDatepicker()
+
             cell.datePicker.date = defaults.objectForKey("startDT")! as! NSDate
         } else if labels[indexPath.row] == "End" {
+            toggleDatepicker()
+
             cell.datePicker.date = defaults.objectForKey("endDT")! as! NSDate
         }
         
@@ -438,6 +471,7 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
     
         print("p364 end cell: \(labels[indexPath.row]) ------------------------")
         print("--------------------------------------------")
+
      
         return cell
     }   // end func cellForRowAtIndexPath
@@ -718,13 +752,13 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
     
     func loadResultsArray() {
         
-        var strRaw      = defaults.stringForKey("strRaw")                   //Input
-        var actionType  = defaults.stringForKey("actionType")!              //Type
-        var day         = defaults.stringForKey("day")                      //Day
+        let strRaw      = defaults.stringForKey("strRaw")                   //Input
+        let actionType  = defaults.stringForKey("actionType")!              //Type
+        let day         = defaults.stringForKey("day")                      //Day
         let phone       = defaults.stringForKey("phone")                    //Cell#
         let startDT     = defaults.objectForKey("startDT")! as! NSDate      //Start
         let endDT       = defaults.objectForKey("endDT")! as! NSDate        //End
-        var output      = defaults.stringForKey("output")                   //Title
+        let output      = defaults.stringForKey("output")                   //Title
         var calendarName = defaults.stringForKey("calendarName")            //Cal.
         let alert       = defaults.objectForKey("eventAlert") as! Int ?? 10 //Alert
         let eventRepeat = defaults.stringForKey("eventRepeat")              //Repeat
@@ -753,13 +787,13 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
 
         //tableV.reloadData()
         
-        var alertSound3: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("se_tap", ofType: "m4a")!)
+        let alertSound3: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("se_tap", ofType: "m4a")!)
         //General.playSound(alertSound3!)
         
         playSound(alertSound3)
         
         // Do any additional setup after loading the view.
-        var strRaw      = defaults.stringForKey("strRaw")                   //Input
+        let strRaw      = defaults.stringForKey("strRaw")                   //Input
         var actionType  = defaults.stringForKey("actionType")!              //Type
         var day         = defaults.stringForKey("day")                      //Day
         let phone       = defaults.stringForKey("phone")                    //Cell#
@@ -772,7 +806,7 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         let eventLocation = defaults.stringForKey("eventLocation") ?? ""    //Location
 
         
-        var formatter3 = NSDateFormatter()
+        let formatter3 = NSDateFormatter()
         formatter3.dateFormat = "M-dd-yyyy h:mm a"
         fullDT = formatter3.stringFromDate(startDT)
         fullDTEnd = formatter3.stringFromDate(endDT)
@@ -791,15 +825,15 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         let outputNote  = defaults.stringForKey("outputNote")
         let duration    = defaults.objectForKey("eventDuration") as! Int ?? 10
         
-        var wordArrTrimmed  = defaults.objectForKey("wordArrTrimmed") as! [String] //array of the items
+        let wordArrTrimmed  = defaults.objectForKey("wordArrTrimmed") as! [String] //array of the items
         
         //TODO Mike Anil commented to fix nil error
         // var reminderArray = defaults.objectForKey("reminderArray") as! [String] //array of the items
         
-        var reminderTitle   = defaults.stringForKey("reminderTitle")
-        var reminderArray:[String] = []
-        var reminderList   = defaults.stringForKey("reminderList")
-        var reminderAlarm  = defaults.objectForKey("reminderAlarm")! as! NSDate
+        let reminderTitle   = defaults.stringForKey("reminderTitle")
+        let reminderArray:[String] = []
+        let reminderList   = defaults.stringForKey("reminderList")
+        let reminderAlarm  = defaults.objectForKey("reminderAlarm")! as! NSDate
     
         let allDayFlag  = defaults.objectForKey("allDayFlag") as! Bool
         let defaultCalendarID  = defaults.stringForKey("defaultCalendarID")
@@ -1021,13 +1055,17 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
+        
+        
+        
+        
         tableV.tableFooterView = UIView(frame:CGRectZero)    //removes blank lines
         
         self.tableV.reloadData()
         
         //Added left and Right Swipe gestures. TODO Can add this to the General.swift Class? and call it?
-        let leftSwipe = UISwipeGestureRecognizer(target: self, action: Selector("handleSwipes:"))
-        let rightSwipe = UISwipeGestureRecognizer(target: self, action: Selector("handleSwipes:"))
+        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(DetailTableVC.handleSwipes(_:)))
+        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(DetailTableVC.handleSwipes(_:)))
         leftSwipe.direction = .Left
         rightSwipe.direction = .Right
         view.addGestureRecognizer(leftSwipe)
@@ -1043,11 +1081,11 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
     
     @IBAction func buttonCreate(sender: AnyObject) {
         
-        var alertSound1 = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("217-buttonclick03", ofType: "mp3")!)
+        let alertSound1 = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("217-buttonclick03", ofType: "mp3")!)
         //  General.playSound(alertSound3!)
         playSound(alertSound1)
         
-        var actionType:String    = defaults.stringForKey("actionType")!
+        let actionType:String    = defaults.stringForKey("actionType")!
         print("p237 vcTest1, actionType: \(actionType)")
         
         switch (actionType){
@@ -1286,7 +1324,7 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         tableV.reloadData()
         titleRowHeight = 27.5
 
-        var alertSound124 = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("124-DeleteWhoosh", ofType: "mp3")!)
+        let alertSound124 = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("124-DeleteWhoosh", ofType: "mp3")!)
         //  General.playSound(alertSound3!)
         
         playSound(alertSound124)

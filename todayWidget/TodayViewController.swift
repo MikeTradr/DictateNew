@@ -36,19 +36,19 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     var rowsToShow = 0
     
     @IBOutlet var labelNoEvents: UILabel!
-    @IBOutlet var table: UITableView!
     
+    @IBOutlet var tableView: UITableView!
     
     func fetchEvents(){
         
         let today =  NSDate()
-        let startDate = NSCalendar.currentCalendar().startOfDayForDate(today)
+        let startDate = NSCalendar.currentCalendar().startOfDayForDate(today)   //= 12:01 am today
         
         let calendar = NSCalendar.currentCalendar()
         
         let tomorrow :NSDate = calendar.dateByAddingUnit(NSCalendarUnit.Day, value: 1, toDate: NSDate(), options: [])!
         
-        let endDate = NSCalendar.currentCalendar().startOfDayForDate(tomorrow)
+        let endDate = NSCalendar.currentCalendar().startOfDayForDate(tomorrow)  //is midnight today
         
         print("p39 startDate: \(startDate)")
         print("p40 endDate: \(endDate)")
@@ -57,7 +57,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             self.allEvents = events
         })
         
-        print("p46 allEvents.count: \(allEvents.count)")
+        print("p60 allEvents.count: \(allEvents.count)")
     }
     
     
@@ -66,24 +66,38 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         super.viewDidLoad()
         // Do any additional setup after loading the view from its nib.
         
+      //  table.contentInset = UIEdgeInsetsMake(20, 0, 0, 0)
+       // table.tableFooterView = UIView(frame: CGRectZero)
+        
         fetchEvents()
+        
+        tableView.reloadData()
         
         var numberOfRows = allEvents.count
         
-        
         print("p67 rowsToDelete: \(rowsToDelete)")
+        print("p77 rowsToShow: \(rowsToShow)")
         
-        self.preferredContentSize.height = CGFloat(rowsToShow * 50)
+        print("p79 allEvents.count: \(allEvents.count)")
         
-        if allEvents.count == 0 {        //no events for day
+        //self.preferredContentSize.height = CGFloat(allEvents.count * 50)
+
+       // self.preferredContentSize.height = CGFloat(rowsToShow * 50)
+        //self.preferredContentSize.height = CGFloat(numberOfRows * 50)
+        
+        //self.preferredContentSize.height = 25
+
+        
+        
+        
+        if allEvents.count == 0 || rowsToShow == 0 {        //no events for day
+            print("p85 we here")
             self.preferredContentSize.height = 25
             self.labelNoEvents.text = "Dictate™ 😀 No More Events Today"
             self.labelNoEvents.hidden = false
         } else {
             self.labelNoEvents.hidden = true
-        }
-        
-        
+        }   
     }
     
     override func didReceiveMemoryWarning() {
@@ -98,12 +112,18 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         // If there's no update required, use NCUpdateResult.NoData
         // If there's an update, use NCUpdateResult.NewData
         
+        //tableView.reloadData()
+        
+        tableView.beginUpdates()
+        tableView.endUpdates()
+        
         fetchEvents()
         
        // let item = allEvents[0]  
         
         if allEvents.count == 0 {        //no events for day
-            self.preferredContentSize.height = 25
+            self.preferredContentSize.height = 15
+            print("p112 we here")
             self.labelNoEvents.text = "Dictate™ 😀 No More Events Today"
             self.labelNoEvents.hidden = false
         } else {
@@ -121,13 +141,16 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
  */
     
-    func widgetMarginInsetsForProposedMarginInsets(var defaultMarginInsets: UIEdgeInsets) -> UIEdgeInsets {
+    func widgetMarginInsetsForProposedMarginInsets(defaultMarginInsets: UIEdgeInsets) -> UIEdgeInsets {
         
        // var defaultLeftInset: CGFloat = 0
        // defaultLeftInset = defaultMarginInsets.left
         
-        defaultMarginInsets.left = 45
-        return defaultMarginInsets
+      //  defaultMarginInsets.left = 45
+       // return defaultMarginInsets
+        
+        return UIEdgeInsetsMake(0, 45, 0, 0)
+
     }
 
 
@@ -146,10 +169,10 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 
 //===== cellForRowAtIndexPath ================================================
     
-    func tableView(table: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let identifier = "tableViewCellIdentifier"
-        let cell = table.dequeueReusableCellWithIdentifier( identifier, forIndexPath: indexPath) as! TodayTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier( identifier, forIndexPath: indexPath) as! TodayTableViewCell
         
        let item = allEvents[indexPath.row]
         
@@ -237,9 +260,13 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
 //===== heightForRowAtIndexPath ================================================
     
-    func tableView(table: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
         let item = allEvents[indexPath.row]
+        
+        print("p267 we here? \(item.title)")
+
+        
         
         if item.endDate.timeIntervalSince1970 <= NSDate().timeIntervalSince1970 {
             
@@ -254,12 +281,10 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             
             rowsToShow = allEvents.count - numberRowsToDelete
             print("p247 rowsToShow: \(rowsToShow)")
-
-            //self.preferredContentSize.height = self.preferredContentSize.height - 50
             
-            return 0.0
+            return 0
         } else {
-            return 50.0     //Choose your custom row height
+            return 50     //Choose your custom row height
         }
     }
 //===== endheightForRowAtIndexPath ================================================
@@ -267,12 +292,14 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 //===== didSelectRowAtIndexPath ================================================
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        print("p267 You selected row/event #\(indexPath.row)!")
+        print("p267 You selected row/event # \(indexPath.row)")
         
        // var selectedCell:UITableViewCell = table.cellForRowAtIndexPath(indexPath)!
         
         let item = allEvents[indexPath.row]
         let eventID = item.eventIdentifier
+        print("p267 eventID \(eventID)")
+
         
         // from here:
         // http://iosdevelopertips.com/cocoa/launching-your-own-application-via-a-custom-url-scheme.html

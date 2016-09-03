@@ -48,7 +48,19 @@ class SettingsEventTableViewController: UITableViewController, UITextFieldDelega
             }
         }
         
+        print("p51 defaults.objectForKey(\"defaultEventDuration\"): \(defaults.objectForKey("defaultEventDuration"))")
+   /*
+        if defaults.objectForKey("defaultEventDuration") == nil {
+            let defaultDurationInitially = 10
+            defaults.setObject(defaultDurationInitially, forKey: "defaultEventDuration")
+        }
+    */
+         print("p58 defaults.objectForKey(\"defaultEventDuration\"): \(defaults.objectForKey("defaultEventDuration"))")
+        
         let duration    = defaults.objectForKey("defaultEventDuration") as! Int     //changed from eventDuration 112715
+        
+         print("p62 defaults.objectForKey(\"defaultEventAlert\"): \(defaults.objectForKey("defaultEventAlert"))")
+        
         let alert       = defaults.objectForKey("defaultEventAlert") as! Int        //changed from eventAlert 112715
         labelDefaultDuration.text = "\(duration)"
         labelDefaultAlert.text = "\(alert)"
@@ -83,6 +95,7 @@ class SettingsEventTableViewController: UITableViewController, UITextFieldDelega
                 //empty field
             } else {
                 let newDuration = Int(currentString)
+                print("p98 newDuration: \(newDuration)")
                 defaults.setObject(newDuration, forKey: "defaultEventDuration")
             }
         }

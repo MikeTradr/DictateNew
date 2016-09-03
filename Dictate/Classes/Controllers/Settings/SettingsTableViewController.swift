@@ -41,7 +41,7 @@ class SettingsTableViewController: UITableViewController{
     }
     
     override func viewWillAppear(animated: Bool) {
-        var alertSound3: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("262-buttonclick57", ofType: "mp3")!)
+        let alertSound3: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("262-buttonclick57", ofType: "mp3")!)
         //General.playSound(alertSound3!)
         playSound(alertSound3)
         

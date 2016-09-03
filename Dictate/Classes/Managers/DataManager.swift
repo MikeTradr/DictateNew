@@ -67,7 +67,7 @@ class DataManager: NSObject {
     var mainType:String   = ""
 
     // new for new start...
-    //var eventDuration:Double     = 10   //TODO get this from settings
+    //var eventDuration:Int     = 10   //TODO get this from settings
     var now         = ""
     var word        = ""
     var timeString  = ""
@@ -102,7 +102,7 @@ class DataManager: NSObject {
         defaults.setObject(actionType, forKey: "actionType")
         defaults.setObject(mainType, forKey: "mainType")
         
-        defaults.setObject(eventDuration, forKey: "defaultEventDuration")   //added defualt 112715
+        defaults.setObject(defaultEventDuration, forKey: "defaultEventDuration")   //added defualt 112715
         defaults.setObject(defaultEventAlert, forKey: "defaultEventAlert")  //added defualt 112715
 
         defaults.setObject(wordArrTrimmed, forKey: "wordArrTrimmed")

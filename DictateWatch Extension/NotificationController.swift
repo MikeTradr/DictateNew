@@ -88,7 +88,7 @@ class NotificationController: WKUserNotificationInterfaceController {
         
         let fontAttribute = [NSFontAttributeName: headlineFont]
         
-        let attributedString = NSAttributedString(string: "Now  ",
+        let attributedString = NSAttributedString(string: "Now😀  ",
                                                   attributes: fontAttribute)
         
         self.labelTimeUntil.setAttributedText(attributedString)

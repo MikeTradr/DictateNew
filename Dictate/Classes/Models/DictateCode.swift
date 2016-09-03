@@ -83,6 +83,10 @@ class DictateCode: NSObject {
     var mainType:String   = ""
     
     let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+    
+    var eventDuration  = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+.objectForKey("defaultEventDuration")! as! Int
+
 
    
 // new for new start...
@@ -94,7 +98,8 @@ class DictateCode: NSObject {
     //CRASHES watchOS@, need to solve! and below. and ALL UserDefaults
   //  var eventDuration    = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!.objectForKey("defaultEventDuration") as! Int
     
-    var eventDuration: Int = 10 //TODO FIX hardcoded for now, fix to new defaults watchSO2
+  //  var eventDuration: Int = 10 //TODO FIX hardcoded for now, fix to new defaults watchSO2
+
     
     // TODO above crashes if not run phone app first??? 121215
     
@@ -2218,7 +2223,10 @@ class DictateCode: NSObject {
                 
                 if userDuration == 0 {          //no duration found so pull duration from defaults.
                     print("p2085 No user Duration found set userDuration: \(userDuration)")
-                    if defaults.objectForKey("eventDuration") as? Int != 0 {
+                    
+                    
+                    // changed below to: defaultEventDuration  was eventDuration wrongly 090116 Mike
+                    if defaults.objectForKey("defaultEventDuration") as? Int != 0 {
                         if let duration:Int  = defaults.objectForKey("defaultEventDuration") as? Int {
                             print("p2137 duration: \(duration)")
                             eventDuration = duration

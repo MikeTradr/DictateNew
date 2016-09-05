@@ -214,6 +214,12 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
                         endDateTL = endDateTL.dateByAddingTimeInterval(1 * MINUTE)  //add 1 minute
                         print("w218 endDateTL: \(endDateTL)")
                         
+                        if allEvents.last == true {         //we at last item in array
+                            endDateTL = item.endDate        //use endDte for last item of day
+                            endDateTL = endDateTL.dateByAddingTimeInterval(1 * MINUTE)  //add 1 minute
+                            print("w220 endDateTL: \(endDateTL)")
+                        }
+                        
                     } else {
                         endDateTL = startDate
                     }

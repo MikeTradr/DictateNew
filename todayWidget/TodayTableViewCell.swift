@@ -20,6 +20,8 @@ class TodayTableViewCell: UITableViewCell {
     
     @IBOutlet var verticalBarView: UIView!
     
+    @IBOutlet var constraintTimeUntilTop: NSLayoutConstraint!
+
     
     override func awakeFromNib() {
         super.awakeFromNib()

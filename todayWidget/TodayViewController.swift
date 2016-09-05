@@ -35,6 +35,8 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     var numberRowsToDelete = 0
     var rowsToShow = 0
     
+    var setRowHeight:CGFloat = 0
+    
     @IBOutlet var labelNoEvents: UILabel!
     
     @IBOutlet var tableView: UITableView!
@@ -82,7 +84,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
         //self.preferredContentSize.height = CGFloat(allEvents.count * 50)
 
-       // self.preferredContentSize.height = CGFloat(rowsToShow * 50)
+        //self.preferredContentSize.height = CGFloat(rowsToShow * 50)
         //self.preferredContentSize.height = CGFloat(numberOfRows * 50)
         
         //self.preferredContentSize.height = 25
@@ -94,6 +96,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             print("p85 we here")
             self.preferredContentSize.height = 25
             self.labelNoEvents.text = "Dictate™ 😀 No More Events Today"
+            self.labelNoEvents.textColor = UIColor.whiteColor().colorWithAlphaComponent(0.7)
             self.labelNoEvents.hidden = false
         } else {
             self.labelNoEvents.hidden = true
@@ -114,10 +117,14 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
         //tableView.reloadData()
         
-        tableView.beginUpdates()
-        tableView.endUpdates()
-        
         fetchEvents()
+        
+       // tableView.beginUpdates()
+       // tableView.endUpdates()
+        
+         tableView.reloadData()
+        
+       
         
        // let item = allEvents[0]  
         
@@ -141,6 +148,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
  */
     
+/*
     func widgetMarginInsetsForProposedMarginInsets(defaultMarginInsets: UIEdgeInsets) -> UIEdgeInsets {
         
        // var defaultLeftInset: CGFloat = 0
@@ -149,10 +157,10 @@ class TodayViewController: UIViewController, NCWidgetProviding {
       //  defaultMarginInsets.left = 45
        // return defaultMarginInsets
         
-        return UIEdgeInsetsMake(0, 45, 0, 0)
-
+        //return UIEdgeInsetsMake(0, 0, 45, 0)
+        return UIEdgeInsetsMake(25, 0, 0, 0)
     }
-
+*/
 
     // MARK: - TableView Data Source
     
@@ -227,8 +235,11 @@ class TodayViewController: UIViewController, NCWidgetProviding {
                 cell.labelTimeUntil.text = ""
             }
             
+            cell.constraintTimeUntilTop.constant = 0    //move up a bit to accomindate the emoji
+            
         } else {
             cell.labelTimeUntil.text = timeUntil
+            cell.constraintTimeUntilTop.constant = 1
         }
         
         print("p227 timeUntil: \(timeUntil)")
@@ -282,10 +293,24 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             rowsToShow = allEvents.count - numberRowsToDelete
             print("p247 rowsToShow: \(rowsToShow)")
             
-            return 0
+            //return 0
+           
+            setRowHeight = 0
         } else {
-            return 50     //Choose your custom row height
+            //return 50     //Choose your custom row height
+            print("p299 we here? \(item.title)")
+
+            setRowHeight = 50
         }
+        
+        if allEvents.count == 0 {  // TODO Mike Anil does not work!
+            //set row height for the No Events today Label
+            print("p303 we here? allEvents.count: \(allEvents.count)")
+            setRowHeight = 60
+        }
+        print("p309 setRowHeight: \(setRowHeight)")
+        
+        return setRowHeight
     }
 //===== endheightForRowAtIndexPath ================================================
     

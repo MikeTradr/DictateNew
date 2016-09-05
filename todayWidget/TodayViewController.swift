@@ -36,14 +36,25 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     var rowsToShow = 0
     
     var setRowHeight:CGFloat = 0
+    var endTimeDash = ""
+    
+    var timer = NSTimer()
+    
+   // let calendar = NSCalendar.currentCalendar()
+    
+    let tomorrow :NSDate = NSCalendar.currentCalendar()
+.dateByAddingUnit(NSCalendarUnit.Day, value: 1, toDate: NSDate(), options: [])!
     
     @IBOutlet var labelNoEvents: UILabel!
     
     @IBOutlet var tableView: UITableView!
+
+    @IBOutlet var labelTime: UILabel!
+    
+    
     
     func fetchEvents(){
         
-        let today =  NSDate()
         let startDate = NSCalendar.currentCalendar().startOfDayForDate(today)   //= 12:01 am today
         
         let calendar = NSCalendar.currentCalendar()
@@ -59,9 +70,24 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             self.allEvents = events
         })
         
+        //sort events array on startDate
+        allEvents.sortInPlace({$0.startDate.timeIntervalSince1970 < $1.startDate.timeIntervalSince1970})
+        
         print("p60 allEvents.count: \(allEvents.count)")
     }
     
+    func currentTime () {
+        dateFormatter.dateFormat = "h:mm a"
+        
+        let timeA = dateFormatter.stringFromDate(NSDate())
+        let timeNow = timeA.stringByReplacingOccurrencesOfString(":00", withString: "")
+        
+        labelTime.text = timeNow
+    }
+    
+    func updateTable () {
+      tableView.reloadData()
+    }
     
     
     override func viewDidLoad() {
@@ -71,9 +97,13 @@ class TodayViewController: UIViewController, NCWidgetProviding {
       //  table.contentInset = UIEdgeInsetsMake(20, 0, 0, 0)
        // table.tableFooterView = UIView(frame: CGRectZero)
         
+        currentTime()
+        
+        timer = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: Selector("currentTime"), userInfo: nil, repeats: true)
+
         fetchEvents()
         
-        tableView.reloadData()
+       // tableView.reloadData()
         
         var numberOfRows = allEvents.count
         
@@ -87,10 +117,16 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         //self.preferredContentSize.height = CGFloat(rowsToShow * 50)
         //self.preferredContentSize.height = CGFloat(numberOfRows * 50)
         
-        //self.preferredContentSize.height = 25
-
+       // self.preferredContentSize.height = 200
         
         
+      //  tableView.rowHeight = UITableViewAutomaticDimension
+       // tableView.estimatedRowHeight = 140
+        
+        // tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
+        // tableView.tableFooterView = UIView(frame: CGRectZero)
+        
+        tableView.reloadData()
         
         if allEvents.count == 0 || rowsToShow == 0 {        //no events for day
             print("p85 we here")
@@ -102,6 +138,16 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             self.labelNoEvents.hidden = true
         }   
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        timer = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: Selector("currentTime"), userInfo: nil, repeats: true)
+    }
+    
+    
+    
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -115,17 +161,16 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         // If there's no update required, use NCUpdateResult.NoData
         // If there's an update, use NCUpdateResult.NewData
         
-        //tableView.reloadData()
+        currentTime()
+        
+        var timer = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: Selector("currentTime"), userInfo: nil, repeats: true)
         
         fetchEvents()
         
-       // tableView.beginUpdates()
-       // tableView.endUpdates()
+        var timer2 = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: Selector("updateTable"), userInfo: nil, repeats: true)
         
-         tableView.reloadData()
-        
-       
-        
+        // tableView.reloadData()
+
        // let item = allEvents[0]  
         
         if allEvents.count == 0 {        //no events for day
@@ -200,11 +245,41 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         let endTimeA = dateFormatter.stringFromDate(item.endDate)
         let endTime = endTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
         
-        var endTimeDash = "- \(endTime)"
+        endTimeDash = "- \(endTime)"
         
         if item.startDate == item.endDate {     //for same start & end time event
             endTimeDash = ""
         }
+        
+        let todayStart = NSCalendar.currentCalendar().startOfDayForDate(today)   //= 12:01 am today
+            
+        if item.startDate.timeIntervalSince1970 <= todayStart.timeIntervalSince1970 {
+            dateFormatter.dateFormat = "EEEE"    //EEEE = full day name  EEE is 3 letter abbreviation
+            let eventDay = dateFormatter.stringFromDate(item.startDate)
+            startTime = eventDay
+            
+            dateFormatter.dateFormat = "h:mm a"
+            let endTimeA = dateFormatter.stringFromDate(item.endDate)
+            let endTime = endTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
+            endTimeDash = "- \(endTime)"
+        }
+        
+        let todayEnd = NSCalendar.currentCalendar().startOfDayForDate(tomorrow)  //is midnight today
+        
+        if item.endDate.timeIntervalSince1970 > todayEnd.timeIntervalSince1970 {
+            dateFormatter.dateFormat = "EEE"    //EEEE = full day name  EEE is 3 letter abbreviation
+            let eventDay = dateFormatter.stringFromDate(item.endDate)
+            let endTime = eventDay
+            endTimeDash = "- \(endTime)"
+        }
+
+
+        
+        
+        
+        
+        
+        
         
         timeUntil = TimeManger.sharedInstance.timeInterval(item.startDate)
         
@@ -270,14 +345,12 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 //===== end cellForRowAtIndexPath ================================================
     
 //===== heightForRowAtIndexPath ================================================
-    
+ 
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
         let item = allEvents[indexPath.row]
         
         print("p267 we here? \(item.title)")
-
-        
         
         if item.endDate.timeIntervalSince1970 <= NSDate().timeIntervalSince1970 {
             
@@ -303,27 +376,32 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             setRowHeight = 50
         }
         
+        rowsToShow = allEvents.count - numberRowsToDelete
+        print("p312 rowsToShow: \(rowsToShow)")
+        
         if allEvents.count == 0 {  // TODO Mike Anil does not work!
             //set row height for the No Events today Label
             print("p303 we here? allEvents.count: \(allEvents.count)")
-            setRowHeight = 60
+            setRowHeight = 50
         }
         print("p309 setRowHeight: \(setRowHeight)")
         
         return setRowHeight
     }
+ 
+
 //===== endheightForRowAtIndexPath ================================================
     
 //===== didSelectRowAtIndexPath ================================================
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        print("p267 You selected row/event # \(indexPath.row)")
+        print("p328 You selected row/event # \(indexPath.row)")
         
        // var selectedCell:UITableViewCell = table.cellForRowAtIndexPath(indexPath)!
         
         let item = allEvents[indexPath.row]
         let eventID = item.eventIdentifier
-        print("p267 eventID \(eventID)")
+        print("p334 eventID \(eventID)")
 
         
         // from here:
@@ -340,7 +418,33 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         })
         
     }
-
+ /*
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if let item = items?[indexPath.row] {
+            if let context = extensionContext {
+                context.openURL(item.link, completionHandler: nil)
+            }
+        }
+    }
+*/
+ /*
+    override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return expandButton
+    }
+    
+    // MARK: expand
+    
+    func updateExpandButtonTitle() {
+        expandButton.setTitle(expanded ? "Show less" : "Show more", forState: .Normal)
+    }
+    
+    func toggleExpand() {
+        expanded = !expanded
+        updateExpandButtonTitle()
+        updatePreferredContentSize()
+        tableView.reloadData()
+    }
+*/
 
  
 }

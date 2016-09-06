@@ -318,7 +318,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         switch calledBy {
             case "com.thatsoft.dictateApp.todayWidget":
   
-                //   let viewController:ViewController = window!.rootViewController as! ViewController
+                let viewController:ViewController = window!.rootViewController as! ViewController
                 //  viewController.performSegueWithIdentifier("TodayViewController", sender: nil)
                 
                 
@@ -326,6 +326,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 if let tabBarController = self.window!.rootViewController as? UITabBarController {
                     tabBarController.selectedIndex = 4    //set to start at tab index 4
                 }
+                
+                var eventController = EKEventViewController()
+             
+            // Anil Tired this too
+             //   dispatch_async(dispatch_get_main_queue(), { () -> Void in
+             //       self.viewController(eventController, animated: true, completion: nil)
+             //   })
+
                 
                 
                 weak var delegate: EKEventViewDelegate?

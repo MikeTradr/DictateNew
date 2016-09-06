@@ -1888,7 +1888,7 @@
         <!--Navigation Controller-->
         <scene sceneID="muo-Ya-V8L">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="vo1-uE-aOl" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="storyboardToday" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="vo1-uE-aOl" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="Today53x62px" id="MPw-th-4Ku"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Gpu-AI-ZHG">

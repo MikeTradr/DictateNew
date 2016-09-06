@@ -409,6 +409,9 @@ class TodayViewController: UIViewController, NCWidgetProviding {
        // let myAppUrl = NSURL(string: "Dictate://some-context")!
         let myAppUrl = NSURL(string: "Dictate://?eventID=\(eventID)")!
         
+       // var myAppUrl = NSURL(string: "Dictate://some-context")!
+
+        
        // myapp://name=BrunoMars&gender=Male&age=26&occupation=Singer
         
         extensionContext?.openURL(myAppUrl, completionHandler: { (success) in

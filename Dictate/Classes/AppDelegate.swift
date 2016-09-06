@@ -5,6 +5,8 @@
 //  Created by Mike Derr on 5/8/15.
 //  Copyright (c) 2015 ThatSoft.com. All rights reserved.
 //
+//  OLD NO MORE url switching: http://www.brianjcoleman.com/tutorial-deep-linking-in-swift/
+//
 
 import UIKit
 import Parse
@@ -12,6 +14,7 @@ import Bolts
 import Fabric
 import Crashlytics
 import WatchConnectivity
+import EventKitUI   //for displaying EKEventViewController
 
 
 @available(iOS 9.0, *)
@@ -306,9 +309,58 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         scheme = url.scheme
         query = url.query
         
+        print("p312 calledBy: \(calledBy)")
+        print("p312 fullUrl: \(fullUrl)")
+        print("p312 scheme: \(scheme)")
+        print("p312 query: \(query)")
+
+        
+        switch calledBy {
+            case "com.thatsoft.dictateApp.todayWidget":
+  
+                //   let viewController:ViewController = window!.rootViewController as! ViewController
+                //  viewController.performSegueWithIdentifier("TodayViewController", sender: nil)
+                
+                
+                //works to Today view :)
+                if let tabBarController = self.window!.rootViewController as? UITabBarController {
+                    tabBarController.selectedIndex = 4    //set to start at tab index 4
+                }
+                
+                
+                weak var delegate: EKEventViewDelegate?
+     
+            break;
+                
+           // case 2: daysToAdd = 5;  break;
+           // case 3: daysToAdd = 4;  break;
+           // case 4: daysToAdd = 3;  break;
+           // case 5: daysToAdd = 2;  break;
+           // case 6: daysToAdd = 1;  break;
+        default:
+            if let tabBarController = self.window!.rootViewController as? UITabBarController {
+                tabBarController.selectedIndex = 2    //main Dictate screen
+            }
+        }
+        
+        
         return true //?? mike guessed here lol
     }
     
+ /*
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "ReminderEditSegue"{
+            let indexPath = self.tableView.indexPathForSelectedRow!
+            let selectedReminder =  reminders[indexPath.row];
+            let navController = segue.destinationViewController as! UINavigationController
+            let destController = navController.topViewController as! ReminderEditorViewController
+            destController.reminder = selectedReminder
+            
+        }
+    }
+
+*/
     
     
     

@@ -61,6 +61,8 @@
 		D31F336B1D0E7BD3003D726E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D31F336A1D0E7BD3003D726E /* Images.xcassets */; };
 		D323505E1B697B0200939F03 /* DictateCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D323505D1B697B0200939F03 /* DictateCode.swift */; };
 		D32350621B69828900939F03 /* ReminderCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32350611B69828900939F03 /* ReminderCode.swift */; };
+		D3294E821D7F0EF900B18B25 /* SettingsFriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3294E811D7F0EF900B18B25 /* SettingsFriendsTableViewCell.swift */; };
+		D3294E841D7F892A00B18B25 /* SettingsAddFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3294E831D7F892A00B18B25 /* SettingsAddFriendViewController.swift */; };
 		D3348D111BAE4D3C0056792D /* 124-DeleteWhoosh.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D3348D101BAE4D3C0056792D /* 124-DeleteWhoosh.mp3 */; };
 		D33C13BB1B8C1EC900470F8F /* ToDoMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33C13BA1B8C1EC900470F8F /* ToDoMenuViewController.swift */; };
 		D33C13BD1B8C3CCB00470F8F /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33C13BC1B8C3CCB00470F8F /* SettingsTableViewController.swift */; };
@@ -295,6 +297,8 @@
 		D31F336A1D0E7BD3003D726E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D323505D1B697B0200939F03 /* DictateCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictateCode.swift; sourceTree = "<group>"; };
 		D32350611B69828900939F03 /* ReminderCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderCode.swift; sourceTree = "<group>"; };
+		D3294E811D7F0EF900B18B25 /* SettingsFriendsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsFriendsTableViewCell.swift; sourceTree = "<group>"; };
+		D3294E831D7F892A00B18B25 /* SettingsAddFriendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsAddFriendViewController.swift; sourceTree = "<group>"; };
 		D3348D031BAE4CFD0056792D /* 124-DeleteWhoosh.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "124-DeleteWhoosh.mp3"; sourceTree = "<group>"; };
 		D3348D101BAE4D3C0056792D /* 124-DeleteWhoosh.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "124-DeleteWhoosh.mp3"; sourceTree = "<group>"; };
 		D33C13BA1B8C1EC900470F8F /* ToDoMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoMenuViewController.swift; sourceTree = "<group>"; };
@@ -679,6 +683,8 @@
 				D33C13BE1B8C47E800470F8F /* SettingsCalendarTableViewController.swift */,
 				D3795E791B8DF927009D3DB5 /* SettingsEventTableViewController.swift */,
 				D392FAD31B9B1BA800678B18 /* SettingsFriendsTableViewController.swift */,
+				D3294E811D7F0EF900B18B25 /* SettingsFriendsTableViewCell.swift */,
+				D3294E831D7F892A00B18B25 /* SettingsAddFriendViewController.swift */,
 				D392FAD91B9B1DFD00678B18 /* SettingsGeneralTableViewController.swift */,
 				D392FAD51B9B1C7E00678B18 /* SettingsInstructionsTableViewController.swift */,
 				D392FAD71B9B1D3600678B18 /* SettingsKeywordsTableViewController.swift */,
@@ -1274,6 +1280,7 @@
 				D38653F71BAA02F400B8CCBC /* EventManager.swift in Sources */,
 				ECB862021B77DD4100503C50 /* TodayViewController.m in Sources */,
 				ECF240461B9AFBF3002BFBAE /* ReminderEditorViewController.m in Sources */,
+				D3294E841D7F892A00B18B25 /* SettingsAddFriendViewController.swift in Sources */,
 				D397FDA21CAB1752005DD51A /* TimeManger.swift in Sources */,
 				D31BF35C1CDBF71F00521A65 /* ReminderManagerSave.swift in Sources */,
 				D3BD1BDE1B9F3CF10052A312 /* ReminderPickerTableViewController.swift in Sources */,
@@ -1291,6 +1298,7 @@
 				D392FAD41B9B1BA800678B18 /* SettingsFriendsTableViewController.swift in Sources */,
 				D3188A7F1B6E9B7F00323DC0 /* LoginViewController.swift in Sources */,
 				D3B703821B94E90800FA1DF0 /* ReminderListTableViewController.swift in Sources */,
+				D3294E821D7F0EF900B18B25 /* SettingsFriendsTableViewCell.swift in Sources */,
 				ECB862371B77DEBD00503C50 /* JTVerticalCalendarView.m in Sources */,
 				D3188A791B6E9B4200323DC0 /* ToDoTableCell.swift in Sources */,
 				D37374671D2547E1003F8D5C /* WatchSessionManager.swift in Sources */,

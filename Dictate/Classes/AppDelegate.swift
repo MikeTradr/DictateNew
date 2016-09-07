@@ -210,7 +210,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // we're now providing a set containing our category as an argument
         application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: Set([todoCategory])))
-        return true
         
         
         

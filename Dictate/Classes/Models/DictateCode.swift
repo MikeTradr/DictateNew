@@ -84,8 +84,8 @@ class DictateCode: NSObject {
     
     let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
     
-//    var eventDuration  = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
-//.objectForKey("defaultEventDuration")! as! Int
+    var eventDuration  = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+.objectForKey("defaultEventDuration") as? Int ?? 10
 
 
    
@@ -154,14 +154,14 @@ class DictateCode: NSObject {
         
         defaults.setObject(actionType, forKey: "actionType")        //sets actionType for processing
         defaults.setObject(mainType, forKey: "mainType")            //sets mainType
-//        defaults.setObject(eventDuration, forKey: "eventDuration")
+        defaults.setObject(eventDuration, forKey: "eventDuration")
         defaults.setObject(wordArrTrimmed, forKey: "wordArrTrimmed")
         defaults.setObject(eventLocation, forKey: "eventLocation")
         defaults.setObject(phone, forKey: "toPhone")                // to use for texting to
 
 
         
-//        print("p116 eventDuration from NSDefaults: \(eventDuration)")              // see what NSDefaults has!
+        print("p116 eventDuration from NSDefaults: \(eventDuration)")              // see what NSDefaults has!
         print("p87 calendarName: \(calendarName)")              // see what NSDefaults has!
         
         
@@ -1646,7 +1646,7 @@ class DictateCode: NSObject {
                         
                         print("p1082 userDuration: \(userDuration)")
                         //eventDuration = Double(userDuration)
-//                        eventDuration = userDuration
+                        eventDuration = userDuration
                         
                         wordArrTrimmed = wordArrTrimmed.filter() { $0 != wordArr[i] }
                         
@@ -1687,7 +1687,7 @@ class DictateCode: NSObject {
                             print("p547 userDuration \(userDuration)")
                             
                            // eventDuration = Double(userDuration)
-//                            eventDuration = userDuration
+                            eventDuration = userDuration
 
                             wordArrTrimmed = wordArrTrimmed.filter() { $0 != wordArr[i+1] }
                         }   // end (durationNumberString != [])
@@ -2150,9 +2150,9 @@ class DictateCode: NSObject {
                 startDT = formatter3.dateFromString(fullDT) ?? today
             }
             
-//            let doubleTimeDuration:Double = Double(eventDuration * 60)  //convert Int to Double for next calc.
+            let doubleTimeDuration:Double = Double(eventDuration * 60)  //convert Int to Double for next calc.
             
-//            var endDT:NSDate = startDT.dateByAddingTimeInterval(doubleTimeDuration)
+            var endDT:NSDate = startDT.dateByAddingTimeInterval(doubleTimeDuration)
             
             var fullDTEnd = formatter3.stringFromDate(endDT)
             
@@ -2229,7 +2229,7 @@ class DictateCode: NSObject {
                     if defaults.objectForKey("defaultEventDuration") as? Int != 0 {
                         if let duration:Int  = defaults.objectForKey("defaultEventDuration") as? Int {
                             print("p2137 duration: \(duration)")
-//                            eventDuration = duration
+                            eventDuration = duration
                         }
                     }
                 }
@@ -2259,7 +2259,7 @@ class DictateCode: NSObject {
                 defaults.setObject(outputNote, forKey: "outputNote")
                 defaults.setObject(day, forKey: "day")
                 defaults.setObject(calendarName, forKey: "calendarName")
-//                defaults.setObject(eventDuration, forKey: "eventDuration")
+                defaults.setObject(eventDuration, forKey: "eventDuration")
                 defaults.setObject(eventAlert, forKey: "eventAlert")
                 // TODO  not used yet we see!
                 eventRepeat = eventRepeatInterval

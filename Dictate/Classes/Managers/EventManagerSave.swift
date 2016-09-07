@@ -93,7 +93,7 @@ class EventManagerSave: NSObject {
                 let endDT       = defaults.objectForKey("endDT")! as! NSDate
                 let output      = defaults.stringForKey("output")
                 let outputNote  = defaults.stringForKey("outputNote")
-                let eventDuration    = defaults.objectForKey("eventDuration") as! Double
+                let eventDuration    = defaults.objectForKey("eventDuration") as? Double ?? 10
                 
                 let eventLocation: String = defaults.stringForKey("eventLocation") ?? ""
                 

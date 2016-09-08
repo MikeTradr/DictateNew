@@ -11,7 +11,7 @@ import MessageUI
 
 class SettingsAboutViewController: UIViewController, MFMailComposeViewControllerDelegate {
     
-    let version: String = "1.2.2"
+    let version: String = "1.2.7"
         
     @IBOutlet weak var labelName: UILabel!
     @IBOutlet weak var labelVersion: UILabel!

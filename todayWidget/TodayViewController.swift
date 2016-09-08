@@ -49,8 +49,25 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     @IBOutlet var tableView: UITableView!
 
-    @IBOutlet var labelTime: UILabel!
+    @IBOutlet weak var buttonLabelTime: UIButton!
     
+    @IBAction func buttonActionTime(sender: AnyObject) {
+        let myAppUrl = NSURL(string: "Dictate://?MainScreen")!
+        extensionContext?.openURL(myAppUrl, completionHandler: { (success) in
+            if (!success) {
+                // let the user know it failed
+            }
+        })
+    }
+    
+    @IBAction func buttonActionIcon(sender: AnyObject) {
+        let myAppUrl = NSURL(string: "Dictate://?MainScreen")!
+        extensionContext?.openURL(myAppUrl, completionHandler: { (success) in
+            if (!success) {
+                // let the user know it failed
+            }
+        })
+    }
     
     
     func fetchEvents(){
@@ -82,7 +99,10 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         let timeA = dateFormatter.stringFromDate(NSDate())
         let timeNow = timeA.stringByReplacingOccurrencesOfString(":00", withString: "")
         
-        labelTime.text = timeNow
+      //  labelTime.text = timeNow
+       // buttonLabelTime = timeNow
+        buttonLabelTime.setTitle(timeNow, forState: UIControlState.Normal)
+
     }
     
     func updateTable () {
@@ -100,6 +120,8 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         currentTime()
         
         timer = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: Selector("currentTime"), userInfo: nil, repeats: true)
+        
+         var timer2 = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: Selector("updateTable"), userInfo: nil, repeats: true)
 
         fetchEvents()
         
@@ -128,6 +150,10 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
         tableView.reloadData()
         
+        tableView.allowsSelectionDuringEditing = false
+        
+        
+                
         if allEvents.count == 0 || rowsToShow == 0 {        //no events for day
             print("p85 we here")
             self.preferredContentSize.height = 25
@@ -169,12 +195,12 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
         var timer2 = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: Selector("updateTable"), userInfo: nil, repeats: true)
         
-        // tableView.reloadData()
+        tableView.reloadData()
 
        // let item = allEvents[0]  
         
-        if allEvents.count == 0 {        //no events for day
-            self.preferredContentSize.height = 15
+        if allEvents.count == 0 || rowsToShow == 0  {        //no events for day
+            self.preferredContentSize.height = 25
             print("p112 we here")
             self.labelNoEvents.text = "Dictate™ 😀 No More Events Today"
             self.labelNoEvents.hidden = false
@@ -309,8 +335,10 @@ class TodayViewController: UIViewController, NCWidgetProviding {
                 print("p205 we here item.allDay: \(item.allDay)")
                 cell.labelTimeUntil.text = ""
             }
-            
-            cell.constraintTimeUntilTop.constant = 0    //move up a bit to accomindate the emoji
+            print("p312 we here? cell.constraintTimeUntilTop.constant: \(cell.constraintTimeUntilTop.constant)")
+            cell.constraintTimeUntilTop.constant = -4    //move up a bit to accomindate the emoji
+            print("p314 we here? cell.constraintTimeUntilTop.constant: \(cell.constraintTimeUntilTop.constant)")
+
             
         } else {
             cell.labelTimeUntil.text = timeUntil
@@ -338,6 +366,8 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             cell.labelSecondLine.text = item.calendar.title
             cell.labelSecondLine.textColor = UIColor(CGColor: item.calendar.CGColor)
         }
+        
+        print("p344 we here? cell.constraintTimeUntilTop.constant: \(cell.constraintTimeUntilTop.constant)")
 
         return cell
     }                   // end func cellForRowAtIndexPath

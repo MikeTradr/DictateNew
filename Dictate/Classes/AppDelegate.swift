@@ -308,16 +308,50 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         scheme = url.scheme
         query = url.query
         
-        print("p312 calledBy: \(calledBy)")
+        print("app312 calledBy: \(calledBy)")
         print("p312 fullUrl: \(fullUrl)")
         print("p312 scheme: \(scheme)")
         print("p312 query: \(query)")
-
         
+        
+        switch query {
+            case "MainScreen":
+                if let tabBarController = self.window!.rootViewController as? UITabBarController {
+                    tabBarController.selectedIndex = 2    //main Dictate screen
+                }
+            break
+            
+            case _ where query.containsString("eventID"):
+                
+                if let tabBarController = self.window!.rootViewController as? UITabBarController {
+                    tabBarController.selectedIndex = 4    //set to start at tab index 4
+                }
+                
+                var eventController = EKEventViewController()
+            
+            
+            
+            //// renamed to range(of:"") in Swift 3.0
+           // if string.rangeOfString("Swift") != nil{
+            
+    
+            break
+            
+            
+            
+            
+            default:
+                if let tabBarController = self.window!.rootViewController as? UITabBarController {
+                    tabBarController.selectedIndex = 2    //main Dictate screen
+                }
+      
+        }
+
+/*
         switch calledBy {
             case "com.thatsoft.dictateApp.todayWidget":
   
-                let viewController:ViewController = window!.rootViewController as! ViewController
+             //   let viewController:ViewController = window!.rootViewController as! TabBarController
                 //  viewController.performSegueWithIdentifier("TodayViewController", sender: nil)
                 
                 
@@ -349,7 +383,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 tabBarController.selectedIndex = 2    //main Dictate screen
             }
         }
-        
+   */
         
         return true //?? mike guessed here lol
     }

@@ -38,7 +38,11 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     var setRowHeight:CGFloat = 0
     var endTimeDash = ""
     
+    var defaultLeftInset: CGFloat = 30
+    var marginIndicator = UIView()
+    
     var timer = NSTimer()
+    let myRowHeightConstant = 62
     
    // let calendar = NSCalendar.currentCalendar()
     
@@ -61,7 +65,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
     
     @IBAction func buttonActionIcon(sender: AnyObject) {
-        let myAppUrl = NSURL(string: "Dictate://?MainScreen")!
+        let myAppUrl = NSURL(string: "Dictate://?record")!
         extensionContext?.openURL(myAppUrl, completionHandler: { (success) in
             if (!success) {
                 // let the user know it failed
@@ -95,27 +99,24 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     func currentTime () {
         dateFormatter.dateFormat = "h:mm a"
-        
         let timeA = dateFormatter.stringFromDate(NSDate())
         let timeNow = timeA.stringByReplacingOccurrencesOfString(":00", withString: "")
-        
-      //  labelTime.text = timeNow
-       // buttonLabelTime = timeNow
         buttonLabelTime.setTitle(timeNow, forState: UIControlState.Normal)
-
     }
     
     func updateTable () {
-      tableView.reloadData()
+        tableView.reloadData()
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view from its nib.
         
-      //  table.contentInset = UIEdgeInsetsMake(20, 0, 0, 0)
+        tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
        // table.tableFooterView = UIView(frame: CGRectZero)
+        
+        tableView.layoutMargins = UIEdgeInsetsZero
+        tableView.separatorInset = UIEdgeInsetsZero
         
         currentTime()
         
@@ -125,18 +126,28 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 
         fetchEvents()
         
-       // tableView.reloadData()
+        tableView.reloadData()
+        
+        if rowsToShow != 0 {
+            self.preferredContentSize.height = CGFloat(rowsToShow * myRowHeightConstant)
+        } else {
+            self.preferredContentSize.height = CGFloat(myRowHeightConstant + 8)
+        }
+
         
         var numberOfRows = allEvents.count
         
         print("p67 rowsToDelete: \(rowsToDelete)")
         print("p77 rowsToShow: \(rowsToShow)")
-        
         print("p79 allEvents.count: \(allEvents.count)")
+        
+        //self.preferredContentSize.height = 100
+
         
         //self.preferredContentSize.height = CGFloat(allEvents.count * 50)
 
-        //self.preferredContentSize.height = CGFloat(rowsToShow * 50)
+        //self.preferredContentSize.height = CGFloat(rowsToShow * 30)
+        
         //self.preferredContentSize.height = CGFloat(numberOfRows * 50)
         
        // self.preferredContentSize.height = 200
@@ -155,8 +166,6 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
                 
         if allEvents.count == 0 || rowsToShow == 0 {        //no events for day
-            print("p85 we here")
-            self.preferredContentSize.height = 25
             self.labelNoEvents.text = "Dictate™ 😀 No More Events Today"
             self.labelNoEvents.textColor = UIColor.whiteColor().colorWithAlphaComponent(0.7)
             self.labelNoEvents.hidden = false
@@ -171,10 +180,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         timer = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: Selector("currentTime"), userInfo: nil, repeats: true)
     }
     
-    
-    
-    
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -187,6 +193,10 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         // If there's no update required, use NCUpdateResult.NoData
         // If there's an update, use NCUpdateResult.NewData
         
+        marginIndicator.frame = CGRectMake(defaultLeftInset, 0, 0, view.frame.size.height)
+
+        //tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
+        
         currentTime()
         
         var timer = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: Selector("currentTime"), userInfo: nil, repeats: true)
@@ -195,13 +205,18 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
         var timer2 = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: Selector("updateTable"), userInfo: nil, repeats: true)
         
+        print("p202 rowsToShow: \(rowsToShow)")
+        
+        if rowsToShow != 0 {
+            self.preferredContentSize.height = CGFloat(rowsToShow * myRowHeightConstant)
+        } else {
+            self.preferredContentSize.height = CGFloat(myRowHeightConstant + 8)
+        }
         tableView.reloadData()
 
        // let item = allEvents[0]  
         
         if allEvents.count == 0 || rowsToShow == 0  {        //no events for day
-            self.preferredContentSize.height = 25
-            print("p112 we here")
             self.labelNoEvents.text = "Dictate™ 😀 No More Events Today"
             self.labelNoEvents.hidden = false
         } else {
@@ -213,25 +228,20 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
         completionHandler(NCUpdateResult.NewData)
     }
+    
 /*
     func widgetMarginInsetsForProposedMarginInsets(defaultMarginInsets: UIEdgeInsets) -> (UIEdgeInsets) {
         return UIEdgeInsetsZero
     }
  */
     
-/*
-    func widgetMarginInsetsForProposedMarginInsets(defaultMarginInsets: UIEdgeInsets) -> UIEdgeInsets {
+    func widgetMarginInsetsForProposedMarginInsets(var defaultMarginInsets: UIEdgeInsets) -> UIEdgeInsets {
+        //let defaultLeftInset = defaultMarginInsets.left
         
-       // var defaultLeftInset: CGFloat = 0
-       // defaultLeftInset = defaultMarginInsets.left
-        
-      //  defaultMarginInsets.left = 45
-       // return defaultMarginInsets
-        
-        //return UIEdgeInsetsMake(0, 0, 45, 0)
-        return UIEdgeInsetsMake(25, 0, 0, 0)
+        defaultMarginInsets.left = 20
+        return defaultMarginInsets
     }
-*/
+
 
     // MARK: - TableView Data Source
     
@@ -252,6 +262,8 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
         let identifier = "tableViewCellIdentifier"
         let cell = tableView.dequeueReusableCellWithIdentifier( identifier, forIndexPath: indexPath) as! TodayTableViewCell
+        
+        cell.layoutMargins = UIEdgeInsetsZero
         
        let item = allEvents[indexPath.row]
         
@@ -298,14 +310,6 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             let endTime = eventDay
             endTimeDash = "- \(endTime)"
         }
-
-
-        
-        
-        
-        
-        
-        
         
         timeUntil = TimeManger.sharedInstance.timeInterval(item.startDate)
         
@@ -338,7 +342,6 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             print("p312 we here? cell.constraintTimeUntilTop.constant: \(cell.constraintTimeUntilTop.constant)")
             cell.constraintTimeUntilTop.constant = -4    //move up a bit to accomindate the emoji
             print("p314 we here? cell.constraintTimeUntilTop.constant: \(cell.constraintTimeUntilTop.constant)")
-
             
         } else {
             cell.labelTimeUntil.text = timeUntil
@@ -395,15 +398,13 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             
             rowsToShow = allEvents.count - numberRowsToDelete
             print("p247 rowsToShow: \(rowsToShow)")
-            
-            //return 0
            
             setRowHeight = 0
         } else {
             //return 50     //Choose your custom row height
             print("p299 we here? \(item.title)")
 
-            setRowHeight = 50
+            setRowHeight = 55
         }
         
         rowsToShow = allEvents.count - numberRowsToDelete

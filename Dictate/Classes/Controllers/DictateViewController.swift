@@ -222,10 +222,27 @@ var eventDuration:Int       = 10
 
 var now = ""
 
+var flagAutoRecord = false
+
+
 // ---- end set Global Varbiables ----
 
 
 class DictateViewController: UIViewController, UITextFieldDelegate, MFMailComposeViewControllerDelegate, SpeechKitDelegate, SKRecognizerDelegate, SKVocalizerDelegate {
+    
+    class var sharedInstance : DictateViewController {
+        struct Static {
+            static var onceToken : dispatch_once_t = 0
+            static var instance : DictateViewController? = nil
+        }
+        dispatch_once(&Static.onceToken) {
+            Static.instance = DictateViewController()
+        }
+        return Static.instance!
+    }
+    
+    
+    
     
     var voiceSearch: SKRecognizer?
     
@@ -241,6 +258,8 @@ class DictateViewController: UIViewController, UITextFieldDelegate, MFMailCompos
     
     // Create a MessageComposer
     let messageComposer = MessageComposer()
+    
+    //flagAutoRecord     = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!.objectForKey("flagAutoRecord")! as! Bool
     
 //    defaults.setObject(eventDuration, forKey: "eventDuration")
     
@@ -500,6 +519,13 @@ class DictateViewController: UIViewController, UITextFieldDelegate, MFMailCompos
         enteredText2.text = results.firstResult()
         print("p421 enteredText2: \(enteredText2)")
         print("p422 enteredText2.text: \(enteredText2.text)")
+        
+        
+        flagAutoRecord = false
+        defaults.setObject(flagAutoRecord, forKey: "flagAutoRecord")        //sets flagAutoRecord for processing
+        
+        
+        
 
 //code for super auto create no button at all.
         
@@ -575,7 +601,9 @@ class DictateViewController: UIViewController, UITextFieldDelegate, MFMailCompos
         voiceSearch = nil
         
         //go to edit Event screen... added 052016 to automatically go to next screen, avoid hittign "process" button
-        str = results.firstResult()
+        if results.firstResult() != nil {
+            str = results.firstResult()
+        }
         print("p572 str: \(str)")
         Process(str)
     
@@ -717,6 +745,27 @@ class DictateViewController: UIViewController, UITextFieldDelegate, MFMailCompos
 
         enteredText2.text = str        // comment out besides for simulator in xCode
         resultMessage.text = str
+        
+    /*        if defaults.objectForKey("flagAutoRecord") != nil {
+            let flagAutoRecord     = defaults.objectForKey("flagAutoRecord")! as! Bool
+            print("p745 flagAutoRecord: \(flagAutoRecord)")
+            
+            if flagAutoRecord == true {
+                print("p740 flagAutoRecord: \(flagAutoRecord)")
+                record()
+            }
+        }
+      */
+        
+        flagAutoRecord = defaults.objectForKey("flagAutoRecord")! as! Bool
+
+        print("p757 flagAutoRecord: \(flagAutoRecord)")
+        if flagAutoRecord == true {
+            record()
+        }
+    
+        
+        
        
 
     }
@@ -724,12 +773,32 @@ class DictateViewController: UIViewController, UITextFieldDelegate, MFMailCompos
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         self.determineStatus()
+        
+        print("p764 we here?")
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "determineStatus", name: UIApplicationWillEnterForegroundNotification, object: nil)
         
         var alertSound218 = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("218-buttonclick54", ofType: "mp3")!)
         //  General.playSound(alertSound3!)
         
         playSound(alertSound218)
+        
+        print("p757 flagAutoRecord: \(flagAutoRecord)")
+        if flagAutoRecord == true {
+            record()
+        }
+        
+     /*
+        if defaults.objectForKey("flagAutoRecord") != nil {
+            let flagAutoRecord     = defaults.objectForKey("flagAutoRecord")! as! Bool
+            print("p776 flagAutoRecord: \(flagAutoRecord)")
+            
+            if flagAutoRecord == true {
+                print("p779 flagAutoRecord: \(flagAutoRecord)")
+                record()
+            }
+        }
+*/
         
         if enteredText2.text == "" {
             labelReadIt.hidden = true   //hide read label at beginning as nothing to read
@@ -787,6 +856,14 @@ class DictateViewController: UIViewController, UITextFieldDelegate, MFMailCompos
         print("p549 a SKRecognizer error has occurred")
     }
  */
+    
+    internal func record () {
+
+        self.voiceSearch = SKRecognizer(type: SKSearchRecognizerType, detection: UInt(SKLongEndOfSpeechDetection), language:"eng-USA", delegate: self)
+        
+        print("p826 after SKRecognizer")
+    }
+    
     
     //#### functions end ##############################
     

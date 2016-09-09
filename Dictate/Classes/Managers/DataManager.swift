@@ -121,6 +121,9 @@ class DataManager: NSObject {
         defaults.setObject(reminderTitle, forKey: "reminderTitle")
         
         defaults.setObject(weekView, forKey: "defaultWeekView")     //calendar display view
+        
+        let flagAutoRecord = false
+        defaults.setObject(flagAutoRecord, forKey: "flagAutoRecord")        //sets flagAutoRecord for processing
 
         let test   = defaults.objectForKey("reminderArray") as! [String]
         print("119 test: \(test)")

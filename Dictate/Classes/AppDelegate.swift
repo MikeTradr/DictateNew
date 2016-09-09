@@ -38,6 +38,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var calledBy: String!
     var fullUrl: String!
     
+    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+    
+    var flagAutoRecord = false
+
+    
     //Anill's
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -181,6 +186,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
         }
         
+        flagAutoRecord = false
+        defaults.setObject(flagAutoRecord, forKey: "flagAutoRecord")        //sets flagAutoRecord for processing
+        
+        print("p190 flagAutoRecord: \(flagAutoRecord)")
+
+
+        
+        
         // need this??? TODO
         // types are UIUserNotificationType values
         application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil))
@@ -276,7 +289,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("p149 Device and Phone munber in here: \(NSUserDefaults.standardUserDefaults().dictionaryRepresentation())")
 
         // above here attempted to get device info
-                
+        
+     
+        
+        
 //_____ End Initialize calls ______________________________________________________
       
 
@@ -320,6 +336,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     tabBarController.selectedIndex = 2    //main Dictate screen
                 }
             break
+        
+            // DictateViewController
+            
+        case "record":
+            
+            flagAutoRecord = true
+            defaults.setObject(flagAutoRecord, forKey: "flagAutoRecord")        //sets flagAutoRecord for processing
+            
+            print("p339  we in here? query: \(query)")
+            
+            if let tabBarController = self.window!.rootViewController as? UITabBarController {
+                tabBarController.selectedIndex = 2    //main Dictate screen
+                
+                //DictateViewController.sharedInstance.record()
+
+            }
+           
+           // DictateViewController.sharedInstance.record()
+            
+            break
+            
+            
             
             case _ where query.containsString("eventID"):
                 

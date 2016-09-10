@@ -43,7 +43,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     var timer = NSTimer()
     let myRowHeightConstant = 62    //was 62
-    let myFooterHeightConstant = 80 //was 45
+    let myFooterHeightConstant = 60 //was 45 80
     
     let startDateToday = NSCalendar.currentCalendar().startOfDayForDate(NSDate())   //= 12:01 am today
     
@@ -112,15 +112,16 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             
             fetchEvents(tomorrowStartDate, endDate: tomorrowEndDate)
             
-            tableView.reloadData()
+            buttonTomorrow.setTitle("Today", forState: UIControlState.Normal)
             
+            tableView.reloadData()
+           
             if rowsToShow != 0 {
-                self.preferredContentSize.height = CGFloat((rowsToShow * myRowHeightConstant) + myFooterHeightConstant + 100)
+                self.preferredContentSize.height = CGFloat((rowsToShow * myRowHeightConstant) + myFooterHeightConstant + 50)
             } else {
                 self.preferredContentSize.height = CGFloat(myRowHeightConstant + 8 + myFooterHeightConstant)
             }
-            
-            buttonTomorrow.setTitle("Today", forState: UIControlState.Normal)
+           
             
             dateFormatter.dateFormat = "EEEE"    //EEEE = full day name  EEE is 3 letter abbreviation
             
@@ -411,6 +412,27 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         let endTime = endTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
         
         endTimeDash = "- \(endTime)"
+
+        let todayNoon: NSDate = NSCalendar.currentCalendar().dateBySettingHour(12, minute: 0, second: 0, ofDate: NSDate(), options: NSCalendarOptions())!
+        
+        // for swift3
+        /*
+         let newDate: Date = NSCalendar.currentCalendar().date(bySettingHour: 0, minute: 0, second: 0, of: NSDate())!
+         */
+        
+        if (item.startDate.timeIntervalSince1970 < todayNoon.timeIntervalSince1970) && (item.endDate.timeIntervalSince1970 > todayNoon.timeIntervalSince1970) {     //for same event start time am and end time in pm
+            
+            dateFormatter.dateFormat = "h:mm a"
+            
+            let endTimeA = dateFormatter.stringFromDate(item.endDate)
+            let endTime = endTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
+            
+            endTimeDash = "- \(endTime)"
+        }
+        
+        
+        
+        
         
         if item.startDate == item.endDate {     //for same start & end time event
             endTimeDash = ""
@@ -429,9 +451,34 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             endTimeDash = "- \(endTime)"
         }
         
+        if buttonTomorrow.currentTitle == "Today" {
+            
+            print("p434 rowsToShow: \(rowsToShow)")
+            
+            dateFormatter.dateFormat = "h:mm"
+            
+            let endTimeA = dateFormatter.stringFromDate(item.endDate)
+            let endTime = endTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
+            
+            endTimeDash = "- \(endTime)"
+            
+            if item.startDate.timeIntervalSince1970 <= todayStart.timeIntervalSince1970 {
+                dateFormatter.dateFormat = "EEEE"    //EEEE = full day name  EEE is 3 letter abbreviation
+                let eventDay = dateFormatter.stringFromDate(item.startDate)
+                startTime = eventDay
+                
+                dateFormatter.dateFormat = "h:mm a"
+                let endTimeA = dateFormatter.stringFromDate(item.endDate)
+                let endTime = endTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
+                endTimeDash = "- \(endTime)"
+            }
+        }
+        
+        
+        
         let todayEnd = NSCalendar.currentCalendar().startOfDayForDate(tomorrow)  //is midnight today
         
-        if item.endDate.timeIntervalSince1970 > todayEnd.timeIntervalSince1970 {
+        if (item.endDate.timeIntervalSince1970 > todayEnd.timeIntervalSince1970) && (buttonTomorrow.currentTitle == "Tomorrow") {
             dateFormatter.dateFormat = "EEE"    //EEEE = full day name  EEE is 3 letter abbreviation
             let eventDay = dateFormatter.stringFromDate(item.endDate)
             let endTime = eventDay
@@ -470,10 +517,17 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             cell.constraintTimeUntilTop.constant = -4    //move up a bit to accomindate the emoji
             print("p314 we here? cell.constraintTimeUntilTop.constant: \(cell.constraintTimeUntilTop.constant)")
             
+            if buttonTomorrow.currentTitle == "Today" {
+                cell.labelTimeUntil.text = ""
+                
+            }
+      
+            
         } else {
             cell.labelTimeUntil.text = timeUntil
             cell.constraintTimeUntilTop.constant = 1
         }
+        
         
         print("p227 timeUntil: \(timeUntil)")
         
@@ -589,6 +643,16 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
     
     
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView(frame: CGRectMake(0, 0, tableView.frame.size.width, 0)) //was 40
+        //headerView.backgroundColor = UIColor.yellowColor()
+        return headerView
+    }
+        
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40.0
+    }
+
     func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let footerView = UIView(frame: CGRectMake(0, 0, tableView.frame.size.width, 0)) //was 40
        // footerView.backgroundColor = UIColor.yellowColor()

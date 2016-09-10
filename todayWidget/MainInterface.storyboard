@@ -22,6 +22,55 @@
                                 <rect key="frame" x="0.0" y="65" width="320" height="167"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="WVT-GX-IgQ">
+                                    <rect key="frame" x="0.0" y="124.5" width="320" height="35"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1fJ-TP-VcF">
+                                            <rect key="frame" x="181" y="0.0" width="107" height="25"/>
+                                            <color key="backgroundColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                            <state key="normal" title="Tomorrow">
+                                                <color key="titleColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            </state>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                    <integer key="value" value="10"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToRounds" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="buttonTomorrow:" destination="M4Y-Lb-cyx" eventType="touchUpInside" id="rhW-Nh-Tdn"/>
+                                            </connections>
+                                        </button>
+                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aOf-CR-nIE">
+                                            <rect key="frame" x="159" y="-2.5" width="2" height="30"/>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yFA-KR-dHd">
+                                            <rect key="frame" x="32" y="-1" width="107" height="25"/>
+                                            <color key="backgroundColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                            <state key="normal" title="Today All">
+                                                <color key="titleColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            </state>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                    <integer key="value" value="10"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToRounds" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="buttonTodayAll:" destination="M4Y-Lb-cyx" eventType="touchUpInside" id="nqu-Vd-PhL"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstItem="1fJ-TP-VcF" firstAttribute="leading" secondItem="aOf-CR-nIE" secondAttribute="trailing" constant="10" id="8PO-V2-7aH"/>
+                                        <constraint firstItem="aOf-CR-nIE" firstAttribute="leading" secondItem="yFA-KR-dHd" secondAttribute="trailing" constant="10" id="Rce-1w-Tbt"/>
+                                        <constraint firstItem="aOf-CR-nIE" firstAttribute="centerX" secondItem="WVT-GX-IgQ" secondAttribute="centerX" id="jmd-U8-Bgv"/>
+                                    </constraints>
+                                </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleAspectFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="tableViewCellIdentifier" rowHeight="50" id="d3N-hD-DqK" customClass="TodayTableViewCell" customModule="todayWidget">
                                         <rect key="frame" x="0.0" y="49.5" width="320" height="50"/>
@@ -129,22 +178,19 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pIY-9P-gFY">
-                                <rect key="frame" x="46" y="0.0" width="30" height="30"/>
-                                <color key="tintColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" image="dicAppD120px-NoBLK"/>
-                                <connections>
-                                    <action selector="buttonActionIcon:" destination="M4Y-Lb-cyx" eventType="touchUpInside" id="Y8l-cu-VVq"/>
-                                </connections>
-                            </button>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0WN-0L-flg">
+                                <rect key="frame" x="8" y="4" width="80" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="28"/>
+                                <color key="textColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <constraints>
                             <constraint firstItem="Lhn-oQ-ibQ" firstAttribute="top" secondItem="Ft6-oW-KC0" secondAttribute="bottom" id="24S-2G-aOV"/>
                             <constraint firstItem="gFG-5y-XB7" firstAttribute="centerX" secondItem="S3S-Oj-5AN" secondAttribute="centerX" id="Bmz-z0-5XE"/>
                             <constraint firstAttribute="trailing" secondItem="Lhn-oQ-ibQ" secondAttribute="trailing" id="C5Z-qR-k6l"/>
                             <constraint firstItem="UuC-6I-rPE" firstAttribute="leading" secondItem="gFG-5y-XB7" secondAttribute="trailing" constant="40" id="Jc5-cf-Bhz"/>
-                            <constraint firstItem="o4P-hJ-MNN" firstAttribute="top" secondItem="pIY-9P-gFY" secondAttribute="bottom" constant="10" id="KcH-Rq-n6B"/>
-                            <constraint firstItem="gFG-5y-XB7" firstAttribute="leading" secondItem="pIY-9P-gFY" secondAttribute="trailing" constant="40" id="PhK-X8-ckI"/>
+                            <constraint firstItem="gFG-5y-XB7" firstAttribute="leading" secondItem="0WN-0L-flg" secondAttribute="trailing" constant="30" id="YIr-Tu-K8p"/>
                             <constraint firstItem="o4P-hJ-MNN" firstAttribute="centerX" secondItem="S3S-Oj-5AN" secondAttribute="centerX" id="Zmx-N6-3TY"/>
                             <constraint firstItem="FKl-LY-JtV" firstAttribute="top" secondItem="Lhn-oQ-ibQ" secondAttribute="bottom" id="nTx-Q5-hEG"/>
                             <constraint firstItem="Lhn-oQ-ibQ" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leading" id="rLW-6D-cbO"/>
@@ -156,7 +202,10 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="buttonLabelTime" destination="gFG-5y-XB7" id="chQ-Is-XMP"/>
+                        <outlet property="buttonTodayAll" destination="yFA-KR-dHd" id="UQP-vb-iRM"/>
+                        <outlet property="buttonTomorrow" destination="1fJ-TP-VcF" id="489-Ty-qY9"/>
                         <outlet property="labelNoEvents" destination="o4P-hJ-MNN" id="k1O-4y-BcM"/>
+                        <outlet property="labelTomorrowDay" destination="0WN-0L-flg" id="irV-LA-PvH"/>
                         <outlet property="tableView" destination="Lhn-oQ-ibQ" id="X23-i8-GAw"/>
                     </connections>
                 </viewController>

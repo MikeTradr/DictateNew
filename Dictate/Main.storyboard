@@ -2189,6 +2189,12 @@
                                         <view tag="1" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1fX-gU-rEV">
                                             <rect key="frame" x="27" y="4" width="4" height="42"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                    <integer key="value" value="3"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToRounds" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
                                         </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="# items" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4iA-6Z-B68">
                                             <rect key="frame" x="60" y="27" width="229" height="21"/>
@@ -2818,34 +2824,20 @@ andrewwynn - consulting</string>
                             <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="93Q-g7-D3y" userLabel="View Buttons">
                                 <rect key="frame" x="0.0" y="612" width="414" height="104"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="center" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="PAZ-ga-bhE">
-                                        <rect key="frame" x="130" y="8" width="155.5" height="60"/>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="95E-dt-a5b">
+                                        <rect key="frame" x="130" y="8" width="155" height="60"/>
                                         <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="60" id="oZp-7g-VtH"/>
-                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="18"/>
                                         <state key="normal" title="Add Friend 😃">
-                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                         </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="10"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToRounds" value="YES"/>
-                                        </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="buttonAddFriend:" destination="TF5-ty-Nxo" eventType="touchUpInside" id="ocD-xp-6sP"/>
-                                            <action selector="buttonCreate:" destination="HWg-SE-uiT" eventType="touchUpInside" id="0K6-Gj-dPw"/>
-                                            <action selector="buttonCreate:" destination="JQz-OP-csq" eventType="touchUpInside" id="n6P-RI-mKM"/>
-                                            <segue destination="sIF-ro-6uM" kind="push" identifier="addFriend" id="0r8-0Y-aTu"/>
+                                            <action selector="buttonAddFriend:" destination="TF5-ty-Nxo" eventType="touchUpInside" id="yAG-8z-uoX"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="PAZ-ga-bhE" firstAttribute="centerX" secondItem="93Q-g7-D3y" secondAttribute="centerX" id="RWG-nz-oql"/>
-                                    <constraint firstAttribute="bottom" secondItem="PAZ-ga-bhE" secondAttribute="bottom" constant="10" id="gSD-5v-bQz"/>
                                     <constraint firstAttribute="height" constant="60" id="y1z-wc-Uox"/>
                                 </constraints>
                             </view>
@@ -2933,10 +2925,10 @@ andrewwynn - consulting</string>
             </objects>
             <point key="canvasLocation" x="-1718" y="3114"/>
         </scene>
-        <!--Add Friend 😃-->
+        <!--addFriend-->
         <scene sceneID="aZP-JQ-stw">
             <objects>
-                <viewController id="sIF-ro-6uM" customClass="SettingsAddFriendViewController" customModule="Dictate" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="addFriend" title="addFriend" id="sIF-ro-6uM" customClass="SettingsAddFriendViewController" customModule="Dictate" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="s5R-g1-sRK"/>
                         <viewControllerLayoutGuide type="bottom" id="Z8d-SX-uMx"/>

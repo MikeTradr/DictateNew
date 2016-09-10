@@ -42,18 +42,35 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     var marginIndicator = UIView()
     
     var timer = NSTimer()
-    let myRowHeightConstant = 62
+    let myRowHeightConstant = 62    //was 62
+    let myFooterHeightConstant = 80 //was 45
+    
+    let startDateToday = NSCalendar.currentCalendar().startOfDayForDate(NSDate())   //= 12:01 am today
+    
+    let calendar = NSCalendar.currentCalendar()
+    
+    let tomorrow :NSDate = NSCalendar.currentCalendar().dateByAddingUnit(NSCalendarUnit.Day, value: 1, toDate: NSDate(), options: [])!
+    
+    let endDateToday = NSCalendar.currentCalendar().startOfDayForDate(NSCalendar.currentCalendar().dateByAddingUnit(NSCalendarUnit.Day, value: 1, toDate: NSDate(), options: [])!)  //is midnight today
+    
+    var startDate: NSDate = NSDate()
+    var endDate: NSDate = NSDate()
+    
     
    // let calendar = NSCalendar.currentCalendar()
     
-    let tomorrow :NSDate = NSCalendar.currentCalendar()
-.dateByAddingUnit(NSCalendarUnit.Day, value: 1, toDate: NSDate(), options: [])!
     
     @IBOutlet var labelNoEvents: UILabel!
     
     @IBOutlet var tableView: UITableView!
 
     @IBOutlet weak var buttonLabelTime: UIButton!
+    
+    @IBOutlet weak var buttonTomorrow: UIButton!
+    
+    @IBOutlet weak var labelTomorrowDay: UILabel!
+    @IBOutlet weak var buttonTodayAll: UIButton!
+    
     
     @IBAction func buttonActionTime(sender: AnyObject) {
         let myAppUrl = NSURL(string: "Dictate://?MainScreen")!
@@ -74,19 +91,113 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
     
     
-    func fetchEvents(){
+    
+    @IBAction func buttonTomorrow(sender: AnyObject) {
+        print("p91 button Clicked")
+        print("p91 buttonTomorrow.currentTitle: \(buttonTomorrow.currentTitle)")
+
         
-        let startDate = NSCalendar.currentCalendar().startOfDayForDate(today)   //= 12:01 am today
+        labelTomorrowDay.hidden = false
         
-        let calendar = NSCalendar.currentCalendar()
+        if buttonTomorrow.currentTitle == "Tomorrow" {
+            
+            let tomorrowStartDate :NSDate = NSCalendar.currentCalendar().dateByAddingUnit(NSCalendarUnit.Day, value: 1, toDate: startDateToday, options: [])!
+            
+            let tomorrowEndDate :NSDate = NSCalendar.currentCalendar().dateByAddingUnit(NSCalendarUnit.Day, value: 1, toDate: endDateToday, options: [])!
+            
+            print("p97 startDateToday: \(startDateToday)")
+            print("p97 tomorrowStartDate: \(tomorrowStartDate)")
+            print("p97 endDateToday: \(endDateToday)")
+            print("p97 tomorrowEndDate: \(tomorrowEndDate)")
+            
+            fetchEvents(tomorrowStartDate, endDate: tomorrowEndDate)
+            
+            tableView.reloadData()
+            
+            if rowsToShow != 0 {
+                self.preferredContentSize.height = CGFloat((rowsToShow * myRowHeightConstant) + myFooterHeightConstant + 100)
+            } else {
+                self.preferredContentSize.height = CGFloat(myRowHeightConstant + 8 + myFooterHeightConstant)
+            }
+            
+            buttonTomorrow.setTitle("Today", forState: UIControlState.Normal)
+            
+            dateFormatter.dateFormat = "EEEE"    //EEEE = full day name  EEE is 3 letter abbreviation
+            
+            let eventDay = dateFormatter.stringFromDate(tomorrowStartDate)
+
+            labelTomorrowDay.text = eventDay
+
+        } else {
+            fetchEvents(NSDate(), endDate: endDateToday)  //show today events
+            
+            tableView.reloadData()
+            
+            if rowsToShow != 0 {
+                self.preferredContentSize.height = CGFloat((rowsToShow * myRowHeightConstant) + myFooterHeightConstant)
+            } else {
+                self.preferredContentSize.height = CGFloat(myRowHeightConstant + 8 + myFooterHeightConstant)
+            }
+            
+            buttonTomorrow.setTitle("Tomorrow", forState: UIControlState.Normal)
+            labelTomorrowDay.hidden = true
+        }
+    }
+    
+    
+    
+    @IBAction func buttonTodayAll(sender: AnyObject) {
+        print("p148 button Clicked")
         
-        let tomorrow :NSDate = calendar.dateByAddingUnit(NSCalendarUnit.Day, value: 1, toDate: NSDate(), options: [])!
+        if buttonTodayAll.currentTitle != "Today All" {
+            
+            let startDate = NSCalendar.currentCalendar().startOfDayForDate(today)   //= 12:01 am today
+            
+            let endDate = NSCalendar.currentCalendar().startOfDayForDate(tomorrow)  //is midnight today
+            
+            fetchEvents(startDate, endDate: endDate)
+            
+            tableView.reloadData()
+            
+            if rowsToShow != 0 {
+                self.preferredContentSize.height = CGFloat((rowsToShow * myRowHeightConstant) + myFooterHeightConstant + 200)
+            } else {
+                self.preferredContentSize.height = CGFloat(myRowHeightConstant + 8 + myFooterHeightConstant)
+            }
+            
+            buttonTodayAll.setTitle("Today", forState: UIControlState.Normal)
+
         
-        let endDate = NSCalendar.currentCalendar().startOfDayForDate(tomorrow)  //is midnight today
+            
+        } else {
+            fetchEvents(NSDate(), endDate: endDateToday)  //show today events
+            
+            tableView.reloadData()
+            
+            if rowsToShow != 0 {
+                self.preferredContentSize.height = CGFloat((rowsToShow * myRowHeightConstant) + myFooterHeightConstant)
+            } else {
+                self.preferredContentSize.height = CGFloat(myRowHeightConstant + 8 + myFooterHeightConstant)
+            }
+            
+            buttonTodayAll.setTitle("Today All", forState: UIControlState.Normal)
+            labelTomorrowDay.hidden = true
+        }
+    }
+    
+    
+    func fetchEvents(startDate: NSDate, endDate: NSDate){
+        
+        //let startDate = NSCalendar.currentCalendar().startOfDayForDate(today)   //= 12:01 am today
+        
+        //let calendar = NSCalendar.currentCalendar()
+        
+       // let tomorrow :NSDate = calendar.dateByAddingUnit(NSCalendarUnit.Day, value: 1, toDate: NSDate(), options: [])!
+        
+       // let endDate = NSCalendar.currentCalendar().startOfDayForDate(tomorrow)  //is midnight today
         
         print("p39 startDate: \(startDate)")
         print("p40 endDate: \(endDate)")
-        
         EventManager.sharedInstance.fetchEventsFrom(startDate, endDate: endDate, completion: { (events) -> Void in
             self.allEvents = events
         })
@@ -94,7 +205,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         //sort events array on startDate
         allEvents.sortInPlace({$0.startDate.timeIntervalSince1970 < $1.startDate.timeIntervalSince1970})
         
-        print("p60 allEvents.count: \(allEvents.count)")
+        print("p130 allEvents.count: \(allEvents.count)")
     }
     
     func currentTime () {
@@ -124,14 +235,16 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
          var timer2 = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: Selector("updateTable"), userInfo: nil, repeats: true)
 
-        fetchEvents()
+        //fetchEvents(startDateToday, endDate: endDateToday)
+        fetchEvents(NSDate(), endDate: endDateToday)
+
         
         tableView.reloadData()
         
         if rowsToShow != 0 {
-            self.preferredContentSize.height = CGFloat(rowsToShow * myRowHeightConstant)
+            self.preferredContentSize.height = CGFloat((rowsToShow * myRowHeightConstant) + myFooterHeightConstant)
         } else {
-            self.preferredContentSize.height = CGFloat(myRowHeightConstant + 8)
+            self.preferredContentSize.height = CGFloat(myRowHeightConstant + 8 + myFooterHeightConstant)
         }
 
         
@@ -162,8 +275,6 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         tableView.reloadData()
         
         tableView.allowsSelectionDuringEditing = false
-        
-        
                 
         if allEvents.count == 0 || rowsToShow == 0 {        //no events for day
             self.labelNoEvents.text = "Dictate™ 😀 No More Events Today"
@@ -201,22 +312,24 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
         var timer = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: Selector("currentTime"), userInfo: nil, repeats: true)
         
-        fetchEvents()
+        fetchEvents(NSDate(), endDate: endDateToday)
         
         var timer2 = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: Selector("updateTable"), userInfo: nil, repeats: true)
         
         print("p202 rowsToShow: \(rowsToShow)")
         
         if rowsToShow != 0 {
-            self.preferredContentSize.height = CGFloat(rowsToShow * myRowHeightConstant)
+            self.preferredContentSize.height = CGFloat((rowsToShow * myRowHeightConstant) + myFooterHeightConstant)
         } else {
-            self.preferredContentSize.height = CGFloat(myRowHeightConstant + 8)
+            self.preferredContentSize.height = CGFloat(myRowHeightConstant + 8 + myFooterHeightConstant)
         }
         tableView.reloadData()
 
        // let item = allEvents[0]  
         
         if allEvents.count == 0 || rowsToShow == 0  {        //no events for day
+            self.preferredContentSize.height = CGFloat(100)
+
             self.labelNoEvents.text = "Dictate™ 😀 No More Events Today"
             self.labelNoEvents.hidden = false
         } else {
@@ -253,7 +366,12 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return allEvents.count
+        
+        if allEvents.count >= 10 {
+            return 10
+        } else  {
+            return allEvents.count
+        }
     }
 
 //===== cellForRowAtIndexPath ================================================
@@ -267,10 +385,19 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
        let item = allEvents[indexPath.row]
         
-        if item.endDate.timeIntervalSince1970 <= NSDate().timeIntervalSince1970 {
-            cell.hidden = true
-          //  cell.rowHeight = 0
-            return cell
+        if buttonTodayAll == "Today All" {
+        
+            if item.endDate.timeIntervalSince1970 <= NSDate().timeIntervalSince1970 {
+                cell.hidden = true
+              //  cell.rowHeight = 0
+               // return cell
+            }
+            
+        } else {
+           // cell.hidden = false
+            //  cell.rowHeight = 0
+            //return cell
+            
         }
         
         dateFormatter.dateFormat = "h:mm a"
@@ -385,26 +512,34 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
         print("p267 we here? \(item.title)")
         
-        if item.endDate.timeIntervalSince1970 <= NSDate().timeIntervalSince1970 {
-            
-            print("p239 we here? have row to hide/delete")
-            
-            deleteRowCountArray.append(indexPath.row)
-            
-            let uniqueRowArray = Array(Set(deleteRowCountArray))    //removes duplicates
-            
-            numberRowsToDelete = uniqueRowArray.count
-            print("p244 numberRowsToDelete: \(numberRowsToDelete)")
-            
-            rowsToShow = allEvents.count - numberRowsToDelete
-            print("p247 rowsToShow: \(rowsToShow)")
-           
-            setRowHeight = 0
-        } else {
-            //return 50     //Choose your custom row height
-            print("p299 we here? \(item.title)")
+        if buttonTodayAll == "Today All" {
 
+            if item.endDate.timeIntervalSince1970 <= NSDate().timeIntervalSince1970 {
+                
+                print("p239 we here? have row to hide/delete")
+                
+                deleteRowCountArray.append(indexPath.row)
+                
+                let uniqueRowArray = Array(Set(deleteRowCountArray))    //removes duplicates
+                
+                numberRowsToDelete = uniqueRowArray.count
+                print("p244 numberRowsToDelete: \(numberRowsToDelete)")
+                
+                rowsToShow = allEvents.count - numberRowsToDelete
+                print("p247 rowsToShow: \(rowsToShow)")
+               
+                setRowHeight = 0
+            } else {
+                //return 50     //Choose your custom row height
+                print("p299 we here? \(item.title)")
+
+                setRowHeight = 55
+            }
+            
+        } else {
+            
             setRowHeight = 55
+
         }
         
         rowsToShow = allEvents.count - numberRowsToDelete
@@ -452,6 +587,30 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         })
         
     }
+    
+    
+    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footerView = UIView(frame: CGRectMake(0, 0, tableView.frame.size.width, 0)) //was 40
+       // footerView.backgroundColor = UIColor.yellowColor()
+        
+        return footerView
+    }
+    
+    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        var footerHeight:CGFloat = 10.0
+
+        if allEvents.count == 0 || rowsToShow == 0 {        //no events for day
+           footerHeight = 50.0
+            
+            self.preferredContentSize.height = CGFloat(100)
+        }
+        
+       // tableView.tableFooterView?.hidden = true
+         return footerHeight //was 40
+    }
+    
+    
+    
  /*
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if let item = items?[indexPath.row] {

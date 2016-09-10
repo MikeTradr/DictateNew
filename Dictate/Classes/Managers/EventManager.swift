@@ -462,15 +462,16 @@ class EventManager: NSObject {
                 let predicate = self.eventStore.predicateForEventsWithStartDate(startDate, endDate: endDate, calendars: calendars)
                 let events = self.eventStore.eventsMatchingPredicate(predicate) as? [EKEvent]
                 
-                print("p465 events: \(events)")
+            // uncomment below to show all event details to log
+               // print("p465 events: \(events)")
                 
                 if let _events = events{
                     completion(events!)
                 } else {
                     completion([])
                 }
-                print("p472 events: \(events)")
-            }else{
+               // print("p472 events: \(events)")
+            } else {
                 completion([])
             }
         })

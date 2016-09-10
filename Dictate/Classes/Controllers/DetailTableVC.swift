@@ -170,6 +170,10 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         labelLocation   = "Locat."
         
         datePickerHeight = 0.0
+        
+        flagAutoRecord = false
+        defaults.setObject(flagAutoRecord, forKey: "flagAutoRecord")        //sets flagAutoRecord for processing
+        
     }
     
     

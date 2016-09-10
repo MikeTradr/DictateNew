@@ -17,13 +17,28 @@ class SettingsFriendsTableViewController: UIViewController{
 
    //@IBOutlet var tableView: UITableView!
     
+    
+    
     @IBAction func buttonAddFriend(sender: AnyObject) {
+        print("p23 we here")
+        switchScreen("AddFriend")
+        
+        
+    }
+    
+    
+    @IBAction func buttonAddFriendold1(sender: AnyObject) {
+        print("p22 we here")
+        switchScreen("AddFriend")
+    }
+    
+    
+    
+    
+    @IBAction func buttonAddFriendold(sender: AnyObject) {
        self.performSegueWithIdentifier("addFriend", sender: self)
 
-        
-        
-        
-        
+        switchScreen("AddFriend")
     }
    
     @IBOutlet weak var table: UITableView!
@@ -33,6 +48,13 @@ class SettingsFriendsTableViewController: UIViewController{
     let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
     
     let smilieFace:UIImage = UIImage(named:"smilieFace")!
+    
+    func switchScreen(scene: String) {
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        let vc : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier(scene)
+        self.presentViewController(vc, animated: true, completion: nil)
+    }
+
 
     
     override func viewDidLoad() {

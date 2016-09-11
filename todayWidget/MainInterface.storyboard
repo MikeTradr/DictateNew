@@ -154,16 +154,6 @@
                                     <outlet property="delegate" destination="M4Y-Lb-cyx" id="sKo-ql-sKq"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gFG-5y-XB7">
-                                <rect key="frame" x="92" y="0.0" width="135" height="30"/>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="28"/>
-                                <state key="normal" title="time">
-                                    <color key="titleColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="buttonActionTime:" destination="M4Y-Lb-cyx" eventType="touchUpInside" id="kpb-Fk-L5g"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UuC-6I-rPE">
                                 <rect key="frame" x="258" y="0.0" width="30" height="30"/>
                                 <color key="tintColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -178,22 +168,35 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0WN-0L-flg">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0WN-0L-flg">
                                 <rect key="frame" x="8" y="0.0" width="80" height="30"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="28"/>
                                 <color key="textColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gFG-5y-XB7">
+                                <rect key="frame" x="92" y="0.0" width="135" height="30"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="28"/>
+                                <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="1"/>
+                                <state key="normal" title="time">
+                                    <color key="titleColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="buttonActionTime:" destination="M4Y-Lb-cyx" eventType="touchUpInside" id="kpb-Fk-L5g"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="Lhn-oQ-ibQ" firstAttribute="top" secondItem="Ft6-oW-KC0" secondAttribute="bottom" id="24S-2G-aOV"/>
                             <constraint firstItem="gFG-5y-XB7" firstAttribute="centerX" secondItem="S3S-Oj-5AN" secondAttribute="centerX" id="Bmz-z0-5XE"/>
                             <constraint firstAttribute="trailing" secondItem="Lhn-oQ-ibQ" secondAttribute="trailing" id="C5Z-qR-k6l"/>
                             <constraint firstItem="UuC-6I-rPE" firstAttribute="leading" secondItem="gFG-5y-XB7" secondAttribute="trailing" constant="40" id="Jc5-cf-Bhz"/>
-                            <constraint firstItem="gFG-5y-XB7" firstAttribute="leading" secondItem="0WN-0L-flg" secondAttribute="trailing" constant="30" id="YIr-Tu-K8p"/>
+                            <constraint firstItem="gFG-5y-XB7" firstAttribute="top" secondItem="Ft6-oW-KC0" secondAttribute="bottom" id="LZW-8G-D56"/>
                             <constraint firstItem="o4P-hJ-MNN" firstAttribute="centerX" secondItem="S3S-Oj-5AN" secondAttribute="centerX" id="Zmx-N6-3TY"/>
                             <constraint firstItem="FKl-LY-JtV" firstAttribute="top" secondItem="Lhn-oQ-ibQ" secondAttribute="bottom" id="nTx-Q5-hEG"/>
                             <constraint firstItem="Lhn-oQ-ibQ" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leading" id="rLW-6D-cbO"/>
+                            <constraint firstItem="0WN-0L-flg" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leadingMargin" constant="5" id="rfD-18-4CV"/>
+                            <constraint firstItem="0WN-0L-flg" firstAttribute="top" secondItem="Ft6-oW-KC0" secondAttribute="bottom" id="zE2-XI-BKu"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>

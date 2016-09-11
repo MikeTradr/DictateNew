@@ -23,7 +23,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     var output:String           = ""
     var allEvents: Array<EKEvent> = []
-    let dateFormatter = NSDateFormatter()
+    let dateFormatter           = NSDateFormatter()
     var today:NSDate            = NSDate()      //current time
     var now:NSDate              = NSDate()
     var timeUntil:String        = ""
@@ -32,18 +32,18 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     var rowsToDelete:Int        = 0
     
     var deleteRowCountArray: [Int] = []
-    var numberRowsToDelete = 0
-    var rowsToShow = 0
+    var numberRowsToDelete      = 0
+    var rowsToShow              = 0
     
-    var setRowHeight:CGFloat = 0
-    var endTimeDash = ""
+    var setRowHeight:CGFloat    = 0
+    var endTimeDash             = ""
     
     var defaultLeftInset: CGFloat = 30
     var marginIndicator = UIView()
     
     var timer = NSTimer()
-    let myRowHeightConstant = 62    //was 62
-    let myFooterHeightConstant = 70 //was 45 80 60
+    let myRowHeightConstant     = 62    //was 62
+    let myFooterHeightConstant  = 80 //was 45 80 60
     
     let startDateToday = NSCalendar.currentCalendar().startOfDayForDate(NSDate())   //= 12:01 am today
     
@@ -57,20 +57,13 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     var endDate: NSDate = NSDate()
     
     
-   // let calendar = NSCalendar.currentCalendar()
-    
-    
     @IBOutlet var labelNoEvents: UILabel!
-    
     @IBOutlet var tableView: UITableView!
-
     @IBOutlet weak var buttonLabelTime: UIButton!
-    
     @IBOutlet weak var buttonTomorrow: UIButton!
-    
     @IBOutlet weak var labelTomorrowDay: UILabel!
     @IBOutlet weak var buttonTodayAll: UIButton!
-    
+
     
     @IBAction func buttonActionTime(sender: AnyObject) {
         let myAppUrl = NSURL(string: "Dictate://?MainScreen")!
@@ -96,7 +89,6 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         print("p91 button Clicked")
         print("p91 buttonTomorrow.currentTitle: \(buttonTomorrow.currentTitle)")
 
-        
         labelTomorrowDay.hidden = false
         
         if buttonTomorrow.currentTitle == "Tomorrow" {
@@ -113,16 +105,16 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             fetchEvents(tomorrowStartDate, endDate: tomorrowEndDate)
             
             buttonTomorrow.setTitle("Today", forState: UIControlState.Normal)
-            
+            buttonTodayAll.setTitle("Today All", forState: UIControlState.Normal)
+
             tableView.reloadData()
            
             if rowsToShow != 0 {
-                self.preferredContentSize.height = CGFloat((rowsToShow * myRowHeightConstant) + myFooterHeightConstant + 50)
+                self.preferredContentSize.height = CGFloat((rowsToShow * myRowHeightConstant) + myFooterHeightConstant) // was + 50
             } else {
                 self.preferredContentSize.height = CGFloat(myRowHeightConstant + 8 + myFooterHeightConstant)
             }
            
-            
             dateFormatter.dateFormat = "EEEE"    //EEEE = full day name  EEE is 3 letter abbreviation
             
             let eventDay = dateFormatter.stringFromDate(tomorrowStartDate)
@@ -162,14 +154,13 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             tableView.reloadData()
           
             if rowsToShow != 0 {
-                self.preferredContentSize.height = CGFloat((rowsToShow * myRowHeightConstant) + myFooterHeightConstant + 220)
+                self.preferredContentSize.height = CGFloat((rowsToShow * myRowHeightConstant) + myFooterHeightConstant)
             } else {
                 self.preferredContentSize.height = CGFloat(myRowHeightConstant + 8 + myFooterHeightConstant)
             }
 
             buttonTodayAll.setTitle("Today", forState: UIControlState.Normal)
-
-        
+            buttonTomorrow.setTitle("Tomorrow", forState: UIControlState.Normal)
             
         } else {
             fetchEvents(NSDate(), endDate: endDateToday)  //show today events
@@ -430,8 +421,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             
             endTimeDash = "- \(endTime)"
         }
-        
-        
+                
         if item.startDate == item.endDate {     //for same start & end time event
             endTimeDash = ""
         }
@@ -548,14 +538,13 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
         
         if buttonTodayAll.currentTitle == "Today" {
-            
             if (item.endDate.timeIntervalSince1970 < NSDate().timeIntervalSince1970){
-                cell.labelTimeUntil.text = ""
-                cell.labelOutput.textColor      = UIColor.whiteColor().colorWithAlphaComponent(0.5)
-                endTimeDash = ""
+                cell.labelTimeUntil.text            = ""
+                cell.labelOutput.textColor          = UIColor.whiteColor().colorWithAlphaComponent(0.5)
+                endTimeDash                         = ""
                 cell.verticalBarView.backgroundColor = UIColor(CGColor: item.calendar.CGColor).colorWithAlphaComponent(0.5)
-                cell.labelStartTime.textColor      = UIColor.whiteColor().colorWithAlphaComponent(0.75)
-                cell.labelEndTime.textColor      = UIColor.whiteColor().colorWithAlphaComponent(0.5)
+                cell.labelStartTime.textColor       = UIColor.whiteColor().colorWithAlphaComponent(0.65)
+                cell.labelEndTime.textColor         = UIColor.whiteColor().colorWithAlphaComponent(0.5)
                 cell.labelSecondLine.textColor      = UIColor.whiteColor().colorWithAlphaComponent(0.5)
             }
         }

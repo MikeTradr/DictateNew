@@ -43,7 +43,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     var timer = NSTimer()
     let myRowHeightConstant = 62    //was 62
-    let myFooterHeightConstant = 60 //was 45 80
+    let myFooterHeightConstant = 70 //was 45 80 60
     
     let startDateToday = NSCalendar.currentCalendar().startOfDayForDate(NSDate())   //= 12:01 am today
     
@@ -150,7 +150,8 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     @IBAction func buttonTodayAll(sender: AnyObject) {
         print("p148 button Clicked")
         
-        if buttonTodayAll.currentTitle != "Today All" {
+        if buttonTodayAll.currentTitle == "Today All" {
+            print("p154 buttonTodayAll.currentTitle: \(buttonTodayAll.currentTitle)")
             
             let startDate = NSCalendar.currentCalendar().startOfDayForDate(today)   //= 12:01 am today
             
@@ -159,13 +160,13 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             fetchEvents(startDate, endDate: endDate)
             
             tableView.reloadData()
-            
+          
             if rowsToShow != 0 {
-                self.preferredContentSize.height = CGFloat((rowsToShow * myRowHeightConstant) + myFooterHeightConstant + 200)
+                self.preferredContentSize.height = CGFloat((rowsToShow * myRowHeightConstant) + myFooterHeightConstant + 220)
             } else {
                 self.preferredContentSize.height = CGFloat(myRowHeightConstant + 8 + myFooterHeightConstant)
             }
-            
+
             buttonTodayAll.setTitle("Today", forState: UIControlState.Normal)
 
         
@@ -395,7 +396,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             }
             
         } else {
-           // cell.hidden = false
+            cell.hidden = false
             //  cell.rowHeight = 0
             //return cell
             
@@ -429,9 +430,6 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             
             endTimeDash = "- \(endTime)"
         }
-        
-        
-        
         
         
         if item.startDate == item.endDate {     //for same start & end time event
@@ -473,8 +471,6 @@ class TodayViewController: UIViewController, NCWidgetProviding {
                 endTimeDash = "- \(endTime)"
             }
         }
-        
-        
         
         let todayEnd = NSCalendar.currentCalendar().startOfDayForDate(tomorrow)  //is midnight today
         
@@ -521,14 +517,13 @@ class TodayViewController: UIViewController, NCWidgetProviding {
                 cell.labelTimeUntil.text = ""
                 
             }
-      
             
         } else {
             cell.labelTimeUntil.text = timeUntil
             cell.constraintTimeUntilTop.constant = 1
         }
         
-        
+
         print("p227 timeUntil: \(timeUntil)")
         
         cell.labelOutput.text           = item.title
@@ -551,7 +546,19 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             cell.labelSecondLine.textColor = UIColor(CGColor: item.calendar.CGColor)
         }
         
-        print("p344 we here? cell.constraintTimeUntilTop.constant: \(cell.constraintTimeUntilTop.constant)")
+        
+        if buttonTodayAll.currentTitle == "Today" {
+            
+            if (item.endDate.timeIntervalSince1970 < NSDate().timeIntervalSince1970){
+                cell.labelTimeUntil.text = ""
+                cell.labelOutput.textColor      = UIColor.whiteColor().colorWithAlphaComponent(0.5)
+                endTimeDash = ""
+                cell.verticalBarView.backgroundColor = UIColor(CGColor: item.calendar.CGColor).colorWithAlphaComponent(0.5)
+                cell.labelStartTime.textColor      = UIColor.whiteColor().colorWithAlphaComponent(0.75)
+                cell.labelEndTime.textColor      = UIColor.whiteColor().colorWithAlphaComponent(0.5)
+                cell.labelSecondLine.textColor      = UIColor.whiteColor().colorWithAlphaComponent(0.5)
+            }
+        }
 
         return cell
     }                   // end func cellForRowAtIndexPath
@@ -585,15 +592,15 @@ class TodayViewController: UIViewController, NCWidgetProviding {
                 setRowHeight = 0
             } else {
                 //return 50     //Choose your custom row height
-                print("p299 we here? \(item.title)")
-
-                setRowHeight = 55
+                print("p588 we here? \(item.title)")
+                
+                rowsToShow = allEvents.count
+                numberRowsToDelete = 0
             }
             
         } else {
             
             setRowHeight = 55
-
         }
         
         rowsToShow = allEvents.count - numberRowsToDelete
@@ -648,7 +655,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         //headerView.backgroundColor = UIColor.yellowColor()
         return headerView
     }
-        
+    
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 40.0
     }

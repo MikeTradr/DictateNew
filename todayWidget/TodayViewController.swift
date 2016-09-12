@@ -186,12 +186,22 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             fetchEvents(startDate, endDate: endDate)
             
             tableView.reloadData()
-          
+        /*
             if rowsToShow != 0 {
                 self.preferredContentSize.height = CGFloat((rowsToShow * myRowHeightConstant) + myFooterHeightConstant)
             } else {
                 self.preferredContentSize.height = CGFloat(myRowHeightConstant + 8 + myFooterHeightConstant)
             }
+ */
+            print("p196 allEventsToday.count: \(allEventsToday.count)")
+            print("p196 myRowHeightConstant: \(myRowHeightConstant)")
+            print("p196 myFooterHeightConstantt: \(myFooterHeightConstant)")
+            
+            self.preferredContentSize.height = CGFloat((allEventsToday.count * myRowHeightConstant) + myFooterHeightConstant)
+            
+            print("p202 preferredContentSize.height: \(self.preferredContentSize.height)")
+            print("p202 rowsToShow: \(rowsToShow)")
+            print("p202 allEvents.count: \(allEvents.count)")
 
             buttonTodayAll.setTitle("Today", forState: UIControlState.Normal)
             buttonTomorrow.setTitle("Tomorrow", forState: UIControlState.Normal)
@@ -294,53 +304,30 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         //fetchEvents(startDateToday, endDate: endDateToday)  //need all day to get no events text set perfectly.
         fetchEvents(NSDate(), endDate: endDateToday)
 
+        var numberOfRows = allEvents.count
         
         tableView.reloadData()
+        
+        print("p310 allEvents.count: \(allEvents.count)")
+        print("p310 numberOfRows: \(numberOfRows)")
+        print("p310 rowsToDelete: \(rowsToDelete)")
+        print("p310 rowsToShow: \(rowsToShow)")
         
         if rowsToShow != 0 {
             self.preferredContentSize.height = CGFloat((rowsToShow * myRowHeightConstant) + myFooterHeightConstant)
         } else {
             self.preferredContentSize.height = CGFloat(myRowHeightConstant + 8 + myFooterHeightConstant)
         }
-
-        
-        var numberOfRows = allEvents.count
-        
-        print("p67 rowsToDelete: \(rowsToDelete)")
-        print("p77 rowsToShow: \(rowsToShow)")
-        print("p79 allEvents.count: \(allEvents.count)")
-        
-        //self.preferredContentSize.height = 100
-
-        
-        //self.preferredContentSize.height = CGFloat(allEvents.count * 50)
-
-        //self.preferredContentSize.height = CGFloat(rowsToShow * 30)
-        
-        //self.preferredContentSize.height = CGFloat(numberOfRows * 50)
-        
-       // self.preferredContentSize.height = 200
-        
-        
-      //  tableView.rowHeight = UITableViewAutomaticDimension
-       // tableView.estimatedRowHeight = 140
-        
-        // tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
-        // tableView.tableFooterView = UIView(frame: CGRectZero)
-        
-        tableView.reloadData()
         
         tableView.allowsSelectionDuringEditing = false
                 
         if allEvents.count == 0 || rowsToShow == 0 {        //no events for day
-           // self.labelNoEvents.text = noEventsString
             
             if buttonTomorrow.currentTitle == "Today" {
                 self.labelNoEvents.text = "Dictate™ 😀 No More Events Tomorrow"
             } else {
                 self.labelNoEvents.text = noEventsString
             }
-            
             
             self.labelNoEvents.textColor = UIColor.whiteColor().colorWithAlphaComponent(0.7)
             self.labelNoEvents.hidden = false
@@ -383,18 +370,17 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
         print("p202 rowsToShow: \(rowsToShow)")
         
+        tableView.reloadData()
+        
         if rowsToShow != 0 {
             self.preferredContentSize.height = CGFloat((rowsToShow * myRowHeightConstant) + myFooterHeightConstant)
         } else {
-            self.preferredContentSize.height = CGFloat(myRowHeightConstant + 8 + myFooterHeightConstant)
+            self.preferredContentSize.height = CGFloat(myRowHeightConstant + 20 + myFooterHeightConstant) // was 8
         }
-        tableView.reloadData()
 
        // let item = allEvents[0]  
         
         if allEvents.count == 0 || rowsToShow == 0  {        //no events for day
-            self.preferredContentSize.height = CGFloat(125)
-            //self.labelNoEvents.text = noEventsString
             
             if allEventsToday.count > 0 {
                 self.labelNoEvents.text = "Dictate™ 😀 No More Events Today"
@@ -408,18 +394,10 @@ class TodayViewController: UIViewController, NCWidgetProviding {
                 self.labelNoEvents.text = noEventsString
             }
             
-
-            
-            
-            
-            
             self.labelNoEvents.hidden = false
         } else {
             self.labelNoEvents.hidden = true
         }
-        
-      //  var numberOfRows = allEvents.count
-       // self.preferredContentSize.height = CGFloat((numberOfRows-rowsToDelete) * 50)
         
         completionHandler(NCUpdateResult.NewData)
     }
@@ -465,7 +443,18 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
         cell.layoutMargins = UIEdgeInsetsZero
         
-       let item = allEvents[indexPath.row]
+        //var item = allEventsToday[indexPath.row]
+        let item = allEvents[indexPath.row]
+
+     /*
+        if buttonTodayAll.currentTitle == "Today" {
+            item = allEventsToday[indexPath.row]
+            
+        } else {
+        
+            item = allEvents[indexPath.row]
+        }
+ */
   /*
         if buttonTodayAll.currentTitle  == "Today All" {
         
@@ -574,6 +563,12 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
         let endTimeItem = item.endDate
         let timeUntilEnd = endTimeItem.timeIntervalSinceDate(NSDate())
+        
+        print("p600 timeUntilStart: \(timeUntilStart)")
+        print("p600 timeUntilEnd: \(timeUntilEnd)")
+
+        
+        
     
         if ((timeUntilStart <= 0) && (timeUntilEnd >= 0)) {     //Time is Now
             // works
@@ -589,7 +584,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
                 print("p205 we here item.allDay: \(item.allDay)")
                 cell.labelTimeUntil.text = ""
             }
-            print("p312 we here? cell.constraintTimeUntilTop.constant: \(cell.constraintTimeUntilTop.constant)")
+            print("p608 we here? cell.constraintTimeUntilTop.constant: \(cell.constraintTimeUntilTop.constant)")
             cell.constraintTimeUntilTop.constant = -4    //move up a bit to accomindate the emoji
             print("p314 we here? cell.constraintTimeUntilTop.constant: \(cell.constraintTimeUntilTop.constant)")
             
@@ -686,7 +681,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         }
     
         rowsToShow = allEvents.count - numberRowsToDelete
-        print("p312 rowsToShow: \(rowsToShow)")
+        print("p708 rowsToShow: \(rowsToShow)")
         
         if allEvents.count == 0 {  // TODO Mike Anil does not work!
             //set row height for the No Events today Label
@@ -696,6 +691,19 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
         setRowHeight = 55
         print("p309 setRowHeight: \(setRowHeight)")
+        
+        print("p721 buttonTodayAll.currentTitle: \(buttonTodayAll.currentTitle)")
+
+        if buttonTodayAll.currentTitle == "Today All" {
+            print("p724 we in here?")
+            //rowsToShow = allEventsToday.count
+            rowsToShow = allEvents.count
+            print("p725 rowsToShow: \(rowsToShow)")
+
+        }
+        
+        
+        
         
         return setRowHeight
     }

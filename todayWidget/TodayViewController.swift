@@ -214,6 +214,20 @@ class TodayViewController: UIViewController, NCWidgetProviding {
                 self.labelNoEvents.hidden = true
             }
             
+            if allEvents.count == 0 || rowsToShow == 0  {        //no events for day
+                self.preferredContentSize.height = CGFloat(125)
+                
+                if allEventsToday.count == 0 {
+                    self.labelNoEvents.text = "Dictate™ 😀 No Events Today"
+                } else {
+                    self.labelNoEvents.text = "Dictate™ 😀 No More Events Today"
+                }
+      
+                self.labelNoEvents.hidden = false
+            } else {
+                self.labelNoEvents.hidden = true
+            }
+            
         } else {
             fetchEvents(NSDate(), endDate: endDateToday)  //show today events
             
@@ -230,7 +244,13 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             
             if allEvents.count == 0 || rowsToShow == 0  {        //no events for day
                 self.preferredContentSize.height = CGFloat(125)
-                self.labelNoEvents.text = "Dictate™ 😀 No More Events Today"
+
+                    if allEventsToday.count == 0 {
+                        self.labelNoEvents.text = "Dictate™ 😀 No Events Today"
+                    } else {
+                        self.labelNoEvents.text = "Dictate™ 😀 No More Events Today"
+                    }
+
                 self.labelNoEvents.hidden = false
             } else {
                 self.labelNoEvents.hidden = true
@@ -260,10 +280,6 @@ class TodayViewController: UIViewController, NCWidgetProviding {
                 
                 self.allEventsToday = events
                 print("p242 self.allEventsToday.count: \(self.allEventsToday.count)")
-              
-                if self.allEventsToday.count == 0 {     //no events ever today
-                    self.noEventsString = "Dictate™ 😀 No Events Today"
-                }
             }
             
         })
@@ -272,6 +288,11 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         allEvents.sortInPlace({$0.startDate.timeIntervalSince1970 < $1.startDate.timeIntervalSince1970})
         
         print("p130 allEvents.count: \(allEvents.count)")
+    }
+    
+    func minuteUpdates (){
+        currentTime ()
+        updateTable()
     }
     
     func currentTime () {
@@ -283,6 +304,15 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     func updateTable () {
         tableView.reloadData()
+    }
+    
+    func delay(delay:Double, closure:()->()) {
+        dispatch_after(
+            dispatch_time(
+                DISPATCH_TIME_NOW,
+                Int64(delay * Double(NSEC_PER_SEC))
+            ),
+            dispatch_get_main_queue(), closure)
     }
     
     override func viewDidLoad() {
@@ -297,11 +327,29 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
         currentTime()
         
-        timer = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: Selector("currentTime"), userInfo: nil, repeats: true)
+        //mikeash:  the current time, calculate how many seconds until the top of the next minute, schedule your time for that many seconds
+        let datecomponenets = calendar.components(NSCalendarUnit.Second, fromDate: NSDate())
+        let secondsToTop:Double =  Double(60 - datecomponenets.second)    //current seconds in minute 12:00:20 shows 20
+        print("p308 secondsToTop: \(secondsToTop)")
         
-         var timer2 = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: Selector("updateTable"), userInfo: nil, repeats: true)
+    
+        //http://stackoverflow.com/questions/24034544/dispatch-after-gcd-in-swift/24318861#24318861
+        //swift3
+      /*  let deadlineTime = DispatchTime.now() + .seconds(1)
+        DispatchQueue.main.asyncAfter(deadline: deadlineTime) {
+            print("test")
+        }
+      */
+   
+        delay(secondsToTop) {
+             self.timer = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: #selector(TodayViewController.minuteUpdates), userInfo: nil, repeats: true)
+        }
+        
+       // timer = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: Selector("minuteUpdates"), userInfo: nil, repeats: true)
 
-        //fetchEvents(startDateToday, endDate: endDateToday)  //need all day to get no events text set perfectly.
+
+        fetchEvents(startDateToday, endDate: endDateToday)  //need all day to get no events text set perfectly.  DO to make all day array for label
+        
         fetchEvents(NSDate(), endDate: endDateToday)
 
         var numberOfRows = allEvents.count
@@ -309,6 +357,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         tableView.reloadData()
         
         print("p310 allEvents.count: \(allEvents.count)")
+        print("p310 allEventsToday.count: \(allEventsToday.count)")
         print("p310 numberOfRows: \(numberOfRows)")
         print("p310 rowsToDelete: \(rowsToDelete)")
         print("p310 rowsToShow: \(rowsToShow)")
@@ -326,7 +375,12 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             if buttonTomorrow.currentTitle == "Today" {
                 self.labelNoEvents.text = "Dictate™ 😀 No More Events Tomorrow"
             } else {
-                self.labelNoEvents.text = noEventsString
+                
+                if allEventsToday.count == 0 {
+                     self.labelNoEvents.text = "Dictate™ 😀 No Events Today"
+                } else {
+                    self.labelNoEvents.text = "Dictate™ 😀 No More Events Today"
+                }
             }
             
             self.labelNoEvents.textColor = UIColor.whiteColor().colorWithAlphaComponent(0.7)
@@ -335,13 +389,13 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             self.labelNoEvents.hidden = true
         }   
     }
-    
+  /*
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
         timer = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: Selector("currentTime"), userInfo: nil, repeats: true)
     }
-    
+  */
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -361,12 +415,20 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
         currentTime()
         
-        var timer = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: Selector("currentTime"), userInfo: nil, repeats: true)
+        let datecomponenets = calendar.components(NSCalendarUnit.Second, fromDate: NSDate())
+        let secondsToTop:Double =  Double(60 - datecomponenets.second)    //current seconds in minute 12:00:20 shows 20
+        print("p308 secondsToTop: \(secondsToTop)")
+        
+        delay(secondsToTop) {
+            self.timer = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: #selector(TodayViewController.minuteUpdates), userInfo: nil, repeats: true)
+        }
+        
+      // var timer = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: Selector("currentTime"), userInfo: nil, repeats: true)
         
         fetchEvents(NSDate(), endDate: endDateToday)
         //fetchEvents(startDateToday, endDate: endDateToday)  //need all day to get no events text set perfectly.
         
-        var timer2 = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: Selector("updateTable"), userInfo: nil, repeats: true)
+     //   var timer2 = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: Selector("updateTable"), userInfo: nil, repeats: true)
         
         print("p202 rowsToShow: \(rowsToShow)")
         
@@ -382,6 +444,20 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
         if allEvents.count == 0 || rowsToShow == 0  {        //no events for day
             
+            
+            
+            if buttonTomorrow.currentTitle == "Today" {
+                self.labelNoEvents.text = "Dictate™ 😀 No More Events Tomorrow"
+            } else {
+                
+                if allEventsToday.count == 0 {
+                    self.labelNoEvents.text = "Dictate™ 😀 No Events Today"
+                } else {
+                    self.labelNoEvents.text = "Dictate™ 😀 No More Events Today"
+                }
+            }
+/*
+            
             if allEventsToday.count > 0 {
                 self.labelNoEvents.text = "Dictate™ 😀 No More Events Today"
             } else {
@@ -393,7 +469,8 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             } else {
                 self.labelNoEvents.text = noEventsString
             }
-            
+        */
+            self.labelNoEvents.textColor = UIColor.whiteColor().colorWithAlphaComponent(0.7)
             self.labelNoEvents.hidden = false
         } else {
             self.labelNoEvents.hidden = true

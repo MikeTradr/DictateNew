@@ -190,6 +190,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         defaults.setObject(flagAutoRecord, forKey: "flagAutoRecord")        //sets flagAutoRecord for processing
         
         print("p190 flagAutoRecord: \(flagAutoRecord)")
+        
+        let duration:Int = 10
+        defaults.setObject(duration, forKey: "eventDuration")        //sets eventDuration for processing
+        
+        print("p190 flagAutoRecord: \(flagAutoRecord)")
+        
+        
 
 
         

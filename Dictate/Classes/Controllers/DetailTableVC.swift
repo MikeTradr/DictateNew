@@ -36,8 +36,8 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
     var messageString = ""
     var locationString = ""
  
-    var results = ["temp", "temp", "temp", "temp", "temp", "temp", "temp", "temp", "temp", "temp", "temp", "temp"]
-    var labels = ["Input", "Type", "Day", "Time", "Cell#", "Start", "End", "Title", "Cal.", "Alert", "Repeat", "Location"]
+    var results = ["header", "temp", "temp", "temp", "temp", "temp", "temp", "temp", "temp", "temp", "temp", "temp", "temp"]
+    var labels = ["header", "Input", "Type", "Day", "Time", "Cell#", "Start", "End", "Title", "Cal.", "Alert", "Repeat", "Location"]
 
     var labelInput = "Input"
     var labelType = "Type"
@@ -72,6 +72,11 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
     
     var startDT = NSDate()
     var datePickerHeight: CGFloat = 0.0
+    
+    let myHeaderHeightConstant  = 100 //was 45 80 60
+    var myHeaderHeight = CGFloat()
+
+
 
 
 //#### my functions #################################
@@ -155,7 +160,7 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
     }
     
     func resetToDefaults(){
-        labels = ["Input", "Type", "Day","Time", "Cell#", "Start", "End", "Title", "Cal.", "Alert", "Repeat", "Locat."]
+        labels = ["header", "Input", "Type", "Day","Time", "Cell#", "Start", "End", "Title", "Cal.", "Alert", "Repeat", "Locat."]
         labelInput      = "Input"
         labelType       = "Type"
         labelDay        = "Day"
@@ -225,6 +230,32 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         }
     }
 
+    func centerTable(tableHeight: CGFloat) -> CGFloat {
+        print("p234 tableHeight: \(tableHeight)")
+        
+        var myHeader:CGFloat = 1
+        
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        let screenHeight = screenSize.height
+        
+        let centerScreen = screenHeight / 2
+        let centerTable = (tableHeight + 60) / 2    //added +60 for Button View height
+        
+        let difference = centerScreen - centerTable
+        
+        print("p244 screenSize: \(screenSize)")
+        print("p244 screenHeight: \(screenHeight)")
+        print("p244 centerScreen: \(centerScreen)")
+        print("p244 centerTable: \(centerTable)")
+        print("p244 differnce: \(difference)")
+
+        myHeader = difference
+        
+        print("p254 myHeader: \(myHeader)")
+        
+        return myHeader
+    }
+
     
 
     
@@ -245,6 +276,33 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         // Return the number of rows in the section.
         //return 11         // 11 fields (rows) total!
         return results.count
+    }
+    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView(frame: CGRectMake(0, 0, tableView.frame.size.width, 0)) //was 40
+       // headerView.backgroundColor = UIColor.yellowColor()
+        return headerView
+    }
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        
+        //let height = myHeaderHeight
+        let height = CGFloat(0)
+        
+        return height
+    }
+    
+    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footerView = UIView(frame: CGRectMake(0, 0, tableView.frame.size.width, 0)) //was 40
+        // footerView.backgroundColor = UIColor.yellowColor()
+        return footerView
+    }
+    
+    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        
+       // let height = myHeaderHeight
+        
+        return 0
     }
     
     
@@ -321,6 +379,9 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
 
             tableViewHeightConstraint.constant = CGFloat((rowsToShow * 35) + (additionalRows * 30)) //20 ) //anil added, mike changed
             
+           // tableViewHeightConstraint.constant = CGFloat((rowsToShow * 35) + (additionalRows * 30) + myHeaderHeightConstant) //20 ) //anil added, mike changed
+
+            
             print("p204 additionalRows: \(additionalRows)")
             
             view.updateConstraintsIfNeeded()
@@ -355,6 +416,28 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
             }
         }
         */
+        
+        
+        
+        let tableHeight = tableViewHeightConstraint.constant    //value calculated based on rows
+        print("p341 tableHeight: \(tableHeight)")
+        
+        myHeaderHeight = centerTable(tableHeight)   //call func to center table
+        
+        //tableViewHeightConstraint.constant = tableViewHeightConstraint.constant + myHeaderHeight
+        
+       // self.preferredContentSize.height = tableViewHeightConstraint.constant + myHeaderHeight
+        
+        print("p393 tableViewHeightConstraint.constant: \(tableViewHeightConstraint.constant)")
+        
+        if (labels[indexPath.row] == "header") {
+           // height = myHeaderHeight
+            height = 0
+ 
+        }
+        
+        
+        
         return height
     }   // end func heightForRowAtIndexPath
 
@@ -475,6 +558,12 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
     
         print("p364 end cell: \(labels[indexPath.row]) ------------------------")
         print("--------------------------------------------")
+        
+        if labels[indexPath.row] == "header" {
+            cell.label.hidden = true
+            //cell.resultsLabel.hidden = true
+            cell.resultsLabel.text = "myHeaderHeight: \(myHeaderHeight)"
+        }
 
      
         return cell
@@ -1030,15 +1119,25 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         print("p555 labelInput: \(labelInput)")
         print("p555 labelType: \(labelType)")
   
-        labels = [labelInput, labelType, labelDay, labelTime, labelCell, labelStart, labelEnd, labelTitle, labelCal, labelAlert, labelRepeat, labelLocation]
+        labels = ["header", labelInput, labelType, labelDay, labelTime, labelCell, labelStart, labelEnd, labelTitle, labelCal, labelAlert, labelRepeat, labelLocation]
         
-        results = ["\"\(strRaw!)\"", actionType, day!, time, phone!, fullDT, fullDTEnd, output!, calendarName!, alertString, eventRepeat, eventLocation]
+        results = ["header", "\"\(strRaw!)\"", actionType, day!, time, phone!, fullDT, fullDTEnd, output!, calendarName!, alertString, eventRepeat, eventLocation]
         
         print("p555 labels: \(labels)")
         print("p555 results: \(results)")
         
-        tableViewHeightConstraint.constant = CGFloat((rowsToShow * 35) + (additionalRows * 35) )   //anil added
+       // tableViewHeightConstraint.constant = CGFloat((rowsToShow * 35) + (additionalRows * 35) + myHeaderHeightConstant )   //anil added
+        
+        print("p1125 myHeaderHeight: \(myHeaderHeight)")
+
+       //  tableViewHeightConstraint.constant = CGFloat((rowsToShow * 35) + (additionalRows * 35)) + myHeaderHeight  //anil added
+        
         tableV.reloadData()
+        
+        tableViewHeightConstraint.constant = CGFloat((rowsToShow * 35) + (additionalRows * 35))  //anil added
+        
+        print("p1133 myHeaderHeight: \(myHeaderHeight)")
+
         
         print("**** p546 tableViewHeightConstraint.constant: \(tableViewHeightConstraint.constant)")
         tableV.layoutIfNeeded()
@@ -1062,10 +1161,13 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         
         
         
-        
         tableV.tableFooterView = UIView(frame:CGRectZero)    //removes blank lines
         
         self.tableV.reloadData()
+        
+        print("p1168 tableViewHeightConstraint.constant: \(tableViewHeightConstraint.constant)")
+        
+        tableViewHeightConstraint.constant = CGFloat((rowsToShow * 35) + (additionalRows * 35)) + myHeaderHeight
         
         //Added left and Right Swipe gestures. TODO Can add this to the General.swift Class? and call it?
         let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(DetailTableVC.handleSwipes(_:)))

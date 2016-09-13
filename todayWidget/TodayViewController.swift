@@ -59,6 +59,10 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     var startDate: NSDate = NSDate()
     var endDate: NSDate = NSDate()
     
+    var eventsLeft:Int = 0
+    var eventsDayTotal:Int = 0
+    
+    
     
     @IBOutlet var labelNoEvents: UILabel!
     @IBOutlet var tableView: UITableView!
@@ -66,7 +70,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     @IBOutlet weak var buttonTomorrow: UIButton!
     @IBOutlet weak var labelTomorrowDay: UILabel!
     @IBOutlet weak var buttonTodayAll: UIButton!
-
+    @IBOutlet weak var labelCount: UILabel!
     
     @IBAction func buttonActionTime(sender: AnyObject) {
         let myAppUrl = NSURL(string: "Dictate://?MainScreen")!
@@ -135,7 +139,9 @@ class TodayViewController: UIViewController, NCWidgetProviding {
                 self.labelNoEvents.hidden = true
             }
             
-            
+            eventsLeft = rowsToShow
+            eventsDayTotal = allEvents.count
+            self.labelCount.text = "\(eventsDayTotal)\n events"
             
 
         } else {
@@ -166,7 +172,17 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             } else {
                 self.labelNoEvents.hidden = true
             }
+            
+            eventsLeft = rowsToShow
+            eventsDayTotal = allEventsToday.count
+            self.labelCount.text = "\(eventsLeft) of \(eventsDayTotal)\n events"
         }
+        
+        
+
+        
+        
+        
     }
     
     
@@ -228,6 +244,10 @@ class TodayViewController: UIViewController, NCWidgetProviding {
                 self.labelNoEvents.hidden = true
             }
             
+            eventsLeft = rowsToShow
+            eventsDayTotal = allEventsToday.count
+            self.labelCount.text = "\(eventsDayTotal)\n events"
+            
         } else {
             fetchEvents(NSDate(), endDate: endDateToday)  //show today events
             
@@ -255,7 +275,12 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             } else {
                 self.labelNoEvents.hidden = true
             }
+            
+            eventsLeft = rowsToShow
+            eventsDayTotal = allEventsToday.count
+            self.labelCount.text = "\(eventsLeft) of \(eventsDayTotal)\n events"
         }
+        
     }
     
     
@@ -387,7 +412,13 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             self.labelNoEvents.hidden = false
         } else {
             self.labelNoEvents.hidden = true
-        }   
+        }
+        
+        eventsLeft = rowsToShow
+        eventsDayTotal = allEventsToday.count
+        
+        self.labelCount.text = "\(eventsLeft) of \(eventsDayTotal)\n events"
+        
     }
   /*
     override func viewWillAppear(animated: Bool) {

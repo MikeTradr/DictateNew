@@ -757,7 +757,7 @@ class DictateViewController: UIViewController, UITextFieldDelegate, MFMailCompos
         }
       */
         
-        flagAutoRecord = defaults.objectForKey("flagAutoRecord")! as! Bool
+        flagAutoRecord = defaults.objectForKey("flagAutoRecord") as? Bool ?? false
 
         print("p757 flagAutoRecord: \(flagAutoRecord)")
         if flagAutoRecord == true {

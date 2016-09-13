@@ -23,7 +23,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="WVT-GX-IgQ">
-                                    <rect key="frame" x="0.0" y="124.5" width="320" height="35"/>
+                                    <rect key="frame" x="0.0" y="124.5" width="320" height="33"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1fJ-TP-VcF">
@@ -47,7 +47,7 @@
                                             <rect key="frame" x="159" y="-2.5" width="2" height="30"/>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yFA-KR-dHd">
-                                            <rect key="frame" x="32" y="-1" width="107" height="25"/>
+                                            <rect key="frame" x="44" y="-1" width="107" height="25"/>
                                             <color key="backgroundColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                             <state key="normal" title="Today All">
@@ -63,11 +63,27 @@
                                                 <action selector="buttonTodayAll:" destination="M4Y-Lb-cyx" eventType="touchUpInside" id="nqu-Vd-PhL"/>
                                             </connections>
                                         </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H9p-6Q-riO">
+                                            <rect key="frame" x="0.0" y="-1" width="42" height="26.5"/>
+                                            <attributedString key="attributedText">
+                                                <fragment content="count">
+                                                    <attributes>
+                                                        <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="0.25" tighteningFactorForTruncation="0.0"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstItem="1fJ-TP-VcF" firstAttribute="leading" secondItem="aOf-CR-nIE" secondAttribute="trailing" constant="10" id="8PO-V2-7aH"/>
-                                        <constraint firstItem="aOf-CR-nIE" firstAttribute="leading" secondItem="yFA-KR-dHd" secondAttribute="trailing" constant="10" id="Rce-1w-Tbt"/>
+                                        <constraint firstItem="H9p-6Q-riO" firstAttribute="leading" secondItem="WVT-GX-IgQ" secondAttribute="leading" constant="14" id="8qa-Dy-xPF"/>
+                                        <constraint firstItem="aOf-CR-nIE" firstAttribute="leading" secondItem="yFA-KR-dHd" secondAttribute="trailing" constant="5" id="Rce-1w-Tbt"/>
+                                        <constraint firstItem="yFA-KR-dHd" firstAttribute="leading" secondItem="H9p-6Q-riO" secondAttribute="trailing" constant="15" id="XRP-vG-hPN"/>
+                                        <constraint firstItem="H9p-6Q-riO" firstAttribute="top" secondItem="WVT-GX-IgQ" secondAttribute="top" constant="-3" id="a8w-8y-eO9"/>
                                         <constraint firstItem="aOf-CR-nIE" firstAttribute="centerX" secondItem="WVT-GX-IgQ" secondAttribute="centerX" id="jmd-U8-Bgv"/>
                                     </constraints>
                                 </view>
@@ -168,7 +184,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0WN-0L-flg">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="0WN-0L-flg">
                                 <rect key="frame" x="8" y="0.0" width="80" height="30"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="28"/>
                                 <color key="textColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -196,6 +212,7 @@
                             <constraint firstItem="FKl-LY-JtV" firstAttribute="top" secondItem="Lhn-oQ-ibQ" secondAttribute="bottom" id="nTx-Q5-hEG"/>
                             <constraint firstItem="Lhn-oQ-ibQ" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leading" id="rLW-6D-cbO"/>
                             <constraint firstItem="0WN-0L-flg" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leadingMargin" constant="5" id="rfD-18-4CV"/>
+                            <constraint firstItem="gFG-5y-XB7" firstAttribute="leading" secondItem="0WN-0L-flg" secondAttribute="trailing" constant="4" id="w0u-96-SgS"/>
                             <constraint firstItem="0WN-0L-flg" firstAttribute="top" secondItem="Ft6-oW-KC0" secondAttribute="bottom" id="zE2-XI-BKu"/>
                         </constraints>
                     </view>
@@ -207,6 +224,7 @@
                         <outlet property="buttonLabelTime" destination="gFG-5y-XB7" id="chQ-Is-XMP"/>
                         <outlet property="buttonTodayAll" destination="yFA-KR-dHd" id="UQP-vb-iRM"/>
                         <outlet property="buttonTomorrow" destination="1fJ-TP-VcF" id="489-Ty-qY9"/>
+                        <outlet property="labelCount" destination="H9p-6Q-riO" id="OaI-qT-XBp"/>
                         <outlet property="labelNoEvents" destination="o4P-hJ-MNN" id="k1O-4y-BcM"/>
                         <outlet property="labelTomorrowDay" destination="0WN-0L-flg" id="irV-LA-PvH"/>
                         <outlet property="tableView" destination="Lhn-oQ-ibQ" id="X23-i8-GAw"/>

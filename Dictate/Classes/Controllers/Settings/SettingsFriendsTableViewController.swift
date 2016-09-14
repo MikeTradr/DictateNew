@@ -36,7 +36,7 @@ class SettingsFriendsTableViewController: UIViewController{
     
     
     @IBAction func buttonAddFriendold(sender: AnyObject) {
-       self.performSegueWithIdentifier("addFriend", sender: self)
+       self.performSegueWithIdentifier("AddFriend", sender: self)
 
         switchScreen("AddFriend")
     }

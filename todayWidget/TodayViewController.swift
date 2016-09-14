@@ -444,6 +444,30 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 
         //tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
         
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 0.5
+        paragraphStyle.alignment = NSTextAlignment.Center
+        
+        eventsLeft = rowsToShow
+        eventsDayTotal = allEventsToday.count
+        
+       //self.labelCount.text = "\(eventsLeft) of \(eventsDayTotal)\n events"
+        
+        let myString = "\(eventsLeft) of \(eventsDayTotal)\n events"
+
+        
+        var attrString = NSMutableAttributedString(string: myString)
+        attrString.addAttribute(NSParagraphStyleAttributeName, value:paragraphStyle, range:NSMakeRange(0, attrString.length))
+        
+        self.labelCount.attributedText = attrString
+        
+      //  var tableViewCell = NSTableCellView()
+       // tableViewCell.textField.attributedStringValue = attrString
+        
+        
+        
+        
         currentTime()
         
         let datecomponenets = calendar.components(NSCalendarUnit.Second, fromDate: NSDate())
@@ -462,6 +486,8 @@ class TodayViewController: UIViewController, NCWidgetProviding {
      //   var timer2 = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: Selector("updateTable"), userInfo: nil, repeats: true)
         
         print("p202 rowsToShow: \(rowsToShow)")
+        
+        
         
         tableView.reloadData()
         

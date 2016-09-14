@@ -1167,7 +1167,7 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         
         print("p1168 tableViewHeightConstraint.constant: \(tableViewHeightConstraint.constant)")
         
-        tableViewHeightConstraint.constant = CGFloat((rowsToShow * 35) + (additionalRows * 35)) + myHeaderHeight
+        tableViewHeightConstraint.constant = CGFloat((rowsToShow * 35) + (additionalRows * 35)) //+ myHeaderHeight
         
         //Added left and Right Swipe gestures. TODO Can add this to the General.swift Class? and call it?
         let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(DetailTableVC.handleSwipes(_:)))

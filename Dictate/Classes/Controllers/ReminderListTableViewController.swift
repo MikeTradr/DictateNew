@@ -12,11 +12,11 @@ class ReminderListableViewController: UITableViewController{
     
     @IBOutlet weak var buttonBackToReminders: UIButton!
     
-    @IBAction func buttonBackToReminders(sender: AnyObject) {
+    @IBAction func buttonBackToReminders(_ sender: AnyObject) {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewControllerWithIdentifier("ToDoList") 
-        self.presentViewController(vc, animated: true, completion: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "ToDoList") 
+        self.present(vc, animated: true, completion: nil)
     }
     
     

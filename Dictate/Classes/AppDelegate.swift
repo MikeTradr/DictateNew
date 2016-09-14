@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         didSet {
             if let session = session {
                 session.delegate = self
-                session.activateSession()
+                session.activate()
             }
         }
     }
@@ -38,14 +38,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var calledBy: String!
     var fullUrl: String!
     
-    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+    let defaults = UserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
     
     var flagAutoRecord = false
 
     
     //Anill's
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
 //        WatchSessionManager.sharedManager.startSession()
@@ -74,7 +74,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         PFUser.enableAutomaticUser()
         
         // Enable data sharing in main app.
-        Parse.enableDataSharingWithApplicationGroupIdentifier("group.com.thatsoft.dictateApp")
+        Parse.enableDataSharing(withApplicationGroupIdentifier: "group.com.thatsoft.dictateApp")
 
 
       //  Parse.enableDataSharingWithApplicationGroupIdentifier("group.com.thatsoft.dictateApp",
@@ -100,37 +100,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //            clientKey: "EHeeek4uXhJQi0vXPBba945A4h0LQ4QddEGW8gSs")
         
         // [Optional] Track statistics around application opens.
-        PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
+        PFAnalytics.trackAppOpened(launchOptions: launchOptions)
         
         //from LittleApp
         
-        PFUser.currentUser()?.incrementKey("RunCount")
-        PFUser.currentUser()?.saveInBackground()
-        PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
+        PFUser.current()?.incrementKey("RunCount")
+        PFUser.current()?.saveInBackground()
+        PFAnalytics.trackAppOpened(launchOptions: launchOptions)
         
         
         
         // Register for Push Notitications
-        if application.applicationState != UIApplicationState.Background {
+        if application.applicationState != UIApplicationState.background {
             // Track an app open here if we launch with a push, unless
             // "content_available" was used to trigger a background push (introduced in iOS 7).
             // In that case, we skip tracking here to avoid double counting the app-open.
             
-            let preBackgroundPush = !application.respondsToSelector("backgroundRefreshStatus")
-            let oldPushHandlerOnly = !self.respondsToSelector("application:didReceiveRemoteNotification:fetchCompletionHandler:")
+            let preBackgroundPush = !application.responds(to: #selector(getter: UIApplication.backgroundRefreshStatus))
+            let oldPushHandlerOnly = !self.responds(to: #selector(UIApplicationDelegate.application(_:didReceiveRemoteNotification:fetchCompletionHandler:)))
             var noPushPayload = false;
             if let options = launchOptions {
-                noPushPayload = options[UIApplicationLaunchOptionsRemoteNotificationKey] != nil;
+                noPushPayload = options[UIApplicationLaunchOptionsKey.remoteNotification] != nil;
             }
             if (preBackgroundPush || oldPushHandlerOnly || noPushPayload) {
-                PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
+                PFAnalytics.trackAppOpened(launchOptions: launchOptions)
             }
         }
         
         
-        if application.respondsToSelector("registerUserNotificationSettings:") {
-            let userNotificationTypes: UIUserNotificationType = [UIUserNotificationType.Alert, UIUserNotificationType.Badge, UIUserNotificationType.Sound]
-            let settings = UIUserNotificationSettings(forTypes: userNotificationTypes, categories: nil)
+        if application.responds(to: #selector(UIApplication.registerUserNotificationSettings(_:))) {
+            let userNotificationTypes: UIUserNotificationType = [UIUserNotificationType.alert, UIUserNotificationType.badge, UIUserNotificationType.sound]
+            let settings = UIUserNotificationSettings(types: userNotificationTypes, categories: nil)
             application.registerUserNotificationSettings(settings)
             application.registerForRemoteNotifications()
         } else {
@@ -139,7 +139,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             application.registerForRemoteNotificationTypes(types)
             */
             
-            let types: UIUserNotificationType = [UIUserNotificationType.Badge, UIUserNotificationType.Alert, UIUserNotificationType.Sound]
+            let types: UIUserNotificationType = [UIUserNotificationType.badge, UIUserNotificationType.alert, UIUserNotificationType.sound]
             //TODO FIX ERROR HERE
             // application.registerForRemoteNotificationTypes(types)
             
@@ -152,7 +152,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Setup Parse
        // Parse.setApplicationId("1wwwPAQ0Of2Fp6flotUw4YzN64HFDmy3ijAlQZKE", clientKey: "EHeeek4uXhJQi0vXPBba945A4h0LQ4QddEGW8gSs")
         
-        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent    //set top menu to white text
+        UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent    //set top menu to white text
         
 
         if let tabBarController = self.window!.rootViewController as? UITabBarController {
@@ -166,33 +166,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             NSUserDefaults.standardUserDefaults().setObject("DictateFirstLaunh", forKey: "isFirstLaunch")
         }
    */
-        let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+        let defaults = UserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
         
-        let firstLaunch = defaults.boolForKey("isFirstLaunch")
+        let firstLaunch = defaults.bool(forKey: "isFirstLaunch")
         if firstLaunch  {
             print("p139 Not first launch.")
         } else {
             print("p141 First launch, setting NSUserDefault.")
-            defaults.setBool(true, forKey: "isFirstLaunch")
+            defaults.set(true, forKey: "isFirstLaunch")
             
             //initialize defaults first time app launched...
             DataManager.sharedInstance.createDefaults()
             
             //for sending notifications I think? Mike 082516
             //TODO best place for this code???
-            let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
-            UIApplication.sharedApplication().registerUserNotificationSettings(settings)
-            UIApplication.sharedApplication().registerForRemoteNotifications()
+            let settings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+            UIApplication.shared.registerUserNotificationSettings(settings)
+            UIApplication.shared.registerForRemoteNotifications()
             
         }
         
         flagAutoRecord = false
-        defaults.setObject(flagAutoRecord, forKey: "flagAutoRecord")        //sets flagAutoRecord for processing
+        defaults.set(flagAutoRecord, forKey: "flagAutoRecord")        //sets flagAutoRecord for processing
         
         print("p190 flagAutoRecord: \(flagAutoRecord)")
         
         let duration:Int = 10
-        defaults.setObject(duration, forKey: "eventDuration")        //sets eventDuration for processing
+        defaults.set(duration, forKey: "eventDuration")        //sets eventDuration for processing
         
         print("p190 flagAutoRecord: \(flagAutoRecord)")
         
@@ -203,7 +203,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // need this??? TODO
         // types are UIUserNotificationType values
-        application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil))
+        application.registerUserNotificationSettings(UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil))
         
         
         //Notification code... Mike 082516
@@ -213,23 +213,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let completeAction = UIMutableUserNotificationAction()
         completeAction.identifier = "COMPLETE_TODO" // the unique identifier for this action
         completeAction.title = "Complete" // title for the action button
-        completeAction.activationMode = .Background // UIUserNotificationActivationMode.Background - don't bring app to foreground
-        completeAction.authenticationRequired = false // don't require unlocking before performing action
-        completeAction.destructive = true // display action in red
+        completeAction.activationMode = .background // UIUserNotificationActivationMode.Background - don't bring app to foreground
+        completeAction.isAuthenticationRequired = false // don't require unlocking before performing action
+        completeAction.isDestructive = true // display action in red
         
         let remindAction = UIMutableUserNotificationAction()
         remindAction.identifier = "REMIND"
         remindAction.title = "Remind in 30 minutes"
-        remindAction.activationMode = .Background
-        remindAction.destructive = false
+        remindAction.activationMode = .background
+        remindAction.isDestructive = false
         
         let todoCategory = UIMutableUserNotificationCategory() // notification categories allow us to create groups of actions that we can associate with a notification
         todoCategory.identifier = "TODO_CATEGORY"
-        todoCategory.setActions([remindAction, completeAction], forContext: .Default) // UIUserNotificationActionContext.Default (4 actions max)
-        todoCategory.setActions([completeAction, remindAction], forContext: .Minimal) // UIUserNotificationActionContext.Minimal - for when space is limited (2 actions max)
+        todoCategory.setActions([remindAction, completeAction], for: .default) // UIUserNotificationActionContext.Default (4 actions max)
+        todoCategory.setActions([completeAction, remindAction], for: .minimal) // UIUserNotificationActionContext.Minimal - for when space is limited (2 actions max)
         
         // we're now providing a set containing our category as an argument
-        application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: Set([todoCategory])))
+        application.registerUserNotificationSettings(UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: Set([todoCategory])))
         
         
         
@@ -240,7 +240,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //get Access to Reminders
         NSLog("%@ p127 appDelegate", self)
         print("p128 call getAccessToEventStoreForType")
-        ReminderManager.sharedInstance.getAccessToEventStoreForType(EKEntityType.Reminder, completion: { (granted) -> Void in
+        ReminderManager.sharedInstance.getAccessToEventStoreForType(EKEntityType.reminder, completion: { (granted) -> Void in
             
             if granted{
                 print("p132 Reminders granted: \(granted)")
@@ -250,7 +250,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //get Access to Events
         NSLog("%@ p137 appDelegate", self)
         print("p138 call getAccessToEventStoreForType")
-        EventManager.sharedInstance.getAccessToEventStoreForType(EKEntityType.Event, completion: { (granted) -> Void in
+        EventManager.sharedInstance.getAccessToEventStoreForType(EKEntityType.event, completion: { (granted) -> Void in
             
             if granted{
                 print("p142 Events granted: \(granted)")
@@ -290,10 +290,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
        
         //TODO Anil can we pull users device info, system version, users  location? city, state country? and stuff??? to save to parse db
         
-        let app = UIApplication.sharedApplication()
+        let app = UIApplication.shared
         print("p147 app: \(app)")
         
-        print("p149 Device and Phone munber in here: \(NSUserDefaults.standardUserDefaults().dictionaryRepresentation())")
+        print("p149 Device and Phone munber in here: \(UserDefaults.standard.dictionaryRepresentation())")
 
         // above here attempted to get device info
         
@@ -309,14 +309,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         application.registerUserNotificationSettings(
             UIUserNotificationSettings(
-                forTypes: [.Alert, .Badge, .Sound],
+                types: [.alert, .badge, .sound],
                 categories: (NSSet(array: [restartGameCategory])) as? Set<UIUserNotificationCategory>))
         
         let count:Int = EventManager.sharedInstance.countEventsToday(0)
         application.applicationIconBadgeNumber = count
         
         if (WCSession.isSupported()) {
-            session = WCSession.defaultSession()
+            session = WCSession.default()
         }
         
         return true
@@ -324,7 +324,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     
-    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         
         calledBy = sourceApplication
         fullUrl = url.absoluteString
@@ -349,7 +349,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         case "record":
             
             flagAutoRecord = true
-            defaults.setObject(flagAutoRecord, forKey: "flagAutoRecord")        //sets flagAutoRecord for processing
+            defaults.set(flagAutoRecord, forKey: "flagAutoRecord")        //sets flagAutoRecord for processing
             
             print("p339  we in here? query: \(query)")
             
@@ -366,7 +366,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             
             
-            case _ where query.containsString("eventID"):
+            case _ where query.contains("eventID"):
                 
                 if let tabBarController = self.window!.rootViewController as? UITabBarController {
                     tabBarController.selectedIndex = 4    //set to start at tab index 4
@@ -460,12 +460,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     
-    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-        let installation = PFInstallation.currentInstallation()
-        installation.setDeviceTokenFromData(deviceToken)
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        let installation = PFInstallation.current()
+        installation.setDeviceTokenFrom(deviceToken)
         installation.saveInBackground()
         
-        PFPush.subscribeToChannelInBackground("") { (succeeded: Bool, error: NSError?) in
+        PFPush.subscribeToChannel(inBackground: "") { (succeeded: Bool, error: NSError?) in
             if succeeded {
                 print("ParseStarterProject successfully subscribed to push notifications on the broadcast channel.\n");
             } else {
@@ -474,7 +474,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         if error.code == 3010 {
             print("Push notifications are not supported in the iOS Simulator.")
         } else {
@@ -482,10 +482,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
-        PFPush.handlePush(userInfo)
-        if application.applicationState == UIApplicationState.Inactive {
-            PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
+        PFPush.handle(userInfo)
+        if application.applicationState == UIApplicationState.inactive {
+            PFAnalytics.trackAppOpened(withRemoteNotificationPayload: userInfo)
         }
     }
     
@@ -497,7 +497,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 // from:
 // http://jamesonquave.com/blog/local-notifications-in-ios-8-with-swift-part-2/
 
-func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forLocalNotification notification: UILocalNotification, completionHandler: () -> Void) {
+func application(_ application: UIApplication, handleActionWithIdentifier identifier: String?, forLocalNotification notification: UILocalNotification, completionHandler: () -> Void) {
    // let item = TodoItem(deadline: notification.fireDate!, title: notification.userInfo!["title"] as String, UUID: notification.userInfo!["UUID"] as String!)
     switch (identifier!) {
 //    case "COMPLETE_TODO":
@@ -514,7 +514,7 @@ func application(application: UIApplication, handleActionWithIdentifier identifi
 @available(iOS 9.0, *)
 extension AppDelegate: WCSessionDelegate {
     
-    func session(session: WCSession, didReceiveMessage message: [String : AnyObject], replyHandler: ([String : AnyObject]) -> Void) {
+    func session(_ session: WCSession, didReceiveMessage message: [String : Any], replyHandler: @escaping ([String : Any]) -> Void) {
     /*    if let name = message["name"] as? String {
             print("p302 Received data: \(name)")
         }
@@ -522,7 +522,7 @@ extension AppDelegate: WCSessionDelegate {
         if let action = message["action"] as? String {
             print("p307 action: \(action)")
             
-            setDefaultsWithMessage(message)
+            setDefaultsWithMessage(message as [String : AnyObject])
             
             if action == "Event" {
                 EventManagerSave.sharedInstance.createEvent()
@@ -554,17 +554,17 @@ extension AppDelegate: WCSessionDelegate {
         replyHandler(["status":"Success"])
     }
     
-    func setDefaultsWithMessage(message:[String : AnyObject]){
-        let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
-        defaults.setObject(message["startDT"], forKey: "startDT")
-        defaults.setObject(message["endDT"], forKey: "endDT")
-        defaults.setObject(message["output"], forKey: "output")
-        defaults.setObject(message["outputNote"], forKey: "outputNote")
+    func setDefaultsWithMessage(_ message:[String : AnyObject]){
+        let defaults = UserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+        defaults.set(message["startDT"], forKey: "startDT")
+        defaults.set(message["endDT"], forKey: "endDT")
+        defaults.set(message["output"], forKey: "output")
+        defaults.set(message["outputNote"], forKey: "outputNote")
        // defaults.setObject(message["eventDuration"], forKey: "eventDuration")
-        defaults.setObject(message["eventLocation"], forKey: "eventLocation")
-        defaults.setObject(message["eventRepeat"], forKey: "eventRepeat")
-        defaults.setObject(message["action"], forKey: "actionType")
-        defaults.setObject(message["calendarName"], forKey: "calendarName")
+        defaults.set(message["eventLocation"], forKey: "eventLocation")
+        defaults.set(message["eventRepeat"], forKey: "eventRepeat")
+        defaults.set(message["action"], forKey: "actionType")
+        defaults.set(message["calendarName"], forKey: "calendarName")
 
     }
 }

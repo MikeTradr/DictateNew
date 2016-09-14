@@ -16,7 +16,7 @@ import EventKitUI
 
 class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate {
     
-    var selectedIndexPath : NSIndexPath?
+    var selectedIndexPath : IndexPath?
     var repeatRow: Int!
     
     @IBOutlet weak var tableV: UITableView!
@@ -52,10 +52,10 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
     var labelRepeat = "Repeat"
     var labelLocation = "Locat."
     
-    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+    let defaults = UserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
     var audioPlayer = AVAudioPlayer()
     
-    var wordArrTrimmed  = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!.objectForKey("wordArrTrimmed") as? [String] ?? [] //array of the items
+    var wordArrTrimmed  = UserDefaults(suiteName: "group.com.thatsoft.dictateApp")!.object(forKey: "wordArrTrimmed") as? [String] ?? [] //array of the items
     
     let lightPink = UIColor(red: 255, green: 204, blue: 255)
     let swiftColor = UIColor(red: 255, green: 165, blue: 0)
@@ -70,7 +70,7 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
     
     var titleRowHeight: CGFloat = 0.0
     
-    var startDT = NSDate()
+    var startDT = Date()
     var datePickerHeight: CGFloat = 0.0
     
     let myHeaderHeightConstant  = 100 //was 45 80 60
@@ -82,22 +82,22 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
 //#### my functions #################################
     
     
-    func switchScreen(scene: String) {
-        let mainStoryboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-        let vc : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier(scene)
-        self.presentViewController(vc, animated: true, completion: nil)
+    func switchScreen(_ scene: String) {
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let vc : UIViewController = mainStoryboard.instantiateViewController(withIdentifier: scene)
+        self.present(vc, animated: true, completion: nil)
     }
     
-    func displayAlert(title: String, message: String) {
+    func displayAlert(_ title: String, message: String) {
         
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction((UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction((UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
             
-            self.dismissViewControllerAnimated(true, completion: nil)
+            self.dismiss(animated: true, completion: nil)
             
         })))
         
-        self.presentViewController(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
     }
     
     
@@ -120,10 +120,10 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
     }
     
     
-    func playSound(sound: NSURL){
+    func playSound(_ sound: URL){
         var error:NSError?
         do {
-            audioPlayer = try AVAudioPlayer(contentsOfURL: sound)
+            audioPlayer = try AVAudioPlayer(contentsOf: sound)
         } catch var error1 as NSError {
             error = error1
         }
@@ -131,21 +131,21 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         audioPlayer.play()
     }
     
-    func handleSwipes(sender:UISwipeGestureRecognizer) {
-        if (sender.direction == .Left) {
+    func handleSwipes(_ sender:UISwipeGestureRecognizer) {
+        if (sender.direction == .left) {
             self.tabBarController?.selectedIndex = 2
         }
-        if (sender.direction == .Right) {
+        if (sender.direction == .right) {
             self.tabBarController?.selectedIndex = 0
         }
     }
     
     // below: http://stackoverflow.com/questions/27369777/self-sizing-cell-in-swift-how-do-i-make-constraints-programmatically
     
-    func dynamicHeight(text:String, font:UIFont, width:CGFloat) -> CGFloat{
-        let label:UILabel = UILabel(frame: CGRectMake(0, 0, width, CGFloat.max))
+    func dynamicHeight(_ text:String, font:UIFont, width:CGFloat) -> CGFloat{
+        let label:UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: CGFloat.greatestFiniteMagnitude))
         label.numberOfLines = 0
-        label.lineBreakMode = NSLineBreakMode.ByWordWrapping
+        label.lineBreakMode = NSLineBreakMode.byWordWrapping
         
         label.font = font
         label.text = text
@@ -154,9 +154,9 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         return label.frame.height
     }
     
-    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+    func adaptivePresentationStyleForPresentationController(_ controller: UIPresentationController) -> UIModalPresentationStyle {
     
-        return UIModalPresentationStyle.None
+        return UIModalPresentationStyle.none
     }
     
     func resetToDefaults(){
@@ -177,7 +177,7 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         datePickerHeight = 0.0
         
         flagAutoRecord = false
-        defaults.setObject(flagAutoRecord, forKey: "flagAutoRecord")        //sets flagAutoRecord for processing
+        defaults.set(flagAutoRecord, forKey: "flagAutoRecord")        //sets flagAutoRecord for processing
         
     }
     
@@ -191,11 +191,11 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
     }
     
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "showCalPicker"
         {
-            if let destinationVC = segue.destinationViewController as? CalendarPickerViewController{
+            if let destinationVC = segue.destination as? CalendarPickerViewController{
                // destinationVC.numberToDisplay = counter
             }
         }
@@ -223,19 +223,19 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
             // in our case its not really required, since we are setting it in user defaults, will be globaly available
             //As a better approach iam doing here to show you
             
-            let selectedCalendarIdentifier = defaults.objectForKey("defaultReminderList") as? String
+            let selectedCalendarIdentifier = defaults.object(forKey: "defaultReminderList") as? String
             
-            let reminderPickerController = segue.destinationViewController as! ReminderPickerTableViewController
+            let reminderPickerController = segue.destination as! ReminderPickerTableViewController
             reminderPickerController.selectedReminder = selectedCalendarIdentifier
         }
     }
 
-    func centerTable(tableHeight: CGFloat) -> CGFloat {
+    func centerTable(_ tableHeight: CGFloat) -> CGFloat {
         print("p234 tableHeight: \(tableHeight)")
         
         var myHeader:CGFloat = 1
         
-        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        let screenSize: CGRect = UIScreen.main.bounds
         let screenHeight = screenSize.height
         
         let centerScreen = screenHeight / 2
@@ -265,26 +265,26 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
 // TABLE funcs...
     // MARK: - Table view data source
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(_ tableView: UITableView) -> Int {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
         //return 11         // 11 fields (rows) total!
         return results.count
     }
     
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView(frame: CGRectMake(0, 0, tableView.frame.size.width, 0)) //was 40
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 0)) //was 40
        // headerView.backgroundColor = UIColor.yellowColor()
         return headerView
     }
     
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
         //let height = myHeaderHeight
         let height = CGFloat(0)
@@ -292,13 +292,13 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         return height
     }
     
-    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let footerView = UIView(frame: CGRectMake(0, 0, tableView.frame.size.width, 0)) //was 40
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 0)) //was 40
         // footerView.backgroundColor = UIColor.yellowColor()
         return footerView
     }
     
-    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         
        // let height = myHeaderHeight
         
@@ -310,7 +310,7 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
 
     var datePickerHidden = false
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
+    func tableView(_ tableView: UITableView, heightForRowAtIndexPath indexPath: IndexPath) -> CGFloat
     {
         //print("p154 results[indexPath.row]: \(results[indexPath.row])")
         
@@ -336,10 +336,10 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         
         var height:CGFloat = 35
 
-        if (results[indexPath.row] == "" || results[indexPath.row] == "0" || labels[indexPath.row] == "") {
+        if (results[(indexPath as NSIndexPath).row] == "" || results[(indexPath as NSIndexPath).row] == "0" || labels[(indexPath as NSIndexPath).row] == "") {
            // print("p148 we here hide rows: \(indexPath.row)")
             
-            deleteRowCountArray.append(indexPath.row)
+            deleteRowCountArray.append((indexPath as NSIndexPath).row)
             //print("p152 deleteRowCountArray: \(deleteRowCountArray)")
             
             let uniqueRowArray = Array(Set(deleteRowCountArray))    //removes duplicates
@@ -351,13 +351,13 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
       
             return 0
         
-        } else if (labels[indexPath.row] == "Title" || labels[indexPath.row] == "Items") {
+        } else if (labels[(indexPath as NSIndexPath).row] == "Title" || labels[(indexPath as NSIndexPath).row] == "Items") {
             
-            print("p175 row: \(labels[indexPath.row]): \(results[indexPath.row])")
+            print("p175 row: \(labels[(indexPath as NSIndexPath).row]): \(results[(indexPath as NSIndexPath).row])")
             // http://stackoverflow.com/questions/27369777/self-sizing-cell-in-swift-how-do-i-make-constraints-programmatically
   
             //Instead of 180, we actually need to have the width of the result textView
-            var  height = dynamicHeight(results[indexPath.row], font: UIFont.boldSystemFontOfSize(22), width: 150)  //was 180
+            var  height = dynamicHeight(results[(indexPath as NSIndexPath).row], font: UIFont.boldSystemFont(ofSize: 22), width: 150)  //was 180
             
             print("p275 height: \(height)")
             
@@ -397,7 +397,7 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         print("p271 selectedIndexPath: \(selectedIndexPath)")
         
         //add height for Date Picker
-        if (labels[indexPath.row] == "Start") || (labels[indexPath.row] == "End") {
+        if (labels[(indexPath as NSIndexPath).row] == "Start") || (labels[(indexPath as NSIndexPath).row] == "End") {
             if selectedIndexPath == indexPath  {
                     print("p230 here? indexPath: \(indexPath)")
                     height = 250
@@ -430,7 +430,7 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         
         print("p393 tableViewHeightConstraint.constant: \(tableViewHeightConstraint.constant)")
         
-        if (labels[indexPath.row] == "header") {
+        if (labels[(indexPath as NSIndexPath).row] == "header") {
            // height = myHeaderHeight
             height = 0
  
@@ -445,42 +445,42 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
     
 //===== cellForRowAtIndexPath ================================================
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAtIndexPath indexPath: IndexPath) -> UITableViewCell {
         
         var identifier = "BasicCell"
         
-        if labels[indexPath.row] == "Start" || labels[indexPath.row] == "End"{
+        if labels[(indexPath as NSIndexPath).row] == "Start" || labels[(indexPath as NSIndexPath).row] == "End"{
             identifier = "DateCell"     //used for datePicker Anil added 022316
         }
         
         
-        let cell = tableView.dequeueReusableCellWithIdentifier( identifier, forIndexPath: indexPath) as! DetailsTableViewCell
+        let cell = tableView.dequeueReusableCell( withIdentifier: identifier, for: indexPath) as! DetailsTableViewCell
         cell.delegate = self
-        cell.selectionStyle = .None
+        cell.selectionStyle = .none
         
 //        cell.selectionStyle = UITableViewCellSelectionStyle.Default //TODO tried to set selection color to yellow
-        cell.label.text = labels[indexPath.row]
-        cell.resultsLabel.text = results[indexPath.row]
+        cell.label.text = labels[(indexPath as NSIndexPath).row]
+        cell.resultsLabel.text = results[(indexPath as NSIndexPath).row]
         cell.resultsLabel.layer.cornerRadius = 7
-        cell.resultsLabel.font = UIFont.boldSystemFontOfSize(CGFloat(22))
+        cell.resultsLabel.font = UIFont.boldSystemFont(ofSize: CGFloat(22))
 
         print("p250 ========================================")
-        print("p250 row: \(labels[indexPath.row]): \(results[indexPath.row]) ")
+        print("p250 row: \(labels[(indexPath as NSIndexPath).row]): \(results[(indexPath as NSIndexPath).row]) ")
         print("p250 ========================================")
         
-        if labels[indexPath.row] == "Input" || labels[indexPath.row] == "Start" || labels[indexPath.row] == "End" || labels[indexPath.row] == "Title" || labels[indexPath.row] == "Cal." || labels[indexPath.row] == "Alert" || labels[indexPath.row] == "List"  || labels[indexPath.row] == "Repeat" || labels[indexPath.row] == "Alarm" || labels[indexPath.row] == "Locat."  {
-            cell.disclosureLabel.hidden = false
-            cell.userInteractionEnabled = true     //allow cell to be highlighted!
+        if labels[(indexPath as NSIndexPath).row] == "Input" || labels[(indexPath as NSIndexPath).row] == "Start" || labels[(indexPath as NSIndexPath).row] == "End" || labels[(indexPath as NSIndexPath).row] == "Title" || labels[(indexPath as NSIndexPath).row] == "Cal." || labels[(indexPath as NSIndexPath).row] == "Alert" || labels[(indexPath as NSIndexPath).row] == "List"  || labels[(indexPath as NSIndexPath).row] == "Repeat" || labels[(indexPath as NSIndexPath).row] == "Alarm" || labels[(indexPath as NSIndexPath).row] == "Locat."  {
+            cell.disclosureLabel.isHidden = false
+            cell.isUserInteractionEnabled = true     //allow cell to be highlighted!
         } else {
-            cell.disclosureLabel.hidden = true
-            cell.userInteractionEnabled = false     //does not allow cell to be highlighted!
+            cell.disclosureLabel.isHidden = true
+            cell.isUserInteractionEnabled = false     //does not allow cell to be highlighted!
         }
         
-        if labels[indexPath.row] == "Input" || labels[indexPath.row] == "Title" || labels[indexPath.row] == "Items" {
+        if labels[(indexPath as NSIndexPath).row] == "Input" || labels[(indexPath as NSIndexPath).row] == "Title" || labels[(indexPath as NSIndexPath).row] == "Items" {
         
             print("p300 titleRowHeight: \(titleRowHeight)")
 
-            if labels[indexPath.row] == "Title" || labels[indexPath.row] == "Items" {
+            if labels[(indexPath as NSIndexPath).row] == "Title" || labels[(indexPath as NSIndexPath).row] == "Items" {
                 cell.resultsLabel.frame.size.height = titleRowHeight
                 
                 if cell.resultsLabel.frame.size.height > 90 {   //try to have max rows at 3
@@ -489,7 +489,7 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
             }
          
             print("p301 ========================================")
-            print("p301 row: \(labels[indexPath.row]): \(results[indexPath.row]) ")
+            print("p301 row: \(labels[(indexPath as NSIndexPath).row]): \(results[(indexPath as NSIndexPath).row]) ")
             print("p301 ========================================")
             print("p301 cell.resultsLabel.font: \(cell.resultsLabel.font)")
             print("p305 cell.resultsLabel.frame.size.height: \(cell.resultsLabel.frame.size.height)")
@@ -497,17 +497,17 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
             //from: http://derekneely.com/2011/04/size-to-fit-text-in-uitextview-iphone/
             //setup text resizing check here
             
-            var height = dynamicHeight(results[indexPath.row], font: UIFont.boldSystemFontOfSize(22), width: 180)
+            var height = dynamicHeight(results[(indexPath as NSIndexPath).row], font: UIFont.boldSystemFont(ofSize: 22), width: 180)
             
             print("p337 height: \(height)")
             
             if ( height > cell.resultsLabel.frame.size.height) {
-                print("p312 we in If?: \(labels[indexPath.row])")
+                print("p312 we in If?: \(labels[(indexPath as NSIndexPath).row])")
                 
                 var fontIncrement = 0.1
                 while (height > cell.resultsLabel.frame.size.height) {
-                    cell.resultsLabel.font = UIFont.boldSystemFontOfSize(CGFloat(21-fontIncrement))
-                    height = dynamicHeight(results[indexPath.row], font: UIFont.boldSystemFontOfSize(CGFloat(21-fontIncrement)), width: 180)
+                    cell.resultsLabel.font = UIFont.boldSystemFont(ofSize: CGFloat(21-fontIncrement))
+                    height = dynamicHeight(results[(indexPath as NSIndexPath).row], font: UIFont.boldSystemFont(ofSize: CGFloat(21-fontIncrement)), width: 180)
                     fontIncrement += 1
                 }
             }
@@ -519,28 +519,28 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         
         
         
-        if labels[indexPath.row] == "Start" {   //set default date for picker!
+        if labels[(indexPath as NSIndexPath).row] == "Start" {   //set default date for picker!
             toggleDatepicker()
 
-            cell.datePicker.date = defaults.objectForKey("startDT")! as! NSDate
-        } else if labels[indexPath.row] == "End" {
+            cell.datePicker.date = defaults.object(forKey: "startDT")! as! Date
+        } else if labels[(indexPath as NSIndexPath).row] == "End" {
             toggleDatepicker()
 
-            cell.datePicker.date = defaults.objectForKey("endDT")! as! NSDate
+            cell.datePicker.date = defaults.object(forKey: "endDT")! as! Date
         }
         
-        if labels[indexPath.row] == "Cal." {    //set default calendar for picker!
+        if labels[(indexPath as NSIndexPath).row] == "Cal." {    //set default calendar for picker!
         }
         
-        if labels[indexPath.row] == "List" {    //set
+        if labels[(indexPath as NSIndexPath).row] == "List" {    //set
         }
         
-        switch (results[indexPath.row]){
+        switch (results[(indexPath as NSIndexPath).row]){
         case "Event":
             cell.resultsLabel.backgroundColor = swiftColor
              break;
         case "Reminder":
-            cell.resultsLabel.backgroundColor = UIColor.yellowColor()
+            cell.resultsLabel.backgroundColor = UIColor.yellow
             break;
         case "New List", "List":
             cell.resultsLabel.backgroundColor = moccasin
@@ -552,15 +552,15 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
             cell.resultsLabel.backgroundColor = apricot
             break;
         default:
-            cell.resultsLabel.backgroundColor = UIColor.whiteColor()
+            cell.resultsLabel.backgroundColor = UIColor.white
             break;
         }
     
-        print("p364 end cell: \(labels[indexPath.row]) ------------------------")
+        print("p364 end cell: \(labels[(indexPath as NSIndexPath).row]) ------------------------")
         print("--------------------------------------------")
         
-        if labels[indexPath.row] == "header" {
-            cell.label.hidden = true
+        if labels[(indexPath as NSIndexPath).row] == "header" {
+            cell.label.isHidden = true
             //cell.resultsLabel.hidden = true
             cell.resultsLabel.text = "myHeaderHeight: \(myHeaderHeight)"
         }
@@ -573,8 +573,8 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
     
 //===== didSelectRowAtIndexPath ================================================
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        print("p68 You selected cell #\(indexPath.row)!")
+    func tableView(_ tableView: UITableView, didSelectRowAtIndexPath indexPath: IndexPath) {
+        print("p68 You selected cell #\((indexPath as NSIndexPath).row)!")
     
     //expand cell code...
         let previousIndexPath = selectedIndexPath
@@ -599,28 +599,28 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
    
         tableView.beginUpdates()
         tableView.endUpdates()
-        var selectedCell:UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
+        var selectedCell:UITableViewCell = tableView.cellForRow(at: indexPath)!
         
        // let saffron = UIColor(red: 244, green: 208, blue: 63)  // 244, 208, 63
        // selectedCell.contentView.backgroundColor = saffron
         
         
-        if labels[indexPath.row] == "Type" || labels[indexPath.row] == "Day" {
+        if labels[(indexPath as NSIndexPath).row] == "Type" || labels[(indexPath as NSIndexPath).row] == "Day" {
             // selectedCell.selectionStyle = UITableViewCellSelectionStyle.None
             
         }
         
-        switch (labels[indexPath.row]){
+        switch (labels[(indexPath as NSIndexPath).row]){
             case "Input":                                       //selected Input row...
                 self.tabBarController?.selectedIndex = 2        //go to main dictate microphone screen
                 break;
                 
             case "Title":
-                var alert = UIAlertController(title: "Enter your new Title", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
-                alert.addAction(UIAlertAction(title: "Continue", style: .Default, handler: { (action) -> Void in
+                let alert = UIAlertController(title: "Enter your new Title", message: nil, preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Continue", style: .default, handler: { (action) -> Void in
                     
                     self.output = alert.textFields![0].text!
-                    self.defaults.setObject(self.output, forKey: "output")                //sets output
+                    self.defaults.set(self.output, forKey: "output")                //sets output
 
                     print("p251 alert.textFields![0].text!: \(alert.textFields![0].text!)")
                     print("p251 self.output: \(self.output)")
@@ -629,19 +629,19 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
                     self.tableV.reloadData()                    
                 }))
             
-                alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action) -> Void in
+                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) -> Void in
                     self.tableV.reloadData()   //TODO Anil Mike best way to remove the highlighted row?
                 }))
      
-                alert.addTextFieldWithConfigurationHandler({(textField: UITextField!) in
+                alert.addTextField(configurationHandler: {(textField: UITextField!) in
                     textField.placeholder = "Enter text:"
-                    textField.secureTextEntry = false
+                    textField.isSecureTextEntry = false
                     
                     print("p230 textField.text: \(textField.text)")
                     self.output = textField.text!
                 })
   
-                self.presentViewController(alert, animated: true, completion: nil)
+                self.present(alert, animated: true, completion: nil)
                 break;
             
             case "Start":
@@ -652,7 +652,7 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
             
             case "Cal.":
                 print("p486 in didselect Cal. segue next")
-                self.performSegueWithIdentifier("showCalPicker", sender: indexPath);
+                self.performSegue(withIdentifier: "showCalPicker", sender: indexPath);
                 break;
             
             case "List":    //todo Add reminder Picker Mike //Reminder
@@ -661,14 +661,14 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
 
             case "Alert":
                 
-                var alert = UIAlertController(title: "Enter new Alert (in minutes)", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
-                alert.addAction(UIAlertAction(title: "Continue", style: .Default, handler: { (action) -> Void in
+                let alert = UIAlertController(title: "Enter new Alert (in minutes)", message: nil, preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Continue", style: .default, handler: { (action) -> Void in
                     
                     self.output = alert.textFields![0].text!
                     print("p442 self.output: \(self.output)")
                     
                     if let newAlertInterger = Int(self.output) {    //make sure it is only number entered
-                        self.defaults.setObject(newAlertInterger, forKey:"eventAlert")    //sets eventAlert
+                        self.defaults.set(newAlertInterger, forKey:"eventAlert")    //sets eventAlert
                     }
                     
                     print("p446 alert.textFields![0].text!: \(alert.textFields![0].text!)")
@@ -679,50 +679,50 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
                     
                 }))
                 
-                alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action) -> Void in
+                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) -> Void in
                     self.tableV.reloadData()
                 }))
                 
-                alert.addTextFieldWithConfigurationHandler({(textField: UITextField!) in
+                alert.addTextField(configurationHandler: {(textField: UITextField!) in
                     textField.placeholder = "Enter minutes:"
-                    textField.secureTextEntry = false
+                    textField.isSecureTextEntry = false
                     
                     print("p230 textField.text: \(textField.text)")
                     self.output = textField.text!
                 })
                 
-                self.presentViewController(alert, animated: true, completion: nil)
+                self.present(alert, animated: true, completion: nil)
                 break;
             
             case "Repeat":
              
-                var alert = UIAlertView()
+                let alert = UIAlertView()
                 alert.delegate = self   //set the delegate of alertView
                 
                 //1 = daily, 2 = weekly, 3 = monthly, 4 = yearly, 99 = none
                 
                 alert.message = "Select new Repeatability"
-                alert.addButtonWithTitle("None")
-                alert.addButtonWithTitle("Every Day")
-                alert.addButtonWithTitle("Every Week")
-                alert.addButtonWithTitle("Every Month")
-                alert.addButtonWithTitle("Every Year")
+                alert.addButton(withTitle: "None")
+                alert.addButton(withTitle: "Every Day")
+                alert.addButton(withTitle: "Every Week")
+                alert.addButton(withTitle: "Every Month")
+                alert.addButton(withTitle: "Every Year")
                 alert.title = "Change Repeat to:"
                 alert.show()
             
-                repeatRow = indexPath.row
+                repeatRow = (indexPath as NSIndexPath).row
                 
                 // */
-                print("p548 results[indexPath.row]: \(results[indexPath.row])")
+                print("p548 results[indexPath.row]: \(results[(indexPath as NSIndexPath).row])")
       
             break;
             
             case "Locat.":
-                var alert = UIAlertController(title: "Enter your new Location", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
-                alert.addAction(UIAlertAction(title: "Continue", style: .Default, handler: { (action) -> Void in
+                let alert = UIAlertController(title: "Enter your new Location", message: nil, preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Continue", style: .default, handler: { (action) -> Void in
                     
                     self.locationString = alert.textFields![0].text!
-                    self.defaults.setObject(self.locationString, forKey: "eventLocation")                //sets eventLocation
+                    self.defaults.set(self.locationString, forKey: "eventLocation")                //sets eventLocation
                     
                     print("p251 alert.textFields![0].text!: \(alert.textFields![0].text!)")
                     print("p251 self.locationString: \(self.locationString)")
@@ -731,19 +731,19 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
                     self.tableV.reloadData()
                 }))
                 
-                alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action) -> Void in
+                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) -> Void in
                     self.tableV.reloadData()   //TODO Anil Mike best way to remove the highlighted row?
                 }))
                 
-                alert.addTextFieldWithConfigurationHandler({(textField: UITextField!) in
+                alert.addTextField(configurationHandler: {(textField: UITextField!) in
                     textField.placeholder = "Enter Location:"
-                    textField.secureTextEntry = false
+                    textField.isSecureTextEntry = false
                     
                     print("p230 textField.text: \(textField.text)")
                     self.locationString = textField.text!
                 })
                 
-                self.presentViewController(alert, animated: true, completion: nil)
+                self.present(alert, animated: true, completion: nil)
                 break;
 
             
@@ -757,7 +757,7 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         
    }   // end func didSelectRowAtIndexPath
 
-    func alertView(alertView: UIAlertView!, clickedButtonAtIndex buttonIndex: Int){
+    func alertView(_ alertView: UIAlertView!, clickedButtonAtIndex buttonIndex: Int){
         print("p488 buttonIndex: \(buttonIndex)")
         
         var eventRepeatInterval = 0
@@ -785,7 +785,7 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         //save for processing in event Manager if user hits create button
        // defaults.setObject(results[repeatRow], forKey: "eventRepeat")  //sets repeat interval for Events  // Anil did
         
-        defaults.setObject(eventRepeatInterval, forKey: "eventRepeat")  //sets repeat interval for Events
+        defaults.set(eventRepeatInterval, forKey: "eventRepeat")  //sets repeat interval for Events
         
         print("p577 results: \(results)")
        // results.removeAtIndex(repeatRow)
@@ -803,32 +803,32 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
     //MARK: DetailsTableViewCellDateSelectionDelegate
     
     //TODO: Update startDT and endDT in results array
-    func didSelectDate(date:NSDate, inCell cell:DetailsTableViewCell){
+    func didSelectDate(_ date:Date, inCell cell:DetailsTableViewCell){
 
-        if labels[selectedIndexPath!.row] == "Start"{
+        if labels[(selectedIndexPath! as NSIndexPath).row] == "Start"{
             // Start date selected
             let newStartDate = date
             print("p568 newStartDate: \(newStartDate)")
-            defaults.setObject(newStartDate, forKey: "startDT")
+            defaults.set(newStartDate, forKey: "startDT")
          
         } else {      //End date selection
             let newEndDate = date
             print("p570 newEndDate: \(newEndDate)")
-            let newStartDate = defaults.objectForKey("startDT")! as! NSDate
+            let newStartDate = defaults.object(forKey: "startDT")! as! Date
             var newDuration: Double = 0.0
             
-            let durationInt = NSCalendar.currentCalendar().components(.Minute, fromDate: newStartDate, toDate: newEndDate, options: []).minute
+            let durationInt = (Calendar.current as NSCalendar).components(.minute, from: newStartDate, to: newEndDate, options: []).minute
 
-            newDuration = Double(durationInt)
-            defaults.setObject(newDuration, forKey: "eventDuration")
+            newDuration = Double(durationInt!)
+            defaults.set(newDuration, forKey: "eventDuration")
         }
     
-        let dateFormatter =  NSDateFormatter()
+        let dateFormatter =  DateFormatter()
         dateFormatter.dateFormat = "M-dd-yyyy h:mm a"
-        let dateString = dateFormatter.stringFromDate(date)
+        let dateString = dateFormatter.string(from: date)
 
-        results.removeAtIndex(selectedIndexPath!.row)
-        results.insert(dateString, atIndex: selectedIndexPath!.row)
+        results.remove(at: (selectedIndexPath! as NSIndexPath).row)
+        results.insert(dateString, at: (selectedIndexPath! as NSIndexPath).row)
     }
 
     
@@ -845,17 +845,17 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
     
     func loadResultsArray() {
         
-        let strRaw      = defaults.stringForKey("strRaw")                   //Input
-        let actionType  = defaults.stringForKey("actionType")!              //Type
-        let day         = defaults.stringForKey("day")                      //Day
-        let phone       = defaults.stringForKey("phone")                    //Cell#
-        let startDT     = defaults.objectForKey("startDT")! as! NSDate      //Start
-        let endDT       = defaults.objectForKey("endDT")! as! NSDate        //End
-        let output      = defaults.stringForKey("output")                   //Title
-        var calendarName = defaults.stringForKey("calendarName")            //Cal.
-        let alert       = defaults.objectForKey("eventAlert") as! Int ?? 10 //Alert
-        let eventRepeat = defaults.stringForKey("eventRepeat")              //Repeat
-        let eventLocation = defaults.stringForKey("eventLocation") ?? ""    //Location
+        let strRaw      = defaults.string(forKey: "strRaw")                   //Input
+        let actionType  = defaults.string(forKey: "actionType")!              //Type
+        let day         = defaults.string(forKey: "day")                      //Day
+        let phone       = defaults.string(forKey: "phone")                    //Cell#
+        let startDT     = defaults.object(forKey: "startDT")! as! Date      //Start
+        let endDT       = defaults.object(forKey: "endDT")! as! Date        //End
+        let output      = defaults.string(forKey: "output")                   //Title
+        let calendarName = defaults.string(forKey: "calendarName")            //Cal.
+        let alert       = defaults.object(forKey: "eventAlert") as! Int ?? 10 //Alert
+        let eventRepeat = defaults.string(forKey: "eventRepeat")              //Repeat
+        let eventLocation = defaults.string(forKey: "eventLocation") ?? ""    //Location
 
         
         var alertString = ""
@@ -873,36 +873,36 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
     
 //#### End my functions #################################
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated);
         
         // self.tableViewOutlet.reloadData()
 
         //tableV.reloadData()
         
-        let alertSound3: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("se_tap", ofType: "m4a")!)
+        let alertSound3: URL = URL(fileURLWithPath: Bundle.main.path(forResource: "se_tap", ofType: "m4a")!)
         //General.playSound(alertSound3!)
         
         playSound(alertSound3)
         
         // Do any additional setup after loading the view.
-        let strRaw      = defaults.stringForKey("strRaw")                   //Input
-        var actionType  = defaults.stringForKey("actionType")!              //Type
-        var day         = defaults.stringForKey("day")                      //Day
-        let phone       = defaults.stringForKey("phone")                    //Cell#
-        let startDT     = defaults.objectForKey("startDT")! as! NSDate      //Start
-        let endDT       = defaults.objectForKey("endDT")! as! NSDate        //End
-        var output      = defaults.stringForKey("output")                   //Title
-        var calendarName = defaults.stringForKey("calendarName")            //Cal.
-        let alert       = defaults.objectForKey("eventAlert") as? Int ?? 10 //Alert
-        var eventRepeat = defaults.stringForKey("eventRepeat") ?? ""            //Repeat
-        let eventLocation = defaults.stringForKey("eventLocation") ?? ""    //Location
+        let strRaw      = defaults.string(forKey: "strRaw")                   //Input
+        var actionType  = defaults.string(forKey: "actionType")!              //Type
+        var day         = defaults.string(forKey: "day")                      //Day
+        let phone       = defaults.string(forKey: "phone")                    //Cell#
+        let startDT     = defaults.object(forKey: "startDT")! as! Date      //Start
+        let endDT       = defaults.object(forKey: "endDT")! as! Date        //End
+        var output      = defaults.string(forKey: "output")                   //Title
+        var calendarName = defaults.string(forKey: "calendarName")            //Cal.
+        let alert       = defaults.object(forKey: "eventAlert") as? Int ?? 10 //Alert
+        var eventRepeat = defaults.string(forKey: "eventRepeat") ?? ""            //Repeat
+        let eventLocation = defaults.string(forKey: "eventLocation") ?? ""    //Location
 
         
-        let formatter3 = NSDateFormatter()
+        let formatter3 = DateFormatter()
         formatter3.dateFormat = "M-dd-yyyy h:mm a"
-        fullDT = formatter3.stringFromDate(startDT)
-        fullDTEnd = formatter3.stringFromDate(endDT)
+        fullDT = formatter3.string(from: startDT)
+        fullDTEnd = formatter3.string(from: endDT)
         
         var alertString = ""
         
@@ -915,23 +915,23 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         deleteRowCountArray = []
         print("p345 deleteRowCountArray: \(deleteRowCountArray)")
   
-        let outputNote  = defaults.stringForKey("outputNote")
-        let duration    = defaults.objectForKey("eventDuration") as! Int ?? 10
+        let outputNote  = defaults.string(forKey: "outputNote")
+        let duration    = defaults.object(forKey: "eventDuration") as! Int ?? 10
         
-        let wordArrTrimmed  = defaults.objectForKey("wordArrTrimmed") as! [String] //array of the items
+        let wordArrTrimmed  = defaults.object(forKey: "wordArrTrimmed") as! [String] //array of the items
         
         //TODO Mike Anil commented to fix nil error
         // var reminderArray = defaults.objectForKey("reminderArray") as! [String] //array of the items
         
-        let reminderTitle   = defaults.stringForKey("reminderTitle")
+        let reminderTitle   = defaults.string(forKey: "reminderTitle")
         let reminderArray:[String] = []
-        let reminderList   = defaults.stringForKey("reminderList")
-        let reminderAlarm  = defaults.objectForKey("reminderAlarm")! as! NSDate
+        let reminderList   = defaults.string(forKey: "reminderList")
+        let reminderAlarm  = defaults.object(forKey: "reminderAlarm")! as! Date
     
-        let allDayFlag  = defaults.objectForKey("allDayFlag") as! Bool
-        let defaultCalendarID  = defaults.stringForKey("defaultCalendarID")
-        let defaultReminderID = defaults.stringForKey("defaultReminderID")
-        let processNow = defaults.objectForKey("ProcessNow") as! Bool
+        let allDayFlag  = defaults.object(forKey: "allDayFlag") as! Bool
+        let defaultCalendarID  = defaults.string(forKey: "defaultCalendarID")
+        let defaultReminderID = defaults.string(forKey: "defaultReminderID")
+        let processNow = defaults.object(forKey: "ProcessNow") as! Bool
         
         print("p111Main ===================================")
         print("p111Main results: \(results)")
@@ -969,7 +969,7 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         
         if allDayFlag {                             //if flag = true
             formatter3.dateFormat = "M-dd-yyyy"
-            fullDT = formatter3.stringFromDate(startDT)
+            fullDT = formatter3.string(from: startDT)
             day     = "\(fullDT), All-Day"
         }
         
@@ -989,10 +989,10 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         switch (actionType){
         case "Reminder":
             print("p315 actionType: \(actionType)")
-            let reminderTitle  = defaults.stringForKey("reminderTitle") ?? ""
+            let reminderTitle  = defaults.string(forKey: "reminderTitle") ?? ""
 
-            buttonCreateOutlet.setTitle("   Create Reminder", forState: UIControlState.Normal)
-            buttonCreateOutlet.backgroundColor = UIColor.yellowColor()
+            buttonCreateOutlet.setTitle("   Create Reminder", for: UIControlState())
+            buttonCreateOutlet.backgroundColor = UIColor.yellow
      
             if ( fullDT == "12-12-2014 12:00 AM" ) {        // added 072315 no need to show if no date used
                 fullDT = ""
@@ -1022,16 +1022,16 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
             break;
             
         case "Event":
-            buttonCreateOutlet.setTitle("Create Event", forState: UIControlState.Normal)
+            buttonCreateOutlet.setTitle("Create Event", for: UIControlState())
             buttonCreateOutlet.backgroundColor = swiftColor
             break;
             
         case "New List", "List":
             
-            let reminderTitle  = defaults.stringForKey("reminderList") ?? ""
+            let reminderTitle  = defaults.string(forKey: "reminderList") ?? ""
             
             buttonCreateOutlet.backgroundColor = moccasin
-            buttonCreateOutlet.setTitle("   Create \r New List", forState: UIControlState.Normal)
+            buttonCreateOutlet.setTitle("   Create \r New List", for: UIControlState())
 
             output = ""
             fullDT = ""
@@ -1039,7 +1039,7 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
             alertString = ""
             calendarName = ""
             
-            let stringOutput = wordArrTrimmed.joinWithSeparator(", ")
+            let stringOutput = wordArrTrimmed.joined(separator: ", ")
             
             // ____ Data Used _____________________________________
             labelDay       = "Title"   // default Day
@@ -1052,10 +1052,10 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
             
         case "New OneItem List":
             
-            let reminderTitle:String    = defaults.stringForKey("reminderList")! //Sets Reminder Title
+            let reminderTitle:String    = defaults.string(forKey: "reminderList")! //Sets Reminder Title
             
             buttonCreateOutlet.backgroundColor = moccasin
-            buttonCreateOutlet.setTitle("  Create \r New List", forState: UIControlState.Normal)
+            buttonCreateOutlet.setTitle("  Create \r New List", for: UIControlState())
             
             output = ""
             fullDT = ""
@@ -1063,7 +1063,7 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
             alertString = ""
             calendarName = ""
             
-            let stringOutput = wordArrTrimmed.joinWithSeparator(", ")
+            let stringOutput = wordArrTrimmed.joined(separator: ", ")
             
             // ____ Data Used _____________________________________
             labelDay       = "Title"   // default Day
@@ -1079,13 +1079,13 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
             
             
         case "Phrase List":
-            let reminderTitle:String    = defaults.stringForKey("reminderList")! //Sets Reminder Title
+            let reminderTitle:String    = defaults.string(forKey: "reminderList")! //Sets Reminder Title
             
             buttonCreateOutlet.backgroundColor = apricot
-            buttonCreateOutlet.setTitle("      Create \r Phrase List", forState: UIControlState.Normal)
+            buttonCreateOutlet.setTitle("      Create \r Phrase List", for: UIControlState())
             output = reminderTitle
             
-            let stringOutput = wordArrTrimmed.joinWithSeparator(", ")
+            let stringOutput = wordArrTrimmed.joined(separator: ", ")
             day = stringOutput
             
             labelDay       = "Title"   // default Day
@@ -1102,7 +1102,7 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
             break;
             
         default:
-            buttonCreateOutlet.setTitle("Create Event", forState: UIControlState.Normal)
+            buttonCreateOutlet.setTitle("Create Event", for: UIControlState())
             buttonCreateOutlet.backgroundColor = swiftColor
             
             break;
@@ -1161,7 +1161,7 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         
         
         
-        tableV.tableFooterView = UIView(frame:CGRectZero)    //removes blank lines
+        tableV.tableFooterView = UIView(frame:CGRect.zero)    //removes blank lines
         
         self.tableV.reloadData()
         
@@ -1172,8 +1172,8 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         //Added left and Right Swipe gestures. TODO Can add this to the General.swift Class? and call it?
         let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(DetailTableVC.handleSwipes(_:)))
         let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(DetailTableVC.handleSwipes(_:)))
-        leftSwipe.direction = .Left
-        rightSwipe.direction = .Right
+        leftSwipe.direction = .left
+        rightSwipe.direction = .right
         view.addGestureRecognizer(leftSwipe)
         view.addGestureRecognizer(rightSwipe)
 
@@ -1185,13 +1185,13 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
     }
     
     
-    @IBAction func buttonCreate(sender: AnyObject) {
+    @IBAction func buttonCreate(_ sender: AnyObject) {
         
-        let alertSound1 = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("217-buttonclick03", ofType: "mp3")!)
+        let alertSound1 = URL(fileURLWithPath: Bundle.main.path(forResource: "217-buttonclick03", ofType: "mp3")!)
         //  General.playSound(alertSound3!)
         playSound(alertSound1)
         
-        let actionType:String    = defaults.stringForKey("actionType")!
+        let actionType:String    = defaults.string(forKey: "actionType")!
         print("p237 vcTest1, actionType: \(actionType)")
         
         switch (actionType){
@@ -1207,8 +1207,8 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
             var calendarName = ""
             var reminderCreatedFlag = false
             
-            var reminderArray       = defaults.objectForKey("reminderArray") as! [String] //array of the items
-            var reminderList:String     = defaults.stringForKey("reminderList")!
+            var reminderArray       = defaults.object(forKey: "reminderArray") as! [String] //array of the items
+            var reminderList:String     = defaults.string(forKey: "reminderList")!
             
             print("p518 reminderArray: \(reminderArray)")
             print("p519 reminderList: \(reminderList)")
@@ -1216,7 +1216,7 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
             if reminderList == "default" {
                 calendarName = reminderList
                 
-                output      = defaults.stringForKey("output")!
+                output      = defaults.string(forKey: "output")!
                 var outputArray:[String] = Array(arrayLiteral: output)  //make output into Array for func call below
                 
                 print("p550 calendarName: \(calendarName)")
@@ -1247,7 +1247,7 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
                     
                     print("p478 calendarName: \(calendarName)")
                     
-                    output      = defaults.stringForKey("output")!
+                    output      = defaults.string(forKey: "output")!
                     var outputArray:[String] = Array(arrayLiteral: output)  //make output into Array for func call below
                     
                     print("p550 calendarName: \(calendarName)")
@@ -1259,7 +1259,7 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
                         // Fallback on earlier versions
                     }
                     
-                    self.messageString = "☑️ Reminder created on your: \"\(calendarName.capitalizedString)\" list"
+                    self.messageString = "☑️ Reminder created on your: \"\(calendarName.capitalized)\" list"
                     
                     reminderCreatedFlag = true
                     break;
@@ -1271,7 +1271,7 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
                 
                 calendarName = reminderList
                 
-                output      = defaults.stringForKey("output")!
+                output      = defaults.string(forKey: "output")!
                 var outputArray:[String] = Array(arrayLiteral: output)
                 
                 if #available(iOS 9.0, *) {
@@ -1280,7 +1280,7 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
                     // Fallback on earlier versions
                 }  //fixed check FIXWC
                 
-                self.messageString = "☑️Reminder created on your New: \"\(calendarName.capitalizedString)\" list!"
+                self.messageString = "☑️Reminder created on your New: \"\(calendarName.capitalized)\" list!"
             }
             
             break;
@@ -1290,8 +1290,8 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
             print("p255 in Event Switch")
             
             EventManagerSave().createEvent()    //fixed check FIXWC
-            calendarName = defaults.stringForKey("calendarName")!            //Cal.
-            self.messageString = "📅 Event created on your: \"\(calendarName.capitalizedString)\" calendar!"
+            calendarName = defaults.string(forKey: "calendarName")!            //Cal.
+            self.messageString = "📅 Event created on your: \"\(calendarName.capitalized)\" calendar!"
             break;
             
 // ____ New List, List Case ____________________________________
@@ -1303,7 +1303,7 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
             } else {
                 // Fallback on earlier versions
             }   //fixed check FIXWC
-            var reminderList = defaults.stringForKey("reminderList")
+            var reminderList = defaults.string(forKey: "reminderList")
             self.messageString = "📝 New List: \(reminderList!), created!"
             break;
             
@@ -1311,9 +1311,9 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         case  "New OneItem List" :
             print("p543 in New OneItem List Switch")
             
-            var calendarName    = defaults.stringForKey("reminderList") //Sets Reminder Title
+            var calendarName    = defaults.string(forKey: "reminderList") //Sets Reminder Title
             
-            output      = defaults.stringForKey("output")!
+            output      = defaults.string(forKey: "output")!
             var outputArray:[String] = Array(arrayLiteral: output)
             
             if #available(iOS 9.0, *) {
@@ -1328,8 +1328,8 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         case "Phrase List":
             print("p638 in phraseList Switch")
             
-            var calendarName    = defaults.stringForKey("calendarName") //Sets Reminder Title
-            var wordArrTrimmed  = defaults.objectForKey("wordArrTrimmed") as! [String] //array of the items
+            var calendarName    = defaults.string(forKey: "calendarName") //Sets Reminder Title
+            var wordArrTrimmed  = defaults.object(forKey: "wordArrTrimmed") as! [String] //array of the items
             
             if #available(iOS 9.0, *) {
                 ReminderManagerSave.sharedInstance.createNewReminderList(calendarName!, items: wordArrTrimmed)
@@ -1347,15 +1347,15 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
             print("p155 in default switch so assume Event")
             
             EventManagerSave().createEvent()    //fixed check FIXWC
-            self.messageString = "📅 Event created on your: \"\(calendarName.capitalizedString)\" calendar!"
+            self.messageString = "📅 Event created on your: \"\(calendarName.capitalized)\" calendar!"
             break;
         }
         
 // ____ End Switch Statement ____________________________________
         
-        var strRaw      = defaults.stringForKey("strRaw")
-        output          = defaults.stringForKey("output")!
-        calendarName    = defaults.stringForKey("calendarName")!
+        var strRaw      = defaults.string(forKey: "strRaw")
+        output          = defaults.string(forKey: "output")!
+        calendarName    = defaults.string(forKey: "calendarName")!
         
         
         print("p485 strRaw: \(strRaw)")
@@ -1373,7 +1373,7 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         
         General().saveToParse()         //save to database
         
-        defaults.setObject(eventDuration, forKey: "eventDuration")
+        defaults.set(eventDuration, forKey: "eventDuration")
                 
        // actionType = ""
        // defaults.setObject(actionType, forKey: "actionType")
@@ -1386,21 +1386,21 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         let labelFont = UIFont(name: "HelveticaNeue-Bold", size: 22)
         let attributedString = NSAttributedString(string: alertTitle, attributes: [
             NSFontAttributeName: labelFont!,
-            NSForegroundColorAttributeName: UIColor.blueColor() //TODO Mike ANIL why is Font color NOT beeing set???
+            NSForegroundColorAttributeName: UIColor.blue //TODO Mike ANIL why is Font color NOT beeing set???
             ])
 
         let textLine2 = "by Dictate™ App 😀"
         let labelFont2 = UIFont(name: "HelveticaNeue-Bold", size: 16)
         let attributedString2 = NSAttributedString(string: textLine2, attributes: [
             NSFontAttributeName: labelFont2!,
-            NSForegroundColorAttributeName: UIColor.blackColor() //TODO Mike ANIL why is Font color NOT beeing set???
+            NSForegroundColorAttributeName: UIColor.black //TODO Mike ANIL why is Font color NOT beeing set???
             ])
  
-        let alert = UIAlertController(title: alertTitle, message: textLine2, preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: alertTitle, message: textLine2, preferredStyle: UIAlertControllerStyle.alert)
         alert.setValue(attributedString, forKey: "attributedTitle")
         alert.setValue(attributedString2, forKey: "attributedMessage")
   
-        self.presentViewController(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
         
 // ____ End Alert Dialog ____________________________________
         
@@ -1411,9 +1411,9 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
             self.resultMessage.text = ""
             
             let processNow = false
-            self.defaults.setObject(processNow, forKey: "ProcessNow")
+            self.defaults.set(processNow, forKey: "ProcessNow")
             
-            self.presentedViewController!.dismissViewControllerAnimated(true, completion: nil)      //close alert after the set delay of 3 seconds!
+            self.presentedViewController!.dismiss(animated: true, completion: nil)      //close alert after the set delay of 3 seconds!
             
             self.tabBarController?.selectedIndex = 2        //go back to main Dictate start screen
             
@@ -1424,13 +1424,13 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
     }   //end ButtonCreate
     
     
-    @IBAction func buttonCancel(sender: AnyObject) {
+    @IBAction func buttonCancel(_ sender: AnyObject) {
         print("p898 in buttonCancel")
         
         tableV.reloadData()
         titleRowHeight = 27.5
 
-        let alertSound124 = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("124-DeleteWhoosh", ofType: "mp3")!)
+        let alertSound124 = URL(fileURLWithPath: Bundle.main.path(forResource: "124-DeleteWhoosh", ofType: "mp3")!)
         //  General.playSound(alertSound3!)
         
         playSound(alertSound124)
@@ -1454,7 +1454,7 @@ class DetailTableVC: UIViewController, DetailsTableViewCellDateSelectionDelegate
         
     }   //end buttonCancel
     
-    @IBAction func backFromModal(segue: UIStoryboardSegue) {
+    @IBAction func backFromModal(_ segue: UIStoryboardSegue) {
         print("p1219 and we are back to DetailTableVC")
         // Switch to the second tab (tabs are numbered 0, 1, 2)
         self.tabBarController?.selectedIndex = 1

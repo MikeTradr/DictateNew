@@ -14,7 +14,7 @@ import EventKit
 class ReminderItemsIC: WKInterfaceController {
     
     var selectedRow:Int! = nil    
-    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+    let defaults = UserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
 
     var allReminders: Array<EKReminder> = []
     var reminderListID: String = ""
@@ -42,7 +42,7 @@ class ReminderItemsIC: WKInterfaceController {
     }
     
     @IBAction func menuSettings() {
-        presentControllerWithName("Settings", context: "«ShowReminders")
+        presentController(withName: "Settings", context: "«ShowReminders")
     }
 //---- end Menu functions ----------------------------------------
   
@@ -55,11 +55,11 @@ class ReminderItemsIC: WKInterfaceController {
         print("w45 allCalendarLists: \(allReminders)")
         print("w46 allCalendarLists.count: \(allReminders.count)")
         
-        for (index, title) in allReminders.enumerate() {
+        for (index, title) in allReminders.enumerated() {
             print("---------------------------------------------------")
             print("w40 index, title: \(index), \(title)")
             
-            let row = table.rowControllerAtIndex(index) as! ReminderItemsTableRC
+            let row = table.rowController(at: index) as! ReminderItemsTableRC
             let item = allReminders[index]
             
             row.tableRowLabel.setText(item.title)
@@ -69,18 +69,18 @@ class ReminderItemsIC: WKInterfaceController {
     
   
 
-    override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
+    override func awake(withContext context: Any?) {
+        super.awake(withContext: context)
         // Configure interface objects here.
         
 
     
         let calendarId = context as! String
-        let calendar = ReminderManager.sharedInstance.eventStore.calendarWithIdentifier(calendarId)
+        let calendar = ReminderManager.sharedInstance.eventStore.calendar(withIdentifier: calendarId)
 
-        labelReminderListID.setTextColor(UIColor(CGColor: calendar!.CGColor))
-        verticalBar.setBackgroundColor(UIColor(CGColor: calendar!.CGColor))
-        buttonShowCompleted.setTextColor(UIColor(CGColor: calendar!.CGColor))
+        labelReminderListID.setTextColor(UIColor(cgColor: calendar!.cgColor))
+        verticalBar.setBackgroundColor(UIColor(cgColor: calendar!.cgColor))
+        buttonShowCompleted.setTextColor(UIColor(cgColor: calendar!.cgColor))
         
         buttonCheckbox.setHidden(true)
   
@@ -98,23 +98,23 @@ class ReminderItemsIC: WKInterfaceController {
         print("w73 he here?")
     }
     
-    override func table(table: WKInterfaceTable, didSelectRowAtIndex rowIndex: Int) {
+    override func table(_ table: WKInterfaceTable, didSelectRowAt rowIndex: Int) {
         print("w119 clicked on row: \(rowIndex)")
         
         selectedRow = rowIndex //for use with insert and delete, save selcted row index
-        let row = self.table.rowControllerAtIndex(rowIndex) as! ReminderItemsTableRC
+        let row = self.table.rowController(at: rowIndex) as! ReminderItemsTableRC
         let reminderItem = allReminders[rowIndex]
         let veryDarkGray = UIColor(red: 128, green: 128, blue: 128, alpha: 1)     //light biege color, for Word List
  
         if self.checked {               // Turn checkmark off
             row.imageCheckbox.setImageNamed("cbBlank40px")
-            row.tableRowLabel.setTextColor(UIColor.whiteColor())
-            reminderItem.completed == false
+            row.tableRowLabel.setTextColor(UIColor.white)
+            reminderItem.isCompleted == false
             self.checked = false
         } else {                        // Turn checkmark on
             row.imageCheckbox.setImageNamed("cbChecked40px")
             row.tableRowLabel.setTextColor(veryDarkGray)
-            reminderItem.completed == true
+            reminderItem.isCompleted == true
             self.checked = true
         }
                 

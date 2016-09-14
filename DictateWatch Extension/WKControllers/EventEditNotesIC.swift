@@ -41,13 +41,13 @@ class EventEditNotesIC: WKInterfaceController {
     }
     
     @IBAction func menuSettings() {
-        presentControllerWithName("Settings", context: "«Details")
+        presentController(withName: "Settings", context: "«Details")
     }
 //---- end Menu functions ----------------------------------------
     
     @IBAction func buttonGroupMic() {
       
-        var alertSound1: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("button-14", ofType: "mp3")!)
+        var alertSound1: URL = URL(fileURLWithPath: Bundle.main.path(forResource: "button-14", ofType: "mp3")!)
         //General.playSound(alertSound3!)
         
         //Second, we currently can't control sounds or haptic feedback from our app's code.
@@ -64,7 +64,7 @@ class EventEditNotesIC: WKInterfaceController {
     
     @IBAction func buttonNotes() {
         
-        var alertSound1: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("button-14", ofType: "mp3")!)
+        var alertSound1: URL = URL(fileURLWithPath: Bundle.main.path(forResource: "button-14", ofType: "mp3")!)
         //General.playSound(alertSound3!)
         
         //Second, we currently can't control sounds or haptic feedback from our app's code.
@@ -84,13 +84,13 @@ class EventEditNotesIC: WKInterfaceController {
 //FIXWC EventManager.sharedInstance.saveEvent(event)
         
         //TODO make a general func call
-        var alertSound1: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("212-buttonclick52", ofType: "mp3")!)
+        var alertSound1: URL = URL(fileURLWithPath: Bundle.main.path(forResource: "212-buttonclick52", ofType: "mp3")!)
        
       //  self.playSound(alertSound1) ////commented for new watchExtension 040516
         
        // self.labelSaveNote.setText("Note for message, \"\(event.title)\" , has been updated")
         
-    self.labelSaveNote2.setTextColor(UIColor.whiteColor())
+    self.labelSaveNote2.setTextColor(UIColor.white)
 
         self.labelSaveNote1.setText("Note for event:")
         self.labelSaveNote2.setText("\"\(event.title)\"")
@@ -103,7 +103,7 @@ class EventEditNotesIC: WKInterfaceController {
         
         WatchGeneral().delay(3.0) {          // do stuff
             
-            self.presentControllerWithName("EventDetails", context: self.eventID)
+            self.presentController(withName: "EventDetails", context: self.eventID)
         }
         
         
@@ -127,7 +127,7 @@ class EventEditNotesIC: WKInterfaceController {
     
     
     func grabvoiceNotes() -> (String)  {
-        self.presentTextInputControllerWithSuggestions(["this is an updated note"], allowedInputMode: WKTextInputMode.Plain, completion: { results -> Void in
+        self.presentTextInputController(withSuggestions: ["this is an updated note"], allowedInputMode: WKTextInputMode.plain, completion: { results -> Void in
             
             //println("34 Results: \(results)")
             //println("35 Results: \(results[0])")
@@ -167,8 +167,8 @@ class EventEditNotesIC: WKInterfaceController {
         self.audioPlayer.play()
     }
 */
-    override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
+    override func awake(withContext context: Any?) {
+        super.awake(withContext: context)
         // Configure interface objects here.
         NSLog("%@ w92 awakeWithContext", self)
         print("w93 EventEditNotesIC awakeWithContext")
@@ -180,7 +180,7 @@ class EventEditNotesIC: WKInterfaceController {
         
         eventID = context as! String
         //FIXME:6
-        event = EventManager.sharedInstance.eventStore.eventWithIdentifier(eventID)!
+        event = EventManager.sharedInstance.eventStore.event(withIdentifier: eventID)!
         print("w168: event \(event)")
         
         self.labelNotes.setText(event.notes)

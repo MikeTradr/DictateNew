@@ -18,15 +18,15 @@ class CalendarSelectionViewController: UITableViewController {
     var shouldShowAll = false
     var specialItems = ["All"];
     
-    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!  //122415 MJD to retain selection
+    let defaults = UserDefaults(suiteName: "group.com.thatsoft.dictateApp")!  //122415 MJD to retain selection
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
 //        self.view.backgroundColor  = UIColor.blackColor()
-        self.tableView.backgroundColor =  UIColor.blackColor()
+        self.tableView.backgroundColor =  UIColor.black
         self.tableView.tableFooterView = UIView()
-        self.tableView.separatorStyle = .None
+        self.tableView.separatorStyle = .none
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -42,7 +42,7 @@ class CalendarSelectionViewController: UITableViewController {
     
     // MARK: - Table view data source
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
         if shouldShowAll{
@@ -51,7 +51,7 @@ class CalendarSelectionViewController: UITableViewController {
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if shouldShowAll && section == 0{
             return 1
         }
@@ -59,49 +59,49 @@ class CalendarSelectionViewController: UITableViewController {
     }
     
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) 
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) 
         
-        cell.selectionStyle = UITableViewCellSelectionStyle.None
-        cell.backgroundColor = UIColor.blackColor()
+        cell.selectionStyle = UITableViewCellSelectionStyle.none
+        cell.backgroundColor = UIColor.black
         
-        if !shouldShowAll || indexPath.section == 1{
+        if !shouldShowAll || (indexPath as NSIndexPath).section == 1{
             
-            let calendar = self.calendarList[indexPath.row]
+            let calendar = self.calendarList[(indexPath as NSIndexPath).row]
             cell.textLabel?.text = calendar.title
-            cell.textLabel?.textColor =  UIColor(CGColor: calendar.CGColor)
+            cell.textLabel?.textColor =  UIColor(cgColor: calendar.cgColor)
             
             if self.selectedCalendars.contains(calendar){
-                cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+                cell.accessoryType = UITableViewCellAccessoryType.checkmark
                 
             }else{
-                cell.accessoryType = UITableViewCellAccessoryType.None
+                cell.accessoryType = UITableViewCellAccessoryType.none
             }
 
         } else {
-            cell.textLabel?.text = self.specialItems[indexPath.row]
-            cell.textLabel?.textColor = UIColor.whiteColor()
+            cell.textLabel?.text = self.specialItems[(indexPath as NSIndexPath).row]
+            cell.textLabel?.textColor = UIColor.white
             if selectedCalendars.count == 0{
-                cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+                cell.accessoryType = UITableViewCellAccessoryType.checkmark
             }else{
-                cell.accessoryType = UITableViewCellAccessoryType.None
+                cell.accessoryType = UITableViewCellAccessoryType.none
 
             }
         }
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let cell = self.tableView.cellForRowAtIndexPath(indexPath)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = self.tableView.cellForRow(at: indexPath)
         
-        if indexPath.section == 0{
+        if (indexPath as NSIndexPath).section == 0{
             
             // All -
             selectedCalendars.removeAll()
             tableView.reloadData()
             
         }else{
-            let selectedCalendar = self.calendarList[indexPath.row];
+            let selectedCalendar = self.calendarList[(indexPath as NSIndexPath).row];
             
             if self.selectedCalendars.contains(selectedCalendar){
                 // Selected same cell, do nothing
@@ -109,7 +109,7 @@ class CalendarSelectionViewController: UITableViewController {
                 //save calendarID to use to show for next time...
                 //TODO Anil
                 //added by 122415 by mike. need to handle multiple calendars, and all cases!
-                defaults.setObject(selectedCalendar.calendarIdentifier, forKey: "defaultListShowID")
+                defaults.set(selectedCalendar.calendarIdentifier, forKey: "defaultListShowID")
                 
             }else{
                 

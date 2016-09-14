@@ -12,41 +12,42 @@ import EventKit
 
 
 class EventManager: NSObject {
+    private static var __once: () = {
+            Static.instance = EventManager()
+        }()
     class var sharedInstance : EventManager {
         struct Static {
-            static var onceToken : dispatch_once_t = 0
+            static var onceToken : Int = 0
             static var instance : EventManager? = nil
         }
-        dispatch_once(&Static.onceToken) {
-            Static.instance = EventManager()
-        }
+        _ = EventManager.__once
         return Static.instance!
     }
     
     let eventStore = EKEventStore()
-    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+    let defaults = UserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
     var allEvents: Array<EKEvent> = []
     var numberEventsToday:Int = 0
     
-    func getAccessToEventStoreForType(type:EKEntityType, completion:(granted:Bool)->Void){
+    func getAccessToEventStoreForType(_ type:EKEntityType, completion:@escaping (_ granted:Bool)->Void){
         
-        let status = EKEventStore.authorizationStatusForEntityType(type)
-        if status != EKAuthorizationStatus.Authorized{
-            self.eventStore.requestAccessToEntityType(EKEntityType.Event, completion: {
+        let status = EKEventStore.authorizationStatus(for: type)
+        if status != EKAuthorizationStatus.authorized{
+            self.eventStore.requestAccess(to: EKEntityType.event, completion: {
                 granted, error in
                 if (granted) && (error == nil) {
-                    completion(granted: true)
+                    completion(true)
                 } else {
-                    completion(granted: false)
+                    completion(false)
                 }
             })
             
         } else {
-            completion(granted: true)
+            completion(true)
             
             print("##p47 WE HERE func getAccessToEventStoreForType")
             
-            let defaultCalendarID = defaults.stringForKey("defaultCalendarID")
+            let defaultCalendarID = defaults.string(forKey: "defaultCalendarID")
             
             print("p52 defaultCalendarID: \(defaultCalendarID)")
             
@@ -55,9 +56,9 @@ class EventManager: NSObject {
                 calendar.calendar = eventStore.defaultCalendarForNewEvents
                 let defaultCalendarID = calendar.calendar.calendarIdentifier
                 if defaultCalendarID != "" {
-                    defaults.setObject(defaultCalendarID, forKey: "defaultCalendarID") //sets Default Selected Calendar CalendarIdentifier
+                    defaults.set(defaultCalendarID, forKey: "defaultCalendarID") //sets Default Selected Calendar CalendarIdentifier
                     let calendarName = calendar.title
-                    defaults.setObject(calendarName, forKey: "calendarName") //sets Default Selected Calendar calendarName  //added 112615
+                    defaults.set(calendarName, forKey: "calendarName") //sets Default Selected Calendar calendarName  //added 112615
                 }
             }
         }
@@ -445,22 +446,22 @@ class EventManager: NSObject {
 
 */
     
-    func fetchEventsFrom(startDate:NSDate,endDate:NSDate,completion:([EKEvent])->Void) {
+    func fetchEventsFrom(_ startDate:Date,endDate:Date,completion:@escaping ([EKEvent])->Void) {
         
-        getAccessToEventStoreForType(EKEntityType.Event, completion: { (granted) -> Void in
+        getAccessToEventStoreForType(EKEntityType.event, completion: { (granted) -> Void in
             
             if granted{
                 
                 print("p454 granted: \(granted)")
                 
-                let calendars = self.eventStore.calendarsForEntityType(EKEntityType.Event)
+                let calendars = self.eventStore.calendars(for: EKEntityType.event)
                 
                 print("p462 calendars: \(calendars)")
                 print("p462 startDate: \(startDate)")
                 print("p462 endDate: \(endDate)")
                 
-                let predicate = self.eventStore.predicateForEventsWithStartDate(startDate, endDate: endDate, calendars: calendars)
-                let events = self.eventStore.eventsMatchingPredicate(predicate) as? [EKEvent]
+                let predicate = self.eventStore.predicateForEvents(withStart: startDate, end: endDate, calendars: calendars)
+                let events = self.eventStore.events(matching: predicate) as? [EKEvent]
                 
             // uncomment below to show all event details to log
                // print("p465 events: \(events)")
@@ -479,19 +480,19 @@ class EventManager: NSObject {
     
     func createCalendarArray() {        //called from AppDelegate on startup, makes String Array of Calendar titles
         
-        getAccessToEventStoreForType(EKEntityType.Reminder, completion: { (granted) -> Void in
+        getAccessToEventStoreForType(EKEntityType.reminder, completion: { (granted) -> Void in
             
             if granted{
                 
                 NSLog("%@ p462 createCalendarArray", self)
                 print("p413 we here? createCalendarArray")
                 
-                var allCalendars: Array<EKCalendar> = self.eventStore.calendarsForEntityType(EKEntityType.Event) //as! Array<EKCalendar>
+                let allCalendars: Array<EKCalendar> = self.eventStore.calendars(for: EKEntityType.event) //as! Array<EKCalendar>
 
                 
                 print("p416 allCalendars: \(allCalendars)")
                 
-                let calendar = EKCalendar(forEntityType: EKEntityType.Event, eventStore: self.eventStore)
+                let calendar = EKCalendar(for: EKEntityType.event, eventStore: self.eventStore)
                 print("p418 calendar: \(calendar)")
                 
        /*
@@ -529,25 +530,25 @@ class EventManager: NSObject {
                 //TODO Anil help we need to filter calendars of type = calDAV
    
                 
-                var error:NSError?
+                let error:NSError?
                 calendar.source = self.eventStore.defaultCalendarForNewEvents.source
                 print("p463 Error: \(error)")
                 
-                let calendars = self.eventStore.calendarsForEntityType(EKEntityType.Event)
+                let calendars = self.eventStore.calendars(for: EKEntityType.event)
                 
                 var calendarArray:[String] = []
                 
                 enum EKCalendarType : Int {
-                    case Local
-                    case CalDAV
-                    case Exchange
-                    case Subscription
-                    case Birthday
+                    case local
+                    case calDAV
+                    case exchange
+                    case subscription
+                    case birthday
                 }
                 
                 var myLocalSource: EKSource? = nil
                 for calendarSource: EKSource in self.eventStore.sources {
-                    if calendarSource.sourceType == EKSourceType.Local {
+                    if calendarSource.sourceType == EKSourceType.local {
                         myLocalSource = calendarSource
                         
                         print("p482 myLocalSource: \(myLocalSource)")
@@ -559,12 +560,12 @@ class EventManager: NSObject {
                 
                 
                 for calendar in calendars {
-                    var calendarTitle:String! = calendar.title
+                    let calendarTitle:String! = calendar.title
                     
                     print("---------------------------------------------------------")
                     print("p532 calendarTitle: \(calendarTitle)")
                     print("p532 calendar.source.sourceType: \(calendar.source.sourceType)")
-                    print("p532 EKSourceType.Local: \(EKSourceType.Local)")
+                    print("p532 EKSourceType.Local: \(EKSourceType.local)")
                     print("p532 calendar.type: \(calendar.type)")
                     print("---------------------------------------------------------")
                     
@@ -574,7 +575,7 @@ class EventManager: NSObject {
                     
                     var myLocalSource: EKSource? = nil
                     for calendarSource: EKSource in self.eventStore.sources {
-                        if calendarSource.sourceType == EKSourceType.Local {
+                        if calendarSource.sourceType == EKSourceType.local {
                             let myLocalSource:EKSource = calendarSource
                             
                             print("p507 myLocalSource: \(myLocalSource)")
@@ -614,10 +615,10 @@ class EventManager: NSObject {
                     
                     
                     print("p591 calendar.source.sourceType: \(calendar.source.sourceType)")
-                    print("p592 EKSourceType.Local: \(EKSourceType.Local)")
+                    print("p592 EKSourceType.Local: \(EKSourceType.local)")
 
 
-                    if calendar.source.sourceType == EKSourceType.Local {
+                    if calendar.source.sourceType == EKSourceType.local {
                         print("p596 we here in match?")
                         calendarArray.append(calendarTitle)
                     }
@@ -638,28 +639,28 @@ class EventManager: NSObject {
                 print("==============================================================")
 
                 
-                self.defaults.setObject(calendarArray, forKey: "calendarArray")            //sets calendarArray of String the names
+                self.defaults.set(calendarArray, forKey: "calendarArray")            //sets calendarArray of String the names
                 self.defaults.synchronize()
                 
             }
         })
     }
     
-    func getCalendar(id:String) -> EKCalendar? {            //returns EKCalendar from CalendarID
-        return self.eventStore.calendarWithIdentifier(id)
+    func getCalendar(_ id:String) -> EKCalendar? {            //returns EKCalendar from CalendarID
+        return self.eventStore.calendar(withIdentifier: id)
     }
     
-    func getCalendarName(calendarID:String,completion:String->Void) {   //TODO NO LONGER CALLED
+    func getCalendarName(_ calendarID:String,completion:@escaping (String)->Void) {   //TODO NO LONGER CALLED
         
         var calendarTitle = ""
         print("p479 calendarID: \(calendarID)")
         
-        getAccessToEventStoreForType(EKEntityType.Event, completion: { (granted) -> Void in
+        getAccessToEventStoreForType(EKEntityType.event, completion: { (granted) -> Void in
             
             if granted{
-                let calendars = self.eventStore.calendarsForEntityType(EKEntityType.Event)
+                let calendars = self.eventStore.calendars(for: EKEntityType.event)
                 
-                for (index, title) in calendars.enumerate() {
+                for (index, title) in calendars.enumerated() {
                     print("---------------------------------------------------")
                     print("p485 index, title: \(index), \(title)")
                     
@@ -702,12 +703,12 @@ class EventManager: NSObject {
     }   // end func saveEvent
 */
     
-    func getLocalEventCalendars(days:Int) -> [AnyObject] {
-        var allCalendars: Array<EKCalendar> = EKEventStore().calendarsForEntityType(EKEntityType.Event) 
+    func getLocalEventCalendars(_ days:Int) -> [AnyObject] {
+        var allCalendars: Array<EKCalendar> = EKEventStore().calendars(for: EKEntityType.event) 
        // var localCalendars: [AnyObject] = NSMutableArray() as [AnyObject]
         let localCalendars: [EKCalendar] = []
 
-        for var i = 0; i < allCalendars.count; i++ {
+        for i in 0 ..< allCalendars.count {
             var currentCalendar: EKCalendar = allCalendars[i]
             
             //TODO Anil TODO Mike  error below: Binary operator '==' cannot be applied to two EKCalendarType operands
@@ -719,24 +720,24 @@ class EventManager: NSObject {
         return localCalendars
     }
     
-    func countEventsToday(days:Int) -> Int {
+    func countEventsToday(_ days:Int) -> Int {
        // let dateHelper = JTDateHelper()
-        let startDate =  NSDate()
+        let startDate =  Date()
        // var endDate = dateHelper.addToDate(startDate, days: days)
         
-        let calendar = NSCalendar.currentCalendar()
-        var endDate: NSDate = calendar.dateByAddingUnit(NSCalendarUnit.Day, value: days, toDate: startDate, options: [])!
+        let calendar = Calendar.current
+        var endDate: Date = (calendar as NSCalendar).date(byAdding: NSCalendar.Unit.day, value: days, to: startDate, options: [])!
         
         if days == 0 {
-            let today = NSDate()
-            let tomorrow:NSDate = NSCalendar.currentCalendar().dateByAddingUnit(
-                .Day,
+            let today = Date()
+            let tomorrow:Date = (Calendar.current as NSCalendar).date(
+                byAdding: .day,
                 value: 1,
-                toDate: today,
-                options: NSCalendarOptions(rawValue: 0))!
+                to: today,
+                options: NSCalendar.Options(rawValue: 0))!
             
-            let calendar = NSCalendar.currentCalendar()
-            endDate = calendar.startOfDayForDate(tomorrow)   // this is midnight today really or 0:00 tomorrow = 12 am = midnight
+            let calendar = Calendar.current
+            endDate = calendar.startOfDay(for: tomorrow)   // this is midnight today really or 0:00 tomorrow = 12 am = midnight
             
         }
         
@@ -756,15 +757,15 @@ class EventManager: NSObject {
     
     
     
-    func getFirstAndLastDateOfMonth(date: NSDate) -> (firstDay: NSDate, lastDay: NSDate) {
+    func getFirstAndLastDateOfMonth(_ date: Date) -> (firstDay: Date, lastDay: Date) {
         
-        let date = NSDate()
-        let calendar = NSCalendar.currentCalendar()
-        let dateComponents = calendar.components([NSCalendarUnit.Month, NSCalendarUnit.Year], fromDate: date)
-        let firstDay = self.returnDateForMonth(dateComponents.month, year: dateComponents.year, day: 1)
-        let lastDay = self.returnDateForMonth(dateComponents.month + 1, year: dateComponents.year, day: 0)
+        let date = Date()
+        let calendar = Calendar.current
+        let dateComponents = (calendar as NSCalendar).components([NSCalendar.Unit.month, NSCalendar.Unit.year], from: date)
+        let firstDay = self.returnDateForMonth(dateComponents.month!, year: dateComponents.year!, day: 1)
+        let lastDay = self.returnDateForMonth(dateComponents.month! + 1, year: dateComponents.year!, day: 0)
 
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd-MMM-yy"
         
         //print("First day of this month: \(firstDay)") // 01-Nov-15
@@ -774,14 +775,14 @@ class EventManager: NSObject {
 
     }
     
-    func returnDateForMonth(month:NSInteger, year:NSInteger, day:NSInteger)->NSDate{
-        let comp = NSDateComponents()
+    func returnDateForMonth(_ month:NSInteger, year:NSInteger, day:NSInteger)->Date{
+        var comp = DateComponents()
         comp.month = month
         comp.year = year
         comp.day = day
         
-        let gregorian = NSCalendar.currentCalendar()
-        return gregorian.dateFromComponents(comp)!
+        let gregorian = Calendar.current
+        return gregorian.date(from: comp)!
     }
     
     

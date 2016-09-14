@@ -24,7 +24,7 @@ class PZDisclosureIndicator: UIView {
         rgba = (0, 0, 0, 0)
         super.init(frame: CGRect(x: 0, y: 0, width: 16, height: 24))
         
-        backgroundColor = .clearColor()
+        backgroundColor = .clear()
         setNeedsDisplay()
     }
     
@@ -32,18 +32,18 @@ class PZDisclosureIndicator: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func drawRect(rect: CGRect) {
+    override func draw(_ rect: CGRect) {
         let context = UIGraphicsGetCurrentContext()
-        CGContextSetRGBFillColor(context, rgba.red, rgba.green, rgba.blue, rgba.alpha)
+        context?.setFillColor(red: rgba.red, green: rgba.green, blue: rgba.blue, alpha: rgba.alpha)
         
-        CGContextMoveToPoint(context, 4, 0)
-        CGContextAddLineToPoint(context, 4, 0)
-        CGContextAddLineToPoint(context, 16, 12)
-        CGContextAddLineToPoint(context, 4, 24)
-        CGContextAddLineToPoint(context, 0, 24 - 4)
-        CGContextAddLineToPoint(context, 9, 12)
-        CGContextAddLineToPoint(context, 0, 4)
-        CGContextAddLineToPoint(context, 4, 0)
-        CGContextFillPath(context)
+        context?.move(to: CGPoint(x: 4, y: 0))
+        context?.addLine(to: CGPoint(x: 4, y: 0))
+        context?.addLine(to: CGPoint(x: 16, y: 12))
+        context?.addLine(to: CGPoint(x: 4, y: 24))
+        context?.addLine(to: CGPoint(x: 0, y: 24 - 4))
+        context?.addLine(to: CGPoint(x: 9, y: 12))
+        context?.addLine(to: CGPoint(x: 0, y: 4))
+        context?.addLine(to: CGPoint(x: 4, y: 0))
+        context?.fillPath()
     }
 }

@@ -14,8 +14,8 @@ import ClockKit
 import EventKit
 
 //---multipliers to convert to seconds---
-let HOUR: NSTimeInterval    = 60 * 60
-let MINUTE: NSTimeInterval  = 60
+let HOUR: TimeInterval    = 60 * 60
+let MINUTE: TimeInterval  = 60
 
 var allEvents :[EKEvent]    = []
 var eventID :String         = ""
@@ -27,12 +27,12 @@ let imageMicSmall           = UIImage(named: "mic38px")!
 let image :UIImage  = imageDMic
 let imageProvider   = CLKImageProvider(onePieceImage: image)
 
-var startDate       = NSDate()
-var endDate         = NSDate()
-var startDateTL     = NSDate()
-var endDateTL       = NSDate()
+var startDate       = Date()
+var endDate         = Date()
+var startDateTL     = Date()
+var endDateTL       = Date()
 
-let dateFormatter   = NSDateFormatter()
+let dateFormatter   = DateFormatter()
 
 var timeLineEntryArray = [CLKComplicationTimelineEntry]()
 
@@ -45,36 +45,38 @@ let dYellow = UIColor(red: 244/255, green: 250/255, blue: 88/255, alpha: 1)
 
 class ComplicationController: NSObject, CLKComplicationDataSource {
     
+    private static var __once: () = {
+            Static.instance = ComplicationController()
+        }()
+    
     class var sharedInstance : ComplicationController {
         struct Static {
-            static var onceToken : dispatch_once_t = 0
+            static var onceToken : Int = 0
             static var instance : ComplicationController? = nil
         }
-        dispatch_once(&Static.onceToken) {
-            Static.instance = ComplicationController()
-        }
+        _ = ComplicationController.__once
         return Static.instance!
     }
     
     func requestedUpdateDidBegin() {
         let server = CLKComplicationServer.sharedInstance()
-        server.activeComplications!.forEach { server.reloadTimelineForComplication($0) }
+        server.activeComplications!.forEach { server.reloadTimeline(for: $0) }
     }
     
     func fetchEvents() {
-        var startDate =  NSDate()
-        let calendar = NSCalendar.currentCalendar()
+        var startDate =  Date()
+        let calendar = Calendar.current
         
-        let tomorrow :NSDate = calendar.dateByAddingUnit(NSCalendarUnit.Day, value: 1, toDate: NSDate(), options: [])!
+        let tomorrow :Date = (calendar as NSCalendar).date(byAdding: NSCalendar.Unit.day, value: 1, to: Date(), options: [])!
         
-        let endDate = NSCalendar.currentCalendar().startOfDayForDate(tomorrow)
+        let endDate = Calendar.current.startOfDay(for: tomorrow)
         
-        startDate = calendar.dateByAddingUnit(NSCalendarUnit.Day, value: -1, toDate: startDate, options: [])!   //get events back 1 day for timeline ok?
+        startDate = (calendar as NSCalendar).date(byAdding: NSCalendar.Unit.day, value: -1, to: startDate, options: [])!   //get events back 1 day for timeline ok?
         
         print("w46 startDate: \(startDate)")
         print("w46 endDate: \(endDate)")
         
-        EventManager.sharedInstance.getAccessToEventStoreForType(EKEntityType.Event, completion: { (granted) -> Void in
+        EventManager.sharedInstance.getAccessToEventStoreForType(EKEntityType.event, completion: { (granted) -> Void in
             
             if granted{
                 print("w51 Events granted: \(granted)")
@@ -93,55 +95,55 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     
     // MARK: - Timeline Configuration
     
-    func getSupportedTimeTravelDirectionsForComplication(complication: CLKComplication, withHandler handler: (CLKComplicationTimeTravelDirections) -> Void) {
-        handler([.Forward, .Backward])
+    func getSupportedTimeTravelDirections(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationTimeTravelDirections) -> Void) {
+        handler([.forward, .backward])
     }
     
-    func getTimelineStartDateForComplication(complication: CLKComplication, withHandler handler: (NSDate?) -> Void) {
+    func getTimelineStartDate(for complication: CLKComplication, withHandler handler: @escaping (Date?) -> Void) {
         handler(nil)
         
-        let calendar = NSCalendar.currentCalendar()
-        let date = calendar.dateByAddingUnit(NSCalendarUnit.Day, value: -2, toDate: startDate, options: [])!  //showed events today from prior day for some reason
+        let calendar = Calendar.current
+        let date = (calendar as NSCalendar).date(byAdding: NSCalendar.Unit.day, value: -2, to: startDate, options: [])!  //showed events today from prior day for some reason
         // let date = NSDate()
         handler(date)
     }
     
-    func getTimelineEndDateForComplication(complication: CLKComplication, withHandler handler: (NSDate?) -> Void) {
+    func getTimelineEndDate(for complication: CLKComplication, withHandler handler: @escaping (Date?) -> Void) {
         handler(nil)
         
-        let calendar = NSCalendar.currentCalendar()
+        let calendar = Calendar.current
         
-        let endDate = calendar.dateByAddingUnit(
-            .Day,
+        let endDate = (calendar as NSCalendar).date(
+            byAdding: .day,
             value: 2,
-            toDate: NSDate(),
+            to: Date(),
             options: []
         )
         
         handler(endDate)
     }
     
-    func getPrivacyBehaviorForComplication(complication: CLKComplication, withHandler handler: (CLKComplicationPrivacyBehavior) -> Void) {
-        handler(.ShowOnLockScreen)
+    func getPrivacyBehavior(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationPrivacyBehavior) -> Void) {
+        handler(.showOnLockScreen)
     }
     
     // MARK: - Timeline Population
     // ===== Current Entry =======================================
     
-    func getCurrentTimelineEntryForComplication(complication: CLKComplication, withHandler handler: ((CLKComplicationTimelineEntry?) -> Void)) {
+    func getCurrentTimelineEntry(for complication: CLKComplication, withHandler handler: (@escaping (CLKComplicationTimelineEntry?) -> Void)) {
         // Call the handler with the current timeline entry
         
         switch complication.family {
-        case .ModularSmall:
+        case .modularSmall:
             
             let template = CLKComplicationTemplateModularSmallSimpleImage()
             template.imageProvider = imageProvider
             template.imageProvider.tintColor = dYellow
             
-            let timelineEntry = CLKComplicationTimelineEntry(date: NSDate(), complicationTemplate: template)
+            let timelineEntry = CLKComplicationTimelineEntry(date: Date(), complicationTemplate: template)
             handler(timelineEntry)
             
-        case .ModularLarge:
+        case .modularLarge:
             //var timeLineEntryArray = [CLKComplicationTimelineEntry]()
             
             fetchEvents()
@@ -151,7 +153,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
             
             if allEvents.count > 0 {
                 
-                for (index, title) in allEvents.enumerate() {
+                for (index, title) in allEvents.enumerated() {
                     print("---------------------------------------------------")
                     print("w159 index, title: \(index), \(title)")
                     
@@ -163,14 +165,14 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
                     
                     dateFormatter.dateFormat = "h:mm a"
                     
-                    let startTimeA = dateFormatter.stringFromDate(item.startDate)
-                    let startTime = startTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
+                    let startTimeA = dateFormatter.string(from: item.startDate)
+                    let startTime = startTimeA.replacingOccurrences(of: ":00", with: "")
                     // NSLog("%@ w137", startTime)
                     
                     dateFormatter.dateFormat = "h:mm"
                     
-                    let endTimeA = dateFormatter.stringFromDate(item.endDate)
-                    let endTime = endTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
+                    let endTimeA = dateFormatter.string(from: item.endDate)
+                    let endTime = endTimeA.replacingOccurrences(of: ":00", with: "")
                     
                     var endTimeDash = "- \(endTime)"
                     
@@ -181,11 +183,11 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
                     timeUntil = TimeManger.sharedInstance.timeInterval(item.startDate)
                     
                     let startTimeItem = item.startDate
-                    let timeUntilStart = startTimeItem.timeIntervalSinceDate(NSDate())
+                    let timeUntilStart = startTimeItem.timeIntervalSince(Date())
                     //print("w187 timeUntilStart: \(timeUntilStart)")
                     
                     let endTimeItem = item.endDate
-                    let timeUntilEnd = endTimeItem.timeIntervalSinceDate(NSDate())
+                    let timeUntilEnd = endTimeItem.timeIntervalSince(Date())
                     //print("w192 timeUntilEnd: \(timeUntilEnd)")
                     
                     if ((timeUntilStart <= 0) && (timeUntilEnd >= 0)) {
@@ -211,12 +213,12 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
                         endDateTL = allEvents[priorIndex].endDate   //trying to get endDate of prior event for timeline
                         print("w202 endDateTL: \(endDateTL)")
                         
-                        endDateTL = endDateTL.dateByAddingTimeInterval(1 * MINUTE)  //add 1 minute
+                        endDateTL = endDateTL.addingTimeInterval(1 * MINUTE)  //add 1 minute
                         print("w218 endDateTL: \(endDateTL)")
                         
                         if allEvents.last == true {         //we at last item in array
                             endDateTL = item.endDate        //use endDte for last item of day
-                            endDateTL = endDateTL.dateByAddingTimeInterval(1 * MINUTE)  //add 1 minute
+                            endDateTL = endDateTL.addingTimeInterval(1 * MINUTE)  //add 1 minute
                             print("w220 endDateTL: \(endDateTL)")
                         }
                         
@@ -255,18 +257,18 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     
     // ===== beforeDate =======================================
     
-    func getTimelineEntriesForComplication(complication: CLKComplication, beforeDate date: NSDate, limit: Int, withHandler handler: (([CLKComplicationTimelineEntry]?) -> Void)) {
+    func getTimelineEntries(for complication: CLKComplication, before date: Date, limit: Int, withHandler handler: (@escaping ([CLKComplicationTimelineEntry]?) -> Void)) {
         // Call the handler with the timeline entries prior to the given date
         
         var timeLineEntryArray = [CLKComplicationTimelineEntry]()
         
         switch complication.family {
-        case .ModularLarge:
+        case .modularLarge:
             print("w257 we here .ModularLarge")
             
             if allEvents.count > 0 {
                 
-                for (index, title) in allEvents.enumerate() {
+                for (index, title) in allEvents.enumerated() {
                     print("---------------------------------------------------")
                     print("w238 index, title: \(index), \(title)")
                     
@@ -278,13 +280,13 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
                     
                     dateFormatter.dateFormat = "h:mm a"
                     
-                    let startTimeA = dateFormatter.stringFromDate(item.startDate)
-                    let startTime = startTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
+                    let startTimeA = dateFormatter.string(from: item.startDate)
+                    let startTime = startTimeA.replacingOccurrences(of: ":00", with: "")
                     
                     dateFormatter.dateFormat = "h:mm"
                     
-                    let endTimeA = dateFormatter.stringFromDate(item.endDate)
-                    let endTime = endTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
+                    let endTimeA = dateFormatter.string(from: item.endDate)
+                    let endTime = endTimeA.replacingOccurrences(of: ":00", with: "")
                     
                     var endTimeDash = "- \(endTime)"
                     
@@ -295,10 +297,10 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
                     timeUntil = TimeManger.sharedInstance.timeInterval(item.startDate)
                     
                     let startTimeItem = item.startDate
-                    let timeUntilStart = startTimeItem.timeIntervalSinceDate(NSDate())
+                    let timeUntilStart = startTimeItem.timeIntervalSince(Date())
                     
                     let endTimeItem = item.endDate
-                    let timeUntilEnd = endTimeItem.timeIntervalSinceDate(NSDate())
+                    let timeUntilEnd = endTimeItem.timeIntervalSince(Date())
                     
                     if ((timeUntilStart <= 0) && (timeUntilEnd >= 0)) {
                         timeUntil = "•NOW•"
@@ -323,7 +325,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
                         startDateTL = allEvents[priorIndex].endDate   //trying to get endDate of prior event for timeline
                         print("w276 startDateTL: \(startDateTL)")
                         
-                        startDateTL = startDateTL.dateByAddingTimeInterval(1 * MINUTE)  //add 1 minute
+                        startDateTL = startDateTL.addingTimeInterval(1 * MINUTE)  //add 1 minute
                         print("w297 startDateTL: \(startDateTL)")
                         
                     } else {
@@ -343,7 +345,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
                         let title = "No events today HE HE"
                         
                         startDateTL = allEvents[index].endDate
-                        startDateTL = startDateTL.dateByAddingTimeInterval(1 * MINUTE)  //add 1 minute
+                        startDateTL = startDateTL.addingTimeInterval(1 * MINUTE)  //add 1 minute
                         print("w351 startDateTL \(startDateTL)")
                         
                         let entry = createTimeLineEntryEnd(timeString, body1Text: title, body2Text: timeUntil, date: startDateTL, startDate: startDate)
@@ -360,7 +362,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
                 handler(nil)
             }
             
-        case .ModularSmall:
+        case .modularSmall:
             
             let template = CLKComplicationTemplateModularSmallSimpleImage()
             template.imageProvider = imageProvider
@@ -376,18 +378,18 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     
     // ===== afterDate =======================================
     
-    func getTimelineEntriesForComplication(complication: CLKComplication, afterDate date: NSDate, limit: Int, withHandler handler: (([CLKComplicationTimelineEntry]?) -> Void)) {
+    func getTimelineEntries(for complication: CLKComplication, after date: Date, limit: Int, withHandler handler: (@escaping ([CLKComplicationTimelineEntry]?) -> Void)) {
         // Call the handler with the timeline entries after to the given date
         
         var timeLineEntryArray = [CLKComplicationTimelineEntry]()
         
         switch complication.family {
-        case .ModularLarge:
+        case .modularLarge:
             print("w374 we here .ModularLarge")
             
             if allEvents.count > 0 {
                 
-                for (index, title) in allEvents.enumerate() {
+                for (index, title) in allEvents.enumerated() {
                     print("---------------------------------------------------")
                     print("w324 index, title: \(index), \(title)")
                     
@@ -399,14 +401,14 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
                     
                     dateFormatter.dateFormat = "h:mm a"
                     
-                    let startTimeA = dateFormatter.stringFromDate(item.startDate)
-                    let startTime = startTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
+                    let startTimeA = dateFormatter.string(from: item.startDate)
+                    let startTime = startTimeA.replacingOccurrences(of: ":00", with: "")
                     // NSLog("%@ w137", startTime)
                     
                     dateFormatter.dateFormat = "h:mm"
                     
-                    let endTimeA = dateFormatter.stringFromDate(item.endDate)
-                    let endTime = endTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
+                    let endTimeA = dateFormatter.string(from: item.endDate)
+                    let endTime = endTimeA.replacingOccurrences(of: ":00", with: "")
                     var endTimeDash = "- \(endTime)"
                     
                     if item.startDate == item.endDate {     //for same start & end time event
@@ -416,9 +418,9 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
                     timeUntil = TimeManger.sharedInstance.timeInterval(item.startDate)
                     
                     let startTimeItem = item.startDate
-                    let timeUntilStart = startTimeItem.timeIntervalSinceDate(NSDate())
+                    let timeUntilStart = startTimeItem.timeIntervalSince(Date())
                     let endTimeItem = item.endDate
-                    let timeUntilEnd = endTimeItem.timeIntervalSinceDate(NSDate())
+                    let timeUntilEnd = endTimeItem.timeIntervalSince(Date())
                     
                     if ((timeUntilStart <= 0) && (timeUntilEnd >= 0)) {
                         timeUntil = "•NOW•"
@@ -443,7 +445,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
                         
                         startDateTL = allEvents[priorIndex].endDate   //trying to get endDate of prior event for timeline
                         print("w367 startDateTL: \(startDateTL)")
-                        startDateTL = startDateTL.dateByAddingTimeInterval(1 * MINUTE)  //add 1 minute
+                        startDateTL = startDateTL.addingTimeInterval(1 * MINUTE)  //add 1 minute
                         print("w383 startDateTL: \(startDateTL)")
                         print("w383 afterDate =================================")
                         
@@ -469,7 +471,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
                         let title = "No more events today"
                         
                         var endDateTL = allEvents[index].endDate
-                        endDateTL = endDateTL.dateByAddingTimeInterval(1 * MINUTE)  //add 1 minute
+                        endDateTL = endDateTL.addingTimeInterval(1 * MINUTE)  //add 1 minute
                         print("w441 endDateTL \(endDateTL)")
                         
                         let entry = createTimeLineEntryEnd(timeString, body1Text: title, body2Text: timeUntil, date: endDateTL, startDate: startDate)
@@ -486,7 +488,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
                 handler(nil)
             }
             
-        case .ModularSmall:
+        case .modularSmall:
             
             let template = CLKComplicationTemplateModularSmallSimpleImage()
             template.imageProvider = imageProvider
@@ -503,11 +505,11 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     
     // MARK: - Update Scheduling
     
-    func getNextRequestedUpdateDateWithHandler(handler: (NSDate?) -> Void) {
+    func getNextRequestedUpdateDate(handler: @escaping (Date?) -> Void) {
         // Call the handler with the date when you would next like to be given the opportunity to update your complication content
         
-        let calendar = NSCalendar.currentCalendar()
-        let nextUpdateDate :NSDate = calendar.dateByAddingUnit(NSCalendarUnit.Hour, value: 1, toDate: NSDate(), options: [])!
+        let calendar = Calendar.current
+        let nextUpdateDate :Date = (calendar as NSCalendar).date(byAdding: NSCalendar.Unit.hour, value: 1, to: Date(), options: [])!
         
         handler(nextUpdateDate)
     }
@@ -546,7 +548,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
      */
     
     
-    func createTimeLineEntry2(headerText: String, body1Text: String, body2Text: String, date: NSDate, startDate: NSDate) -> CLKComplicationTimelineEntry {
+    func createTimeLineEntry2(_ headerText: String, body1Text: String, body2Text: String, date: Date, startDate: Date) -> CLKComplicationTimelineEntry {
         
         let template = CLKComplicationTemplateModularLargeStandardBody()
         
@@ -557,13 +559,13 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         print("w512 body2Text: \(body2Text)")
         
         template.headerImageProvider = CLKImageProvider(onePieceImage: imageMicSmall)
-        template.headerImageProvider!.tintColor = UIColor.yellowColor()
+        template.headerImageProvider!.tintColor = UIColor.yellow
         template.headerTextProvider = CLKSimpleTextProvider(text: headerText)
-        template.headerTextProvider.tintColor = UIColor.yellowColor()
+        template.headerTextProvider.tintColor = UIColor.yellow
         template.body1TextProvider = CLKSimpleTextProvider(text: body1Text)
         
-        let units : NSCalendarUnit = [.Hour, .Minute]
-        let style : CLKRelativeDateStyle = .Natural     //styles: .Natural .Offset  .Timer
+        let units : NSCalendar.Unit = [.hour, .minute]
+        let style : CLKRelativeDateStyle = .natural     //styles: .Natural .Offset  .Timer
         let textProvider = CLKRelativeDateTextProvider(date: startDate,
                                                        style: style,
                                                        units: units) //NSCalendarUnit.Hour.union(.Minute))
@@ -577,7 +579,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     }
     
     
-    func createTimeLineEntryEnd(headerText: String, body1Text: String, body2Text: String, date: NSDate, startDate: NSDate) -> CLKComplicationTimelineEntry {
+    func createTimeLineEntryEnd(_ headerText: String, body1Text: String, body2Text: String, date: Date, startDate: Date) -> CLKComplicationTimelineEntry {
         
         let template = CLKComplicationTemplateModularLargeStandardBody()
         
@@ -587,9 +589,9 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         print("w512 body2Text: \(body2Text)")
         
         template.headerImageProvider = CLKImageProvider(onePieceImage: imageMicSmall)
-        template.headerImageProvider!.tintColor = UIColor.yellowColor()
+        template.headerImageProvider!.tintColor = UIColor.yellow
         template.headerTextProvider = CLKSimpleTextProvider(text: headerText)
-        template.headerTextProvider.tintColor = UIColor.yellowColor()
+        template.headerTextProvider.tintColor = UIColor.yellow
         template.body1TextProvider = CLKSimpleTextProvider(text: body1Text)
         
         let entry = CLKComplicationTimelineEntry(date: date,
@@ -603,7 +605,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     
     // ===== Placeholder =======================================
     
-    func getPlaceholderTemplateForComplication(complication: CLKComplication, withHandler handler: (CLKComplicationTemplate?) -> Void) {
+    func getPlaceholderTemplate(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationTemplate?) -> Void) {
         // This method will be called once per supported complication, and the results will be cached
         
         print("w63 we here complication.family: \(complication.family)")
@@ -611,7 +613,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         var template: CLKComplicationTemplate?
         
         switch complication.family {
-        case .ModularLarge:
+        case .modularLarge:
             
             print("w75 we here .ModularLarge")
             
@@ -622,9 +624,9 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
             let body2Text   =  ""
             
             template.headerImageProvider = CLKImageProvider(onePieceImage: imageMicSmall)
-            template.headerImageProvider!.tintColor = UIColor.yellowColor()
+            template.headerImageProvider!.tintColor = UIColor.yellow
             template.headerTextProvider = CLKSimpleTextProvider(text: headerText)
-            template.headerTextProvider.tintColor = UIColor.yellowColor()
+            template.headerTextProvider.tintColor = UIColor.yellow
             template.body1TextProvider = CLKSimpleTextProvider(text: body1Text)
             template.body2TextProvider = CLKSimpleTextProvider(text: body2Text)
             
@@ -632,7 +634,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
             
             handler(template)
             
-        case .ModularSmall:
+        case .modularSmall:
             template = CLKComplicationTemplateModularSmallSimpleImage()
             if let template = template as? CLKComplicationTemplateModularSmallSimpleImage {
                 template.imageProvider = CLKImageProvider(onePieceImage: imageDMic)
@@ -641,15 +643,15 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
             
             
             
-        case .CircularSmall:
+        case .circularSmall:
             let template = CLKComplicationTemplateCircularSmallRingImage()
             template.imageProvider = CLKImageProvider(onePieceImage: imageDMic)
             
-        case .UtilitarianSmall:
+        case .utilitarianSmall:
             let template = CLKComplicationTemplateUtilitarianSmallRingImage()
             template.imageProvider = CLKImageProvider(onePieceImage: imageDMic)
             
-        case .UtilitarianLarge:
+        case .utilitarianLarge:
             let headerText      = "Dictate™ 😀"
             //let body1Text     = "Getting Events..."
             //let body2Text     =  ""

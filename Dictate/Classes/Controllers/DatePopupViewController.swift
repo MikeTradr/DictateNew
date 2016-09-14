@@ -14,7 +14,7 @@ class DatePopupViewController: ViewController {
     
     @IBOutlet weak var datePicker: UIDatePicker!
     
-    @IBAction func dateChanged(sender: UITextField) {
+    @IBAction func dateChanged(_ sender: UITextField) {
         
         // updates ur label in the cell above
         print("p19 datePicker.date: \(datePicker.date)")
@@ -24,25 +24,25 @@ class DatePopupViewController: ViewController {
     
     
     
-    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+    let defaults = UserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
  
-        let startDT     = defaults.objectForKey("startDT")! as! NSDate      //Start
+        let startDT     = defaults.object(forKey: "startDT")! as! Date      //Start
         
         
         
         print("p32 startDT: \(startDT)")
         datePicker.date = startDT
         
-        var formatter3 = NSDateFormatter()
+        let formatter3 = DateFormatter()
         formatter3.dateFormat = "M-dd-yyyy h:mm a"
-        fullDT = formatter3.stringFromDate(startDT)
+        fullDT = formatter3.string(from: startDT)
        // fullDTEnd = formatter3.stringFromDate(endDT)
         
-        dateLabel.text = fullDT as! String
+        dateLabel.text = fullDT 
         print("p43  dateLabel.text: \( dateLabel.text)")
         
    

@@ -16,20 +16,20 @@ class SettingsAboutViewController: UIViewController, MFMailComposeViewController
     @IBOutlet weak var labelName: UILabel!
     @IBOutlet weak var labelVersion: UILabel!
     
-    @IBAction func buttonThatSoftLogo(sender: AnyObject) {
-        if let url = NSURL(string: "http://www.ThatSoft.com") {
-            UIApplication.sharedApplication().openURL(url)
+    @IBAction func buttonThatSoftLogo(_ sender: AnyObject) {
+        if let url = URL(string: "http://www.ThatSoft.com") {
+            UIApplication.shared.openURL(url)
         }
     }
     
-    @IBAction func buttonThatSoftURL(sender: AnyObject) {
-        if let url = NSURL(string: "http://www.ThatSoft.com") {
-            UIApplication.sharedApplication().openURL(url)
+    @IBAction func buttonThatSoftURL(_ sender: AnyObject) {
+        if let url = URL(string: "http://www.ThatSoft.com") {
+            UIApplication.shared.openURL(url)
         }
     }
     
     
-    @IBAction func buttonMailUs(sender: AnyObject) {
+    @IBAction func buttonMailUs(_ sender: AnyObject) {
         
         if MFMailComposeViewController.canSendMail() {
             let toRecipents = ["support@thatsoft.com"]
@@ -42,7 +42,7 @@ class SettingsAboutViewController: UIViewController, MFMailComposeViewController
             mail.setMessageBody(messageBody, isHTML: false)
             mail.setToRecipients(toRecipents)
 
-            presentViewController(mail, animated: true, completion: nil)
+            present(mail, animated: true, completion: nil)
         } else {
             // give feedback to the user
             //TODO Anil Mike Add Error Alert Dialog?
@@ -64,7 +64,7 @@ class SettingsAboutViewController: UIViewController, MFMailComposeViewController
         // Do any additional setup after loading the view.
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         
     
     }
@@ -76,20 +76,20 @@ class SettingsAboutViewController: UIViewController, MFMailComposeViewController
     
     // MARK: - MFMailComposeViewControllerDelegate
     
-    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         switch result.rawValue {
-        case MFMailComposeResultCancelled.rawValue:
+        case MFMailComposeResult.cancelled.rawValue:
             print("Cancelled")
-        case MFMailComposeResultSaved.rawValue:
+        case MFMailComposeResult.saved.rawValue:
             print("Saved")
-        case MFMailComposeResultSent.rawValue:
+        case MFMailComposeResult.sent.rawValue:
             print("Sent")
-        case MFMailComposeResultFailed.rawValue:
+        case MFMailComposeResult.failed.rawValue:
             print("Error: \(error?.localizedDescription)")
         default:
             break
         }
-        controller.dismissViewControllerAnimated(true, completion: nil)
+        controller.dismiss(animated: true, completion: nil)
     }
 
 

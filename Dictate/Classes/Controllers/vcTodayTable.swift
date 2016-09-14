@@ -37,19 +37,19 @@ class vcTodayTable: UITableViewController {
     @IBOutlet var tableViewToday: UITableView!
     
     var numberOfNewItems:Int    = 0
-    var startDT:NSDate          = NSDate()
-    var endDT:NSDate            = NSDate()
-    var today:NSDate            = NSDate()
+    var startDT:Date          = Date()
+    var endDT:Date            = Date()
+    var today:Date            = Date()
     var events:NSMutableArray   = []
     
     
     // from http://stackoverflow.com/questions/24722597/fetch-events-from-ekeventstore-and-show-in-tableview-in-swift-ios8
     
     func fetchEvents() -> NSMutableArray {
-        var eventStore : EKEventStore = EKEventStore()
+        let eventStore : EKEventStore = EKEventStore()
         // 'EKEntityTypeReminder' or 'EKEntityTypeEvent' TODO use for Reminders? Mike
         
-        eventStore.requestAccessToEntityType(EKEntityType.Event, completion: {
+        eventStore.requestAccess(to: EKEntityType.event, completion: {
             granted, error in
             if (granted) && (error == nil) {
                 print("granted: \(granted)")
@@ -70,8 +70,8 @@ class vcTodayTable: UITableViewController {
         
         
         // This lists every reminder
-        var predicate = eventStore.predicateForRemindersInCalendars([])
-        eventStore.fetchRemindersMatchingPredicate(predicate) { reminders in
+        let predicate = eventStore.predicateForReminders(in: [])
+        eventStore.fetchReminders(matching: predicate) { reminders in
             for reminder in reminders! {
                 print("•p73: reminder title: \(reminder.title)")
                 
@@ -82,35 +82,35 @@ class vcTodayTable: UITableViewController {
         
         // What about Calendar entries?
         
-        let date = NSDate()
-        let cal = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
-        let startDate = cal!.startOfDayForDate(date)
+        let date = Date()
+        let cal = Calendar(identifier: Calendar.Identifier.gregorian)
+        let startDate = cal.startOfDay(for: date)
         
-        var endDate = startDate.dateByAddingTimeInterval(60*60*24)
-        var predicate2 = eventStore.predicateForEventsWithStartDate(startDate, endDate: endDate, calendars: nil)
+        let endDate = startDate.addingTimeInterval(60*60*24)
+        let predicate2 = eventStore.predicateForEvents(withStart: startDate, end: endDate, calendars: nil)
         
         print("startDate:\(startDate) endDate:\(endDate)")
-        var eV = eventStore.eventsMatchingPredicate(predicate2) as [EKEvent]!
+        let eV = eventStore.events(matching: predicate2) as [EKEvent]!
         
         //println("p68 eV: \(eV)" )         // prints Event details! good.
         
         if eV != nil {
             
-            if eV.count == 0 {
+            if eV?.count == 0 {
                 print("No events could be found")
             } else {
                 
-                events = NSMutableArray(array: eventStore.eventsMatchingPredicate(predicate2))
+                events = NSMutableArray(array: eventStore.events(matching: predicate2))
                 //println("p88 events  \(events)" )
                 
-                for i in eV {
+                for i in eV! {
                     print("p66 Title  \(i.title)" )
                     print("p67 stareDate: \(i.startDate)" )
                     print("p68 endDate: \(i.endDate)" )
                     
                     
                     // Access list of available sources from the Event Store
-                    let sourcesInEventStore = eventStore.sources as! [EKSource]
+                    let sourcesInEventStore = eventStore.sources 
                     
           // http://www.andrewcbancroft.com/2015/06/17/creating-calendars-with-event-kit-and-swift/
                     
@@ -129,10 +129,10 @@ class vcTodayTable: UITableViewController {
             
     }
     
-    func playSound(sound: NSURL){
+    func playSound(_ sound: URL){
         var error:NSError?
         do {
-            audioPlayer = try AVAudioPlayer(contentsOfURL: sound)
+            audioPlayer = try AVAudioPlayer(contentsOf: sound)
         } catch var error1 as NSError {
             error = error1
         }
@@ -169,8 +169,8 @@ class vcTodayTable: UITableViewController {
 */        
     }
     
-    override func viewWillAppear(animated: Bool) {
-        var alertSound3: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("se_tap", ofType: "m4a")!)
+    override func viewWillAppear(_ animated: Bool) {
+        let alertSound3: URL = URL(fileURLWithPath: Bundle.main.path(forResource: "se_tap", ofType: "m4a")!)
         //General.playSound(alertSound3!)
         
         playSound(alertSound3)
@@ -181,7 +181,7 @@ class vcTodayTable: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
-        var viewController = self
+        let viewController = self
         
         print("p182 vcToday viewController: \(viewController)" )
 
@@ -190,8 +190,8 @@ class vcTodayTable: UITableViewController {
         events = fetchEvents()
         
         //Register custom cell
-        var nib = UINib(nibName: "CustomTableViewCell", bundle: nil)
-        tableViewToday.registerNib(nib, forCellReuseIdentifier: "customCell")
+        let nib = UINib(nibName: "CustomTableViewCell", bundle: nil)
+        tableViewToday.register(nib, forCellReuseIdentifier: "customCell")
         
         //Set the bader number to display
         // TODO add this to the app start up, does not show when app loads.
@@ -203,27 +203,27 @@ class vcTodayTable: UITableViewController {
         }
     }
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return events.count
     }
     
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let object: EKEvent = events[indexPath.row] as! EKEvent
+        let object: EKEvent = events[(indexPath as NSIndexPath).row] as! EKEvent
         
-        var cell:TableCell = tableView.dequeueReusableCellWithIdentifier("customCell") as! TableCell
+        let cell:TableCell = tableView.dequeueReusableCell(withIdentifier: "customCell") as! TableCell
         // cell.selectionStyle = .None
         
-        var dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "h:mm a"
         
-        let eventStartDTString = dateFormatter.stringFromDate(object.startDate)
-        let eventEndDTString = dateFormatter.stringFromDate(object.endDate)
+        let eventStartDTString = dateFormatter.string(from: object.startDate)
+        let eventEndDTString = dateFormatter.string(from: object.endDate)
         
         cell.labelTitle.text = object.title
         
@@ -240,7 +240,7 @@ class vcTodayTable: UITableViewController {
         
         cell.labelCalendar.text = "add this from code"
         cell.labelVertical.text = ""            //TODO set this label background color to calendar color somehow
-        cell.labelVertical.backgroundColor = UIColor.blueColor()
+        cell.labelVertical.backgroundColor = UIColor.blue
         
         cell.labelStart.text = eventStartDTString
         cell.labelEnd.text = eventEndDTString
@@ -250,16 +250,16 @@ class vcTodayTable: UITableViewController {
     
     
     
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
     }
     
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            events.removeObjectAtIndex(indexPath.row)
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            events.removeObject(at: (indexPath as NSIndexPath).row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
         }
     }
@@ -273,14 +273,14 @@ class vcTodayTable: UITableViewController {
     
     
     // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to toIndexPath: IndexPath) {
         
     }
     
     
     
     // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         // Return NO if you do not want the item to be re-orderable.
         return true
     }
@@ -294,11 +294,11 @@ class vcTodayTable: UITableViewController {
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
         
-        var alertSound3: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("se_tap", ofType: "m4a")!)
+        let alertSound3: URL = URL(fileURLWithPath: Bundle.main.path(forResource: "se_tap", ofType: "m4a")!)
         
         //General.playSound(alertSound3!)
         

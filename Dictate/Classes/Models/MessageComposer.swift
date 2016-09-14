@@ -14,7 +14,7 @@ let textMessageRecipients = ["1-608-242-7700"] // for pre-populating the recipie
 
 class MessageComposer: NSObject, MFMessageComposeViewControllerDelegate {
     
-    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+    let defaults = UserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
 
     
     // A wrapper function to indicate whether or not a text message can be sent from the user's device
@@ -29,11 +29,11 @@ class MessageComposer: NSObject, MFMessageComposeViewControllerDelegate {
         
         print("p29 We in MessageComposer")
         
-        let output:String = defaults.stringForKey("output")!
+        let output:String = defaults.string(forKey: "output")!
         
         
         //TODO fix the forced downcast below
-        let tempPhone:String = defaults.stringForKey("toPhone")!
+        let tempPhone:String = defaults.string(forKey: "toPhone")!
         
         var toPhone:[String] = []
         
@@ -63,7 +63,7 @@ class MessageComposer: NSObject, MFMessageComposeViewControllerDelegate {
     }
     
     // MFMessageComposeViewControllerDelegate callback - dismisses the view controller when the user is finished with it
-    func messageComposeViewController(controller: MFMessageComposeViewController, didFinishWithResult result: MessageComposeResult) {
-        controller.dismissViewControllerAnimated(true, completion: nil)
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+        controller.dismiss(animated: true, completion: nil)
     }
 }

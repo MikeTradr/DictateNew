@@ -14,7 +14,7 @@ import EventKit
 class SetCalendarIC: WKInterfaceController {
     
     var selectedRow:Int! = nil
-    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+    let defaults = UserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
     
     let eventStore = EKEventStore()    
     var checked:Bool = false
@@ -24,7 +24,7 @@ class SetCalendarIC: WKInterfaceController {
     
     @IBOutlet weak var table: WKInterfaceTable!
     
-    let allCalendarLists: Array<EKCalendar> = EKEventStore().calendarsForEntityType(EKEntityType.Event) 
+    let allCalendarLists: Array<EKCalendar> = EKEventStore().calendars(for: EKEntityType.event) 
     
 //---- Menu functions -------------------------------------------
     @IBAction func menuDictate() {
@@ -32,7 +32,7 @@ class SetCalendarIC: WKInterfaceController {
     }
     
     @IBAction func menuSettings() {
-        presentControllerWithName("Settings", context: "«Events")
+        presentController(withName: "Settings", context: "«Events")
     }
 //---- end Menu functions ----------------------------------------
     
@@ -54,39 +54,39 @@ class SetCalendarIC: WKInterfaceController {
         table.setNumberOfRows(allCalendarLists.count, withRowType: "tableRow")
         print("w46 allCalendarLists.count: \(allCalendarLists.count)")
         
-        for (index, title) in allCalendarLists.enumerate() {
+        for (index, title) in allCalendarLists.enumerated() {
             print("---------------------------------------------------")
             print("w40 index, title: \(index), \(title)")
             
-            let row = table.rowControllerAtIndex(index) as! SetCalendarTableRC
+            let row = table.rowController(at: index) as! SetCalendarTableRC
             let item = allCalendarLists[index]
             
             row.tableRowLabel.setText(item.title)
-            row.tableRowLabel.setTextColor(UIColor(CGColor: item.CGColor))
-            row.verticalBar.setBackgroundColor(UIColor(CGColor: item.CGColor))
+            row.tableRowLabel.setTextColor(UIColor(cgColor: item.cgColor))
+            row.verticalBar.setBackgroundColor(UIColor(cgColor: item.cgColor))
         }
     }   //end loadTableData
     
-    override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
+    override func awake(withContext context: Any?) {
+        super.awake(withContext: context)
         // Configure interface objects here.
         print("w72 SetCalendarIC")
         print("-----------------------------------------")
         
         eventID = context as! String
         //FIXME:7
-        event = EventManager.sharedInstance.eventStore.eventWithIdentifier(eventID)!
+        event = EventManager.sharedInstance.eventStore.event(withIdentifier: eventID)!
         print("w168: event \(event)")
         
         //TODO Anil TODO Mike needed? or willActivate instead?
         loadTableData()
     }
     
-    override func table(table: WKInterfaceTable, didSelectRowAtIndex rowIndex: Int) {
+    override func table(_ table: WKInterfaceTable, didSelectRowAt rowIndex: Int) {
         print("w116 clicked on row: \(rowIndex)")
         
         selectedRow = rowIndex //for use with insert and delete, save selcted row index
-        let row = self.table.rowControllerAtIndex(rowIndex) as! SetCalendarTableRC
+        let row = self.table.rowController(at: rowIndex) as! SetCalendarTableRC
         
         if self.checked {               // Turn checkmark off
             row.imageCheckbox.setImageNamed("cbBlank40px")
@@ -98,7 +98,7 @@ class SetCalendarIC: WKInterfaceController {
             
             print("w130 defaultCalendarID: \(defaultCalendarID)")
             
-            defaults.setObject(defaultCalendarID, forKey: "defaultCalendarID")    //sets defaultReminderListID String
+            defaults.set(defaultCalendarID, forKey: "defaultCalendarID")    //sets defaultReminderListID String
             
             self.checked = true
         }

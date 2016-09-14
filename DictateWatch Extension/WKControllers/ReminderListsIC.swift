@@ -21,13 +21,13 @@ class ReminderListsIC: WKInterfaceController, DataSourceChangedDelegate {
         didSet {
             if let session = session {
                 session.delegate = self
-                session.activateSession()
+                session.activate()
             }
         }
     }
 
     
-    let defaults    = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+    let defaults    = UserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
     let eventStore  = EKEventStore()
     
     var reminders:[EKReminder]          = []
@@ -37,9 +37,9 @@ class ReminderListsIC: WKInterfaceController, DataSourceChangedDelegate {
     var calendars:[EKCalendar]          = []
 
     var numberOfItems:Int       = 0
-    var startDT:NSDate          = NSDate()
-    var endDT:NSDate            = NSDate()
-    var today:NSDate            = NSDate()
+    var startDT:Date          = Date()
+    var endDT:Date            = Date()
+    var today:Date            = Date()
     var events:NSMutableArray   = []
     
     var reminderListID:String   = ""
@@ -48,7 +48,7 @@ class ReminderListsIC: WKInterfaceController, DataSourceChangedDelegate {
     var checked:Bool            = false
     
  //   var audioPlayer = AVAudioPlayer() //commented for new watchExtension 040516
-    var reminderListColor:UIColor = UIColor.greenColor()
+    var reminderListColor:UIColor = UIColor.green
     
     var player: WKAudioFilePlayer!
     
@@ -128,7 +128,7 @@ class ReminderListsIC: WKInterfaceController, DataSourceChangedDelegate {
     
     
     @IBAction func menuSettings() {
-        presentControllerWithName("Settings", context: "Reminders")
+        presentController(withName: "Settings", context: "Reminders")
     }
 //---- end Menu functions ----------------------------------------
     
@@ -164,8 +164,8 @@ class ReminderListsIC: WKInterfaceController, DataSourceChangedDelegate {
     
 
 
-    override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
+    override func awake(withContext context: Any?) {
+        super.awake(withContext: context)
         // Configure interface objects here.
         //NSLog("%@ w193 awakeWithContext", self)
         print("w105 RemindersIC awakeWithContext")
@@ -189,7 +189,7 @@ class ReminderListsIC: WKInterfaceController, DataSourceChangedDelegate {
         //get Access to Reminders
         //NSLog("%@ w60 appDelegate", self)
         print("w61 call getAccessToEventStoreForType")
-        ReminderManager.sharedInstance.getAccessToEventStoreForType(EKEntityType.Reminder, completion: { (granted) -> Void in
+        ReminderManager.sharedInstance.getAccessToEventStoreForType(EKEntityType.reminder, completion: { (granted) -> Void in
             
             if granted{
                 print("w65 Reminders granted: \(granted)")
@@ -213,9 +213,9 @@ class ReminderListsIC: WKInterfaceController, DataSourceChangedDelegate {
         self.setTitle("Reminders")
         self.loadTableData()
      
-        let filePath = NSBundle.mainBundle().pathForResource("beep-08b", ofType: "mp3")!
-        let fileUrl = NSURL.fileURLWithPath (filePath)
-        let asset = WKAudioFileAsset (URL: fileUrl)
+        let filePath = Bundle.main.path(forResource: "beep-08b", ofType: "mp3")!
+        let fileUrl = URL (fileURLWithPath: filePath)
+        let asset = WKAudioFileAsset (url: fileUrl)
         let playerItem = WKAudioFilePlayerItem (asset: asset)
         player = WKAudioFilePlayer (playerItem: playerItem)
         
@@ -226,7 +226,7 @@ class ReminderListsIC: WKInterfaceController, DataSourceChangedDelegate {
         //TODO Mike Anil replace above with call to Manager!
         //GeneralWatch.sharedInstance.playSound(alertSound1)
         
-        calendars = ReminderManager.sharedInstance.eventStore.calendarsForEntityType(EKEntityType.Reminder)
+        calendars = ReminderManager.sharedInstance.eventStore.calendars(for: EKEntityType.reminder)
         print("w230 calendars: \(calendars)")
         print("w230 calendars.count: \(calendars.count)")
 
@@ -265,7 +265,7 @@ class ReminderListsIC: WKInterfaceController, DataSourceChangedDelegate {
         
     }
     
-    func fetchRemindersFromCalendars(calendars:[EKCalendar]? = nil, showComplted:Bool=false){
+    func fetchRemindersFromCalendars(_ calendars:[EKCalendar]? = nil, showComplted:Bool=false){
         
         ReminderManager.sharedInstance.fetchRemindersFromCalendars(calendars,includeCompleted:showComplted ) { (reminders) -> Void in
             
@@ -285,7 +285,7 @@ class ReminderListsIC: WKInterfaceController, DataSourceChangedDelegate {
         backToReminders.setHidden(true)         //Hide lower table2
 
 
-        self.allReminderLists = ReminderManager.sharedInstance.eventStore.calendarsForEntityType(EKEntityType.Reminder) 
+        self.allReminderLists = ReminderManager.sharedInstance.eventStore.calendars(for: EKEntityType.reminder) 
         
         table.setNumberOfRows(allReminderLists.count, withRowType: "tableRow")
         
@@ -293,16 +293,16 @@ class ReminderListsIC: WKInterfaceController, DataSourceChangedDelegate {
         print("w293 allReminderLists.count: \(allReminderLists.count)")
   
         if allReminderLists != [] {
-            for (index, title) in allReminderLists.enumerate() {
+            for (index, title) in allReminderLists.enumerated() {
                 print("---------------------------------------------------")
                 print("w298 title: \(title.title)")
                 print("---------------------------------------------------")
 
                 print("w301 index, title: \(index), \(title)")
-                print("w302 table.rowControllerAtIndex(index): \(table.rowControllerAtIndex(index))")
+                print("w302 table.rowControllerAtIndex(index): \(table.rowController(at: index))")
                 
-                if table.rowControllerAtIndex(index) != nil {
-                    let row = table.rowControllerAtIndex(index) as! ReminderListsTableRC
+                if table.rowController(at: index) != nil {
+                    let row = table.rowController(at: index) as! ReminderListsTableRC
                 
                     let reminderList = allReminderLists[index]
                     print("w308 reminderList: \(reminderList)")
@@ -329,12 +329,12 @@ class ReminderListsIC: WKInterfaceController, DataSourceChangedDelegate {
      //  */
         
                     row.tableRowLabel.setText("\(reminderList.title)")
-                    row.tableRowLabel.setTextColor(UIColor(CGColor: reminderList.CGColor))
-                    row.verticalBar.setBackgroundColor(UIColor(CGColor: reminderList.CGColor))
+                    row.tableRowLabel.setTextColor(UIColor(cgColor: reminderList.cgColor))
+                    row.verticalBar.setBackgroundColor(UIColor(cgColor: reminderList.cgColor))
                     
-                    row.imageVerticalBar.setTintColor(UIColor(CGColor: reminderList.CGColor))
+                    row.imageVerticalBar.setTintColor(UIColor(cgColor: reminderList.cgColor))
                     
-                    row.imageVerticalBarRT.setTintColor(UIColor(CGColor: reminderList.CGColor))
+                    row.imageVerticalBarRT.setTintColor(UIColor(cgColor: reminderList.cgColor))
                 }
             }
         }
@@ -351,15 +351,15 @@ class ReminderListsIC: WKInterfaceController, DataSourceChangedDelegate {
 
         let calendarId = reminderListID
         print("w353 reminderListID: \(reminderListID)")
-        let calendar = ReminderManager.sharedInstance.eventStore.calendarWithIdentifier(calendarId)
+        let calendar = ReminderManager.sharedInstance.eventStore.calendar(withIdentifier: calendarId)
         
-        labelReminderListID.setTextColor(UIColor(CGColor: calendar!.CGColor))
-        verticalBar2.setBackgroundColor(UIColor(CGColor: calendar!.CGColor))
-        labelShowCompleted.setTextColor(UIColor(CGColor: calendar!.CGColor))
+        labelReminderListID.setTextColor(UIColor(cgColor: calendar!.cgColor))
+        verticalBar2.setBackgroundColor(UIColor(cgColor: calendar!.cgColor))
+        labelShowCompleted.setTextColor(UIColor(cgColor: calendar!.cgColor))
         
-        self.reminderListColor = UIColor(CGColor: calendar!.CGColor)    //save for selected row later
+        self.reminderListColor = UIColor(cgColor: calendar!.cgColor)    //save for selected row later
         
-        let reminderListColor:UIColor = UIColor(CGColor: calendar!.CGColor)
+        let reminderListColor:UIColor = UIColor(cgColor: calendar!.cgColor)
 
         
        // buttonCheckbox.setHidden(true)
@@ -379,11 +379,11 @@ class ReminderListsIC: WKInterfaceController, DataSourceChangedDelegate {
             print("w379 allReminders: \(self.allReminders)")
             print("w380 allReminders.count: \(self.allReminders.count)")
             
-            for (index, title) in self.allReminders.enumerate() {
+            for (index, title) in self.allReminders.enumerated() {
                 print("---------------------------------------------------")
                 print("w384 index, title: \(index), \(title)")
                 
-                let row = self.table2.rowControllerAtIndex(index) as! ReminderItemsTableRC
+                let row = self.table2.rowController(at: index) as! ReminderItemsTableRC
                 let item = self.allReminders[index]
                 
                 row.tableRowLabel.setText(item.title)
@@ -394,7 +394,7 @@ class ReminderListsIC: WKInterfaceController, DataSourceChangedDelegate {
     }       // end loadTableData2 func
     
     
-    override func table(table: WKInterfaceTable, didSelectRowAtIndex rowIndex: Int) {
+    override func table(_ table: WKInterfaceTable, didSelectRowAt rowIndex: Int) {
         //selection of data and presenting it to
         
         if table == self.table {
@@ -411,14 +411,14 @@ class ReminderListsIC: WKInterfaceController, DataSourceChangedDelegate {
             var selectedRow:Int! = nil
             
             selectedRow = rowIndex //for use with insert and delete, save selcted row index
-            let row = self.table2.rowControllerAtIndex(rowIndex) as! ReminderItemsTableRC
+            let row = self.table2.rowController(at: rowIndex) as! ReminderItemsTableRC
             let reminderItem = allReminders[rowIndex]
             let veryDarkGray = UIColor(red: 128, green: 128, blue: 128, alpha: 1)     //light biege color, for Word List
             
             if self.checked {               // Turn checkmark off
                 row.imageCheckbox.setImageNamed("cbBlank40px")
-                row.tableRowLabel.setTextColor(UIColor.whiteColor())
-                reminderItem.completed = false
+                row.tableRowLabel.setTextColor(UIColor.white)
+                reminderItem.isCompleted = false
                 self.checked = false
                 
 //                var alertSound1: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("beep-08b", ofType: "mp3")!)
@@ -428,7 +428,7 @@ class ReminderListsIC: WKInterfaceController, DataSourceChangedDelegate {
                 row.imageCheckbox.setImageNamed("cbChecked40px")
                 row.tableRowLabel.setTextColor(veryDarkGray)
                 
-                var alertSound1: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("124-DeleteWhoosh", ofType: "mp3")!)
+                var alertSound1: URL = URL(fileURLWithPath: Bundle.main.path(forResource: "124-DeleteWhoosh", ofType: "mp3")!)
                 //TODO Mike TODO Anil fix sound call.
                 //DictateManagerIC.sharedInstance.playSound(alertSound1)
                 
@@ -440,16 +440,16 @@ class ReminderListsIC: WKInterfaceController, DataSourceChangedDelegate {
                 self.labelCompleted.setHidden(false)
 
                 print("w305 reminderItem: \(reminderItem)")
-                print("w306 reminderItem.completed: \(reminderItem.completed)")
+                print("w306 reminderItem.completed: \(reminderItem.isCompleted)")
                 
-                reminderItem.completed = true
+                reminderItem.isCompleted = true
           
                 //TODO WCFIX ReminderManager.sharedInstance.saveReminder(reminderItem)
                 //TODO Anil Mike add code to updated/save reminder as it is completed!!! broke in watchOS2
                 let actionType = "saveReminder"
                 
-                session = WCSession.defaultSession()
-                let messageDict = ["action":actionType, "reminderItem":reminderItem]
+                session = WCSession.default()
+                let messageDict = ["action":actionType, "reminderItem":reminderItem] as [String : Any]
                 
                 print("w423 messageDict: \(messageDict)")
                 
@@ -466,7 +466,7 @@ class ReminderListsIC: WKInterfaceController, DataSourceChangedDelegate {
                 
                 
                 
-                print("w325 reminderItem.completed: \(reminderItem.completed)")
+                print("w325 reminderItem.completed: \(reminderItem.isCompleted)")
                 
                 self.checked = true
                 
@@ -517,14 +517,14 @@ class ReminderListsIC: WKInterfaceController, DataSourceChangedDelegate {
     }
     
     @IBAction func buttonToday() {
-        presentControllerWithName("Events", context: "Reminders")
+        presentController(withName: "Events", context: "Reminders")
     }
     
     @IBAction func buttonMain() {
-        presentControllerWithName("Main", context: "Reminders")
+        presentController(withName: "Main", context: "Reminders")
     }
     
-    func dataSourceDidUpdate(dataSource: DataSource){
+    func dataSourceDidUpdate(_ dataSource: DataSource){
         
     }
 

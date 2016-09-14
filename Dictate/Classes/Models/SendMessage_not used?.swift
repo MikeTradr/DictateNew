@@ -21,13 +21,13 @@ class SendMessage: UIViewController, MFMessageComposeViewControllerDelegate {
             controller.body = "Text Message Body Here";
             controller.recipients = ["(415) 555-4387"]
             controller.messageComposeDelegate = self;
-            self.presentViewController(controller, animated: true, completion: nil);
+            self.present(controller, animated: true, completion: nil);
         }
     }
     
     // this function will be called after the user presses the cancel button or sends the text
-    func messageComposeViewController(controller: MFMessageComposeViewController, didFinishWithResult result: MessageComposeResult) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+        self.dismiss(animated: true, completion: nil)
     }
     
 }

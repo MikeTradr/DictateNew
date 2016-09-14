@@ -10,12 +10,12 @@ import UIKit
 
 
 protocol DetailsTableViewCellDateSelectionDelegate{     //Anil added 022416
-    func didSelectDate(date:NSDate, inCell cell:DetailsTableViewCell)
+    func didSelectDate(_ date:Date, inCell cell:DetailsTableViewCell)
 }
 
 class DetailsTableViewCell: UITableViewCell {
     
-    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+    let defaults = UserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
 
    
     @IBOutlet weak var label: UILabel!
@@ -38,11 +38,11 @@ class DetailsTableViewCell: UITableViewCell {
     
     
     
-    @IBAction func dateChanged(sender: AnyObject) {
+    @IBAction func dateChanged(_ sender: AnyObject) {
         // updates ur label in the cell above
-        let dateFormatter =  NSDateFormatter()
+        let dateFormatter =  DateFormatter()
         dateFormatter.dateFormat = "M-dd-yyyy h:mm a"
-        let dateString = dateFormatter.stringFromDate(datePicker.date)
+        let dateString = dateFormatter.string(from: datePicker.date)
         resultsLabel.text = dateString
         
         delegate?.didSelectDate(datePicker.date, inCell: self)

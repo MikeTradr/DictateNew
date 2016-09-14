@@ -12,44 +12,46 @@ import WatchConnectivity
 @available(iOS 9.0, *)
 class ConnectivityPhoneManager: NSObject, WCSessionDelegate {
     
+    private static var __once: () = {
+            Static.instance = ConnectivityPhoneManager()
+        }()
+    
     class var sharedInstance : ConnectivityPhoneManager {
         struct Static {
-            static var onceToken : dispatch_once_t = 0
+            static var onceToken : Int = 0
             static var instance : ConnectivityPhoneManager? = nil
         }
-        dispatch_once(&Static.onceToken) {
-            Static.instance = ConnectivityPhoneManager()
-        }
+        _ = ConnectivityPhoneManager.__once
         return Static.instance!
     }
     
     var label = ""
-    let now = NSDate()
+    let now = Date()
     var timeOutput = ""
     var outputInterval = ""
-    let dateFormatter = NSDateFormatter()
+    let dateFormatter = DateFormatter()
     
-    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+    let defaults = UserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
     
     var dict = [String: String]()   //make empty dictionary
     
-    private let session: WCSession? = WCSession.isSupported() ? WCSession.defaultSession() : nil
+    fileprivate let session: WCSession? = WCSession.isSupported() ? WCSession.default() : nil
     
  
     
     //pass NSUserDefaults Key to send to watch"
-    func sendKey(keyString:String) {  //key is the UserDefaults ID
+    func sendKey(_ keyString:String) {  //key is the UserDefaults ID
         print("p36 key: \(keyString)")
         
-        let updatedValue:String = defaults.stringForKey(keyString)!
+        let updatedValue:String = defaults.string(forKey: keyString)!
         print("p40 updatedValue: \(updatedValue)")
 
         dict[keyString] = updatedValue
         
         if (WCSession.isSupported()) {
-            let session = WCSession.defaultSession()
+            let session = WCSession.default()
             session.delegate = self
-            session.activateSession()
+            session.activate()
         }
        //send message to watch
        //session?.sendMessage([keyString:updatedValue], replyHandler: nil, errorHandler: nil)
@@ -57,7 +59,7 @@ class ConnectivityPhoneManager: NSObject, WCSessionDelegate {
 
         
         // The paired iPhone has to be connected via Bluetooth.
-        if let session = session where session.reachable {
+        if let session = session , session.isReachable {
             session.sendMessage(dict,
                                 replyHandler: { replyData in
                                     // handle reply from iPhone app here
@@ -73,14 +75,14 @@ class ConnectivityPhoneManager: NSObject, WCSessionDelegate {
         
     }   //end func sendKey
     
-    func recieveKey(keyString:String) {  //key is the UserDefaults ID
+    func recieveKey(_ keyString:String) {  //key is the UserDefaults ID
         
         
     
     }
     
     
-    func session(session: WCSession, didReceiveMessage message: [String : AnyObject], replyHandler: ([String : AnyObject]) -> Void) {
+    func session(_ session: WCSession, didReceiveMessage message: [String : Any], replyHandler: @escaping ([String : Any]) -> Void) {
         //recieve messages from watch
         let key = message
         
@@ -89,7 +91,7 @@ class ConnectivityPhoneManager: NSObject, WCSessionDelegate {
         let data = "0000"
         let forKey  = "defaultReminderListID"
 
-        defaults.setObject(data, forKey: forKey)    //sets data into forKey USerData
+        defaults.set(data, forKey: forKey)    //sets data into forKey USerData
 
         
        // let counterValue = message[key]
@@ -98,7 +100,7 @@ class ConnectivityPhoneManager: NSObject, WCSessionDelegate {
     
         
         //Use this to update the UI instantaneously (otherwise, takes a little while)
-        dispatch_async(dispatch_get_main_queue()) {
+        DispatchQueue.main.async {
             if let counterValue = message["counterValue"] as? Int {
                // self.counterData.append(counterValue)
                // self.mainTableView.reloadData()

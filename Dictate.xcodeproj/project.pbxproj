@@ -1076,6 +1076,7 @@
 					D31BF2F91CDAB93700521A65 = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = A6V8M5Q68S;
+						LastSwiftMigration = 0800;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -1085,6 +1086,7 @@
 					D31BF3051CDAB93700521A65 = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = A6V8M5Q68S;
+						LastSwiftMigration = 0800;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -1097,6 +1099,7 @@
 					D3F8ACE41B696FB00070C097 = {
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = A6V8M5Q68S;
+						LastSwiftMigration = 0800;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -1112,6 +1115,7 @@
 					D3FDDE7A1D76D99900050301 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = A6V8M5Q68S;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -1450,6 +1454,7 @@
 				PROVISIONING_PROFILE = "e451216e-d675-46ee-a294-137eab35fed7";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 2.2;
 			};
@@ -1478,6 +1483,7 @@
 				PROVISIONING_PROFILE = "e451216e-d675-46ee-a294-137eab35fed7";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 2.2;
 			};
@@ -1512,6 +1518,7 @@
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "DictateWatch Extension/Watch-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 2.2;
 			};
@@ -1544,6 +1551,7 @@
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "DictateWatch Extension/Watch-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 2.2;
 			};
@@ -1666,6 +1674,7 @@
 				PROVISIONING_PROFILE = "bc3c1ed8-5eb4-4139-9638-6ba671cb46e4";
 				SWIFT_OBJC_BRIDGING_HEADER = "Dictate/Classes/Controllers/Dictate-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -1701,6 +1710,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "bc3c1ed8-5eb4-4139-9638-6ba671cb46e4";
 				SWIFT_OBJC_BRIDGING_HEADER = "Dictate/Classes/Controllers/Dictate-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -1719,6 +1729,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.thatsoft.dictateApp.todayWidget;
 				PRODUCT_NAME = todayWidget;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -1734,6 +1745,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.thatsoft.dictateApp.todayWidget;
 				PRODUCT_NAME = todayWidget;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

@@ -18,13 +18,13 @@ import WatchConnectivity
 class WatchSessionManager: NSObject, WCSessionDelegate {
     
     static let sharedManager = WatchSessionManager()
-    private override init() {
+    fileprivate override init() {
         super.init()
     }
     
-    private let session: WCSession? = WCSession.isSupported() ? WCSession.defaultSession() : nil
+    fileprivate let session: WCSession? = WCSession.isSupported() ? WCSession.default() : nil
     
-    private var validSession: WCSession? {
+    fileprivate var validSession: WCSession? {
         
         // paired - the user has to have their device paired to the watch
         // watchAppInstalled - the user must have your watch app installed
@@ -32,7 +32,7 @@ class WatchSessionManager: NSObject, WCSessionDelegate {
         // Note: if the device is paired, but your watch app is not installed
         // consider prompting the user to install it for a better experience
         
-        if let session = session where session.paired && session.watchAppInstalled {
+        if let session = session , session.isPaired && session.isWatchAppInstalled {
             return session
         }
         return nil
@@ -40,7 +40,7 @@ class WatchSessionManager: NSObject, WCSessionDelegate {
     
     func startSession() {
         session?.delegate = self
-        session?.activateSession()
+        session?.activate()
     }
 }
 
@@ -50,7 +50,7 @@ class WatchSessionManager: NSObject, WCSessionDelegate {
 extension WatchSessionManager {
     
     // Sender
-    func updateApplicationContext(applicationContext: [String : AnyObject]) throws {
+    func updateApplicationContext(_ applicationContext: [String : AnyObject]) throws {
         if let session = validSession {
             do {
                 try session.updateApplicationContext(applicationContext)
@@ -61,10 +61,10 @@ extension WatchSessionManager {
     }
     
     // Receiver
-    func session(session: WCSession, didReceiveApplicationContext applicationContext: [String : AnyObject]) {
+    func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String : Any]) {
         // handle receiving application context
         
-        dispatch_async(dispatch_get_main_queue()) {
+        DispatchQueue.main.async {
             // make sure to put on the main queue to update UI!
         }
     }
@@ -76,19 +76,19 @@ extension WatchSessionManager {
 extension WatchSessionManager {
     
     // Sender
-    func transferUserInfo(userInfo: [String : AnyObject]) -> WCSessionUserInfoTransfer? {
+    func transferUserInfo(_ userInfo: [String : AnyObject]) -> WCSessionUserInfoTransfer? {
         return validSession?.transferUserInfo(userInfo)
     }
     
-    func session(session: WCSession, didFinishUserInfoTransfer userInfoTransfer: WCSessionUserInfoTransfer, error: NSError?) {
+    func session(_ session: WCSession, didFinish userInfoTransfer: WCSessionUserInfoTransfer, error: Error?) {
         // implement this on the sender if you need to confirm that
         // the user info did in fact transfer
     }
     
     // Receiver
-    func session(session: WCSession, didReceiveUserInfo userInfo: [String : AnyObject]) {
+    func session(_ session: WCSession, didReceiveUserInfo userInfo: [String : Any]) {
         // handle receiving user info
-        dispatch_async(dispatch_get_main_queue()) {
+        DispatchQueue.main.async {
             // make sure to put on the main queue to update UI!
         }
     }
@@ -99,18 +99,18 @@ extension WatchSessionManager {
 extension WatchSessionManager {
     
     // Sender
-    func transferFile(file: NSURL, metadata: [String : AnyObject]) -> WCSessionFileTransfer? {
+    func transferFile(_ file: URL, metadata: [String : AnyObject]) -> WCSessionFileTransfer? {
         return validSession?.transferFile(file, metadata: metadata)
     }
     
-    func session(session: WCSession, didFinishFileTransfer fileTransfer: WCSessionFileTransfer, error: NSError?) {
+    func session(_ session: WCSession, didFinish fileTransfer: WCSessionFileTransfer, error: Error?) {
         // handle filed transfer completion
     }
     
     // Receiver
-    func session(session: WCSession, didReceiveFile file: WCSessionFile) {
+    func session(_ session: WCSession, didReceive file: WCSessionFile) {
         // handle receiving file
-        dispatch_async(dispatch_get_main_queue()) {
+        DispatchQueue.main.async {
             // make sure to put on the main queue to update UI!
         }
     }
@@ -121,39 +121,39 @@ extension WatchSessionManager {
 extension WatchSessionManager {
     
     // Live messaging! App has to be reachable
-    private var validReachableSession: WCSession? {
-        if let session = validSession where session.reachable {
+    fileprivate var validReachableSession: WCSession? {
+        if let session = validSession , session.isReachable {
             return session
         }
         return nil
     }
     
     // Sender
-    func sendMessage(message: [String : AnyObject],
+    func sendMessage(_ message: [String : AnyObject],
                      replyHandler: (([String : AnyObject]) -> Void)? = nil,
                      errorHandler: ((NSError) -> Void)? = nil)
     {
         validReachableSession?.sendMessage(message, replyHandler: replyHandler, errorHandler: errorHandler)
     }
     
-    func sendMessageData(data: NSData,
-                         replyHandler: ((NSData) -> Void)? = nil,
+    func sendMessageData(_ data: Data,
+                         replyHandler: ((Data) -> Void)? = nil,
                          errorHandler: ((NSError) -> Void)? = nil)
     {
-        validReachableSession?.sendMessageData(data, replyHandler: replyHandler, errorHandler: errorHandler)
+        validReachableSession?.sendMessageData(data, replyHandler: replyHandler, errorHandler: errorHandler as! ((Error) -> Void)?)
     }
     
     // Receiver
-    func session(session: WCSession, didReceiveMessage message: [String : AnyObject], replyHandler: ([String : AnyObject]) -> Void) {
+    func session(_ session: WCSession, didReceiveMessage message: [String : Any], replyHandler: @escaping ([String : Any]) -> Void) {
         // handle receiving message
-        dispatch_async(dispatch_get_main_queue()) {
+        DispatchQueue.main.async {
             // make sure to put on the main queue to update UI!
         }
     }
     
-    func session(session: WCSession, didReceiveMessageData messageData: NSData, replyHandler: (NSData) -> Void) {
+    func session(_ session: WCSession, didReceiveMessageData messageData: Data, replyHandler: @escaping (Data) -> Void) {
         // handle receiving message data
-        dispatch_async(dispatch_get_main_queue()) {
+        DispatchQueue.main.async {
             // make sure to put on the main queue to update UI!
         }
     }

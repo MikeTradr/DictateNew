@@ -17,14 +17,14 @@ import EventKit
 
 class TodayIC: WKInterfaceController {
     
-    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+    let defaults = UserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
     
     var showCalendarsView:Bool  = true
     var checked:Bool            = false
     var eventID:String          = ""
-    var today:NSDate            = NSDate()      //current time
-    var now:NSDate              = NSDate()      //current time, same as today
-    var todayPlusSeven:NSDate   = NSDate()
+    var today:Date            = Date()      //current time
+    var now:Date              = Date()      //current time, same as today
+    var todayPlusSeven:Date   = Date()
     var allEvents: Array<EKEvent> = []
     var timeUntil:String        = ""
   
@@ -32,8 +32,8 @@ class TodayIC: WKInterfaceController {
     @IBOutlet var labelTime: WKInterfaceLabel!
     @IBOutlet weak var table: WKInterfaceTable!
     
-    let dateFormatter = NSDateFormatter()
-    var timer:NSTimer!
+    let dateFormatter = DateFormatter()
+    var timer:Timer!
 
     
 //---- funcs below here -----------------------------------------------------------
@@ -42,13 +42,13 @@ class TodayIC: WKInterfaceController {
     func fetchEvents(){
         
       //  let dateHelper = JTDateHelper()
-        let startDate =  NSDate()
+        let startDate =  Date()
         
        // let cal = NSCalendar(calendarIdentifier: NSGregorianCalendar)
        // let next10Days = cal!.dateByAddingUnit(NSCalendarUnit.Day, value: 10, toDate: today, options: .Day)
         
-        let calendar = NSCalendar.currentCalendar()
-        let endDate: NSDate = calendar.dateByAddingUnit(NSCalendarUnit.Day, value: 4, toDate: startDate, options: [])!
+        let calendar = Calendar.current
+        let endDate: Date = (calendar as NSCalendar).date(byAdding: NSCalendar.Unit.day, value: 4, to: startDate, options: [])!
         
         // value above was 10 Mke 061316
         
@@ -69,7 +69,7 @@ class TodayIC: WKInterfaceController {
     
     func updateScreen(){
         dateFormatter.dateFormat = "h:mm"
-        let nowString = dateFormatter.stringFromDate(NSDate())   //set to today date for now
+        let nowString = dateFormatter.string(from: Date())   //set to today date for now
         
         self.labelTime.setText(nowString)
         //self.loadTableData()
@@ -82,7 +82,7 @@ class TodayIC: WKInterfaceController {
     }
     
     @IBAction func menuSettings() {
-        presentControllerWithName("Settings", context: "Events")
+        presentController(withName: "Settings", context: "Events")
     }
 //---- end Menu functions ----------------------------------------
     
@@ -92,15 +92,15 @@ class TodayIC: WKInterfaceController {
         
     }
    */
-    override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
+    override func awake(withContext context: Any?) {
+        super.awake(withContext: context)
         // Configure interface objects here.
         
         NSLog("%@ w68 TodayIC awakeWithContext", self)
         print("w70 TodayIC awakeWithContext")
         
         // Create a timer to refresh the time every second
-        timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: Selector("updateScreen"), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(TodayIC.updateScreen), userInfo: nil, repeats: true)
         timer.fire()
 
         
@@ -111,7 +111,7 @@ class TodayIC: WKInterfaceController {
         //get Access to Reminders
         NSLog("%@ w60 appDelegate", self)
         print("w61 call getAccessToEventStoreForType")
-        ReminderManager.sharedInstance.getAccessToEventStoreForType(EKEntityType.Reminder, completion: { (granted) -> Void in
+        ReminderManager.sharedInstance.getAccessToEventStoreForType(EKEntityType.reminder, completion: { (granted) -> Void in
             
             if granted{
                 print("w65 Reminders granted: \(granted)")
@@ -122,7 +122,7 @@ class TodayIC: WKInterfaceController {
         NSLog("%@ w70 appDelegate", self)
         print("w71 call getAccessToEventStoreForType")
         //FIXME:9
-        EventManager.sharedInstance.getAccessToEventStoreForType(EKEntityType.Event, completion: { (granted) -> Void in
+        EventManager.sharedInstance.getAccessToEventStoreForType(EKEntityType.event, completion: { (granted) -> Void in
             
             if granted{
                 print("w75 Events granted: \(granted)")
@@ -138,7 +138,7 @@ class TodayIC: WKInterfaceController {
         self.loadTableData()
         
         dateFormatter.dateFormat = "h:mm"
-        let nowString = dateFormatter.stringFromDate(NSDate())
+        let nowString = dateFormatter.string(from: Date())
         self.labelTime.setText(nowString)
         
     }
@@ -175,30 +175,30 @@ class TodayIC: WKInterfaceController {
         
         table.setNumberOfRows(allEvents.count, withRowType: "tableRow")
         
-        for (index, title) in allEvents.enumerate() {
+        for (index, title) in allEvents.enumerated() {
         
             print("---------------------------------------------------")
             print("w175 index, title: \(index), \(title)")
             print("w176 index: \(index)")
             print("w177 table: \(table)")
-            print("w178 table.rowControllerAtIndex(index): \(table.rowControllerAtIndex(index))")
+            print("w178 table.rowControllerAtIndex(index): \(table.rowController(at: index))")
            
             
-            if let row = table.rowControllerAtIndex(index) as? TodayEventsTableRC {
+            if let row = table.rowController(at: index) as? TodayEventsTableRC {
                 print("w183 WE HERE????")
                 
                 let item = allEvents[index]
                                 
                 dateFormatter.dateFormat = "h:mm a"
                 
-                let startTimeA = dateFormatter.stringFromDate(item.startDate)
-                var startTime = startTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
+                let startTimeA = dateFormatter.string(from: item.startDate)
+                var startTime = startTimeA.replacingOccurrences(of: ":00", with: "")
                 NSLog("%@ w137", startTime)
                 
                 dateFormatter.dateFormat = "h:mm"
                 
-                let endTimeA = dateFormatter.stringFromDate(item.endDate)
-                let endTime = endTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
+                let endTimeA = dateFormatter.string(from: item.endDate)
+                let endTime = endTimeA.replacingOccurrences(of: ":00", with: "")
                 
                 var endTimeDash = "- \(endTime)"
                 
@@ -208,16 +208,16 @@ class TodayIC: WKInterfaceController {
                 
                 timeUntil = TimeManger.sharedInstance.timeInterval(item.startDate)
                 
-                if item.allDay {     // if allDay bool is true
+                if item.isAllDay {     // if allDay bool is true
                     row.groupTime.setHidden(true)
                 }
                 
                 let startTimeItem = item.startDate
-                let timeUntilStart = startTimeItem.timeIntervalSinceDate(NSDate())
+                let timeUntilStart = startTimeItem.timeIntervalSince(Date())
                 //print("w187 timeUntilStart: \(timeUntilStart)")
                 
                 let endTimeItem = item.endDate
-                let timeUntilEnd = endTimeItem.timeIntervalSinceDate(NSDate())
+                let timeUntilEnd = endTimeItem.timeIntervalSince(Date())
                 //print("w192 timeUntilEnd: \(timeUntilEnd)")
                 
                 if ((timeUntilStart <= 0) && (timeUntilEnd >= 0)) {
@@ -231,7 +231,7 @@ class TodayIC: WKInterfaceController {
                     
                     // works
                     let headlineFont =
-                        UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
+                        UIFont.preferredFont(forTextStyle: UIFontTextStyle.headline)
                     
                     let fontAttribute = [NSFontAttributeName: headlineFont]
                     
@@ -242,7 +242,7 @@ class TodayIC: WKInterfaceController {
 
                     
                 } else {
-                    row.labelTimeUntil.setTextColor(UIColor.greenColor())
+                    row.labelTimeUntil.setTextColor(UIColor.green)
                     row.labelTimeUntil.setText("\(timeUntil)  ")                   
                 }
                 
@@ -260,18 +260,18 @@ class TodayIC: WKInterfaceController {
                 // row.labelStartTime.setTextColor(UIColor(CGColor: item.calendar.CGColor))
                 // row.labelEndTime.setTextColor(UIColor(CGColor: item.calendar.CGColor))
                 
-                row.labelStartTime.setTextColor(UIColor.whiteColor().colorWithAlphaComponent(0.8))
-                row.labelEndTime.setTextColor(UIColor.whiteColor().colorWithAlphaComponent(0.65))
+                row.labelStartTime.setTextColor(UIColor.white.withAlphaComponent(0.8))
+                row.labelEndTime.setTextColor(UIColor.white.withAlphaComponent(0.65))
                 
-                row.labelEventLocation.setTextColor(UIColor(CGColor: item.calendar.CGColor))
+                row.labelEventLocation.setTextColor(UIColor(cgColor: item.calendar.cgColor))
                 
-                row.verticalBar.setBackgroundColor(UIColor(CGColor: item.calendar.CGColor))
+                row.verticalBar.setBackgroundColor(UIColor(cgColor: item.calendar.cgColor))
                 
-                row.imageVertBar.setTintColor(UIColor(CGColor: item.calendar.CGColor))
+                row.imageVertBar.setTintColor(UIColor(cgColor: item.calendar.cgColor))
                 
                 // row.imageVertBar.image = [row.imageVertBar imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
                 
-                row.groupEvent.setBackgroundColor(UIColor(CGColor: item.calendar.CGColor).colorWithAlphaComponent(0.375))
+                row.groupEvent.setBackgroundColor(UIColor(cgColor: item.calendar.cgColor).withAlphaComponent(0.375))
             } // end if let row...
             
             
@@ -280,7 +280,7 @@ class TodayIC: WKInterfaceController {
     }   //end loadTableData
     
     
-    override func contextForSegueWithIdentifier(segueIdentifier: String, inTable table: WKInterfaceTable, rowIndex: Int) -> AnyObject? {
+    override func contextForSegue(withIdentifier segueIdentifier: String, in table: WKInterfaceTable, rowIndex: Int) -> Any? {
         
         if segueIdentifier == "EventDetails" {
             let selectedEvent = allEvents[rowIndex]
@@ -298,11 +298,11 @@ class TodayIC: WKInterfaceController {
     }
     
     @IBAction func buttonMainIC() {
-        presentControllerWithName("Main", context: "Today")
+        presentController(withName: "Main", context: "Today")
     }
 
     @IBAction func buttonReminders() {
-        presentControllerWithName("Reminders", context: "Today")
+        presentController(withName: "Reminders", context: "Today")
     }
 
 }

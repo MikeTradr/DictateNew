@@ -9,7 +9,7 @@
 import UIKit
 
 @objc protocol DateCellDelegate{
-    func alarmStateChanged(state:Bool,cell:DateTableViewCell)
+    func alarmStateChanged(_ state:Bool,cell:DateTableViewCell)
     
 }
 
@@ -24,13 +24,13 @@ class DateTableViewCell: UITableViewCell {
         // Initialization code
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
 
-    @IBAction func alarmSwitchValueChanged(sender: UISwitch) {
-        self.delegate?.alarmStateChanged(sender.on, cell: self)
+    @IBAction func alarmSwitchValueChanged(_ sender: UISwitch) {
+        self.delegate?.alarmStateChanged(sender.isOn, cell: self)
     }
 }

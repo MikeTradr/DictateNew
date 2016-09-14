@@ -17,7 +17,7 @@ import UIKit
 
 class WatchGeneral: NSObject {
     
-    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+    let defaults = UserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
     var carrierName = ""
     var mcc = ""
     var mnc = ""
@@ -72,13 +72,9 @@ class WatchGeneral: NSObject {
         */
     }
     
-    func delay(delay:Double, closure:()->()) {
-        dispatch_after(
-            dispatch_time(
-                DISPATCH_TIME_NOW,
-                Int64(delay * Double(NSEC_PER_SEC))
-            ),
-            dispatch_get_main_queue(), closure)
+    func delay(_ delay:Double, closure:@escaping ()->()) {
+        DispatchQueue.main.asyncAfter(
+            deadline: DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: closure)
     }
     
     
@@ -88,9 +84,9 @@ class WatchGeneral: NSObject {
         return false
     }
 */
-    func makeCall(toPhone:String) {
+    func makeCall(_ toPhone:String) {
         
-        if let url = NSURL(string: "tel://\(toPhone)") {
+        if let url = URL(string: "tel://\(toPhone)") {
             //TODO Anl can this work here?
             //UIApplication.sharedApplication().openURL(url)
         }
@@ -100,10 +96,10 @@ class WatchGeneral: NSObject {
         
         // ____ Save to Parse Database ____________________________________
         
-        let strRaw      = defaults.stringForKey("strRaw")
-        let actionType:String  = defaults.stringForKey("actionType")!
-        var output      = defaults.stringForKey("output")
-        var calendarName    = defaults.stringForKey("calendarName")
+        let strRaw      = defaults.string(forKey: "strRaw")
+        let actionType:String  = defaults.string(forKey: "actionType")!
+        let output      = defaults.string(forKey: "output")
+        let calendarName    = defaults.string(forKey: "calendarName")
 
 
         
@@ -123,7 +119,7 @@ class WatchGeneral: NSObject {
 */
         //TODO get these two fields from code!
         //TODO see here:
-        print("109 Device and Phone munber in here: \(NSUserDefaults.standardUserDefaults().dictionaryRepresentation())")
+        print("109 Device and Phone munber in here: \(UserDefaults.standard.dictionaryRepresentation())")
  /*
         let uuid = UIDevice.currentDevice().identifierForVendor!.UUIDString
         let device = UIDevice.currentDevice().model

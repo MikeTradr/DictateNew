@@ -17,7 +17,7 @@ import Foundation
 class NotificationController: WKUserNotificationInterfaceController {
     
     var timeUntil:String        = ""
-    let dateFormatter = NSDateFormatter()
+    let dateFormatter = DateFormatter()
     
     
     @IBOutlet var labelEventTitle: WKInterfaceLabel!    
@@ -45,7 +45,7 @@ class NotificationController: WKUserNotificationInterfaceController {
     }
 
     
-    override func didReceiveLocalNotification(localNotification: UILocalNotification, withCompletion completionHandler: ((WKUserNotificationInterfaceType) -> Void)) {
+    override func didReceive(_ localNotification: UILocalNotification, withCompletion completionHandler: (@escaping (WKUserNotificationInterfaceType) -> Void)) {
         // This method is called when a local notification needs to be presented.
         // Implement it if you use a dynamic notification interface.
         // Populate your dynamic notification interface as quickly as possible.
@@ -55,12 +55,12 @@ class NotificationController: WKUserNotificationInterfaceController {
         
         dateFormatter.dateFormat = "h:mm a"
         
-        let startTimeA = dateFormatter.stringFromDate(localNotification.fireDate!)
-        var startTime = startTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
+        let startTimeA = dateFormatter.string(from: localNotification.fireDate!)
+        var startTime = startTimeA.replacingOccurrences(of: ":00", with: "")
         print("w58 startime \(startTime)")
         
         let startTimeItem = localNotification.fireDate!
-        let timeUntilStart = startTimeItem.timeIntervalSinceDate(NSDate())
+        let timeUntilStart = startTimeItem.timeIntervalSince(Date())
         
         
         
@@ -84,7 +84,7 @@ class NotificationController: WKUserNotificationInterfaceController {
         
         // works
         let headlineFont =
-            UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
+            UIFont.preferredFont(forTextStyle: UIFontTextStyle.headline)
         
         let fontAttribute = [NSFontAttributeName: headlineFont]
         
@@ -98,18 +98,18 @@ class NotificationController: WKUserNotificationInterfaceController {
 
         
         
-        completionHandler(.Custom)
+        completionHandler(.custom)
     }
     
     
     
-    override func didReceiveRemoteNotification(remoteNotification: [NSObject : AnyObject], withCompletion completionHandler: ((WKUserNotificationInterfaceType) -> Void)) {
+    override func didReceiveRemoteNotification(_ remoteNotification: [AnyHashable: Any], withCompletion completionHandler: (@escaping (WKUserNotificationInterfaceType) -> Void)) {
         // This method is called when a remote notification needs to be presented.
         // Implement it if you use a dynamic notification interface.
         // Populate your dynamic notification interface as quickly as possible.
         //
         // After populating your dynamic notification interface call the completion block.
-        completionHandler(.Custom)
+        completionHandler(.custom)
     }
     
 }

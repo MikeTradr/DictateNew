@@ -15,21 +15,21 @@ class TimeDiffViewController: UIViewController {
     @IBOutlet weak var labelTimeUntil: UILabel!
     
     var label = ""
-    let now = NSDate()
+    let now = Date()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
-        let calendar = NSCalendar.currentCalendar()
+        let calendar = Calendar.current
         
-        let components = NSDateComponents()
+        var components = DateComponents()
         components.day = 29
         components.month = 03
         components.year = 2016
         components.hour = 19
         components.minute = 30
-        let newDate: NSDate = calendar.dateFromComponents(components)!
+        let newDate: Date = calendar.date(from: components)!
         
         //let eventTime: NSDate = calendar.dateBySettingHour(5, minute: 30, second: 0, ofDate: now, options: NSCalendarOptions())!
         
@@ -38,17 +38,17 @@ class TimeDiffViewController: UIViewController {
        
         var timeOutput = ""
         
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         
         var dateAsString = "2016-04-03 12:40:00"
-        let date3 = dateFormatter.dateFromString(dateAsString)!
+        let date3 = dateFormatter.date(from: dateAsString)!
         
         labelTimeUntil.text = TimeManger.sharedInstance.timeInterval(date3)
         
         if (labelTimeUntil.text == "Now" || labelTimeUntil.text == "in 1 minute") {
-            labelTimeUntil.textColor = UIColor.redColor()
+            labelTimeUntil.textColor = UIColor.red
         }
         
         // Do any additional setup after loading the view.

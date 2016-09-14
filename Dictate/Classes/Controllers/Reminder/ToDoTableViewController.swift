@@ -19,13 +19,13 @@ class ToDoTableViewController: UITableViewController,BFPaperCheckboxDelegate {
     var audioPlayer = AVAudioPlayer()
     
     var numberOfNewItems:Int    = 0
-    var startDate:NSDate!
-    var endDate:NSDate!
-    var today:NSDate!
+    var startDate:Date!
+    var endDate:Date!
+    var today:Date!
     var reminders:[EKReminder] = []
     var eventStore : EKEventStore = EKEventStore()
-    lazy var dateFormatter:NSDateFormatter = {
-        let _dateFormatter = NSDateFormatter()
+    lazy var dateFormatter:DateFormatter = {
+        let _dateFormatter = DateFormatter()
         _dateFormatter.dateFormat = "dd-MM-yyyy"
         return _dateFormatter
         }()
@@ -47,16 +47,16 @@ class ToDoTableViewController: UITableViewController,BFPaperCheckboxDelegate {
     
     // TODO Anil get calendars from users, Add to array: All, Default, Last, +Array and make into array hard coded at prsent 7-17-15
     
-    @IBAction func buttonReminderListSelector(sender: AnyObject) {
+    @IBAction func buttonReminderListSelector(_ sender: AnyObject) {
         
 //        let storyboard = UIStoryboard(name: "Main", bundle: nil)
 //        let vc = storyboard.instantiateViewControllerWithIdentifier("ShowReminders") 
 //        self.presentViewController(vc, animated: true, completion: nil)
         
         if (self.selectionController == nil){
-            self.selectionController = self.storyboard!.instantiateViewControllerWithIdentifier("CalendarSelectionViewController") as! CalendarSelectionViewController
+            self.selectionController = self.storyboard!.instantiateViewController(withIdentifier: "CalendarSelectionViewController") as! CalendarSelectionViewController
         }
-        let calendars = ReminderManager.sharedInstance.eventStore.calendarsForEntityType(EKEntityType.Reminder)
+        let calendars = ReminderManager.sharedInstance.eventStore.calendars(for: EKEntityType.reminder)
         self.selectionController.calendarList = calendars;
 //        self.selectionController.selectedCalendars = [self.reminder.calendar]
         self.selectionController.allowsMultipleSelection = false
@@ -67,7 +67,7 @@ class ToDoTableViewController: UITableViewController,BFPaperCheckboxDelegate {
     
     
     
-    @IBAction func shareButtonTapped(sender: AnyObject) {   //added by Mike 122415
+    @IBAction func shareButtonTapped(_ sender: AnyObject) {   //added by Mike 122415
         
     //TODO Anil, Mike need to give the data, maybe see the mail html format Mike does!
         
@@ -125,7 +125,7 @@ class ToDoTableViewController: UITableViewController,BFPaperCheckboxDelegate {
         
         
         //New Excluded Activities Code
-        activityViewController.excludedActivityTypes = [UIActivityTypeAirDrop, UIActivityTypeAddToReadingList]
+        activityViewController.excludedActivityTypes = [UIActivityType.airDrop, UIActivityType.addToReadingList]
         //
         
         activityViewController.setValue(mailSubjectText, forKey: "Subject") //set subject for mail
@@ -139,24 +139,24 @@ class ToDoTableViewController: UITableViewController,BFPaperCheckboxDelegate {
                 return
             }
             
-            if activityType == UIActivityTypeMessage {
+            if activityType == UIActivityType.message {
                 print("p130 text")
                 self.remindersForTexting()
                 self.body = self.body + "\r\n" + "💬 from Dictate™ App 😀"
             }
             
-            if activityType == UIActivityTypeMail {
+            if activityType == UIActivityType.mail {
                 print("p136 mail")
                 self.remindersForMailing()
                 self.body = self.body + "\r\n" + "📩 Sent from Dictate™ App 😀" //use this for the mail case...
             }
             
-            if activityType == UIActivityTypePostToTwitter {
+            if activityType == UIActivityType.postToTwitter {
                 print("p142 twitter")
                 self.body = self.body + "\r\n" + "Tweeted from Dictate™ App 😀"
             }
             
-            if activityType == UIActivityTypePostToFacebook {
+            if activityType == UIActivityType.postToFacebook {
                 print("p147 facebook")
                 self.body = self.body + "\r\n" + "posted from Dictate™ App 😀"
             }
@@ -165,7 +165,7 @@ class ToDoTableViewController: UITableViewController,BFPaperCheckboxDelegate {
 
         
         
-        self.presentViewController(activityViewController, animated: true, completion: nil)
+        self.present(activityViewController, animated: true, completion: nil)
         
         activityViewController.completionWithItemsHandler = {(activityType, completed:Bool, returnedItems:[AnyObject]?, error: NSError?) in
             
@@ -175,24 +175,24 @@ class ToDoTableViewController: UITableViewController,BFPaperCheckboxDelegate {
                 return
             }
             
-            if activityType == UIActivityTypeMessage {
+            if activityType == UIActivityType.message {
                 print("p130 text")
                 self.remindersForTexting()
                 self.body = self.body + "\r\n" + "💬 from Dictate™ App 😀"
             }
             
-            if activityType == UIActivityTypeMail {
+            if activityType == UIActivityType.mail {
                 print("p136 mail")
                 self.remindersForMailing()
                 self.body = self.body + "\r\n" + "📩 Sent from Dictate™ App 😀" //use this for the mail case...
             }
             
-            if activityType == UIActivityTypePostToTwitter {
+            if activityType == UIActivityType.postToTwitter {
                 print("p142 twitter")
                 self.body = self.body + "\r\n" + "Tweeted from Dictate™ App 😀"
             }
             
-            if activityType == UIActivityTypePostToFacebook {
+            if activityType == UIActivityType.postToFacebook {
                 print("p147 facebook")
                 self.body = self.body + "\r\n" + "posted from Dictate™ App 😀"
             }
@@ -246,11 +246,11 @@ class ToDoTableViewController: UITableViewController,BFPaperCheckboxDelegate {
 
     
     
-    func activityViewController(activityViewController: UIActivityViewController, itemForActivityType activityType: String) -> AnyObject? {
-        if activityType == UIActivityTypeMessage {
-            return NSLocalizedString("Like this!", comment: "comment")
-        } else if activityType == UIActivityTypePostToTwitter {
-            return NSLocalizedString("Retweet this!", comment: "comment")
+    func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: String) -> AnyObject? {
+        if activityType == UIActivityType.message {
+            return NSLocalizedString("Like this!", comment: "comment") as AnyObject?
+        } else if activityType == UIActivityType.postToTwitter {
+            return NSLocalizedString("Retweet this!", comment: "comment") as AnyObject?
         } else {
             return nil
         }
@@ -265,10 +265,10 @@ class ToDoTableViewController: UITableViewController,BFPaperCheckboxDelegate {
         setStartDateAndEndDate()
         
         //Added left and Right Swipe gestures. TODO Can add this to the General.swift Class? and call it?
-        let leftSwipe = UISwipeGestureRecognizer(target: self, action: Selector("handleSwipes:"))
-        let rightSwipe = UISwipeGestureRecognizer(target: self, action: Selector("handleSwipes:"))
-        leftSwipe.direction = .Left
-        rightSwipe.direction = .Right
+        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(ToDoTableViewController.handleSwipes(_:)))
+        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(ToDoTableViewController.handleSwipes(_:)))
+        leftSwipe.direction = .left
+        rightSwipe.direction = .right
         view.addGestureRecognizer(leftSwipe)
         view.addGestureRecognizer(rightSwipe)
         
@@ -276,15 +276,15 @@ class ToDoTableViewController: UITableViewController,BFPaperCheckboxDelegate {
     
     
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         
-        showHideButton.setTitle("Show Completed", forState: .Normal)
-        showHideButton.selected = true
+        showHideButton.setTitle("Show Completed", for: UIControlState())
+        showHideButton.isSelected = true
         showCompleted = false
         
         fetchReminders()
         //Play sound
-        var alertSound3: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("button-14", ofType: "mp3")!)
+        var alertSound3: URL = URL(fileURLWithPath: Bundle.main.path(forResource: "button-14", ofType: "mp3")!)
         //General.playSound(alertSound3!)
 //        playSound(alertSound3)
     }
@@ -301,7 +301,7 @@ class ToDoTableViewController: UITableViewController,BFPaperCheckboxDelegate {
         //body = "<html><body>"
         //body = "\(body)<font size=\"6\" color=\"red\"><b>\(reminderListTitle.title)</b></font><br><hr> "
         
-        for (index, title) in self.reminders.enumerate() {
+        for (index, title) in self.reminders.enumerated() {
             print("---------------------------------------------------")
             print("p191 index, title: \(index), \(title)")
             
@@ -361,7 +361,7 @@ class ToDoTableViewController: UITableViewController,BFPaperCheckboxDelegate {
         //body = "<html><body>"
         //body = "\(body)<font size=\"6\" color=\"red\"><b>\(reminderListTitle.title)</b></font><br><hr> "
         
-        for (index, title) in self.reminders.enumerate() {
+        for (index, title) in self.reminders.enumerated() {
             print("---------------------------------------------------")
             print("p273 index, title: \(index), \(title)")
             
@@ -417,7 +417,7 @@ class ToDoTableViewController: UITableViewController,BFPaperCheckboxDelegate {
     
     
     func fetchReminders(){
-        if let _selectionController = selectionController where selectionController.selectedCalendars.count > 0{
+        if let _selectionController = selectionController , selectionController.selectedCalendars.count > 0{
             self.fetchRemindersFromCalendars(_selectionController.selectedCalendars, showComplted: showCompleted)
             
         }else{
@@ -426,7 +426,7 @@ class ToDoTableViewController: UITableViewController,BFPaperCheckboxDelegate {
         }
     }
     
-    func fetchRemindersFromCalendars(calendars:[EKCalendar]? = nil, showComplted:Bool=false){
+    func fetchRemindersFromCalendars(_ calendars:[EKCalendar]? = nil, showComplted:Bool=false){
         
         ReminderManager.sharedInstance.fetchRemindersFromCalendars(calendars,includeCompleted:showComplted ) { (reminders) -> Void in
             self.reminders = reminders
@@ -434,16 +434,16 @@ class ToDoTableViewController: UITableViewController,BFPaperCheckboxDelegate {
             print("p76 self.reminders: \(self.reminders)")
             print("p77 self.reminders.count: \(self.reminders.count)")
             
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            DispatchQueue.main.async(execute: { () -> Void in
                 self.tableView.reloadData()
                 self.setTabBarBadge()
-                if let _selectionController = self.selectionController where self.selectionController.selectedCalendars.count > 0{
-                    self.reminderListButton.setTitle("List: \(_selectionController.selectedCalendars[0].title) >", forState: .Normal)
+                if let _selectionController = self.selectionController , self.selectionController.selectedCalendars.count > 0{
+                    self.reminderListButton.setTitle("List: \(_selectionController.selectedCalendars[0].title) >", for: UIControlState())
                     
                     self.listName = "\(_selectionController.selectedCalendars[0].title)"    //for activityVC
                     
                 }else{
-                    self.reminderListButton.setTitle("List: All >", forState: .Normal)
+                    self.reminderListButton.setTitle("List: All >", for: UIControlState())
                     self.listName = "All Lists" //for activityVC
 
                 }
@@ -456,8 +456,8 @@ class ToDoTableViewController: UITableViewController,BFPaperCheckboxDelegate {
     }
     
     func setTabBarBadge(){
-        var tabArray = self.tabBarController?.tabBar.items as NSArray!  //added by Mike 082315 here and viewDidLoad appear?
-        var tabItem = tabArray.objectAtIndex(3) as! UITabBarItem              // set 4th tab item
+        let tabArray = self.tabBarController?.tabBar.items as NSArray!  //added by Mike 082315 here and viewDidLoad appear?
+        let tabItem = tabArray?.object(at: 3) as! UITabBarItem              // set 4th tab item
         
         tabItem.badgeValue = String(self.reminders.count)
         
@@ -478,20 +478,20 @@ class ToDoTableViewController: UITableViewController,BFPaperCheckboxDelegate {
     
     func setStartDateAndEndDate()
     {
-        today = NSDate()
+        today = Date()
         let dateHelper = JTDateHelper()
-        startDate =  dateHelper.addToDate(today, months: -6)
-        endDate = dateHelper.addToDate(today, months: 6)
+        startDate =  dateHelper.add(to: today, months: -6)
+        endDate = dateHelper.add(to: today, months: 6)
     }
     
     func createReminderDictionary(){
         
     }
     
-    func playSound(sound: NSURL){       //Added by Mike 082215
+    func playSound(_ sound: URL){       //Added by Mike 082215
         var error:NSError?
         do {
-            audioPlayer = try AVAudioPlayer(contentsOfURL: sound)
+            audioPlayer = try AVAudioPlayer(contentsOf: sound)
         } catch var error1 as NSError {
             error = error1
         }
@@ -499,11 +499,11 @@ class ToDoTableViewController: UITableViewController,BFPaperCheckboxDelegate {
         audioPlayer.play()
     }
     
-    func handleSwipes(sender:UISwipeGestureRecognizer) {
-        if (sender.direction == .Left) {
+    func handleSwipes(_ sender:UISwipeGestureRecognizer) {
+        if (sender.direction == .left) {
             self.tabBarController?.selectedIndex = 4
         }
-        if (sender.direction == .Right) {
+        if (sender.direction == .right) {
             self.tabBarController?.selectedIndex = 2
         }
     }
@@ -542,31 +542,31 @@ class ToDoTableViewController: UITableViewController,BFPaperCheckboxDelegate {
     
     // MARK: - Table view data source
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return reminders.count
     }
     
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell:ToDoTableCell = tableView.dequeueReusableCellWithIdentifier("ReminderCell") as! ToDoTableCell
-        cell.selectionStyle = .None
-        let reminder = reminders[indexPath.row]
+        let cell:ToDoTableCell = tableView.dequeueReusableCell(withIdentifier: "ReminderCell") as! ToDoTableCell
+        cell.selectionStyle = .none
+        let reminder = reminders[(indexPath as NSIndexPath).row]
         cell.reminder = reminder
         cell.titleLabel.text = reminder.title
         cell.calendarName.text = reminder.calendar.title
-        cell.calendarName.textColor = UIColor(CGColor: reminder.calendar.CGColor)
-        cell.verticalBarView.backgroundColor = UIColor(CGColor: reminder.calendar.CGColor)
-        cell.checkBox.tag = indexPath.row
+        cell.calendarName.textColor = UIColor(cgColor: reminder.calendar.cgColor)
+        cell.verticalBarView.backgroundColor = UIColor(cgColor: reminder.calendar.cgColor)
+        cell.checkBox.tag = (indexPath as NSIndexPath).row
         cell.checkBox.delegate = self
-        if reminder.completed{
-           cell.checkBox.checkAnimated(false)
+        if reminder.isCompleted{
+           cell.checkBox.check(animated: false)
         }
         
         return cell
@@ -574,7 +574,7 @@ class ToDoTableViewController: UITableViewController,BFPaperCheckboxDelegate {
     
     
     // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return NO if you do not want the specified item to be editable.
         return true
     }
@@ -582,60 +582,60 @@ class ToDoTableViewController: UITableViewController,BFPaperCheckboxDelegate {
     
     
     // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
             // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
     }
     
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 70
     }
     
-    func paperCheckboxChangedState(checkbox: BFPaperCheckbox!) {
+    func paperCheckboxChangedState(_ checkbox: BFPaperCheckbox!) {
         let row = checkbox.tag
         let reminder = self.reminders[row]
-        reminder.completed = !reminder.completed
-        try? ReminderManager.sharedInstance.eventStore.saveReminder(reminder, commit: true)
+        reminder.isCompleted = !reminder.isCompleted
+        try? ReminderManager.sharedInstance.eventStore.save(reminder, commit: true)
 //        fetchRemindersFromCalendars(nil, showComplted: <#T##Bool#>)
     }
 
     
-    func indexPathForView(view: UIView) -> NSIndexPath? {
+    func indexPathForView(_ view: UIView) -> IndexPath? {
         let viewOrigin = view.bounds.origin
         
-        let viewLocation = tableView.convertPoint(viewOrigin, fromView: view)
+        let viewLocation = tableView.convert(viewOrigin, from: view)
         
-        return tableView.indexPathForRowAtPoint(viewLocation)
+        return tableView.indexPathForRow(at: viewLocation)
     }
     
-    @IBAction func showHideCompletedReminders(sender: UIButton) {
+    @IBAction func showHideCompletedReminders(_ sender: UIButton) {
         
-        if sender.selected{
-            sender.selected = false
-            sender.setTitle("Hide Completed", forState: .Normal)
+        if sender.isSelected{
+            sender.isSelected = false
+            sender.setTitle("Hide Completed", for: UIControlState())
             showCompleted = true
             fetchReminders()
 
         }else{
-            sender.selected = true
-            sender.setTitle("Show Completed", forState: .Normal)
+            sender.isSelected = true
+            sender.setTitle("Show Completed", for: UIControlState())
             showCompleted = false
             fetchReminders()
 
         }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "ReminderEditSegue"{
             let indexPath = self.tableView.indexPathForSelectedRow!
-            let selectedReminder =  reminders[indexPath.row];
-            let navController = segue.destinationViewController as! UINavigationController
+            let selectedReminder =  reminders[(indexPath as NSIndexPath).row];
+            let navController = segue.destination as! UINavigationController
             let destController = navController.topViewController as! ReminderEditorViewController
             destController.reminder = selectedReminder
             

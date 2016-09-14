@@ -10,17 +10,19 @@ import UIKit
 
 class FavoritesManager: NSObject {
     
-    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+    private static var __once: () = {
+            Static.instance = FavoritesManager()
+        }()
+    
+    let defaults = UserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
 
     
     class var sharedInstance : FavoritesManager {
         struct Static {
-            static var onceToken : dispatch_once_t = 0
+            static var onceToken : Int = 0
             static var instance : FavoritesManager? = nil
         }
-        dispatch_once(&Static.onceToken) {
-            Static.instance = FavoritesManager()
-        }
+        _ = FavoritesManager.__once
         return Static.instance!
     }
     

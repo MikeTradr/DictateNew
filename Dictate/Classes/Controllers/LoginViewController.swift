@@ -29,32 +29,32 @@ class LoginViewController: UIViewController {
     
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
-    func displayAlert(title: String, message: String) {
+    func displayAlert(_ title: String, message: String) {
         
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
-            self.dismissViewControllerAnimated(true, completion: nil)
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
+            self.dismiss(animated: true, completion: nil)
         }))
         
-        self.presentViewController(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
         
         
     }
     
     
-    @IBAction func buttonTestPrefsScene(sender: AnyObject) {
+    @IBAction func buttonTestPrefsScene(_ sender: AnyObject) {
         
         
         let storyboard = UIStoryboard(name: "oldPrefs", bundle: nil)
-        let vc = storyboard.instantiateViewControllerWithIdentifier("someViewController") 
-        self.presentViewController(vc, animated: true, completion: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "someViewController") 
+        self.present(vc, animated: true, completion: nil)
         
         
     }
     
     //TODO Temp force login for testing... and Parse Mike username problems lol...
     
-    @IBAction func buttonForceGo(sender: AnyObject) {
+    @IBAction func buttonForceGo(_ sender: AnyObject) {
         
         print("p47 We here buttonForceGo?")
         
@@ -62,17 +62,17 @@ class LoginViewController: UIViewController {
         
         //TODO I atempted to make a user namve for forced login so Parse still works!
         
-        PFUser.logInWithUsernameInBackground("force", password: "force", block: { (user, error) -> Void in
+        PFUser.logInWithUsername(inBackground: "force", password: "force", block: { (user, error) -> Void in
             
             print("119 We here logged in?")
             
             self.activityIndicator.stopAnimating()
-            UIApplication.sharedApplication().endIgnoringInteractionEvents()
+            UIApplication.shared.endIgnoringInteractionEvents()
             
             if user != nil {
                 // lpgged In!
                 
-                self.performSegueWithIdentifier("login", sender: self)
+                self.performSegue(withIdentifier: "login", sender: self)
                 
             } else {
                 
@@ -98,12 +98,12 @@ class LoginViewController: UIViewController {
         
         
         
-        self.performSegueWithIdentifier("login", sender: self)
+        self.performSegue(withIdentifier: "login", sender: self)
         
     }
     
     
-    @IBAction func signUp(sender: AnyObject) {
+    @IBAction func signUp(_ sender: AnyObject) {
         
         print("p44 We here buttonSignUp?")
         
@@ -115,13 +115,13 @@ class LoginViewController: UIViewController {
             
         } else {
             
-            activityIndicator = UIActivityIndicatorView(frame: CGRectMake(0, 0, 50, 50))
+            activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
             activityIndicator.center = self.view.center
             activityIndicator.hidesWhenStopped = true
-            activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+            activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
             view.addSubview(activityIndicator)
             activityIndicator.startAnimating()
-            UIApplication.sharedApplication().beginIgnoringInteractionEvents()
+            UIApplication.shared.beginIgnoringInteractionEvents()
             
             var errorMessage = "Please try again later"
             
@@ -135,18 +135,18 @@ class LoginViewController: UIViewController {
                 //user.userpassword = password.text
                 
                 
-                user.signUpInBackgroundWithBlock({ (success, error) -> Void in
+                user.signUpInBackground(block: { (success, error) -> Void in
                     
                     print("88 We here user.signUpInBackgroundWithBlock")
                     
                     self.activityIndicator.stopAnimating()
-                    UIApplication.sharedApplication().endIgnoringInteractionEvents()
+                    UIApplication.shared.endIgnoringInteractionEvents()
                     
                     if error == nil {
                         
                         //Signup successful
                         
-                        self.performSegueWithIdentifier("login", sender: self)
+                        self.performSegue(withIdentifier: "login", sender: self)
                         
                     } else {
                         
@@ -169,16 +169,16 @@ class LoginViewController: UIViewController {
                 print("136 password.text: \(password.text)")
                 print("136 self.email.text: \(email.text)")
                 
-                PFUser.logInWithUsernameInBackground(username.text!, password: password.text!, block: { (user, error) -> Void in
+                PFUser.logInWithUsername(inBackground: username.text!, password: password.text!, block: { (user, error) -> Void in
                     
                     print("119 We here logged in?")
                     
                     self.activityIndicator.stopAnimating()
-                    UIApplication.sharedApplication().endIgnoringInteractionEvents()
+                    UIApplication.shared.endIgnoringInteractionEvents()
                     
                     if user != nil {
                         // logged In!
-                        self.performSegueWithIdentifier("login", sender: self)
+                        self.performSegue(withIdentifier: "login", sender: self)
                         
                     } else {
                         
@@ -208,28 +208,28 @@ class LoginViewController: UIViewController {
     
     
     
-    @IBAction func buttonLogin(sender: AnyObject) {
+    @IBAction func buttonLogin(_ sender: AnyObject) {
         
         print("p134 We here buttonLogin?")
         
         
         if signupActive == true {
             
-            signupButton.setTitle("Log In", forState: UIControlState.Normal)
+            signupButton.setTitle("Log In", for: UIControlState())
             
             registeredText.text = "Not registered?"
             
-            loginButton.setTitle("Sign Up", forState: UIControlState.Normal)
+            loginButton.setTitle("Sign Up", for: UIControlState())
             
             signupActive = false
             
         } else {
             
-            signupButton.setTitle("Sign Up", forState: UIControlState.Normal)
+            signupButton.setTitle("Sign Up", for: UIControlState())
             
             registeredText.text = "Alredy registered?"
             
-            loginButton.setTitle("Login", forState: UIControlState.Normal)
+            loginButton.setTitle("Login", for: UIControlState())
             
             signupActive = true
             
@@ -237,8 +237,8 @@ class LoginViewController: UIViewController {
         
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let tabBarController = segue.destinationViewController as! UITabBarController
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let tabBarController = segue.destination as! UITabBarController
         tabBarController.selectedIndex = 2
     }
     
@@ -247,18 +247,18 @@ class LoginViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         
         print("190 We in LoginViewController viewDidAppear")
         
         PFUser.logOut()
         
-        print("194 PFUser.currentUser(): \(PFUser.currentUser())")
+        print("194 PFUser.currentUser(): \(PFUser.current())")
         
         
         
         
-        if PFUser.currentUser() != nil {
+        if PFUser.current() != nil {
             // TODO commented out below for testing username problem 081715 MJD
             //  self.performSegueWithIdentifier("login", sender: self)
         }

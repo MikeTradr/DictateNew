@@ -15,17 +15,17 @@ import EventKit
 
 class EventDetailsIC: WKInterfaceController {
     
-    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+    let defaults = UserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
     
     let eventStore = EKEventStore()
 
     var event:EKEvent = EKEvent(eventStore: EKEventStore())
     var sendID:String = ""
     
-    var now:NSDate              = NSDate()      //current time, same as today
+    var now:Date              = Date()      //current time, same as today
     var timeUntil:String        = ""
     
-    let dateFormatter = NSDateFormatter()
+    let dateFormatter = DateFormatter()
     
     let tempAlarm = EKAlarm()
  
@@ -80,15 +80,15 @@ class EventDetailsIC: WKInterfaceController {
     }
     
     @IBAction func menuSettings() {
-        presentControllerWithName("Settings", context: "«Events")
+        presentController(withName: "Settings", context: "«Events")
     }
 //---- end Menu functions ----------------------------------------
     
 
 
     
-    override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
+    override func awake(withContext context: Any?) {
+        super.awake(withContext: context)
         // Configure interface objects here.
         
         NSLog("%@ w41 TodayIC awakeWithContext", self)
@@ -100,21 +100,21 @@ class EventDetailsIC: WKInterfaceController {
         
         let eventID = context as! String
         
-        event = eventStore.eventWithIdentifier(eventID)!
+        event = eventStore.event(withIdentifier: eventID)!
         
         print("w81 event: \(event)")
         
-        let dateString = dateFormatter.stringFromDate(event.startDate)
+        let dateString = dateFormatter.string(from: event.startDate)
         
         dateFormatter.dateFormat = "h:mm a"
         
-        let startTimeA = dateFormatter.stringFromDate(event.startDate)
-        var startTime = startTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
+        let startTimeA = dateFormatter.string(from: event.startDate)
+        var startTime = startTimeA.replacingOccurrences(of: ":00", with: "")
         
         dateFormatter.dateFormat = "h:mm"
         
-        let endTimeA = dateFormatter.stringFromDate(event.endDate)
-        let endTime = endTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
+        let endTimeA = dateFormatter.string(from: event.endDate)
+        let endTime = endTimeA.replacingOccurrences(of: ":00", with: "")
         
         var endTimeDash = "-\(endTime)"
         
@@ -125,7 +125,7 @@ class EventDetailsIC: WKInterfaceController {
         timeUntil = TimeManger.sharedInstance.timeInterval(event.startDate)
         print("w115 timeUntil: \(timeUntil)")
  
-        if event.allDay {   // if allDay bool is true
+        if event.isAllDay {   // if allDay bool is true
             startTime = ""
             endTimeDash = "all-day"
             self.labelTimeUntil.setHidden(true)
@@ -134,11 +134,11 @@ class EventDetailsIC: WKInterfaceController {
         }
  
         let startTimeItem = event.startDate
-        let timeUntilStart = startTimeItem.timeIntervalSinceDate(NSDate())
+        let timeUntilStart = startTimeItem.timeIntervalSince(Date())
         print("w187 timeUntilStart: \(timeUntilStart)")
         
         let endTimeItem = event.endDate
-        let timeUntilEnd = endTimeItem.timeIntervalSinceDate(NSDate())
+        let timeUntilEnd = endTimeItem.timeIntervalSince(Date())
         print("w192 timeUntilEnd: \(timeUntilEnd)")
         
         if ((timeUntilStart <= 0) && (timeUntilEnd >= 0)) {
@@ -149,7 +149,7 @@ class EventDetailsIC: WKInterfaceController {
             
             // works
             let headlineFont =
-                UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
+                UIFont.preferredFont(forTextStyle: UIFontTextStyle.headline)
             
             let fontAttribute = [NSFontAttributeName: headlineFont]
             
@@ -159,7 +159,7 @@ class EventDetailsIC: WKInterfaceController {
             self.labelTimeUntil.setAttributedText(attributedString)
             
         } else {
-            self.labelTimeUntil.setTextColor(UIColor.greenColor())
+            self.labelTimeUntil.setTextColor(UIColor.green)
             self.labelTimeUntil.setText(timeUntil)
         }
 
@@ -169,20 +169,20 @@ class EventDetailsIC: WKInterfaceController {
         self.labelLocation.setText(event.location)
         //self.labelTimeUntil.setText(timeUntil)
         
-        self.labelStartTime.setTextColor(UIColor.whiteColor().colorWithAlphaComponent(0.8))
+        self.labelStartTime.setTextColor(UIColor.white.withAlphaComponent(0.8))
         
-        self.labelEndTime.setTextColor(UIColor.whiteColor().colorWithAlphaComponent(0.65))
+        self.labelEndTime.setTextColor(UIColor.white.withAlphaComponent(0.65))
         
-        self.labelLocation.setTextColor(UIColor(CGColor: event.calendar.CGColor))
+        self.labelLocation.setTextColor(UIColor(cgColor: event.calendar.cgColor))
         
-        self.verticalBar.setBackgroundColor(UIColor(CGColor: event.calendar.CGColor))
+        self.verticalBar.setBackgroundColor(UIColor(cgColor: event.calendar.cgColor))
         
-        self.imageVerticalBar.setTintColor(UIColor(CGColor: event.calendar.CGColor))
-        self.imageVerticalBarRT.setTintColor(UIColor(CGColor: event.calendar.CGColor))
+        self.imageVerticalBar.setTintColor(UIColor(cgColor: event.calendar.cgColor))
+        self.imageVerticalBarRT.setTintColor(UIColor(cgColor: event.calendar.cgColor))
         
-        self.buttonGrCalendarName.setBackgroundColor(UIColor(CGColor: event.calendar.CGColor))
+        self.buttonGrCalendarName.setBackgroundColor(UIColor(cgColor: event.calendar.cgColor))
         
-         self.groupCalendar.setBackgroundColor(UIColor(CGColor: event.calendar.CGColor).colorWithAlphaComponent(0.375))
+         self.groupCalendar.setBackgroundColor(UIColor(cgColor: event.calendar.cgColor).withAlphaComponent(0.375))
         
         
        // self.calendarName.setTextColor(UIColor(CGColor: event.calendar.CGColor))
@@ -256,7 +256,7 @@ class EventDetailsIC: WKInterfaceController {
     }
     
     
-  override func contextForSegueWithIdentifier(segueIdentifier: String) ->  AnyObject? {
+  override func contextForSegue(withIdentifier segueIdentifier: String) ->  Any? {
         if segueIdentifier == "EditNotes" {
             sendID = event.eventIdentifier
             print("w171 sendID \(sendID)")
@@ -282,11 +282,11 @@ class EventDetailsIC: WKInterfaceController {
     }
     
     @IBAction func buttonMainIC() {
-        presentControllerWithName("Main", context: "Today")
+        presentController(withName: "Main", context: "Today")
     }
 
     @IBAction func buttonReminders() {
-        presentControllerWithName("Reminders", context: "Today")
+        presentController(withName: "Reminders", context: "Today")
     }
 
 }

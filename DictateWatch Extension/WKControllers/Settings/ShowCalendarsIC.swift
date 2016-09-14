@@ -14,14 +14,14 @@ import EventKit
 class ShowCalendarsIC: WKInterfaceController {
     
     var selectedRow:Int! = nil
-    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+    let defaults = UserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
 
     let eventStore = EKEventStore()
     var checked:Bool = false
 
     @IBOutlet weak var table: WKInterfaceTable!
     
-    let allCalendarLists: Array<EKCalendar> = EKEventStore().calendarsForEntityType(EKEntityType.Event) 
+    let allCalendarLists: Array<EKCalendar> = EKEventStore().calendars(for: EKEntityType.event) 
     
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
@@ -36,21 +36,21 @@ class ShowCalendarsIC: WKInterfaceController {
         table.setNumberOfRows(allCalendarLists.count, withRowType: "tableRow")
         print("w46 allCalendarLists.count: \(allCalendarLists.count)")
         
-        for (index, title) in allCalendarLists.enumerate() {
+        for (index, title) in allCalendarLists.enumerated() {
             print("---------------------------------------------------")
             print("w40 index, title: \(index), \(title)")
             
-            let row = table.rowControllerAtIndex(index) as! ShowCalendarsTableRC
+            let row = table.rowController(at: index) as! ShowCalendarsTableRC
             let item = allCalendarLists[index]
             
             row.tableRowLabel.setText(item.title)
-            row.tableRowLabel.setTextColor(UIColor(CGColor: item.CGColor))
-            row.verticalBar.setBackgroundColor(UIColor(CGColor: item.CGColor))
+            row.tableRowLabel.setTextColor(UIColor(cgColor: item.cgColor))
+            row.verticalBar.setBackgroundColor(UIColor(cgColor: item.cgColor))
         }
     }   //end loadTableData
     
-    override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
+    override func awake(withContext context: Any?) {
+        super.awake(withContext: context)
         // Configure interface objects here.
         print("w55 ShowCalendarsIC")
         print("-----------------------------------------")
@@ -61,11 +61,11 @@ class ShowCalendarsIC: WKInterfaceController {
         loadTableData()
     }
     
-    override func table(table: WKInterfaceTable, didSelectRowAtIndex rowIndex: Int) {
+    override func table(_ table: WKInterfaceTable, didSelectRowAt rowIndex: Int) {
         print("w116 clicked on row: \(rowIndex)")
         
         selectedRow = rowIndex //for use with insert and delete, save selcted row index
-        let row = self.table.rowControllerAtIndex(rowIndex) as! ShowCalendarsTableRC
+        let row = self.table.rowController(at: rowIndex) as! ShowCalendarsTableRC
   
         if self.checked {               // Turn checkmark off
             row.imageCheckbox.setImageNamed("cbBlank40px")
@@ -77,7 +77,7 @@ class ShowCalendarsIC: WKInterfaceController {
             
             print("w130 defaultCalendarID: \(defaultCalendarID)")
             
-            defaults.setObject(defaultCalendarID, forKey: "defaultCalendarID")    //sets defaultReminderListID String
+            defaults.set(defaultCalendarID, forKey: "defaultCalendarID")    //sets defaultReminderListID String
             
             self.checked = true
         }

@@ -11,7 +11,7 @@ import UIKit
 class DetailsTableVC_OLD: UIViewController,UITableViewDelegate, UITableViewDataSource {
 
 
-    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+    let defaults = UserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
     
    // class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
         
@@ -41,16 +41,16 @@ class DetailsTableVC_OLD: UIViewController,UITableViewDelegate, UITableViewDataS
             super.viewDidLoad()
             // Do any additional setup after loading the view, typically from a nib.
             
-            tableView.frame         =   CGRectMake(2, 30, 300, 350);
+            tableView.frame         =   CGRect(x: 2, y: 30, width: 300, height: 350);
             tableView.delegate      =   self
             tableView.dataSource    =   self
             tableView.rowHeight     =   31.0
-            tableView.backgroundColor = UIColor.blackColor()
-            tableView.tintColor     =   UIColor.whiteColor()
+            tableView.backgroundColor = UIColor.black
+            tableView.tintColor     =   UIColor.white
             
            // tableView.tableFooterView = UIView(frame:CGRectZero)    //removes blank lines
           
-            tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+            tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
             
         
 
@@ -58,23 +58,23 @@ class DetailsTableVC_OLD: UIViewController,UITableViewDelegate, UITableViewDataS
             self.view.addSubview(tableView)
         }
         
-        func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             
             // Return the number of rows in the section.
             return 11
             //return self.items.count   //counts items in array
         }
         
-        func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             
-            var cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("cell")! as UITableViewCell
+            let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell")! as UITableViewCell
             
-            cell.backgroundColor        =   UIColor.clearColor()
-            cell.textLabel?.textColor   =   UIColor.whiteColor()
+            cell.backgroundColor        =   UIColor.clear
+            cell.textLabel?.textColor   =   UIColor.white
 
             //cell.textLabel?.text = self.items[indexPath.row]  //pulls from array
             
-            let shortPath = (indexPath.section, indexPath.row)
+            let shortPath = ((indexPath as NSIndexPath).section, (indexPath as NSIndexPath).row)
             switch shortPath {
             case (0, 0):    cell.textLabel?.text = "Input"
             case (0, 1):    cell.textLabel?.text = "Type"
@@ -96,8 +96,8 @@ class DetailsTableVC_OLD: UIViewController,UITableViewDelegate, UITableViewDataS
             return cell
         }
         
-        func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-            print("You selected cell #\(indexPath.row)!")
+        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            print("You selected cell #\((indexPath as NSIndexPath).row)!")
         }
         
         override func didReceiveMemoryWarning() {

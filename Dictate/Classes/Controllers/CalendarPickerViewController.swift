@@ -17,34 +17,34 @@ class CalendarPickerViewController: UIViewController, UIPickerViewDataSource, UI
     @IBOutlet weak var resultLabel: UILabel!
     @IBOutlet weak var buttonSetNew: UIButton!
     
-    let calendarList = ReminderManager.sharedInstance.getCalendars(EKEntityType.Event)
+    let calendarList = ReminderManager.sharedInstance.getCalendars(EKEntityType.event)
     
     var selectedCalendar:String = ""
     var calendarArray: [String] = []
     var newCalendarName: String = ""        //string to hold new string from picker.
     
-    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+    let defaults = UserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
 
     
    // var calendarName = defaults.stringForKey("calendarName")            //Cal.
     
-    @IBAction func buttonSetNew(sender: AnyObject) {
-        self.performSegueWithIdentifier("returnFromModal", sender: self)
-        defaults.setObject(newCalendarName, forKey: "calendarName")
+    @IBAction func buttonSetNew(_ sender: AnyObject) {
+        self.performSegue(withIdentifier: "returnFromModal", sender: self)
+        defaults.set(newCalendarName, forKey: "calendarName")
     }
     
-    @IBAction func buttonCancel(sender: AnyObject) {
-        self.performSegueWithIdentifier("returnFromModal", sender: self)
+    @IBAction func buttonCancel(_ sender: AnyObject) {
+        self.performSegue(withIdentifier: "returnFromModal", sender: self)
     }
     
-    @IBAction func barButtonCancel(sender: AnyObject) {
-         self.performSegueWithIdentifier("returnFromModal", sender: self)
+    @IBAction func barButtonCancel(_ sender: AnyObject) {
+         self.performSegue(withIdentifier: "returnFromModal", sender: self)
     }
     
     
-    @IBAction func barButtonDone(sender: AnyObject) {
-         defaults.setObject(newCalendarName, forKey: "calendarName")
-         self.performSegueWithIdentifier("returnFromModal", sender: self)
+    @IBAction func barButtonDone(_ sender: AnyObject) {
+         defaults.set(newCalendarName, forKey: "calendarName")
+         self.performSegue(withIdentifier: "returnFromModal", sender: self)
     }
         
     override func viewDidLoad() {
@@ -53,9 +53,9 @@ class CalendarPickerViewController: UIViewController, UIPickerViewDataSource, UI
         self.pickerView.dataSource = self;
         self.pickerView.delegate = self;
         
-        let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+        let defaults = UserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
         
-        var calendarName = defaults.stringForKey("calendarName")
+        let calendarName = defaults.string(forKey: "calendarName")
         print("p59 calendarName: \(calendarName)")
 
         
@@ -64,13 +64,13 @@ class CalendarPickerViewController: UIViewController, UIPickerViewDataSource, UI
         //make Calendar's List Array
         EventManager.sharedInstance.createCalendarArray()
         
-        calendarArray = defaults.objectForKey("calendarArray")! as! [String]
+        calendarArray = defaults.object(forKey: "calendarArray")! as! [String]
         
         print("p66 calendarArray: \(calendarArray)")
 
         
       //below works, but guy in slackchat room suggested map routine!
-        var defaultRowIndex = calendarArray.indexOf(calendarName!)
+        var defaultRowIndex = calendarArray.index(of: calendarName!)
         if(defaultRowIndex == nil) { defaultRowIndex = 0 }
      //   pickerView.selectRow(defaultRowIndex!, inComponent: 0, animated: false)
 
@@ -88,15 +88,15 @@ class CalendarPickerViewController: UIViewController, UIPickerViewDataSource, UI
     }
     
     
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return calendarArray.count;
     }
     
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
         
      //   title.backgroundColor = UIColor.blackColor()
      //  .textColor = UIColor.whiteColor()
@@ -105,7 +105,7 @@ class CalendarPickerViewController: UIViewController, UIPickerViewDataSource, UI
     }
     
     
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         print("p103 row: \(row)")
         print("p110 calendarArray: \(calendarArray)")
 
@@ -114,7 +114,7 @@ class CalendarPickerViewController: UIViewController, UIPickerViewDataSource, UI
 
     }
     
-    func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         let pickerLabel = UILabel()
         let titleData = calendarArray[row]
         let myTitle = NSAttributedString(
@@ -122,14 +122,14 @@ class CalendarPickerViewController: UIViewController, UIPickerViewDataSource, UI
                 attributes: [NSFontAttributeName:UIFont(
                 name: "Helvetica-Bold",
                 size: 22.0)!,
-                NSForegroundColorAttributeName:UIColor.whiteColor()])
+                NSForegroundColorAttributeName:UIColor.white])
         
         pickerLabel.attributedText = myTitle
         
         //color  and center the label's background
      //   let hue = CGFloat(row)/CGFloat(calendarArray.count)
        // pickerLabel.backgroundColor = UIColor(hue: hue, saturation: 1.0, brightness:1.0, alpha: 1.0)
-        pickerLabel.textAlignment = .Center
+        pickerLabel.textAlignment = .center
         
         return pickerLabel
     }

@@ -17,20 +17,20 @@ class SettingsIC: WKInterfaceController {
     
     @IBAction func buttonReminders() {
         print("w19 in buttom Reminders")
-          presentControllerWithName("ReminderPicker", context: "Settings")    //TODO why no "settings" shown ???
+          presentController(withName: "ReminderPicker", context: "Settings")    //TODO why no "settings" shown ???
     }
     
     @IBAction func buttonCalendars() {
-         presentControllerWithName("CalendarPicker", context: "Settings")
+         presentController(withName: "CalendarPicker", context: "Settings")
     }
 //----- Navigation Buttons ---------------------------------
     @IBAction func navButtonReminders() {
-          presentControllerWithName("Reminders", context: nil)
+          presentController(withName: "Reminders", context: nil)
     }
     
     
     @IBAction func buttonMic() {
-        var alertSound1: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("button-14", ofType: "mp3")!)
+        var alertSound1: URL = URL(fileURLWithPath: Bundle.main.path(forResource: "button-14", ofType: "mp3")!)
         //General.playSound(alertSound3!)
         
         //Second, we currently can't control sounds or haptic feedback from our app's code.
@@ -46,7 +46,7 @@ class SettingsIC: WKInterfaceController {
     }
     
     @IBAction func navButtonToday() {
-          presentControllerWithName("Events", context: nil)
+          presentController(withName: "Events", context: nil)
     }
     
 //----- Navigation Buttons ---------------------------------
@@ -64,13 +64,13 @@ class SettingsIC: WKInterfaceController {
         self.audioPlayer.play()
     }
 */
-    override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
+    override func awake(withContext context: Any?) {
+        super.awake(withContext: context)
         
         // Configure interface objects here.
         print("p19 PreferencesIC")
         
-        super.awakeWithContext(context)
+        super.awake(withContext: context)
         
         let sceneTitle:String = (context as? String)!
         self.setTitle("«\(sceneTitle)")

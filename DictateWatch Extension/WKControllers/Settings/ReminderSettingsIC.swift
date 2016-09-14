@@ -18,25 +18,25 @@ class ReminderSettingsIC: WKInterfaceController {
     
     @IBAction func buttonSetDefault() {
         print("w19 in buttom Reminders")
-        presentControllerWithName("ReminderPicker", context: "Settings")
+        presentController(withName: "ReminderPicker", context: "Settings")
     }
     
     @IBAction func buttonShowReminders() {
-          presentControllerWithName("ShowReminders", context: "Settings")
+          presentController(withName: "ShowReminders", context: "Settings")
     }
 
 //----- Navigation Buttons ---------------------------------
     @IBAction func navButtonReminders() {
-          presentControllerWithName("Reminders", context: nil)
+          presentController(withName: "Reminders", context: nil)
     }
     
     @IBAction func buttonMic() {
-        let alertSound1: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("button-14", ofType: "mp3")!)
+        let alertSound1: URL = URL(fileURLWithPath: Bundle.main.path(forResource: "button-14", ofType: "mp3")!)
         //General.playSound(alertSound3!)
  
         // TODO Fix sound playing on watch
-        let filePath = NSBundle.mainBundle().pathForResource("se_tap", ofType: "m4a")!
-        let fileUrl = NSURL.fileURLWithPath(filePath)
+        let filePath = Bundle.main.path(forResource: "se_tap", ofType: "m4a")!
+        let fileUrl = URL(fileURLWithPath: filePath)
 /*        let asset = WKAudioFileAsset(URL: fileUrl)
         let playerItem = WKAudioFilePlayerItem(asset: asset)
         player = WKAudioFilePlayer(playerItem: playerItem)
@@ -72,7 +72,7 @@ class ReminderSettingsIC: WKInterfaceController {
     }
     
     @IBAction func navButtonToday() {
-          presentControllerWithName("Events", context: nil)
+          presentController(withName: "Events", context: nil)
     }
     
 //----- Navigation Buttons ---------------------------------
@@ -90,13 +90,13 @@ class ReminderSettingsIC: WKInterfaceController {
         self.audioPlayer.play()
     }
 */
-    override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
+    override func awake(withContext context: Any?) {
+        super.awake(withContext: context)
         
         // Configure interface objects here.
         print("p19 PreferencesIC")
         
-        super.awakeWithContext(context)
+        super.awake(withContext: context)
         //self.setTitle(context as? String)
         self.setTitle("«Settings")
 

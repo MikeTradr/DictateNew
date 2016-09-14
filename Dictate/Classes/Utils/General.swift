@@ -15,7 +15,7 @@ import CoreTelephony
 
 class General: NSObject, UITextFieldDelegate, MFMailComposeViewControllerDelegate {
     
-    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+    let defaults = UserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
     var carrierName = ""
     var mcc = ""
     var mnc = ""
@@ -37,9 +37,9 @@ class General: NSObject, UITextFieldDelegate, MFMailComposeViewControllerDelegat
     
     //---- my General functions ----------------------------------------
     
-    func switchScreen(scene: String) {
-        let mainStoryboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-        let vc : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier(scene) 
+    func switchScreen(_ scene: String) {
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let vc : UIViewController = mainStoryboard.instantiateViewController(withIdentifier: scene) 
         // TODO FIX    self.presentViewController(vc, animated: true, completion: nil)
     }
     
@@ -70,25 +70,21 @@ class General: NSObject, UITextFieldDelegate, MFMailComposeViewControllerDelegat
         */
     }
     
-    func delay(delay:Double, closure:()->()) {
-        dispatch_after(
-            dispatch_time(
-                DISPATCH_TIME_NOW,
-                Int64(delay * Double(NSEC_PER_SEC))
-            ),
-            dispatch_get_main_queue(), closure)
+    func delay(_ delay:Double, closure:@escaping ()->()) {
+        DispatchQueue.main.asyncAfter(
+            deadline: DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: closure)
     }
     
     
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         // self.view.endEditing(true)
         return false
     }
     
-    func makeCall(toPhone:String) {
+    func makeCall(_ toPhone:String) {
         
-        if let url = NSURL(string: "tel://\(toPhone)") {
+        if let url = URL(string: "tel://\(toPhone)") {
             //TODO Anl can this work here?
             //UIApplication.sharedApplication().openURL(url)
         }
@@ -98,10 +94,10 @@ class General: NSObject, UITextFieldDelegate, MFMailComposeViewControllerDelegat
         
         // ____ Save to Parse Database ____________________________________
         
-        let strRaw      = defaults.stringForKey("strRaw")
-        let actionType:String  = defaults.stringForKey("actionType")!
-        var output      = defaults.stringForKey("output")
-        var calendarName    = defaults.stringForKey("calendarName")
+        let strRaw      = defaults.string(forKey: "strRaw")
+        let actionType:String  = defaults.string(forKey: "actionType")!
+        let output      = defaults.string(forKey: "output")
+        let calendarName    = defaults.string(forKey: "calendarName")
 
 
         
@@ -120,15 +116,15 @@ class General: NSObject, UITextFieldDelegate, MFMailComposeViewControllerDelegat
         
         //TODO get these two fields from code!
         //TODO see here:
-        print("109 Device and Phone munber in here: \(NSUserDefaults.standardUserDefaults().dictionaryRepresentation())")
+        print("109 Device and Phone munber in here: \(UserDefaults.standard.dictionaryRepresentation())")
         
-        let uuid = UIDevice.currentDevice().identifierForVendor!.UUIDString
-        let device = UIDevice.currentDevice().model
-        let systemVersion = UIDevice.currentDevice().systemVersion
+        let uuid = UIDevice.current.identifierForVendor!.uuidString
+        let device = UIDevice.current.model
+        let systemVersion = UIDevice.current.systemVersion
         
-        let modelName = UIDevice.currentDevice().modelName
+        let modelName = UIDevice.current.modelName
         
-        let memory = NSProcessInfo.processInfo().physicalMemory/(1024 * 1024 * 1024)    //to convert to GB
+        let memory = ProcessInfo.processInfo.physicalMemory/(1024 * 1024 * 1024)    //to convert to GB
         // memory = memory/(1024 * 1024 * 1024)
         
         // Setup the Network Info and create a CTCarrier object
@@ -178,17 +174,17 @@ class General: NSObject, UITextFieldDelegate, MFMailComposeViewControllerDelegat
         
         //TODO fix PFuser when is nil can be nil???
         
-        if PFUser.currentUser() == nil {
+        if PFUser.current() == nil {
             rawDataObject["userName"] = "Mike Coded"
         } else {
             // rawDataObject["userName"] = "Mike Hard Coded"
             
-            print("p155 PFUser.currentUser().username: \(PFUser.currentUser()!.username!)")
+            print("p155 PFUser.currentUser().username: \(PFUser.current()!.username!)")
             
             // todo bombs below here.
             //TODO Anil I chnged as had nil, when we no longer sue login screen 123115 MJD
             //rawDataObject["userName"] = PFUser.currentUser()!.username
-            rawDataObject["userName"] = PFUser.currentUser()!.username!
+            rawDataObject["userName"] = PFUser.current()!.username!
         }
         
         print("p\(#line) we here? ")
@@ -205,12 +201,12 @@ class General: NSObject, UITextFieldDelegate, MFMailComposeViewControllerDelegat
         
         print("p174 query: \(query)")
         
-        if PFUser.currentUser()?.email != nil {
-            print("p176 PFUser.currentUser()?.email: \(PFUser.currentUser()?.email!)")
-            rawDataObject["userEmail"] = PFUser.currentUser()?.email!
+        if PFUser.current()?.email != nil {
+            print("p176 PFUser.currentUser()?.email: \(PFUser.current()?.email!)")
+            rawDataObject["userEmail"] = PFUser.current()?.email!
         }
         
-        rawDataObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+        rawDataObject.saveInBackground { (success: Bool, error: NSError?) -> Void in
             print("p214 General rawDataObject has been saved.")
         }
         
@@ -237,7 +233,7 @@ public extension UIDevice {
         uname(&systemInfo)
         let machineMirror = Mirror(reflecting: systemInfo.machine)
         let identifier = machineMirror.children.reduce("") { identifier, element in
-            guard let value = element.value as? Int8 where value != 0 else { return identifier }
+            guard let value = element.value as? Int8 , value != 0 else { return identifier }
             return identifier + String(UnicodeScalar(UInt8(value)))
         }
         

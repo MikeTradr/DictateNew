@@ -17,13 +17,13 @@ class InterfaceController: WKInterfaceController {
         didSet {
             if let session = session {
                 session.delegate = self
-                session.activateSession()
+                session.activate()
             }
         }
     }
 
-    override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
+    override func awake(withContext context: Any?) {
+        super.awake(withContext: context)
         
         // Configure interface objects here.
     }
@@ -34,7 +34,7 @@ class InterfaceController: WKInterfaceController {
     }
     override func didAppear() {
         super.didAppear()
-        session = WCSession.defaultSession()
+        session = WCSession.default()
         
         session?.sendMessage(["name" : "Anil"], replyHandler: { (response) in
             

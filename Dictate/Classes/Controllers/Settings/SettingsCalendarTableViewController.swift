@@ -12,7 +12,7 @@ import UIKit
 
 class SettingsCalendarTableViewController: UITableViewController{
     
-    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+    let defaults = UserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
     var weekView:Bool = true
     
     @IBOutlet weak var weekCell: UITableViewCell!
@@ -24,7 +24,7 @@ class SettingsCalendarTableViewController: UITableViewController{
         
         tableView.tableFooterView = UIView()    //hides blank cells
 
-        weekView = defaults.boolForKey("defaultWeekView")
+        weekView = defaults.bool(forKey: "defaultWeekView")
         print("p26 weekView: \(weekView)")
 
         // Uncomment the following line to preserve selection between presentations
@@ -40,42 +40,42 @@ class SettingsCalendarTableViewController: UITableViewController{
     }
 
 
-    override func tableView(tableView: UITableView,
-        didSelectRowAtIndexPath indexPath: NSIndexPath) {
-            let cell = tableView.cellForRowAtIndexPath(indexPath)
+    override func tableView(_ tableView: UITableView,
+        didSelectRowAt indexPath: IndexPath) {
+            let cell = tableView.cellForRow(at: indexPath)
             
-            if indexPath.row == 1 {
-                cell!.accessoryType = UITableViewCellAccessoryType.Checkmark
+            if (indexPath as NSIndexPath).row == 1 {
+                cell!.accessoryType = UITableViewCellAccessoryType.checkmark
                 weekView = true
-                monthCell.accessoryType = .None
+                monthCell.accessoryType = .none
             }
-            if indexPath.row == 2 {
-                cell!.accessoryType = UITableViewCellAccessoryType.Checkmark
+            if (indexPath as NSIndexPath).row == 2 {
+                cell!.accessoryType = UITableViewCellAccessoryType.checkmark
                 weekView = false
-                weekCell.accessoryType = .None
+                weekCell.accessoryType = .none
             }
             
-            tableView.deselectRowAtIndexPath(indexPath, animated: true)
+            tableView.deselectRow(at: indexPath, animated: true)
             
             print("p63 weekView: \(weekView)")
-            defaults.setObject(weekView, forKey: "defaultWeekView")     //save to defaults calendar display view, true = week view, false = month view
+            defaults.set(weekView, forKey: "defaultWeekView")     //save to defaults calendar display view, true = week view, false = month view
     }
     
     
-    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
         print("p73 weekView: \(weekView)")
 
-        if indexPath.row == 0 {     //weekView = true set check mark
+        if (indexPath as NSIndexPath).row == 0 {     //weekView = true set check mark
 
             if weekView {
-                weekCell.accessoryType = UITableViewCellAccessoryType.Checkmark
+                weekCell.accessoryType = UITableViewCellAccessoryType.checkmark
             }
             
         } else {     //weekView = false set check mark
             
             if !weekView {
-                monthCell.accessoryType = UITableViewCellAccessoryType.Checkmark
+                monthCell.accessoryType = UITableViewCellAccessoryType.checkmark
             }
         }
         

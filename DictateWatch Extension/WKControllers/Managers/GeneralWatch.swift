@@ -11,20 +11,22 @@ import WatchKit
 
 class GeneralWatch: WKInterfaceController {
     
+    private static var __once: () = {
+            Static.instance = GeneralWatch()
+        }()
+    
     class var sharedInstance : GeneralWatch {
         struct Static {
-            static var onceToken : dispatch_once_t = 0
+            static var onceToken : Int = 0
             static var instance : GeneralWatch? = nil
         }
-        dispatch_once(&Static.onceToken) {
-            Static.instance = GeneralWatch()
-        }
+        _ = GeneralWatch.__once
         return Static.instance!
     }
     
     var player: WKAudioFilePlayer!
     
-    func playSound(sound: NSURL) {
+    func playSound(_ sound: URL) {
         
         /*
          func playSound(sound: NSURL){
@@ -44,7 +46,7 @@ class GeneralWatch: WKInterfaceController {
        // let filePath = NSBundle.mainBundle().pathForResource("beep-08b", ofType: "mp3")!
         //let filePath = NSBundle.mainBundle().pathForResource(fileName, ofType: "mp3")!
         //let fileUrl = NSURL.fileURLWithPath (filePath)
-        let asset = WKAudioFileAsset (URL: sound)
+        let asset = WKAudioFileAsset (url: sound)
         let playerItem = WKAudioFilePlayerItem (asset: asset)
         player = WKAudioFilePlayer (playerItem: playerItem)
         // locks app in simulator 
@@ -54,8 +56,8 @@ class GeneralWatch: WKInterfaceController {
     
     
     
-    override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
+    override func awake(withContext context: Any?) {
+        super.awake(withContext: context)
         
         // Configure interface objects here.
     }

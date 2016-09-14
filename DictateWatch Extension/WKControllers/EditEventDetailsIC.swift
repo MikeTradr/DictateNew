@@ -15,15 +15,15 @@ import EventKit
 
 class EditEventDetailsIC: WKInterfaceController {
     
-    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+    let defaults = UserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
     
     var showCalendarsView:Bool = true
     var checked:Bool = false
     
-    var today:NSDate            = NSDate()
+    var today:Date            = Date()
    // var startDT:NSDate          = NSDate(dateString:"2014-12-12")
 //var endDT:NSDate            = NSDate(dateString:"2014-12-12")
-    var todayPlusSeven:NSDate = NSDate()
+    var todayPlusSeven:Date = Date()
     
 
     
@@ -41,11 +41,11 @@ class EditEventDetailsIC: WKInterfaceController {
         
        // let dateHelper = JTDateHelper()
         //let dateHelper = JTDate
-        let startDate =  NSDate()
+        let startDate =  Date()
         //let endDate = dateHelper.addToDate(startDate, days: 7)
         
-        let calendar = NSCalendar.currentCalendar()
-        let endDate: NSDate = calendar.dateByAddingUnit(NSCalendarUnit.Day, value: 7, toDate: startDate, options: [])!
+        let calendar = Calendar.current
+        let endDate: Date = (calendar as NSCalendar).date(byAdding: NSCalendar.Unit.day, value: 7, to: startDate, options: [])!
         
         print("w46 startDate: \(startDate)")
         print("w46 endDate: \(endDate)")
@@ -67,7 +67,7 @@ class EditEventDetailsIC: WKInterfaceController {
     }
     
     @IBAction func menuSettings() {
-        presentControllerWithName("Settings", context: "«Details")
+        presentController(withName: "Settings", context: "«Details")
     }
 //---- end Menu functions ----------------------------------------
     
@@ -76,8 +76,8 @@ class EditEventDetailsIC: WKInterfaceController {
     
 
     
-    override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
+    override func awake(withContext context: Any?) {
+        super.awake(withContext: context)
         // Configure interface objects here.
         
         NSLog("%@ w41 TodayIC awakeWithContext", self)
@@ -89,7 +89,7 @@ class EditEventDetailsIC: WKInterfaceController {
         //get Access to Reminders
         NSLog("%@ w60 appDelegate", self)
         print("w61 call getAccessToEventStoreForType")
-        ReminderManager.sharedInstance.getAccessToEventStoreForType(EKEntityType.Reminder, completion: { (granted) -> Void in
+        ReminderManager.sharedInstance.getAccessToEventStoreForType(EKEntityType.reminder, completion: { (granted) -> Void in
             
             if granted{
                 print("w65 Reminders granted: \(granted)")
@@ -100,7 +100,7 @@ class EditEventDetailsIC: WKInterfaceController {
         NSLog("%@ w70 appDelegate", self)
         print("w71 call getAccessToEventStoreForType")
         //FIXME:5
-        EventManager.sharedInstance.getAccessToEventStoreForType(EKEntityType.Event, completion: { (granted) -> Void in
+        EventManager.sharedInstance.getAccessToEventStoreForType(EKEntityType.event, completion: { (granted) -> Void in
             
             if granted{
                 print("w75 Events granted: \(granted)")
@@ -120,24 +120,24 @@ class EditEventDetailsIC: WKInterfaceController {
         table.setNumberOfRows(allEvents.count, withRowType: "tableRow")
         print("w46 allEvents.count: \(allEvents.count)")
         
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "E, MMM d"
         
-        let dateString = dateFormatter.stringFromDate(NSDate())
+        let dateString = dateFormatter.string(from: Date())
    
         self.labelDate.setText(dateString)
         
-        for (index, title) in allEvents.enumerate() {
+        for (index, title) in allEvents.enumerated() {
             print("---------------------------------------------------")
             print("w40 index, title: \(index), \(title)")
             
-            let row = table.rowControllerAtIndex(index) as! TodayEventsTableRC
+            let row = table.rowController(at: index) as! TodayEventsTableRC
             let item = allEvents[index]
             
-            let dateFormatter = NSDateFormatter()
+            let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "h:mm a"
-            let startTime = dateFormatter.stringFromDate(item.startDate)
-            let endTime = dateFormatter.stringFromDate(item.endDate)
+            let startTime = dateFormatter.string(from: item.startDate)
+            let endTime = dateFormatter.string(from: item.endDate)
 
             var endTimeDash = "- \(endTime)"
             
@@ -151,7 +151,7 @@ class EditEventDetailsIC: WKInterfaceController {
             row.labelEndTime.setText(endTimeDash)
 
             //row.labelEventTitle.setTextColor(UIColor(CGColor: item.calendar.CGColor))
-            row.verticalBar.setBackgroundColor(UIColor(CGColor: item.calendar.CGColor))
+            row.verticalBar.setBackgroundColor(UIColor(cgColor: item.calendar.cgColor))
         }
     }   //end loadTableData
     
@@ -187,11 +187,11 @@ class EditEventDetailsIC: WKInterfaceController {
     }
     
     @IBAction func buttonMainIC() {
-        presentControllerWithName("Main", context: "Today")
+        presentController(withName: "Main", context: "Today")
     }
 
     @IBAction func buttonReminders() {
-        presentControllerWithName("Reminders", context: "Today")
+        presentController(withName: "Reminders", context: "Today")
     }
 
 }

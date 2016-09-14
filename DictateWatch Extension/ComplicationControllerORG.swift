@@ -135,16 +135,16 @@ struct Show {
     var shortName: String?
     var genre: String
     
-    var startDate: NSDate
-    var length: NSTimeInterval
+    var startDate: Date
+    var length: TimeInterval
 }
 
-let hour: NSTimeInterval = 60 * 60
+let hour: TimeInterval = 60 * 60
 let shows = [
-    Show(name: "Into the Wild", shortName: "Into Wild", genre: "Documentary", startDate: NSDate(), length: hour * 1.5),
-    Show(name: "24/7", shortName: nil, genre: "Drama", startDate: NSDate(timeIntervalSinceNow: hour * 1.5), length: hour),
-    Show(name: "How to become rich", shortName: "Become Rich", genre: "Documentary", startDate: NSDate(timeIntervalSinceNow: hour * 2.5), length: hour * 3),
-    Show(name: "NET Daily", shortName: nil, genre: "News", startDate: NSDate(timeIntervalSinceNow: hour * 5.5), length: hour)
+    Show(name: "Into the Wild", shortName: "Into Wild", genre: "Documentary", startDate: Date(), length: hour * 1.5),
+    Show(name: "24/7", shortName: nil, genre: "Drama", startDate: Date(timeIntervalSinceNow: hour * 1.5), length: hour),
+    Show(name: "How to become rich", shortName: "Become Rich", genre: "Documentary", startDate: Date(timeIntervalSinceNow: hour * 2.5), length: hour * 3),
+    Show(name: "NET Daily", shortName: nil, genre: "News", startDate: Date(timeIntervalSinceNow: hour * 5.5), length: hour)
 ]
 
 class ComplicationControllerORG: NSObject, CLKComplicationDataSource {
@@ -153,19 +153,19 @@ class ComplicationControllerORG: NSObject, CLKComplicationDataSource {
     
     // MARK: - Timeline Configuration
     
-    func getSupportedTimeTravelDirectionsForComplication(complication: CLKComplication, withHandler handler: (CLKComplicationTimeTravelDirections) -> Void) {
-        handler([.Forward, .Backward])
+    func getSupportedTimeTravelDirections(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationTimeTravelDirections) -> Void) {
+        handler([.forward, .backward])
     }
     
-    func getTimelineEndDateForComplication(complication: CLKComplication, withHandler handler: (NSDate?) -> Void) {
-        handler(NSDate(timeIntervalSinceNow: (60 * 60 * 24)))
+    func getTimelineEndDate(for complication: CLKComplication, withHandler handler: @escaping (Date?) -> Void) {
+        handler(Date(timeIntervalSinceNow: (60 * 60 * 24)))
     }
     
-    func getPrivacyBehaviorForComplication(complication: CLKComplication, withHandler handler: (CLKComplicationPrivacyBehavior) -> Void) {
-        handler(.ShowOnLockScreen)
+    func getPrivacyBehavior(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationPrivacyBehavior) -> Void) {
+        handler(.showOnLockScreen)
     }
     
-    func getTimelineStartDateForComplication(complication: CLKComplication, withHandler handler: (NSDate?) -> Void) {
+    func getTimelineStartDate(for complication: CLKComplication, withHandler handler: @escaping (Date?) -> Void) {
         handler(nil)
     }
     
@@ -190,12 +190,12 @@ class ComplicationControllerORG: NSObject, CLKComplicationDataSource {
         handler(entry)
     }
 */
-    func getCurrentTimelineEntryForComplication(complication: CLKComplication, withHandler handler: ((CLKComplicationTimelineEntry?) -> Void)) {
+    func getCurrentTimelineEntry(for complication: CLKComplication, withHandler handler: (@escaping (CLKComplicationTimelineEntry?) -> Void)) {
         // Call the handler with the current timeline entry
         handler(nil)
     }
     
-    func getTimelineEntriesForComplication(complication: CLKComplication, beforeDate date: NSDate, limit: Int, withHandler handler: (([CLKComplicationTimelineEntry]?) -> Void)) {
+    func getTimelineEntries(for complication: CLKComplication, before date: Date, limit: Int, withHandler handler: (@escaping ([CLKComplicationTimelineEntry]?) -> Void)) {
         // Call the handler with the timeline entries prior to the given date
         handler(nil)
     }
@@ -205,22 +205,22 @@ class ComplicationControllerORG: NSObject, CLKComplicationDataSource {
  //       handler(nil)
  //   }
     
-    func getTimelineEntriesForComplication(complication: CLKComplication, afterDate date: NSDate, limit: Int, withHandler handler: (([CLKComplicationTimelineEntry]?) -> Void)) {
+    func getTimelineEntries(for complication: CLKComplication, after date: Date, limit: Int, withHandler handler: (@escaping ([CLKComplicationTimelineEntry]?) -> Void)) {
         // Call the handler with the timeline entries after to the given date
         
         var entries: [CLKComplicationTimelineEntry] = []
         
         for show in shows
         {
-            if entries.count < limit && show.startDate.timeIntervalSinceDate(date) > 0
+            if entries.count < limit && show.startDate.timeIntervalSince(date) > 0
             {
                 let template = CLKComplicationTemplateModularLargeStandardBody()
                 
-                template.headerTextProvider = CLKTimeIntervalTextProvider(startDate: show.startDate, endDate: NSDate(timeInterval: show.length, sinceDate: show.startDate))
+                template.headerTextProvider = CLKTimeIntervalTextProvider(start: show.startDate, end: Date(timeInterval: show.length, since: show.startDate))
                 template.body1TextProvider = CLKSimpleTextProvider(text: show.name, shortText: show.shortName)
                 template.body2TextProvider = CLKSimpleTextProvider(text: show.genre, shortText: nil)
                 
-                let entry = CLKComplicationTimelineEntry(date: NSDate(timeInterval: hour * -0.25, sinceDate: show.startDate), complicationTemplate: template)
+                let entry = CLKComplicationTimelineEntry(date: Date(timeInterval: hour * -0.25, since: show.startDate), complicationTemplate: template)
                 entries.append(entry)
             }
         }
@@ -230,7 +230,7 @@ class ComplicationControllerORG: NSObject, CLKComplicationDataSource {
     
     // MARK: - Update Scheduling
     
-    func getNextRequestedUpdateDateWithHandler(handler: (NSDate?) -> Void) {
+    func getNextRequestedUpdateDate(handler: @escaping (Date?) -> Void) {
         // Call the handler with the date when you would next like to be given the opportunity to update your complication content
         handler(nil);
     }
@@ -252,8 +252,8 @@ class ComplicationControllerORG: NSObject, CLKComplicationDataSource {
 */
 
     //---multipliers to convert to seconds---
-    let HOUR: NSTimeInterval = 60 * 60
-    let MINUTE: NSTimeInterval = 60
+    let HOUR: TimeInterval = 60 * 60
+    let MINUTE: TimeInterval = 60
     
     
  /*
@@ -282,9 +282,9 @@ class ComplicationControllerORG: NSObject, CLKComplicationDataSource {
 */
     
     
-    func getPlaceholderTemplateForComplication(
-        complication: CLKComplication,
-        withHandler handler: (CLKComplicationTemplate?) -> Void) {
+    func getPlaceholderTemplate(
+        for complication: CLKComplication,
+        withHandler handler: @escaping (CLKComplicationTemplate?) -> Void) {
         // This method will be called once per supported complication, and
         // the results will be cached       
         
@@ -313,7 +313,7 @@ class ComplicationControllerORG: NSObject, CLKComplicationDataSource {
             template = CLKComplicationTemplateModularSmallRingImage()
             template.imageProvider = CLKImageProvider(onePieceImage: UIImage(named: "app_icon")!)
 */
-        case .ModularSmall:
+        case .modularSmall:
            // let modularSmallTemplate =  CLKComplicationTemplateModularSmallRingText()
           //  modularSmallTemplate.textProvider = CLKSimpleTextProvider(text: "D_%")
 
@@ -365,12 +365,12 @@ class ComplicationControllerORG: NSObject, CLKComplicationDataSource {
 */
 
             
-        case .ModularLarge:
+        case .modularLarge:
             let modularLargeTemplate =
                 CLKComplicationTemplateModularLargeStandardBody()
             modularLargeTemplate.headerTextProvider =
-                CLKTimeIntervalTextProvider(startDate: NSDate(),
-                                            endDate: NSDate(timeIntervalSinceNow: 1.5 * HOUR))
+                CLKTimeIntervalTextProvider(start: Date(),
+                                            end: Date(timeIntervalSinceNow: 1.5 * HOUR))
             modularLargeTemplate.body1TextProvider =
                 CLKSimpleTextProvider(text: "Movie Name",
                                       shortText: "Movie")
@@ -378,7 +378,7 @@ class ComplicationControllerORG: NSObject, CLKComplicationDataSource {
                 CLKSimpleTextProvider(text: "Running Time",
                                       shortText: "Time")
             template = modularLargeTemplate
-        case .UtilitarianSmall:
+        case .utilitarianSmall:
             /*
                 let percentage = WatchEntryHelper.sharedHelper.percentage() ?? 0
 
@@ -393,9 +393,9 @@ class ComplicationControllerORG: NSObject, CLKComplicationDataSource {
             
             
             template = nil
-        case .UtilitarianLarge:
+        case .utilitarianLarge:
             template = nil
-        case .CircularSmall:
+        case .circularSmall:
             template = nil
        // default:
         //     template = nil

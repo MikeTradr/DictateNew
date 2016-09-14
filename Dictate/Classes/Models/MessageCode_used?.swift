@@ -15,7 +15,7 @@ import CoreLocation
 
 class MessageCode: NSObject {
     
-    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+    let defaults = UserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
     
     var store : EKEventStore = EKEventStore()
     
@@ -23,15 +23,15 @@ class MessageCode: NSObject {
     
     var calendarDatabase = EKEventStore()   // from EKTest code...
     
-    var startDT:NSDate          = NSDate()
-    var endDT:NSDate            = NSDate()
+    var startDT:Date          = Date()
+    var endDT:Date            = Date()
     
-    func createReminder(title:String, notes:String, startDT:NSDate) {
+    func createReminder(_ title:String, notes:String, startDT:Date) {
         
         print("p25 We in create reminder... Access to store not granted")
         
         
-        eventStore.requestAccessToEntityType(EKEntityType.Reminder) { (granted, error) -> Void in
+        eventStore.requestAccess(to: EKEntityType.reminder) { (granted, error) -> Void in
             if !granted {
                 print("Access to store not granted")
             }
@@ -69,7 +69,7 @@ class MessageCode: NSObject {
         var error: NSError?
         
         do {
-            try eventStore.saveReminder(reminder, commit: true)
+            try eventStore.save(reminder, commit: true)
         } catch var error1 as NSError {
             error = error1
         }
@@ -77,7 +77,7 @@ class MessageCode: NSObject {
     }
     
     
-    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+    func locationManager(_ manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         
         // locationManager.stopUpdatingLocation()
         
@@ -92,7 +92,7 @@ class MessageCode: NSObject {
         let alarm = EKAlarm()
         
         alarm.structuredLocation = location
-        alarm.proximity = EKAlarmProximity.Leave
+        alarm.proximity = EKAlarmProximity.leave
         
         // reminder.addAlarm(alarm)
         
@@ -155,10 +155,10 @@ class MessageCode: NSObject {
     
     func getCalendar() -> EKCalendar? {
         
-        if let id = defaults.stringForKey("calendarID") {
-            return store.calendarWithIdentifier(id)
+        if let id = defaults.string(forKey: "calendarID") {
+            return store.calendar(withIdentifier: id)
         } else {
-            let calendar = EKCalendar(forEntityType: EKEntityType.Event, eventStore: self.store)
+            let calendar = EKCalendar(for: EKEntityType.event, eventStore: self.store)
             
             calendar.title = "My New Calendar"
             //  calendar.CGColor = UIColor.redColor()
@@ -172,7 +172,7 @@ class MessageCode: NSObject {
             }
             
             if error == nil {
-                defaults.setObject(calendar.calendarIdentifier, forKey: "calendarID")
+                defaults.set(calendar.calendarIdentifier, forKey: "calendarID")
             }
             
             return calendar
@@ -186,11 +186,11 @@ class MessageCode: NSObject {
         
         let someTitle = "Test Title"
         let someLocation = "Test location"
-        let someStartDate = NSDate()
-        let someEndDate = NSDate()
+        let someStartDate = Date()
+        let someEndDate = Date()
         let someMoreInfo = "notes info"
         
-        var newEvent = EKEvent(eventStore: self.store)
+        let newEvent = EKEvent(eventStore: self.store)
         
         newEvent.title = someTitle
         newEvent.location = someLocation
@@ -200,7 +200,7 @@ class MessageCode: NSObject {
         newEvent.calendar = getCalendar()!
         
         do {
-            try self.store.saveEvent(newEvent, span: EKSpan.ThisEvent, commit: true)
+            try self.store.save(newEvent, span: EKSpan.thisEvent, commit: true)
         } catch _ {
         }
     }
@@ -210,7 +210,7 @@ class MessageCode: NSObject {
     
     func eventStoreAccessReminders() {
         
-        calendarDatabase.requestAccessToEntityType(EKEntityType.Reminder) { (granted, error) -> Void in
+        calendarDatabase.requestAccess(to: EKEntityType.reminder) { (granted, error) -> Void in
             if !granted {
                 print("Access to store not granted")
                 print(error?.localizedDescription)
@@ -220,7 +220,7 @@ class MessageCode: NSObject {
     }
     
     func accessCalendarInTheDatabase() {
-        let calendars = calendarDatabase.calendarsForEntityType(EKEntityType.Reminder)
+        let calendars = calendarDatabase.calendars(for: EKEntityType.reminder)
         
         for calendar in calendars {
             print("••• p130 Calendar = \(calendar.title)")
@@ -228,7 +228,7 @@ class MessageCode: NSObject {
     }
     
     
-    func createReminder(reminderTitle: String, reminderDate: NSDate) {
+    func createReminder(_ reminderTitle: String, reminderDate: Date) {
         
         let reminder = EKReminder(eventStore: calendarDatabase)
         reminder.title = reminderTitle
@@ -246,7 +246,7 @@ class MessageCode: NSObject {
         }
         
         do {
-            try calendarDatabase.saveReminder(reminder, commit: true)
+            try calendarDatabase.save(reminder, commit: true)
         } catch let error1 as NSError {
             error = error1
         }

@@ -11,7 +11,7 @@ import AVFoundation
 
 class SettingsTableViewController: UITableViewController{
     
-    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+    let defaults = UserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
 
     var defaultReminderList:String = "Default"
     
@@ -19,10 +19,10 @@ class SettingsTableViewController: UITableViewController{
     
     @IBOutlet weak var labelReminderDefault: UILabel!
     
-    func playSound(sound: NSURL){
+    func playSound(_ sound: URL){
         var error:NSError?
         do {
-            audioPlayer = try AVAudioPlayer(contentsOfURL: sound)
+            audioPlayer = try AVAudioPlayer(contentsOf: sound)
         } catch var error1 as NSError {
             error = error1
         }
@@ -35,18 +35,18 @@ class SettingsTableViewController: UITableViewController{
       //  prefsDefaultDuration.resignFirstResponder()
     }
     
-    func textFieldShouldReturn(prefsDefaultDuration: UITextField) -> Bool {
+    func textFieldShouldReturn(_ prefsDefaultDuration: UITextField) -> Bool {
         prefsDefaultDuration.resignFirstResponder()
         return true;
     }
     
-    override func viewWillAppear(animated: Bool) {
-        let alertSound3: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("262-buttonclick57", ofType: "mp3")!)
+    override func viewWillAppear(_ animated: Bool) {
+        let alertSound3: URL = URL(fileURLWithPath: Bundle.main.path(forResource: "262-buttonclick57", ofType: "mp3")!)
         //General.playSound(alertSound3!)
         playSound(alertSound3)
         
-        if defaults.stringForKey("defaultReminderID") != "" {
-            if let defaultReminderID  = defaults.stringForKey("defaultReminderID") {
+        if defaults.string(forKey: "defaultReminderID") != "" {
+            if let defaultReminderID  = defaults.string(forKey: "defaultReminderID") {
                 
                 print("p83 defaultReminderID: \(defaultReminderID)")
                 
@@ -57,7 +57,7 @@ class SettingsTableViewController: UITableViewController{
                     print("p87 reminder: \(reminder)")
                     
                     labelReminderDefault.text = reminder.title
-                    labelReminderDefault.textColor = UIColor(CGColor: reminder.CGColor)
+                    labelReminderDefault.textColor = UIColor(cgColor: reminder.cgColor)
                 }
             }
         }
@@ -66,13 +66,13 @@ class SettingsTableViewController: UITableViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if defaults.stringForKey("defaultReminderID") != "" {
-            if let defaultReminderID  = defaults.stringForKey("defaultReminderID") {
+        if defaults.string(forKey: "defaultReminderID") != "" {
+            if let defaultReminderID  = defaults.string(forKey: "defaultReminderID") {
                 print("p83 defaultReminderID: \(defaultReminderID)")
-                if let reminder:EKCalendar = ReminderManager.sharedInstance.eventStore.calendarWithIdentifier("defaultReminderID") {
+                if let reminder:EKCalendar = ReminderManager.sharedInstance.eventStore.calendar(withIdentifier: "defaultReminderID") {
                     print("p75 reminder: \(reminder)")
                     labelReminderDefault.text = reminder.title
-                    labelReminderDefault.textColor = UIColor(CGColor: reminder.CGColor)
+                    labelReminderDefault.textColor = UIColor(cgColor: reminder.cgColor)
                 }
             }
         }
@@ -98,7 +98,7 @@ class SettingsTableViewController: UITableViewController{
         // Dispose of any resources that can be recreated.
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "SaveReminderDetail" {
             
         }
@@ -109,16 +109,16 @@ class SettingsTableViewController: UITableViewController{
             // in our case its not really required, since we are setting it in user defaults, will be globaly available
             //As a better approach iam doing here to show you
             
-            let selectedCalendarIdentifier = defaults.objectForKey("defaultReminderList") as? String
+            let selectedCalendarIdentifier = defaults.object(forKey: "defaultReminderList") as? String
             
-            let reminderPickerController = segue.destinationViewController as! ReminderPickerTableViewController
+            let reminderPickerController = segue.destination as! ReminderPickerTableViewController
             reminderPickerController.selectedReminder = selectedCalendarIdentifier
         }
     }
     
 
     
-    @IBAction func selectedReminderList(segue: UIStoryboardSegue) {
+    @IBAction func selectedReminderList(_ segue: UIStoryboardSegue) {
 //        if let reminderPickerTabelViewController = segue.sourceViewController as? ReminderPickerTabelViewController,
 //            selectedReminder = ReminderPickerTabelViewController.selectedReminder {
 //                labelReminderDefault.text = selectedReminder
@@ -186,7 +186,7 @@ class SettingsTableViewController: UITableViewController{
 }
 
 extension SettingsTableViewController : UITextFieldDelegate {
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
 }

@@ -15,19 +15,19 @@ import WatchConnectivity
 class ReminderListPickerIC: WKInterfaceController, WCSessionDelegate {
     
     var selectedRow:Int! = nil
-    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+    let defaults = UserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
     let eventStore = EKEventStore()
     var checked:Bool = false
     var allReminders:[EKReminder] = []
-    var allReminderLists: Array<EKCalendar> = EKEventStore().calendarsForEntityType(EKEntityType.Reminder)
+    var allReminderLists: Array<EKCalendar> = EKEventStore().calendars(for: EKEntityType.reminder)
     
-    private let session : WCSession? = WCSession.isSupported() ? WCSession.defaultSession() : nil
+    fileprivate let session : WCSession? = WCSession.isSupported() ? WCSession.default() : nil
     
     override init() {
         super.init()
         
         session?.delegate = self
-        session?.activateSession()
+        session?.activate()
     }
     
     @IBOutlet weak var table: WKInterfaceTable!
@@ -47,17 +47,17 @@ class ReminderListPickerIC: WKInterfaceController, WCSessionDelegate {
         table.setNumberOfRows(allReminderLists.count, withRowType: "tableRow")
         print("w39 allReminderLists.count: \(allReminderLists.count)")
 
-        for (index, title) in allReminderLists.enumerate() {
+        for (index, title) in allReminderLists.enumerated() {
             print("---------------------------------------------------")
             print("w40 index, title: \(index), \(title)")
             
-            let row = table.rowControllerAtIndex(index) as! DefaultReminderListTableRC
+            let row = table.rowController(at: index) as! DefaultReminderListTableRC
             let reminder = allReminderLists[index]
             
             
             // Check if deafults is there, then set default item to be checked
-            if defaults.stringForKey("defaultReminderID") != "" {
-                if let defaultReminderID  = defaults.stringForKey("defaultReminderID") {
+            if defaults.string(forKey: "defaultReminderID") != "" {
+                if let defaultReminderID  = defaults.string(forKey: "defaultReminderID") {
                     
                     print("p133 defaultReminderID: \(defaultReminderID)")
                     print("p134 reminder.calendarIdentifier: \(reminder.calendarIdentifier)")
@@ -81,8 +81,8 @@ class ReminderListPickerIC: WKInterfaceController, WCSessionDelegate {
                 //println("w98 numberOfItems: \(numberOfItems)")
                 
                 row.tableRowLabel.setText("\(reminder.title) (\(numberOfItems))")
-                row.tableRowLabel.setTextColor(UIColor(CGColor: reminder.CGColor))
-                row.verticalBar.setBackgroundColor(UIColor(CGColor: reminder.CGColor))
+                row.tableRowLabel.setTextColor(UIColor(cgColor: reminder.cgColor))
+                row.verticalBar.setBackgroundColor(UIColor(cgColor: reminder.cgColor))
             }
         }
         
@@ -96,8 +96,8 @@ class ReminderListPickerIC: WKInterfaceController, WCSessionDelegate {
     
   
 
-    override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
+    override func awake(withContext context: Any?) {
+        super.awake(withContext: context)
         // Configure interface objects here.
         print("w69 ReminderListPickerIC awakeWithContext")
         print("-----------------------------------------")
@@ -116,11 +116,11 @@ class ReminderListPickerIC: WKInterfaceController, WCSessionDelegate {
 
     }
     
-    override func table(table: WKInterfaceTable, didSelectRowAtIndex rowIndex: Int) {
+    override func table(_ table: WKInterfaceTable, didSelectRowAt rowIndex: Int) {
         print("w94 clicked on row: \(rowIndex)")
         
         selectedRow = rowIndex //for use with insert and delete, save selcted row index
-        let row = self.table.rowControllerAtIndex(rowIndex) as! DefaultReminderListTableRC
+        let row = self.table.rowController(at: rowIndex) as! DefaultReminderListTableRC
         
         if self.checked {               // Turn checkmark off
             row.imageCheckbox.setImageNamed("cbBlank40px")
@@ -134,14 +134,14 @@ class ReminderListPickerIC: WKInterfaceController, WCSessionDelegate {
             
            // defaults.setObject(defaultReminderListID, forKey: "defaultReminderListID")    //sets defaultReminderListID String   //removed had old key. 121215
             
-            defaults.setObject(defaultReminderID, forKey: "defaultReminderID")    //sets defaultReminderListID String
+            defaults.set(defaultReminderID, forKey: "defaultReminderID")    //sets defaultReminderListID String
             
             //send to Phone App
             let key = ["defaultReminderID" : defaultReminderID]
             print("w141 key: \(key)")
             
             // The paired iPhone has to be connected via Bluetooth.
-            if let session = session where session.reachable {
+            if let session = session , session.isReachable {
                 session.sendMessage(key,
                                     replyHandler: { replyData in
                                         // handle reply from iPhone app here
@@ -161,7 +161,7 @@ class ReminderListPickerIC: WKInterfaceController, WCSessionDelegate {
         }
     }
     
-    override func contextForSegueWithIdentifier(segueIdentifier: String, inTable table: WKInterfaceTable, rowIndex: Int) -> AnyObject?
+    override func contextForSegue(withIdentifier segueIdentifier: String, in table: WKInterfaceTable, rowIndex: Int) -> Any?
     {
         
       //  let reminderListID = allReminderLists[rowIndex]

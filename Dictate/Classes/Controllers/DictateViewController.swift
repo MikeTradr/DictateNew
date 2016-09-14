@@ -196,9 +196,9 @@ var todayDay:String     = ""
 var timestamp:String    = ""
 var word:String         = ""
 var timeString:String   = ""
-var endTime:NSDate      = NSDate()
+var endTime:Date      = Date()
 
-var today:NSDate        = NSDate()
+var today:Date        = Date()
 
 var wordArr             = []
 
@@ -230,14 +230,16 @@ var flagAutoRecord = false
 
 class DictateViewController: UIViewController, UITextFieldDelegate, MFMailComposeViewControllerDelegate, SpeechKitDelegate, SKRecognizerDelegate, SKVocalizerDelegate {
     
+    private static var __once: () = {
+            Static.instance = DictateViewController()
+        }()
+    
     class var sharedInstance : DictateViewController {
         struct Static {
-            static var onceToken : dispatch_once_t = 0
+            static var onceToken : Int = 0
             static var instance : DictateViewController? = nil
         }
-        dispatch_once(&Static.onceToken) {
-            Static.instance = DictateViewController()
-        }
+        _ = DictateViewController.__once
         return Static.instance!
     }
     
@@ -246,13 +248,13 @@ class DictateViewController: UIViewController, UITextFieldDelegate, MFMailCompos
     
     var voiceSearch: SKRecognizer?
     
-    var earconStart: SKEarcon = SKEarcon.earconWithName("earcon_listening.wav") as! SKEarcon
-    var earconStop: SKEarcon = SKEarcon.earconWithName("earcon_done_listening.wav") as! SKEarcon
-    var earconCancel: SKEarcon = SKEarcon.earconWithName("earcon_cancel.wav") as! SKEarcon
+    var earconStart: SKEarcon = SKEarcon.earcon(withName: "earcon_listening.wav") as! SKEarcon
+    var earconStop: SKEarcon = SKEarcon.earcon(withName: "earcon_done_listening.wav") as! SKEarcon
+    var earconCancel: SKEarcon = SKEarcon.earcon(withName: "earcon_cancel.wav") as! SKEarcon
     
     var isSpeaking: Bool = false
 
-    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+    let defaults = UserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
     
      var audioPlayer = AVAudioPlayer()
     
@@ -295,8 +297,8 @@ class DictateViewController: UIViewController, UITextFieldDelegate, MFMailCompos
     @IBOutlet weak var labelReadIt: UIButton!
 
     
-    var startDT:NSDate = NSDate(dateString:"2014-12-12")
-    var endDT:NSDate = NSDate(dateString:"2014-12-12")
+    var startDT:Date = Date(dateString:"2014-12-12")
+    var endDT:Date = Date(dateString:"2014-12-12")
     
     var output:String       = ""
     var outputNote:String   = ""
@@ -323,27 +325,27 @@ class DictateViewController: UIViewController, UITextFieldDelegate, MFMailCompos
     // TODO need to call this func yet I think... had good dialog.
     
     func determineStatus() -> Bool {
-        let type = EKEntityType.Event
-        let stat = EKEventStore.authorizationStatusForEntityType(type)
+        let type = EKEntityType.event
+        let stat = EKEventStore.authorizationStatus(for: type)
         switch stat {
-        case .Authorized:
+        case .authorized:
             return true
-        case .NotDetermined:
-            self.database.requestAccessToEntityType(type, completion:{_,_ in})
+        case .notDetermined:
+            self.database.requestAccess(to: type, completion:{_,_ in})
             return false
-        case .Restricted:
+        case .restricted:
             return false
-        case .Denied:
+        case .denied:
             // new iOS 8 feature: sane way of getting the user directly to the relevant prefs
             // I think the crash-in-background issue is now gone
-            let alert = UIAlertController(title: "Need Authorization", message: "Wouldn't you like to authorize this app to use your Calendar?", preferredStyle: .Alert)
-            alert.addAction(UIAlertAction(title: "No", style: .Cancel, handler: nil))
-            alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: {
+            let alert = UIAlertController(title: "Need Authorization", message: "Wouldn't you like to authorize this app to use your Calendar?", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: {
                 _ in
-                let url = NSURL(string:UIApplicationOpenSettingsURLString)!
-                UIApplication.sharedApplication().openURL(url)
+                let url = URL(string:UIApplicationOpenSettingsURLString)!
+                UIApplication.shared.openURL(url)
             }))
-            self.presentViewController(alert, animated:true, completion:nil)
+            self.present(alert, animated:true, completion:nil)
             return false
         }
     }
@@ -351,8 +353,8 @@ class DictateViewController: UIViewController, UITextFieldDelegate, MFMailCompos
     
     
     
-    func calendarWithName( name:String ) -> EKCalendar? {
-        let calendars = self.database.calendarsForEntityType(EKEntityType.Event) 
+    func calendarWithName( _ name:String ) -> EKCalendar? {
+        let calendars = self.database.calendars(for: EKEntityType.event) 
         for cal in calendars { // (should be using identifier)
             if cal.title == name {
                 return cal
@@ -363,39 +365,39 @@ class DictateViewController: UIViewController, UITextFieldDelegate, MFMailCompos
     }
     
     func switchScreenOld() {
-        let mainStoryboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-        let vc : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("eventDetails") 
-        self.presentViewController(vc, animated: true, completion: nil)
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let vc : UIViewController = mainStoryboard.instantiateViewController(withIdentifier: "eventDetails") 
+        self.present(vc, animated: true, completion: nil)
     }
     
     func switchScreenTester() {
-        let mainStoryboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-        let vc : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("eventTester") 
-        self.presentViewController(vc, animated: true, completion: nil)
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let vc : UIViewController = mainStoryboard.instantiateViewController(withIdentifier: "eventTester") 
+        self.present(vc, animated: true, completion: nil)
     }
     
-    func switchScreen(scene: String) {
-        let mainStoryboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-        let vc : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier(scene) 
-        self.presentViewController(vc, animated: true, completion: nil)
+    func switchScreen(_ scene: String) {
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let vc : UIViewController = mainStoryboard.instantiateViewController(withIdentifier: scene) 
+        self.present(vc, animated: true, completion: nil)
     }
     
     // MARK: - MFMailComposeViewControllerDelegate
     
-    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         switch result.rawValue {
-        case MFMailComposeResultCancelled.rawValue:
+        case MFMailComposeResult.cancelled.rawValue:
             print("Cancelled")
-        case MFMailComposeResultSaved.rawValue:
+        case MFMailComposeResult.saved.rawValue:
             print("Saved")
-        case MFMailComposeResultSent.rawValue:
+        case MFMailComposeResult.sent.rawValue:
             print("Sent")
-        case MFMailComposeResultFailed.rawValue:
+        case MFMailComposeResult.failed.rawValue:
             print("Error: \(error?.localizedDescription)")
         default:
             break
         }
-        controller.dismissViewControllerAnimated(true, completion: nil)
+        controller.dismiss(animated: true, completion: nil)
     }
 
     
@@ -433,18 +435,18 @@ class DictateViewController: UIViewController, UITextFieldDelegate, MFMailCompos
         enteredText2.resignFirstResponder()
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return false
     }
 
     
-    func handleSwipes(sender:UISwipeGestureRecognizer) {
-        if (sender.direction == .Left) {
+    func handleSwipes(_ sender:UISwipeGestureRecognizer) {
+        if (sender.direction == .left) {
             self.tabBarController?.selectedIndex = 3
         }
-        if (sender.direction == .Right) {
-            var alertSound3: NSURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("122-whoosh03", ofType: "mp3")!)
+        if (sender.direction == .right) {
+            let alertSound3: URL = URL(fileURLWithPath: Bundle.main.path(forResource: "122-whoosh03", ofType: "mp3")!)
             //General.playSound(alertSound3!)
             playSound(alertSound3)
             self.tabBarController?.selectedIndex = 1
@@ -453,7 +455,7 @@ class DictateViewController: UIViewController, UITextFieldDelegate, MFMailCompos
     
     func autoProcess() {
         // ____ Auto Process ____________________________________
-        let processNow = defaults.objectForKey("ProcessNow") as! Bool
+        let processNow = defaults.object(forKey: "ProcessNow") as! Bool
         print("p379 processNow: \(processNow)")
         if (processNow == true) {
             print("p381 we here: \(processNow)")
@@ -464,7 +466,7 @@ class DictateViewController: UIViewController, UITextFieldDelegate, MFMailCompos
         }
     }
     
-    func Process(str: String) {
+    func Process(_ str: String) {
         let (startDT, endDT, output, outputNote, day, calendarName, actionType, duration, alert, eventLocation, eventRepeat)
  = DictateCode().parse(str)
         self.tabBarController?.selectedIndex = 1
@@ -475,7 +477,8 @@ class DictateViewController: UIViewController, UITextFieldDelegate, MFMailCompos
 //---- From Nuance funcs ----------------------------------------------------------
 //---- Speach to Text --------------
     
-    func setVUMeterWidth (var width: CGFloat) {
+    func setVUMeterWidth (_ width: CGFloat) {
+        var width = width
         if width < 0 {
             width = 0
         }
@@ -488,27 +491,27 @@ class DictateViewController: UIViewController, UITextFieldDelegate, MFMailCompos
         let width: CGFloat = ( 90 + CGFloat(voiceSearch!.audioLevel) * 5 / 2 ) * 4
        // let width: CGFloat = (90 + voiceSearch!.audioLevel) * 5 / 2
         self.setVUMeterWidth(width)
-        self.performSelector("updateVUMeter", withObject: nil, afterDelay: 0.05)
+        self.perform(#selector(DictateViewController.updateVUMeter), with: nil, afterDelay: 0.05)
     }
     
-    func recognizerDidBeginRecording(recognizer: SKRecognizer) {
+    func recognizerDidBeginRecording(_ recognizer: SKRecognizer) {
         NSLog("p402 recognizerDidBeginRecording Recording started.")
         var transactionState = "TS_RECORDING"
         
         labelRecording.text = "Recording..."
        // recordButton.setTitle("Recording...", forState: UIControlStateNormal)
-        self.performSelector("updateVUMeter", withObject: nil, afterDelay: 0.05)
+        self.perform(#selector(DictateViewController.updateVUMeter), with: nil, afterDelay: 0.05)
     }
     
-    func recognizerDidFinishRecording(recognizer: SKRecognizer) {
+    func recognizerDidFinishRecording(_ recognizer: SKRecognizer) {
         NSLog("p408 recognizerDidFinishRecording Recording finished.")
-        NSObject.cancelPreviousPerformRequestsWithTarget(self, selector: "updateVUMeter", object: nil)
+        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(DictateViewController.updateVUMeter), object: nil)
         self.setVUMeterWidth(0)
         transactionState = "TS_PROCESSING"
         labelRecording.text = "Processing..."
     }
     
-    func recognizer(recognizer: SKRecognizer!, didFinishWithResults results: SKRecognition!) {
+    func recognizer(_ recognizer: SKRecognizer!, didFinishWithResults results: SKRecognition!) {
     
         NSLog("p419 didFinishWithResults Got results.")
         NSLog("Session id [%@].", SpeechKit.sessionID())
@@ -522,19 +525,19 @@ class DictateViewController: UIViewController, UITextFieldDelegate, MFMailCompos
         
         
         flagAutoRecord = false
-        defaults.setObject(flagAutoRecord, forKey: "flagAutoRecord")        //sets flagAutoRecord for processing
+        defaults.set(flagAutoRecord, forKey: "flagAutoRecord")        //sets flagAutoRecord for processing
         
         
         
 
 //code for super auto create no button at all.
         
-        var wordArrTemp = enteredText2.text.componentsSeparatedByString(" ")      //** use for SPACE seperated list, or phrases
+        var wordArrTemp = enteredText2.text.components(separatedBy: " ")      //** use for SPACE seperated list, or phrases
         
         print("p427 wordArrTemp: \(wordArrTemp)")
 
         var lastElement:String = wordArrTemp.last!                          //last element in array
-        lastElement = lastElement.lowercaseString
+        lastElement = lastElement.lowercased()
         
         if (lastElement == "go" || lastElement == "done" || lastElement == "create") {
             let str = enteredText2.text
@@ -557,7 +560,7 @@ class DictateViewController: UIViewController, UITextFieldDelegate, MFMailCompos
         }
         
         var firstElement:String = wordArrTemp.first!                          //first element in array
-        firstElement = firstElement.lowercaseString
+        firstElement = firstElement.lowercased()
         
         
         switch (firstElement) {
@@ -593,9 +596,9 @@ class DictateViewController: UIViewController, UITextFieldDelegate, MFMailCompos
         
     
         if enteredText2.text == "" {
-            labelReadIt.hidden = true   //hide read label at beginning as nothing to read
+            labelReadIt.isHidden = true   //hide read label at beginning as nothing to read
         } else {
-            labelReadIt.hidden = false
+            labelReadIt.isHidden = false
         }
 
         voiceSearch = nil
@@ -609,7 +612,7 @@ class DictateViewController: UIViewController, UITextFieldDelegate, MFMailCompos
     
     }
 
-    func recognizer(recognizer: SKRecognizer!, didFinishWithError error: NSError!, suggestion: String!) {
+    func recognizer(_ recognizer: SKRecognizer!, didFinishWithError error: NSError!, suggestion: String!) {
         
         NSLog("p424 didFinishWithError Got error.")
        // NSLog("Session id [%@].", SpeechKit.sessionID())              //this crasehd app 012316 so commented out
@@ -617,11 +620,11 @@ class DictateViewController: UIViewController, UITextFieldDelegate, MFMailCompos
         //recordButton.setTitle("Record", forState: UIControlStateNormal)
         
         if error != nil {
-           let alert = UIAlertController(title: "Error", message: error.debugDescription, preferredStyle: UIAlertControllerStyle.Alert)
+           let alert = UIAlertController(title: "Error", message: error.debugDescription, preferredStyle: UIAlertControllerStyle.alert)
             //TODO Mike uncomment below for release, and comment above.
            // let alert = UIAlertController(title: "Error", message: "Problem to connecting to speech server. Try again", preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
-            self.presentViewController(alert, animated: true, completion: nil)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         }
         
       //  voiceSearch.release()
@@ -630,25 +633,25 @@ class DictateViewController: UIViewController, UITextFieldDelegate, MFMailCompos
     
 //---- Read Text --------------
     
-    func vocalizer(vocalizer: SKVocalizer, willBeginSpeakingString text: String) {
+    func vocalizer(_ vocalizer: SKVocalizer, willBeginSpeaking text: String) {
         isSpeaking = true
-        labelReadIt.setTitle("Stop", forState: UIControlState.Normal)
+        labelReadIt.setTitle("Stop", for: UIControlState())
        // if text {
        //     textReadSoFar.text = textReadSoFar.text.stringByAppendingString(text).stringByAppendingString("\n")
        // }
     }
 
   
-    func vocalizer(vocalizer: SKVocalizer, willSpeakTextAtCharacter index: UInt, ofString text: String) {
+    func vocalizer(_ vocalizer: SKVocalizer, willSpeakTextAtCharacter index: UInt, ofString text: String) {
         NSLog("Session id [%@].", SpeechKit.sessionID())
         //textReadSoFar.text = text.substringToIndex(index)
     }
 
-    func vocalizer(vocalizer: SKVocalizer!, didFinishSpeakingString text: String!, withError error: NSError!) {
+    func vocalizer(_ vocalizer: SKVocalizer!, didFinishSpeaking text: String!, withError error: NSError!) {
         NSLog("p453 didFinishSpeakingString")
         NSLog("Session id [%@].", SpeechKit.sessionID())
         isSpeaking = false
-        labelReadIt.setTitle("speak your result", forState: UIControlState.Normal)
+        labelReadIt.setTitle("speak your result", for: UIControlState())
         //speakButton.setTitle("Read It", forState: UIControlStateNormal)
         
         if error != nil {
@@ -656,10 +659,10 @@ class DictateViewController: UIViewController, UITextFieldDelegate, MFMailCompos
             print("p465 error.debugDescription: \(error.debugDescription)")
 
         
-            let alert = UIAlertController(title: "Error", message: "Problem to connecting to speech server. Try again", preferredStyle: UIAlertControllerStyle.Alert)
+            let alert = UIAlertController(title: "Error", message: "Problem to connecting to speech server. Try again", preferredStyle: UIAlertControllerStyle.alert)
 
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
-            self.presentViewController(alert, animated: true, completion: nil)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         }
     }
     
@@ -680,7 +683,7 @@ class DictateViewController: UIViewController, UITextFieldDelegate, MFMailCompos
         print("p328 we here? viewDidLoad viewController")
         
         //Setup SpeechKit
-        SpeechKit.setupWithID("NMDPTRIAL_miketradr_gmail_com20151020235701", host: "sandbox.nmdp.nuancemobility.net", port: 443, useSSL: false, delegate: self)
+        SpeechKit.setup(withID: "NMDPTRIAL_miketradr_gmail_com20151020235701", host: "sandbox.nmdp.nuancemobility.net", port: 443, useSSL: false, delegate: self)
         
         //TODO Anil TODO Mike UInt to Int Error here.
         SpeechKit.setEarcon(earconStart, forType: UInt(SKStartRecordingEarconType))
@@ -688,22 +691,22 @@ class DictateViewController: UIViewController, UITextFieldDelegate, MFMailCompos
         SpeechKit.setEarcon(earconCancel, forType: UInt(SKCancelRecordingEarconType))
         
         if enteredText2.text == "" {
-            labelReadIt.hidden = true   //hide read label at beginning as nothing to read
+            labelReadIt.isHidden = true   //hide read label at beginning as nothing to read
         } else {
-             labelReadIt.hidden = false
+             labelReadIt.isHidden = false
         }
         
         //Added left adn Right Swipe gestures. TODO Can add this to the General.swift Class? and call it?
-        var leftSwipe = UISwipeGestureRecognizer(target: self, action: Selector("handleSwipes:"))
-        var rightSwipe = UISwipeGestureRecognizer(target: self, action: Selector("handleSwipes:"))
-        leftSwipe.direction = .Left
-        rightSwipe.direction = .Right
+        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(DictateViewController.handleSwipes(_:)))
+        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(DictateViewController.handleSwipes(_:)))
+        leftSwipe.direction = .left
+        rightSwipe.direction = .right
         view.addGestureRecognizer(leftSwipe)
         view.addGestureRecognizer(rightSwipe)
         
         let testObject = PFObject(className: "TestObject")
         testObject["foo"] = "does send?"
-        testObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+        testObject.saveInBackground { (success: Bool, error: NSError?) -> Void in
             print("Object has been saved.")
         }
         
@@ -718,15 +721,15 @@ class DictateViewController: UIViewController, UITextFieldDelegate, MFMailCompos
         let eventStore = EKEventStore()
         
         // 2
-        switch EKEventStore.authorizationStatusForEntityType(EKEntityType.Event) {
-        case .Authorized:
+        switch EKEventStore.authorizationStatus(for: EKEntityType.event) {
+        case .authorized:
             print("p176 Access Authorized")
             //insertEvent(eventStore)
-        case .Denied:
+        case .denied:
             print("Access denied")
-        case .NotDetermined:
+        case .notDetermined:
             // 3
-            eventStore.requestAccessToEntityType(EKEntityType.Event, completion: { (granted, error) -> Void in
+            eventStore.requestAccess(to: EKEntityType.event, completion: { (granted, error) -> Void in
                     if granted {
                         //self!.insertEvent(eventStore)
                         print("p186 Access Authorized")
@@ -757,7 +760,7 @@ class DictateViewController: UIViewController, UITextFieldDelegate, MFMailCompos
         }
       */
         
-        flagAutoRecord = defaults.objectForKey("flagAutoRecord") as? Bool ?? false
+        flagAutoRecord = defaults.object(forKey: "flagAutoRecord") as? Bool ?? false
 
         print("p757 flagAutoRecord: \(flagAutoRecord)")
         if flagAutoRecord == true {
@@ -770,15 +773,15 @@ class DictateViewController: UIViewController, UITextFieldDelegate, MFMailCompos
 
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.determineStatus()
         
         print("p764 we here?")
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "determineStatus", name: UIApplicationWillEnterForegroundNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(DictateViewController.determineStatus), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
         
-        var alertSound218 = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("218-buttonclick54", ofType: "mp3")!)
+        let alertSound218 = URL(fileURLWithPath: Bundle.main.path(forResource: "218-buttonclick54", ofType: "mp3")!)
         //  General.playSound(alertSound3!)
         
         playSound(alertSound218)
@@ -801,9 +804,9 @@ class DictateViewController: UIViewController, UITextFieldDelegate, MFMailCompos
 */
         
         if enteredText2.text == "" {
-            labelReadIt.hidden = true   //hide read label at beginning as nothing to read
+            labelReadIt.isHidden = true   //hide read label at beginning as nothing to read
         } else {
-            labelReadIt.hidden = false
+            labelReadIt.isHidden = false
         }
         
     }
@@ -816,10 +819,10 @@ class DictateViewController: UIViewController, UITextFieldDelegate, MFMailCompos
     
 //---- End Override functions ----------------------------------------
 
-    func playSound(sound: NSURL){
+    func playSound(_ sound: URL){
         var error:NSError?
         do {
-            audioPlayer = try AVAudioPlayer(contentsOfURL: sound)
+            audioPlayer = try AVAudioPlayer(contentsOf: sound)
             
         } catch  {
            
@@ -868,7 +871,7 @@ class DictateViewController: UIViewController, UITextFieldDelegate, MFMailCompos
     //#### functions end ##############################
     
     
-    @IBAction func buttonMic(sender: AnyObject) {
+    @IBAction func buttonMic(_ sender: AnyObject) {
         
         //TODO Bro, Anil, ADD call to Nuance voice here please. Thx Bro...
         // put results into var enteredText2 to show on screen!
@@ -881,7 +884,7 @@ class DictateViewController: UIViewController, UITextFieldDelegate, MFMailCompos
         print("p599 after SKRecognizer")
     }
     
-    @IBAction func buttonReadIt(sender: AnyObject) {
+    @IBAction func buttonReadIt(_ sender: AnyObject) {
         print("p604 button Read It pressed")
         
         removeKeyboard()
@@ -889,11 +892,11 @@ class DictateViewController: UIViewController, UITextFieldDelegate, MFMailCompos
         let vocalizer = SKVocalizer(language: "en_US", delegate: self)
         
         if isSpeaking {
-            vocalizer.cancel()
+            vocalizer?.cancel()
             isSpeaking = false
         } else {
             isSpeaking = true
-            vocalizer.speakString(enteredText2.text)
+            vocalizer?.speak(enteredText2.text)
             //textReadSoFar.text = ""
         }
 
@@ -902,9 +905,9 @@ class DictateViewController: UIViewController, UITextFieldDelegate, MFMailCompos
     
     
     
-    @IBAction func buttonProcess(sender: AnyObject) {
+    @IBAction func buttonProcess(_ sender: AnyObject) {
         
-        let alertSound1 = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("se_tap", ofType: "m4a")!)
+        let alertSound1 = URL(fileURLWithPath: Bundle.main.path(forResource: "se_tap", ofType: "m4a")!)
         //  General.playSound(alertSound3!)
         playSound(alertSound1)
 
@@ -917,9 +920,9 @@ class DictateViewController: UIViewController, UITextFieldDelegate, MFMailCompos
 */
         if ( enteredText2.text != "" ) {
             str = enteredText2.text
-            labelReadIt.hidden = false
+            labelReadIt.isHidden = false
         } else {
-            labelReadIt.hidden = true   //hide read label at beginning as nothing to read
+            labelReadIt.isHidden = true   //hide read label at beginning as nothing to read
         }
 
         print("### 684 str: \(str)")
@@ -963,7 +966,7 @@ class DictateViewController: UIViewController, UITextFieldDelegate, MFMailCompos
                 // Present the configured MFMessageComposeViewController instance
                 // Note that the dismissal of the VC will be handled by the messageComposer instance,
                 // since it implements the appropriate delegate call-back
-                presentViewController(messageComposeVC, animated: true, completion: nil)
+                present(messageComposeVC, animated: true, completion: nil)
                 
             } else {
                 // Let the user know if his/her device isn't able to send text messages
@@ -976,8 +979,8 @@ class DictateViewController: UIViewController, UITextFieldDelegate, MFMailCompos
             
             //let actionType = ""         // set to "" for next processing
             let mainType = ""
-            defaults.setObject(actionType, forKey: "actionType")        //saves actionType
-            defaults.setObject(actionType, forKey: "mainType")        //saves actionType
+            defaults.set(actionType, forKey: "actionType")        //saves actionType
+            defaults.set(actionType, forKey: "mainType")        //saves actionType
             
             General().saveToParse()
         break;
@@ -986,16 +989,16 @@ class DictateViewController: UIViewController, UITextFieldDelegate, MFMailCompos
             print("p431 in Call Switch")
             resultMessage.text = "Switching to Phone for your call"
     
-            let toPhone:String    = defaults.stringForKey("toPhone")!
+            let toPhone:String    = defaults.string(forKey: "toPhone")!
             
-            if let url = NSURL(string: "tel://\(toPhone)") {
-                UIApplication.sharedApplication().openURL(url)
+            if let url = URL(string: "tel://\(toPhone)") {
+                UIApplication.shared.openURL(url)
             }
             
             //let actionType = ""         // set to "" for next processing
             let mainType = ""
-            defaults.setObject(actionType, forKey: "actionType")        //saves actionType
-            defaults.setObject(actionType, forKey: "mainType")        //saves actionType
+            defaults.set(actionType, forKey: "actionType")        //saves actionType
+            defaults.set(actionType, forKey: "mainType")        //saves actionType
             
             General().saveToParse()
         break;
@@ -1006,7 +1009,7 @@ class DictateViewController: UIViewController, UITextFieldDelegate, MFMailCompos
             
             let mailComposeViewController = MailComposer().configuredMailComposeViewController()
             if MFMailComposeViewController.canSendMail() {
-                self.presentViewController(mailComposeViewController, animated: true, completion: nil)
+                self.present(mailComposeViewController, animated: true, completion: nil)
             } else {
                 MailComposer().showSendMailErrorAlert()
             }
@@ -1022,7 +1025,7 @@ class DictateViewController: UIViewController, UITextFieldDelegate, MFMailCompos
             
             let mailComposeViewController = MailComposer().mailList()
             if MFMailComposeViewController.canSendMail() {
-                self.presentViewController(mailComposeViewController, animated: true, completion: nil)
+                self.present(mailComposeViewController, animated: true, completion: nil)
             } else {
                 MailComposer().showSendMailErrorAlert()
             }
@@ -1038,7 +1041,7 @@ class DictateViewController: UIViewController, UITextFieldDelegate, MFMailCompos
             
             let mailComposeViewController = MailComposer().mailEvents()
             if MFMailComposeViewController.canSendMail() {
-                self.presentViewController(mailComposeViewController, animated: true, completion: nil)
+                self.present(mailComposeViewController, animated: true, completion: nil)
             } else {
                 MailComposer().showSendMailErrorAlert()
             }
@@ -1071,17 +1074,17 @@ class DictateViewController: UIViewController, UITextFieldDelegate, MFMailCompos
 }   // end func buttonProcess
 
      
-    @IBAction func buttonToday(sender: AnyObject) {
+    @IBAction func buttonToday(_ sender: AnyObject) {
          switchScreen("Today")
     }
     
     
-    @IBAction func buttonEdit(sender: AnyObject) {
+    @IBAction func buttonEdit(_ sender: AnyObject) {
         EventManagerSave().createEvent()
         switchScreen("Event")
     }
     
-    @IBAction func buttonCancel(sender: AnyObject) {
+    @IBAction func buttonCancel(_ sender: AnyObject) {
         cleardata()
     }
     
@@ -1090,25 +1093,25 @@ class DictateViewController: UIViewController, UITextFieldDelegate, MFMailCompos
 // MARK: - MFMailComposeViewControllerDelegate
 
 
-func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+func mailComposeController(_ controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
     switch result.rawValue {
-    case MFMailComposeResultCancelled.rawValue:
+    case MFMailComposeResult.cancelled.rawValue:
         print("Cancelled")
-    case MFMailComposeResultSaved.rawValue:
+    case MFMailComposeResult.saved.rawValue:
         print("Saved")
-    case MFMailComposeResultSent.rawValue:
+    case MFMailComposeResult.sent.rawValue:
         print("Sent")
-    case MFMailComposeResultFailed.rawValue:
+    case MFMailComposeResult.failed.rawValue:
         print("Error: \(error?.localizedDescription)")
     default:
         break
     }
-    controller.dismissViewControllerAnimated(true, completion: nil)
+    controller.dismiss(animated: true, completion: nil)
 }
 
 
 extension DictateViewController  {
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
 }

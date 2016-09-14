@@ -11,7 +11,7 @@ import MessageUI
 
 class MailComposer: UIViewController, MFMailComposeViewControllerDelegate {
     
-    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+    let defaults = UserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
     var allReminderLists:[EKCalendar] = []
     var allReminders: Array<EKReminder> = []
     var numberOfItems:Int = 0
@@ -24,10 +24,10 @@ class MailComposer: UIViewController, MFMailComposeViewControllerDelegate {
         super.viewDidLoad()
     }
     
-    @IBAction func sendEmailButtonTapped(sender: AnyObject) {
+    @IBAction func sendEmailButtonTapped(_ sender: AnyObject) {
         let mailComposeViewController = configuredMailComposeViewController()
         if MFMailComposeViewController.canSendMail() {
-            self.presentViewController(mailComposeViewController, animated: true, completion: nil)
+            self.present(mailComposeViewController, animated: true, completion: nil)
         } else {
            // showSendMailErrorAlert()
         }
@@ -41,9 +41,9 @@ class MailComposer: UIViewController, MFMailComposeViewControllerDelegate {
             mailComposerVC.mailComposeDelegate = self // Extremely important to set the --mailComposeDelegate-- property, NOT the --delegate-- property
             
             //TODO fix the forced downcast below
-            let mainType:String    = defaults.stringForKey("mainType")!
-            let output:String    = defaults.stringForKey("output")!
-            let toPhone:String    = defaults.stringForKey("toPhone")!
+            let mainType:String    = defaults.string(forKey: "mainType")!
+            let output:String    = defaults.string(forKey: "output")!
+            let toPhone:String    = defaults.string(forKey: "toPhone")!
             
             var toRecipents:[String] = []
             toRecipents.append(toPhone)
@@ -76,10 +76,10 @@ class MailComposer: UIViewController, MFMailComposeViewControllerDelegate {
         mailComposerVC.mailComposeDelegate = self // Extremely important to set the --mailComposeDelegate-- property, NOT the --delegate-- property
         
         //TODO fix the forced downcast below
-        let mainType:String    = defaults.stringForKey("mainType")!
-        let output:String    = defaults.stringForKey("output")!
-        let toPhone:String    = defaults.stringForKey("toPhone")!
-        var reminderList:String = defaults.stringForKey("reminderList")!
+        let mainType:String    = defaults.string(forKey: "mainType")!
+        let output:String    = defaults.string(forKey: "output")!
+        let toPhone:String    = defaults.string(forKey: "toPhone")!
+        var reminderList:String = defaults.string(forKey: "reminderList")!
         
         //  var firstAlarm:EKAlarm
         
@@ -90,13 +90,13 @@ class MailComposer: UIViewController, MFMailComposeViewControllerDelegate {
         mailComposerVC.setSubject("✔︎ Reminder List: \(reminderList)...")
         
         //load and step through reminderList
-        allReminderLists = ReminderManager.sharedInstance.eventStore.calendarsForEntityType(EKEntityType.Reminder)
+        allReminderLists = ReminderManager.sharedInstance.eventStore.calendars(for: EKEntityType.reminder)
         
-        reminderList = reminderList.capitalizedString   //Capitalize first letter
+        reminderList = reminderList.capitalized   //Capitalize first letter
         print("p86 reminderList: \(reminderList)")
         
         if allReminderLists != [] {
-            for (index, title) in allReminderLists.enumerate() {
+            for (index, title) in allReminderLists.enumerated() {
                 // print("---------------------------------------------------")
                 // print("p82 index, title: \(index), \(title)")
                 
@@ -121,7 +121,7 @@ class MailComposer: UIViewController, MFMailComposeViewControllerDelegate {
                             body = "<html><body>"
                             body = "\(body)<font size=\"6\" color=\"red\"><b>\(reminderListTitle.title)</b></font><br><hr> "
                             
-                            for (index, title) in self.allReminders.enumerate() {
+                            for (index, title) in self.allReminders.enumerated() {
                                 print("---------------------------------------------------")
                                 print("p103 index, title: \(index), \(title)")
                                 
@@ -183,27 +183,27 @@ class MailComposer: UIViewController, MFMailComposeViewControllerDelegate {
         
         
         //TODO fix the forced downcast below
-        let mainType:String    = defaults.stringForKey("mainType")!
-        let output:String    = defaults.stringForKey("output")!
-        let toPhone:String    = defaults.stringForKey("toPhone")!
-        var reminderList:String = defaults.stringForKey("reminderList")!
+        let mainType:String    = defaults.string(forKey: "mainType")!
+        let output:String    = defaults.string(forKey: "output")!
+        let toPhone:String    = defaults.string(forKey: "toPhone")!
+        var reminderList:String = defaults.string(forKey: "reminderList")!
         
         var toRecipents:[String] = []
         toRecipents.append(toPhone)
         
         let dateHelper = JTDateHelper()
-        let startDate =  NSDate()
+        let startDate =  Date()
         // let endDate = dateHelper.addToDate(startDate, days: 1)
         
-        let today = NSDate()
-        let tomorrow:NSDate = NSCalendar.currentCalendar().dateByAddingUnit(
-            .Day,
+        let today = Date()
+        let tomorrow:Date = (Calendar.current as NSCalendar).date(
+            byAdding: .day,
             value: 1,
-            toDate: today,
-            options: NSCalendarOptions(rawValue: 0))!
+            to: today,
+            options: NSCalendar.Options(rawValue: 0))!
         
-        let cal = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
-        let endDate = cal.startOfDayForDate(tomorrow)   // this is midnight today really or 0:00 tomorrow = 12 am = midnight
+        let cal = Calendar(identifier: Calendar.Identifier.gregorian)
+        let endDate = cal.startOfDay(for: tomorrow)   // this is midnight today really or 0:00 tomorrow = 12 am = midnight
         
         print("p178 startDate: \(startDate)")
         print("p179 endDate: \(endDate)")
@@ -217,10 +217,10 @@ class MailComposer: UIViewController, MFMailComposeViewControllerDelegate {
             
             var displayDate:String = ""
             
-            let dateFormatter = NSDateFormatter()
+            let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "E, MMM d"
             
-            displayDate = dateFormatter.stringFromDate(startDate)
+            displayDate = dateFormatter.string(from: startDate)
             
             var body:String = ""
             body = "<html><body>"
@@ -228,21 +228,21 @@ class MailComposer: UIViewController, MFMailComposeViewControllerDelegate {
             
             if self.allEvents != [] {
                 
-                for (index, title) in self.allEvents.enumerate() {
+                for (index, title) in self.allEvents.enumerated() {
                     print("---------------------------------------------------")
                     print("p171 index, title: \(index), \(title)")
                     let item = self.allEvents[index]
                     print("p173 item.title: \(item.title)")
                     
-                    let dateFormatter = NSDateFormatter()
+                    let dateFormatter = DateFormatter()
                     dateFormatter.dateFormat = "h:mm a"
                     
-                    let startTimeA = dateFormatter.stringFromDate(item.startDate)
-                    var startTime = startTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
+                    let startTimeA = dateFormatter.string(from: item.startDate)
+                    var startTime = startTimeA.replacingOccurrences(of: ":00", with: "")
                     NSLog("%@ w137", startTime)
                     
-                    let endTimeA = dateFormatter.stringFromDate(item.endDate)
-                    let endTime = endTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
+                    let endTimeA = dateFormatter.string(from: item.endDate)
+                    let endTime = endTimeA.replacingOccurrences(of: ":00", with: "")
                     
                     var endTimeDash = "- \(endTime)"
                     
@@ -278,7 +278,7 @@ class MailComposer: UIViewController, MFMailComposeViewControllerDelegate {
                 body = body + "<br><hr><br>📩 Sent from Dictate™ App 😀</body></html>"
                 mailComposerVC.setMessageBody(body, isHTML: true)
                 
-                self.presentViewController(mailComposerVC, animated: true, completion: nil)
+                self.present(mailComposerVC, animated: true, completion: nil)
                 
                 
                 // self.messageBody = "\(self.newOutput)\n\n\n📩 Sent from Dictate™ App 😀"
@@ -307,19 +307,19 @@ class MailComposer: UIViewController, MFMailComposeViewControllerDelegate {
     func showSendMailErrorAlert() {
         //TODO fix line below
         
-        let alertController = UIAlertController(title: "Could Not Send Email", message: "Your device could not send e-mail.  Please check e-mail configuration and try again.", preferredStyle: .Alert)
+        let alertController = UIAlertController(title: "Could Not Send Email", message: "Your device could not send e-mail.  Please check e-mail configuration and try again.", preferredStyle: .alert)
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
             // ...
         }
         alertController.addAction(cancelAction)
         
-        let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
+        let OKAction = UIAlertAction(title: "OK", style: .default) { (action) in
             // ...
         }
         alertController.addAction(OKAction)
         
-        self.presentViewController(alertController, animated: true) {
+        self.present(alertController, animated: true) {
             // ...
         }
         
@@ -328,20 +328,20 @@ class MailComposer: UIViewController, MFMailComposeViewControllerDelegate {
     
     // MARK: - MFMailComposeViewControllerDelegate
     
-    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         switch result.rawValue {
-        case MFMailComposeResultCancelled.rawValue:
+        case MFMailComposeResult.cancelled.rawValue:
             print("Cancelled")
-        case MFMailComposeResultSaved.rawValue:
+        case MFMailComposeResult.saved.rawValue:
             print("Saved")
-        case MFMailComposeResultSent.rawValue:
+        case MFMailComposeResult.sent.rawValue:
             print("Sent")
-        case MFMailComposeResultFailed.rawValue:
+        case MFMailComposeResult.failed.rawValue:
             print("Error: \(error?.localizedDescription)")
         default:
             break
         }
-        controller.dismissViewControllerAnimated(true, completion: nil)
+        controller.dismiss(animated: true, completion: nil)
     }
     
 /*

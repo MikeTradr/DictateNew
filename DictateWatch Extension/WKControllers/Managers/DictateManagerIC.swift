@@ -31,9 +31,9 @@ var todayDay:String     = ""
 var timestamp:String    = ""
 var word:String         = ""
 var timeString:String   = ""
-var endTime:NSDate      = NSDate()
+var endTime:Date      = Date()
 
-var today               = NSDate()
+var today               = Date()
 
 var wordArr             = []
 
@@ -79,27 +79,29 @@ var alert:Int               = 0
     
 class DictateManagerIC: WKInterfaceController {
     
+    private static var __once: () = {
+            Static.instance = DictateManagerIC()
+        }()
+    
     class var sharedInstance : DictateManagerIC {
         struct Static {
-            static var onceToken : dispatch_once_t = 0
+            static var onceToken : Int = 0
             static var instance : DictateManagerIC? = nil
         }
-        dispatch_once(&Static.onceToken) {
-            Static.instance = DictateManagerIC()
-        }
+        _ = DictateManagerIC.__once
         return Static.instance!
     }
     
     var str:String      = ""
-    var startDT:NSDate          = NSDate(dateString:"2014-12-12")
-    var endDT:NSDate            = NSDate(dateString:"2014-12-12")
+    var startDT:Date          = Date(dateString:"2014-12-12")
+    var endDT:Date            = Date(dateString:"2014-12-12")
     var actionType:String   = ""        //event, reminder, singleWordList, commaList, rawList, note?, text, email
    // var audioPlayer = AVAudioPlayer()
     
     
     // return (startDT, endDT, output, outputNote, day, calendarName, actionType, duration, alert, eventLocation, eventRepeat)
     
-    func grabVoice() -> (NSDate, NSDate, String, String, String, String, String, Int, Int, String, Int)  {  //startDT, endDT, output, outputNote, day, calendarName, actionType, duration, alert, eventLocation, eventRepeat)
+    func grabVoice() -> (Date, Date, String, String, String, String, String, Int, Int, String, Int)  {  //startDT, endDT, output, outputNote, day, calendarName, actionType, duration, alert, eventLocation, eventRepeat)
 
         //added actionType above
         
@@ -112,7 +114,7 @@ class DictateManagerIC: WKInterfaceController {
         // uncomment line below to get a string from simulator Anil :)
         // self.presentTextInputControllerWithSuggestions(["Today 2 PM test Appointment"], allowedInputMode: WKTextInputMode.Plain, completion: { results -> Void in
         
-        self.presentTextInputControllerWithSuggestions([], allowedInputMode: WKTextInputMode.Plain, completion: { results -> Void in
+        self.presentTextInputController(withSuggestions: [], allowedInputMode: WKTextInputMode.plain, completion: { results -> Void in
             
             //println("34 Results: \(results)")
             //println("35 Results: \(results[0])")
@@ -137,17 +139,17 @@ class DictateManagerIC: WKInterfaceController {
                 
                 let (startDT, endDT, output, outputNote, day, calendarName, actionType, duration, alert, eventLocation, eventRepeat) = DictateCode().parse(self.str)
                 
-                let formatter3 = NSDateFormatter()
+                let formatter3 = DateFormatter()
                 formatter3.dateFormat = "M-dd-yyyy h:mm a"
                 
-                fullDT = formatter3.stringFromDate(startDT)
-                fullDTEnd = formatter3.stringFromDate(endDT)
+                fullDT = formatter3.string(from: startDT)
+                fullDTEnd = formatter3.string(from: endDT)
                 
-                if (startDT != NSDate(dateString:"2014-12-12") ) {
+                if (startDT != Date(dateString:"2014-12-12") ) {
                     print("p153 startDT: \(startDT)")
                     
-                    fullDT = formatter3.stringFromDate(startDT)
-                    fullDTEnd = formatter3.stringFromDate(endDT)
+                    fullDT = formatter3.string(from: startDT)
+                    fullDTEnd = formatter3.string(from: endDT)
                 } else {
                     fullDT = ""
                     fullDTEnd = ""
@@ -182,13 +184,9 @@ class DictateManagerIC: WKInterfaceController {
         self.audioPlayer.play()
     }
 */    
-    func delay(delay:Double, closure:()->()) {
-        dispatch_after(
-            dispatch_time(
-                DISPATCH_TIME_NOW,
-                Int64(delay * Double(NSEC_PER_SEC))
-            ),
-            dispatch_get_main_queue(), closure)
+    func delay(_ delay:Double, closure:@escaping ()->()) {
+        DispatchQueue.main.asyncAfter(
+            deadline: DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: closure)
     }
     
     
@@ -225,8 +223,8 @@ class DictateManagerIC: WKInterfaceController {
     
     
 
-    override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
+    override func awake(withContext context: Any?) {
+        super.awake(withContext: context)
         
         // Configure interface objects here.
     }

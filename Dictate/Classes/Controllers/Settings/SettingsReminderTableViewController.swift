@@ -10,7 +10,7 @@ import UIKit
 
 class SettingsReminderTableViewController: UITableViewController {
     
-    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+    let defaults = UserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +20,7 @@ class SettingsReminderTableViewController: UITableViewController {
         
         let defaultReminderListID = "0000"
         
-         defaults.setObject(defaultReminderListID, forKey: "defaultReminderListID")    //sets defaultReminderList
+         defaults.set(defaultReminderListID, forKey: "defaultReminderListID")    //sets defaultReminderList
         
         tableView.tableFooterView = UIView()    //hides blank cells
 

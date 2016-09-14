@@ -19,7 +19,7 @@ class SettingsFriendsTableViewController: UIViewController{
     
     
     
-    @IBAction func buttonAddFriend(sender: AnyObject) {
+    @IBAction func buttonAddFriend(_ sender: AnyObject) {
         print("p23 we here")
         switchScreen("AddFriend")
         
@@ -27,7 +27,7 @@ class SettingsFriendsTableViewController: UIViewController{
     }
     
     
-    @IBAction func buttonAddFriendold1(sender: AnyObject) {
+    @IBAction func buttonAddFriendold1(_ sender: AnyObject) {
         print("p22 we here")
         switchScreen("AddFriend")
     }
@@ -35,8 +35,8 @@ class SettingsFriendsTableViewController: UIViewController{
     
     
     
-    @IBAction func buttonAddFriendold(sender: AnyObject) {
-       self.performSegueWithIdentifier("addFriend", sender: self)
+    @IBAction func buttonAddFriendold(_ sender: AnyObject) {
+       self.performSegue(withIdentifier: "addFriend", sender: self)
 
         switchScreen("AddFriend")
     }
@@ -45,14 +45,14 @@ class SettingsFriendsTableViewController: UIViewController{
     
     var people: [[String:String]] = [[:]]
     
-    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+    let defaults = UserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
     
     let smilieFace:UIImage = UIImage(named:"smilieFace")!
     
-    func switchScreen(scene: String) {
-        let mainStoryboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-        let vc : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier(scene)
-        self.presentViewController(vc, animated: true, completion: nil)
+    func switchScreen(_ scene: String) {
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let vc : UIViewController = mainStoryboard.instantiateViewController(withIdentifier: scene)
+        self.present(vc, animated: true, completion: nil)
     }
 
 
@@ -112,7 +112,7 @@ class SettingsFriendsTableViewController: UIViewController{
         
         print("p71 people: \(people)")
         
-        defaults.setObject(people, forKey: "people")        //sets actionType for processing
+        defaults.set(people, forKey: "people")        //sets actionType for processing
 
         
         
@@ -133,30 +133,30 @@ class SettingsFriendsTableViewController: UIViewController{
  
     // MARK: - TableView Data Source
 
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(_ tableView: UITableView) -> Int {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return people.count
     }
 
 
     
-   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+   func tableView(_ tableView: UITableView, cellForRowAtIndexPath indexPath: IndexPath) -> UITableViewCell {
 
         // Configure the cell...
         
         let identifier = "cell"
-        let cell = tableView.dequeueReusableCellWithIdentifier( identifier, forIndexPath: indexPath) as! SettingsFriendsTableViewCell
+        let cell = tableView.dequeueReusableCell( withIdentifier: identifier, for: indexPath) as! SettingsFriendsTableViewCell
     
-        cell.selectionStyle = .None
-        cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+        cell.selectionStyle = .none
+        cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
 
     
-        let row = people[indexPath.row]
+        let row = people[(indexPath as NSIndexPath).row]
     
         let firstName:String = row["firstName"]!
         let lastName:String = row["lastName"] ?? ""
@@ -173,7 +173,7 @@ class SettingsFriendsTableViewController: UIViewController{
     
         //add a border
         cell.imagePicture.layer.borderWidth = 1.0
-        cell.imagePicture.layer.borderColor = UIColor.whiteColor().CGColor
+        cell.imagePicture.layer.borderColor = UIColor.white.cgColor
     
         print("p154 row[phone]: \(row["phone"])")
     
@@ -202,19 +202,19 @@ class SettingsFriendsTableViewController: UIViewController{
     
     //===== didSelectRowAtIndexPath ================================================
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        print("p119 You selected row/event # \(indexPath.row)")
+    func tableView(_ tableView: UITableView, didSelectRowAtIndexPath indexPath: IndexPath) {
+        print("p119 You selected row/event # \((indexPath as NSIndexPath).row)")
         
-         var selectedCell:UITableViewCell = table.cellForRowAtIndexPath(indexPath)!
+         var selectedCell:UITableViewCell = table.cellForRow(at: indexPath)!
         
         let identifier = "cell"
-        let cell = tableView.dequeueReusableCellWithIdentifier( identifier, forIndexPath: indexPath) as! SettingsFriendsTableViewCell
+        let cell = tableView.dequeueReusableCell( withIdentifier: identifier, for: indexPath) as! SettingsFriendsTableViewCell
         
-        let row = people[indexPath.row]
+        let row = people[(indexPath as NSIndexPath).row]
         
     
         
-        self.performSegueWithIdentifier("addFriend", sender: self)
+        self.performSegue(withIdentifier: "addFriend", sender: self)
 
         
         

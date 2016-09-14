@@ -11,42 +11,44 @@ import UIKit
 
 class TimeManger: NSObject {
     
+    private static var __once: () = {
+            Static.instance = TimeManger()
+        }()
+ 
     class var sharedInstance : TimeManger {
         struct Static {
-            static var onceToken : dispatch_once_t = 0
+            static var onceToken : Int = 0
             static var instance : TimeManger? = nil
         }
-        dispatch_once(&Static.onceToken) {
-            Static.instance = TimeManger()
-        }
+        _ = TimeManger.__once
         return Static.instance!
     }
     
     var label = ""
-    let now = NSDate()
+    let now = Date()
     var timeOutput = ""
     var outputInterval = ""
-    let dateFormatter = NSDateFormatter()
+    let dateFormatter = DateFormatter()
     
     //pass date in format: dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-    func timeInterval(date:NSDate) -> String {
+    func timeInterval(_ date:Date) -> String {
         
-        let dateComponentsFormatter = NSDateComponentsFormatter()
-        dateComponentsFormatter.unitsStyle = NSDateComponentsFormatterUnitsStyle.Short
-        dateComponentsFormatter.allowedUnits = [.Hour, .Minute]
+        let dateComponentsFormatter = DateComponentsFormatter()
+        dateComponentsFormatter.unitsStyle = DateComponentsFormatter.UnitsStyle.short
+        dateComponentsFormatter.allowedUnits = [.hour, .minute]
         
-        let hourFormatter = NSDateComponentsFormatter()
-        hourFormatter.unitsStyle = NSDateComponentsFormatterUnitsStyle.Short
-        hourFormatter.allowedUnits = .Hour
+        let hourFormatter = DateComponentsFormatter()
+        hourFormatter.unitsStyle = DateComponentsFormatter.UnitsStyle.short
+        hourFormatter.allowedUnits = .hour
         
-        let timeUntil = date.timeIntervalSinceDate(NSDate())
-        dateComponentsFormatter.stringFromTimeInterval(timeUntil)
+        let timeUntil = date.timeIntervalSince(Date())
+        dateComponentsFormatter.string(from: timeUntil)
         
         print("p42 now:  \(now)")
         print("p43 date: \(date)")
         print("p44 timeUntil: \(timeUntil)")
         
-        timeOutput = dateComponentsFormatter.stringFromTimeInterval(timeUntil)!
+        timeOutput = dateComponentsFormatter.string(from: timeUntil)!
         
         // Anil add to viewcontroller: labelTimeUntil.textColor = UIColor.redColor()      for first two case statements please
 
@@ -60,7 +62,7 @@ class TimeManger: NSObject {
         case timeUntil where ((timeUntil > 3600) && (timeUntil <= 10800)):  //display hours & minutes, timeUntil < 3 hours
             label = "in \(timeOutput)"
         case timeUntil where ((timeUntil > 10800) && (timeUntil <= 86400)): //display hours only
-            timeOutput = hourFormatter.stringFromTimeInterval(timeUntil)!
+            timeOutput = hourFormatter.string(from: timeUntil)!
             label = "in \(timeOutput)"
         case timeUntil where (timeUntil > 86400): //> then a day until, display blank
             label = ""

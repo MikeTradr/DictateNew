@@ -25,14 +25,14 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
         didSet {
             if let session = session {
                 session.delegate = self
-                session.activateSession()
+                session.activate()
             }
         }
     }
 
     
     //let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
-    var defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+    var defaults = UserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
 
     
   //  var audioPlayer = AVAudioPlayer() //commented for new watchExtension 040516
@@ -41,11 +41,11 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
     
     var str:String              = ""
     
-    var startDT:NSDate          = NSDate(dateString:"2014-12-12")
-    var endDT:NSDate            = NSDate(dateString:"2014-12-12")
+    var startDT:Date          = Date(dateString:"2014-12-12")
+    var endDT:Date            = Date(dateString:"2014-12-12")
     
-    var eventStartDT:NSDate     = NSDate(dateString:"2015-06-01")
-    var eventEndDT:NSDate       = NSDate(dateString:"2015-06-01")
+    var eventStartDT:Date     = Date(dateString:"2015-06-01")
+    var eventEndDT:Date       = Date(dateString:"2015-06-01")
     
     var calendarName:String     = ""
     var reminderTitle:String    = ""
@@ -117,7 +117,7 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
     @IBOutlet var buttonCreateOutlet: WKInterfaceGroup!
 
     
-    var actionType:String = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!.stringForKey("actionType") ?? "Event"
+    var actionType:String = UserDefaults(suiteName: "group.com.thatsoft.dictateApp")!.string(forKey: "actionType") ?? "Event"
 
    // var alert       = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!.objectForKey("defaultEventAlert") as? Double //added defualt 112715
 
@@ -125,11 +125,11 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
     
  //   let eventLocation      = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!.stringForKey("evetnLocation")
     
-    var output      = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!.stringForKey("output") ?? ""
+    var output      = UserDefaults(suiteName: "group.com.thatsoft.dictateApp")!.string(forKey: "output") ?? ""
     
-    var phone       = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!.stringForKey("phone")
+    var phone       = UserDefaults(suiteName: "group.com.thatsoft.dictateApp")!.string(forKey: "phone")
     
-    var wordArrTrimmed  = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!.objectForKey("wordArrTrimmed") as? [String] ?? [] //array of the items
+    var wordArrTrimmed  = UserDefaults(suiteName: "group.com.thatsoft.dictateApp")!.object(forKey: "wordArrTrimmed") as? [String] ?? [] //array of the items
 
     
     let lightPink = UIColor(red: 255/255, green: 204/255, blue: 255/255, alpha: 1)
@@ -154,7 +154,7 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
     
     // return (startDT, endDT, output, outputNote, day, calendarName, actionType, eventDuration, alert, eventLocation, eventRepeat)
     
-    internal func grabvoice() -> (NSDate, NSDate, String, String, String, String, String, Int, Int, String, Int)  {  //startDT, endDT, output, outputNote, day, calendarName, actionType
+    internal func grabvoice() -> (Date, Date, String, String, String, String, String, Int, Int, String, Int)  {  //startDT, endDT, output, outputNote, day, calendarName, actionType
         //added actionType above
         
         self.buttonMicGr.setHidden(true)
@@ -196,23 +196,23 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
         let suggestionArray = [str4, str5, str3, str1]       //TODO Comment out for non-testing
 
         
-        var phone       = defaults.stringForKey("phone")
+        var phone       = defaults.string(forKey: "phone")
        // var alert       = defaults.objectForKey("defaultEventAlert") as? Double //added defualt 112715
         //let duration    = defaults.stringForKey("defaultEventDuration")         //added defualt 112715
     //    let eventRepeat = defaults.stringForKey("eventRepeat")
-        let strRaw      = defaults.stringForKey("strRaw")
-        var reminderTitle   = defaults.stringForKey("title") ?? ""
-        var wordArrTrimmed  = defaults.objectForKey("wordArrTrimmed") as? [String] ?? [] //array of the items
+        let strRaw      = defaults.string(forKey: "strRaw")
+        var reminderTitle   = defaults.string(forKey: "title") ?? ""
+        var wordArrTrimmed  = defaults.object(forKey: "wordArrTrimmed") as? [String] ?? [] //array of the items
         
-        let eventLocation: String = defaults.stringForKey("eventLocation") ?? ""
+        let eventLocation: String = defaults.string(forKey: "eventLocation") ?? ""
         //TODO Mike Anil commented to fix nil error
         // var reminderArray = defaults.objectForKey("reminderArray") as! [String] //array of the items
         
         var reminderArray:[String] = []
-        var reminderList    = defaults.stringForKey("reminderList") ?? ""
+        var reminderList    = defaults.string(forKey: "reminderList") ?? ""
         
-        var reminderAlarm   = defaults.objectForKey("reminderAlarm") as? NSDate
-        var allDayFlag = self.defaults.objectForKey("allDayFlag") as? Bool ?? false     //Anil helped here :)
+        var reminderAlarm   = defaults.object(forKey: "reminderAlarm") as? Date
+        var allDayFlag = self.defaults.object(forKey: "allDayFlag") as? Bool ?? false     //Anil helped here :)
         
         print("w111Defaults ==================================")
         print("w111Defaults phone: \(phone)")
@@ -236,7 +236,7 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
 
 
        
-        self.presentTextInputControllerWithSuggestions(suggestionArray, allowedInputMode: WKTextInputMode.Plain, completion: { results -> Void in
+        self.presentTextInputController(withSuggestions: suggestionArray, allowedInputMode: WKTextInputMode.plain, completion: { results -> Void in
 
             //println("34 Results: \(results)")
             //println("35 Results: \(results[0])")
@@ -289,17 +289,17 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
                 print("w200Main end ==================================")
         
                 
-                var formatter3 = NSDateFormatter()
+                var formatter3 = DateFormatter()
                 formatter3.dateFormat = "M-dd-yyyy h:mm a"
                 
-                fullDT = formatter3.stringFromDate(startDT)
-                fullDTEnd = formatter3.stringFromDate(endDT)
+                fullDT = formatter3.string(from: startDT)
+                fullDTEnd = formatter3.string(from: endDT)
                 
-                if (startDT != NSDate(dateString:"2014-12-12") ) {
+                if (startDT != Date(dateString:"2014-12-12") ) {
                     print("w153 startDT: \(startDT)")
                     
-                    fullDT = formatter3.stringFromDate(startDT)
-                    fullDTEnd = formatter3.stringFromDate(endDT)
+                    fullDT = formatter3.string(from: startDT)
+                    fullDTEnd = formatter3.string(from: endDT)
                 } else {
                     fullDT = ""
                     fullDTEnd = ""
@@ -320,16 +320,16 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
                 
                 
                //format Times to look great!
-                let dateFormatter = NSDateFormatter()
-                let dateString = dateFormatter.stringFromDate(startDT)
+                let dateFormatter = DateFormatter()
+                let dateString = dateFormatter.string(from: startDT)
                 
                 dateFormatter.dateFormat = "h:mm a"
                 
-                let startTimeA = dateFormatter.stringFromDate(startDT)
-                var startTime = startTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
+                let startTimeA = dateFormatter.string(from: startDT)
+                var startTime = startTimeA.replacingOccurrences(of: ":00", with: "")
                 
-                let endTimeA = dateFormatter.stringFromDate(endDT)
-                let endTime = endTimeA.stringByReplacingOccurrencesOfString(":00", withString: "")
+                let endTimeA = dateFormatter.string(from: endDT)
+                let endTime = endTimeA.replacingOccurrences(of: ":00", with: "")
                 
                 var endTimeDash = "-\(endTime)"
                 
@@ -343,7 +343,7 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
 
                 if allDayFlag {   // if allDay bool is true
                     formatter3.dateFormat = "M-dd-yyyy"
-                    fullDT = formatter3.stringFromDate(startDT)
+                    fullDT = formatter3.string(from: startDT)
                     
                     startTime = ""
                     time = "\(fullDT), all-day"
@@ -427,7 +427,7 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
                 case "Call":
                     print("w431 in Call Switch")
                     
-                    let toPhone:String    = self.defaults.stringForKey("toPhone")!
+                    let toPhone:String    = self.defaults.string(forKey: "toPhone")!
                    // WatchGeneral().makeCall(toPhone) //commented for new watchExtension 040516
                     break;
                     
@@ -448,9 +448,9 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
                     
                 case "Reminder":
                     print("w224 in Reminder Switch")
-                    self.resultType.setTextColor(UIColor.yellowColor())
+                    self.resultType.setTextColor(UIColor.yellow)
                     self.labelButtonCreate.setText("Create Reminder")
-                    self.buttonCreateOutlet.setBackgroundColor(UIColor.yellowColor())
+                    self.buttonCreateOutlet.setBackgroundColor(UIColor.yellow)
                     if day == "No Day Found" {
                         self.buttonGrDay.setHidden(true)
                     }
@@ -460,7 +460,7 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
                         self.buttonGrStart.setHidden(true)
                     }
                     
-                    let reminderTitle = self.defaults.stringForKey("reminderList") ?? ""
+                    let reminderTitle = self.defaults.string(forKey: "reminderList") ?? ""
                     self.resultCalendar.setText("List: \(reminderTitle)")
                     self.resultTitle.setText("Items: \(output)")
                     
@@ -480,15 +480,15 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
                     self.resultType.setTextColor(self.swiftColor)
                     //self.groupLabelTitle.setBackgroundColor(self.swiftColor)
                     self.labelButtonCreate.setText("Create Event")
-                    self.buttonCreateOutlet.setBackgroundColor(UIColor.greenColor())
+                    self.buttonCreateOutlet.setBackgroundColor(UIColor.green)
                     self.resultCalendar.setText("Calendar: \(calendarName)")
                     self.resultTitle.setText("Title: \(output)")
                     break;
                     
                 case "New List", "List":
-                    let wordArrTrimmed  = self.defaults.objectForKey("wordArrTrimmed") as? [String] ?? [] //array of the items
-                    let stringOutput = wordArrTrimmed.joinWithSeparator(", ")
-                    let reminderTitle = self.defaults.stringForKey("reminderList") ?? ""
+                    let wordArrTrimmed  = self.defaults.object(forKey: "wordArrTrimmed") as? [String] ?? [] //array of the items
+                    let stringOutput = wordArrTrimmed.joined(separator: ", ")
+                    let reminderTitle = self.defaults.string(forKey: "reminderList") ?? ""
                    // self.resultType.setTextColor(self.moccasin)
                     self.labelButtonCreate.setText("Create New List")
                     self.buttonCreateOutlet.setBackgroundColor(self.moccasin)
@@ -503,9 +503,9 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
                     break;
                 
                 case "New OneItem List":
-                    let wordArrTrimmed  = self.defaults.objectForKey("wordArrTrimmed") as? [String] ?? [] //array of the items
-                    let stringOutput = wordArrTrimmed.joinWithSeparator(", ")
-                    let reminderTitle = self.defaults.stringForKey("reminderList") ?? ""
+                    let wordArrTrimmed  = self.defaults.object(forKey: "wordArrTrimmed") as? [String] ?? [] //array of the items
+                    let stringOutput = wordArrTrimmed.joined(separator: ", ")
+                    let reminderTitle = self.defaults.string(forKey: "reminderList") ?? ""
                   //  self.resultType.setTextColor(self.moccasin)
                     self.labelButtonCreate.setText("Create New List")
                     self.buttonCreateOutlet.setBackgroundColor(self.moccasin)
@@ -518,9 +518,9 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
                     break;
                     
                 case "Phrase List":
-                    let wordArrTrimmed  = self.defaults.objectForKey("wordArrTrimmed") as? [String] ?? [] //array of the items
-                    let stringOutput = wordArrTrimmed.joinWithSeparator(", ")
-                    let reminderTitle  = self.defaults.stringForKey("reminderList") ?? ""
+                    let wordArrTrimmed  = self.defaults.object(forKey: "wordArrTrimmed") as? [String] ?? [] //array of the items
+                    let stringOutput = wordArrTrimmed.joined(separator: ", ")
+                    let reminderTitle  = self.defaults.string(forKey: "reminderList") ?? ""
                    // self.resultType.setTextColor(self.apricot)
                     self.labelButtonCreate.setText("Create Phrase List")
                     self.buttonCreateOutlet.setBackgroundColor(self.apricot)
@@ -570,8 +570,8 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
         
         date = ""
         self.phone = ""
-        startDT = NSDate(dateString:"2014-12-12")
-        endDT = NSDate(dateString:"2014-12-12")
+        startDT = Date(dateString:"2014-12-12")
+        endDT = Date(dateString:"2014-12-12")
         
         output = ""
         outputNote = ""
@@ -589,13 +589,9 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
 
     }
     
-    func delay(delay:Double, closure:()->()) {
-        dispatch_after(
-            dispatch_time(
-                DISPATCH_TIME_NOW,
-                Int64(delay * Double(NSEC_PER_SEC))
-            ),
-            dispatch_get_main_queue(), closure)
+    func delay(_ delay:Double, closure:@escaping ()->()) {
+        DispatchQueue.main.asyncAfter(
+            deadline: DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: closure)
     }
  /*
     func playSound(sound: NSURL){
@@ -627,7 +623,7 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
     }
     
     @IBAction func menuSettings() {
-        presentControllerWithName("Settings", context: "Dictate")
+        presentController(withName: "Settings", context: "Dictate")
     }
 //---- end Menu functions ----------------------------------------
     
@@ -653,15 +649,15 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
     
     @IBAction func buttonCreate() {
         
-        var actionType:String    = defaults.stringForKey("actionType")!
+        var actionType:String    = defaults.string(forKey: "actionType")!
         
         print("w654 calendarName: \(calendarName)")
         
         print("w657 eventDuration: \(eventDuration)")
 
       
-        session = WCSession.defaultSession()
-        let messageDict = ["action":actionType, "startDT":startDT, "endDT": endDT,"output" : output, "outputNote":outputNote, "eventDuration":eventDuration, "eventLocation":eventLocation,"eventRepeat":eventRepeat, "calendarName":calendarName]
+        session = WCSession.default()
+        let messageDict = ["action":actionType, "startDT":startDT, "endDT": endDT,"output" : output, "outputNote":outputNote, "eventDuration":eventDuration, "eventLocation":eventLocation,"eventRepeat":eventRepeat, "calendarName":calendarName] as [String : Any]
         print("w709 messageDict: \(messageDict)")
         
         
@@ -711,11 +707,11 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
             
 
             
-            var reminderList    = defaults.stringForKey("reminderList") ?? ""
+            var reminderList    = defaults.string(forKey: "reminderList") ?? ""
             
             print("w601 reminderList: \(reminderList)")
             
-            self.labelCreated.setText("Reminder created on your \(reminderList.capitalizedString) list")
+            self.labelCreated.setText("Reminder created on your \(reminderList.capitalized) list")
             break;
             
         case "Event":
@@ -751,7 +747,7 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
                     print("w717 error : \(error.localizedDescription)")
             })
         */
-            self.labelCreated.setText("Event created on your \(calendarName.capitalizedString) calendar!")
+            self.labelCreated.setText("Event created on your \(calendarName.capitalized) calendar!")
             
             ComplicationController.sharedInstance.requestedUpdateDidBegin() //update complication!
 
@@ -759,7 +755,7 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
             
         case "New List", "List":
             
-            let reminderTitle  = defaults.stringForKey("reminderList") ?? ""
+            let reminderTitle  = defaults.string(forKey: "reminderList") ?? ""
             
  //FIXWC            ReminderManager.sharedInstance.createNewReminderList(reminderList, items: wordArrTrimmed)
             
@@ -769,9 +765,9 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
             
         case "New OneItem List":
             
-            let reminderTitle  = defaults.stringForKey("reminderList") ?? ""
+            let reminderTitle  = defaults.string(forKey: "reminderList") ?? ""
 
-            output      = defaults.stringForKey("output") ?? ""
+            output      = defaults.string(forKey: "output") ?? ""
             let outputArray:[String] = Array(arrayLiteral: output)
             
  //FIXWC            ReminderManager.sharedInstance.createNewReminderList(reminderList, items: outputArray)
@@ -784,7 +780,7 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
         case "Phrase List":
             print("w589 in phraseList Switch")
             
-            let reminderTitle  = defaults.stringForKey("reminderList") ?? ""
+            let reminderTitle  = defaults.string(forKey: "reminderList") ?? ""
             
  //FIXWC            ReminderManager.sharedInstance.createNewReminderList(reminderList, items: wordArrTrimmed)
             
@@ -795,13 +791,13 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
             
         case "List":
             print("w150 in list Switch")
-             self.labelCreated.setText("List created on your \(reminderList.capitalizedString) calendar!")
+             self.labelCreated.setText("List created on your \(reminderList.capitalized) calendar!")
            
             break;
             
         case "CommaList":
             print("w151 in commaList Switch")
-             self.labelCreated.setText("New Reminder List created: \(reminderList.capitalizedString)")
+             self.labelCreated.setText("New Reminder List created: \(reminderList.capitalized)")
             break;
             
         case "Note":
@@ -813,7 +809,7 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
             
             //resultMessage.text = "Switching to Phone for your call"
             
-            let toPhone:String    = defaults.stringForKey("toPhone")!
+            let toPhone:String    = defaults.string(forKey: "toPhone")!
             
          //   General().makeCall(toPhone)   ////commented for new watchExtension 040516
             
@@ -822,8 +818,8 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
             
             //let actionType = ""         // set to "" for next processing
             let mainType = ""
-            defaults.setObject(actionType, forKey: "actionType")        //saves actionType
-            defaults.setObject(actionType, forKey: "mainType")        //saves actionType
+            defaults.set(actionType, forKey: "actionType")        //saves actionType
+            defaults.set(actionType, forKey: "mainType")        //saves actionType
 //FIXWC
 /*
             let rawDataObject = PFObject(className: "UserData")
@@ -854,13 +850,13 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
         
         
         self.labelCreated.setHidden(false)
-        self.labelCreated.setTextColor(UIColor.greenColor())
+        self.labelCreated.setTextColor(UIColor.green)
         
         self.buttonMicGr.setHidden(true)  //hide mircophone
         
-        strRaw          = defaults.stringForKey("strRaw")!
-        output          = defaults.stringForKey("output")!
-        calendarName    = defaults.stringForKey("calendarName")!
+        strRaw          = defaults.string(forKey: "strRaw")!
+        output          = defaults.string(forKey: "output")!
+        calendarName    = defaults.string(forKey: "calendarName")!
         
         
         print("w820 strRaw: \(strRaw)")
@@ -904,7 +900,7 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
         let modelName = "Watch"
 
         
-        let memory = NSProcessInfo.processInfo().physicalMemory/(1024 * 1024 * 1024)    //to convert to GB
+        let memory = ProcessInfo.processInfo.physicalMemory/(1024 * 1024 * 1024)    //to convert to GB
         // memory = memory/(1024 * 1024 * 1024)
         
         // Setup the Network Info and create a CTCarrier object
@@ -1041,7 +1037,7 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
         print("w995 we here?")
         
         WatchGeneral().delay(3.0) {          // do stuff
-            self.myLabel.setTextColor(UIColor.yellowColor())
+            self.myLabel.setTextColor(UIColor.yellow)
             self.myLabel.setText("Tap Mic to dictate or force touch")
             self.groupNavigation.setHidden(false)
             self.buttonMicGr.setHidden(false)  //show mircophone
@@ -1050,7 +1046,7 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
         }
         
         
-        defaults.setObject(eventDuration, forKey: "eventDuration")
+        defaults.set(eventDuration, forKey: "eventDuration")
         
         //resultMessage.text = "Event created on your \(calendarName.capitalizedString) calendar!"
         
@@ -1059,7 +1055,7 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
         //resultError.text = ""
         
         actionType = ""
-        defaults.setObject(actionType, forKey: "actionType")
+        defaults.set(actionType, forKey: "actionType")
         
         
         self.groupMicMain.setHidden(false)
@@ -1088,11 +1084,11 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
     
     
     @IBAction func buttonToday() {
-        presentControllerWithName("Events", context: "Dictate")
+        presentController(withName: "Events", context: "Dictate")
     }
     
     @IBAction func buttonReminders() {
-        presentControllerWithName("Reminders", context: "Dictate")
+        presentController(withName: "Reminders", context: "Dictate")
     }
     
     
@@ -1101,14 +1097,14 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
 
 //---- Override functions ----------------------------------------
     
-    override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
+    override func awake(withContext context: Any?) {
+        super.awake(withContext: context)
         // Configure interface objects here.
         NSLog("%@ w1061 MainIC awakeWithContext", self)
         print("w1062 in MainIC awakeWithContext")
      
         self.setTitle("Dictate™")
-        self.myLabel.setTextColor(UIColor.yellowColor())
+        self.myLabel.setTextColor(UIColor.yellow)
         self.myLabel.setText("Tap Mic to dictate or force touch")
         self.buttonMicGr.setHidden(false)       //show mircophone
         self.groupNavigation.setHidden(false)   //show navigation
@@ -1171,7 +1167,7 @@ class MainIC: WKInterfaceController, DataSourceChangedDelegate {
         
     }
     
-    func dataSourceDidUpdate(dataSource: DataSource){
+    func dataSourceDidUpdate(_ dataSource: DataSource){
         
     }
     

@@ -10,22 +10,23 @@ import UIKit
 import EventKit
 
 class DataManager: NSObject {
+    private static var __once: () = {
+            Static.instance = DataManager()
+        }()
     class var sharedInstance : DataManager {
         struct Static {
-            static var onceToken : dispatch_once_t = 0
+            static var onceToken : Int = 0
             static var instance : DataManager? = nil
         }
-        dispatch_once(&Static.onceToken) {
-            Static.instance = DataManager()
-        }
+        _ = DataManager.__once
         return Static.instance!
     }
     
 //_____ Variables for new users start____________________________
     
-    var startDT:NSDate          = NSDate(dateString:"2014-12-12")
-    var endDT:NSDate            = NSDate(dateString:"2014-12-12")
-    var reminderAlarm:NSDate    = NSDate(dateString:"2014-12-12")
+    var startDT:Date          = Date(dateString:"2014-12-12")
+    var endDT:Date            = Date(dateString:"2014-12-12")
+    var reminderAlarm:Date    = Date(dateString:"2014-12-12")
     
     var outputNote:String       = ""
     var output:String           = ""
@@ -72,7 +73,7 @@ class DataManager: NSObject {
     var word        = ""
     var timeString  = ""
     var phone       = ""
-    var today       = NSDate()
+    var today       = Date()
     var date        = ""
     var aptType     = ""
     var outputRaw   = ""
@@ -90,7 +91,7 @@ class DataManager: NSObject {
 
     
 
-    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+    let defaults = UserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
     
 //_____ end Variables for new users start____________________________
 
@@ -99,44 +100,44 @@ class DataManager: NSObject {
         NSLog("%@ p94 func createDefaults", self)
         print("p95 startDT: \(startDT)")
     
-        defaults.setObject(actionType, forKey: "actionType")
-        defaults.setObject(mainType, forKey: "mainType")
+        defaults.set(actionType, forKey: "actionType")
+        defaults.set(mainType, forKey: "mainType")
         
-        defaults.setObject(defaultEventDuration, forKey: "defaultEventDuration")   //added defualt 112715
-        defaults.setObject(defaultEventAlert, forKey: "defaultEventAlert")  //added defualt 112715
+        defaults.set(defaultEventDuration, forKey: "defaultEventDuration")   //added defualt 112715
+        defaults.set(defaultEventAlert, forKey: "defaultEventAlert")  //added defualt 112715
 
-        defaults.setObject(wordArrTrimmed, forKey: "wordArrTrimmed")
-        defaults.setObject(calendarName, forKey: "calendarName")
-        defaults.setObject(startDT, forKey: "startDT")
-        defaults.setObject(endDT, forKey: "endDT")
-        defaults.setObject(output, forKey: "output")
+        defaults.set(wordArrTrimmed, forKey: "wordArrTrimmed")
+        defaults.set(calendarName, forKey: "calendarName")
+        defaults.set(startDT, forKey: "startDT")
+        defaults.set(endDT, forKey: "endDT")
+        defaults.set(output, forKey: "output")
 
-        defaults.setObject(defaultReminderListID, forKey: "defaultReminderListID")
-        defaults.setObject(defaultEventListID, forKey: "defaultEventListID")
-        defaults.setObject(defaultEventAlert, forKey: "eventAlert")
+        defaults.set(defaultReminderListID, forKey: "defaultReminderListID")
+        defaults.set(defaultEventListID, forKey: "defaultEventListID")
+        defaults.set(defaultEventAlert, forKey: "eventAlert")
         
-        defaults.setObject(reminderList, forKey: "reminderList")
-        defaults.setObject(reminderAlarm, forKey: "reminderAlarm")
-        defaults.setObject(reminderArray, forKey: "reminderArray")
-        defaults.setObject(reminderTitle, forKey: "reminderTitle")
+        defaults.set(reminderList, forKey: "reminderList")
+        defaults.set(reminderAlarm, forKey: "reminderAlarm")
+        defaults.set(reminderArray, forKey: "reminderArray")
+        defaults.set(reminderTitle, forKey: "reminderTitle")
         
-        defaults.setObject(weekView, forKey: "defaultWeekView")     //calendar display view
+        defaults.set(weekView, forKey: "defaultWeekView")     //calendar display view
         
         let flagAutoRecord = false
-        defaults.setObject(flagAutoRecord, forKey: "flagAutoRecord")        //sets flagAutoRecord for processing
+        defaults.set(flagAutoRecord, forKey: "flagAutoRecord")        //sets flagAutoRecord for processing
 
-        let test   = defaults.objectForKey("reminderArray") as! [String]
+        let test   = defaults.object(forKey: "reminderArray") as! [String]
         print("119 test: \(test)")
 
 
         
         print("#####################################################")
         //println("111 Main Representation: \(NSUserDefaults.standardUserDefaults().dictionaryRepresentation())")
-        print("111 Main keys.array: \(NSUserDefaults.standardUserDefaults().dictionaryRepresentation().keys)")
+        print("111 Main keys.array: \(UserDefaults.standard.dictionaryRepresentation().keys)")
         print("-----------------------------------------------------")
-        print("112: \(NSUserDefaults.standardUserDefaults().dictionaryRepresentation())")
+        print("112: \(UserDefaults.standard.dictionaryRepresentation())")
         print("-----------------------------------------------------")
-        print("113 Main values.array: \(NSUserDefaults.standardUserDefaults().dictionaryRepresentation().values)")
+        print("113 Main values.array: \(UserDefaults.standard.dictionaryRepresentation().values)")
         print("#####################################################")
 
         //TODO Mike TODO Anil can't we print to log the items saved in NSUserDefaults???

@@ -11,14 +11,14 @@ import EventKit
 
 class ReminderPickerTableViewController: UITableViewController {
     
-    let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
+    let defaults = UserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
     
-    let reminderList = ReminderManager.sharedInstance.getCalendars(EKEntityType.Reminder)
+    let reminderList = ReminderManager.sharedInstance.getCalendars(EKEntityType.reminder)
     
     var numberOfNewItems:Int    = 0
-    var startDate:NSDate!
-    var endDate:NSDate!
-    var today:NSDate!
+    var startDate:Date!
+    var endDate:Date!
+    var today:Date!
     var reminders:[EKReminder] = []
     var eventStore : EKEventStore = EKEventStore()
     
@@ -44,25 +44,25 @@ class ReminderPickerTableViewController: UITableViewController {
     // var reminderArray: Array<EKCalendar> = ReminderManager.createReminderArray
     
     
-   override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+   override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
     
         let view = cell.viewWithTag(1)
-        let reminder = reminderList[indexPath.row]
-        view!.backgroundColor = UIColor(CGColor: reminder.CGColor)
+        let reminder = reminderList[(indexPath as NSIndexPath).row]
+        view!.backgroundColor = UIColor(cgColor: reminder.cgColor)
     
     
         // Check if deafults is there, then set default item to be checked
-        if defaults.stringForKey("defaultReminderID") != "" {
-            if let defaultReminderID  = defaults.stringForKey("defaultReminderID") {
+        if defaults.string(forKey: "defaultReminderID") != "" {
+            if let defaultReminderID  = defaults.string(forKey: "defaultReminderID") {
                 
                 print("p133 defaultReminderID: \(defaultReminderID)")
                 print("p134 reminder.calendarIdentifier: \(reminder.calendarIdentifier)")
                 
                 if reminder.calendarIdentifier == defaultReminderID {               // add checkmark for default reminder
                     print("p135 WE HERE")
-                    cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+                    cell.accessoryType = UITableViewCellAccessoryType.checkmark
                 } else {
-                    cell.accessoryType = UITableViewCellAccessoryType.None
+                    cell.accessoryType = UITableViewCellAccessoryType.none
                 }
             }
         }
@@ -71,8 +71,8 @@ class ReminderPickerTableViewController: UITableViewController {
     
     }
 
-    override func viewWillAppear(animated: Bool) {
-        let reminderList = ReminderManager.sharedInstance.getCalendars(EKEntityType.Reminder)
+    override func viewWillAppear(_ animated: Bool) {
+        let reminderList = ReminderManager.sharedInstance.getCalendars(EKEntityType.reminder)
 
             print("p49 reminderList: \(reminderList)")
             print("p50 reminderList.count: \(reminderList.count)")
@@ -88,7 +88,7 @@ class ReminderPickerTableViewController: UITableViewController {
          self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-         self.navigationItem.rightBarButtonItem = self.editButtonItem()
+         self.navigationItem.rightBarButtonItem = self.editButtonItem
         
         
         if let defaultReminderList = selectedReminder {
@@ -109,41 +109,41 @@ class ReminderPickerTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
         return reminderList.count
     }
 
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("ReminderCell", forIndexPath: indexPath) as! SettingsReminderListTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ReminderCell", for: indexPath) as! SettingsReminderListTableViewCell
         
-        cell.selectionStyle = .None
+        cell.selectionStyle = .none
         
-        let reminder = reminderList[indexPath.row]
+        let reminder = reminderList[(indexPath as NSIndexPath).row]
         cell.labelTitle.text = reminder.title
         
         ReminderManager.sharedInstance.fetchCalendarReminders(reminder) { (reminders) -> Void in
             self.allReminders = reminders as [EKReminder]
             let numberOfItems = self.allReminders.count
             cell.labelNumberItems.text = "\(numberOfItems) items"
-            cell.labelTitle.textColor = UIColor(CGColor: reminder.CGColor)
-            cell.labelNumberItems.textColor = UIColor(CGColor: reminder.CGColor)
+            cell.labelTitle.textColor = UIColor(cgColor: reminder.cgColor)
+            cell.labelNumberItems.textColor = UIColor(cgColor: reminder.cgColor)
         }
         
         //Anil added
         if reminder.calendarIdentifier == self.selectedReminder{
-            cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+            cell.accessoryType = UITableViewCellAccessoryType.checkmark
         }else{
-            cell.accessoryType = UITableViewCellAccessoryType.None
+            cell.accessoryType = UITableViewCellAccessoryType.none
         }
 
         return cell
@@ -195,24 +195,24 @@ class ReminderPickerTableViewController: UITableViewController {
     }
     */
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
         
         //other row is selected  - need to deselect it
         if let index = selectedReminderIndex {
-            let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: index, inSection: 0))
-            cell?.accessoryType = .None
+            let cell = tableView.cellForRow(at: IndexPath(row: index, section: 0))
+            cell?.accessoryType = .none
         }
         
-        selectedReminderIndex = indexPath.row
-        let selectedReminder = reminderList[indexPath.row]
+        selectedReminderIndex = (indexPath as NSIndexPath).row
+        let selectedReminder = reminderList[(indexPath as NSIndexPath).row]
 
         print("p200 selectedReminder: \(selectedReminder)")
         print("p201 selectedReminder.title: \(selectedReminder.title)")
         print("p202 selectedReminder.calendarIdentifier: \(selectedReminder.calendarIdentifier)")
         
-        defaults.setObject(selectedReminder.calendarIdentifier, forKey: "defaultReminderID") //sets Default Selected Reminder CalendarIdentifier
+        defaults.set(selectedReminder.calendarIdentifier, forKey: "defaultReminderID") //sets Default Selected Reminder CalendarIdentifier
         
         if #available(iOS 9.0, *) {
             ConnectivityPhoneManager.sharedInstance.sendKey("defaultReminderID")
@@ -221,8 +221,8 @@ class ReminderPickerTableViewController: UITableViewController {
         }
         
         //update the checkmark for the current row
-        let cell = tableView.cellForRowAtIndexPath(indexPath)
-        cell?.accessoryType = .Checkmark
+        let cell = tableView.cellForRow(at: indexPath)
+        cell?.accessoryType = .checkmark
         
      /*
         if !shouldShowSpecialItems{
@@ -233,13 +233,13 @@ class ReminderPickerTableViewController: UITableViewController {
 */
         }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "SaveSelectedReminder" {
             if let cell = sender as? UITableViewCell {
-                let indexPath = tableView.indexPathForCell(cell)
-                selectedReminderIndex = indexPath?.row
+                let indexPath = tableView.indexPath(for: cell)
+                selectedReminderIndex = (indexPath as NSIndexPath?)?.row
                 if let index = selectedReminderIndex {
-                    let reminder = reminderList[indexPath!.row]
+                    let reminder = reminderList[(indexPath! as NSIndexPath).row]
                     selectedReminder = reminder.title
                 }
             }

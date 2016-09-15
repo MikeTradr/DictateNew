@@ -150,6 +150,10 @@ let str73:String = "next Monday Country USA all day for five days"
 let str74:String = "nexy Monday Country USA all day for all week"
 
 
+let str75:String = "8 am test table is centered vertically now? thank you Don :)"
+
+let str76:String = "8 am Friday 608-255-1234 programming eeting with our team leader duration 1 hour repeat weekly calendar Mike location Meeting Room"
+
 
 
 
@@ -178,8 +182,8 @@ add to dictate str   “meeting with Bob every Wednesday at noon”  //handle wo
 */
 
 // ---- change strings here for testing, shows on the dictated field---
-//var str:String = str63
-var str:String = ""
+var str:String = str76
+//var str:String = ""
 
 //var strRaw:String = str
 

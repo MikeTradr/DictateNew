@@ -86,7 +86,10 @@ class DataManager: NSObject {
     var reminderArray:[String]          = []
     var reminderTitle: String           = ""
     
-    var weekView:Bool = true                //set defualt to week view true
+    //var weekView:Bool = true                //set defualt to week view true
+    
+    var calendarViewType:Int = 0    //0=none, 1=week, 2= month, 3= year ? possible Bro?
+
 
     
 
@@ -120,13 +123,17 @@ class DataManager: NSObject {
         defaults.setObject(reminderArray, forKey: "reminderArray")
         defaults.setObject(reminderTitle, forKey: "reminderTitle")
         
-        defaults.setObject(weekView, forKey: "defaultWeekView")     //calendar display view
+       // defaults.setObject(weekView, forKey: "defaultWeekView")     //calendar display view
         
         let flagAutoRecord = false
         defaults.setObject(flagAutoRecord, forKey: "flagAutoRecord")        //sets flagAutoRecord for processing
 
         let test   = defaults.objectForKey("reminderArray") as! [String]
         print("119 test: \(test)")
+        
+        defaults.setObject(calendarViewType, forKey: "calendarViewType")
+        
+         
 
 
         

@@ -10,22 +10,25 @@
 
 import UIKit
 
-class SettingsCalendarTableViewController: UITableViewController{
+class SettingsCalendarTableViewController: UITableViewController {
     
     let defaults = NSUserDefaults(suiteName: "group.com.thatsoft.dictateApp")!
     var weekView:Bool = true
+    var calendarViewType:Int = 0
     
     @IBOutlet weak var weekCell: UITableViewCell!
     @IBOutlet weak var monthCell: UITableViewCell!
-    
+    @IBOutlet weak var noneCell: UITableViewCell!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.tableFooterView = UIView()    //hides blank cells
 
-        weekView = defaults.boolForKey("defaultWeekView")
-        print("p26 weekView: \(weekView)")
+        calendarViewType = defaults.integerForKey("calendarViewType")
+        
+        
+
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -46,25 +49,44 @@ class SettingsCalendarTableViewController: UITableViewController{
             
             if indexPath.row == 1 {
                 cell!.accessoryType = UITableViewCellAccessoryType.Checkmark
-                weekView = true
+                calendarViewType = 1    //weak view
+                monthCell.accessoryType = .None
+                noneCell.accessoryType = .None
+                
+            } else if indexPath.row == 2 {
+                cell!.accessoryType = UITableViewCellAccessoryType.Checkmark
+                calendarViewType = 2    //month view
+                weekCell.accessoryType = .None
+                noneCell.accessoryType = .None
+                
+            } else if indexPath.row == 3 {
+                cell!.accessoryType = UITableViewCellAccessoryType.Checkmark
+                calendarViewType = 0    //none view
+                weekCell.accessoryType = .None
                 monthCell.accessoryType = .None
             }
-            if indexPath.row == 2 {
-                cell!.accessoryType = UITableViewCellAccessoryType.Checkmark
-                weekView = false
-                weekCell.accessoryType = .None
-            }
-            
+        
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
             
-            print("p63 weekView: \(weekView)")
-            defaults.setObject(weekView, forKey: "defaultWeekView")     //save to defaults calendar display view, true = week view, false = month view
+           // print("p63 weekView: \(weekView)")
+            defaults.setObject(calendarViewType, forKey: "calendarViewType")     ////0=none, 1=week, 2= month, 3= year ? possible Bro?
     }
     
     
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         
-        print("p73 weekView: \(weekView)")
+        print("p76 calendarViewType: \(calendarViewType)")
+ 
+        if indexPath.row == 0 {
+            if calendarViewType == 1 {
+                 weekCell.accessoryType = UITableViewCellAccessoryType.Checkmark
+            } else if calendarViewType == 2 {
+                monthCell.accessoryType = UITableViewCellAccessoryType.Checkmark
+            } else if calendarViewType == 0 {
+                noneCell.accessoryType = UITableViewCellAccessoryType.Checkmark
+            }
+        
+      /*
 
         if indexPath.row == 0 {     //weekView = true set check mark
 
@@ -78,7 +100,8 @@ class SettingsCalendarTableViewController: UITableViewController{
                 monthCell.accessoryType = UITableViewCellAccessoryType.Checkmark
             }
         }
-        
+      */
+        }
     }
 
     

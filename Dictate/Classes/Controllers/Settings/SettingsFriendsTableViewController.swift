@@ -26,7 +26,7 @@ class SettingsFriendsTableViewController: UIViewController{
         
     }
     
-    
+  /*
     @IBAction func buttonAddFriendold1(sender: AnyObject) {
         print("p22 we here")
         switchScreen("AddFriend")
@@ -40,7 +40,7 @@ class SettingsFriendsTableViewController: UIViewController{
 
         switchScreen("AddFriend")
     }
-   
+ */  
     @IBOutlet weak var table: UITableView!
     
     var people: [[String:String]] = [[:]]
@@ -52,7 +52,9 @@ class SettingsFriendsTableViewController: UIViewController{
     func switchScreen(scene: String) {
         let mainStoryboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
         let vc : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier(scene)
-        self.presentViewController(vc, animated: true, completion: nil)
+       // self.presentViewController(vc, animated: true, completion: nil)
+        self.presentViewController(vc, animated: false, completion: nil)
+
     }
 
 
@@ -213,8 +215,11 @@ class SettingsFriendsTableViewController: UIViewController{
         let row = people[indexPath.row]
         
     
+        switchScreen("AddFriend")
         
-        self.performSegueWithIdentifier("addFriend", sender: self)
+       // self.performSegueWithIdentifier("addFriend", sender: self)
+        
+        
 
         
         

@@ -182,7 +182,7 @@ add to dictate str   “meeting with Bob every Wednesday at noon”  //handle wo
 */
 
 // ---- change strings here for testing, shows on the dictated field---
-var str:String = str76
+var str:String = str75
 //var str:String = ""
 
 //var strRaw:String = str
